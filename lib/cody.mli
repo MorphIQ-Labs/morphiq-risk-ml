@@ -13,5 +13,4 @@ val erfcx : float -> float
 (** [exp(x^2) erfc(x)]. [infinity] below CALERF's [XNEG = -26.628]. *)
 
 val erf : float -> float
-
 val erfc : float -> float

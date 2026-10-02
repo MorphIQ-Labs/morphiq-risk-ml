@@ -30,12 +30,21 @@ let () =
              let x = Int64.float_of_bits xb and r = Int64.float_of_bits rb in
              let got = eval fn x in
              let u = ulps got r in
-             let n, worst, at = Option.value ~default:(0, 0.0, 0.0) (Hashtbl.find_opt stats fn) in
-             Hashtbl.replace stats fn (n + 1, Float.max worst u, if u > worst then x else at);
+             let n, worst, at =
+               Option.value ~default:(0, 0.0, 0.0) (Hashtbl.find_opt stats fn)
+             in
+             Hashtbl.replace stats fn
+               (n + 1, Float.max worst u, if u > worst then x else at);
              if u > 1.0 && List.length !failures < 20 then
-               failures := Printf.sprintf "%s(%h) = %h, reference %h (%.0f ulp)" fn x got r u :: !failures)
+               failures :=
+                 Printf.sprintf "%s(%h) = %h, reference %h (%.0f ulp)" fn x got
+                   r u
+                 :: !failures)
      done
    with End_of_file -> close_in ic);
-  Hashtbl.iter (fun fn (n, worst, at) -> Printf.printf "%-6s %7d rows, worst %.0f ulp at %h\n" fn n worst at) stats;
+  Hashtbl.iter
+    (fun fn (n, worst, at) ->
+      Printf.printf "%-6s %7d rows, worst %.0f ulp at %h\n" fn n worst at)
+    stats;
   List.iter print_endline (List.rev !failures);
   if !failures <> [] then exit 1

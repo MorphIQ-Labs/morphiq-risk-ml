@@ -29,9 +29,20 @@ let horner coefficients v =
 (* 1/(n+1)! for n = 0..13, correctly rounded (checked against mpmath). *)
 let exp_coefficients =
   [|
-    1.0; 0.5; 0x1.5555555555555p-3; 0x1.5555555555555p-5; 0x1.1111111111111p-7; 0x1.6c16c16c16c17p-10;
-    0x1.a01a01a01a01ap-13; 0x1.a01a01a01a01ap-16; 0x1.71de3a556c734p-19; 0x1.27e4fb7789f5cp-22;
-    0x1.ae64567f544e4p-26; 0x1.1eed8eff8d898p-29; 0x1.6124613a86d09p-33; 0x1.93974a8c07c9dp-37;
+    1.0;
+    0.5;
+    0x1.5555555555555p-3;
+    0x1.5555555555555p-5;
+    0x1.1111111111111p-7;
+    0x1.6c16c16c16c17p-10;
+    0x1.a01a01a01a01ap-13;
+    0x1.a01a01a01a01ap-16;
+    0x1.71de3a556c734p-19;
+    0x1.27e4fb7789f5cp-22;
+    0x1.ae64567f544e4p-26;
+    0x1.1eed8eff8d898p-29;
+    0x1.6124613a86d09p-33;
+    0x1.93974a8c07c9dp-37;
   |]
 
 (* e^r - 1 = r Σ r^n/(n+1)! for |r| <= ln 2 / 2 + a little; the degree-14
@@ -40,7 +51,30 @@ let expm1_reduced r = r *. horner exp_coefficients r
 
 (* The same series to degree 21 for |x| <= 1, where 1/22! < 2^-70: expm1 is
    then one Horner evaluation, without recombining across a reduction. *)
-let expm1_coefficients = [| 0x1.0000000000000p+0; 0x1.0000000000000p-1; 0x1.5555555555555p-3; 0x1.5555555555555p-5; 0x1.1111111111111p-7; 0x1.6c16c16c16c17p-10; 0x1.a01a01a01a01ap-13; 0x1.a01a01a01a01ap-16; 0x1.71de3a556c734p-19; 0x1.27e4fb7789f5cp-22; 0x1.ae64567f544e4p-26; 0x1.1eed8eff8d898p-29; 0x1.6124613a86d09p-33; 0x1.93974a8c07c9dp-37; 0x1.ae7f3e733b81fp-41; 0x1.ae7f3e733b81fp-45; 0x1.952c77030ad4ap-49; 0x1.6827863b97d97p-53; 0x1.2f49b46814157p-57; 0x1.e542ba4020225p-62; 0x1.71b8ef6dcf572p-66 |]
+let expm1_coefficients =
+  [|
+    0x1.0000000000000p+0;
+    0x1.0000000000000p-1;
+    0x1.5555555555555p-3;
+    0x1.5555555555555p-5;
+    0x1.1111111111111p-7;
+    0x1.6c16c16c16c17p-10;
+    0x1.a01a01a01a01ap-13;
+    0x1.a01a01a01a01ap-16;
+    0x1.71de3a556c734p-19;
+    0x1.27e4fb7789f5cp-22;
+    0x1.ae64567f544e4p-26;
+    0x1.1eed8eff8d898p-29;
+    0x1.6124613a86d09p-33;
+    0x1.93974a8c07c9dp-37;
+    0x1.ae7f3e733b81fp-41;
+    0x1.ae7f3e733b81fp-45;
+    0x1.952c77030ad4ap-49;
+    0x1.6827863b97d97p-53;
+    0x1.2f49b46814157p-57;
+    0x1.e542ba4020225p-62;
+    0x1.71b8ef6dcf572p-66;
+  |]
 
 let expm1_direct x = x *. horner expm1_coefficients x
 
@@ -80,8 +114,16 @@ let expm1 x =
 (* 1/(2k+1) for k = 1..10, correctly rounded (checked against mpmath). *)
 let atanh_coefficients =
   [|
-    0x1.5555555555555p-2; 0x1.999999999999ap-3; 0x1.2492492492492p-3; 0x1.c71c71c71c71cp-4; 0x1.745d1745d1746p-4;
-    0x1.3b13b13b13b14p-4; 0x1.1111111111111p-4; 0x1.e1e1e1e1e1e1ep-5; 0x1.af286bca1af28p-5; 0x1.8618618618618p-5;
+    0x1.5555555555555p-2;
+    0x1.999999999999ap-3;
+    0x1.2492492492492p-3;
+    0x1.c71c71c71c71cp-4;
+    0x1.745d1745d1746p-4;
+    0x1.3b13b13b13b14p-4;
+    0x1.1111111111111p-4;
+    0x1.e1e1e1e1e1e1ep-5;
+    0x1.af286bca1af28p-5;
+    0x1.8618618618618p-5;
   |]
 
 (* ln(1 + f) for f in [sqrt(1/2) - 1, sqrt 2 - 1], as 2 atanh(f / (2 + f)):
@@ -121,7 +163,8 @@ let log1p x =
   else if Float.is_nan x || x < -1.0 then Float.nan
   else if x = -1.0 then Float.neg_infinity
   else if x = Float.infinity then x
-  else if x >= sqrt_half -. 1.0 && x <= 0x1.6a09e667f3bcdp0 -. 1.0 then log1p_reduced x
+  else if x >= sqrt_half -. 1.0 && x <= 0x1.6a09e667f3bcdp0 -. 1.0 then
+    log1p_reduced x
   else
     (* 1 + x rounds; c = (x - (u - 1))/u restores what the rounding dropped. *)
     let u = 1.0 +. x in

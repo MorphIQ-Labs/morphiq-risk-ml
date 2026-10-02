@@ -9,7 +9,8 @@ let inv_sqrt_2pi = { Dd.hi = 0x1.9884533d43651p-2; lo = -0x1.cbc0d30ebfd15p-56 }
 let limit = 6.0
 
 (* φ(d) = e^(-d^2/2) / sqrt(2π), with d^2 formed exactly. *)
-let pdf d = Dd.mul inv_sqrt_2pi (Dd.exp (Dd.neg (Dd.mul_float (Dd.mul d d) 0.5)))
+let pdf d =
+  Dd.mul inv_sqrt_2pi (Dd.exp (Dd.neg (Dd.mul_float (Dd.mul d d) 0.5)))
 
 (* Φ(d) = 1/2 + φ(d) Σ_{k>=0} d^(2k+1) / (2k+1)!!   (Marsaglia 2004, eq. 2).
    Every term has the sign of d, so the sum does not cancel; for d < 0 the
@@ -19,9 +20,12 @@ let cdf d =
   else
     let d2 = Dd.mul d d in
     let rec sum k term acc =
-      if Float.abs term.Dd.hi <= 0x1p-110 *. Float.abs acc.Dd.hi || k > 400 then acc
+      if Float.abs term.Dd.hi <= 0x1p-110 *. Float.abs acc.Dd.hi || k > 400 then
+        acc
       else
-        let term = Dd.div (Dd.mul term d2) (Dd.of_float (float ((2 * k) + 1))) in
+        let term =
+          Dd.div (Dd.mul term d2) (Dd.of_float (float ((2 * k) + 1)))
+        in
         sum (k + 1) term (Dd.add acc term)
     in
     let series = sum 1 d d in

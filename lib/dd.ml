@@ -105,7 +105,10 @@ let sqrt_half = 0x1.6a09e667f3bcdp-1
 
 (* 1/(2k+1) for the atanh series, to double-double precision. *)
 let series_terms = 22
-let reciprocals = Array.init (series_terms + 1) (fun k -> div (of_float 1.0) (of_float (float (2 * k + 1))))
+
+let reciprocals =
+  Array.init (series_terms + 1) (fun k ->
+      div (of_float 1.0) (of_float (float ((2 * k) + 1))))
 
 (* ln m for m in [sqrt 1/2, sqrt 2]: 2 atanh u, u = (m-1)/(m+1), |u| <= 0.1716,
    so u^2 <= 0.0295 and 22 terms of sum u^(2k)/(2k+1) reach 2^-106. *)
@@ -131,7 +134,8 @@ let log_float a =
    breaks an exact tie, and a true tie goes to even. *)
 let to_float_scaled a k =
   let v = Float.ldexp a.hi k in
-  if Float.abs v >= Float.min_float || a.hi = 0.0 || not (Float.is_finite v) then Float.ldexp (to_float a) k
+  if Float.abs v >= Float.min_float || a.hi = 0.0 || not (Float.is_finite v)
+  then Float.ldexp (to_float a) k
   else
     let shift = k + 1074 in
     let u = Float.ldexp a.hi shift and ul = Float.ldexp a.lo shift in

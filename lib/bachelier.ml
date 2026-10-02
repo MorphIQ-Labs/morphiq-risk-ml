@@ -7,7 +7,12 @@
 
 let inv_sqrt_2pi = 0.39894228040143267794
 
-type inputs = { forward : float; strike : float; time_to_expiry : float; rate : float }
+type inputs = {
+  forward : float;
+  strike : float;
+  time_to_expiry : float;
+  rate : float;
+}
 
 type coordinates =
   | Expiry of { forward : float; strike : float; rate : float }
@@ -31,7 +36,8 @@ let admit i =
   else if not (Float.is_finite i.time_to_expiry && i.time_to_expiry >= 0.0) then
     invalid Refusal.Time_to_expiry i.time_to_expiry
   else if not (Float.is_finite i.rate) then invalid Refusal.Rate i.rate
-  else if i.time_to_expiry = 0.0 then Ok (Expiry { forward = i.forward; strike = i.strike; rate = i.rate })
+  else if i.time_to_expiry = 0.0 then
+    Ok (Expiry { forward = i.forward; strike = i.strike; rate = i.rate })
   else
     let distance, distance_low = Split.two_sum i.forward (-.i.strike) in
     Ok
@@ -46,34 +52,47 @@ let admit i =
            root_time_low = snd (Split.sqrt i.time_to_expiry);
          })
 
-
 (* D s φ(d) Y'(-d) with d = |Δ| / s, the out-of-the-money part, for s > 0.
    d is carried as q + r so d²/2 is formed without rounding. *)
 let otm ~discount ~abs_distance ~abs_low s sl =
   let q, r = Split.quotient_dd abs_distance abs_low s sl in
   let q2, q2l = Split.square q in
-  let m = discount *. s *. inv_sqrt_2pi *. Normalised_black.y_prime (-.(q +. r)) in
+  let m =
+    discount *. s *. inv_sqrt_2pi *. Normalised_black.y_prime (-.(q +. r))
+  in
   Split.scaled_exp_neg m (0.5 *. q2) ((0.5 *. q2l) +. (q *. r))
 
 let abs_parts distance distance_low =
-  if distance < 0.0 then (-.distance, -.distance_low) else (distance, distance_low)
+  if distance < 0.0 then (-.distance, -.distance_low)
+  else (distance, distance_low)
 
 let price a side sigma =
   let theta = Side.sign side in
   match a with
-  | Expiry { forward; strike; _ } -> Float.max (theta *. (forward -. strike)) 0.0
-  | Live { discount; distance; distance_low; root_time; root_time_low; rate; time } ->
+  | Expiry { forward; strike; _ } ->
+      Float.max (theta *. (forward -. strike)) 0.0
+  | Live
+      { discount; distance; distance_low; root_time; root_time_low; rate; time }
+    ->
       (* D θ Δ to ~106 bits: the zero-variance price is its correctly rounded
          value, the boundary the inverse classifies quotes against. *)
       let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
       let in_the_money = delta.hi > 0.0 in
-      let intrinsic () = Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate time))) delta in
-      let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = root_time; lo = root_time_low } (Vol.to_float sigma) in
+      let intrinsic () =
+        Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate time))) delta
+      in
+      let { Dd.hi = s; lo = sl } =
+        Dd.mul_float
+          { Dd.hi = root_time; lo = root_time_low }
+          (Vol.to_float sigma)
+      in
       if s = 0.0 then if in_the_money then Dd.to_float (intrinsic ()) else 0.0
       else
         let abs_distance, abs_low = abs_parts distance distance_low in
         let otm = otm ~discount ~abs_distance ~abs_low s sl in
-        if in_the_money then Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float otm)) else otm
+        if in_the_money then
+          Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float otm))
+        else otm
 
 let sqrt_two_pi = Normalised_black.sqrt_two_pi
 
@@ -95,14 +114,22 @@ let solve_total_volatility ~discount ~abs_distance ~abs_low target =
         let slope = discount *. Normal.norm_pdf d in
         let step = (Elementary.log target -. Elementary.log v) *. v /. slope in
         let next = s +. step in
-        let next = if next > lo && next < hi && Float.is_finite next then next else 0.5 *. (lo +. hi) in
-        if Float.abs (next -. s) <= epsilon_float *. s || hi -. lo <= epsilon_float *. hi then next
+        let next =
+          if next > lo && next < hi && Float.is_finite next then next
+          else 0.5 *. (lo +. hi)
+        in
+        if
+          Float.abs (next -. s) <= epsilon_float *. s
+          || hi -. lo <= epsilon_float *. hi
+        then next
         else go (n + 1) lo hi next
     in
-    let lo = beta *. sqrt_two_pi and hi = (beta +. abs_distance) *. sqrt_two_pi in
+    let lo = beta *. sqrt_two_pi
+    and hi = (beta +. abs_distance) *. sqrt_two_pi in
     go 0 lo hi (Float.sqrt lo *. Float.sqrt hi)
 
-let root sigma = match Vol.normal sigma with Ok v -> Iv.Root v | Error _ -> Iv.Above_maximum
+let root sigma =
+  match Vol.normal sigma with Ok v -> Iv.Root v | Error _ -> Iv.Above_maximum
 
 let implied a side price =
   if not (Float.is_finite price && price >= 0.0) then
@@ -110,25 +137,35 @@ let implied a side price =
   else
     match a with
     | Expiry _ -> Ok Iv.Not_identifiable_at_expiry
-    | Live { distance; distance_low; time; root_time; root_time_low; rate; _ } ->
+    | Live { distance; distance_low; time; root_time; root_time_low; rate; _ }
+      ->
         let theta = Side.sign side in
         (* The zero-volatility price D θ Δ in double-double. *)
         let discount_dd = Dd.exp (Dd.neg (Dd.two_prod rate time)) in
-        let delta = Dd.mul_float { Dd.hi = distance; lo = distance_low } theta in
+        let delta =
+          Dd.mul_float { Dd.hi = distance; lo = distance_low } theta
+        in
         let intrinsic = Dd.mul discount_dd delta in
         if intrinsic.hi > 0.0 && Dd.compare_float intrinsic price > 0 then
           Ok (if price = intrinsic.hi then root 0.0 else Iv.Below_intrinsic)
         else
-          let otm_target = Dd.sub (Dd.of_float price) (if intrinsic.hi > 0.0 then intrinsic else Dd.of_float 0.0) in
+          let otm_target =
+            Dd.sub (Dd.of_float price)
+              (if intrinsic.hi > 0.0 then intrinsic else Dd.of_float 0.0)
+          in
           if otm_target.hi = 0.0 then Ok (root 0.0)
           else
             let abs_distance, abs_low = abs_parts distance distance_low in
             let s =
-              solve_total_volatility ~discount:(Dd.to_float discount_dd) ~abs_distance ~abs_low (Dd.to_float otm_target)
+              solve_total_volatility ~discount:(Dd.to_float discount_dd)
+                ~abs_distance ~abs_low (Dd.to_float otm_target)
             in
-            let sigma = s /. root_time *. (1.0 -. (root_time_low /. root_time)) in
+            let sigma =
+              s /. root_time *. (1.0 -. (root_time_low /. root_time))
+            in
             Ok
-              (if Float.is_nan sigma || sigma = Float.infinity then Iv.Above_maximum
+              (if Float.is_nan sigma || sigma = Float.infinity then
+                 Iv.Above_maximum
                else if sigma <= 0.0 then Iv.Below_smallest_volatility
                else root sigma)
 
@@ -148,12 +185,25 @@ let greeks a side sigma =
   let theta = Side.sign side in
   let sigma_f = Vol.to_float sigma in
   match a with
-  | Expiry { forward; strike; rate } -> Greeks.expiry ~theta ~spot:forward ~strike ~rate ~yield:rate
-  | Live { discount; distance; distance_low; time; root_time; root_time_low; rate; _ } ->
+  | Expiry { forward; strike; rate } ->
+      Greeks.expiry ~theta ~spot:forward ~strike ~rate ~yield:rate
+  | Live
+      {
+        discount;
+        distance;
+        distance_low;
+        time;
+        root_time;
+        root_time_low;
+        rate;
+        _;
+      } ->
       let value = price a side sigma in
       let rho = Ok (-.time *. value) in
       let rt = root_time *. (1.0 +. (root_time_low /. root_time)) in
-      let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = root_time; lo = root_time_low } sigma_f in
+      let { Dd.hi = s; lo = sl } =
+        Dd.mul_float { Dd.hi = root_time; lo = root_time_low } sigma_f
+      in
       let day = 1.0 /. Units.days_per_year in
       if sigma_f = 0.0 || (s = 0.0 && distance <> 0.0) then
         if distance = 0.0 && distance_low = 0.0 then
@@ -185,25 +235,42 @@ let greeks a side sigma =
             color = Greeks.daily 0.0;
           }
       else
-        let dh, dl = if s = 0.0 then (0.0, 0.0) else Split.quotient_dd distance distance_low s sl in
+        let dh, dl =
+          if s = 0.0 then (0.0, 0.0)
+          else Split.quotient_dd distance distance_low s sl
+        in
         let d = dh +. dl in
         let d2h, d2l = Split.square dh in
-        let g p = Split.scaled_exp_neg p (0.5 *. d2h) ((0.5 *. d2l) +. (dh *. dl)) in
-        let base = discount *. inv_sqrt_2pi (* D φ(d) = base G *) in
+        let g p =
+          Split.scaled_exp_neg p (0.5 *. d2h) ((0.5 *. d2l) +. (dh *. dl))
+        in
+        let base =
+          discount *. inv_sqrt_2pi
+          (* D φ(d) = base G *)
+        in
         (* d/σ, kept finite where s underflows at the money. *)
-        let d_over_sigma = if distance = 0.0 && distance_low = 0.0 then 0.0 else d /. sigma_f in
+        let d_over_sigma =
+          if distance = 0.0 && distance_low = 0.0 then 0.0 else d /. sigma_f
+        in
         (* veta's and color's brackets cancel where d^2 = 1 ± 2rT: both in
            double-double, with d = dh + dl and √T's low part. *)
         let d2_dd = Dd.mul { Dd.hi = dh; lo = dl } { Dd.hi = dh; lo = dl } in
         let rt_dd = { Dd.hi = root_time; lo = root_time_low } in
         let veta_bracket =
           Dd.to_float
-            (Dd.sub (Dd.mul_float rt_dd rate) (Dd.div (Dd.add (Dd.of_float 1.0) d2_dd) (Dd.mul_float rt_dd 2.0)))
+            (Dd.sub (Dd.mul_float rt_dd rate)
+               (Dd.div
+                  (Dd.add (Dd.of_float 1.0) d2_dd)
+                  (Dd.mul_float rt_dd 2.0)))
         in
         let color_bracket =
           let half_inverse_time = 0.5 /. time in
           if Float.is_finite half_inverse_time then
-            Dd.to_float (Dd.add (Dd.of_float rate) (Dd.div (Dd.sub (Dd.of_float 1.0) d2_dd) (Dd.of_float (2.0 *. time))))
+            Dd.to_float
+              (Dd.add (Dd.of_float rate)
+                 (Dd.div
+                    (Dd.sub (Dd.of_float 1.0) d2_dd)
+                    (Dd.of_float (2.0 *. time))))
           else (1.0 -. (d *. d)) *. half_inverse_time
         in
         (* charm = r Δ + D φ(d) d/(2T) = D (θ r Φ(θ d) + φ(d) d/(2T)): the
@@ -212,8 +279,12 @@ let greeks a side sigma =
           let d_dd = { Dd.hi = dh; lo = dl } in
           let bracket =
             Dd.add
-              (Dd.mul_float (Normal_dd.cdf (Dd.mul_float d_dd theta)) (theta *. rate))
-              (Dd.div (Dd.mul (Normal_dd.pdf d_dd) d_dd) (Dd.of_float (2.0 *. time)))
+              (Dd.mul_float
+                 (Normal_dd.cdf (Dd.mul_float d_dd theta))
+                 (theta *. rate))
+              (Dd.div
+                 (Dd.mul (Normal_dd.pdf d_dd) d_dd)
+                 (Dd.of_float (2.0 *. time)))
           in
           discount *. Dd.to_float bracket *. day
         in
@@ -226,18 +297,28 @@ let greeks a side sigma =
         let theta_annual =
           if Float.abs dh <= Normal_dd.limit then
             let d_dd = { Dd.hi = dh; lo = dl } in
-            let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
+            let delta =
+              { Dd.hi = theta *. distance; lo = theta *. distance_low }
+            in
             let s_dd = { Dd.hi = s; lo = sl } in
-            let first = Dd.mul (Dd.mul_float delta rate) (Normal_dd.cdf (Dd.mul_float d_dd theta)) in
+            let first =
+              Dd.mul (Dd.mul_float delta rate)
+                (Normal_dd.cdf (Dd.mul_float d_dd theta))
+            in
             let second =
               Dd.mul (Normal_dd.pdf d_dd)
-                (Dd.sub (Dd.mul_float s_dd rate) (Dd.div (Dd.of_float sigma_f) (Dd.mul_float rt_dd 2.0)))
+                (Dd.sub (Dd.mul_float s_dd rate)
+                   (Dd.div (Dd.of_float sigma_f) (Dd.mul_float rt_dd 2.0)))
             in
-            Dd.to_float (Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate time))) (Dd.add first second))
+            Dd.to_float
+              (Dd.mul
+                 (Dd.exp (Dd.neg (Dd.two_prod rate time)))
+                 (Dd.add first second))
           else (rate *. value) -. g (base *. sigma_f /. (2.0 *. rt))
         in
         let charm =
-          if Float.abs dh <= Normal_dd.limit && Float.is_finite (0.5 /. time) then charm_dd ()
+          if Float.abs dh <= Normal_dd.limit && Float.is_finite (0.5 /. time)
+          then charm_dd ()
           else (rate *. delta *. day) +. g (base *. d /. (2.0 *. time) *. day)
         in
         {
@@ -247,7 +328,10 @@ let greeks a side sigma =
           vega = Ok (Units.per_volatility (g (base *. rt)));
           rho;
           vanna = Ok (Units.per_volatility (g (-.base *. d_over_sigma)));
-          volga = Ok (Units.per_volatility_squared (g (base *. rt *. d *. d_over_sigma)));
+          volga =
+            Ok
+              (Units.per_volatility_squared
+                 (g (base *. rt *. d *. d_over_sigma)));
           charm = Ok (Units.time_rate charm);
           veta = Ok (Units.time_rate (g (base *. veta_bracket *. day)));
           color = Ok (Units.time_rate (g (base /. s *. color_bracket *. day)));
