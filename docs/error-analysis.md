@@ -20,6 +20,10 @@ These are analyses with measured envelopes, not machine-checked proofs. Where a 
 
 **Determinism.** These use only IEEE basic operations and fma, which every conforming platform rounds the same way (docs/determinism.md).
 
+**Double-double exp and expm1** (`Internal.Dd`) follow the QD library (Hida, Li and Bailey, qd-2.3.24 `dd_real::exp`): m = round(x/ln 2), r = (x − m·ln 2)/512, the Taylor series of e^r − 1 until a term falls below 2^-104/512, then nine doublings s ← 2s + s². The reduction's error, about |x|·2^-105 absolute in r, is relative error in e^x. A pinned mpmath test (`test/dd_reference.ml`) measures exp within 2^-100 + |x|·2^-105. Unlike QD, exp continues into the subnormal range, where the low part underflows.
+
+**Double-double log** stays the atanh series on m ∈ [√½, √2]. QD's log, a Newton step x + m·e^(−x) − 1, has absolute error near 2^-104, which is unbounded relative error as ln m → 0. ln(S/K) for S ≈ K needs relative accuracy there: the QD form put a zero-variance price 21 ULP off.
+
 ## 2. The normal distribution
 
 - **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals, whose stated relative error is below 10^-18 before rounding. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
