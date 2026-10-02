@@ -88,3 +88,47 @@
  (alias runtest)
  (action
   (diff forge_volatility.expected forge_volatility.out)))
+
+(rule
+ (deps daily_as_annual.ml ../../lib/morphiq_risk.cma)
+ (targets daily_as_annual.out)
+ (action
+  (with-stderr-to
+   daily_as_annual.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     daily_as_annual.cmo
+     daily_as_annual.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff daily_as_annual.expected daily_as_annual.out)))
+
+(rule
+ (deps mixed_vega.ml ../../lib/morphiq_risk.cma)
+ (targets mixed_vega.out)
+ (action
+  (with-stderr-to
+   mixed_vega.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     mixed_vega.cmo
+     mixed_vega.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff mixed_vega.expected mixed_vega.out)))

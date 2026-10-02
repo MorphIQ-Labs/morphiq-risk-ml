@@ -16,12 +16,15 @@ module Coordinates : sig
     root_time : float;
     root_time_low : float;
     spot : float;  (** [S], scaled by [2^-exponent]. *)
+    spot_low : float;  (** [S]'s low part where [S] is an exact sum ([F + d]). *)
     strike : float;  (** [K], scaled by [2^-exponent]. *)
+    strike_low : float;
     rate : float;
     yield : float;
+    tied : bool;  (** The yield is the rate (a forward model): rho moves both. *)
   }
 
-  type t = private Expiry of { spot : float; strike : float } | Live of live
+  type t = private Expiry of { spot : float; strike : float; rate : float; yield : float } | Live of live
 
   val exp_neg_product : float -> float -> float
   (** [e^(-(a b))] with the product split exactly. *)
@@ -45,6 +48,8 @@ module type MODEL = sig
   val implied : admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
   (** The volatility whose price is the quote, or why there is none. A quote
       that is not a finite, nonnegative number is refused. *)
+
+  val greeks : admitted -> Side.t -> Vol.lognormal Vol.t -> Vol.lognormal Greeks.t
 
   val coordinates : admitted -> Coordinates.t
 end

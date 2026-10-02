@@ -12,3 +12,5 @@ val price : admitted -> Side.t -> Vol.normal Vol.t -> float
 
 val implied : admitted -> Side.t -> float -> (Vol.normal Iv.t, Refusal.t) result
 (** The normal volatility whose price is the quote, or why there is none. *)
+
+val greeks : admitted -> Side.t -> Vol.normal Vol.t -> Vol.normal Greeks.t

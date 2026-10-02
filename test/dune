@@ -33,3 +33,11 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/data/public_iv_reference.txt})))
+
+(test
+ (name oracle_greeks)
+ (package morphiq_risk_ml)
+ (modules oracle_greeks budget_greeks)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/data/greek_reference.txt})))

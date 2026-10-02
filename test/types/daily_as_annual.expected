@@ -1,0 +1,13 @@
+File "daily_as_annual.ml", line 10, characters 15-38:
+10 |   annual_carry (Result.get_ok g.theta)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type
+         "Morphiq_risk__.Units.per_calendar_day Morphiq_risk__.Units.time_rate"
+           =
+           "Morphiq_risk__.Units.per_calendar_day Morphiq_risk.Units.time_rate"
+       but an expression was expected of type
+         "Morphiq_risk.Units.per_year Morphiq_risk.Units.time_rate"
+       Type
+         "Morphiq_risk__.Units.per_calendar_day" =
+           "Morphiq_risk.Units.per_calendar_day"
+       is not compatible with type "Morphiq_risk.Units.per_year"

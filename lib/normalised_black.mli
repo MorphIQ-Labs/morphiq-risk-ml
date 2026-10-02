@@ -31,3 +31,7 @@ val complement : float -> float -> float -> float -> float
 (** [complement x xl s sl] is [e^(x/2) - b(x + xl, s + sl)] for [x <= 0],
     without subtractive cancellation. *)
 
+
+val vega_exponent : float -> float -> float -> float -> float * float
+(** [vega_exponent hh hl t tl] is [(h^2 + t^2)/2] as an unevaluated sum, for
+    [h = hh + hl] and [t = t + tl]. *)

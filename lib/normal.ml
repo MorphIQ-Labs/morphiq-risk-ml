@@ -146,3 +146,8 @@ let norm_inv p =
       let r = Float.sqrt (-.Float.log (if q < 0.0 then p else 1.0 -. p)) in
       let z = if r <= As241.split2 then As241.intermediate r else As241.far r in
       if q < 0.0 then -.z else z
+
+(* Phi(hi + lo) for |lo| <= ulp(hi), to first order in lo. Phi(hi) is exact
+   in its argument, so a double-double argument keeps the tail's relative
+   accuracy, which a rounded argument loses at rate |d|. *)
+let norm_cdf_dd hi lo = if lo = 0.0 then norm_cdf hi else norm_cdf hi +. (norm_pdf hi *. lo)

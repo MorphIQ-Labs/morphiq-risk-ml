@@ -1,0 +1,11 @@
+File "mixed_vega.ml", line 12, characters 30-53:
+12 |   net (Result.get_ok gb.vega) (Result.get_ok gn.vega)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type
+         "Morphiq_risk__.Vol.normal Morphiq_risk__.Units.per_volatility" =
+           "Morphiq_risk__.Vol.normal Morphiq_risk.Units.per_volatility"
+       but an expression was expected of type
+         "Morphiq_risk__.Vol.lognormal Morphiq_risk.Units.per_volatility"
+       Type "Morphiq_risk__.Vol.normal" = "Morphiq_risk.Vol.normal"
+       is not compatible with type
+         "Morphiq_risk__.Vol.lognormal" = "Morphiq_risk.Vol.lognormal"

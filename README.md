@@ -9,5 +9,10 @@ eval "$(opam env --switch=morphiq-risk-ml)"
 ./oracle/fetch.sh        # FerroRisk reference fixtures from the pinned commit
 python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0
 oracle/.venv/bin/python oracle/gen_normal.py oracle/data/normal_reference.txt
+oracle/.venv/bin/python oracle/convert_440.py oracle/data/440-candidates.jsonl.gz oracle/data/440-oracle.jsonl.gz oracle/data/european_price_reference.txt
+oracle/.venv/bin/python oracle/convert_public_iv.py oracle/data/public_iv_reference.json oracle/data/public_iv_observed_envelope.json oracle/data/public_iv_reference.txt
+oracle/.venv/bin/python oracle/convert_greeks.py oracle/data/greek_derivative_reference.json oracle/data/greek_reference.txt
 dune build && dune test
 ```
+
+Results: [docs/results-slice.md](docs/results-slice.md).

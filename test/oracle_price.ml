@@ -59,12 +59,12 @@ let price model side ~s ~k ~t ~r ~q ~sigma ~shift =
       let a = get (Black.Black76.admit { forward = s; strike = k; time_to_expiry = t; rate = r }) in
       Black.Black76.price a side lognormal
   | "displaced" ->
-      let a =
-        get
-          (Black.Displaced.admit
-             { forward = s; strike = k; displacement = shift; time_to_expiry = t; rate = r })
-      in
-      Black.Displaced.price a side lognormal
+      (* #440 measures displaced Black on binary64-shifted coordinates (its
+         oracle shifts in binary64 before pricing). Displaced here shifts by
+         the exact sum, as FerroRisk's IV and Greek references do, so the #440
+         rows are Black-76 on fl(F + d) and fl(K + d). *)
+      let a = get (Black.Black76.admit { forward = s +. shift; strike = k +. shift; time_to_expiry = t; rate = r }) in
+      Black.Black76.price a side lognormal
   | "bachelier" ->
       let a = get (Bachelier.admit { forward = s; strike = k; time_to_expiry = t; rate = r }) in
       Bachelier.price a side (get (Vol.normal sigma))

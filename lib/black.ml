@@ -16,12 +16,15 @@ module Coordinates = struct
     root_time : float;
     root_time_low : float;  (** sqrt T = root_time + root_time_low to ~106 bits. *)
     spot : float;  (** S, scaled by 2^-exponent. *)
+    spot_low : float;  (** S's low part, for a spot that is an exact sum (S + d). *)
     strike : float;  (** K, scaled by 2^-exponent. *)
+    strike_low : float;
     rate : float;
     yield : float;
+    tied : bool;  (** The yield is the rate (a forward model): rho moves both. *)
   }
 
-  type t = Expiry of { spot : float; strike : float } | Live of live
+  type t = Expiry of { spot : float; strike : float; rate : float; yield : float } | Live of live
 
   (* e^(-(a b)) with the product a b split exactly. *)
   let exp_neg_product a b =
@@ -48,16 +51,22 @@ module Coordinates = struct
      power of two that centres them on 1, exactly, and the price is scaled
      back once. The legs then neither underflow nor overflow before they
      cancel. *)
-  let make ~spot ~strike ~time ~rate ~yield =
-    if time = 0.0 then Expiry { spot; strike }
+  let make ?(tied = false) ?(spot_low = 0.0) ?(strike_low = 0.0) ~spot ~strike ~time ~rate ~yield () =
+    if time = 0.0 then Expiry { spot; strike; rate; yield }
     else
       let exponent = (snd (Float.frexp spot) + snd (Float.frexp strike)) / 2 in
-      let spot' = Float.ldexp spot (-exponent) and strike' = Float.ldexp strike (-exponent) in
-      let x = Dd.add (log_ratio spot strike) (carry ~rate ~yield ~time) in
+      let scale v = Float.ldexp v (-exponent) in
+      let spot' = scale spot and strike' = scale strike in
+      (* ln((S + Sl)/(K + Kl)) = ln(S/K) + Sl/S - Kl/K to first order. *)
+      let x =
+        Dd.add
+          (Dd.add (log_ratio spot strike) (carry ~rate ~yield ~time))
+          (Dd.of_float ((spot_low /. spot) -. (strike_low /. strike)))
+      in
       Live
         {
-          asset = spot' *. exp_neg_product yield time;
-          cash = strike' *. exp_neg_product rate time;
+          asset = spot' *. exp_neg_product yield time *. (1.0 +. (spot_low /. spot));
+          cash = strike' *. exp_neg_product rate time *. (1.0 +. (strike_low /. strike));
           x = x.hi;
           x_low = x.lo;
           exponent;
@@ -65,9 +74,12 @@ module Coordinates = struct
           root_time = fst (Split.sqrt time);
           root_time_low = snd (Split.sqrt time);
           spot = spot';
+          spot_low = scale spot_low;
           strike = strike';
+          strike_low = scale strike_low;
           rate;
           yield;
+          tied;
         }
 end
 
@@ -84,6 +96,7 @@ module type MODEL = sig
   val admit : inputs -> (admitted, Refusal.t) result
   val price : admitted -> Side.t -> Vol.lognormal Vol.t -> float
   val implied : admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
+  val greeks : admitted -> Side.t -> Vol.lognormal Vol.t -> Vol.lognormal Greeks.t
   val coordinates : admitted -> Coordinates.t
 end
 
@@ -117,15 +130,15 @@ let live_price side (c : Coordinates.live) sigma =
 
 let price_coordinates coordinates side sigma =
   match coordinates with
-  | Coordinates.Expiry { spot; strike } -> Float.max (Side.sign side *. (spot -. strike)) 0.0
+  | Coordinates.Expiry { spot; strike; _ } -> Float.max (Side.sign side *. (spot -. strike)) 0.0
   | Coordinates.Live c -> live_price side c (Vol.to_float sigma)
 
 (* The legs and the discounted forward intrinsic in double-double (~106
    bits), at the coordinates' scale. They decide where a quote falls relative
    to the zero-volatility price and the maximum. *)
 let precise_legs (c : Coordinates.live) =
-  let leg spot rate = Dd.mul_float (Dd.exp (Dd.neg (Dd.two_prod rate c.time))) spot in
-  let asset = leg c.spot c.yield and cash = leg c.strike c.rate in
+  let leg hi lo rate = Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate c.time))) { Dd.hi; lo } in
+  let asset = leg c.spot c.spot_low c.yield and cash = leg c.strike c.strike_low c.rate in
   let x = { Dd.hi = c.x; lo = c.x_low } in
   let forward_intrinsic = if Float.abs c.x <= 0.35 then Dd.mul cash (Dd.expm1 x) else Dd.sub asset cash in
   (asset, cash, forward_intrinsic)
@@ -183,6 +196,134 @@ let live_implied side (c : Coordinates.live) price =
         else if sigma <= 0.0 then Iv.Below_smallest_volatility
         else root sigma
 
+let sqrt_pi_over_2 = 1.253314137315500251207882642405522626503493370305
+
+(* Mills ratio R(z) = Phi(-z)/phi(z) for z >= 0. *)
+let mills z = sqrt_pi_over_2 *. Cody.erfcx_nonnegative (z *. Normal.inv_sqrt_2)
+
+(* Analytic Greeks (FerroRisk conventions: time Greeks are -d/dT per
+   calendar day). Each Greek is assembled as an ordinary part plus
+   P exp(-(h^2+t^2)/2) 2^k, where the prefactor P collects every algebraic
+   factor and k the Greek's degree of homogeneity in (S, K) times the
+   coordinate exponent. The exponential, with its exactly split argument, is
+   applied last with a single rounding. A tail Greek therefore neither loses
+   bits in the subnormals nor underflows before rescaling. Φ enters through
+   the Mills ratio, Φ(-z) = φ(z) R(z), so A Φ(θ d1) = A φ(d1) R(-θ d1) shares
+   the exponential. Terms in 1/T are rewritten so σ and √T cancel
+   analytically, for example vega/(2T) = A φ(d1)/(2 √T). *)
+let live_greeks side (c : Coordinates.live) sigma =
+  let theta = Side.sign side in
+  let e_up = c.exponent and e_down = -c.exponent in
+  let up v = Float.ldexp v e_up in
+  let q = c.yield and r = c.rate and time = c.time and rt = c.root_time in
+  let rt_full = rt *. (1.0 +. (c.root_time_low /. rt)) in
+  let dq = Coordinates.exp_neg_product q time in
+  let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = rt; lo = c.root_time_low } sigma in
+  let price = live_price side c sigma in
+  let rho_forward () = Ok (-.time *. price) in
+  if sigma = 0.0 || (s = 0.0 && c.x <> 0.0) then
+    (* Zero variance: the discounted payoff max(θ(A - C), 0). *)
+    if c.x = 0.0 then
+      {
+        Greeks.delta = Greeks.kink;
+        gamma = Greeks.kink;
+        theta = Greeks.kink;
+        vega = Ok (Units.per_volatility (up (c.asset *. rt *. Normalised_black.inv_sqrt_2pi)));
+        rho = Greeks.kink;
+        vanna = Greeks.kink;
+        volga = Ok (Units.per_volatility_squared 0.0);
+        charm = Greeks.kink;
+        veta = Greeks.kink;
+        color = Greeks.kink;
+      }
+    else
+      let itm = theta *. c.x > 0.0 in
+      let on v = if itm then v else 0.0 in
+      {
+        Greeks.delta = Ok (on (theta *. dq));
+        gamma = Ok 0.0;
+        theta = Greeks.daily (up (on (theta *. ((q *. c.asset) -. (r *. c.cash)))));
+        vega = Ok (Units.per_volatility 0.0);
+        rho = (if c.tied then rho_forward () else Ok (up (on (theta *. c.cash *. time))));
+        vanna = Ok (Units.per_volatility 0.0);
+        volga = Ok (Units.per_volatility_squared 0.0);
+        charm = Greeks.daily (on (theta *. q *. dq));
+        veta = Greeks.daily 0.0;
+        color = Greeks.daily 0.0;
+      }
+  else
+    let hh, hl = if s = 0.0 then (0.0, 0.0) else Split.quotient_dd c.x c.x_low s sl in
+    let t = 0.5 *. s and tl = 0.5 *. sl in
+    let e, el = Normalised_black.vega_exponent hh hl t tl in
+    (* g ~k p = 2^k p exp(-(h^2 + t^2)/2). *)
+    let g ?(k = 0) p = Split.scaled_exp_neg ~k p e el in
+    let base = Float.sqrt c.asset *. Float.sqrt c.cash *. Normalised_black.inv_sqrt_2pi (* A φ(d1) = base G *) in
+    let spot = c.spot in
+    (* d1 = h + t and d2 = h - t in double-double: near a zero of d2 (where
+       x = s^2/2) the difference is far below either term. *)
+    let dd_sum a al b bl =
+      let hi, lo = Split.two_sum a b in
+      hi +. (lo +. al +. bl)
+    in
+    let d1 = dd_sum hh hl t tl and d2 = dd_sum hh hl (-.t) (-.tl) in
+    (* Where s is near the bottom of the range, s/2 itself underflows, but
+       there h = x/s is either 0 or dominant, so h/σ - √T/2 has no cancellation. *)
+    let d2_over_sigma =
+      if s < 0x1p-1000 then (if c.x = 0.0 then 0.0 else (hh +. hl) /. sigma) -. (0.5 *. rt_full) else d2 /. sigma
+    in
+    (* A Φ(θ d1) and C Φ(θ d2) as ordinary part + Mills part (prefactor of G). *)
+    let tail_split leg d = if theta *. d <= 0.0 then (0.0, mills (-.theta *. d)) else (leg, -.mills (theta *. d)) in
+    let a_part, a_mills = tail_split c.asset d1 and c_part, c_mills = tail_split c.cash d2 in
+    (* w = dd1/dT = (2(r-q)T - x + s^2/2)/(2 T s) = (2(r-q)T - x)/(2 T s) + σ/(4 √T),
+       in double-double, with d1 likewise: the veta and color brackets
+       q + d1 w ∓ 1/(2T) can cancel to far below their terms. *)
+    let rt_dd = { Dd.hi = rt; lo = c.root_time_low } and s_dd = { Dd.hi = s; lo = sl } in
+    let w_dd =
+      let carry = Dd.sub (Dd.two_prod r time) (Dd.two_prod q time) in
+      let lead = Dd.sub (Dd.mul_float carry 2.0) { Dd.hi = c.x; lo = c.x_low } in
+      let tail = Dd.div (Dd.of_float sigma) (Dd.mul_float rt_dd 4.0) in
+      if lead.hi = 0.0 then tail else Dd.add (Dd.div lead (Dd.mul_float s_dd (2.0 *. time))) tail
+    in
+    let w = Dd.to_float w_dd in
+    let d1_dd = Dd.add (Dd.add (Dd.of_float hh) (Dd.of_float hl)) (Dd.add (Dd.of_float t) (Dd.of_float tl)) in
+    let q_plus_d1_w = Dd.add (Dd.of_float q) (Dd.mul d1_dd w_dd) in
+    (* veta's bracket times √T: q √T + √T d1 w - 1/(2 √T), finite even where 1/T is not. *)
+    let veta_bracket = Dd.to_float (Dd.sub (Dd.mul q_plus_d1_w rt_dd) (Dd.div (Dd.of_float 0.5) rt_dd)) in
+    (* color's bracket q + d1 w + 1/(2T); where 1/(2T) overflows, so does color. *)
+    let color_bracket =
+      let half_inverse_time = 0.5 /. time in
+      if Float.is_finite half_inverse_time then Dd.to_float (Dd.add q_plus_d1_w (Dd.div (Dd.of_float 0.5) (Dd.of_float time)))
+      else half_inverse_time
+    in
+    let day = 1.0 /. Units.days_per_year in
+    let delta = (theta *. a_part /. spot) +. g (theta *. base *. a_mills /. spot) in
+    let rho =
+      if c.tied then rho_forward ()
+      else Ok (up (theta *. time *. c_part) +. g ~k:e_up (theta *. time *. base *. c_mills))
+    in
+    {
+      Greeks.delta = Ok delta;
+      gamma = Ok (g ~k:e_down (base /. (spot *. spot *. s)));
+      theta =
+        Ok
+          (Units.per_calendar_day
+             ((r *. price)
+             +. up (theta *. (q -. r) *. a_part)
+             +. g ~k:e_up ((theta *. (q -. r) *. base *. a_mills) -. (base *. sigma /. (2.0 *. rt_full)))));
+      vega = Ok (Units.per_volatility (g ~k:e_up (base *. rt_full)));
+      rho;
+      vanna = Ok (Units.per_volatility (g (-.base /. spot *. d2_over_sigma)));
+      volga = Ok (Units.per_volatility_squared (g ~k:e_up (base *. rt_full *. d1 *. d2_over_sigma)));
+      charm = Ok (Units.time_rate ((q *. delta *. day) -. g (base /. spot *. w *. day)));
+      veta = Ok (Units.time_rate (g ~k:e_up (base *. veta_bracket *. day)));
+      color = Ok (Units.time_rate (g ~k:e_down (base /. (spot *. spot *. s) *. color_bracket *. day)));
+    }
+
+let greeks_coordinates coordinates side sigma =
+  match coordinates with
+  | Coordinates.Expiry { spot; strike; rate; yield } -> Greeks.expiry ~theta:(Side.sign side) ~spot ~strike ~rate ~yield
+  | Coordinates.Live c -> live_greeks side c (Vol.to_float sigma)
+
 let implied_coordinates coordinates side price =
   if not (Float.is_finite price && price >= 0.0) then invalid Refusal.Price price
   else
@@ -198,6 +339,7 @@ module Make (C : CARRY) : MODEL with type inputs = C.inputs = struct
   let coordinates a = a
   let price a side sigma = price_coordinates a side sigma
   let implied a side price = implied_coordinates a side price
+  let greeks a side sigma = greeks_coordinates a side sigma
 end
 
 module Bsm_carry = struct
@@ -208,7 +350,7 @@ module Bsm_carry = struct
     else if not (positive_finite i.strike) then invalid Refusal.Strike i.strike
     else
       Result.map
-        (fun () -> Coordinates.make ~spot:i.spot ~strike:i.strike ~time:i.time_to_expiry ~rate:i.rate ~yield:i.dividend_yield)
+        (fun () -> Coordinates.make ~spot:i.spot ~strike:i.strike ~time:i.time_to_expiry ~rate:i.rate ~yield:i.dividend_yield ())
         (Coordinates.validate_carry ~time:i.time_to_expiry ~rate:i.rate ~yield:i.dividend_yield
            ~yield_parameter:Refusal.Dividend_yield)
 end
@@ -223,7 +365,7 @@ module Black76_carry = struct
     else if not (positive_finite i.strike) then invalid Refusal.Strike i.strike
     else
       Result.map
-        (fun () -> Coordinates.make ~spot:i.forward ~strike:i.strike ~time:i.time_to_expiry ~rate:i.rate ~yield:i.rate)
+        (fun () -> Coordinates.make ~tied:true ~spot:i.forward ~strike:i.strike ~time:i.time_to_expiry ~rate:i.rate ~yield:i.rate ())
         (Coordinates.validate_carry ~time:i.time_to_expiry ~rate:i.rate ~yield:i.rate ~yield_parameter:Refusal.Rate)
 end
 
@@ -241,12 +383,17 @@ module Displaced_carry = struct
         Coordinates.validate_carry ~time:i.time_to_expiry ~rate:i.rate ~yield:i.rate ~yield_parameter:Refusal.Rate
       with
       | Error _ as e -> e
-      | Ok () when i.time_to_expiry = 0.0 -> Ok (Coordinates.Expiry { spot = i.forward; strike = i.strike })
+      | Ok () when i.time_to_expiry = 0.0 ->
+          Ok (Coordinates.Expiry { spot = i.forward; strike = i.strike; rate = i.rate; yield = i.rate })
       | Ok () ->
-          let f = i.forward +. i.displacement and k = i.strike +. i.displacement in
+          (* The shifted coordinates are exact sums, carried as hi + lo. *)
+          let f, fl = Split.two_sum i.forward i.displacement and k, kl = Split.two_sum i.strike i.displacement in
           if not (positive_finite f) then invalid Refusal.Shifted_forward f
           else if not (positive_finite k) then invalid Refusal.Shifted_strike k
-          else Ok (Coordinates.make ~spot:f ~strike:k ~time:i.time_to_expiry ~rate:i.rate ~yield:i.rate)
+          else
+            Ok
+              (Coordinates.make ~tied:true ~spot:f ~spot_low:fl ~strike:k ~strike_low:kl ~time:i.time_to_expiry
+                 ~rate:i.rate ~yield:i.rate ())
 end
 
 module Displaced = Make (Displaced_carry)

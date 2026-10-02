@@ -10,7 +10,7 @@ let inv_sqrt_2pi = 0.39894228040143267794
 type inputs = { forward : float; strike : float; time_to_expiry : float; rate : float }
 
 type coordinates =
-  | Expiry of { forward : float; strike : float }
+  | Expiry of { forward : float; strike : float; rate : float }
   | Live of {
       discount : float;
       rate : float;
@@ -31,7 +31,7 @@ let admit i =
   else if not (Float.is_finite i.time_to_expiry && i.time_to_expiry >= 0.0) then
     invalid Refusal.Time_to_expiry i.time_to_expiry
   else if not (Float.is_finite i.rate) then invalid Refusal.Rate i.rate
-  else if i.time_to_expiry = 0.0 then Ok (Expiry { forward = i.forward; strike = i.strike })
+  else if i.time_to_expiry = 0.0 then Ok (Expiry { forward = i.forward; strike = i.strike; rate = i.rate })
   else
     let distance, distance_low = Split.two_sum i.forward (-.i.strike) in
     Ok
@@ -61,7 +61,7 @@ let abs_parts distance distance_low =
 let price a side sigma =
   let theta = Side.sign side in
   match a with
-  | Expiry { forward; strike } -> Float.max (theta *. (forward -. strike)) 0.0
+  | Expiry { forward; strike; _ } -> Float.max (theta *. (forward -. strike)) 0.0
   | Live { discount; distance; distance_low; root_time; root_time_low; _ } ->
       let delta = theta *. distance and delta_low = theta *. distance_low in
       let intrinsic =
@@ -129,3 +129,94 @@ let implied a side price =
               (if Float.is_nan sigma || sigma = Float.infinity then Iv.Above_maximum
                else if sigma <= 0.0 then Iv.Below_smallest_volatility
                else root sigma)
+
+let sqrt_pi_over_2 = 1.253314137315500251207882642405522626503493370305
+let mills z = sqrt_pi_over_2 *. Cody.erfcx_nonnegative (z *. Normal.inv_sqrt_2)
+
+(* Analytic Greeks on the forward, with D = e^(-rT), s = σ √T and
+   d = (F - K)/s carried in double-double:
+   Δ = θ D Φ(θ d), Γ = D φ(d)/s, vega = D φ(d) √T, ρ = -T V,
+   vanna = -D φ(d) d/σ, volga = vega d²/σ,
+   and the time Greeks (-d/dT, per calendar day):
+   Θ = r V - D φ(d) σ/(2 √T), charm = r Δ + D φ(d) d/(2T),
+   veta = vega (r - (1 + d²)/(2T)), color = Γ (r + (1 - d²)/(2T)).
+   As in the Black family, each is an ordinary part plus P exp(-d²/2) with
+   the exponential applied last, and Φ(θ d) enters through the Mills ratio. *)
+let greeks a side sigma =
+  let theta = Side.sign side in
+  let sigma_f = Vol.to_float sigma in
+  match a with
+  | Expiry { forward; strike; rate } -> Greeks.expiry ~theta ~spot:forward ~strike ~rate ~yield:rate
+  | Live { discount; distance; distance_low; time; root_time; root_time_low; rate; _ } ->
+      let value = price a side sigma in
+      let rho = Ok (-.time *. value) in
+      let rt = root_time *. (1.0 +. (root_time_low /. root_time)) in
+      let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = root_time; lo = root_time_low } sigma_f in
+      let day = 1.0 /. Units.days_per_year in
+      if sigma_f = 0.0 || (s = 0.0 && distance <> 0.0) then
+        if distance = 0.0 && distance_low = 0.0 then
+          {
+            Greeks.delta = Greeks.kink;
+            gamma = Greeks.kink;
+            theta = Greeks.kink;
+            vega = Ok (Units.per_volatility (discount *. rt *. inv_sqrt_2pi));
+            rho = Greeks.kink;
+            vanna = Greeks.kink;
+            volga = Ok (Units.per_volatility_squared 0.0);
+            charm = Greeks.kink;
+            veta = Greeks.kink;
+            color = Greeks.kink;
+          }
+        else
+          let itm = theta *. distance > 0.0 in
+          let delta = if itm then theta *. discount else 0.0 in
+          {
+            Greeks.delta = Ok delta;
+            gamma = Ok 0.0;
+            theta = Greeks.daily (rate *. value);
+            vega = Ok (Units.per_volatility 0.0);
+            rho;
+            vanna = Ok (Units.per_volatility 0.0);
+            volga = Ok (Units.per_volatility_squared 0.0);
+            charm = Greeks.daily (rate *. delta);
+            veta = Greeks.daily 0.0;
+            color = Greeks.daily 0.0;
+          }
+      else
+        let dh, dl = if s = 0.0 then (0.0, 0.0) else Split.quotient_dd distance distance_low s sl in
+        let d = dh +. dl in
+        let d2h, d2l = Split.square dh in
+        let g p = Split.scaled_exp_neg p (0.5 *. d2h) ((0.5 *. d2l) +. (dh *. dl)) in
+        let base = discount *. inv_sqrt_2pi (* D φ(d) = base G *) in
+        (* d/σ, kept finite where s underflows at the money. *)
+        let d_over_sigma = if distance = 0.0 && distance_low = 0.0 then 0.0 else d /. sigma_f in
+        (* veta's and color's brackets cancel where d^2 = 1 ± 2rT: both in
+           double-double, with d = dh + dl and √T's low part. *)
+        let d2_dd = Dd.mul { Dd.hi = dh; lo = dl } { Dd.hi = dh; lo = dl } in
+        let rt_dd = { Dd.hi = root_time; lo = root_time_low } in
+        let veta_bracket =
+          Dd.to_float
+            (Dd.sub (Dd.mul_float rt_dd rate) (Dd.div (Dd.add (Dd.of_float 1.0) d2_dd) (Dd.mul_float rt_dd 2.0)))
+        in
+        let color_bracket =
+          let half_inverse_time = 0.5 /. time in
+          if Float.is_finite half_inverse_time then
+            Dd.to_float (Dd.add (Dd.of_float rate) (Dd.div (Dd.sub (Dd.of_float 1.0) d2_dd) (Dd.of_float (2.0 *. time))))
+          else (1.0 -. (d *. d)) *. half_inverse_time
+        in
+        let delta =
+          if theta *. d <= 0.0 then theta *. g (base *. mills (-.theta *. d))
+          else theta *. (discount -. g (base *. mills (theta *. d)))
+        in
+        {
+          Greeks.delta = Ok delta;
+          gamma = Ok (g (base /. s));
+          theta = Ok (Units.per_calendar_day ((rate *. value) -. g (base *. sigma_f /. (2.0 *. rt))));
+          vega = Ok (Units.per_volatility (g (base *. rt)));
+          rho;
+          vanna = Ok (Units.per_volatility (g (-.base *. d_over_sigma)));
+          volga = Ok (Units.per_volatility_squared (g (base *. rt *. d *. d_over_sigma)));
+          charm = Ok (Units.time_rate ((rate *. delta *. day) +. g (base *. d /. (2.0 *. time) *. day)));
+          veta = Ok (Units.time_rate (g (base *. veta_bracket *. day)));
+          color = Ok (Units.time_rate (g (base /. s *. color_bracket *. day)));
+        }
