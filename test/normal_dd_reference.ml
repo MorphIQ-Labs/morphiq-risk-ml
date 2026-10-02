@@ -22,16 +22,16 @@ let cases =
     (0x1.8000000000000p+2, (0x1.fffffff786788p-1, 0x1.feda56f83c156p-55), (0x1.a1880fbd087fcp-28, 0x1.18d15a785658cp-82));
   ]
 
-let rel (got : Dd.t) (hi, lo) =
-  let num = Dd.sub got { Dd.hi; lo } in
-  Float.abs (Dd.to_float num /. hi)
+let rel (got : Internal.Dd.t) (hi, lo) =
+  let num = Internal.Dd.sub got { Internal.Dd.hi; lo } in
+  Float.abs (Internal.Dd.to_float num /. hi)
 
 let () =
   let failures =
     List.filter_map
       (fun (d, cdf, pdf) ->
-        let x = Dd.of_float d in
-        let ec = rel (Normal_dd.cdf x) cdf and ep = rel (Normal_dd.pdf x) pdf in
+        let x = Internal.Dd.of_float d in
+        let ec = rel (Internal.Normal_dd.cdf x) cdf and ep = rel (Internal.Normal_dd.pdf x) pdf in
         let cdf_budget = 0x1p-100 *. Float.max 1.0 (0.5 /. fst cdf) in
         if ec > cdf_budget || ep > 0x1p-100 then Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep) else None)
       cases

@@ -2,6 +2,8 @@
 
 (name morphiq_risk_ml)
 
+(version 0.1.0)
+
 (generate_opam_files true)
 
 (package

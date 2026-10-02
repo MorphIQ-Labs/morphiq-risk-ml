@@ -35,7 +35,7 @@ let eval = function
   | "pdf" -> Normal.norm_pdf
   | "cdf" -> Normal.norm_cdf
   | "logcdf" -> Normal.log_norm_cdf
-  | "erfcx" -> Cody.erfcx
+  | "erfcx" -> Internal.Cody.erfcx
   | "inv" -> Normal.norm_inv
   | fn -> invalid_arg fn
 

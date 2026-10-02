@@ -16,4 +16,4 @@ oracle/.venv/bin/python oracle/gen_displaced.py oracle/data/displaced_price_refe
 dune build && dune test
 ```
 
-Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Results: [docs/results-slice.md](docs/results-slice.md).
+The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).
