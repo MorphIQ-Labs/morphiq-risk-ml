@@ -1,4 +1,5 @@
-(** Error-free transformations, and an exponential with an exactly split argument. *)
+(** Error-free transformations, and an exponential with an exactly split
+    argument. *)
 
 val two_sum : float -> float -> float * float
 (** [two_sum a b = (s, e)] with [a + b = s + e] exactly (Knuth). *)
@@ -18,7 +19,8 @@ val sqrt : float -> float * float
 (** [sqrt t = (hi, lo)] with [hi + lo = sqrt t] to about 106 bits. *)
 
 val quotient_dd : float -> float -> float -> float -> float * float
-(** [quotient_dd n nl d dl] is [(n + nl)/(d + dl)] as [hi + lo], to first order. *)
+(** [quotient_dd n nl d dl] is [(n + nl)/(d + dl)] as [hi + lo], to first order.
+*)
 
 val quotient : float -> float -> float * float
 (** [quotient n d = (q, r)] with [n/d = q + r] to first order. *)

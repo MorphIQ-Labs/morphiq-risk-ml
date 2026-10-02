@@ -12,8 +12,13 @@
 open Morphiq_risk
 
 let buf = Buffer.create (1 lsl 20)
-let emit x = Buffer.add_string buf (Printf.sprintf "%016Lx\n" (Int64.bits_of_float x))
-let emit_result = function Ok v -> emit v | Error _ -> Buffer.add_string buf "refused\n"
+
+let emit x =
+  Buffer.add_string buf (Printf.sprintf "%016Lx\n" (Int64.bits_of_float x))
+
+let emit_result = function
+  | Ok v -> emit v
+  | Error _ -> Buffer.add_string buf "refused\n"
 
 let emit_iv to_float = function
   | Ok (Iv.Root v) -> emit (to_float v)
@@ -23,9 +28,13 @@ let emit_iv to_float = function
   | Ok Iv.Below_smallest_volatility -> Buffer.add_string buf "smallest\n"
   | Error _ -> Buffer.add_string buf "refused\n"
 
-let rate r = Result.map (fun v -> (v : Units.per_calendar_day Units.time_rate :> float)) r
+let rate r =
+  Result.map (fun v -> (v : Units.per_calendar_day Units.time_rate :> float)) r
+
 let per_vol r = Result.map (fun v -> (v : _ Units.per_volatility :> float)) r
-let per_vol2 r = Result.map (fun v -> (v : _ Units.per_volatility_squared :> float)) r
+
+let per_vol2 r =
+  Result.map (fun v -> (v : _ Units.per_volatility_squared :> float)) r
 
 let emit_greeks (g : _ Greeks.t) =
   emit_result g.delta;
@@ -61,26 +70,58 @@ let () =
                     (fun side ->
                       List.iter
                         (fun sigma ->
-                          (match Black.Bsm.admit { spot; strike; time_to_expiry = t; rate = r; dividend_yield = q } with
+                          (match
+                             Black.Bsm.admit
+                               {
+                                 spot;
+                                 strike;
+                                 time_to_expiry = t;
+                                 rate = r;
+                                 dividend_yield = q;
+                               }
+                           with
                           | Ok a ->
-                              let p = Black.Bsm.price a side (lognormal sigma) in
+                              let p =
+                                Black.Bsm.price a side (lognormal sigma)
+                              in
                               emit p;
                               emit_iv Vol.to_float (Black.Bsm.implied a side p);
-                              emit_greeks (Black.Bsm.greeks a side (lognormal sigma))
+                              emit_greeks
+                                (Black.Bsm.greeks a side (lognormal sigma))
                           | Error _ -> Buffer.add_string buf "refused\n");
                           (match
                              Black.Displaced.admit
-                               { forward = spot -. 0.01; strike; displacement = 0.03; time_to_expiry = t; rate = r }
+                               {
+                                 forward = spot -. 0.01;
+                                 strike;
+                                 displacement = 0.03;
+                                 time_to_expiry = t;
+                                 rate = r;
+                               }
                            with
                           | Ok a ->
-                              let p = Black.Displaced.price a side (lognormal sigma) in
+                              let p =
+                                Black.Displaced.price a side (lognormal sigma)
+                              in
                               emit p;
-                              emit_iv Vol.to_float (Black.Displaced.implied a side p);
-                              emit_greeks (Black.Displaced.greeks a side (lognormal sigma))
+                              emit_iv Vol.to_float
+                                (Black.Displaced.implied a side p);
+                              emit_greeks
+                                (Black.Displaced.greeks a side (lognormal sigma))
                           | Error _ -> Buffer.add_string buf "refused\n");
-                          match Bachelier.admit { forward = spot; strike; time_to_expiry = t; rate = r } with
+                          match
+                            Bachelier.admit
+                              {
+                                forward = spot;
+                                strike;
+                                time_to_expiry = t;
+                                rate = r;
+                              }
+                          with
                           | Ok a ->
-                              let s = sigma *. Float.max 1e-3 (Float.abs spot) in
+                              let s =
+                                sigma *. Float.max 1e-3 (Float.abs spot)
+                              in
                               let p = Bachelier.price a side (normal s) in
                               emit p;
                               emit_iv Vol.to_float (Bachelier.implied a side p);
@@ -93,8 +134,12 @@ let () =
         moneyness)
     spots;
   let bytes = Buffer.length buf in
-  let digest = Digest.BLAKE256.to_hex (Digest.BLAKE256.string (Buffer.contents buf)) in
-  let expected = String.trim (In_channel.with_open_text Sys.argv.(1) In_channel.input_all) in
+  let digest =
+    Digest.BLAKE256.to_hex (Digest.BLAKE256.string (Buffer.contents buf))
+  in
+  let expected =
+    String.trim (In_channel.with_open_text Sys.argv.(1) In_channel.input_all)
+  in
   Printf.printf "determinism digest %s over %d bytes\n" digest bytes;
   if digest <> expected then (
     Printf.printf "expected %s: this platform serves different bits\n" expected;

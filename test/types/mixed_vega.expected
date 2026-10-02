@@ -1,5 +1,5 @@
-File "mixed_vega.ml", line 12, characters 30-53:
-12 |   net (Result.get_ok gb.vega) (Result.get_ok gn.vega)
+File "mixed_vega.ml", line 30, characters 30-53:
+30 |   net (Result.get_ok gb.vega) (Result.get_ok gn.vega)
                                    ^^^^^^^^^^^^^^^^^^^^^^^
 Error: This expression has type
          "Morphiq_risk__.Vol.normal Morphiq_risk__.Units.per_volatility" =

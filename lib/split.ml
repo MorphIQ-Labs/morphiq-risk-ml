@@ -32,7 +32,8 @@ let scaled_exp_neg ?(k = 0) m hi lo =
    residual t - hi^2). *)
 let sqrt t =
   let hi = Float.sqrt t in
-  if hi = 0.0 || not (Float.is_finite hi) then (hi, 0.0) else (hi, Float.fma (-.hi) hi t /. (2.0 *. hi))
+  if hi = 0.0 || not (Float.is_finite hi) then (hi, 0.0)
+  else (hi, Float.fma (-.hi) hi t /. (2.0 *. hi))
 
 (* (n + nl) / (d + dl) = q + r to first order, for |nl| <= ulp(n), |dl| <= ulp(d). *)
 let quotient_dd n nl d dl =

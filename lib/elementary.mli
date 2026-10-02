@@ -1,6 +1,6 @@
-(** Deterministic elementary functions: IEEE-754 basic operations and fma
-    only, so they give the same bits on every conforming platform, unlike the
-    system libm. About 1 ULP (test/oracle_elementary.ml). *)
+(** Deterministic elementary functions: IEEE-754 basic operations and fma only,
+    so they give the same bits on every conforming platform, unlike the system
+    libm. About 1 ULP (test/oracle_elementary.ml). *)
 
 val exp : float -> float
 val expm1 : float -> float

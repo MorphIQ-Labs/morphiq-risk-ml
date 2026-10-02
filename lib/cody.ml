@@ -12,7 +12,6 @@ let xneg = -26.628
 let xsmall = 1.11e-16
 let xbig = 26.543
 let xhuge = 6.71e7
-
 let a0 = 3.16112374387056560e00
 let a1 = 1.13864154151050156e02
 let a2 = 3.77485237685302021e02
@@ -22,7 +21,6 @@ let b0 = 2.36012909523441209e01
 let b1 = 2.44024637934444173e02
 let b2 = 1.28261652607737228e03
 let b3 = 2.84423683343917062e03
-
 let c0 = 5.64188496988670089e-1
 let c1 = 8.88314979438837594e0
 let c2 = 6.61191906371416295e01
@@ -40,7 +38,6 @@ let d4 = 3.29079923573345963e03
 let d5 = 4.36261909014324716e03
 let d6 = 3.43936767414372164e03
 let d7 = 1.23033935480374942e03
-
 let p0 = 3.05326634961232344e-1
 let p1 = 3.60344899949804439e-1
 let p2 = 1.25781726111229246e-1
@@ -57,14 +54,15 @@ let q4 = 2.33520497626869185e-3
 let erf_small x =
   let y = Float.abs x in
   let ysq = if y > xsmall then y *. y else 0.0 in
-  let num = ((((a4 *. ysq) +. a0) *. ysq +. a1) *. ysq +. a2) *. ysq in
-  let den = (((ysq +. b0) *. ysq +. b1) *. ysq +. b2) *. ysq in
+  let num = ((((((a4 *. ysq) +. a0) *. ysq) +. a1) *. ysq) +. a2) *. ysq in
+  let den = (((((ysq +. b0) *. ysq) +. b1) *. ysq) +. b2) *. ysq in
   x *. (num +. a3) /. (den +. b3)
 
 (* exp(y^2) * erfc(y) for thresh < y <= 4. *)
 let erfcx_mid y =
   let num =
-    ((((((((c8 *. y) +. c0) *. y +. c1) *. y +. c2) *. y +. c3) *. y +. c4)
+    ((((((((((((c8 *. y) +. c0) *. y) +. c1) *. y) +. c2) *. y) +. c3) *. y)
+      +. c4)
       *. y
      +. c5)
      *. y
@@ -72,18 +70,24 @@ let erfcx_mid y =
     *. y
   in
   let den =
-    ((((((((y +. d0) *. y +. d1) *. y +. d2) *. y +. d3) *. y +. d4) *. y +. d5)
+    (((((((((((y +. d0) *. y) +. d1) *. y) +. d2) *. y) +. d3) *. y) +. d4)
       *. y
-     +. d6)
-    *. y)
+     +. d5)
+     *. y
+    +. d6)
+    *. y
   in
   (num +. c7) /. (den +. d7)
 
 (* exp(y^2) * erfc(y) for 4 < y < xhuge. *)
 let erfcx_tail y =
   let ysq = 1.0 /. (y *. y) in
-  let num = ((((p5 *. ysq) +. p0) *. ysq +. p1) *. ysq +. p2) *. ysq +. p3 in
-  let den = ((((ysq +. q0) *. ysq +. q1) *. ysq +. q2) *. ysq +. q3) *. ysq in
+  let num =
+    (((((((p5 *. ysq) +. p0) *. ysq) +. p1) *. ysq) +. p2) *. ysq) +. p3
+  in
+  let den =
+    (((((((ysq +. q0) *. ysq) +. q1) *. ysq) +. q2) *. ysq) +. q3) *. ysq
+  in
   let r = ysq *. ((num *. ysq) +. p4) /. (den +. q4) in
   (sqrpi -. r) /. y
 
@@ -120,7 +124,9 @@ let erf x =
     let y = Float.abs x in
     if y <= thresh then erf_small x
     else
-      let erfc_y = if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y in
+      let erfc_y =
+        if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y
+      in
       let r = 0.5 -. erfc_y +. 0.5 in
       if x < 0.0 then -.r else r
 
@@ -130,5 +136,7 @@ let erfc x =
     let y = Float.abs x in
     if y <= thresh then 1.0 -. erf_small x
     else
-      let r = if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y in
+      let r =
+        if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y
+      in
       if x < 0.0 then 2.0 -. r else r
