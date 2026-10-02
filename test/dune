@@ -8,7 +8,7 @@
  (name oracle_normal)
  (package morphiq_risk_ml)
  (modules oracle_normal)
- (libraries morphiq_risk)
+ (libraries morphiq_risk bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/normal.txt})))
 
@@ -44,7 +44,7 @@
  (name oracle_greeks)
  (package morphiq_risk_ml)
  (modules oracle_greeks budget_greeks)
- (libraries morphiq_risk)
+ (libraries morphiq_risk bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
@@ -91,3 +91,14 @@
  (package morphiq_risk_ml)
  (modules dd_reference)
  (libraries morphiq_risk))
+
+(test
+ (name manifest)
+ (package morphiq_risk_ml)
+ (modules manifest)
+ (deps
+  ../oracle/MANIFEST
+  (glob_files ../oracle/*.py)
+  (glob_files ../oracle/fixtures/*.txt.gz))
+ (action
+  (run %{test} ../oracle)))

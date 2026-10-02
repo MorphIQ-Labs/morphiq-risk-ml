@@ -48,6 +48,8 @@ JMP is Joldes, Muller and Popescu, "Tight and rigorous error bounds for basic bu
 
 So |z − y| ≤ ulp(z)/2 + 0.085·u·|y|. The scorer checks this against a reference that carries its residual (exact − reference). Measured worst: 0.5205 ULP from exact. Without the quotient remainder ul, the leading 2u carries up to another u·|y|, and the bound fails.
 
+**Horner evaluation** in this project's polynomials uses one explicit fma per step (`Elementary.horner`).
+
 **Determinism.** These use only IEEE basic operations and fma, which every conforming platform rounds the same way (docs/determinism.md).
 
 **Double-double exp and expm1** (`Internal.Dd`) follow the QD library (Hida, Li and Bailey, qd-2.3.24 `dd_real::exp`): m = round(x/ln 2), r = (x − m·ln 2)/512, the Taylor series of e^r − 1 until a term falls below 2^-104/512, then nine doublings s ← 2s + s². The reduction's error, about |x|·2^-105 absolute in r, is relative error in e^x. A pinned mpmath test (`test/dd_reference.ml`) measures exp within 2^-100 + |x|·2^-105. Unlike QD, exp continues into the subnormal range, where the low part underflows.
@@ -59,6 +61,7 @@ So |z − y| ≤ ulp(z)/2 + 0.085·u·|y|. The scorer checks this against a refe
 - **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals, whose stated relative error is below 10^-18 before rounding. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
 - **Why that matters in the tail.** The naive form's relative error grows like ε·x², which is 5.7e-14 at x = −38, the FerroRisk budget. Here the remaining error is the rounding of erfcx, exp and two products: ≤ 4 ULP measured over the whole range, tails included.
 - **Φ⁻¹ is AS241.** The central branch evaluates only polynomials, so it is reproducible. The tails add one `log`: ≤ 4 ULP measured.
+- **ln Φ composed from Φ.** For x above the erf region it is log1p(−Q), Q = 1 − Φ(x); inside the erf region it is log Φ. Its bound is composed from the CDF's enforced 6 ULP through the derivative of the outer function, 1/(1 − Q) or 1/Φ, plus the outer function's 1 ULP: |got − r| ≤ 6·ulp(Q)/(1 − Q) + ulp(got) + ulp(r)/2, or the same with 6·ulp(Φ)/Φ. A fixed 4-ULP budget was smaller than its own input's budget, and passed only under arm64's contracted arithmetic. Below the erf region the code evaluates an asymptotic form directly, which keeps its measured 4 ULP.
 - **The double-double Φ and φ** (`Normal_dd`, |d| ≤ 6) use Marsaglia's series, whose terms all share a sign. For d < 0 the final ½ − … loses log₂(1/(2Φ(d))) bits, about 30 at −6, giving a relative error ≤ 2^-100/(2Φ(d)). A pinned mpmath test checks that.
 
 ## 3. Log-moneyness x = ln(A/C) = ln(S/K) + (r − q)T
@@ -153,6 +156,8 @@ Brackets that cancel near the money are evaluated in DD, using `Normal_dd` for �
 - veta and color: q + d1·∂d1/∂T ∓ 1/(2T), with veta's form scaled by √T so it stays finite where 1/T is not.
 
 Terms in 1/T are rewritten so that √T and σ cancel analytically.
+
+**Forward-model rho** (Black-76, displaced Black, Bachelier) is −T·V. For a live contract the scorer requires rho = RN(−T·V) of the served price, bit for bit, and bounds its error by the family's price budget + 1 ULP. A separate 16-ULP rho budget was smaller than the 32-ULP out-of-the-money price budget it is composed from.
 
 **Measured.** Every Greek's worst case is ≤ 6 ULP against an oracle that requires a closed-form route and mpmath differentiation of the price to agree. Away from the deep tails, finite differences of the served price agree to 1e-7 over random contracts.
 

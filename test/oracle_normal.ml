@@ -32,6 +32,27 @@ let budget fn x =
   | "inv" -> { name = "inv tail"; ulps = 8L }
   | _ -> invalid_arg fn
 
+(* ln Phi(x) where the code composes it, as an absolute bound from its
+   components (docs/error-analysis.md §2). The CDF's enforced budget is 6 ULP
+   of its own value; the outer function adds at most 1 ULP of the result (its
+   enforced budget), and the reference half an ULP.
+   - x above the erf region: log1p(-Q), Q = 1 - Phi(x), whose derivative in
+     Q is 1/(1 - Q): |got - r| <= 6 ulp(Q)/(1 - Q) + ulp(got) + ulp(r)/2.
+   - x in the erf region: log Phi, derivative 1/Phi:
+     |got - r| <= 6 ulp(Phi)/Phi + ulp(got) + ulp(r)/2.
+   Below the erf region the code evaluates an asymptotic form directly; that
+   keeps its measured budget. *)
+let logcdf_composed x r got =
+  let erf_region = Internal.Cody.thresh /. 0.70710678118654752440 in
+  let rounding = Bounds.ulp got +. (0.5 *. Bounds.ulp r) in
+  if x > erf_region then
+    let q = -.Float.expm1 r in
+    Some ((6.0 *. Bounds.ulp q /. (1.0 -. q)) +. rounding)
+  else if x >= -.erf_region then
+    let phi = Float.exp r in
+    Some ((6.0 *. Bounds.ulp phi /. phi) +. rounding)
+  else None
+
 let eval = function
   | "pdf" -> Normal.norm_pdf
   | "cdf" -> Normal.norm_cdf
@@ -76,7 +97,12 @@ let () =
                   the endpoint is returned exactly. *)
                if endpoint then
                  Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
-               else d <= b.ulps
+               else
+                 match
+                   if fn = "logcdf" then logcdf_composed x r got else None
+                 with
+                 | Some bound -> Float.abs (got -. r) <= bound
+                 | None -> d <= b.ulps
              in
              let s =
                match Hashtbl.find_opt stats b.name with

@@ -33,19 +33,6 @@ let ferro_budget family region =
   | "bachelier", _ -> (329.0, 4.3)
   | _ -> invalid_arg region
 
-(* Enforced ULP budgets: the measured worst case per region with roughly 2x
-   headroom, so a regression to FerroRisk-level error fails. The ε·scale
-   budget stays FerroRisk's. Measured worst: deep ITM 3, ITM 7, near-ATM 4,
-   OTM 16, extreme scale 10, zero variance 1; Bachelier 3. *)
-let ulp_budget family region =
-  match (family, region) with
-  | "black", ("deep_itm" | "near_atm_tiny_variance") -> 8.0
-  | "black", "zero_variance" -> 4.0
-  | "black", "itm" -> 16.0
-  | "black", ("otm" | "extreme_scale") -> 32.0
-  | "bachelier", _ -> 8.0
-  | _ -> invalid_arg region
-
 let side_of = function
   | "call" -> Side.Call
   | "put" -> Side.Put
@@ -193,7 +180,7 @@ let () =
              in
              let sc = if Float.is_nan sc then Float.infinity else sc in
              let _, scale_budget = ferro_budget family region in
-             let ulp_budget = ulp_budget family region in
+             let ulp_budget = Bounds.price_ulp_budget family region in
              let key = family ^ " " ^ region in
              let st =
                match Hashtbl.find_opt stats key with
@@ -276,8 +263,9 @@ let () =
          let fu, fs = ferro_budget family region in
          Printf.printf
            "%-34s %6d %10.4g %7.0f %8.2g %10.3g | %10.3g %8.3g | %5d\n" key st.n
-           st.worst_ulp (ulp_budget family region) (median st.errors)
-           st.worst_scale fu fs st.fails);
+           st.worst_ulp
+           (Bounds.price_ulp_budget family region)
+           (median st.errors) st.worst_scale fu fs st.fails);
   if Hashtbl.length families > 1 || not (Hashtbl.mem families "-") then
     Hashtbl.iter
       (fun fam (n, f) ->

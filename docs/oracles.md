@@ -31,11 +31,11 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 ## Provenance
 
 - **Building fixtures.** `oracle/build.sh [name…]` regenerates fixtures. Each is compressed with `gzip -n -9`, so the bytes are reproducible.
-- **The manifest.** `scripts/manifest.py write` records, per fixture:
-  - the generator's SHA-256 and the shared `common.py`'s;
+- **The manifest.** `oracle/write_manifest.py` (run by `oracle/build.sh`) writes `oracle/MANIFEST`, one line per fixture:
+  - its generator's BLAKE2b-256 and the shared `common.py`'s;
   - the mpmath and Python versions;
-  - the row count and the fixture's own SHA-256.
-- **The check.** `scripts/manifest.py check`, run in CI, fails if a fixture's bytes changed, if a generator or `common.py` changed without regeneration, or if a fixture is missing.
+  - the row count and the fixture's own BLAKE2b-256.
+- **The check.** `test/manifest.ml`, part of `dune test` and so of CI, recomputes the hashes with OCaml's `Digest.BLAKE256`. It fails if a fixture's bytes changed, if a generator or `common.py` changed without regeneration, or if a fixture is missing. It needs no Python.
 - **Toolchain.** The generators need mpmath 1.3.0: `python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0`.
 
 ## What the oracles have caught

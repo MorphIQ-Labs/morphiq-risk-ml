@@ -14,7 +14,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - **Property-based tests** (`test/properties.ml`, QCheck, fixed seed): bounds, parity, monotonicity, Greek signs, exact homogeneity, translation invariance, IV accuracy and finite differences.
 - **An error analysis** (docs/error-analysis.md).
 
+### Fixed
+- **Platform-dependent rounding.** OCaml's arm64 backend contracted `a +. b *. c` into fused multiply-adds (about 500 in the library), so Linux x86-64 served different bits; CI's new platform matrix found it. Every multiplication in `lib/` is now an explicitly rounded product (`Morphiq_fp`), and fused multiply-adds are explicit `Float.fma`: this project's Horner helper, and the exact remainders. docs/determinism.md, which claimed OCaml never contracts, is corrected. The determinism digest is re-recorded and must match on all three CI platforms.
+- **Budgets composed from their inputs:**
+  - `logcdf` (from the CDF's budget through 1/(1 − Q) or 1/Φ);
+  - forward-model rho: RN(−T·V) bit for bit, within the price budget + 1 ULP.
+
+  Each replaced a fixed budget smaller than its input's own, which held only under contraction.
+
 ### Changed
+- **CI** (`.github/workflows/ci.yml`): the whole suite on Linux x86-64, Linux arm64 and macOS arm64 with locked dependencies and flambda required, the format check, and the mutation catalog.
+- **The fixture manifest is checked in OCaml.** `oracle/MANIFEST` records BLAKE2b-256 hashes, and `test/manifest.ml` (part of `dune test`) verifies them with `Digest.BLAKE256`. This replaces `scripts/manifest.py check` and `oracle/MANIFEST.json`.
 - **Budgets derived from the error analysis replace measured ones where the mutation catalog depends on them.**
   - **Zero-variance prices:** checked per row against the intrinsic's certified error (§5.1), replacing "4 ULP".
   - **Black-family implied volatility:** checked per root against a derived bound with the better-conditioned of β and β̄ and the intrinsic's error near the money (§6). This replaces "in the rounding cell, or 4× attainable", which accepted roots 8e14 ULP off near the maximum.

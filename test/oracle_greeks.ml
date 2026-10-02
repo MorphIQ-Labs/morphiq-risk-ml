@@ -92,6 +92,41 @@ let greeks model side ~s ~k ~t ~r ~q ~sigma ~shift =
       `Normal (Bachelier.greeks a side (get (Vol.normal sigma)))
   | m -> invalid_arg m
 
+(* The library's price, for rho = -T V in the forward models. *)
+let price model side ~s ~k ~t ~r ~sigma ~shift =
+  match model with
+  | "black76" ->
+      let a =
+        get
+          (Black.Black76.admit
+             { forward = s; strike = k; time_to_expiry = t; rate = r })
+      in
+      Black.Black76.price a side (get (Vol.lognormal sigma))
+  | "displaced" ->
+      let a =
+        get
+          (Black.Displaced.admit
+             {
+               forward = s;
+               strike = k;
+               displacement = shift;
+               time_to_expiry = t;
+               rate = r;
+             })
+      in
+      Black.Displaced.price a side (get (Vol.lognormal sigma))
+  | "bachelier" ->
+      let a =
+        get
+          (Bachelier.admit
+             { forward = s; strike = k; time_to_expiry = t; rate = r })
+      in
+      Bachelier.price a side (get (Vol.normal sigma))
+  | m -> invalid_arg m
+
+let forward_rho model greek =
+  greek = "rho" && List.mem model [ "black76"; "displaced"; "bachelier" ]
+
 let budget = Hashtbl.create 32
 
 let () =
@@ -173,10 +208,27 @@ let () =
                      if u > st.worst then (
                        st.worst <- u;
                        st.worst_line <- line);
-                     let b =
-                       Option.value ~default:Float.infinity
-                         (Hashtbl.find_opt budget key)
+                     (* Forward models, live: rho = -T V exactly, so it must
+                        be RN(-T V) of the served price, and its error is the
+                        price's plus one rounding: the family's price budget
+                        + 1 ULP. At expiry rho is the contract's limit. *)
+                     let composed_ok, b =
+                       if forward_rho model greek && t > 0.0 then
+                         let p = price model side ~s ~k ~t ~r ~sigma ~shift in
+                         ( Int64.equal (Int64.bits_of_float v)
+                             (Int64.bits_of_float (-.t *. p)),
+                           Bounds.price_ulp_budget_max
+                             (if model = "bachelier" then "bachelier"
+                              else "black")
+                           +. 1.0 )
+                       else
+                         ( true,
+                           Option.value ~default:Float.infinity
+                             (Hashtbl.find_opt budget key) )
                      in
+                     if not composed_ok then (
+                       st.fails <- st.fails + 1;
+                       fail (Printf.sprintf "rho %h is not RN(-T V)" v));
                      if u > b then (
                        st.fails <- st.fails + 1;
                        fail
