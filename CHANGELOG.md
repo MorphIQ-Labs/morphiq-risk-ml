@@ -5,8 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 ## [Unreleased]
 
 ### Added
+- **Deterministic elementary functions** (`Internal.Elementary`: exp, expm1, log, log1p, cbrt) from IEEE basic operations and fma, each within 1 ULP. The library no longer calls the platform libm.
+- **A cross-platform determinism digest** (`test/determinism.ml`, docs/determinism.md).
 - The public surface is `Morphiq_risk` minus `Internal`. Numerical building blocks moved under `Morphiq_risk.Internal`, outside the stability policy.
 - `Morphiq_risk.version`, a stability policy and this changelog.
+
+### Changed (numerical)
+- Every libm call now goes through `Internal.Elementary`. Served values move by at most their previous rounding; every worst-case region ULP is unchanged or better (docs/results-*.md).
+- **Zero-variance price:** the log-moneyness remainder is now double-double, which fixes a cancellation case: 8 → 1 ULP.
+- **Black theta** is now double-double near the money: 17 → 4 ULP (Bachelier: 13 → 3).
 
 ## [0.1.0] - 2026-10-02
 

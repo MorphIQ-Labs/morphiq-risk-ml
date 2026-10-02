@@ -93,7 +93,7 @@ let solve_total_volatility ~discount ~abs_distance ~abs_low target =
         let lo, hi = if v < target then (s, hi) else (lo, s) in
         let d = abs_distance /. s in
         let slope = discount *. Normal.norm_pdf d in
-        let step = (Float.log target -. Float.log v) *. v /. slope in
+        let step = (Elementary.log target -. Elementary.log v) *. v /. slope in
         let next = s +. step in
         let next = if next > lo && next < hi && Float.is_finite next then next else 0.5 *. (lo +. hi) in
         if Float.abs (next -. s) <= epsilon_float *. s || hi -. lo <= epsilon_float *. hi then next

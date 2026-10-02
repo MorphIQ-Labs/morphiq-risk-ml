@@ -55,3 +55,19 @@
  (package morphiq_risk_ml)
  (modules consistency)
  (libraries morphiq_risk))
+
+(test
+ (name oracle_elementary)
+ (package morphiq_risk_ml)
+ (modules oracle_elementary)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/data/elementary_reference.txt})))
+
+(test
+ (name determinism)
+ (package morphiq_risk_ml)
+ (modules determinism)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:determinism.digest})))

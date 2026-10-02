@@ -30,7 +30,7 @@ module Coordinates = struct
   let exp_neg_product a b =
     let p = a *. b in
     let lo = Float.fma a b (-.p) in
-    if p >= 0.0 then Split.scaled_exp_neg 1.0 p lo else Float.exp (-.p) *. (1.0 -. lo)
+    if p >= 0.0 then Split.scaled_exp_neg 1.0 p lo else Elementary.exp (-.p) *. (1.0 -. lo)
 
   (* ln(S / K) in double-double. With q = fl(S/K), S/K = q (1 + ρ) where
      ρ = (S - q K)/(q K) and S - q K is exact (fma). Then
@@ -181,14 +181,14 @@ let live_implied side (c : Coordinates.live) price =
          itself can be subnormal, and rescaling a subnormal quote by
          2^-exponent drops its bits. LBR's lowest branch works on ln β. *)
       let ln_beta =
-        (if intrinsic.hi > 0.0 then Float.log (Dd.to_float otm)
-         else Float.log price -. (float c.exponent *. Split.ln2_hi))
-        -. Float.log m
+        (if intrinsic.hi > 0.0 then Elementary.log (Dd.to_float otm)
+         else Elementary.log price -. (float c.exponent *. Split.ln2_hi))
+        -. Elementary.log m
       in
       (* β̄ = b_max - β from the exact distance to the maximum: near the
          maximum β itself rounds to b_max and loses it. *)
       let beta_bar = Dd.to_float (Dd.sub maximum (Dd.of_float p)) /. m in
-      let b_max = Float.exp (0.5 *. x) in
+      let b_max = Elementary.exp (0.5 *. x) in
       if beta <= 0.0 then Iv.Below_smallest_volatility
       else
         let beta = Float.min beta (Float.pred b_max) in
