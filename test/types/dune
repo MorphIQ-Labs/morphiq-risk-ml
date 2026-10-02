@@ -1,5 +1,7 @@
 ;; Each snippet must be rejected by the type checker (exit 2); the expected
 ;; diagnostic is pinned so a change in why it is rejected is visible.
+;; -color never: OCaml quotes or styles inline code by colour setting, and
+;; the pinned text must not depend on the environment.
 
 (rule
  (deps mix_coordinates.ml ../../lib/morphiq_risk.cma)
@@ -11,6 +13,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
@@ -33,6 +37,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
@@ -55,6 +61,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
@@ -77,6 +85,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
@@ -99,6 +109,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
@@ -121,6 +133,8 @@
     2
     (run
      %{ocamlc}
+     -color
+     never
      -I
      ../../lib/.morphiq_risk.objs/byte
      -c
