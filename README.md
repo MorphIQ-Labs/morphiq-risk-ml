@@ -25,4 +25,4 @@ Prices and finite Greeks in the committed corpora are checked against per-input 
 
 Ordinary CI runs the full test suite on all three platforms, formatting, and the seven [core mutation checks](docs/mutation-policy.md). The full mutation catalog is a separate manual/weekly workflow; it does not run on each PR or push.
 
-The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, and an explicit list of unavailable papers and non-paper references.
+The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, canonical filenames, and a separate list of book and implementation references.
