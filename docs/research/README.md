@@ -2,7 +2,7 @@
 
 This inventory covers the research papers explicitly cited in this repository’s source, documentation, and PR #12 numerical audit at `130ce0a`. It does not recursively collect the bibliographies inside those papers. Downloaded files are the original PDFs, with their notices and cover pages intact. Their original terms apply; they are not relicensed under the project’s source-code license.
 
-As of 2026-10-02: **all 11 identified cited papers are archived**, plus **2 supplemental reports** (13 PDFs, 338 pages, about 9.7 MB). The collection has no outstanding paper-retrieval gaps. Cody (1969) and Tang (1989) were supplied by the user after automated publisher downloads failed.
+As of 2026-10-02: **14 of 15 identified cited papers are archived**, plus **2 supplemental reports** (16 PDFs, 468 pages, about 23.4 MB). **Black (1976) remains unavailable**; its citation and retrieval status are recorded below. The earlier inventory omitted four model papers cited in `SLICE.md`; this inventory includes them. Cody (1969) and Tang (1989) were supplied by the user after automated publisher downloads failed.
 
 ## File naming
 
@@ -12,6 +12,9 @@ All PDFs use `YYYY-first-author-short-title[-version].pdf`: publication year, th
 
 | Paper / local PDF | Archived version and source | Cited by |
 | --- | --- | --- |
+| [Louis Bachelier (1900), *Théorie de la spéculation*](1900-bachelier-theorie-de-la-speculation.pdf) | Annales scientifiques de l’École Normale Supérieure, série 3, tome 17, 21–86; original French article with NUMDAM cover; [download source](https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf); [DOI](https://doi.org/10.24033/asens.476) | [`SLICE.md`](../../SLICE.md) |
+| [Fischer Black; Myron Scholes (1973), *The Pricing of Options and Corporate Liabilities*](1973-black-pricing-options-corporate-liabilities.pdf) | Journal of Political Economy 81(3), 637–654; Princeton-hosted journal scan with JSTOR cover; [download source](https://www.cs.princeton.edu/courses/archive/fall02/cs323/links/blackscholes.pdf); [DOI](https://doi.org/10.1086/260062) | [`SLICE.md`](../../SLICE.md) |
+| [Robert C. Merton (1973), *Theory of Rational Option Pricing*](1973-merton-theory-rational-option-pricing.pdf) | The Bell Journal of Economics and Management Science 4(1), 141–183; researcher-hosted journal scan with JSTOR cover; [download source](https://finance.martinsewell.com/option-pricing/Merton1973.pdf); [DOI](https://doi.org/10.2307/3003143) | [`SLICE.md`](../../SLICE.md) |
 | [Mioara Joldes; Jean-Michel Muller; Valentina Popescu (2017), *Tight and rigorous error bounds for basic building blocks of double-word arithmetic*](2017-joldes-double-word-error-bounds-hal-v3.pdf) | HAL v3; [download source](https://hal.science/hal-01351529v3/document); [DOI](https://doi.org/10.1145/3121432) | [`lib/dd.ml`](../../lib/dd.ml), [`lib/dd.mli`](../../lib/dd.mli), [`docs/error-analysis.md`](../../docs/error-analysis.md), [`CHANGELOG.md`](../../CHANGELOG.md) |
 | [Jean-Michel Muller; Laurence Rideau (2022), *Formalization of double-word arithmetic, and comments on “Tight and rigorous error bounds for basic building blocks of double-word arithmetic”*](2022-muller-double-word-formalization-hal-v2.pdf) | HAL v2; [download source](https://hal.science/hal-02972245v2/document); [DOI](https://doi.org/10.1145/3484514) | [`docs/error-analysis.md`](../../docs/error-analysis.md) |
 | [Vincent Lefèvre; Nicolas Louvet; Jean-Michel Muller; Joris Picot; Laurence Rideau (2023), *Accurate calculation of Euclidean norms using double-word arithmetic*](2023-lefevre-double-word-euclidean-norms-hal-v2.pdf) | HAL v2; [download source](https://hal.science/hal-03482567v2/document); [DOI](https://doi.org/10.1145/3568672) | [`lib/dd.ml`](../../lib/dd.ml), [`lib/dd.mli`](../../lib/dd.mli), [`docs/error-analysis.md`](../../docs/error-analysis.md), [`CHANGELOG.md`](../../CHANGELOG.md) |
@@ -27,6 +30,10 @@ All PDFs use `YYYY-first-author-short-title[-version].pdf`: publication year, th
 The review cited as “Muller, Floating-point arithmetic” has four authors: Boldo, Jeannerod, Melquiond and Muller. The index records the full authorship. The three HAL PDFs and *Let’s be rational* match the exact SHA-256 values already recorded in [the source audit](../error-analysis.md#pr-12-source-and-assumption-audit).
 
 Jäckel’s filenames use the cited publication year; the version dates printed inside the saved PDFs are recorded separately above. *Implied Normal Volatility* is a reference from the slice specification; the current Bachelier solver is a custom bracketed Newton solver, not a literal implementation of that paper’s analytic inverse. Archiving a reference does not extend any certification claim.
+
+## Paper still to collect
+
+**Fischer Black (1976), *The pricing of commodity contracts*.** Journal of Financial Economics 3(1–2), 167–179; [DOI / publisher](https://doi.org/10.1016/0304-405X(76)90024-6); cited in [`SLICE.md`](../../SLICE.md). The publisher PDF request returned HTTP 403 on 2026-10-02. OpenAlex and Semantic Scholar exposed no open PDF location; a publicly indexed scan also returned HTTP 403. No PDF is archived. The reserved filename is `1976-black-pricing-commodity-contracts.pdf`.
 
 ## Supplemental reports
 
@@ -52,7 +59,7 @@ These references are recorded separately because they are not research-paper PDF
 
 ## Integrity and provenance
 
-[manifest.json](manifest.json) records titles, authors, publication years, archived versions, original download URLs, citation locations, retrieval date, sizes, page counts, and SHA-256 hashes. The previously audited PDFs were copied unchanged from the source-audit downloads made earlier on 2026-10-02. Other PDFs were retrieved or supplied by the user on the same date. Cody’s and Tang’s manifest entries distinguish their user-supplied acquisition from the canonical publisher URLs. University-hosted scans are identified as such.
+[manifest.json](manifest.json) records titles, authors, publication years, archived versions, original download URLs, citation locations, retrieval date, sizes, page counts, and SHA-256 hashes. The previously audited PDFs were copied unchanged from the source-audit downloads made earlier on 2026-10-02. Other PDFs were retrieved or supplied by the user on the same date. Cody’s and Tang’s manifest entries distinguish their user-supplied acquisition from the canonical publisher URLs. University- and researcher-hosted scans are identified as such. Merton’s saved PDF is the 1973 journal article, not the earlier MIT working paper; Bachelier’s is the original French article.
 
 Validate all saved PDF bytes locally:
 
@@ -61,4 +68,4 @@ cd docs/research
 shasum -a 256 -c SHA256SUMS
 ```
 
-Each PDF was parsed with Poppler, its full text extracted, and its first page rendered and inspected to check document identity. That validates the archive files, not the papers’ mathematical claims. PDF downloads are not part of builds or CI.
+Each PDF was parsed with Poppler, text extraction attempted, and its first page rendered and inspected to check document identity. The Black–Scholes and Merton PDFs are image-only scans: their covers and first article pages were inspected visually; they have no searchable text layer. All 130 pages of the three newly collected model papers rendered successfully. Poppler reports annotation-destination and malformed-number warnings in the NUMDAM Bachelier source; these are recorded in the manifest. The original bytes were retained without OCR or re-export. That validates the archive files, not the papers’ mathematical claims. PDF downloads are not part of builds or CI.

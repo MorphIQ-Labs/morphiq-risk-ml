@@ -9,7 +9,7 @@ literature and first principles and is scored against FerroRisk's
 | Layer | Content | Literature |
 | --- | --- | --- |
 | Numerics | `norm_pdf`, `norm_cdf`, `log_norm_cdf`, `erfcx`, `norm_inv` | Cody (1969, 1990) `calerf`; Wichura AS241 |
-| Models | European price for BSM, Black-76, displaced Black and Bachelier, calls and puts, including expiry (T = 0) and zero-volatility limits | Black–Scholes (1973), Merton (1973), Black (1976), Bachelier (1900) |
+| Models | European price for BSM, Black-76, displaced Black and Bachelier, calls and puts, including expiry (T = 0) and zero-volatility limits | [Black–Scholes (1973)](docs/research/1973-black-pricing-options-corporate-liabilities.pdf), [Merton (1973)](docs/research/1973-merton-theory-rational-option-pricing.pdf), [Black (1976; PDF pending)](docs/research/README.md#paper-still-to-collect), [Bachelier (1900)](docs/research/1900-bachelier-theorie-de-la-speculation.pdf) |
 | Implied volatility | Normalised Black function, "Let's Be Rational" plus a bracketed fallback, the Bachelier inverse, and the #448 identifiability outcomes (unique root, rounding-resolved set, below intrinsic, above maximum, effectively zero, unresolved) | Jäckel (2015, 2017) |
 | Greeks | Analytic delta, gamma, theta, vega, rho, vanna, volga, charm, veta and color, with their units, for all four models | closed-form derivatives |
 | Contracts | Domain admission, typed refusals, and validity outcomes for every served quantity | FerroRisk SPEC §7.0 format |

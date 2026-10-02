@@ -4,6 +4,26 @@
   "scope": "Research papers explicitly cited in the current tracked source/documentation and the PR 12 source audit; not the recursive bibliographies of those papers.",
   "documents": [
     {
+      "file": "1900-bachelier-theorie-de-la-speculation.pdf",
+      "title": "Théorie de la spéculation",
+      "authors": "Louis Bachelier",
+      "year": 1900,
+      "version": "Annales scientifiques de l’École Normale Supérieure, série 3, tome 17, 21–86; original French article with NUMDAM cover",
+      "source_url": "https://www.numdam.org/item/ASENS_1900_3_17__21_0.pdf",
+      "doi": "10.24033/asens.476",
+      "cited_in": [
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "03f1b9542d2c374d61a276fd6c52d8936e1298bfaafd8efdc74b8b27e38faffd",
+      "bytes": 8693533,
+      "pages": 67,
+      "text_layer": "OCR text present",
+      "validation_note": "Poppler reports an annotation-destination warning during text extraction and malformed-number warnings during extraction/rendering; all 67 pages render successfully. Source bytes retained unchanged."
+    },
+    {
       "title": "Rational Chebyshev approximations for the error function",
       "authors": "W. J. Cody",
       "year": 1969,
@@ -58,6 +78,44 @@
       "sha256": "41ece4987012f243cf67c2ff78baa0fd62f5a12f6859f7817b92770f1bd60b2e",
       "bytes": 970552,
       "pages": 19
+    },
+    {
+      "file": "1973-black-pricing-options-corporate-liabilities.pdf",
+      "title": "The Pricing of Options and Corporate Liabilities",
+      "authors": "Fischer Black; Myron Scholes",
+      "year": 1973,
+      "version": "Journal of Political Economy 81(3), 637–654; Princeton-hosted journal scan with JSTOR cover",
+      "source_url": "https://www.cs.princeton.edu/courses/archive/fall02/cs323/links/blackscholes.pdf",
+      "doi": "10.1086/260062",
+      "cited_in": [
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "6dae2f2f588aa9f296d01f8f3817a848c67171fcf82662cd86140052a6304794",
+      "bytes": 763683,
+      "pages": 19,
+      "text_layer": "Image-only scan; identity verified from rendered cover and first article page"
+    },
+    {
+      "file": "1973-merton-theory-rational-option-pricing.pdf",
+      "title": "Theory of Rational Option Pricing",
+      "authors": "Robert C. Merton",
+      "year": 1973,
+      "version": "The Bell Journal of Economics and Management Science 4(1), 141–183; researcher-hosted journal scan with JSTOR cover",
+      "source_url": "https://finance.martinsewell.com/option-pricing/Merton1973.pdf",
+      "doi": "10.2307/3003143",
+      "cited_in": [
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "48f9fb0b4529979c291773782b7bf93b259ba1c4d414c76c6314a2d1d3162596",
+      "bytes": 4213019,
+      "pages": 44,
+      "text_layer": "Image-only scan; identity verified from rendered cover and first article page"
     },
     {
       "file": "1988-wichura-as241-normal-percentage-points.pdf",
@@ -257,6 +315,22 @@
       "pages": 51
     }
   ],
-  "unavailable": [],
+  "unavailable": [
+    {
+      "title": "The pricing of commodity contracts",
+      "authors": "Fischer Black",
+      "year": 1976,
+      "doi": "10.1016/0304-405X(76)90024-6",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/0304405X76900246",
+      "cited_in": [
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "unavailable",
+      "planned_file": "1976-black-pricing-commodity-contracts.pdf",
+      "checked_on": "2026-10-02",
+      "reason": "Publisher PDF request returned HTTP 403; OpenAlex and Semantic Scholar expose no open PDF location. A publicly indexed scan at PDFCoffee also returned HTTP 403. No verified PDF was obtained."
+    }
+  ],
   "filename_convention": "YYYY-first-author-short-title[-version].pdf; ASCII lowercase kebab-case; publication year first; retain distinct HAL/revision/report identifiers."
 }
