@@ -10,6 +10,24 @@ For each numerical path this document gives:
 
 These are analyses with measured envelopes, not machine-checked proofs. Where a bound is only measured over the oracles' grids and random samples, this says so.
 
+## 0. Double-double primitives (`Internal.Dd`)
+
+Every bound below is composed from these. Each primitive is a published algorithm with a proved relative error bound, u = 2^-53:
+
+| Operation | Algorithm | Proved bound |
+| --- | --- | --- |
+| DW + DW (`add`, `sub`) | AccurateDWPlusDW, JMP Algorithm 6 | 3u² + 13u³ |
+| DW + FP (`add_float`) | DWPlusFP, JMP Algorithm 4 | 2u² |
+| DW × FP (`mul_float`) | DWTimesFP3, JMP Algorithm 9 | 2u² |
+| DW × DW (`mul`) | DWTimesDW3, JMP Algorithm 12 | 5u² |
+| DW ÷ DW (`div`) | DWDivDW3, JMP Algorithm 18 | 9.8u² |
+| √DW (`sqrt`) | SQRTDWtoDW, LLMPR Algorithm 8 | 25/8 u² |
+| FP × FP (`two_prod`) | Fast2Mult (fma) | exact |
+
+JMP is Joldes, Muller and Popescu, "Tight and rigorous error bounds for basic building blocks of double-word arithmetic", ACM TOMS 44(2), 2017. LLMPR is Lefèvre, Louvet, Muller, Picot and Rideau, "Accurate calculation of Euclidean norms using double-word arithmetic", ACM TOMS 49(1), 2023.
+
+**Domain.** The bounds assume no underflow or overflow. `div` computes `1/b.hi`, which overflows for a subnormal divisor, so it first scales b exactly into [1, 2) by a power of two and scales the quotient back. That keeps the computation inside the theorem's domain whenever the quotient itself is normal. Results that fall into the subnormal range carry absolute rather than relative error, and are rounded once by `to_float_scaled`.
+
 ## 1. Elementary functions (`Internal.Elementary`)
 
 | Function | Construction | Error sources | Measured |
