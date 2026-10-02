@@ -11,4 +11,7 @@ for f in normal_premium_reference public_iv_reference iv_inverse_reference \
          bachelier_quantlib_reference greek_derivative_reference black_greek_boundary_reference; do
   git -C "$FERRO_RISK" show "$PIN:crates/ferro-risk/testing/data/$f.json" > "$OUT/$f.json"
 done
+for f in candidates oracle; do
+  git -C "$FERRO_RISK" show "$PIN:crates/ferro-risk/docs/440-european-formulation-evidence/$f.jsonl.gz" > "$OUT/440-$f.jsonl.gz"
+done
 printf '%s\n' "$PIN" > "$OUT/PIN"

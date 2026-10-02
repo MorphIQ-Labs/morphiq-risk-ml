@@ -1,24 +1,11 @@
 let inv_sqrt_2 = 0.70710678118654752440
 let inv_sqrt_2pi = 0.39894228040143267794
 
-(* Above this half-square, exp(-h) leaves the normal range; it is then
-   taken as exp(-h/2)^2 so the result rounds once, into the subnormals. *)
-let exp_split_threshold = 700.0
-
-(* [scale * exp(-u^2/2)] for u >= 0. The square is split exactly,
-   u^2 = s + e, so the half-square carries no rounding into the exponential:
-   exp(-(s+e)/2) = exp(-s/2) * (1 - e/2) to within |e/2|^2. *)
+(* [scale * exp(-u^2/2)] for u >= 0, with u^2 split exactly so the
+   half-square carries no rounding into the exponential. *)
 let scaled_gaussian scale u =
-  let s = u *. u in
-  if s = Float.infinity then 0.0
-  else
-  let e = Float.fma u u (-.s) in
-  let h = 0.5 *. s in
-  let m = scale *. (1.0 -. (0.5 *. e)) in
-  if h <= exp_split_threshold then m *. Float.exp (-.h)
-  else
-    let half = Float.exp (-0.5 *. h) in
-    m *. half *. half
+  let hi, lo = Split.square u in
+  Split.scaled_exp_neg scale (0.5 *. hi) (0.5 *. lo)
 
 let norm_pdf x =
   if Float.is_nan x then x else scaled_gaussian inv_sqrt_2pi (Float.abs x)

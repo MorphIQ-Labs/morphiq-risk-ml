@@ -3,3 +3,11 @@
 
 module Cody = Cody
 module Normal = Normal
+module Split = Split
+module Normalised_black = Normalised_black
+module Refusal = Refusal
+module Side = Side
+module Vol = Vol
+module Black = Black
+module Bachelier = Bachelier
+module Dd = Dd

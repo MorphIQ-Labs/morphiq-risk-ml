@@ -1,0 +1,90 @@
+;; Each snippet must be rejected by the type checker (exit 2); the expected
+;; diagnostic is pinned so a change in why it is rejected is visible.
+
+(rule
+ (deps mix_coordinates.ml ../../lib/morphiq_risk.cma)
+ (targets mix_coordinates.out)
+ (action
+  (with-stderr-to
+   mix_coordinates.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     mix_coordinates.cmo
+     mix_coordinates.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff mix_coordinates.expected mix_coordinates.out)))
+
+(rule
+ (deps forge_admitted.ml ../../lib/morphiq_risk.cma)
+ (targets forge_admitted.out)
+ (action
+  (with-stderr-to
+   forge_admitted.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_admitted.cmo
+     forge_admitted.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_admitted.expected forge_admitted.out)))
+
+(rule
+ (deps cross_model.ml ../../lib/morphiq_risk.cma)
+ (targets cross_model.out)
+ (action
+  (with-stderr-to
+   cross_model.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     cross_model.cmo
+     cross_model.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff cross_model.expected cross_model.out)))
+
+(rule
+ (deps forge_volatility.ml ../../lib/morphiq_risk.cma)
+ (targets forge_volatility.out)
+ (action
+  (with-stderr-to
+   forge_volatility.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_volatility.cmo
+     forge_volatility.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_volatility.expected forge_volatility.out)))

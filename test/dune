@@ -11,3 +11,11 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/data/normal_reference.txt})))
+
+(test
+ (name oracle_price)
+ (package morphiq_risk_ml)
+ (modules oracle_price)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/data/european_price_reference.txt})))

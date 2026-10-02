@@ -123,3 +123,12 @@ let erf x =
       let erfc_y = if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y in
       let r = 0.5 -. erfc_y +. 0.5 in
       if x < 0.0 then -.r else r
+
+let erfc x =
+  if Float.is_nan x then x
+  else
+    let y = Float.abs x in
+    if y <= thresh then 1.0 -. erf_small x
+    else
+      let r = if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y in
+      if x < 0.0 then 2.0 -. r else r

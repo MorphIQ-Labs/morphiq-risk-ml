@@ -1,0 +1,9 @@
+File "mix_coordinates.ml", line 6, characters 30-62:
+6 |   Black.Bsm.price a Side.Call (Result.get_ok (Vol.normal 0.2))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type "Morphiq_risk.Vol.normal Morphiq_risk.Vol.t"
+       but an expression was expected of type
+         "Morphiq_risk__.Vol.lognormal Morphiq_risk__.Vol.t" =
+           "Morphiq_risk__.Vol.lognormal Morphiq_risk.Vol.t"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk__.Vol.lognormal" = "Morphiq_risk.Vol.lognormal"

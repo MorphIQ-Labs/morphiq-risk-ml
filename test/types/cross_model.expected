@@ -1,0 +1,6 @@
+File "cross_model.ml", line 6, characters 22-23:
+6 |   Black.Black76.price a Side.Call (Result.get_ok (Vol.lognormal 0.2))
+                          ^
+Error: The value "a" has type "Morphiq_risk.Black.Bsm.admitted"
+       but an expression was expected of type
+         "Morphiq_risk.Black.Black76.admitted"
