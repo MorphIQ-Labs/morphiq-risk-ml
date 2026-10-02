@@ -34,9 +34,9 @@ The cited algorithms are also summarized, with later formalized bounds, in [Mull
 
 | Function | Construction | Error sources | Measured |
 | --- | --- | --- | --- |
-| exp | k = round(x/ln 2), r = x − k·ln2_hi − k·ln2_lo by fma; e^r − 1 by a degree-14 Taylor/Horner series; 1 + (e^r − 1); ldexp | `ln2_hi` has 32 significant bits, so `k·ln2_hi` is exact for \|k\| < 2^20, and the reduction's error is \|k\|·ulp(ln2_lo)/2 ≤ 2^-80 absolute. Truncation is < 2^-60 relative on \|r\| ≤ ln 2/2. Horner rounding is O(ε·\|r\|) relative, and one rounding comes in 1 + em1. | ≤ 1 ULP over 31k arguments |
-| expm1 | \|x\| ≤ 1: the series to degree 21, with truncation 1/22! < 2^-70. Otherwise 2^k(1 + em1) − 1. | Horner rounding is relative, because no cancellation happens at the leading term. | ≤ 1 ULP |
-| log, log1p | m ∈ [√½, √2), f = m − 1 (exact, Sterbenz); 2·atanh(u) with u = f/(2 + f) and its fma remainder | Series truncation is < 2^-60 relative. Carrying u's remainder removes the quotient's rounding from the leading 2u. log adds e·ln2_hi exactly. | ≤ 1 ULP over 49k arguments |
+| exp | k = round(x/ln 2), r = x − k·ln2_hi − k·ln2_lo by fma; e^r − 1 by a degree-14 Taylor/Horner series; 1 + (e^r − 1); ldexp | `k·ln2_hi` is exact for \|k\| < 2^20. Reduction also includes the ln(2) split residual and the final fma rounding; the latter cannot be omitted. §8 includes these terms in the 4u exponential bound. | ≤ 1 ULP over 31k arguments |
+| expm1 | \|x\| ≤ 1: the series to degree 21, with absolute tail ≤ 1/[22!(1−1/23)] < 2^-69. Otherwise 2^k(1 + em1) − 1. | Horner rounding is relative, because no cancellation happens at the leading term. | ≤ 1 ULP |
+| log, log1p | m ∈ [√½, √2), f = m − 1 (exact, Sterbenz); 2·atanh(u) with u = f/(2 + f) and its fma remainder | Series truncation is < 2^-60 relative. Carrying u's remainder removes the quotient's rounding from the leading 2u. log recombines with both ln(2) parts, including the final rounding. | ≤ 1 ULP over 49k arguments |
 
 ### 1.1 Reduced binary64 log1p
 
@@ -105,7 +105,7 @@ QD's Newton log has absolute error near zero. Its relative error is unbounded as
 
 ## 2. The normal distribution
 
-- **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals, whose stated relative error is below 10^-18 before rounding. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
+- **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals; §8 certifies the coefficients actually stored here. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
 - **Why that matters in the tail.** The naive form's relative error grows like ε·x², which is 5.7e-14 at x = −38, the FerroRisk budget. Here the remaining error is the rounding of erfcx, exp and two products: ≤ 4 ULP measured over the whole range, tails included.
 - **Φ⁻¹ is AS241.** The central branch evaluates only polynomials, so it is reproducible. The tails add one `log`: ≤ 4 ULP measured.
 - **ln Φ composed from Φ.** The enforced CDF envelope is 6 ULP to a rounded reference, hence 6.5 spacings to the real value. The scorer evaluates the actual inner CDF and uses the largest spacing in its neighbourhood, including binade crossings. With this error E, the mean-value denominator is `1−Q−E` or `Φ−E`, not the central value. The outer evaluator and oracle rounding contribute `2 ulp(got)+ulp(reference)/2`. This is conditional on the measured CDF and elementary envelopes. A nonpositive denominator is unresolved and fails; it is never accepted as an infinite bound.
@@ -114,21 +114,21 @@ QD's Newton log has absolute error near zero. Its relative error is unbounded as
 ## 3. Log-moneyness x = ln(A/C) = ln(S/K) + (r − q)T
 
 x is computed in DD:
-- ln q for q = fl(S/K), by the atanh series (2^-104 relative);
+- ln q for q = fl(S/K), by the atanh series (32u² relative);
 - the quotient remainder ρ = (S − qK)/(qK), with S − qK exact by fma and ρ itself in DD, plus −ρ²/2;
 - (r − q)T as two exact products (two_prod);
 - for displaced Black, F + d and K + d as exact sums, with their low parts added as Sl/S − Kl/K.
 
-The absolute error is about 2^-104·(|ln(S/K)| + |(r − q)T|).
+The absolute error depends on the component bounds and |ln(S/K)|+|(r−q)T|. The explicit bound and finite-exponent qualifications are in §5.1.
 
 **Consequence.** A price depends on x through ∂ln V/∂x. That derivative is about |h|/s in the out-of-the-money tail (h = x/s) and 1/|x| for the zero-variance price. So the tail error stays about ε until |h|·(|ln S/K| + |(r−q)T|)/s approaches 2^51, and the zero-variance price is limited where x itself cancels.
 
-**Known limit.** A forward placed at the strike through carry has x ≈ 1e-16 of its terms. Its zero-variance price is then taken as A − C from the DD legs instead (§5), because C·expm1(x) would inherit x's 2^-104·|terms| error.
+**Known limit.** A forward placed at the strike through carry has x ≈ 1e-16 of its terms. Its zero-variance price is then taken as A − C from the DD legs instead (§5), because C·expm1(x) would inherit x’s absolute coordinate error.
 
 ## 4. The normalised Black function b(x, s), out of the money (x ≤ 0)
 
 The kernel uses Jäckel's three regions (η = −13, τ = 2ε^(1/16)):
-- **Regions I and II.** b = vega·(b/vega). The scaled function comes from Jäckel's asymptotic or small-t expansion. Section 8.4 bounds each truncation remainder and the actual rounded polynomial evaluation separately. The vega, `exp(−(h² + t²)/2)/√(2π)`, is evaluated with h = x/s in DD (including x's and s's low parts) and the exponent split exactly. The exponential is applied last with any prefactor folded in, so a value rounds once even in the subnormals. A direct mpmath probe of Region I measures about 1 ULP.
+- **Regions I and II.** b = vega·(b/vega). The scaled function comes from Jäckel's asymptotic or small-t expansion. Section 8.4 bounds each truncation remainder and the actual rounded polynomial evaluation separately. The vega, `exp(−(h² + t²)/2)/√(2π)`, is evaluated with h = x/s in DD (including x's and s's low parts) and the exponent assembled from split products and DD corrections. §8 includes their remaining arithmetic error. Applying the exponential last with its prefactor folded in avoids premature underflow before final exponent restoration. A direct mpmath probe of Region I measures about 1 ULP.
 - **Region III** is `½·exp(−(h² + t²)/2)·(erfcx(q1) − erfcx(q2))` with Cody's erfcx, or the erfc forms.
 
 **Cancellation.** Region III subtracts positive terms. Its observed cancellation and ULP maxima are regression evidence, not premises of the certificate. The new evaluator propagates absolute errors through this subtraction; it assumes no fixed upper cancellation factor.
@@ -137,17 +137,17 @@ The kernel uses Jäckel's three regions (η = −13, τ = 2ε^(1/16)):
 
 ## 5. Price assembly
 
-- **Black family.** V = 2^e·(θ·intrinsic⁺ + √A·√C·b(−|x|, s)), with (S, K) scaled by 2^-e, initially e = ⌊(e_S + e_K)/2⌋. For |x| < 2^-500 and small x terms, the exponent is lowered by 512 to retain tiny intrinsic products; this depends only on dimensionless quantities.
-  - Floor division makes the scaling equivariant, so V(2^j S, 2^j K) = 2^j V(S, K) exactly. A property test checks this.
+- **Black family.** V = 2^e·(max(θ(A−C),0) + √A·√C·b(−|x|, s)), with (S, K) scaled by 2^-e, initially e = ⌊(e_S + e_K)/2⌋. For |x| < 2^-500 and small x terms, the exponent is lowered by 512 to retain tiny intrinsic products; this depends only on dimensionless quantities.
+  - Floor division makes the scaling equivariant, so V(2^j S, 2^j K) = 2^j V(S, K) exactly when the input scaling is exact and output scaling crosses no overflow/underflow boundary. A property test checks this on its stated domain.
   - The out-of-the-money part applies 2^e inside the exponential (Cody–Waite 2^-n·e^-r), avoiding an intermediate underflow before the final exponent restoration.
 - **Intrinsic θ(A − C)** comes from DD legs, `S·exp_DD(−qT)` and `K·exp_DD(−rT)`:
   - as C·expm1(x) when |x| ≤ 0.35 and x's terms are ≤ 1;
   - otherwise as A − C. The bounds are the component-dependent expressions in §5.1; neither branch has a uniform 2^-104 coefficient.
 
   It is then rounded once, including into the subnormals (`Dd.to_float_scaled`). Equal-coordinate zero-variance contracts with max(|r|,|q|)T < 2^-500 instead form S(r−q)T from mantissas and accumulated exponents. The omitted relative term is < 2^-499. This covers carry below the binary64 range while the currency price is normal. For example S=K=2^1000, T=2^-1074, r=1, q=0 changed from 0 to 2^-74. This special price path does not establish exact inverse classification at these exponent extremes; inverse classification still uses the DD legs.
-- **Bachelier.** V = D·(θΔ⁺ + s·φ(d)·Y′(−|d|)), with Y′ = 1 + h·Φ(h)/φ(h) from Jäckel's Remez rationals. This avoids subtracting φ(d) − |d|Φ(−|d|). d = Δ/s is carried in DD, and D·θΔ is DD.
+- **Bachelier.** V = D·(max(θΔ,0) + s·φ(d)·Y′(−|d|)), with Y′ = 1 + h·Φ(h)/φ(h) from Jäckel's Remez rationals. This avoids subtracting φ(d) − |d|Φ(−|d|). d = Δ/s is carried in DD, and D·θΔ is DD.
 
-**Measured.** Worst errors per region are 1–23 ULP on this project's 57k-contract oracle, and 1–19 ULP on the 41,760-contract displaced oracle.
+**Measured.** Worst errors per region are 1–22 ULP on this project's 57k-contract oracle, and 1–19 ULP on the 41,760-contract displaced oracle.
 
 ### 5.1 The intrinsic's analytical error budget, and the zero-variance price
 

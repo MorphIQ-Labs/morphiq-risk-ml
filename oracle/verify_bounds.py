@@ -86,6 +86,8 @@ round_tail = tail_ratio
 log1p = (argument + evaluation + truncation + round_tail + 32*u)*inflate
 assert log1p < F(14,100)
 
+assert F(1, factorial(22))/(1-F(1,23)) < F(1,2**69)
+
 # Binary64 Elementary.exp: polynomial arithmetic, rounded coefficients,
 # Taylor tail, two fma reductions, and the final sum. Constants are read from
 # the implementation; dyadic fractions retain their exact stored values.
