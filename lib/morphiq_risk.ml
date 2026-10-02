@@ -11,3 +11,5 @@ module Vol = Vol
 module Black = Black
 module Bachelier = Bachelier
 module Dd = Dd
+module Lbr = Lbr
+module Iv = Iv

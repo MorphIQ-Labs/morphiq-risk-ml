@@ -65,3 +65,40 @@ let log_float a =
   let m, e = Float.frexp a in
   let m, e = if m < sqrt_half then (2.0 *. m, e - 1) else (m, e) in
   add (log_reduced m) (mul_float ln2 (float e))
+
+let scale a k = { hi = Float.ldexp a.hi k; lo = Float.ldexp a.lo k }
+let compare_float a f = if a.hi <> f then compare a.hi f else compare a.lo 0.0
+
+(* 1/n! for the exponential series. *)
+let inverse_factorials =
+  let a = Array.make 14 (of_float 1.0) in
+  for n = 1 to 13 do
+    a.(n) <- div a.(n - 1) (of_float (float n))
+  done;
+  a
+
+(* expm1 r for |r| <= 0.35: the argument is halved 8 times, the series
+   sum r^n/n! (n = 1..12) is taken, and u -> 2u + u^2 undoes each halving.
+   Working on e^r - 1 throughout keeps a small result's relative precision. *)
+let expm1_reduced r =
+  let r = scale r (-8) in
+  let acc = ref inverse_factorials.(12) in
+  for n = 11 downto 1 do
+    acc := add (mul !acc r) inverse_factorials.(n)
+  done;
+  let u = ref (mul !acc r) in
+  for _ = 1 to 8 do
+    u := add (mul_float !u 2.0) (mul !u !u)
+  done;
+  !u
+
+(* e^x = 2^k e^r, r = x - k ln 2. *)
+let exp x =
+  if x.hi > 709.8 then of_float Float.infinity
+  else if x.hi < -745.2 then of_float 0.0
+  else
+    let k = Float.round (x.hi /. ln2.hi) in
+    let r = sub x (mul_float ln2 k) in
+    scale (add (of_float 1.0) (expm1_reduced r)) (int_of_float k)
+
+let expm1 x = if Float.abs x.hi <= 0.35 then expm1_reduced x else sub (exp x) (of_float 1.0)

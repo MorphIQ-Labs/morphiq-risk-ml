@@ -14,6 +14,7 @@ type parameter =
   | Shifted_forward
   | Shifted_strike
   | Volatility
+  | Price
 
 type t = Invalid_input of { parameter : parameter; value : float }
 

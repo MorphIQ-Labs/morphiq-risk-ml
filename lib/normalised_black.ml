@@ -180,3 +180,36 @@ let scaled ?(k = 0) m x xl s sl =
   else if region_i x s then expansion Asymptotic.scaled
   else if region_ii x s then expansion small_t_scaled
   else Float.ldexp (m *. with_cody x xl s sl) k
+
+let ln_two_pi = 1.8378770664093454835606594728112352797227949472755668
+let sqrt_two_pi = 2.506628274631000502415765284811045253006986740609938316629923576
+
+(* b(x, s) for x <= 0, s > 0, without extended inputs. *)
+let b x s = scaled 1.0 x 0.0 s 0.0
+
+(* ln of the normalised vega exp(-(h^2 + t^2)/2) / sqrt(2 pi). *)
+let ln_vega x s =
+  let h = x /. s and t = 0.5 *. s in
+  (-.0.5 *. ln_two_pi) -. (0.5 *. ((h *. h) +. (t *. t)))
+
+let vega x s = Float.exp (ln_vega x s)
+let inv_vega x s = sqrt_two_pi *. Float.exp (0.5 *. (((x /. s) *. (x /. s)) +. (0.25 *. s *. s)))
+
+(* (b / vega, ln vega), the scaled function and its scale (reference
+   scaled_normalised_black_and_ln_vega). *)
+let scaled_and_ln_vega x s =
+  let lv = ln_vega x s in
+  if region_i x s then (Asymptotic.scaled (x /. s) (0.5 *. s), lv)
+  else if region_ii x s then (small_t_scaled (x /. s) (0.5 *. s), lv)
+  else (with_cody x 0.0 s 0.0 *. Float.exp (-.lv), lv)
+
+(* b_max - b = (erfcx((t+h)/sqrt 2) + erfcx((t-h)/sqrt 2)) / 2 * exp(-(h^2+t^2)/2),
+   free of cancellation (reference complementary_normalised_black), with
+   h = x/s carried to double-double and the exponent split exactly. *)
+let complement x xl s sl =
+  let hh, hl = Split.quotient_dd x xl s sl in
+  let t = 0.5 *. s in
+  let h = hh +. hl in
+  let e, el = vega_exponent hh hl t (0.5 *. sl) in
+  Split.scaled_exp_neg (0.5 *. (Cody.erfcx ((t +. h) *. inv_sqrt_2) +. Cody.erfcx ((t -. h) *. inv_sqrt_2))) e el
+

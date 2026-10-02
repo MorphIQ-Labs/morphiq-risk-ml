@@ -7,11 +7,18 @@ FERRO_RISK=${FERRO_RISK:-$(cd "$(dirname "$0")/../../ferro-risk" && pwd)}
 OUT="$(cd "$(dirname "$0")" && pwd)/data"
 mkdir -p "$OUT"
 git -C "$FERRO_RISK" cat-file -e "$PIN^{commit}" || git -C "$FERRO_RISK" fetch -q origin "$PIN"
-for f in normal_premium_reference public_iv_reference iv_inverse_reference \
+# The IV references carry #448's identifiability semantics (the rounded
+# zero-volatility bound), which exist only on the #448 stack tip.
+IV_PIN=c1d2b66f7e1a9ec32d724aa1a9f6e1c2978a02cc
+git -C "$FERRO_RISK" cat-file -e "$IV_PIN^{commit}" || git -C "$FERRO_RISK" fetch -q origin "$IV_PIN"
+for f in public_iv_reference public_iv_observed_envelope; do
+  git -C "$FERRO_RISK" show "$IV_PIN:crates/ferro-risk/testing/data/$f.json" > "$OUT/$f.json"
+done
+for f in normal_premium_reference iv_inverse_reference \
          bachelier_quantlib_reference greek_derivative_reference black_greek_boundary_reference; do
   git -C "$FERRO_RISK" show "$PIN:crates/ferro-risk/testing/data/$f.json" > "$OUT/$f.json"
 done
 for f in candidates oracle; do
   git -C "$FERRO_RISK" show "$PIN:crates/ferro-risk/docs/440-european-formulation-evidence/$f.jsonl.gz" > "$OUT/440-$f.jsonl.gz"
 done
-printf '%s\n' "$PIN" > "$OUT/PIN"
+printf '%s\n%s\n' "$PIN" "$IV_PIN" > "$OUT/PIN"

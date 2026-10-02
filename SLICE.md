@@ -44,14 +44,18 @@ demonstrates or refutes.
 ## Oracle
 
 Scoring uses FerroRisk's retained mpmath and QuantLib references, which are
-independent of the Rust implementation. `oracle/fetch.sh` reads them from a
-pinned FerroRisk commit into `oracle/data/`, which is git-ignored. The pin is
-the `!551` head. It moves to the squash-merge commit once `!551` lands.
+independent of the Rust implementation. `oracle/fetch.sh` reads them from
+pinned FerroRisk commits into `oracle/data/`, which is git-ignored. Most
+fixtures are pinned to the `!551` head. The IV reference and FerroRisk's
+observed IV envelope are pinned to the #448 stack tip (`c1d2b66f`), because
+only that commit has #448's rounded zero-volatility bound. Both pins move to
+their squash-merge commits as the MRs land.
 
 | Fixture | Use |
 | --- | --- |
 | `normal_premium_reference.json` | Normal CDF and premium tails |
-| `public_iv_reference.json` | Exact binary64 price targets and IV outcome classes for all four models |
+| `public_iv_reference.json`, `public_iv_observed_envelope.json` | IV outcome classes and rounding cells for all four models, with FerroRisk's own per-row σ errors |
+| `440-*.jsonl.gz` (#440 study) | 50,094 exact-input European prices with regions |
 | `iv_inverse_reference.json` | Normalised-inverse rounding cells |
 | `bachelier_quantlib_reference.json` | Bachelier price and IV |
 | `greek_derivative_reference.json`, `black_greek_boundary_reference.json` | Analytic Greeks |

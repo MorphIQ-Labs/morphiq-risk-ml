@@ -19,3 +19,17 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/data/european_price_reference.txt})))
+
+(test
+ (name lbr_round_trip)
+ (package morphiq_risk_ml)
+ (modules lbr_round_trip)
+ (libraries morphiq_risk))
+
+(test
+ (name oracle_iv)
+ (package morphiq_risk_ml)
+ (modules oracle_iv)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/data/public_iv_reference.txt})))

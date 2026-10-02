@@ -15,6 +15,10 @@ module Coordinates = struct
     time : float;
     root_time : float;
     root_time_low : float;  (** sqrt T = root_time + root_time_low to ~106 bits. *)
+    spot : float;  (** S, scaled by 2^-exponent. *)
+    strike : float;  (** K, scaled by 2^-exponent. *)
+    rate : float;
+    yield : float;
   }
 
   type t = Expiry of { spot : float; strike : float } | Live of live
@@ -60,6 +64,10 @@ module Coordinates = struct
           time;
           root_time = fst (Split.sqrt time);
           root_time_low = snd (Split.sqrt time);
+          spot = spot';
+          strike = strike';
+          rate;
+          yield;
         }
 end
 
@@ -75,6 +83,7 @@ module type MODEL = sig
 
   val admit : inputs -> (admitted, Refusal.t) result
   val price : admitted -> Side.t -> Vol.lognormal Vol.t -> float
+  val implied : admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
   val coordinates : admitted -> Coordinates.t
 end
 
@@ -111,6 +120,76 @@ let price_coordinates coordinates side sigma =
   | Coordinates.Expiry { spot; strike } -> Float.max (Side.sign side *. (spot -. strike)) 0.0
   | Coordinates.Live c -> live_price side c (Vol.to_float sigma)
 
+(* The legs and the discounted forward intrinsic in double-double (~106
+   bits), at the coordinates' scale. They decide where a quote falls relative
+   to the zero-volatility price and the maximum. *)
+let precise_legs (c : Coordinates.live) =
+  let leg spot rate = Dd.mul_float (Dd.exp (Dd.neg (Dd.two_prod rate c.time))) spot in
+  let asset = leg c.spot c.yield and cash = leg c.strike c.rate in
+  let x = { Dd.hi = c.x; lo = c.x_low } in
+  let forward_intrinsic = if Float.abs c.x <= 0.35 then Dd.mul cash (Dd.expm1 x) else Dd.sub asset cash in
+  (asset, cash, forward_intrinsic)
+
+let root sigma = match Vol.lognormal sigma with Ok v -> Iv.Root v | Error _ -> Iv.Above_maximum
+
+(* Invert a live quote. The quote is compared exactly (to ~106 bits) with
+   the zero-volatility price and the maximum. Its out-of-the-money part is
+   normalised and inverted by Let's Be Rational, then given one Newton
+   correction against the extended-precision kernel. *)
+let live_implied side (c : Coordinates.live) price =
+  let theta = Side.sign side in
+  let p = Float.ldexp price (-c.exponent) in
+  let asset, cash, forward_intrinsic = precise_legs c in
+  let intrinsic = if theta > 0.0 then forward_intrinsic else Dd.neg forward_intrinsic in
+  let maximum = if theta > 0.0 then asset else cash in
+  if Dd.compare_float maximum p <= 0 then Iv.Above_maximum
+  else if intrinsic.hi > 0.0 && Dd.compare_float intrinsic p > 0 then
+    (* Below the exact zero-volatility price. A quote equal to that price's
+       correctly rounded value is its binary64 rounding, so σ = 0 (#448). *)
+    if p = intrinsic.hi then root 0.0 else Iv.Below_intrinsic
+  else
+    let otm = Dd.sub (Dd.of_float p) (if intrinsic.hi > 0.0 then intrinsic else Dd.of_float 0.0) in
+    if otm.hi = 0.0 then root 0.0
+    else
+      let x, xl = if c.x > 0.0 then (-.c.x, -.c.x_low) else (c.x, c.x_low) in
+      let m = Float.sqrt c.asset *. Float.sqrt c.cash in
+      let beta = Dd.to_float otm /. m in
+      (* ln β from the unscaled quote where nothing is subtracted from it: β
+         itself can be subnormal, and rescaling a subnormal quote by
+         2^-exponent drops its bits. LBR's lowest branch works on ln β. *)
+      let ln_beta =
+        (if intrinsic.hi > 0.0 then Float.log (Dd.to_float otm)
+         else Float.log price -. (float c.exponent *. Split.ln2_hi))
+        -. Float.log m
+      in
+      (* β̄ = b_max - β from the exact distance to the maximum: near the
+         maximum β itself rounds to b_max and loses it. *)
+      let beta_bar = Dd.to_float (Dd.sub maximum (Dd.of_float p)) /. m in
+      let b_max = Float.exp (0.5 *. x) in
+      if beta <= 0.0 then Iv.Below_smallest_volatility
+      else
+        let beta = Float.min beta (Float.pred b_max) in
+        let s = Lbr.solve ~beta_bar ~ln_beta beta x in
+        let s =
+          if not (Float.is_finite s && s > 0.0) then s
+          else if beta > 0.5 *. b_max then
+            (* Correct on the complement: β - b = b̄(s) - β̄. *)
+            s +. ((Normalised_black.complement x xl s 0.0 -. beta_bar) /. Normalised_black.vega x s)
+          else s +. ((beta -. Normalised_black.scaled 1.0 x xl s 0.0) /. Normalised_black.vega x s)
+        in
+        (* σ = s / sqrt T, with sqrt T's low part. *)
+        let sigma = s /. c.root_time *. (1.0 -. (c.root_time_low /. c.root_time)) in
+        if Float.is_nan sigma || sigma = Float.infinity then Iv.Above_maximum
+        else if sigma <= 0.0 then Iv.Below_smallest_volatility
+        else root sigma
+
+let implied_coordinates coordinates side price =
+  if not (Float.is_finite price && price >= 0.0) then invalid Refusal.Price price
+  else
+    match coordinates with
+    | Coordinates.Expiry _ -> Ok Iv.Not_identifiable_at_expiry
+    | Coordinates.Live c -> Ok (live_implied side c price)
+
 module Make (C : CARRY) : MODEL with type inputs = C.inputs = struct
   type inputs = C.inputs
   type admitted = Coordinates.t
@@ -118,6 +197,7 @@ module Make (C : CARRY) : MODEL with type inputs = C.inputs = struct
   let admit = C.coordinates
   let coordinates a = a
   let price a side sigma = price_coordinates a side sigma
+  let implied a side price = implied_coordinates a side price
 end
 
 module Bsm_carry = struct

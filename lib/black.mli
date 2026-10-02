@@ -15,6 +15,10 @@ module Coordinates : sig
     time : float;
     root_time : float;
     root_time_low : float;
+    spot : float;  (** [S], scaled by [2^-exponent]. *)
+    strike : float;  (** [K], scaled by [2^-exponent]. *)
+    rate : float;
+    yield : float;
   }
 
   type t = private Expiry of { spot : float; strike : float } | Live of live
@@ -37,6 +41,11 @@ module type MODEL = sig
 
   val admit : inputs -> (admitted, Refusal.t) result
   val price : admitted -> Side.t -> Vol.lognormal Vol.t -> float
+
+  val implied : admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
+  (** The volatility whose price is the quote, or why there is none. A quote
+      that is not a finite, nonnegative number is refused. *)
+
   val coordinates : admitted -> Coordinates.t
 end
 

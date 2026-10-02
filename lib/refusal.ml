@@ -9,6 +9,7 @@ type parameter =
   | Shifted_forward
   | Shifted_strike
   | Volatility
+  | Price
 
 type t = Invalid_input of { parameter : parameter; value : float }
 
@@ -23,6 +24,7 @@ let parameter_name = function
   | Shifted_forward -> "shifted_forward"
   | Shifted_strike -> "shifted_strike"
   | Volatility -> "volatility"
+  | Price -> "price"
 
 let to_string (Invalid_input { parameter; value }) =
   Printf.sprintf "invalid input %s = %h" (parameter_name parameter) value

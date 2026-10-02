@@ -12,3 +12,22 @@ val y_prime : float -> float
 (** [1 + h Y(h)] with [Y = Phi / phi], for [h <= 0]. *)
 
 val inv_sqrt_2pi : float
+
+val b : float -> float -> float
+(** [b x s] for [x <= 0], [s > 0]. *)
+
+val vega : float -> float -> float
+(** [db/ds = exp(-((x/s)^2 + (s/2)^2)/2) / sqrt(2 pi)]. *)
+
+val inv_vega : float -> float -> float
+val ln_vega : float -> float -> float
+
+val scaled_and_ln_vega : float -> float -> float * float
+(** [(b / vega, ln vega)], for [x < 0], [s > 0]. *)
+
+val sqrt_two_pi : float
+
+val complement : float -> float -> float -> float -> float
+(** [complement x xl s sl] is [e^(x/2) - b(x + xl, s + sl)] for [x <= 0],
+    without subtractive cancellation. *)
+
