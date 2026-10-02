@@ -8,7 +8,7 @@ let error (got : Dd.t) exponent h l tail =
   else
     let gh = Float.ldexp got.hi (-exponent)
     and gl = Float.ldexp got.lo (-exponent) in
-    Float.abs (gh -. h +. (gl -. l) -. tail)
+    Bounds.expansion_error [ gh; -.h; gl; -.l; -.tail ]
 
 let () =
   let rows = ref 0 and nonzero_low = ref 0 and failures = ref 0 in

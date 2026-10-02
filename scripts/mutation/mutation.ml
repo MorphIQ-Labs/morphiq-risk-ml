@@ -36,6 +36,16 @@ type mutant = {
 let catalog =
   [
     {
+      id = "reference-expansion";
+      file = "test/bounds.ml";
+      snippet =
+        "Float.abs (List.fold_left ( +. ) 0.0 (List.fold_left grow [] terms))";
+      replacement = "let _ = grow in Float.abs (List.fold_left (+.) 0.0 terms)";
+      killer = "numerical_regressions";
+      mechanism =
+        "reference discrepancy retains cancellation between high and low words";
+    };
+    {
       id = "sqrt-exponent-scale";
       file = "lib/dd.ml";
       snippet = "else (snd (Float.frexp a.hi) - 1) asr 1";

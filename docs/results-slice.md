@@ -31,7 +31,7 @@ Measured on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3`. The library is abo
 | Full test suite: every oracle, the consistency, property and compile-failure tests | 0.54–0.55 s, with the 41,760-row displaced oracle and double-double intrinsics |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
-The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each claimed mechanism and requires the test that guards it to fail. The expanded catalog has 28 mechanisms (see the numerical assurance audit below). Three lessons for mutation testing:
+The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each claimed mechanism and requires the test that guards it to fail. The expanded catalog has 29 mechanisms (see the numerical assurance audit below). Three lessons for mutation testing:
 
 - **Equivalent mutants are common.** A last-digit change to a 17-digit literal often parses to the same double, and a mutant that only breaks compilation, such as an unused variable under warnings-as-errors, is not a kill.
 - **Budgets come from the error analysis, not from the mutants.** Tightening a measured budget until a mutant dies proves nothing. The scorers check derived bounds (docs/error-analysis.md §1, §5.1, §6), and a survivor can also expose a corpus or scoring-resolution gap.
@@ -63,7 +63,7 @@ The following were out of scope (see SLICE.md):
 
 ## Numerical assurance audit
 
-The expanded checks add 24,451 DD references and 2,005 high-precision coordinate/near-maximum IV references, plus analytic tiny-carry, displaced-spread, nonfinite-scorer and rho controls. The DD corpus includes 13,041 nonzero low words. Build, format, the full test suite and all 28 catalogued mutations pass locally on macOS arm64. The intrinsic branch guard is separately probed and survives; its exclusion is provisional.
+The expanded checks add 24,451 DD references and 2,005 high-precision coordinate/near-maximum IV references, plus analytic tiny-carry, displaced-spread, nonfinite-scorer and rho controls. The DD corpus includes 13,041 nonzero low words. Build, format, the full test suite and all 29 catalogued mutations pass locally on macOS arm64. The intrinsic branch guard is separately probed and survives; its exclusion is provisional.
 
 The unchanged historical model corpus still has the same determinism digest. New cases change a tiny BSM zero-variance call from 0 to 2^-74 and a tiny displaced call from 0 to 2^-574; a subnormal DD quotient changes from 0.5 to RN(1/3). These are improvements outside that old corpus, so an unchanged digest does not mean unchanged numerics.
 

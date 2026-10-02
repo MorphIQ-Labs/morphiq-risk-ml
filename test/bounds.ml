@@ -29,6 +29,31 @@ let within ~error ~bound =
   Float.is_finite error && Float.is_finite bound && error >= 0.0 && bound >= 0.0
   && error <= bound
 
+(* Sum a short expansion without losing cancellation between the high and
+   low words. This independent TwoSum implementation uses only IEEE additions
+   and subtractions, never the library's DD primitives. Each grow step is
+   exact; summing the resulting nonoverlapping components costs O(n*u)
+   relative to their total, covered by the scorer's explicit inflation. *)
+let expansion_error terms =
+  if not (List.for_all Float.is_finite terms) then Float.infinity
+  else
+    let two_sum a b =
+      let s = a +. b in
+      let bb = s -. a in
+      (s, a -. (s -. bb) +. (b -. bb))
+    in
+    let grow expansion value =
+      let q, lows =
+        List.fold_left
+          (fun (q, lows) component ->
+            let sum, error = two_sum q component in
+            (sum, if error = 0.0 then lows else error :: lows))
+          (value, []) expansion
+      in
+      List.rev (q :: lows)
+    in
+    Float.abs (List.fold_left ( +. ) 0.0 (List.fold_left grow [] terms))
+
 (* ulp(v), with the subnormal quantum below the normal range. *)
 let ulp v =
   let a = Float.abs v in

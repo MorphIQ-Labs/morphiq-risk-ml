@@ -12,6 +12,9 @@ let () =
     [ Float.nan; Float.infinity; Float.neg_infinity ];
   require "nonfinite bound accepted"
     (not (Bounds.within ~error:0.0 ~bound:Float.infinity));
+  require "reference expansion loses cancellation"
+    (Bounds.expansion_error [ 1.0; Bounds.u; -1.0; -.Bounds.u +. Bounds.u2 ]
+    = Bounds.u2);
   (* An error expressed in price ULPs does not keep that ULP count after
      multiplication. This case turns 32 price ULPs into 61 rho ULPs. *)
   let p = ref 1.0 in
@@ -123,10 +126,14 @@ let () =
                      | _ -> failwith "live coordinate missing"
                    in
                    let error =
-                     Float.abs
-                       (Float.ldexp x (-e) -. h
-                       +. (Float.ldexp xl (-e) -. l)
-                       -. tail)
+                     Bounds.expansion_error
+                       [
+                         Float.ldexp x (-e);
+                         -.h;
+                         Float.ldexp xl (-e);
+                         -.l;
+                         -.tail;
+                       ]
                    in
                    let log_q = Float.abs (Float.log (a /. b)) in
                    let absolute =
@@ -136,7 +143,10 @@ let () =
                    in
                    require "double-word quotient remainder lost"
                      (Bounds.within ~error
-                        ~bound:(Float.ldexp absolute (-e) +. 0x1p-158))
+                        ~bound:
+                          (Float.ldexp absolute (-e)
+                           *. (1.0 +. (8.0 *. Bounds.u))
+                          +. 0x1p-158))
                | _ -> invalid_arg kind));
   require "empty regression corpus" (!rows > 0);
   Printf.printf "%d generated regressions and boundary controls passed\n" !rows

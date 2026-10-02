@@ -101,7 +101,7 @@ QD's Newton log has absolute error near zero. Its relative error is unbounded as
 
 ### 1.4 Independent checking
 
-`dd.txt.gz` contains 24,451 three-word reference expansions, including 13,041 nonzero input low words, reduction boundaries, subnormals and exponent extremes. Generation at 110 and 220 digits agrees on all reference words; tiny arguments receive additional precision. A separate exponent keeps oracle errors representable. The scorer does not use the library's DD subtraction. It accounts for oracle expansion error, its own roundoff and final component underflow, and rejects NaN/infinity. These tests check the analysis against examples; agreement of two mpmath precisions is not an interval proof.
+`dd.txt.gz` contains 24,451 three-word reference expansions, including 13,041 nonzero input low words, reduction boundaries, subnormals and exponent extremes. Generation at 110 and 220 digits agrees on all reference words; tiny arguments receive additional precision. A separate exponent keeps oracle errors representable. The scorer uses an independent error-free expansion sum, so high-word disagreement cannot erase the low-word discrepancy; it does not use the library's DD subtraction. It accounts for oracle expansion error, its own roundoff and final component underflow, and rejects NaN/infinity. These tests check the analysis against examples; agreement of two mpmath precisions is not an interval proof.
 
 ## 2. The normal distribution
 
