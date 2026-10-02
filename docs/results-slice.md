@@ -25,7 +25,7 @@ Measured on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3`. The library is abo
 | Full test suite: every oracle, the property tests and the compile-failure tests | 0.31–0.41 s |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
-Every mechanism claimed in the results docs has a mutant that fails rows when it is removed, and the suite runs about 25 such mutants. Two lessons for mutation testing:
+Every mechanism claimed in the results docs has a mutant that fails rows when it is removed, and about 20 such mutants were run during development. Two lessons for mutation testing:
 
 - **Equivalent mutants are common.** A last-digit change to a 17-digit literal often parses to the same double, and a mutant that only breaks compilation, such as an unused variable under warnings-as-errors, is not a kill.
 - **Budgets must be tight enough to see each mechanism.** Several mechanisms passed FerroRisk-level budgets with or without them. Their budgets were tightened to the measured worst before their mutants failed.
