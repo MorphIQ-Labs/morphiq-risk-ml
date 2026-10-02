@@ -11,9 +11,9 @@
     }
   },
   "elementary": {
-    "fixture_sha256": "a98d98e94476db7aeceb2f096277f011cca43b557eb023d9e5ce0344308e9fc2",
+    "fixture_sha256": "5d182e6b43ff521029e9f95fb3261524157fe6b603a40476af66921a180690b1",
     "generator": "gen_elementary.py",
-    "generator_sha256": "c72dc9691d1d95cb4bb5a3af4d2a6c4a718e0538837c12fd7972d443abb0bacd",
+    "generator_sha256": "454812fda63df0968cbec556baa7697a79227339a0b8b9e88aede2d83222ba0e",
     "mpmath": "1.3.0",
     "python": "3.14.8",
     "rows": 111470,

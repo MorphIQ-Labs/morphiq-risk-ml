@@ -8,7 +8,9 @@ rounded to nearest binary64 (subnormals exact). The corpus covers:
 - arguments near 0, the overflow and underflow thresholds;
 - a fixed-seed random sample.
 
-Output lines: `<fn> <arg hex bits> <reference hex bits>`.
+Output lines: `<fn> <arg hex bits> <reference hex bits> <residual hex bits>`.
+The residual is the exact value minus the reference, rounded to binary64,
+so a scorer can measure error in fractions of an ULP against a derived bound.
 """
 import math
 import random
@@ -76,15 +78,20 @@ def main(out):
     rng = random.Random(20261002)
     with open(out, "w") as w:
         w.write(f"# mpmath {mpmath.__version__} dps {mp.dps}\n")
+        def row(fn, x, exact):
+            ref = round_binary64(exact)
+            residual = round_binary64(exact - mpf(ref)) if math.isfinite(ref) else 0.0
+            w.write(f"{fn} {bits(x)} {bits(ref)} {bits(residual)}\n")
+
         for x in corpus(rng):
             X = mpf(x)
             if x < 760:
-                w.write(f"exp {bits(x)} {bits(round_binary64(mpmath.exp(X)))}\n")
-                w.write(f"expm1 {bits(x)} {bits(round_binary64(mpmath.expm1(X)))}\n")
+                row("exp", x, mpmath.exp(X))
+                row("expm1", x, mpmath.expm1(X))
             if x > 0:
-                w.write(f"log {bits(x)} {bits(round_binary64(mpmath.log(X)))}\n")
+                row("log", x, mpmath.log(X))
             if x > -1:
-                w.write(f"log1p {bits(x)} {bits(round_binary64(mpmath.log1p(X)))}\n")
+                row("log1p", x, mpmath.log1p(X))
 
 
 if __name__ == "__main__":

@@ -12,11 +12,15 @@
  (action
   (run %{test} %{dep:../oracle/fixtures/normal.txt})))
 
+(library
+ (name bounds)
+ (modules bounds))
+
 (test
  (name oracle_price)
  (package morphiq_risk_ml)
  (modules oracle_price)
- (libraries morphiq_risk)
+ (libraries morphiq_risk bounds)
  (action
   (progn
    (run %{test} %{dep:../oracle/fixtures/european.txt})
@@ -32,7 +36,7 @@
  (name oracle_iv)
  (package morphiq_risk_ml)
  (modules oracle_iv)
- (libraries morphiq_risk)
+ (libraries morphiq_risk bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -60,7 +64,7 @@
  (name oracle_elementary)
  (package morphiq_risk_ml)
  (modules oracle_elementary)
- (libraries morphiq_risk)
+ (libraries morphiq_risk bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/elementary.txt})))
 
@@ -69,6 +73,10 @@
  (package morphiq_risk_ml)
  (modules determinism)
  (libraries morphiq_risk)
+ ; Any numerical change moves the digest, so the mutation catalog
+ ; (scripts/mutation.py) runs without it.
+ (enabled_if
+  (<> %{profile} mutation))
  (action
   (run %{test} %{dep:determinism.digest})))
 
