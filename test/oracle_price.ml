@@ -132,6 +132,9 @@ type stat = {
 }
 
 let source = ref "-"
+
+(* The largest share of the certified error E used by a zero-variance row. *)
+let derived_worst = ref 0.0
 let families : (string, int * int) Hashtbl.t = Hashtbl.create 4
 
 let () =
@@ -175,6 +178,14 @@ let () =
                try price model (side_of side) ~s ~k ~t ~r ~q ~sigma ~shift
                with Failure _ -> Float.nan
              in
+             let derived =
+               if family = "black" && region = "zero_variance" then
+                 Some
+                   ((0.5 *. (Bounds.ulp got +. Bounds.ulp reference))
+                   +. Bounds.intrinsic_error model ~s ~k ~t ~r ~q ~shift
+                        ~reference)
+               else None
+             in
              let u = ulps got reference in
              let sc =
                Float.abs (got -. reference)
@@ -209,14 +220,37 @@ let () =
                ( fn + 1,
                  ff
                  +
-                 if u > 4.0 && (u > ulp_budget || sc > scale_budget) then 1
-                 else 0 );
+                 match derived with
+                 | Some bound ->
+                     if Float.abs (got -. reference) <= bound then 0 else 1
+                 | None ->
+                     if u > 4.0 && (u > ulp_budget || sc > scale_budget) then 1
+                     else 0 );
              st.errors <- u :: st.errors;
              if u > st.worst_ulp then (
                st.worst_ulp <- u;
                st.worst_row <- line);
              if sc > st.worst_scale then st.worst_scale <- sc;
-             if u > 4.0 && (u > ulp_budget || sc > scale_budget) then (
+             (match derived with
+             | Some bound ->
+                 (* The excess over the two half-ULP roundings, as a fraction
+                    of E: how much of the intrinsic's certified error the
+                    served value uses. *)
+                 let rounding =
+                   0.5 *. (Bounds.ulp got +. Bounds.ulp reference)
+                 in
+                 let e = bound -. rounding in
+                 if e > 0.0 then
+                   derived_worst :=
+                     Float.max !derived_worst
+                       ((Float.abs (got -. reference) -. rounding) /. e)
+             | None -> ());
+             let failed =
+               match derived with
+               | Some bound -> not (Float.abs (got -. reference) <= bound)
+               | None -> u > 4.0 && (u > ulp_budget || sc > scale_budget)
+             in
+             if failed then (
                st.fails <- st.fails + 1;
                if List.length !failures < 25 then
                  failures :=
@@ -253,5 +287,9 @@ let () =
     Hashtbl.iter
       (fun k st -> Printf.printf "worst %s: %s\n" k st.worst_row)
       stats;
+  if Sys.argv.(1) <> "" then
+    Printf.printf
+      "zero variance: worst excess over rounding %.3g of the certified error E\n"
+      !derived_worst;
   List.iter print_endline (List.rev !failures);
   if !failures <> [] then exit 1

@@ -159,7 +159,11 @@ let log x =
     (e *. ln2_hi) +. (log1p_reduced f +. (e *. ln2_lo))
 
 let log1p x =
-  if x = 0.0 then x (* ±0 keeps its sign *)
+  if Float.abs x < 0x1p-54 then
+    (* x - x^2/2 + ...: x^2/2 < ulp(x)/4, so x is the correctly rounded
+       result (fdlibm s_log1p.c); ±0 keeps its sign. Below this the reduced
+       path's u = x/2 would underflow and lose x's last bit. *)
+    x
   else if Float.is_nan x || x < -1.0 then Float.nan
   else if x = -1.0 then Float.neg_infinity
   else if x = Float.infinity then x

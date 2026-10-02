@@ -15,6 +15,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - **An error analysis** (docs/error-analysis.md).
 
 ### Changed
+- **Budgets derived from the error analysis replace measured ones where the mutation catalog depends on them.**
+  - **Zero-variance prices:** checked per row against the intrinsic's certified error (§5.1), replacing "4 ULP".
+  - **Black-family implied volatility:** checked per root against a derived bound with the better-conditioned of β and β̄ and the intrinsic's error near the money (§6). This replaces "in the rounding cell, or 4× attainable", which accepted roots 8e14 ULP off near the maximum.
+  - **log1p's reduced path:** checked against ulp/2 + 0.085·u·|y| using references that now carry their residual (§1).
+- **log1p returns x for |x| < 2^-54** (fdlibm). The reduced path rounded log1p(2^-1074) to 0.
+- **The mutation catalog** (`dune exec scripts/mutation/mutation.exe`, OCaml): 18 mechanisms, each removed and required to fail the test that guards it, in a temporary copy under a `mutation` dune profile. Two mechanisms are justified by the analysis but cannot be decided by a test; §5.1 records why.
 - **Double-double primitives are the published algorithms with proved error bounds** (docs/error-analysis.md §0): Joldes, Muller and Popescu (ACM TOMS 2017) for `mul_float` (Algorithm 9, 2u²), `mul` (Algorithm 12, 5u²), `add_float` (Algorithm 4, 2u²) and `div` (Algorithm 18, 9.8u²), and Lefèvre et al. (ACM TOMS 2023) for `sqrt` (25/8 u²). They replace Algorithms 8 and 10, QD's unproved three-quotient division, and an unproved Newton square root. `add` already was Algorithm 6. `div` scales its divisor into [1, 2) to stay inside the theorem's domain. Worst-case ULP is unchanged in every oracle region; the determinism digest is re-recorded.
 - **Double-double exp and expm1 follow QD's `dd_real::exp`** (Hida, Li and Bailey): reduction by 512 and nine doublings instead of a long series. Worst-case ULP is unchanged in every oracle region; `test/dd_reference.ml` pins exp, expm1 and log against mpmath. The determinism digest changes, because low-order bits of intermediates differ.
 

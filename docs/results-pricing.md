@@ -56,16 +56,16 @@ The worst extreme-scale case (10 ULP at h = −4.6, s = 1) is in the normalised 
 
 ## What made the difference
 
-Each technique below is derived from first principles and guarded by a mutant that fails rows when it is removed:
+Each technique below is derived from first principles. Where a mutant can decide it, the mutation catalog (`scripts/mutation/`) removes it and requires the price oracle to fail. Where it cannot, the reason is in docs/error-analysis.md §5.1.
 
 | Technique | What it fixes | Mutant |
 | --- | --- | --- |
-| Log-moneyness `x = ln(S/K) + (r−q)T` as a double-double: an atanh-series log, exact carry products, and the quotient remainder of S/K | Contracts at the money by construction, e.g. `ln(S/K) = 4.5` cancelled by `(r−q)T = −4.5`. FerroRisk's 4.3e15-ULP zero-variance row is one of these. | 767 rows fail |
-| `√T` and `s = σ√T` as double-doubles, carried into `h = x/s` | A relative ε in s becomes ε·h² in `exp(−h²/2)`: 413 ULP at h = 25 | 42 rows fail |
+| Log-moneyness `x = ln(S/K) + (r−q)T` as a double-double: an atanh-series log, exact carry products, and the quotient remainder of S/K | Contracts at the money by construction, e.g. `ln(S/K) = 4.5` cancelled by `(r−q)T = −4.5`. FerroRisk's 4.3e15-ULP zero-variance row is one of these. | the remainder is below the certified bound's resolution (§5.1) |
+| `√T` and `s = σ√T` as double-doubles, carried into `h = x/s` | A relative ε in s becomes ε·h² in `exp(−h²/2)`: 413 ULP at h = 25 | `root-time-low` |
 | `x`'s low part carried into the Gaussian exponent | The deep-OTM tail | (covered by the first mutant) |
-| Forward intrinsic as `K e^(−rT)·expm1(x)` near the money | Cancellation between the two discounted legs | 3,886 rows fail |
-| Exact power-of-two rescaling of (S, K), applied back once inside the exponential (Cody-Waite `2^−n e^(−r)`) | Strikes at 1e±300, and prices that underflow before rescaling | 62 rows fail |
-| Bachelier `d = Δ/s` with its remainder | The Bachelier OTM tail | 41 rows fail |
+| Forward intrinsic as `K e^(−rT)·expm1(x)` near the money | Cancellation between the two discounted legs | `intrinsic-expm1` |
+| Exact power-of-two rescaling of (S, K), applied back once inside the exponential (Cody-Waite `2^−n e^(−r)`) | Strikes at 1e±300, and prices that underflow before rescaling | `floor-exponent`, `subnormal-rounding` |
+| Bachelier `d = Δ/s` with its remainder | The Bachelier OTM tail | `bachelier-distance` |
 
 The normalised Black kernel follows Jäckel's 2024 reference: three regions with η = −13 and τ = 2ε^(1/16). The asymptotic-expansion coefficients are generated mechanically from his C macros rather than transcribed by hand. A direct mpmath probe of `b(x, s)` measures about 1 ULP across Region I.
 

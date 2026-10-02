@@ -14,7 +14,7 @@ Measured against this project's own oracles (docs/oracles.md): mpmath, refined t
 | Normal distribution | `normal` | 82,000 | ≤ 4 ULP, tails included |
 | Prices: BSM, Black-76, Bachelier | `european` (grid, carry-cancelled forwards, random) | 57,296 | 1–22 ULP per region; zero variance 1; Bachelier ≤ 5 |
 | Prices: displaced Black | `displaced` (exact sums) | 41,760 | 1–15 ULP per region |
-| Implied volatility | `iv` (exact roots and rounding cells) | 8,254 | every outcome class matches; roots in their rounding cell or within 4× Jäckel's attainable accuracy (Black-family worst 4–7 ULP from the exact root) |
+| Implied volatility | `iv` (exact roots and rounding cells) | 8,254 | every outcome class matches; Black-family roots within their derived bound (Bachelier: rounding cell or 4 ULP) (Black-family worst 4–7 ULP from the exact root) |
 | Greeks | `greeks` (closed form vs mpmath differentiation) | 66,400 | ≤ 7 ULP for every Greek; underflow and kink classes exact |
 | Properties | `test/properties.ml` (random, fixed seed) | 22,000 | bounds, parity, monotonicity, Greek signs, exact homogeneity, translation, IV within 2.10× attainable, finite differences |
 | Cross-quantity consistency | `test/consistency.ml` | 128 | displaced = Black-76 bit for bit; IV inverts the served price; Greeks match finite differences |
@@ -31,10 +31,11 @@ Measured on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3`. The library is abo
 | Full test suite: every oracle, the consistency, property and compile-failure tests | 0.54–0.55 s, with the 41,760-row displaced oracle and double-double intrinsics |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
-Every mechanism claimed in the results docs has a mutant that fails rows when it is removed, and about 20 such mutants were run during development. Two lessons for mutation testing:
+The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each claimed mechanism and requires the test that guards it to fail. All 18 are killed. Three lessons for mutation testing:
 
 - **Equivalent mutants are common.** A last-digit change to a 17-digit literal often parses to the same double, and a mutant that only breaks compilation, such as an unused variable under warnings-as-errors, is not a kill.
-- **Budgets must be tight enough to see each mechanism.** Several mechanisms passed FerroRisk-level budgets with or without them. Their budgets were tightened to the measured worst before their mutants failed.
+- **Budgets come from the error analysis, not from the mutants.** Tightening a measured budget until a mutant dies proves nothing. The scorers check derived bounds (docs/error-analysis.md §1, §5.1, §6), and a survivor means either the bound or the mechanism is wrong.
+- **Some mechanisms cannot be decided.** A mechanism that lowers a certified bound by less than the certified slack elsewhere cannot be made to fail a bound. Two such are justified in the analysis and left out of the catalog.
 
 ### 3. Types
 

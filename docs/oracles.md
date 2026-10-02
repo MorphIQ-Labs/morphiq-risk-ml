@@ -8,7 +8,7 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 
 | Fixture | Generator | Content |
 | --- | --- | --- |
-| `elementary` | `gen_elementary.py` | exp, expm1, log, log1p over every binade, the reduction boundaries and a random sample (111k) |
+| `elementary` | `gen_elementary.py` | exp, expm1, log, log1p over every binade, the reduction boundaries and a random sample (111k); each reference carries its residual, exact − reference, for fractional-ULP scoring |
 | `normal` | `gen_normal.py` | Φ, φ, ln Φ, erfcx and Φ⁻¹ over every binade, Cody's interval cuts and the tails (82k) |
 | `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
 | `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,760); 63% have an unrepresentable F + d or K + d |
