@@ -2,7 +2,7 @@
 
 This inventory covers the research papers explicitly cited in this repository’s source, documentation, and PR #12 numerical audit at `130ce0a`. It does not recursively collect the bibliographies inside those papers. Downloaded files are the original PDFs, with their notices and cover pages intact. Their original terms apply; they are not relicensed under the project’s source-code license.
 
-As of 2026-10-02: **9 of 11 identified cited papers are archived**, plus **2 supplemental reports** (11 PDFs, 317 pages, about 8.4 MB). **Cody (1969) and Tang (1989) remain unavailable** after the retrieval attempts below. No error pages or placeholder PDFs are included.
+As of 2026-10-02: **10 of 11 identified cited papers are archived**, plus **2 supplemental reports** (12 PDFs, 331 pages, about 9.2 MB). **Cody (1969) remains unavailable** after the retrieval attempts below. No error pages or placeholder PDFs are included.
 
 ## Cited papers
 
@@ -17,6 +17,7 @@ As of 2026-10-02: **9 of 11 identified cited papers are archived**, plus **2 sup
 | [Michael J. Wichura (1988), *Algorithm AS 241: The Percentage Points of the Normal Distribution*](wichura-1988-as241-normal-percentage-points.pdf) | Journal scan with JSTOR cover; university-hosted copy; [download source](https://csg.sph.umich.edu/abecasis/gas_power_calculator/algorithm-as-241-the-percentage-points-of-the-normal-distribution.pdf); [DOI](https://doi.org/10.2307/2347330) | [`lib/normal.ml`](../../lib/normal.ml), [`lib/normal.mli`](../../lib/normal.mli), [`SLICE.md`](../../SLICE.md) |
 | [George Marsaglia (2004), *Evaluating the Normal Distribution*](marsaglia-2004-evaluating-normal-distribution.pdf) | Journal of Statistical Software 11(4), 1–11; publisher PDF; [download source](https://www.jstatsoft.org/index.php/jss/article/download/v011i04/13); [DOI](https://doi.org/10.18637/jss.v011.i04) | [`lib/normal_dd.ml`](../../lib/normal_dd.ml), [`docs/error-analysis.md`](../../docs/error-analysis.md), [`docs/results-greeks.md`](../../docs/results-greeks.md) |
 | [T. J. Dekker (1971), *A Floating-Point Technique for Extending the Available Precision*](dekker-1971-extending-available-precision.pdf) | Numerische Mathematik 18, 224–242; university-hosted journal scan; [download source](https://csclub.uwaterloo.ca/~pbarfuss/dekker1971.pdf); [DOI](https://doi.org/10.1007/BF01397083) | [`lib/dd.ml`](../../lib/dd.ml) |
+| [Ping Tak Peter Tang (1989), *Table-driven implementation of the exponential function in IEEE floating-point arithmetic*](tang-1989-table-driven-exponential.pdf) | ACM TOMS 15(2), 144–157; user-supplied original journal PDF; [publisher PDF](https://dl.acm.org/doi/pdf/10.1145/63522.214389); [DOI](https://doi.org/10.1145/63522.214389) | [`lib/elementary.ml`](../../lib/elementary.ml) |
 
 The review cited as “Muller, Floating-point arithmetic” has four authors: Boldo, Jeannerod, Melquiond and Muller. The index records the full authorship. The three HAL PDFs and *Let’s be rational* match the exact SHA-256 values already recorded in [the source audit](../error-analysis.md#pr-12-source-and-assumption-audit).
 
@@ -34,9 +35,8 @@ Jäckel’s filenames use the cited publication year; the version dates printed 
 | Paper | Citation and retrieval result |
 | --- | --- |
 | W. J. Cody (1969), *Rational Chebyshev approximations for the error function* | [DOI](https://doi.org/10.1090/S0025-5718-1969-0247736-4); [publisher PDF](https://www.ams.org/mcom/1969-23-107/S0025-5718-1969-0247736-4/S0025-5718-1969-0247736-4.pdf). Publisher PDF returned HTTP 403; an indexed mirror was unreachable. No PDF or placeholder stored. |
-| Ping Tak Peter Tang (1989), *Table-driven implementation of the exponential function in IEEE floating-point arithmetic* | [DOI](https://doi.org/10.1145/63522.214389); [publisher PDF](https://dl.acm.org/doi/pdf/10.1145/63522.214389). Publisher PDF returned HTTP 403. Crossref and OpenAlex identify the same publisher location; no alternative downloadable copy located. The source comment gives only the shorthand Tang 1989; this is the matching exponential-function paper. |
 
-For Cody, both the historical `/mcom/` and current `/journals/mcom/` AMS URLs returned 403; an indexed scan mirror could not be reached, and the JSTOR endpoint did not return a PDF. For Tang, the publisher PDF and viewer endpoints returned 403. These entries remain incomplete; an accessible original PDF can be added with its source and checksum.
+For Cody, both the historical `/mcom/` and current `/journals/mcom/` AMS URLs returned 403; an indexed scan mirror could not be reached, and the JSTOR endpoint did not return a PDF. This entry remains incomplete; an accessible original PDF can be added with its source and checksum. Tang’s paper was subsequently supplied by the user as `63522.214389.pdf` and verified against the title, author, journal, year and pages before archiving.
 
 ## Books and implementation references
 
@@ -51,7 +51,7 @@ These references are recorded separately because they are not research-paper PDF
 
 ## Integrity and provenance
 
-[manifest.json](manifest.json) records titles, authors, publication years, archived versions, original download URLs, citation locations, retrieval date, sizes, page counts, and SHA-256 hashes. The previously audited PDFs were copied unchanged from the source-audit downloads made earlier on 2026-10-02. Other PDFs were retrieved on the same date. University-hosted scans are identified as such.
+[manifest.json](manifest.json) records titles, authors, publication years, archived versions, original download URLs, citation locations, retrieval date, sizes, page counts, and SHA-256 hashes. The previously audited PDFs were copied unchanged from the source-audit downloads made earlier on 2026-10-02. Other PDFs were retrieved or supplied by the user on the same date. Tang’s manifest entry distinguishes its user-supplied acquisition from the canonical publisher URL. University-hosted scans are identified as such.
 
 Validate all saved PDF bytes locally:
 

@@ -216,6 +216,25 @@
       "sha256": "aea02b65374391ff75f72ed342861fea05efc3a68968c04883335eb51185cb3f",
       "bytes": 194502,
       "pages": 24
+    },
+    {
+      "title": "Table-driven implementation of the exponential function in IEEE floating-point arithmetic",
+      "authors": "Ping Tak Peter Tang",
+      "year": 1989,
+      "doi": "10.1145/63522.214389",
+      "source_url": "https://dl.acm.org/doi/pdf/10.1145/63522.214389",
+      "cited_in": [
+        "lib/elementary.ml"
+      ],
+      "status": "archived",
+      "file": "tang-1989-table-driven-exponential.pdf",
+      "version": "ACM TOMS 15(2), 144–157; original journal PDF supplied by the user",
+      "relationship": "cited",
+      "retrieved_on": "2026-10-02",
+      "acquisition": "User-supplied local file 63522.214389.pdf; publisher URL records the canonical location, not a successful automated download.",
+      "sha256": "d7f8a88739abab5dca8268e63e1b82965cb6bbfa4a4030aed2e4bd1c0827dac2",
+      "bytes": 803404,
+      "pages": 14
     }
   ],
   "unavailable": [
@@ -232,19 +251,6 @@
       "status": "unavailable",
       "checked_on": "2026-10-02",
       "reason": "Publisher PDF returned HTTP 403; an indexed mirror was unreachable. No PDF or placeholder stored."
-    },
-    {
-      "title": "Table-driven implementation of the exponential function in IEEE floating-point arithmetic",
-      "authors": "Ping Tak Peter Tang",
-      "year": 1989,
-      "doi": "10.1145/63522.214389",
-      "source_url": "https://dl.acm.org/doi/pdf/10.1145/63522.214389",
-      "cited_in": [
-        "lib/elementary.ml"
-      ],
-      "status": "unavailable",
-      "checked_on": "2026-10-02",
-      "reason": "Publisher PDF returned HTTP 403. Crossref and OpenAlex identify the same publisher location; no alternative downloadable copy located. The source comment gives only the shorthand Tang 1989; this is the matching exponential-function paper."
     }
   ]
 }
