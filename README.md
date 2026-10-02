@@ -4,15 +4,17 @@ An internal experiment that rebuilds one slice of FerroRisk in OCaml. The slice 
 
 ```sh
 opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml-option-flambda
-opam install dune alcotest qcheck-core qcheck-alcotest ocamlformat
 eval "$(opam env --switch=morphiq-risk-ml)"
-dune build && dune test          # every oracle is committed under oracle/fixtures
+opam install . --deps-only --with-test --locked   # versions pinned in morphiq_risk_ml.opam.locked
+opam install ocamlformat.0.27.0
+dune build && dune test          # every oracle, the manifest and the determinism digest
+dune build @fmt
+dune exec scripts/mutation/mutation.exe   # the mutation catalog
 dune exec --release bench/bench.exe
 
 # Regenerating oracles (mpmath 1.3.0), and the optional FerroRisk cross-check:
 python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0
-oracle/build.sh                  # regenerates fixtures and oracle/MANIFEST.json
-oracle/.venv/bin/python scripts/manifest.py check
+oracle/build.sh                  # regenerates fixtures and oracle/MANIFEST
 scripts/ferro_crosscheck.sh      # needs oracle/fetch.sh and the convert_* scripts
 ```
 

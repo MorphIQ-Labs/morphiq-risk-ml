@@ -91,3 +91,14 @@
  (package morphiq_risk_ml)
  (modules dd_reference)
  (libraries morphiq_risk))
+
+(test
+ (name manifest)
+ (package morphiq_risk_ml)
+ (modules manifest)
+ (deps
+  ../oracle/MANIFEST
+  (glob_files ../oracle/*.py)
+  (glob_files ../oracle/fixtures/*.txt.gz))
+ (action
+  (run %{test} ../oracle)))

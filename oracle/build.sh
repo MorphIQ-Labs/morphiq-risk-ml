@@ -7,7 +7,7 @@
 #
 # Each fixture is written uncompressed, then gzip -n -9 (no name or time
 # stamp, so identical content gives identical bytes), and
-# scripts/manifest.py records its generator and fixture hashes.
+# write_manifest.py records its generator and fixture hashes (oracle/MANIFEST).
 set -euo pipefail
 cd "$(dirname "$0")"
 PY=.venv/bin/python
@@ -25,4 +25,4 @@ for name in "$@"; do
   "$PY" "$gen" "fixtures/$name.txt"
   gzip -n -9 -f "fixtures/$name.txt"
 done
-"$PY" ../scripts/manifest.py write
+"$PY" write_manifest.py

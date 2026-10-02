@@ -1,0 +1,73 @@
+# Required checks for main. Dependencies come from morphiq_risk_ml.opam.locked,
+# so every platform builds with the same versions.
+#
+# - test: build and the whole suite on each platform. `dune test` includes the
+#   oracles, property and consistency tests, the compile-failure tests, the
+#   fixture manifest and the determinism digest, so a platform that serves
+#   different bits fails here.
+# - format: ocamlformat at the version .ocamlformat pins.
+# - mutation: every catalogued mechanism, removed, must fail its test.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install locked dependencies
+        run: opam install . --deps-only --with-test --locked --yes
+      - name: Require flambda
+        run: test "$(opam exec -- ocamlopt -config-var flambda)" = true
+      - name: Build
+        run: opam exec -- dune build @install
+      - name: Test
+        run: opam exec -- dune test
+
+  format:
+    name: format
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install ocamlformat at the pinned version
+        run: opam install --yes "ocamlformat.$(sed -n 's/^version *= *//p' .ocamlformat)"
+      - name: Check formatting
+        run: opam exec -- dune build @fmt
+
+  mutation:
+    name: mutation
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install locked dependencies
+        run: opam install . --deps-only --with-test --locked --yes
+      - name: Mutation catalog
+        run: opam exec -- dune exec scripts/mutation/mutation.exe
