@@ -35,3 +35,7 @@ val complement : float -> float -> float -> float -> float
 val vega_exponent : float -> float -> float -> float -> float * float
 (** [vega_exponent hh hl t tl] is [(h^2 + t^2)/2] as an unevaluated sum, for
     [h = hh + hl] and [t = t + tl]. *)
+
+val ln_b_and_scaled : float -> float -> float -> float * float
+(** [(ln b, b / vega)] at log-moneyness [x + xl] and total volatility [s],
+    for [x < 0]. Neither underflows where [b] does. *)

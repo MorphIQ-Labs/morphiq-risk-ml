@@ -6,14 +6,14 @@ An internal experiment that rebuilds one slice of FerroRisk in OCaml. The slice 
 opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml-option-flambda
 opam install dune alcotest qcheck-core qcheck-alcotest ocamlformat
 eval "$(opam env --switch=morphiq-risk-ml)"
-./oracle/fetch.sh        # FerroRisk reference fixtures from the pinned commit
+dune build && dune test          # every oracle is committed under oracle/fixtures
+dune exec --release bench/bench.exe
+
+# Regenerating oracles (mpmath 1.3.0), and the optional FerroRisk cross-check:
 python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0
-oracle/.venv/bin/python oracle/gen_normal.py oracle/data/normal_reference.txt
-oracle/.venv/bin/python oracle/convert_440.py oracle/data/440-candidates.jsonl.gz oracle/data/440-oracle.jsonl.gz oracle/data/european_price_reference.txt
-oracle/.venv/bin/python oracle/convert_public_iv.py oracle/data/public_iv_reference.json oracle/data/public_iv_observed_envelope.json oracle/data/public_iv_reference.txt
-oracle/.venv/bin/python oracle/convert_greeks.py oracle/data/greek_derivative_reference.json oracle/data/greek_reference.txt
-oracle/.venv/bin/python oracle/gen_displaced.py oracle/data/displaced_price_reference.txt
-dune build && dune test
+oracle/build.sh                  # regenerates fixtures and oracle/MANIFEST.json
+oracle/.venv/bin/python scripts/manifest.py check
+scripts/ferro_crosscheck.sh      # needs oracle/fetch.sh and the convert_* scripts
 ```
 
-The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).
+The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Oracles: [docs/oracles.md](docs/oracles.md). Error analysis: [docs/error-analysis.md](docs/error-analysis.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).

@@ -93,6 +93,9 @@ type stat = {
   mutable worst_row : string;
 }
 
+let source = ref "-"
+let families : (string, int * int) Hashtbl.t = Hashtbl.create 4
+
 let () =
   let path = Sys.argv.(1) in
   let stats = Hashtbl.create 16 in
@@ -102,6 +105,20 @@ let () =
      while true do
        let line = input_line ic in
        if line <> "" && line.[0] <> '#' then
+         (* This project's oracles carry a family column (grid, cancel,
+            random); FerroRisk's #440 rows do not. *)
+         let line =
+           match String.split_on_char ' ' line with
+           | [ _; _; _; _; _; _; _; _; _; _; _; _ ] as fields -> (
+               match fields with
+               | m :: sd :: rg :: fam :: rest ->
+                   source := fam;
+                   String.concat " " (m :: sd :: rg :: rest)
+               | _ -> line)
+           | _ ->
+               source := "-";
+               line
+         in
          Scanf.sscanf line "%s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"
            (fun model side region s k t r q sigma shift reference ->
              let f = Int64.float_of_bits in
@@ -131,6 +148,8 @@ let () =
                    st
              in
              st.n <- st.n + 1;
+             let fn, ff = Option.value ~default:(0, 0) (Hashtbl.find_opt families !source) in
+             Hashtbl.replace families !source (fn + 1, ff + if u > 4.0 && (u > ulp_budget || sc > scale_budget) then 1 else 0);
              st.errors <- u :: st.errors;
              if u > st.worst_ulp then (
                st.worst_ulp <- u;
@@ -140,8 +159,8 @@ let () =
                st.fails <- st.fails + 1;
                if List.length !failures < 25 then
                  failures :=
-                   Printf.sprintf "%s %s %s: got %h ref %h (%.0f ulp, %.2f eps*scale)" model side region got
-                     reference u sc
+                   Printf.sprintf "%s %s %s: got %h ref %h (%.0f ulp, %.2f eps*scale) | %s" model side region got
+                     reference u sc line
                    :: !failures))
      done
    with End_of_file -> close_in ic);
@@ -161,6 +180,8 @@ let () =
          let fu, fs = ferro_budget family region in
          Printf.printf "%-34s %6d %10.4g %7.0f %8.2g %10.3g | %10.3g %8.3g | %5d\n" key st.n st.worst_ulp
            (ulp_budget family region) (median st.errors) st.worst_scale fu fs st.fails);
+  if Hashtbl.length families > 1 || not (Hashtbl.mem families "-") then
+    Hashtbl.iter (fun fam (n, f) -> Printf.printf "family %-8s rows %6d fails %d\n" fam n f) families;
   if Array.length Sys.argv > 2 then
     Hashtbl.iter (fun k st -> Printf.printf "worst %s: %s\n" k st.worst_row) stats;
   List.iter print_endline (List.rev !failures);

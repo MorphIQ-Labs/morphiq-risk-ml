@@ -10,10 +10,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - The public surface is `Morphiq_risk` minus `Internal`. Numerical building blocks moved under `Morphiq_risk.Internal`, outside the stability policy.
 - `Morphiq_risk.version`, a stability policy and this changelog.
 
+- **This project's own oracles for every layer** (docs/oracles.md): elementary functions, the normal distribution, European and displaced prices, implied volatility with exact roots and rounding cells, and Greeks by two independent routes. They are committed as fixtures with a SHA-256 manifest (`scripts/manifest.py check`), so the tests no longer depend on FerroRisk's data. `scripts/ferro_crosscheck.sh` keeps FerroRisk as a second opinion.
+- **Property-based tests** (`test/properties.ml`, QCheck, fixed seed): bounds, parity, monotonicity, Greek signs, exact homogeneity, translation invariance, IV accuracy and finite differences.
+- **An error analysis** (docs/error-analysis.md).
+
 ### Changed (numerical)
 - Every libm call now goes through `Internal.Elementary`. Served values move by at most their previous rounding; every worst-case region ULP is unchanged or better (docs/results-*.md).
 - **Zero-variance price:** the log-moneyness remainder is now double-double, which fixes a cancellation case: 8 → 1 ULP.
 - **Black theta** is now double-double near the money: 17 → 4 ULP (Bachelier: 13 → 3).
+- **Expiry theta** `θ(qS − rK)/365` is now formed from exact products: up to 413 → ≤ 7 ULP where S ≈ K.
+- **Zero-variance intrinsic** is taken as A − C from the double-double legs when x's parts (|ln S/K| + |(r−q)T|) exceed 1. A forward placed at the strike through carry goes from 13 → 1 ULP.
+- **Implied volatility:**
+  - m and β come from the double-double legs;
+  - a positive quote that underflows on rescaling is no longer inverted to σ = 0;
+  - the log-space correction for β < 2^-900 is restored. Removing it was an error, because no oracle row exercised it.
+- **Exact homogeneity.** The internal scale exponent uses floor division, so price(2^j S, 2^j K) = 2^j price(S, K) bit for bit.
+
+### Changed (claims)
+- **IV accuracy is now stated per contract.** It is held to 4× Jäckel's attainable accuracy, (1 + |b/(s·b′)|)·ε. The previous "≤ 2 ULP of the exact root" held on FerroRisk's grid but not in general; the worst found over random contracts is 4 ULP from a 2-ULP cell.
 
 ## [0.1.0] - 2026-10-02
 

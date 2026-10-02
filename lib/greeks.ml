@@ -41,7 +41,9 @@ let expiry ~theta ~spot ~strike ~rate ~yield =
     {
       delta = Ok (if itm then theta else 0.0);
       gamma = zero;
-      theta = daily (if itm then theta *. ((yield *. spot) -. (rate *. strike)) else 0.0);
+      (* q S - r K cancels when S is near K; both products are exact
+         double-doubles, so the difference is rounded once. *)
+      theta = daily (if itm then theta *. Dd.to_float (Dd.sub (Dd.two_prod yield spot) (Dd.two_prod rate strike)) else 0.0);
       vega = Ok (Units.per_volatility 0.0);
       rho = zero;
       vanna = Ok (Units.per_volatility 0.0);

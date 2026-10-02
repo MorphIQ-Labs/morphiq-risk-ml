@@ -228,3 +228,17 @@ let complement x xl s sl =
   let e, el = vega_exponent hh hl t (0.5 *. sl) in
   Split.scaled_exp_neg (0.5 *. (Cody.erfcx ((t +. h) *. inv_sqrt_2) +. Cody.erfcx ((t -. h) *. inv_sqrt_2))) e el
 
+
+(* (ln b, b / vega) at x + xl, for x < 0: the scaled function and the log of
+   the vega taken separately, so neither underflows where b does. *)
+let ln_b_and_scaled x xl s =
+  let hh, hl = Split.quotient_dd x xl s 0.0 in
+  let t = 0.5 *. s in
+  let e, el = vega_exponent hh hl t 0.0 in
+  let ln_vega = (-.0.5 *. ln_two_pi) -. e -. el in
+  let bx =
+    if region_i x s then Asymptotic.scaled hh t
+    else if region_ii x s then small_t_scaled hh t
+    else with_cody x xl s 0.0 *. sqrt_two_pi *. Elementary.exp e *. (1.0 +. el)
+  in
+  (Elementary.log bx +. ln_vega, bx)
