@@ -4,6 +4,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Runtime model enclosure foundation
+
+- Added internal Black-family and Bachelier price enclosures from original inputs, a derived pi enclosure, a normal integral series with an explicit tail and NIST's bracketing Mills-ratio continued fraction. This is not yet wired into the public inverse or a production acceptance policy.
+- Added 1,670 three-word model references, refined at 110/220 digits or 400/800 digits for sparse inputs. The enclosure test also checks all 7,940 existing extra-bit normal rows. A new optional normalization mutant brings the catalog to 39; default CI retains seven core mutants.
+
 ### Runtime enclosure foundation
 
 - Added internal finite arithmetic balls with derived residual, underflow and analytic-series remainders for arithmetic, square root, exponential and logarithm. This is infrastructure for runtime decisions; financial integration and production acceptance remain outstanding. Runtime dependencies and pricing results are unchanged.

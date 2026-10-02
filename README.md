@@ -32,5 +32,6 @@ The [research library](docs/research/README.md) contains the collected reference
 The [numerical backend contract](docs/numerical-backend-contract.md) defines required arithmetic semantics, optimization assessment, AD/FFI obligations, and conformance evidence. Native and bytecode arithmetic probes run in the ordinary suite.
 
 The internal [runtime enclosure foundation](docs/runtime-enclosures.md) derives arithmetic and elementary-function error balls from rounding residuals and explicit remainders. It is not yet integrated into financial output acceptance or IV boundary classification.
+An independent [model enclosure layer](docs/model-enclosures.md) evaluates normal probabilities and original-input European prices for that integration work.
 
 The [financial type audit](docs/type-boundary-audit.md) records enforced invariants, trusted raw-value labeling, all Greek units, and remaining caller obligations. Veta retains both its time unit and volatility coordinate.

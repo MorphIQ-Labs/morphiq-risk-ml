@@ -1,6 +1,14 @@
 ; Decompress the committed oracle fixtures for the tests.
 
 (rule
+ (deps model_enclosures.txt.gz)
+ (target model_enclosures.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
  (deps greek_bits.txt.gz)
  (target greek_bits.txt)
  (action
