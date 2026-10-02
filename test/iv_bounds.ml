@@ -157,14 +157,16 @@ let bachelier_root_bound ~side_call ~s ~k ~t ~r ~quote ~root ~candidate =
   in
   (* 8 ULP to RN(price) is at most 17u to its exact value. Two more u
      cover rounding the DD discount and the DD out-of-money target.
-     8u*sigma covers the 2u stopping test, sqrt/divide correction and the
-     rounding of bracket endpoints. Use vmax for this price displacement. *)
+     8u*sigma is a provisional displacement allowance for stopping and
+     conversion, not a proved consequence of the small-step test. A small
+     rounded step does not establish a small true residual. Use vmax for
+     transporting this assumed displacement. *)
   let e_price = e_intrinsic +. (19.0 *. u *. otm) +. 0x1p-1074 in
   if vmin <= 0.0 then Float.infinity
   else
     ((e_price +. (8.0 *. u *. hi *. vmax)) /. vmin) +. (0.5 *. Bounds.ulp root)
 
-(* b'(s) = phi(1) exp(-(x/s)^2/2-s^2/8) has one maximum.
+(* b'(s) = phi(0) exp(-(x/s)^2/2-s^2/8) has one maximum.
    Its minimum on any positive interval is at an endpoint. This factor
    replaces linearization at the reference root by the mean-value bound.
    Fail closed if the candidate is outside a numerically resolvable interval. *)

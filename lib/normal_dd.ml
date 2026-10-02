@@ -8,7 +8,7 @@ let inv_sqrt_2pi = { Dd.hi = 0x1.9884533d43651p-2; lo = -0x1.cbc0d30ebfd15p-56 }
    binary64 Mills-ratio forms are already relatively accurate. *)
 let limit = 6.0
 
-(* φ(d) = e^(-d^2/2) / sqrt(2π), with d^2 formed exactly. *)
+(* φ(d) = e^(-d^2/2) / sqrt(2π), with d^2 formed in DD. *)
 let pdf d =
   Dd.mul inv_sqrt_2pi (Dd.exp (Dd.neg (Dd.mul_float (Dd.mul d d) 0.5)))
 

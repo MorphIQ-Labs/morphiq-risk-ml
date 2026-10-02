@@ -7,7 +7,7 @@ let two_sum a b =
   let bb = s -. a in
   (s, a -. (s -. bb) +. (b -. bb))
 
-(* u^2 = hi + lo exactly. *)
+(* u^2 = hi + lo exactly when the product and residual are representable. *)
 let square u =
   let hi = u *. u in
   (hi, Float.fma u u (-.hi))
@@ -15,7 +15,7 @@ let square u =
 let ln2_hi = 0x1.62e42fefa39efp-1
 let ln2_lo = 0x1.abc9e3b39803fp-56
 
-(* 2^k * m * exp(-(hi + lo)) for hi >= 0 and |lo| <= ulp(hi), rounded once.
+(* 2^k * m * exp(-(hi + lo)) for hi >= 0 and |lo| <= ulp(hi), with one final exponent restoration.
    exp(-hi) is reduced to 2^-n exp(-r) with r = hi - n ln 2 in [0, ln 2)
    (Cody-Waite with a two-part ln 2), so neither the exponential nor the
    product leaves the normal range before the final ldexp. exp(-lo) is taken

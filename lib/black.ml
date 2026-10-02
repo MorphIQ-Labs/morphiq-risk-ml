@@ -158,10 +158,10 @@ let precise_legs (c : Coordinates.live) =
   let asset = leg c.spot c.spot_low c.yield
   and cash = leg c.strike c.strike_low c.rate in
   let x = { Dd.hi = c.x; lo = c.x_low } in
-  (* C (e^x - 1) is exact in relative terms when x itself is: its error is
-     2^-104 C (|ln(S/K)| + |(r - q)T|). Once those terms are large and
-     cancel (a forward placed at the strike through carry), A - C is better,
-     with error 2^-104 A. *)
+  (* C (e^x - 1) preserves relative accuracy when x does. Its error depends
+     on the DD component bounds and |ln(S/K)| + |(r-q)T|. For large cancelling
+     terms (a forward placed at the strike through carry), use the difference
+     of the DD legs. See error-analysis section 5.1 for the actual bounds. *)
   let forward_intrinsic =
     if Float.abs c.x <= 0.35 && c.x_terms <= 1.0 then Dd.mul cash (Dd.expm1 x)
     else Dd.sub asset cash
@@ -236,7 +236,7 @@ let root sigma =
   | Ok v -> Iv.Root v
   | Error _ -> Iv.Above_maximum
 
-(* Invert a live quote. The quote is compared exactly (to ~106 bits) with
+(* Invert a live quote. The quote is compared with DD approximations to
    the zero-volatility price and the maximum. Its out-of-the-money part is
    normalised and inverted by Let's Be Rational, then given one Newton
    correction against the extended-precision kernel. *)
