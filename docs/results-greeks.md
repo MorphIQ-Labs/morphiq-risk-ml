@@ -16,7 +16,7 @@ Conventions are FerroRisk's:
 | --- | ---: | ---: | ---: | ---: |
 | delta | 6 (3,318) | 16 | 4 (1,068) | 8 |
 | gamma | 4 (2,586) | 8 | 2 (776) | 4 |
-| theta | 17 (2,889) | 64 | 13 (918) | 32 |
+| theta | 4 (2,889) | 8 | 3 (918) | 8 |
 | vega | 3 (2,634) | 8 | 2 (792) | 4 |
 | rho | 6 (3,344) | 16 | 4 (1,074) | 8 |
 | vanna | 4 (2,592) | 8 | 2 (778) | 4 |
@@ -51,6 +51,7 @@ FerroRisk states no per-region Greek accuracy contract for these models (#449). 
 | `1/T` terms rewritten so `√T` and σ cancel, e.g. `vega/(2T) = Aφ(d1)/(2√T)` | Subnormal T and σ | (covered by the reference's range rows) |
 | Charm's bracket `θqΦ(θd1) − φ(d1)·w` (Bachelier: `θrΦ(θd) + φ(d)·d/(2T)`) in double-double, with Φ and φ from `Normal_dd` | The at-the-money cancellation, 205 → 4 ULP | float bracket: 21 entries fail (Bachelier: 3) |
 | `Normal_dd`: φ from the double-double exp, and Φ from Marsaglia's series `½ + φ(d)·Σ d^(2k+1)/(2k+1)!!`, whose terms share a sign | A Φ accurate to about 106 bits for \|d\| ≤ 6 (the final `½ − …` for d < 0 loses log₂(1/(2Φ(d))) bits, about 30 at −6) | truncated series: 3 fail; a pinned mpmath test holds Φ to `2^-100/(2Φ(d))` and φ to 2^-100 |
+| Theta in double-double where \|d1\|, \|d2\| ≤ 6, legs included: `θ(qAΦ(θd1) − rCΦ(θd2)) − Aφ(d1)σ/(2√T)` (Bachelier: `D(rθΔΦ(θd) + φ(d)(rs − σ/(2√T)))`) | Cancellation between rV and the diffusion term, 17 → 4 ULP | binary64 theta: 23 entries fail (Bachelier: 4) |
 | Displaced Black shifts by the exact sum, carried as hi + lo through x and the legs | ~800 ULP in displaced tails | binary64 shift: 619 fail |
 
 ## The displaced-Black convention

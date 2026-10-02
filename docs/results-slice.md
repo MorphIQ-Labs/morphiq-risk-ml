@@ -13,7 +13,7 @@ Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Bla
 | Displaced prices | this project's exact-sum oracle | 41,760 | worst 1–15 ULP per region | [results-pricing.md](results-pricing.md) |
 | Cross-quantity consistency | price ↔ IV ↔ Greeks | 128 | displaced equals Black-76 bit for bit on representable sums; IV inverts the served price; Greeks match finite differences of it | `test/consistency.ml` |
 | Implied volatility | FerroRisk public IV at the #448 tip | 3,522 | every class matches; Black roots ≤ 2 ULP from exact | [results-iv.md](results-iv.md) |
-| Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 17 ULP for every Greek (charm 4 after a double-double Φ) | [results-greeks.md](results-greeks.md) |
+| Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 6 ULP for every Greek | [results-greeks.md](results-greeks.md) |
 
 ### 2. Iteration speed
 

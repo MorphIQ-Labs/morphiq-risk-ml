@@ -36,11 +36,12 @@ let ferro_budget family region =
 (* Enforced ULP budgets: the measured worst case per region with roughly 2x
    headroom, so a regression to FerroRisk-level error fails. The ε·scale
    budget stays FerroRisk's. Measured worst: deep ITM 3, ITM 7, near-ATM 4,
-   OTM 16, extreme scale 10, zero variance 7; Bachelier 3. *)
+   OTM 16, extreme scale 10, zero variance 1; Bachelier 3. *)
 let ulp_budget family region =
   match (family, region) with
   | "black", ("deep_itm" | "near_atm_tiny_variance") -> 8.0
-  | "black", ("itm" | "zero_variance") -> 16.0
+  | "black", "zero_variance" -> 4.0
+  | "black", "itm" -> 16.0
   | "black", ("otm" | "extreme_scale") -> 32.0
   | "bachelier", _ -> 8.0
   | _ -> invalid_arg region

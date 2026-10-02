@@ -102,3 +102,27 @@ let exp x =
     scale (add (of_float 1.0) (expm1_reduced r)) (int_of_float k)
 
 let expm1 x = if Float.abs x.hi <= 0.35 then expm1_reduced x else sub (exp x) (of_float 1.0)
+
+(* 2^k (hi + lo), correctly rounded to binary64, including into the
+   subnormals, where ldexp of the rounded sum would round twice. On the
+   subnormal grid (quantum 2^-1074) the scaled value is an integer part and
+   a fraction; the fraction is compared with 1/2 exactly, the low part
+   breaks an exact tie, and a true tie goes to even. *)
+let to_float_scaled a k =
+  let v = Float.ldexp a.hi k in
+  if Float.abs v >= Float.min_float || a.hi = 0.0 || not (Float.is_finite v) then Float.ldexp (to_float a) k
+  else
+    let shift = k + 1074 in
+    let u = Float.ldexp a.hi shift and ul = Float.ldexp a.lo shift in
+    let s, e = Split.two_sum u ul in
+    let f = Float.floor s in
+    (* s - f is exact, and when it is not exactly 1/2 it differs from 1/2 by at
+       least ulp(s) > |e|, so only an exact tie consults e. *)
+    let g = s -. f in
+    let n =
+      if g > 0.5 || (g = 0.5 && e > 0.0) then f +. 1.0
+      else if g < 0.5 || (g = 0.5 && e < 0.0) then f
+      else if Float.rem f 2.0 = 0.0 then f
+      else f +. 1.0
+    in
+    Float.ldexp n (-1074)

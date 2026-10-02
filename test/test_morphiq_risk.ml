@@ -15,6 +15,17 @@ let exact_points () =
     (fun f -> Alcotest.(check bool) "NaN propagates" true (Float.is_nan (f Float.nan)))
     [ Normal.norm_pdf; Normal.norm_cdf; Normal.log_norm_cdf; Cody.erfcx ]
 
+(* 2^-1075 (1 + δ) sits at the midpoint of the first subnormal interval.
+   ldexp of the rounded sum rounds the tie to even (0) and loses δ's sign;
+   rounding once from hi + lo must not. *)
+let scaled_rounding () =
+  let v lo = Dd.to_float_scaled { Dd.hi = 1.0; lo } (-1075) in
+  Alcotest.(check (float 0.0)) "above the tie rounds up" 0x1p-1074 (v 0x1p-60);
+  Alcotest.(check (float 0.0)) "below the tie rounds down" 0.0 (v (-0x1p-60));
+  Alcotest.(check (float 0.0)) "an exact tie rounds to even" 0.0 (v 0.0);
+  Alcotest.(check (float 0.0)) "3/2 at the tie rounds to even" 0x1p-1073 (Dd.to_float_scaled { Dd.hi = 1.5; lo = 0.0 } (-1074));
+  Alcotest.(check (float 0.0)) "normal results are unaffected" 0x1.8p-1000 (Dd.to_float_scaled { Dd.hi = 1.5; lo = 0x1p-80 } (-1000))
+
 let pdf_symmetric =
   QCheck.Test.make ~count:20_000 ~name:"phi(x) = phi(-x) bit for bit" QCheck.float (fun x ->
       Float.is_nan x || Int64.equal (bits (Normal.norm_pdf x)) (bits (Normal.norm_pdf (-.x))))
@@ -46,6 +57,7 @@ let () =
   Alcotest.run "morphiq_risk"
     [
       ("normal: exact points", [ Alcotest.test_case "values" `Quick exact_points ]);
+      ("dd: scaled rounding", [ Alcotest.test_case "single rounding into the subnormals" `Quick scaled_rounding ]);
       ( "normal: properties",
         List.map QCheck_alcotest.to_alcotest
           [ pdf_symmetric; cdf_monotone; cdf_symmetry; inverse_round_trip ] );
