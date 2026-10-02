@@ -18,7 +18,9 @@
  (modules oracle_price)
  (libraries morphiq_risk)
  (action
-  (run %{test} %{dep:../oracle/data/european_price_reference.txt})))
+  (progn
+   (run %{test} %{dep:../oracle/data/european_price_reference.txt})
+   (run %{test} %{dep:../oracle/data/displaced_price_reference.txt}))))
 
 (test
  (name lbr_round_trip)
@@ -46,4 +48,10 @@
  (name normal_dd_reference)
  (package morphiq_risk_ml)
  (modules normal_dd_reference)
+ (libraries morphiq_risk))
+
+(test
+ (name consistency)
+ (package morphiq_risk_ml)
+ (modules consistency)
  (libraries morphiq_risk))

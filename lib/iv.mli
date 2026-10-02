@@ -6,8 +6,11 @@
 
 type 'coordinate t =
   | Root of 'coordinate Vol.t
-      (** A volatility whose model price is the quote. Zero when the quote is
-          the discounted intrinsic, or its correctly rounded value. *)
+      (** The volatility whose exact model price is the quote, which is taken
+          as an exact number. Zero when the quote is the discounted intrinsic,
+          or its correctly rounded value below it (#448). A quote that rounds
+          the intrinsic upward has a positive exact root, and that root
+          reprices to the quote. *)
   | Below_intrinsic  (** Below the zero-volatility price: no volatility attains it. *)
   | Above_maximum
       (** At or above the price as volatility goes to infinity, or with a root

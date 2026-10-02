@@ -9,7 +9,9 @@ Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Bla
 | Layer | Oracle | Rows | Result | Detail |
 | --- | --- | ---: | --- | --- |
 | Normal primitives | mpmath, 80 digits | 82,000 | all within FerroRisk's SPEC budgets; tail tightened to 6 ULP | [results-numerics.md](results-numerics.md) |
-| Prices | FerroRisk #440 | 50,094 | worst 3–16 ULP per region, against FerroRisk's 37–3,504 (4.3e15 at zero variance) | [results-pricing.md](results-pricing.md) |
+| Prices | FerroRisk #440 | 50,094 | worst 2–16 ULP per region, against FerroRisk's 37–3,504 (4.3e15 at zero variance) | [results-pricing.md](results-pricing.md) |
+| Displaced prices | this project's exact-sum oracle | 41,760 | worst 1–15 ULP per region | [results-pricing.md](results-pricing.md) |
+| Cross-quantity consistency | price ↔ IV ↔ Greeks | 128 | displaced equals Black-76 bit for bit on representable sums; IV inverts the served price; Greeks match finite differences of it | `test/consistency.ml` |
 | Implied volatility | FerroRisk public IV at the #448 tip | 3,522 | every class matches; Black roots ≤ 2 ULP from exact | [results-iv.md](results-iv.md) |
 | Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 17 ULP for every Greek (charm 4 after a double-double Φ) | [results-greeks.md](results-greeks.md) |
 
@@ -22,7 +24,7 @@ Measured on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3`. The library is abo
 | Clean build | 0.71–0.76 s |
 | Incremental rebuild after editing `normal.ml` (at the root of the dependency graph) | 0.13 s |
 | Incremental rebuild after editing `black.ml` | 0.22–0.24 s |
-| Full test suite: every oracle, the property tests and the compile-failure tests | 0.31–0.41 s (0.40 s with the double-double charm) |
+| Full test suite: every oracle, the consistency, property and compile-failure tests | 0.54–0.55 s, with the 41,760-row displaced oracle and double-double intrinsics |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
 Every mechanism claimed in the results docs has a mutant that fails rows when it is removed, and about 20 such mutants were run during development. Two lessons for mutation testing:
@@ -45,7 +47,7 @@ All six compile-failure tests pin the compiler's diagnostic, so a change in why 
 
 ## Where FerroRisk's references disagree with each other
 
-- **Displaced Black shift.** #440 uses binary64-shifted coordinates; the IV and Greek references use exact sums (see results-greeks.md).
+- **Displaced Black shift.** #440 uses binary64-shifted coordinates; the IV and Greek references use exact sums. This project defines displaced Black on the exact sums, owns an oracle for that definition, and labels #440's displaced rows `black76_shifted` (docs/model-contracts.md). It's being taken up in FerroRisk separately.
 - **Oracle versions.** The IV reference at the `!551` head predates #448's rounded zero-volatility bound. Scoring needs the #448 stack tip.
 
 ## Not attempted in this slice

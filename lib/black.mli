@@ -77,3 +77,8 @@ end
 module Bsm : MODEL with type inputs = Bsm_carry.inputs
 module Black76 : MODEL with type inputs = Black76_carry.inputs
 module Displaced : MODEL with type inputs = Displaced_carry.inputs
+(** Black-76 on the real numbers [forward + displacement] and
+    [strike + displacement]. The sums are exact: never rounded, and carried as
+    double-doubles throughout. Where they are representable, price, implied
+    volatility and Greeks equal Black-76's on the sums bit for bit
+    (docs/model-contracts.md). *)

@@ -10,17 +10,39 @@ Worst error per region, ours vs FerroRisk's published SPEC §7.1 (#440) contract
 
 | Region | Rows | Worst ULP | FerroRisk worst ULP | Worst ε·scale | FerroRisk worst ε·scale |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Black family, deep ITM | 6,133 | 3 | 175 | 1.65 | 28.4 |
+| Black family, deep ITM | 6,133 | 2 | 175 | 1.03 | 28.4 |
 | Black family, ITM | 3,414 | 7 | 37 | 2.08 | 17.3 |
 | Black family, near ATM, tiny variance | 4,016 | 4 | 552 | 0.0099 | 0.10 |
 | Black family, OTM | 9,897 | 16 | 3,504 | 2.06 | 17.9 |
 | Black family, strike outside [1e-100, 1e100] | 19,320 | 10 | 7.3e6 | 1.79 | 613 |
-| Black family, zero variance | 4,278 | 7 | 4.3e15 | 1.27 | 567 |
+| Black family, zero variance | 4,278 | 8 | 4.3e15 | 0.54 | 567 |
 | Bachelier, all regions | 3,036 | 3 | 329 | 5.07 | 4.3 |
 
 The enforced ULP budgets are the measured worst with about 2× headroom, so a regression to FerroRisk-level error fails.
 
 Two Bachelier rows exceed FerroRisk's ε·scale worst: s = 1000, a price of 359, and 2 ULP. The scorer accepts any value within 4 ULP of exact, because ε·scale exists to expose cancellation in values far below the scale, and a near-exact value has none.
+
+In this table "Black family" means BSM, Black-76 and #440's displaced rows, which are scored as Black-76 on binary64-shifted coordinates (`black76_shifted`), because that is what #440 measured.
+
+## Displaced Black on its own definition
+
+`oracle/gen_displaced.py` is this project's own exact-sum oracle: 41,760 contracts, 63% of which have an unrepresentable F + d or K + d. It covers shifts from 5bp to 100, forwards near the −d floor, maturities from a day to 30 years and volatilities from 0 to 3. Every row passes:
+
+| Region | Rows | Worst ULP |
+| --- | ---: | ---: |
+| deep ITM | 11,136 | 2 |
+| ITM | 4,852 | 5 |
+| near ATM, tiny variance | 2,436 | 5 |
+| OTM | 18,116 | 15 |
+| zero variance | 5,220 | 1 |
+
+A rounded-shift implementation fails 2,450 of these contracts: up to 1.6e9 ULP near the money, and zero-variance values flipped outright.
+
+## The zero-variance price and the inverse share one boundary
+
+The zero-variance price and the in-the-money intrinsic are computed from the double-double legs the inverse uses to classify quotes, then rounded once. Zero-variance prices are now 0–1 ULP (Bachelier 0). More importantly, a served zero-variance price always has an inverse: either σ = 0 or an exact positive root that reprices to it.
+
+The binary64 intrinsic it replaced could land below the exact intrinsic. The inverse then correctly reported `Below_intrinsic` for the library's own price. `test/consistency.ml` found that; a mutant that restores it fails with "no root for its own price".
 
 ## What made the difference
 

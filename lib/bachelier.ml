@@ -62,16 +62,18 @@ let price a side sigma =
   let theta = Side.sign side in
   match a with
   | Expiry { forward; strike; _ } -> Float.max (theta *. (forward -. strike)) 0.0
-  | Live { discount; distance; distance_low; root_time; root_time_low; _ } ->
-      let delta = theta *. distance and delta_low = theta *. distance_low in
-      let intrinsic =
-        if delta > 0.0 || (delta = 0.0 && delta_low > 0.0) then (discount *. delta) +. (discount *. delta_low) else 0.0
-      in
+  | Live { discount; distance; distance_low; root_time; root_time_low; rate; time } ->
+      (* D θ Δ to ~106 bits: the zero-variance price is its correctly rounded
+         value, the boundary the inverse classifies quotes against. *)
+      let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
+      let in_the_money = delta.hi > 0.0 in
+      let intrinsic () = Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate time))) delta in
       let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = root_time; lo = root_time_low } (Vol.to_float sigma) in
-      if s = 0.0 then intrinsic
+      if s = 0.0 then if in_the_money then Dd.to_float (intrinsic ()) else 0.0
       else
         let abs_distance, abs_low = abs_parts distance distance_low in
-        intrinsic +. otm ~discount ~abs_distance ~abs_low s sl
+        let otm = otm ~discount ~abs_distance ~abs_low s sl in
+        if in_the_money then Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float otm)) else otm
 
 let sqrt_two_pi = Normalised_black.sqrt_two_pi
 
