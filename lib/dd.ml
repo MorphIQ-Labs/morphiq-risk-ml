@@ -1,15 +1,25 @@
-(* Double-double arithmetic: a value is the unevaluated sum hi + lo with
-   |lo| <= ulp(hi)/2 (Dekker 1971; Hida, Li and Bailey's QD library). Only
-   what the log-moneyness needs is provided. *)
+(* Double-double ("double-word") arithmetic: a value is the unevaluated sum
+   hi + lo with hi = RN(hi + lo) (Dekker 1971).
+
+   The primitives are the algorithms of Joldes, Muller and Popescu, "Tight and
+   rigorous error bounds for basic building blocks of double-word arithmetic",
+   ACM TOMS 44(2), 2017 (JMP), and the square root of Lefèvre, Louvet,
+   Muller, Picot and Rideau, "Accurate calculation of Euclidean norms using
+   double-word arithmetic", ACM TOMS 49(1), 2023 (LLMPR), each with its proved
+   relative error bound, u = 2^-53. The bounds assume no underflow or
+   overflow. *)
 
 type t = { hi : float; lo : float }
 
 let of_float hi = { hi; lo = 0.0 }
 
+(* Fast2Sum (Dekker 1971; JMP Algorithm 1): exact when hi's exponent is at
+   least lo's. *)
 let renormalise hi lo =
   let s = hi +. lo in
   { hi = s; lo = lo -. (s -. hi) }
 
+(* AccurateDWPlusDW, JMP Algorithm 6: relative error <= 3u^2 + 13u^3. *)
 let add a b =
   let s, e = Split.two_sum a.hi b.hi in
   let t, f = Split.two_sum a.lo b.lo in
@@ -19,31 +29,53 @@ let add a b =
 let neg a = { hi = -.a.hi; lo = -.a.lo }
 let sub a b = add a (neg b)
 
+(* 2Prod by fma (Fast2Mult, JMP Algorithm 3): exact. *)
 let two_prod a b =
   let p = a *. b in
   { hi = p; lo = Float.fma a b (-.p) }
 
+(* DWPlusFP, JMP Algorithm 4: relative error <= 2u^2. *)
+let add_float a y =
+  let s, e = Split.two_sum a.hi y in
+  renormalise s (a.lo +. e)
+
+(* DWTimesFP3, JMP Algorithm 9: relative error <= 2u^2. *)
+let mul_float a y =
+  let p = two_prod a.hi y in
+  renormalise p.hi (Float.fma a.lo y p.lo)
+
+(* DWTimesDW3, JMP Algorithm 12: relative error <= 5u^2. *)
 let mul a b =
   let p = two_prod a.hi b.hi in
-  renormalise p.hi (p.lo +. ((a.hi *. b.lo) +. (a.lo *. b.hi)))
+  let t0 = a.lo *. b.lo in
+  let t1 = Float.fma a.hi b.lo t0 in
+  let c2 = Float.fma a.lo b.hi t1 in
+  renormalise p.hi (p.lo +. c2)
 
-let mul_float a f =
-  let p = two_prod a.hi f in
-  renormalise p.hi (p.lo +. (a.lo *. f))
+let scale a k = { hi = Float.ldexp a.hi k; lo = Float.ldexp a.lo k }
 
+(* DWDivDW3, JMP Algorithm 18: one Newton step for 1/b, then a product;
+   relative error <= 9.8u^2. The bound assumes an unbounded exponent range,
+   and 1/b.hi overflows for a subnormal b, so b is first scaled exactly into
+   [1, 2) by 2^-k: a/b = 2^-k (a / (2^-k b)). The final scaling is exact
+   unless the quotient itself underflows. *)
 let div a b =
-  let q1 = a.hi /. b.hi in
-  let r = sub a (mul_float b q1) in
-  let q2 = r.hi /. b.hi in
-  let r = sub r (mul_float b q2) in
-  let q3 = r.hi /. b.hi in
-  add (renormalise q1 q2) (of_float q3)
+  if b.hi = 0.0 || not (Float.is_finite b.hi) then of_float (a.hi /. b.hi)
+  else
+    let k = snd (Float.frexp b.hi) - 1 in
+    let b = scale b (-k) in
+    let th = 1.0 /. b.hi in
+    let rh = Float.fma (-.b.hi) th 1.0 in
+    let rl = -.(b.lo *. th) in
+    let e = renormalise rh rl in
+    let d = mul_float e th in
+    let m = add_float d th in
+    scale (mul a m) (-k)
 
 let to_float a = a.hi +. a.lo
 
 (* ln 2 = ln2_hi + ln2_lo to 106 bits. *)
 let ln2 = { hi = 0x1.62e42fefa39efp-1; lo = 0x1.abc9e3b39803fp-56 }
-let scale a k = { hi = Float.ldexp a.hi k; lo = Float.ldexp a.lo k }
 let compare_float a f = if a.hi <> f then compare a.hi f else compare a.lo 0.0
 
 (* exp and expm1 follow the QD library's dd_real (Hida, Li and Bailey,
@@ -152,11 +184,11 @@ let to_float_scaled a k =
     in
     Float.ldexp n (-1074)
 
-(* sqrt a to double-double: one Newton correction from the residual
-   a - hi^2, formed exactly. *)
+(* SQRTDWtoDW, LLMPR Algorithm 8: relative error <= 25/8 u^2. *)
 let sqrt a =
   if a.hi <= 0.0 then of_float (Float.sqrt a.hi)
   else
-    let hi = Float.sqrt a.hi in
-    let r = sub a (two_prod hi hi) in
-    renormalise hi (r.hi /. (2.0 *. hi))
+    let sh = Float.sqrt a.hi in
+    let rho1 = Float.fma (-.sh) sh a.hi in
+    let rho2 = a.lo +. rho1 in
+    renormalise sh (rho2 /. (2.0 *. sh))

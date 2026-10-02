@@ -15,6 +15,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - **An error analysis** (docs/error-analysis.md).
 
 ### Changed
+- **Double-double primitives are the published algorithms with proved error bounds** (docs/error-analysis.md §0): Joldes, Muller and Popescu (ACM TOMS 2017) for `mul_float` (Algorithm 9, 2u²), `mul` (Algorithm 12, 5u²), `add_float` (Algorithm 4, 2u²) and `div` (Algorithm 18, 9.8u²), and Lefèvre et al. (ACM TOMS 2023) for `sqrt` (25/8 u²). They replace Algorithms 8 and 10, QD's unproved three-quotient division, and an unproved Newton square root. `add` already was Algorithm 6. `div` scales its divisor into [1, 2) to stay inside the theorem's domain. Worst-case ULP is unchanged in every oracle region; the determinism digest is re-recorded.
 - **Double-double exp and expm1 follow QD's `dd_real::exp`** (Hida, Li and Bailey): reduction by 512 and nine doublings instead of a long series. Worst-case ULP is unchanged in every oracle region; `test/dd_reference.ml` pins exp, expm1 and log against mpmath. The determinism digest changes, because low-order bits of intermediates differ.
 
 ### Changed (numerical)
