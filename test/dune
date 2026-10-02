@@ -20,7 +20,7 @@
  (name oracle_price)
  (package morphiq_risk_ml)
  (modules oracle_price)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds certified)
  (action
   (progn
    (run %{test} %{dep:../oracle/fixtures/european.txt})
@@ -44,7 +44,7 @@
  (name oracle_greeks)
  (package morphiq_risk_ml)
  (modules oracle_greeks budget_greeks)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds certified greek_values)
  (action
   (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
@@ -52,7 +52,7 @@
  (name normal_dd_reference)
  (package morphiq_risk_ml)
  (modules normal_dd_reference)
- (libraries morphiq_risk))
+ (libraries morphiq_risk bounds))
 
 (test
  (name consistency)
@@ -74,7 +74,7 @@
  (modules determinism)
  (libraries morphiq_risk)
  ; Any numerical change moves the digest, so the mutation catalog
- ; (scripts/mutation.py) runs without it.
+ ; (scripts/mutation/mutation.ml) runs without it.
  (enabled_if
   (<> %{profile} mutation))
  (action
@@ -90,7 +90,7 @@
  (name dd_reference)
  (package morphiq_risk_ml)
  (modules dd_reference)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds certified)
  (action
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
@@ -110,6 +110,38 @@
  (modules iv_bounds)
  (libraries morphiq_risk bounds))
 
+(library
+ (name certified)
+ (modules certified kernel_polynomials certificate_mode)
+ (libraries morphiq_risk bounds))
+
+(rule
+ (target certificate_mode.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (echo "let require_replay = \"%{profile}\" <> \"mutation\""))))
+
+(library
+ (name greek_values)
+ (modules greek_values)
+ (libraries morphiq_risk))
+
+(test
+ (name greek_reference)
+ (modules greek_reference)
+ (libraries morphiq_risk bounds certified greek_values)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/greek_bits.txt})))
+
+(rule
+ (target kernel_polynomials.ml)
+ (deps ../oracle/lift_polynomials.py ../lib/normalised_black.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/lift_polynomials.py}))))
+
 (test
  (name numerical_regressions)
  (modules numerical_regressions)
@@ -119,8 +151,14 @@
 
 (rule
  (target component_bounds.ml)
- (deps ../oracle/verify_bounds.py)
+ (deps
+  ../oracle/verify_bounds.py
+  ../oracle/kernel_certificates.py
+  ../lib/elementary.ml
+  ../lib/cody.ml
+  ../lib/normalised_black.ml
+  ../lib/normal_dd.ml)
  (action
   (with-stdout-to
    %{target}
-   (run python3 %{deps} --ocaml))))
+   (run python3 %{dep:../oracle/verify_bounds.py} --ocaml))))

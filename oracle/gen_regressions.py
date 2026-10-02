@@ -29,6 +29,19 @@ def main(path):
                 roots.append(fields(2*mp.sqrt(2)*mp.erfinv(mp.mpf(quote)*mp.exp(mp.mpf(r)))))
         assert roots[0] == roots[1]
         rows.append(['iv', bits(r), bits(quote), *roots[0]])
+    for kind, a, b in [('scaled_exp', math.ldexp(1.,1000), 800.),
+                        ('bachelier_price', 40*math.ldexp(1.,995), math.ldexp(1.,995))]:
+        values = []
+        for precision in (110, 220):
+            with mp.workdps(precision):
+                if kind == 'scaled_exp':
+                    value = mp.mpf(a)*mp.exp(-mp.mpf(b))
+                else:
+                    d = mp.mpf(a)/mp.mpf(b)
+                    value = mp.mpf(b)*(mp.exp(-d*d/2)/mp.sqrt(2*mp.pi)-d*mp.erfc(d/mp.sqrt(2))/2)
+                values.append(fields(value))
+        assert values[0] == values[1]
+        rows.append([kind,bits(a),bits(b),*values[0]])
     for _ in range(2000):
         k = rng.uniform(.5, 2.)
         s = math.nextafter(k, math.inf if rng.random() < .5 else 0.)

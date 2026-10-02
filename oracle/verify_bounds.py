@@ -8,6 +8,9 @@ Only Python's standard library is required at test build time.
 from fractions import Fraction as F
 from math import factorial
 import sys
+import re
+from pathlib import Path
+import kernel_certificates
 
 u = F(1, 2**53)
 u2 = u*u
@@ -82,11 +85,87 @@ round_tail = tail_ratio
 log1p = (argument + evaluation + truncation + round_tail + 32*u)*inflate
 assert log1p < F(14,100)
 
+# Binary64 Elementary.exp: polynomial arithmetic, rounded coefficients,
+# Taylor tail, two fma reductions, and the final sum. Constants are read from
+# the implementation; dyadic fractions retain their exact stored values.
+root = Path(__file__).resolve().parent.parent
+source = (root/'lib/elementary.ml').read_text()
+def fp_literal(value):
+    return F(float.fromhex(value) if '0x' in value else float(value))
+coefficients = source.split('let exp_coefficients =',1)[1].split('[|',1)[1].split('|]',1)[0]
+coefficients = [fp_literal(v.strip()) for v in coefficients.split(';') if v.strip()]
+assert len(coefficients) == 14
+R = F(347,1000)
+polynomial_rounding = u*sum((F(k+1)*R**(k+1)/F(factorial(k+1)) for k in range(14)),F(0))
+coefficient_error = sum((abs(c-F(1,factorial(k+1)))*R**(k+1) for k,c in enumerate(coefficients)),F(0))
+taylor_tail = R**15/(factorial(15)*(1-R/16))
+product_rounding = u*sum((R**k/F(factorial(k)) for k in range(1,15)),F(0))
+ln_hi = fp_literal(re.search(r'let ln2_hi = (\S+)',source).group(1))
+ln_lo = fp_literal(re.search(r'let ln2_lo = (\S+)',source).group(1))
+ln_error = max(abs(ln_hi+ln_lo-lower),abs(ln_hi+ln_lo-upper))
+reduction = (2*R+F(1,2**20))*u+1077*ln_error
+# exp(-R) >= 1-R; 2^-20 bounds |k ln2_lo|. Final ldexp adds an absolute
+# half-quantum if subnormal, separately from this relative majorant.
+elementary_exp = (u+(polynomial_rounding+coefficient_error+taylor_tail+product_rounding)/(1-R)
+                  + reduction/(1-reduction))*inflate
+assert elementary_exp < 4*u
+
+approximation, kernel_rounding = kernel_certificates.verify()
+
+# erf_small: positive Horner evaluation contributes <22u (including the
+# squared argument's logarithmic sensitivity <1); integrate the residual and
+# divide by erf(x)>=2c*x*(1-x²). This remains relative as x tends to zero.
+c_lo,c_hi = kernel_certificates.inverse_sqrt_pi()
+erf_small = (((1+u)**10/(1-u)**12-1+2*u2)
+             + approximation['erf_derivative']/(2*c_lo*(1-F(225,1024))))*inflate
+assert erf_small < 26*u
+
+# Split.scaled_exp_neg: |n|<6000, reduced |r|<.7. Two reduction roundings
+# plus the two-word ln2 residual; three product/correction roundings.
+split_reduction = F(7,5)*u + 6000*(ln_error+u2)
+split_factor = (1+4*u)*(1+u)**3/(1-split_reduction)
+for lo_squared in [F(0),F(1,10**6)]:
+    error = split_factor*(1+lo_squared/(2*(1-F(1,1000))))-1
+    assert error < 12*u+lo_squared
+# The inequality is affine in lo², so endpoint checks cover |lo|<=.001.
+# Also certify the deliberately flushed Cody tail, without measuring erfc.
+assert F(2654,100)**2 > 1016*upper
+assert c_hi/F(2654,100) < F(1,32) # erfc(26.54)<2^-1021
+assert F(99,100)*4096 > (1025+2048+1075)*upper
+# Derivative bounds across a small interval straddling zero.
+assert F(1,100)+2*c_hi < 2
+mills_negative = (F(1254,1000)+F(1,200))/(1-F(1,80000))
+assert (1+F(1,40000))*mills_negative+F(1,200) < 2
+
+# Normal_dd's constant 1/sqrt(2*pi), enclosed with Machin's identity and
+# sqrt(2) by integer/rational inequalities.
+c_lo,c_hi = kernel_certificates.inverse_sqrt_pi()
+sqrt2_lo = F(1414213562373095048801688724209698078569671875376948073176679,10**60)
+sqrt2_hi = sqrt2_lo + F(1,10**60)
+assert sqrt2_lo**2 < 2 < sqrt2_hi**2
+normal_source = (root/'lib/normal_dd.ml').read_text()
+constant = re.search(r'let inv_sqrt_2pi = \{ Dd.hi = ([^;]+); lo = ([^ }]+)',normal_source)
+normal_constant = fp_literal(constant.group(1))+fp_literal(constant.group(2))
+normal_lo,normal_hi = c_lo/sqrt2_hi,c_hi/sqrt2_lo
+assert max(abs(normal_constant-normal_lo),abs(normal_constant-normal_hi)) < normal_lo*u2
+# On |d.hi|<=6 (including a normalized low word), d²<37. At term 128,
+# q_128/q_0 <= 37^128/257!! < 2^-120, so the 400-iteration cap is unreachable.
+odd_factorial = 1
+for k in range(1,129): odd_factorial *= 2*k+1
+assert F(37)**128/odd_factorial < F(1,2**120)
+# The terms share a sign and sum n*q_n / sum q_n <= d²/2. This bounds
+# accumulated term errors without charging the maximum n to every term.
+series_error = (F(99,5)*F(37,2) + 3*129 + 1)*inflate
+pdf_error = (40+3*F(37,2)+5*F(37,2)+6)*inflate
+assert pdf_error < 200
+cdf_error = (F(1,2)*(series_error+200+5)+4)*inflate
+assert cdf_error < 512
+
 if '--ocaml' in sys.argv:
     print('(* Generated after exact-rational verification; see oracle/verify_bounds.py. *)')
-    print('let exp_base = 40.0\nlet exp_slope = 3.0\nlet expm1_reduced = 80.0\nlet log = 32.0\nlet log1p_tail = 0.14')
+    print('let exp_base = 40.0\nlet exp_slope = 3.0\nlet expm1_reduced = 80.0\nlet log = 32.0\nlet log1p_tail = 0.14\nlet elementary_exp = 4.0\nlet erfcx = 40.0\nlet y_prime = 96.0\nlet normal_pdf = 200.0\nlet normal_cdf = 512.0')
 else:
     for name, value, ceiling in [('expm1 reduced / u²', reduced, 80),
         ('exp base / u²', exp_base, 40), ('log / u²', log_total, 32),
-        ('log1p tail / u', log1p, .14)]:
+        ('log1p tail / u', log1p, .14), ('elementary exp / u',elementary_exp/u,4), ('Normal DD pdf / u²',pdf_error,200), ('Normal DD cdf absolute / u²',cdf_error,512)]:
         print(f'{name}: {float(value):.12g} < {ceiling}')

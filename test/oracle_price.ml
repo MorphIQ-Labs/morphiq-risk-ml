@@ -120,8 +120,10 @@ let derived_worst = ref 0.0
 let families : (string, int * int) Hashtbl.t = Hashtbl.create 4
 
 let () =
+  Printexc.record_backtrace true;
   let path = Sys.argv.(1) in
   let stats = Hashtbl.create 16 in
+  let certificates = ref 0 and domains = Hashtbl.create 8 in
   let failures = ref [] in
   let ic = open_in path in
   (try
@@ -195,6 +197,47 @@ let () =
                    st
              in
              st.n <- st.n + 1;
+             (try
+                let side = side_of side in
+                let b =
+                  if t = 0.0 || sigma = 0.0 then
+                    Certified.boundary model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                      "price"
+                  else if model = "bachelier" then
+                    List.assoc "price"
+                      (Certified.bachelier ~only_price:true ~side ~s ~k ~t ~r
+                         ~sigma ())
+                  else
+                    Certified.black model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                      "price"
+                in
+                if
+                  (not (Certified.replay_matches got b))
+                  || not (Certified.check ~got ~reference b)
+                then (
+                  st.fails <- st.fails + 1;
+                  if List.length !failures < 25 then
+                    failures :=
+                      Printf.sprintf
+                        "derived price certificate: served %h replay %h ref %h \
+                         radius %.4g | %s"
+                        got b.v reference b.e line
+                      :: !failures)
+                else incr certificates
+              with Certified.Unsupported why ->
+                st.fails <- st.fails + 1;
+                if List.length !failures < 25 then
+                  failures :=
+                    ("derived certificate unavailable: " ^ why ^ " | " ^ line)
+                    :: !failures;
+                let n =
+                  Option.value ~default:0 (Hashtbl.find_opt domains why)
+                in
+                if Array.length Sys.argv > 2 && n < 3 then
+                  Printf.printf "domain %s | %s\n" why line;
+                if Array.length Sys.argv > 2 && n = 0 then
+                  Printf.printf "%s\n" (Printexc.get_backtrace ());
+                Hashtbl.replace domains why (1 + n));
              let fn, ff =
                Option.value ~default:(0, 0) (Hashtbl.find_opt families !source)
              in
@@ -255,6 +298,12 @@ let () =
     Array.sort compare a;
     a.(Array.length a / 2)
   in
+  Printf.printf "Derived price certificates: %d rows\n" !certificates;
+  Hashtbl.iter
+    (fun why n ->
+      Printf.printf "outside price certificate domain: %s: %d\n" why n)
+    domains;
+  if !certificates = 0 then failwith "no derived price coverage";
   Printf.printf "%-34s %6s %10s %7s %8s %10s | %10s %8s | %5s\n" "region" "rows"
     "worst ulp" "budget" "median" "eps*scale" "ferro ulp" "ferro sc" "fails";
   Hashtbl.fold (fun k _ acc -> k :: acc) stats []

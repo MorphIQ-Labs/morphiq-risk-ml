@@ -4,7 +4,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
-### Numerical assurance audit
+### Rounded-kernel and Greek certification
+
+- Added exact-rational differential-residual certificates for the rounded Cody erfcx and Jäckel Y′ kernels, integral remainder bounds for both Black expansions, and analytical Normal_dd bounds (200u² relative for density, 512u² absolute for CDF). Operation-by-operation propagation now checks all 99,056 price and 65,980 finite Greek rows independently of the historical measured quality budgets.
+- Expanded the component fixture to 48,203 rows (22,425 nonzero low words), added 2,506 three-word Greek references including 51 contracts near Greek zeros, and expanded the mutation catalog to 33. Mutation builds disable replay-identity assertions so numerical mutants must fail their independent numerical guard. The intrinsic-guard probe still survives provisionally.
+- Fixed premature Gaussian underflow when a large prefactor rescues the result, normalized extreme split root/quotient inputs, and restored quotient-pair nonoverlap with Fast2Sum. Six historical Bachelier contracts change from false-zero tail prices to positive values within 1–6 ULP of the independent oracle. The public-model digest changes; detailed affected inputs and 4,936 subsequent quotient-normalization differences are recorded in `docs/results-slice.md`. European Black near-ATM worst error improves from 6 to 5 ULP; every other price-region maximum is unchanged in fresh baseline/current runs (`docs/results-slice.md`). All current region quality gates pass. Oracle generators and hashes are pinned in `oracle/MANIFEST`.
+- These fixes include served-value/class changes beyond the previous budget: a major numerical change, expressed as a minor release during 0.y.z. No release or version bump is performed here. IV scorers still use their historical conditional kernel envelopes; this work does not claim universal finite-input or finite-iteration certification.
+
+### Initial numerical assurance audit (through 3f5b0db)
 
 - Fixed DD division on subnormal operands (`minsub/(3*minsub)`: 0.5 → correctly rounded 1/3), normalized DD square root, and preserved tiny expm1 arguments before division by 512.
 - Fixed early underflow of tiny zero-variance intrinsics. For BSM S=K=2^1000, T=2^-1074, r=1, q=0, σ=0, the call changes from 0 to 2^-74. Tests cover both sides, three scales and three rates. A displaced F=2^-573, K=2^-574, d=2^500 contract also changes from 0 to its exact zero-volatility call value 2^-574. This is a served-value change beyond the published budget: a major numerical change, expressed as a minor release while version 0.y.z. No release/version bump is performed here.
@@ -12,7 +19,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - Fixed fail-open NaN scoring, rho's binade-dependent error propagation and log-CDF's reference-rounding/minimum-denominator composition. Missing normal fixtures now fail.
 - Removed the price scorer's 4-ULP bypass. Bachelier's norm includes its volatility time value. Its IV scorer now transports price error through vega instead of accepting rounding-cell membership.
 - Corrected the log1p derivation to 0.14u|y|; the former 0.085 estimate omitted a denominator rounding and lacked margin.
-- Included maximum-leg error divided by the complement gap in the IV budget, replaced the arbitrary threshold guard with normalization uncertainty, and removed the unsupported negligible-Newton-remainder claim. The kernel/Greek envelopes remain measured premises; `docs/error-analysis.md` lists the remaining proof obligations explicitly.
+- Included maximum-leg error divided by the complement gap in the IV budget, replaced the arbitrary threshold guard with normalization uncertainty, and removed the unsupported negligible-Newton-remainder claim. At this checkpoint the kernel/Greek envelopes remained measured premises; `docs/error-analysis.md` lists the remaining proof obligations explicitly.
 - Against the unchanged six public-model fixture files, all rows pass and the determinism digest is unchanged from 15b5f7a. New boundary cases expose changes beyond that historical corpus. Fixture generators and hashes are recorded in `oracle/MANIFEST`; this does not claim universal correctness over all admitted inputs.
 
 ### Added
@@ -41,7 +48,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   - **Black-family implied volatility:** checked per root against a derived bound with the better-conditioned of β and β̄ and the intrinsic's error near the money (§6). This replaces "in the rounding cell, or 4× attainable", which accepted roots 8e14 ULP off near the maximum.
   - **log1p's reduced path:** checked against ulp/2 + 0.14·u·|y| using references that now carry their residual (§1).
 - **log1p returns x for |x| < 2^-54** (fdlibm). The reduced path rounded log1p(2^-1074) to 0.
-- **The mutation catalog** (`dune exec scripts/mutation/mutation.exe`, OCaml): 29 mechanisms, each removed and required to fail the test that guards it, in a temporary copy under a `mutation` dune profile. The quotient remainder now has a direct coordinate oracle. The intrinsic branch guard remains a provisional, explicitly runnable surviving probe (§5.1).
+- **The mutation catalog** (`dune exec scripts/mutation/mutation.exe`, OCaml): 33 mechanisms, each removed and required to fail the test that guards it, in a temporary copy under a `mutation` dune profile. The quotient remainder now has a direct coordinate oracle. The intrinsic branch guard remains a provisional, explicitly runnable surviving probe (§5.1).
 - **Double-double primitives are the published algorithms with proved error bounds** (docs/error-analysis.md §0): Joldes, Muller and Popescu (ACM TOMS 2017) for `mul_float` (Algorithm 9, 2u²), `mul` (Algorithm 12, 5u²), `add_float` (Algorithm 4, 2u²) and `div` (Algorithm 18, 9.8u²), and Lefèvre et al. (ACM TOMS 2023) for `sqrt` (25/8 u²). They replace Algorithms 8 and 10, QD's unproved three-quotient division, and an unproved Newton square root. `add` already was Algorithm 6. `div` now normalizes both operands; normalizing the divisor alone allowed intermediate underflow even for a normal quotient. Worst-case ULP is unchanged in every oracle region; the determinism digest is re-recorded.
 - **Double-double exp and expm1 follow QD's `dd_real::exp`** (Hida, Li and Bailey): reduction by 512 and nine doublings instead of a long series. Worst-case ULP is unchanged in every oracle region; `test/dd_reference.ml` pins exp, expm1 and log against mpmath. The determinism digest changes, because low-order bits of intermediates differ.
 

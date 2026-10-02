@@ -108,6 +108,36 @@ let () =
                    in
                    require "near-maximum root exceeds propagated bound"
                      (Bounds.within ~error:(Float.abs (got -. root)) ~bound)
+               | "scaled_exp" ->
+                   let got = Internal.Split.scaled_exp_neg a b 0.0 in
+                   let reference = Float.ldexp h e in
+                   require "scaled exponential discards a rescuing prefactor"
+                     (Bounds.within
+                        ~error:(Float.abs (got -. reference))
+                        ~bound:
+                          ((12.0 *. Bounds.u *. Float.abs reference)
+                          +. Bounds.ulp reference))
+               | "bachelier_price" ->
+                   let contract =
+                     get
+                       (Bachelier.admit
+                          {
+                            forward = a;
+                            strike = 0.0;
+                            time_to_expiry = 1.0;
+                            rate = 0.0;
+                          })
+                   in
+                   let got =
+                     Bachelier.price contract Side.Put (get (Vol.normal b))
+                   in
+                   let reference = Float.ldexp h e in
+                   require "Bachelier normal tail lost before multiplication"
+                     (Bounds.within
+                        ~error:(Float.abs (got -. reference))
+                        ~bound:
+                          (Bounds.price_ulp_budget_max "bachelier"
+                          *. Bounds.ulp reference))
                | "coordinate" ->
                    let contract =
                      get

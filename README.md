@@ -19,3 +19,5 @@ scripts/ferro_crosscheck.sh      # needs oracle/fetch.sh and the convert_* scrip
 ```
 
 The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Oracles: [docs/oracles.md](docs/oracles.md). Error analysis: [docs/error-analysis.md](docs/error-analysis.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).
+
+Prices and finite Greeks in the committed corpora are checked against per-input analytical bounds, with exact-rational rounded-kernel checks and extra-bit references. Historical ULP targets remain additional quality gates. IV envelopes and universal finite-input coverage still have the limitations listed in the [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).

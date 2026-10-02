@@ -36,6 +36,41 @@ type mutant = {
 let catalog =
   [
     {
+      id = "scaled-exp-prefactor";
+      file = "lib/split.ml";
+      snippet = "(1077.0 +. float (ceiling_exponent + k)) *. ln2_hi";
+      replacement = "(1100.0 +. float k) *. ln2_hi";
+      killer = "numerical_regressions";
+      mechanism = "a large prefactor rescues a representable exponential tail";
+    };
+    {
+      id = "split-root-scale";
+      file = "lib/split.ml";
+      snippet = "else (snd (Float.frexp t) - 1) asr 1";
+      replacement = "else 0";
+      killer = "dd_reference";
+      mechanism = "retain the square-root residual for extreme maturities";
+    };
+    {
+      id = "split-quotient-scale";
+      file = "lib/split.ml";
+      snippet =
+        "let en = snd (Float.frexp n) - 1 and ed = snd (Float.frexp d) - 1 in";
+      replacement = "let en = 0 and ed = 0 in";
+      killer = "dd_reference";
+      mechanism =
+        "normalize the compensated quotient before taking its residual";
+    };
+    {
+      id = "split-quotient-nonoverlap";
+      file = "lib/split.ml";
+      snippet = "(hi, r -. (hi -. q))";
+      replacement = "(q, r)";
+      killer = "dd_reference";
+      mechanism =
+        "normalize the two quotient words before DD consumers use them";
+    };
+    {
       id = "reference-expansion";
       file = "test/bounds.ml";
       snippet =

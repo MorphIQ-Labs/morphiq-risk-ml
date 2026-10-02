@@ -21,16 +21,48 @@ let () =
                let f = Int64.float_of_bits in
                let a = { Dd.hi = f ah; lo = f al }
                and b = { Dd.hi = f bh; lo = f bl } in
-               let got, relative =
+               let got, relative, absolute =
                  match fn with
-                 | "exp" -> (Dd.exp a, Bounds.eps_exp (Dd.to_float a))
-                 | "expm1" -> (Dd.expm1 a, Bounds.eps_expm1 (Dd.to_float a))
-                 | "log" -> (Dd.log_float a.hi, Bounds.eps_log)
-                 | "sqrt" -> (Dd.sqrt a, 3.125 *. Bounds.u2)
-                 | "div" -> (Dd.div a b, 9.8 *. Bounds.u2)
+                 | "exp" -> (Dd.exp a, Bounds.eps_exp (Dd.to_float a), 0.0)
+                 | "expm1" -> (Dd.expm1 a, Bounds.eps_expm1 (Dd.to_float a), 0.0)
+                 | "log" -> (Dd.log_float a.hi, Bounds.eps_log, 0.0)
+                 | "sqrt" -> (Dd.sqrt a, 3.125 *. Bounds.u2, 0.0)
+                 | "div" -> (Dd.div a b, 9.8 *. Bounds.u2, 0.0)
+                 | "split_sqrt" ->
+                     let hi, lo = Split.sqrt a.hi in
+                     ({ Dd.hi; lo }, 3.125 *. Bounds.u2, 0.0)
+                 | "split_quotient" ->
+                     let hi, lo = Split.quotient_dd a.hi a.lo b.hi b.lo in
+                     ({ Dd.hi; lo }, 16.0 *. Bounds.u2, 0.0)
+                 | "normal_pdf" ->
+                     (Normal_dd.pdf a, Bounds.normal_pdf_relative, 0.0)
+                 | "normal_cdf" ->
+                     (Normal_dd.cdf a, 0.0, Bounds.normal_cdf_absolute)
+                 | "erfcx" ->
+                     ( Dd.of_float (Cody.erfcx_nonnegative a.hi),
+                       Bounds.erfcx_relative,
+                       0.0 )
+                 | "y_prime" ->
+                     ( Dd.of_float (Normalised_black.y_prime a.hi),
+                       Bounds.y_prime_relative,
+                       0.0 )
+                 | "black_kernel" ->
+                     let certificate =
+                       Certified.black_kernel (Certified.c 1.0)
+                         (Certified.D.input a.hi a.lo 0.0)
+                         (Certified.D.input b.hi b.lo 0.0)
+                     in
+                     let got =
+                       Normalised_black.scaled 1.0 a.hi a.lo b.hi b.lo
+                     in
+                     if not (Certified.replay_matches got certificate) then
+                       failwith "Black kernel certificate replay mismatch";
+                     (Dd.of_float got, 0.0, certificate.e)
                  | _ -> invalid_arg fn
                in
                incr rows;
+               if fn = "split_quotient" && got.hi +. got.lo <> got.hi then
+                 failwith "split quotient words overlap";
                if a.lo <> 0.0 || b.lo <> 0.0 then incr nonzero_low;
                let e = error got exponent (f h) (f l) (f tail) in
                (* At most one quantum from independently scaling two result
@@ -38,6 +70,7 @@ let () =
                   covers rounding in the scorer's three subtractions and sum. *)
                let bound =
                  (relative *. (1.0 +. (8.0 *. Bounds.u)) *. Float.abs (f h))
+                 +. Float.ldexp absolute (-exponent)
                  +. Float.ldexp 1.0 (-1074 - exponent)
                  +. 0x1p-158
                in

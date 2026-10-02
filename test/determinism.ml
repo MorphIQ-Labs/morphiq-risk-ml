@@ -133,6 +133,9 @@ let () =
             times)
         moneyness)
     spots;
+  if Array.length Sys.argv > 2 then
+    Out_channel.with_open_bin Sys.argv.(2) (fun oc ->
+        output_string oc (Buffer.contents buf));
   let bytes = Buffer.length buf in
   let digest =
     Digest.BLAKE256.to_hex (Digest.BLAKE256.string (Buffer.contents buf))

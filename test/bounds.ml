@@ -24,6 +24,11 @@ let eps_expm1 z =
 
 let eps_log = Component_bounds.log *. u2
 let log1p_tail = Component_bounds.log1p_tail
+let elementary_exp_relative = Component_bounds.elementary_exp *. u
+let erfcx_relative = Component_bounds.erfcx *. u
+let y_prime_relative = Component_bounds.y_prime *. u
+let normal_pdf_relative = Component_bounds.normal_pdf *. u2
+let normal_cdf_absolute = Component_bounds.normal_cdf *. u2
 
 let within ~error ~bound =
   Float.is_finite error && Float.is_finite bound && error >= 0.0 && bound >= 0.0
