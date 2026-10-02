@@ -6,6 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ### PR #12 source and assumption audit
 
+- Default CI now runs seven core numerical mutation checks; the full 35-mutant catalog runs separately on manual dispatch or a weekly schedule. Full accuracy and certification tests remain in ordinary CI. See `docs/mutation-policy.md` for selection and local commands.
 - Compared DD algorithms with their original papers and later formalization, and recorded primary source versions and hashes. Corrected the negative-expm1 tail normalization, the scaled exponential's ln(2) split dependency, the erfcx derivative interval and a Greek denominator lower bound. The existing component ceilings still hold.
 - Added test-only exact rational primitive witnesses and enforced DD nonoverlap. Regenerated the 48,203-row DD fixture after fixing input normalization at binade boundaries; 22,425 rows retain nonzero low words.
 - Fixed DD/split quotient normalization after subnormal low-word scaling, and added the published final Fast2Sum to split square root. The public determinism corpus is byte-for-byte unchanged against 76c3cc5. Two new mutation guards cover normalization, bringing the catalog to 35.

@@ -17,6 +17,7 @@
    checkout is never modified.
 
      dune exec scripts/mutation/mutation.exe              run the catalog
+     dune exec scripts/mutation/mutation.exe -- --core    run the CI core
      dune exec scripts/mutation/mutation.exe -- --list    print it
      dune exec scripts/mutation/mutation.exe -- ID ...    run the named mutants *)
 
@@ -357,6 +358,29 @@ let catalog =
     };
   ]
 
+(* Keep the required PR workload small. This is a sentinel set, not exhaustive
+   coverage: shared DD preconditions, independent scoring, exponent rescue,
+   inverse conditioning and cancellation in both model families. The complete
+   catalog remains a separate manual/scheduled assurance run. *)
+let core_ids =
+  [
+    "split-root-nonoverlap";
+    "dd-scale-nonoverlap";
+    "reference-expansion";
+    "scaled-exp-prefactor";
+    "iv-beta-bar";
+    "greeks-theta-dd";
+    "bachelier-theta-dd";
+  ]
+
+let core_catalog () =
+  List.map
+    (fun id ->
+      match List.filter (fun m -> m.id = id) catalog with
+      | [ m ] -> m
+      | _ -> failwith ("core mutant missing or ambiguous: " ^ id))
+    core_ids
+
 (* Diagnostic only: a survivor is recorded, never called impossible to kill.
    Run with --probe intrinsic-terms; exit 1 means a compiled survivor. *)
 let probes =
@@ -513,7 +537,10 @@ let score work m =
 let () =
   let args = List.tl (Array.to_list Sys.argv) in
   let args, catalog =
-    match args with "--probe" :: rest -> (rest, probes) | _ -> (args, catalog)
+    match args with
+    | "--probe" :: rest -> (rest, probes)
+    | "--core" :: rest -> (rest, core_catalog ())
+    | _ -> (args, catalog)
   in
   if args = [ "--list" ] then
     List.iter
