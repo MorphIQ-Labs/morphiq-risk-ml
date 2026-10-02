@@ -4,6 +4,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Runtime enclosure foundation
+
+- Added internal finite arithmetic balls with derived residual, underflow and analytic-series remainders for arithmetic, square root, exponential and logarithm. This is infrastructure for runtime decisions; financial integration and production acceptance remain outstanding. Runtime dependencies and pricing results are unchanged.
+- Independent exact-rational checks cover 757 deterministic primitive cases and 2,000 generated compositions; 19,058 existing extra-bit elementary references cover the documented domain. Added an optional fused-residual-underflow mutant (38 total); the default core remains seven.
+
 ### Financial type boundaries
 
 - Veta now retains both the time unit and volatility coordinate, preventing normal/lognormal veta mixing and accidental use as theta. Added `Units.annualise_volatility` and three compiler-rejection witnesses. This is a breaking public field-type change under the stability policy; its private-float representation and served numerical values are unchanged.
