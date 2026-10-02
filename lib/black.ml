@@ -82,8 +82,6 @@ module Coordinates = struct
       let exponent =
         (snd (Float.frexp spot) + snd (Float.frexp strike)) asr 1
       in
-      let scale v = Float.ldexp v (-exponent) in
-      let spot' = scale spot and strike' = scale strike in
       (* ln((S + Sl)/(K + Kl)) = ln(S/K) + Sl/S - Kl/K to first order. *)
       let ln_ratio = log_ratio spot strike
       and carried = carry ~rate ~yield ~time in
@@ -91,6 +89,19 @@ module Coordinates = struct
         Dd.add (Dd.add ln_ratio carried)
           (Dd.of_float ((spot_low /. spot) -. (strike_low /. strike)))
       in
+      let x_terms = Float.abs ln_ratio.hi +. Float.abs carried.hi in
+      (* For a tiny intrinsic, leave room for its product with the cash
+         leg before restoring the currency exponent. The lift depends only
+         on dimensionless x, preserving power-of-two homogeneity. With
+         x_terms <= 1 the input ratio is bounded by e, so lifted coordinates
+         remain below 2^514. *)
+      let exponent =
+        if x.hi <> 0.0 && Float.abs x.hi < 0x1p-500 && x_terms <= 1.0 then
+          exponent - 512
+        else exponent
+      in
+      let scale v = Float.ldexp v (-exponent) in
+      let spot' = scale spot and strike' = scale strike in
       Live
         {
           asset =
@@ -100,7 +111,7 @@ module Coordinates = struct
             *. (1.0 +. (strike_low /. strike));
           x = x.hi;
           x_low = x.lo;
-          x_terms = Float.abs ln_ratio.hi +. Float.abs carried.hi;
+          x_terms;
           exponent;
           time;
           root_time = fst (Split.sqrt time);
@@ -169,8 +180,27 @@ let live_price side (c : Coordinates.live) sigma =
     Dd.mul_float forward_intrinsic theta
   in
   let zero_variance () =
-    let i = intrinsic () in
-    if i.hi > 0.0 then Dd.to_float_scaled i c.exponent else 0.0
+    if
+      c.spot = c.strike && c.spot_low = c.strike_low
+      && Float.max (Float.abs c.rate) (Float.abs c.yield) *. c.time < 0x1p-500
+    then
+      (* Here I = S (r-q) T (1 + O(max(|r|,|q|) T)). The omitted
+         relative term is below 2^-499. Form the leading product from
+         mantissas: (r-q)T itself need not be representable. *)
+      let rate =
+        Dd.mul_float (Dd.sub (Dd.of_float c.rate) (Dd.of_float c.yield)) theta
+      in
+      if rate.hi <= 0.0 then 0.0
+      else
+        let rt, re = Float.frexp c.time in
+        let _, de = Float.frexp rate.hi in
+        let _, se = Float.frexp c.spot in
+        let spot = Dd.scale { Dd.hi = c.spot; lo = c.spot_low } (-se) in
+        let product = Dd.mul_float (Dd.mul spot (Dd.scale rate (-de))) rt in
+        Dd.to_float_scaled product (c.exponent + se + de + re)
+    else
+      let i = intrinsic () in
+      if i.hi > 0.0 then Dd.to_float_scaled i c.exponent else 0.0
   in
   let m () = Float.sqrt c.asset *. Float.sqrt c.cash in
   if sigma = 0.0 then zero_variance ()

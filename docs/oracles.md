@@ -1,6 +1,6 @@
 # Oracles
 
-Every accuracy claim in this project is measured against this project's own references. They are generated from the model definitions (docs/model-contracts.md) in mpmath, independently of the library's algorithms. The fixtures are committed, hashed and checked in CI, so the tests need nothing outside the repository.
+Every accuracy claim in this project is measured against this project's own references. They are generated from the model definitions (docs/model-contracts.md) in mpmath, independently of the library's algorithms. The fixtures are committed, hashed and checked in CI, so the tests need no downloaded reference data. Test builds use Python 3's standard library to verify the analytical majorants; mpmath is needed only to regenerate fixtures.
 
 The approach is modelled on FerroRisk's oracle practice: pinned generators, agreement between precisions, provenance hashes, and analytic bounds for values below binary64. FerroRisk's data serves only as an optional second opinion (`scripts/ferro_crosscheck.sh`). It is never ground truth.
 
@@ -13,6 +13,8 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 | `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
 | `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,760); 63% have an unrepresentable F + d or K + d |
 | `iv` | `gen_iv.py` | implied-volatility outcomes, exact roots and rounding cells for all four models, on a grid and a random sample |
+| `dd` | `gen_dd.py` | 24,451 three-word/exponent references, including 13,041 nonzero low words, reduction boundaries and subnormals |
+| `regressions` | `gen_regressions.py` | five exact near-maximum ATM roots and 2,000 near-unit log-coordinate references |
 | `greeks` | `gen_greeks.py` | the ten Greeks for all four models, including the defined limits at expiry |
 
 ## Generation rules
@@ -46,5 +48,11 @@ These were found by this project's own oracles and property tests, not FerroRisk
 - **The intrinsic's formulation** needed choosing by the size of x's parts. A carry-cancelled forward was 13 ULP off at zero variance.
 - **The scale exponent** used truncating division, which broke exact homogeneity.
 - **A subnormal quote** lost bits to rescaling before the inverse's final correction.
-- **"Within 2 ULP of the exact root"** held on FerroRisk's grid but not in general. The defensible bound is Jäckel's attainable accuracy.
+- **"Within 2 ULP of the exact root"** held on FerroRisk's grid but not in general. The scorer composes normalization and kernel errors and accounts for conditioning; Jäckel's attainable accuracy alone is not an implementation error guarantee.
 - **In the generators themselves:** a false agreed zero at T = 1e-200, and an unconverged root returned as a value. Both are fixed by rules 3 and 4.
+
+## Bound and scorer controls
+
+`python3 oracle/verify_bounds.py` verifies rational majorants without numerical samples. Dune runs it to generate `Component_bounds`, so scorers and derivation constants cannot silently diverge. The DD fixture uses 110/220 digits plus cancellation-dependent extra precision, and scores at a separate reference exponent. Nonfinite results fail. The `dd-reference-nan` mutant explicitly verifies that failure.
+
+The near-maximum regression fixture evaluates the ATM inverse through `erfinv`, independently of the library's iteration and the general oracle's root solver. Quotient-remainder mutation is checked at the coordinate level, where extra reference bits distinguish errors hidden by final price rounding.

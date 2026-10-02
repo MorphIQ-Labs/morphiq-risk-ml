@@ -14,8 +14,7 @@
      outside the subnormals);
    - displaced Black is Black-76 on the sums, bit for bit, wherever the
      sums are representable (dyadic inputs);
-   - implied volatility recovers σ to 4x Jäckel's attainable accuracy
-     (1 + |b/(s b')|) ε, or reprices to the quote within 2 ULP;
+   - implied volatility round trips compose forward and inverse error;
    - delta, vega and theta match a Richardson-extrapolated central
      difference of the served price (off the deep tails). *)
 
@@ -169,42 +168,49 @@ let translation =
       && Black.Displaced.greeks dsp (side c) v
          = Black.Black76.greeks b76 (side c) v)
 
-let ulps a b =
-  let o x =
-    let b = Int64.bits_of_float x in
-    if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int)
-    else b
-  in
-  Int64.to_float (Int64.abs (Int64.sub (o a) (o b)))
-
-(* The inverse's attainable relative accuracy is (1 + |b/(s b')|) ε, with b
-   the normalised out-of-the-money price at total volatility s (Jäckel,
-   "Let's Be Rational", §6). A rounding cell can be narrower than that, so
-   recovering σ to a fixed ULP count is not attainable in general. The
-   property holds the root to 4x the bound and records the worst ratio. *)
-let worst_ratio = ref 0.0
-
+(* The generating sigma and the exact root of the rounded served quote need
+   not agree. Compose forward price error with the inverse error instead of
+   accepting a root merely because its served price rounds to the quote. *)
 let round_trip =
   QCheck.Test.make ~count
-    ~name:"implied volatility within 4x Jäckel's attainable accuracy" arb
-    (fun c ->
+    ~name:"IV round trip composes forward and inverse error" arb (fun c ->
       let a = bsm c in
       let p = price c in
+      let spacing = Bounds.ulp (p +. (33.0 *. Bounds.ulp p)) in
+      let uncertainty = 32.5 *. spacing in
+      let intrinsic = Black.Bsm.price a (side c) (lognormal 0.0) in
+      let asset, cash = legs c in
+      let maximum = if c.call then asset else cash in
+      (* A forward error interval touching a boundary cannot identify the
+         generating sigma. Outcome and boundary-root tests cover those rows. *)
+      QCheck.assume (p -. uncertainty > intrinsic && p +. uncertainty < maximum);
       match Black.Bsm.implied a (side c) p with
       | Ok (Iv.Root v) ->
-          let s' = Vol.to_float v in
-          let x = Float.log (c.s /. c.k) +. ((c.r -. c.q) *. c.t)
-          and s = c.sigma *. Float.sqrt c.t in
-          let x = -.Float.abs x in
-          let b = Internal.Normalised_black.b x s
-          and v = Internal.Normalised_black.vega x s in
-          let attainable = (1.0 +. Float.abs (b /. (s *. v))) *. eps in
-          let ratio = Float.abs (s' -. c.sigma) /. c.sigma /. attainable in
-          let reprice = ulps (Black.Bsm.price a (side c) (lognormal s')) p in
-          (* A root that reprices the quote exactly is exact for it, however
-             far from the generating σ a flat price lets it lie. *)
-          if reprice > 0.0 && ratio > !worst_ratio then worst_ratio := ratio;
-          ratio <= 4.0 || reprice <= 2.0
+          let candidate = Vol.to_float v in
+          let x = Float.log (c.s /. c.k) +. ((c.r -. c.q) *. c.t) in
+          let rt = Float.sqrt c.t in
+          let vega sigma =
+            let total = sigma *. rt in
+            let d1 = (x /. total) +. (0.5 *. total) in
+            c.s
+            *. Float.exp (-.c.q *. c.t)
+            *. rt
+            *. Float.exp (-0.5 *. d1 *. d1)
+            /. Float.sqrt (2.0 *. Float.pi)
+          in
+          (* Black vega has one maximum as sigma varies, hence its minimum
+             on an interval is at an endpoint. *)
+          let vmin = Float.min (vega candidate) (vega c.sigma) in
+          let spacing = Bounds.ulp (p +. (33.0 *. Bounds.ulp p)) in
+          let forward = 32.5 *. spacing /. vmin in
+          let inverse =
+            Iv_bounds.black_root_bound "bsm" ~side_call:c.call ~s:c.s ~k:c.k
+              ~t:c.t ~r:c.r ~q:c.q ~shift:0.0 ~quote:p ~root:c.sigma
+            *. c.sigma
+          in
+          Bounds.within
+            ~error:(Float.abs (candidate -. c.sigma))
+            ~bound:(forward +. inverse)
       | _ -> p = 0.0)
 
 let derivative g h =
@@ -258,8 +264,4 @@ let () =
         finite_differences;
       ]
   in
-  Printf.printf
-    "implied volatility: worst error %.2f x attainable, over roots that do not \
-     reprice exactly\n"
-    !worst_ratio;
   exit code

@@ -210,17 +210,17 @@ let () =
                        st.worst_line <- line);
                      (* Forward models, live: rho = -T V exactly, so it must
                         be RN(-T V) of the served price, and its error is the
-                        price's plus one rounding: the family's price budget
-                        + 1 ULP. At expiry rho is the contract's limit. *)
+                        price's absolute error multiplied by T, plus rounding.
+                        ULP spacings must be converted before composition. At expiry rho is the contract's limit. *)
                      let composed_ok, b =
                        if forward_rho model greek && t > 0.0 then
                          let p = price model side ~s ~k ~t ~r ~sigma ~shift in
                          ( Int64.equal (Int64.bits_of_float v)
                              (Int64.bits_of_float (-.t *. p)),
-                           Bounds.price_ulp_budget_max
-                             (if model = "bachelier" then "bachelier"
-                              else "black")
-                           +. 1.0 )
+                           Bounds.scaled_price_error ~time:t ~price:p ~got:v
+                             ~reference
+                             ~budget:(Bounds.price_ulp_budget_max family)
+                           /. Bounds.ulp reference )
                        else
                          ( true,
                            Option.value ~default:Float.infinity
@@ -229,7 +229,12 @@ let () =
                      if not composed_ok then (
                        st.fails <- st.fails + 1;
                        fail (Printf.sprintf "rho %h is not RN(-T V)" v));
-                     if u > b then (
+                     if
+                       not
+                         (Bounds.within
+                            ~error:(Float.abs (v -. reference))
+                            ~bound:(b *. Bounds.ulp reference))
+                     then (
                        st.fails <- st.fails + 1;
                        fail
                          (Printf.sprintf

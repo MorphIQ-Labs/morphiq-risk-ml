@@ -20,7 +20,7 @@ from pathlib import Path
 import mpmath
 
 ORACLE = Path(__file__).resolve().parent
-FIXTURES = ("elementary", "normal", "european", "displaced", "iv", "greeks")
+FIXTURES = ("elementary", "normal", "european", "displaced", "iv", "greeks", "dd", "regressions")
 
 
 def blake(path):

@@ -60,8 +60,11 @@ let () =
         let ec = rel (Internal.Normal_dd.cdf x) cdf
         and ep = rel (Internal.Normal_dd.pdf x) pdf in
         let cdf_budget = 0x1p-100 *. Float.max 1.0 (0.5 /. fst cdf) in
-        if ec > cdf_budget || ep > 0x1p-100 then
-          Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep)
+        if
+          not
+            (Float.is_finite ec && Float.is_finite ep && ec <= cdf_budget
+           && ep <= 0x1p-100)
+        then Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep)
         else None)
       cases
   in

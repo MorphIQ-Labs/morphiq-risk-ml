@@ -29,18 +29,104 @@ type mutant = {
   mechanism : string;
 }
 
-(* Two mechanisms are justified by the error analysis but cannot be decided
-   by a test, so they are not here. Each lowers a certified bound by less than
-   the certified slack the rest of the computation already carries, so no
-   input can make its removal violate a bound (docs/error-analysis.md §5.1):
-
-   - ln(S/K)'s quotient remainder in double-word: it removes a u^2 term from
-     x's bound, below ln q's own certified error.
-   - The intrinsic's branch rule (x's terms <= 1): it picks whichever of
-     C expm1(x) and A - C has the smaller certified error; the other branch's
-     realized error stays inside the chosen one's bound. *)
+(* The quotient remainder has a direct coordinate oracle: near S/K = 1,
+   rounding rho once loses relative accuracy even when the final price happens
+   to round identically. The intrinsic branch guard remains an explicit probe,
+   not a claim of universal indistinguishability (error-analysis §5.1). *)
 let catalog =
   [
+    {
+      id = "sqrt-exponent-scale";
+      file = "lib/dd.ml";
+      snippet = "else (snd (Float.frexp a.hi) - 1) asr 1";
+      replacement = "else 0";
+      killer = "dd_reference";
+      mechanism = "even-exponent normalization before the square-root residual";
+    };
+    {
+      id = "intrinsic-coordinate-scale";
+      file = "lib/black.ml";
+      snippet =
+        "if x.hi <> 0.0 && Float.abs x.hi < 0x1p-500 && x_terms <= 1.0 then";
+      replacement = "if false then";
+      killer = "numerical_regressions";
+      mechanism =
+        "retain a tiny displaced spread before restoring the currency scale";
+    };
+    {
+      id = "rho-ulp-propagation";
+      file = "test/bounds.ml";
+      snippet =
+        "(Float.abs time *. price_error) +. (0.5 *. ulp got) +. (0.5 *. ulp \
+         reference)";
+      replacement =
+        "let _ = time, price_error, got in (budget +. 1.0) *. ulp reference";
+      killer = "numerical_regressions";
+      mechanism = "price ULP counts do not survive multiplication by T";
+    };
+    {
+      id = "bachelier-iv-quantum";
+      file = "test/iv_bounds.ml";
+      snippet = "+. 0x1p-1074 in";
+      replacement = "+. 0.0 in";
+      killer = "oracle_iv";
+      mechanism = "absolute rounding error for subnormal Bachelier quotes";
+    };
+    {
+      id = "quotient-remainder";
+      file = "lib/black.ml";
+      snippet =
+        "Dd.add (Dd.log_float q) (Dd.sub rho (Dd.mul_float (Dd.mul rho rho) \
+         0.5))";
+      replacement =
+        "let rho = Dd.of_float (Dd.to_float rho) in\n\
+        \      Dd.add (Dd.log_float q) (Dd.sub rho (Dd.mul_float (Dd.mul rho \
+         rho) 0.5))";
+      killer = "numerical_regressions";
+      mechanism = "double-word quotient remainder near unit spot/strike ratios";
+    };
+    {
+      id = "division-numerator-scale";
+      file = "lib/dd.ml";
+      snippet = "else snd (Float.frexp a.hi) - 1";
+      replacement = "else 0";
+      killer = "dd_reference";
+      mechanism = "normalise the dividend before the reciprocal product";
+    };
+    {
+      id = "expm1-tiny";
+      file = "lib/dd.ml";
+      snippet = "if Float.abs x.hi < 0x1p-104 then x";
+      replacement = "if false then x";
+      killer = "dd_reference";
+      mechanism = "retain tiny expm1 inputs before division by 512";
+    };
+    {
+      id = "intrinsic-tiny-carry";
+      file = "lib/black.ml";
+      snippet = "c.spot = c.strike && c.spot_low = c.strike_low";
+      replacement = "false && c.spot = c.strike && c.spot_low = c.strike_low";
+      killer = "numerical_regressions";
+      mechanism = "carry below the exponent range, restored at currency scale";
+    };
+    {
+      id = "dd-reference-nan";
+      file = "test/dd_reference.ml";
+      snippet = "let e = error got exponent (f h) (f l) (f tail) in";
+      replacement =
+        "let _ = got in let e = error (Dd.of_float Float.nan) exponent (f h) \
+         (f l) (f tail) in";
+      killer = "dd_reference";
+      mechanism = "nonfinite component outputs must fail the DD scorer";
+    };
+    {
+      id = "iv-maximum-error";
+      file = "test/iv_bounds.ml";
+      snippet = "u +. (e_max /. gap_lower)";
+      replacement = "u +. (0.0 /. gap_lower)";
+      killer = "numerical_regressions";
+      mechanism = "maximum-leg error amplified by the complement gap";
+    };
     {
       id = "floor-exponent";
       file = "lib/black.ml";
@@ -208,6 +294,24 @@ let catalog =
     };
   ]
 
+(* Diagnostic only: a survivor is recorded, never called impossible to kill.
+   Run with --probe intrinsic-terms; exit 1 means a compiled survivor. *)
+let probes =
+  [
+    {
+      id = "intrinsic-terms";
+      file = "lib/black.ml";
+      snippet =
+        "if Float.abs c.x <= 0.35 && c.x_terms <= 1.0 then Dd.mul cash \
+         (Dd.expm1 x)";
+      replacement = "if Float.abs c.x <= 0.35 then Dd.mul cash (Dd.expm1 x)";
+      killer = "oracle_price";
+      mechanism =
+        "intrinsic branch guard; current end-to-end corpus may not distinguish \
+         it";
+    };
+  ]
+
 (* Process plumbing. *)
 
 (* A dune started from [dune exec] inherits variables that tell it it is
@@ -345,6 +449,9 @@ let score work m =
 
 let () =
   let args = List.tl (Array.to_list Sys.argv) in
+  let args, catalog =
+    match args with "--probe" :: rest -> (rest, probes) | _ -> (args, catalog)
+  in
   if args = [ "--list" ] then
     List.iter
       (fun m ->

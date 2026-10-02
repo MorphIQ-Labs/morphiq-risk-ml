@@ -2,9 +2,8 @@
    (oracle/convert_public_iv.py). Expected outcome by reference status:
 
    - root: for the Black family, within the derived bound of the exact root
-     (black_root_bound, docs/error-analysis.md §6); for Bachelier, a
-     volatility in the rounding cell (every σ whose exact price rounds to the
-     quote) or within 4 ULP. How
+     (black_root_bound, docs/error-analysis.md §6); for Bachelier, an absolute price-error budget
+     transported through the minimum vega between candidate and reference. How
      many rows are no further from the root than FerroRisk's own largest
      observed error (public_iv_observed_envelope.json) is reported alongside.
    - zero_volatility_limit, rounded_zero_volatility_bound: σ = 0 exactly.
@@ -117,98 +116,6 @@ type stat = {
   mutable worst_ulp : float;
 }
 
-(* The Black family's implied-volatility error bound, per root
-   (docs/error-analysis.md §6), derived from the code path. The quote is
-   exact; the inverse forms β, or β̄ = b_max - β near the maximum, from the
-   double-word legs and rounds it once (u), then takes one Newton step against
-   the kernel. LBR's two Householder steps leave the start accurate to working
-   precision (Jäckel 2015, 2024), so the step's quadratic term is below u².
-   With s the exact normalised root and b' = ∂b/∂s, the relative error in σ
-   is at most
-
-     3u + (δβ + κ) · c,
-
-   where δβ = u below the money; in the money β = (quote - I)/m carries the
-   intrinsic's double-word error E_I (Bounds.intrinsic_error), so
-   δβ = u + (E_I + 3u² quote)/(quote - I), and
-
-   3u covers σ = s / sqrt T with sqrt T's low part. By branch:
-   - β <= b_max/2: c = b/(s b') and κ = 64u, the kernel's component bound
-     (the price oracle's enforced 32 ULP for out-of-the-money values);
-   - β > b_max/2: c = b̄/(s b') and κ = 17u: b̄ = ½ e^-(h²+t²)/2 (erfcx(q1) +
-     erfcx(q2)) with q1, q2 >= 0 there (s² > 2|x|), so 8u from erfcx's
-     4-ULP component bound, 3u from the arguments, u for the sum and 5u
-     for the scaled exponential;
-   - β < 2^-900 (Newton on ln b): c = b/(s b') times the absolute error in
-     ln β - ln b, from Elementary.log (1 ULP each) and the kernel (64u). *)
-let black_root_bound model ~side_call ~s ~k ~t ~r ~q ~shift ~quote ~root =
-  let u = 0x1p-53 in
-  let s' = s +. shift and k' = k +. shift in
-  let q' = if model = "bsm" then q else r in
-  let x = -.Float.abs (Float.log (s' /. k') +. ((r -. q') *. t)) in
-  let sd = root *. Float.sqrt t in
-  if not (sd > 0.0 && Float.is_finite sd) then Float.infinity
-  else
-    let ln_b, bx = Internal.Normalised_black.ln_b_and_scaled x 0.0 sd in
-    let c_b = bx /. sd in
-    let h = x /. sd and half = 0.5 *. sd in
-    let c_bar =
-      Internal.Normalised_black.sqrt_two_pi *. 0.5
-      *. (Internal.Cody.erfcx ((half +. h) *. Float.sqrt 0.5)
-         +. Internal.Cody.erfcx ((half -. h) *. Float.sqrt 0.5))
-      /. sd
-    in
-    (* β = (quote - I⁺)/m: below the money I⁺ = 0; in the money the
-       intrinsic's double-word error E_I is divided by quote - I, the
-       out-of-the-money part, m b(x, s). *)
-    let a = s' *. Float.exp (-.q' *. t) and c = k' *. Float.exp (-.r *. t) in
-    let itm = (if side_call then a -. c else c -. a) > 0.0 in
-    let otm = Float.sqrt a *. Float.sqrt c *. Float.exp ln_b in
-    let d_beta =
-      if itm then
-        let e_i =
-          Bounds.intrinsic_error model ~s ~k ~t ~r ~q ~shift ~reference:0.0
-        in
-        u +. ((e_i +. (3.0 *. Bounds.u2 *. quote)) /. otm)
-      else u
-    in
-    let linear = (3.0 *. u) +. ((d_beta +. (64.0 *. u)) *. c_b) in
-    let complement = (3.0 *. u) +. ((d_beta +. (17.0 *. u)) *. c_bar) in
-    let logarithmic =
-      let exponent = (snd (Float.frexp s') + snd (Float.frexp k')) asr 1 in
-      let a = s' *. Float.exp (-.q' *. t) and c = k' *. Float.exp (-.r *. t) in
-      let ln_m =
-        (0.5 *. (Float.log a +. Float.log c))
-        -. (float exponent *. Float.log 2.0)
-      in
-      let ln_error =
-        3.0 *. u
-        *. (Float.abs (Float.log quote)
-           +. Float.abs (float exponent *. Float.log 2.0)
-           +. Float.abs ln_m)
-        +. (64.0 *. u)
-        +. (2.0 *. u *. Float.abs ln_b)
-      in
-      (3.0 *. u) +. (ln_error *. c_b)
-    in
-    let ln_half_max = (0.5 *. x) -. Float.log 2.0
-    and ln_small = -900.0 *. Float.log 2.0 in
-    (* Within a hair of a threshold the exact β cannot say which branch the
-       rounded β took. *)
-    let near a b = Float.abs (a -. b) <= 1e-6 *. Float.max 1.0 (Float.abs b) in
-    let candidates =
-      (if ln_b > ln_half_max || near ln_b ln_half_max then [ complement ]
-       else [])
-      @ (if ln_b < ln_small || near ln_b ln_small then [ logarithmic ] else [])
-      @
-      if
-        (ln_b <= ln_half_max && ln_b >= ln_small)
-        || near ln_b ln_half_max || near ln_b ln_small
-      then [ linear ]
-      else []
-    in
-    List.fold_left Float.max 0.0 candidates
-
 let () =
   let stats = Hashtbl.create 32 in
   let unresolved = Hashtbl.create 8 in
@@ -294,19 +201,23 @@ let () =
                      if u <= 4.0 then st.within_4 <- st.within_4 + 1;
                      if within_ferro then st.within_ferro <- st.within_ferro + 1;
                      if u > st.worst_ulp then st.worst_ulp <- u;
-                     (* Enforced. The Black family: the derived bound above,
-                        plus half an ULP for the reference's own rounding.
-                        Bachelier's bound is not yet derived (see the CHANGELOG);
-                        it keeps the rounding cell or 4 ULP. *)
+                     (* Conditional component bounds; the rounding cell is
+                        diagnostic only, for every model. *)
                      let ok =
-                       if model = "bachelier" then in_cell || u <= 4.0
+                       if model = "bachelier" then
+                         Bounds.within
+                           ~error:(Float.abs (v -. root))
+                           ~bound:
+                             (Iv_bounds.bachelier_root_bound
+                                ~side_call:(side = Side.Call) ~s ~k ~t ~r
+                                ~quote:target ~root ~candidate:v)
                        else
-                         let rel =
-                           black_root_bound model ~side_call:(side = Side.Call)
-                             ~s ~k ~t ~r ~q ~shift ~quote:target ~root
-                         in
-                         Float.abs (v -. root)
-                         <= (rel *. root) +. (0.5 *. Bounds.ulp root)
+                         Bounds.within
+                           ~error:(Float.abs (v -. root))
+                           ~bound:
+                             (Iv_bounds.black_interval_bound model
+                                ~side_call:(side = Side.Call) ~s ~k ~t ~r ~q
+                                ~shift ~quote:target ~root ~candidate:v)
                      in
                      record ok;
                      if not ok then

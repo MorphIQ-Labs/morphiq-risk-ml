@@ -1,15 +1,7 @@
-(* Scores European prices against FerroRisk's #440 exact-input oracle
-   (oracle/convert_440.py). The budget for each region is FerroRisk's measured
-   worst case (SPEC §7.1) on both metrics:
-
-   - ULP: error in units of the correctly rounded exact value.
-   - ε·scale: absolute error in units of EPSILON * max(S e^-qT, K e^-rT).
-
-   A row passes only if it is within both, except that a value within 4 ULP
-   of the exact value always passes. ε·scale exists to expose cancellation in
-   values far below the scale; a value that close to exact has none, and it
-   can exceed FerroRisk's ε·scale worst only where the price is far above the
-   scale. Two Bachelier rows do that: s = 1000, price 359, 2 ULP. *)
+(* Scores exact-input prices. ULP budgets are measured regression limits.
+   Both the ULP and normwise limits must hold. For Bachelier the norm includes
+   sigma sqrt(T)/sqrt(2 pi): unlike Black, its price is not bounded by the
+   discounted legs. See docs/error-analysis.md; no small-ULP bypass exists. *)
 
 open Morphiq_risk
 
@@ -101,13 +93,16 @@ let price model side ~s ~k ~t ~r ~q ~sigma ~shift =
   | m -> invalid_arg m
 
 (* EPSILON * scale, the normwise unit FerroRisk reports alongside ULP. *)
-let scale model ~s ~k ~t ~r ~q ~shift =
+let scale model ~s ~k ~t ~r ~q ~sigma ~shift =
   let dr = Float.exp (-.r *. t) in
   match model with
   | "bsm" -> Float.max (s *. Float.exp (-.q *. t)) (k *. dr)
   | "black76" -> dr *. Float.max s k
   | "displaced" | "black76_shifted" -> dr *. Float.max (s +. shift) (k +. shift)
-  | _ -> dr *. Float.max (Float.abs s) (Float.abs k)
+  | _ ->
+      dr
+      *. (Float.max (Float.abs s) (Float.abs k)
+         +. (sigma *. Float.sqrt t /. Float.sqrt (2.0 *. Float.pi)))
 
 type stat = {
   mutable n : int;
@@ -120,7 +115,7 @@ type stat = {
 
 let source = ref "-"
 
-(* The largest share of the certified error E used by a zero-variance row. *)
+(* The largest share of the analytical error budget E used by a zero-variance row. *)
 let derived_worst = ref 0.0
 let families : (string, int * int) Hashtbl.t = Hashtbl.create 4
 
@@ -176,7 +171,7 @@ let () =
              let u = ulps got reference in
              let sc =
                Float.abs (got -. reference)
-               /. (epsilon_float *. scale model ~s ~k ~t ~r ~q ~shift)
+               /. (epsilon_float *. scale model ~s ~k ~t ~r ~q ~sigma ~shift)
              in
              let sc = if Float.is_nan sc then Float.infinity else sc in
              let _, scale_budget = ferro_budget family region in
@@ -209,10 +204,14 @@ let () =
                  +
                  match derived with
                  | Some bound ->
-                     if Float.abs (got -. reference) <= bound then 0 else 1
-                 | None ->
-                     if u > 4.0 && (u > ulp_budget || sc > scale_budget) then 1
-                     else 0 );
+                     if
+                       Bounds.within
+                         ~error:(Float.abs (got -. reference))
+                         ~bound
+                     then 0
+                     else 1
+                 | None -> if u > ulp_budget || sc > scale_budget then 1 else 0
+               );
              st.errors <- u :: st.errors;
              if u > st.worst_ulp then (
                st.worst_ulp <- u;
@@ -221,7 +220,7 @@ let () =
              (match derived with
              | Some bound ->
                  (* The excess over the two half-ULP roundings, as a fraction
-                    of E: how much of the intrinsic's certified error the
+                    of E: how much of the intrinsic's analytical error the
                     served value uses. *)
                  let rounding =
                    0.5 *. (Bounds.ulp got +. Bounds.ulp reference)
@@ -234,8 +233,12 @@ let () =
              | None -> ());
              let failed =
                match derived with
-               | Some bound -> not (Float.abs (got -. reference) <= bound)
-               | None -> u > 4.0 && (u > ulp_budget || sc > scale_budget)
+               | Some bound ->
+                   not
+                     (Bounds.within
+                        ~error:(Float.abs (got -. reference))
+                        ~bound)
+               | None -> u > ulp_budget || sc > scale_budget
              in
              if failed then (
                st.fails <- st.fails + 1;
@@ -277,7 +280,8 @@ let () =
       stats;
   if Sys.argv.(1) <> "" then
     Printf.printf
-      "zero variance: worst excess over rounding %.3g of the certified error E\n"
+      "zero variance: worst excess over rounding %.3g of the analytical error \
+       budget E\n"
       !derived_worst;
   List.iter print_endline (List.rev !failures);
   if !failures <> [] then exit 1

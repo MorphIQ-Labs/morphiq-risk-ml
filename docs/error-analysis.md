@@ -8,7 +8,7 @@ For each numerical path this document gives:
 
 ε is 2^-53, the binary64 unit roundoff, and "DD" is double-double, about 2^-104 relative. The measured worst cases are in docs/results-*.md, and the budgets that enforce them are in the oracle scorers.
 
-These are analyses with measured envelopes, not machine-checked proofs. Where a bound is only measured over the oracles' grids and random samples, this says so.
+There are three different kinds of evidence here: published primitive theorems, analytical majorants for compositions, and measured regression envelopes. A composition that uses a measured envelope is **conditional on that envelope**; testing the composition does not prove its premise for every input. The exact-rational checks in `oracle/verify_bounds.py` check the inequalities below, not the OCaml implementation. They generate the constants consumed by the tests.
 
 ## 0. Double-double primitives (`Internal.Dd`)
 
@@ -26,7 +26,9 @@ Every bound below is composed from these. Each primitive is a published algorith
 
 JMP is Joldes, Muller and Popescu, "Tight and rigorous error bounds for basic building blocks of double-word arithmetic", ACM TOMS 44(2), 2017. LLMPR is Lefèvre, Louvet, Muller, Picot and Rideau, "Accurate calculation of Euclidean norms using double-word arithmetic", ACM TOMS 49(1), 2023.
 
-**Domain.** The bounds assume no underflow or overflow. `div` computes `1/b.hi`, which overflows for a subnormal divisor, so it first scales b exactly into [1, 2) by a power of two and scales the quotient back. That keeps the computation inside the theorem's domain whenever the quotient itself is normal. Results that fall into the subnormal range carry absolute rather than relative error, and are rounded once by `to_float_scaled`.
+**Domain.** The primitive theorems assume no underflow or overflow. Scaling only the divisor does not establish this: `minsub/(3*minsub)` previously returned 0.5 instead of 1/3. Division now normalizes the divisor and extreme dividend before the reciprocal/product and restores their exponent difference. A dividend already in [2^-400,2^400] needs no normalization: multiplying by the normalized reciprocal leaves ample exponent room. Square root likewise normalizes by an even exponent. Independently scaling two result components costs at most one subnormal quantum, 2^-1074, in addition to the relative bound. A normal result alone never establishes the theorem's assumptions about intermediate values. `two_prod` is exact only when its residual is representable.
+
+The cited algorithms are also summarized, with later formalized bounds, in [Muller, Floating-point arithmetic, §5](https://doi.org/10.1017/S0962492922000101). We retain the conservative 5u² multiplication bound; that review gives the tighter 4u² for DWTimesDW3.
 
 ## 1. Elementary functions (`Internal.Elementary`)
 
@@ -36,33 +38,78 @@ JMP is Joldes, Muller and Popescu, "Tight and rigorous error bounds for basic bu
 | expm1 | \|x\| ≤ 1: the series to degree 21, with truncation 1/22! < 2^-70. Otherwise 2^k(1 + em1) − 1. | Horner rounding is relative, because no cancellation happens at the leading term. | ≤ 1 ULP |
 | log, log1p | m ∈ [√½, √2), f = m − 1 (exact, Sterbenz); 2·atanh(u) with u = f/(2 + f) and its fma remainder | Series truncation is < 2^-60 relative. Carrying u's remainder removes the quotient's rounding from the leading 2u. log adds e·ln2_hi exactly. | ≤ 1 ULP over 49k arguments |
 
-**log1p's derived bound.** For |f| < 2^-54, log1p returns f, which is correctly rounded because f²/2 < ulp(f)/4 (fdlibm `s_log1p.c`); below that, the reduced path's u = f/2 would underflow. On the reduced path, f ∈ [√½ − 1, √2 − 1] and |f| ≥ 2^-54, the result is z = RN(2u + T) with y = 2·atanh(w), w = f/(2 + f). Apart from that final rounding, the error is at most 0.085·u·|y| (u = 2^-53):
+### 1.1 Reduced binary64 log1p
 
-| Source | Bound, × u·\|y\| |
-| --- | ---: |
-| The tail evaluated at u rather than w | 0.030 |
-| The tail's evaluation: coefficients, Horner, v = u², the products | 0.036 |
-| Series truncation (< 2^-60 relative) | 0.0078 |
-| Rounding of T | 0.0098 |
-| ul's computed error | ≈ 4u, negligible |
+For |f| < 2^-54, returning f is correctly rounded: the omitted term f²/2 is less than a quarter spacing. The cutoff agrees with [fdlibm's s_log1p.c](https://netlib.org/fdlibm/s_log1p.c), `ax < 0x3c900000`.
 
-So |z − y| ≤ ulp(z)/2 + 0.085·u·|y|. The scorer checks this against a reference that carries its residual (exact − reference). Measured worst: 0.5205 ULP from exact. Without the quotient remainder ul, the leading 2u carries up to another u·|y|, and the bound fails.
+Otherwise let w = f/(2+f), y = 2 atanh(w), q = RN(f/RN(2+f)), and v = q². On the reduced interval v < V = 0.0295, including the rounding at its endpoints. TwoSum and the quotient residual restore the leading 2w to O(u²); the tail is evaluated at q. There are **two** roundings in q, from the denominator and the division. Bounding only one was a defect in the former 0.085 calculation.
 
-**Horner evaluation** in this project's polynomials uses one explicit fma per step (`Elementary.horner`).
+Use the positive-coefficient series for atanh and bound each weighted Horner error by a geometric series. In units of u|y| the contributions are:
 
-**Determinism.** These use only IEEE basic operations and fma, which every conforming platform rounds the same way (docs/determinism.md).
+| Source | Upper expression |
+| --- | --- |
+| Tail argument, two roundings in q | 2V/(1−V) |
+| Coefficients, explicit-fma Horner, squared argument and products | (3 + 2/(1−V)) V/[3(1−V)] |
+| Omitted terms after degree 21 | V^11/[23(1−V)u] |
+| Adding the tail to the quotient correction | V/[3(1−V)] |
+| Computed quotient correction and second-order arithmetic | 32u, plus the inflation below |
 
-**Double-double exp and expm1** (`Internal.Dd`) follow the QD library (Hida, Li and Bailey, qd-2.3.24 `dd_real::exp`): m = round(x/ln 2), r = (x − m·ln 2)/512, the Taylor series of e^r − 1 until a term falls below 2^-104/512, then nine doublings s ← 2s + s². The reduction's error, about |x|·2^-105 absolute in r, is relative error in e^x. A pinned mpmath test (`test/dd_reference.ml`) measures exp within 2^-100 + |x|·2^-105. Unlike QD, exp continues into the subnormal range, where the low part underflows.
+Their sum, with higher-order inflation, is **0.128144454533 < 0.14**. Thus the test requires |z−y| ≤ ulp(z)/2 + 0.14u|y|, using the oracle's residual to measure fractional ULPs. This replaces 0.085, whose rounded-down table and missing denominator contribution did not establish its claim. The measured worst remains about 0.5205 ULP. Removing the quotient correction fails this bound.
 
-**Double-double log** stays the atanh series on m ∈ [√½, √2]. QD's log, a Newton step x + m·e^(−x) − 1, has absolute error near 2^-104, which is unbounded relative error as ln m → 0. ln(S/K) for S ≈ K needs relative accuracy there: the QD form put a zero-variance price 21 ULP off.
+### 1.2 Double-word exp and expm1
+
+The construction follows [QD 2.3.24, dd_real.cpp](https://github.com/BL-highprecision/QD/blob/v2.3.24/src/dd_real.cpp): reduction by 512, Taylor accumulation and nine doublings. Our factorial coefficients are generated by DD division, unlike QD's literals, so their error must be included. QD is an algorithm reference, not a proof of the following bounds.
+
+Write A = 3u²+13u³, M = 5u², D = 9.8u². A product of n error factors is bounded using `(1+e)^n−1`, not by dropping higher-order terms. For the estimates below we additionally multiply by H = 1/(1−100000u). This exceeds the products of fewer than 1000 roundoff factors and the reciprocal perturbations of the denominators (all at least 0.97, except the explicitly treated cancellation). It is an analytical rounding allowance, not an observed maximum.
+
+After reduction |r| < R = 0.0007. The relative Taylor arithmetic bound, in u² units, is
+
+    S = ((1+A)^7−1)/u² + 5R/2
+        + (40 + ((1+D)^8−1)/u²) R²/[6(1−R)].
+
+Seven additions cover the quadratic term and terms through degree 8. Each generated factorial needs at most eight divisions; eight power/product errors give the 40 term. For negative r, partial-sum magnitudes can exceed the final magnitude: multiply S by 1.001 (> 1/(1−R)). The relative omitted tail is bounded by the larger of
+
+    R^8/[9!(1−R/10)]
+    2^-113/[5(1−R/6)].
+
+The second expression treats early stopping: the tested small term is included before the loop exits. For doubling `s <- 2s+s²`, each addition contributes A; each multiplication is weighted by |s|/(2−|s|). The sum of these weights over nine doublings is below 0.24. Relative error transport through the whole doubling sequence is below 1.21, since |512r| ≤ 0.347 and |z exp(z)/expm1(z)| < 1.21. Consequently
+
+    H × 1.21 × [1.001 S + max(tails)/u² + 9A/u² + 1.2]
+      = 75.155662471… < 80.
+
+This gives **ε_expm1 = 80u²** on |x| ≤ ln(2)/2. The tiny branch |x| < 2^-104 returns x; its omitted relative term is < 2u² and avoids losing x in division by 512.
+
+For exp, adding 1 weights the expm1 error by |expm1(z)|/exp(z) < 0.416. The two-word ln(2) constant has relative error < u²/4; `verify_bounds.py` establishes this with a rational atanh(1/3) enclosure. Reduction contributes at most (2+3|x|)u²: the DD constant product contributes 2.25|m ln 2|u², and the DD subtraction contributes A|x−m ln 2|. Thus the majorant is **ε_exp(x) = (40+3|x|)u²**: H(0.416×80+3+2) < 40.
+
+Outside the direct expm1 interval, subtraction of 1 gives
+
+    ε_expm1(x) = ε_exp(x) exp(x)/|expm1(x)| + 4u².
+
+These are relative bounds before final exponent scaling, for finite outputs and normalized input pairs in the exp implementation's range. Add an absolute quantum for component underflow. They do not assert a pure relative guarantee in the subnormal range. The 80u² bound is larger than the old measured 64u² envelope: the degree-8 truncation and generated coefficient errors cannot be omitted merely because the observed errors are small.
+
+### 1.3 Double-word log
+
+For m ∈ [√½,√2], w=(m−1)/(m+1), v=w² < V=0.0296. The numerator is exact by Sterbenz and the denominator is an exact DD sum. The atanh series has positive coefficients, allowing geometrically weighted error propagation even for m close to 1. In u² units a reduced bound is
+
+    H [9.8/(1−V) + 3/(1−V) + 5V/(1−V)
+       + 9.8V/[3(1−V)] + 5V/[3(1−V)²] + 5
+       + V^23/[47(1−V)u²]] < 20.
+
+The terms cover the quotient parameter, Horner additions/products, generated reciprocals, squared parameter, final product and truncation. In recombination, |ln m|/|ln a| ≤ 1 and |e ln 2|/|ln a| ≤ 2. The constant product costs (2+1/4)u², and the final DD addition costs A. Therefore **ε_log = 32u²**, above H(20+2×2.25+3) = 27.500000001…. `log_float` accepts one binary64 argument; exp/expm1 tests exercise both input words.
+
+QD's Newton log has absolute error near zero. Its relative error is unbounded as ln m tends to zero; this library needs relative accuracy for near-unit spot/strike ratios. That is why the atanh construction remains.
+
+### 1.4 Independent checking
+
+`dd.txt.gz` contains 24,451 three-word reference expansions, including 13,041 nonzero input low words, reduction boundaries, subnormals and exponent extremes. Generation at 110 and 220 digits agrees on all reference words; tiny arguments receive additional precision. A separate exponent keeps oracle errors representable. The scorer does not use the library's DD subtraction. It accounts for oracle expansion error, its own roundoff and final component underflow, and rejects NaN/infinity. These tests check the analysis against examples; agreement of two mpmath precisions is not an interval proof.
 
 ## 2. The normal distribution
 
 - **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals, whose stated relative error is below 10^-18 before rounding. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
 - **Why that matters in the tail.** The naive form's relative error grows like ε·x², which is 5.7e-14 at x = −38, the FerroRisk budget. Here the remaining error is the rounding of erfcx, exp and two products: ≤ 4 ULP measured over the whole range, tails included.
 - **Φ⁻¹ is AS241.** The central branch evaluates only polynomials, so it is reproducible. The tails add one `log`: ≤ 4 ULP measured.
-- **ln Φ composed from Φ.** For x above the erf region it is log1p(−Q), Q = 1 − Φ(x); inside the erf region it is log Φ. Its bound is composed from the CDF's enforced 6 ULP through the derivative of the outer function, 1/(1 − Q) or 1/Φ, plus the outer function's 1 ULP: |got − r| ≤ 6·ulp(Q)/(1 − Q) + ulp(got) + ulp(r)/2, or the same with 6·ulp(Φ)/Φ. A fixed 4-ULP budget was smaller than its own input's budget, and passed only under arm64's contracted arithmetic. Below the erf region the code evaluates an asymptotic form directly, which keeps its measured 4 ULP.
-- **The double-double Φ and φ** (`Normal_dd`, |d| ≤ 6) use Marsaglia's series, whose terms all share a sign. For d < 0 the final ½ − … loses log₂(1/(2Φ(d))) bits, about 30 at −6, giving a relative error ≤ 2^-100/(2Φ(d)). A pinned mpmath test checks that.
+- **ln Φ composed from Φ.** The enforced CDF envelope is 6 ULP to a rounded reference, hence 6.5 spacings to the real value. The scorer evaluates the actual inner CDF and uses the largest spacing in its neighbourhood, including binade crossings. With this error E, the mean-value denominator is `1−Q−E` or `Φ−E`, not the central value. The outer evaluator and oracle rounding contribute `2 ulp(got)+ulp(reference)/2`. This is conditional on the measured CDF and elementary envelopes. A nonpositive denominator is unresolved and fails; it is never accepted as an infinite bound.
+- **The double-double Φ and φ** (`Normal_dd`, |d| ≤ 6) use Marsaglia's series, whose terms all share a sign. For d < 0 the final ½ − … loses log₂(1/(2Φ(d))) bits, about 30 at −6, motivating a cancellation-scaled **measured** envelope 2^-100·max(1,1/(2Φ(d))). The 13-point pinned test checks that envelope; it is not a derived bound for the series. This remains a proof gap for the cancelling Greeks.
 
 ## 3. Log-moneyness x = ln(A/C) = ln(S/K) + (r − q)T
 
@@ -86,34 +133,37 @@ The kernel uses Jäckel's three regions (η = −13, τ = 2ε^(1/16)):
 
 **Known limit.** Where q1 and q2 are both above Cody's threshold, the erfcx difference cancels by up to about 6×. The worst case is 10–23 ULP, around h ≈ −4.6, s ≈ 1 at strikes of 1e-150. FerroRisk's reference for that case checks out to 4.7e-17 against mpmath at 200 digits, so the error is the method's own. Jäckel's reference has the same limit.
 
-**Attainable accuracy (Jäckel).** b is a function of its inputs. With them exact, its relative condition in s is |s·b′/b|, so a rounded s alone costs (1 + |s·b′/b|)·ε. The library carries s = σ√T in DD, so s contributes no error of its own.
+**Attainable accuracy (Jäckel).** b is a function of its inputs. With them exact, its relative condition in s is |s·b′/b|, so a rounded s alone costs (1 + |s·b′/b|)·ε. The library carries s = σ√T in DD, so its input formation contributes DD error rather than binary64 rounding; that contribution is small, not identically zero.
 
 ## 5. Price assembly
 
-- **Black family.** V = 2^e·(θ·intrinsic⁺ + √A·√C·b(−|x|, s)), with (S, K) scaled exactly by 2^-e, e = ⌊(e_S + e_K)/2⌋.
+- **Black family.** V = 2^e·(θ·intrinsic⁺ + √A·√C·b(−|x|, s)), with (S, K) scaled by 2^-e, initially e = ⌊(e_S + e_K)/2⌋. For |x| < 2^-500 and small x terms, the exponent is lowered by 512 to retain tiny intrinsic products; this depends only on dimensionless quantities.
   - Floor division makes the scaling equivariant, so V(2^j S, 2^j K) = 2^j V(S, K) exactly. A property test checks this.
   - The out-of-the-money part applies 2^e inside the exponential (Cody–Waite 2^-n·e^-r), so it rounds once.
 - **Intrinsic θ(A − C)** comes from DD legs, `S·exp_DD(−qT)` and `K·exp_DD(−rT)`:
   - as C·expm1(x) when |x| ≤ 0.35 and x's terms are ≤ 1, with error 2^-104·C·(|ln S/K| + |(r−q)T|);
   - otherwise as A − C, with error 2^-104·A.
 
-  It is then rounded once, including into the subnormals (`Dd.to_float_scaled`). The zero-variance price is that value, and the inverse classifies quotes against the same DD value.
+  It is then rounded once, including into the subnormals (`Dd.to_float_scaled`). Equal-coordinate zero-variance contracts with max(|r|,|q|)T < 2^-500 instead form S(r−q)T from mantissas and accumulated exponents. The omitted relative term is < 2^-499. This covers carry below the binary64 range while the currency price is normal. For example S=K=2^1000, T=2^-1074, r=1, q=0 changed from 0 to 2^-74. This special price path does not establish exact inverse classification at these exponent extremes; inverse classification still uses the DD legs.
 - **Bachelier.** V = D·(θΔ⁺ + s·φ(d)·Y′(−|d|)), with Y′ = 1 + h·Φ(h)/φ(h) from Jäckel's Remez rationals. This avoids subtracting φ(d) − |d|Φ(−|d|). d = Δ/s is carried in DD, and D·θΔ is DD.
 
 **Measured.** Worst errors per region are 1–23 ULP on this project's 57k-contract oracle, and 1–15 ULP on the 41,760-contract displaced oracle.
 
-### 5.1 The intrinsic's certified error, and the zero-variance price
+### 5.1 The intrinsic's analytical error budget, and the zero-variance price
 
-The intrinsic I = A − C is formed in double-word. Its error E composes the proved primitive bounds (§0) with the component bounds that `test/dd_reference.ml` enforces: ε_exp(z) = 2^-100 + |z|·2^-105 for exp and expm1, and ε_log = 2^-100 for log. Those two are measured envelopes, not proofs. With L = |ln S/K| and C_y = |(r − q)T|:
+The intrinsic I=A−C is formed in DD. With the component majorants above, L=|ln(S/K)| and C_y=|(r−q)T|, the normal-intermediate analysis is:
 
-- **x** = ln q + (ρ − ρ²/2) + (r − q)T, plus displaced Black's low parts:
-  E_x ≤ ε_log·L + 15u²·|ρ| + 9u²·(L + C_y) + E_low, with |ρ| ≤ u, and E_low ≤ 5u² for displaced Black (its sums' low parts enter to first order).
-- **C·expm1(x):** E ≤ A·E_x + |I|·(ε_exp(x) + ε_exp(rT) + 10u²), since C·e^x = A.
-- **A − C:** E ≤ A·(ε_exp(qT) + 5u²) + C·(ε_exp(rT) + 5u²) + 3u²·|I|.
+- E_x ≤ ε_log |ln RN(S/K)| + 15u³ + 9u²(L+C_y) + E_low, with E_low ≤ 5u² for displaced inputs. For a quotient outside the normal range, use |ln S|+|ln K| in the log term.
+- C·expm1(x): E ≤ A E_x + |I|[ε_expm1(x)+ε_exp(rT)+10u²].
+- A−C: E ≤ A[ε_exp(qT)+5u²] + C[ε_exp(rT)+5u²] + 3u²|I|.
 
-The code takes C·expm1(x) when |x| ≤ 0.35 and L + C_y ≤ 1: there its bound is the smaller of the two. The zero-variance price is I rounded once, so against the correctly rounded reference R, |V − R| ≤ ulp(V)/2 + ulp(R)/2 + E. The price scorer checks this per row (`test/bounds.ml`). On both fixtures no row uses any of E: every served value is within the two half-ULP roundings.
+The code uses expm1 for |x|≤0.35 and L+C_y≤1. This is a conservative validity rule, **not an optimizer of the two bounds**; the crossing depends on the component constants and contract. The scorer checks |V−RN(I)| against E and both final half-ULP roundings. It considers both branches within the rounding uncertainty of a threshold. These formulas are not a universal finite-exponent certificate: intermediate underflow and unresolved cancellation require separate treatment.
 
-**Two mechanisms a test cannot decide.** Carrying ρ in double-word removes a u² term from E_x, which is below ln q's own certified error. The branch rule chooses the smaller certified bound, and the other branch's realized error stays inside it. Both are justified by this analysis, but no input can make their removal violate a bound, so the mutation catalog (`scripts/mutation/`) does not include them.
+**Mutation evidence.** Rounding the quotient remainder to one word now fails the independent coordinate corpus (`quotient-remainder`). Near S/K=1 the log term is small enough to distinguish it. The old assertion that no test could distinguish this was false. Removing the intrinsic terms guard still survives the current price corpus under the revised bounds. Run `dune exec scripts/mutation/mutation.exe -- --probe intrinsic-terms` to reproduce that specific result. The exclusion is provisional; a survivor is not a proof of equivalence or impossibility.
+
+### 5.2 Measured price regression envelopes
+
+The remaining 8–32 ULP budgets are measured envelopes, not consequences of the DD theorems. Both the ULP gate and the normwise gate are enforced; there is no longer an “any row within 4 ULP passes” bypass. For Bachelier the scale now includes D σ√T/√(2π), since its time value is unbounded relative to the discounted forward/strike. This changes the norm to match the model instead of bypassing the test when that scale was too small.
 
 ## 6. Implied volatility
 
@@ -127,24 +177,39 @@ The code takes C·expm1(x) when |x| ≤ 0.35 and L + C_y ≤ 1: there its bound 
    - on ln b when β < 2^-900;
    - on b otherwise.
 
-**Bound (Black family).** The quote is exact. The inverse rounds β (or β̄ near the maximum) once, and takes one Newton step against the kernel. LBR's two Householder steps leave the start accurate to working precision (Jäckel 2015, 2024), so the step's quadratic term is below u². With s the exact normalised root and b′ = ∂b/∂s, the relative error in σ is at most
+### 6.1 Conditional Black root budget
 
-3u + (δβ + κ)·c
+The error requirement composes normalization error with a kernel envelope. It does not claim that two Householder steps plus Newton converge for every representable contract. In particular, the former assertion that the Newton quadratic remainder is below u² did not follow from a citation to Jäckel. The scorer now transports error using the minimum vega over the candidate/reference interval. Black vega has one maximum as volatility varies, so that minimum is at an endpoint; the mean-value theorem then handles nonlinear transport without discarding a quadratic term.
 
-- **3u** covers σ = s/√T, with √T's low part.
-- **δβ** is the error in β. Below the money δβ = u. In the money, β = (quote − I)/m carries the intrinsic's error E (§5.1), so δβ = u + (E + 3u²·quote)/(quote − I). That term dominates for quotes just above the intrinsic.
-- **c and κ, by branch:**
-  - β ≤ b_max/2: c = b/(s·b′), and κ = 64u, the kernel's component bound (the price oracle's enforced 32 ULP for out-of-the-money values; a measured envelope).
-  - β > b_max/2: c = b̄/(s·b′), and κ = 17u. Here b̄ = ½·e^(−(h²+t²)/2)·(erfcx(q₁) + erfcx(q₂)) with q₁, q₂ ≥ 0, because s² > 2|x|. The 17u is 8u from erfcx's 4-ULP component bound, 3u from the arguments, u for the sum and 5u for the scaled exponential.
-  - β < 2^-900, Newton on ln b: c = b/(s·b′) times the absolute error in ln β − ln b. That error comes from `Elementary.log` (1 ULP each) and the kernel (64u).
+At the reference root the relative budget is `3u + (δβ+κ)c`, with the conversion allowance 3u and c=b/(s b′) or b̄/(s b′). The endpoint-vega ratio inflates this before comparison with the exact-root oracle. Nonfinite error or allowance fails.
 
-The IV scorer checks |σ − σ*| ≤ bound·σ* + ulp(σ*)/2 per root (`test/oracle_iv.ml`). It no longer accepts a root merely because it lies in the quote's rounding cell. Near the maximum that cell is unbounded above, and a mutant that dropped the final correction returned roots 8e14 ULP off while staying in the cell.
+- **Ordinary branch:** δβ=u below the money; above it add `(E_I+3u² quote)/(quote−I)`. κ=65u remains conditional on the measured 32-ULP kernel envelope (including the reference half-ULP); it is not a published theorem for this implementation.
+- **Complement:** use the maximum-leg error, not the intrinsic error. If M is the DD maximum, set E_M=|M|[ε_exp(rate·T)+5u²] and g_lower=(M−quote)−E_M−2u|M−quote|. The normalization error includes `u+E_M/g_lower`, the two discount exp bounds and 32u² for DD assembly. If g_lower≤0 the bound is unresolved and rejected. Five independently generated near-maximum ATM roots expose the old omission: one was about 360 times outside the old allowance.
+- **Logarithmic branch:** β<2^-900 uses the absolute log-normalization error and the kernel envelope, transported by b/(s b′).
 
-**Bachelier** keeps "in the rounding cell or within 4 ULP" until its bound is derived. Its inverse loses precision for subnormal quotes, where the price evaluation's rounding is absolute: two roots are 1e6 ULP from the exact root, inside a cell the 8-bit quote makes wide.
+**Complement kernel derivation.** At s²=2|x| the normalized price is below b_max/2; monotonicity then implies t+h>0 whenever β>b_max/2. Thus both erfcx arguments are nonnegative, and their sum has no cancellation. The integral representation of erfcx gives
 
-**Measured.**
-- Over 3,000 random contracts (`test/properties.ml`), the worst root error among roots that don't reprice exactly is 2.10× Jäckel's attainable accuracy (1 + |b/(s·b′)|)·ε.
-- Every outcome class matches on the grid oracles.
+    |d log(erfcx(z))/dz| ≤ min(2/√π, 1/z), z≥0.
+
+For each z=(t±h)/√2, rounded division/addition and the √½ constant give an absolute perturbation at most δz=4u(t+|h|)/√2. Use 1.129 near zero, otherwise min(1.129,1/(z−δz)), to cover the whole argument interval. This replaces the unsupported constant 3u argument estimate. The implemented budget is
+
+    κ = 21u + δz·max(argument sensitivities)
+        + u²(16E+8E²), E=(h²+t²)/2.
+
+The 21u allows 9u for a 4-ULP-to-rounded-reference erfcx envelope, u for the positive sum, 3u for a 1-ULP exponential envelope, and 8u for the scaled product/reduction assembly. The final term allows DD exponent error and the exponential perturbation's second order. This composition remains **conditional**: the binary64 erfcx/scaled-exponential component envelopes and the assembly bound have not been proved uniformly. It replaces the unexplained 17u claim; it is not a completed universal certification of that path.
+
+**Branch uncertainty.** An error δ in β changes ln β by at most −log(1−δ). The scorer adds rounding in reconstructing x and the threshold, and evaluates every overlapping branch. The previous arbitrary 1e-6 guard is gone.
+
+### 6.2 Bachelier and round trips
+
+Bachelier no longer accepts “in the rounding cell or within 4 ULP.” It propagates an absolute price uncertainty through the minimum vega between candidate and exact reference. With J the positive intrinsic, O the time value, u=2^-53,
+
+    E_price = J[ε_exp(rT)+8u²] + 19u O + 2^-1074.
+    E_sigma = [E_price + 8u σ_hi vega_hi]/vega_lo + ulp(reference)/2.
+
+The 19u is conditional on the measured 8-ULP price envelope (17u to the real value), plus two normalization roundings. The stopping test and final conversion contribute the 8u displacement allowance. Bachelier vega is increasing in σ, so endpoint vegas enclose the full interval. The absolute quantum is essential for subnormal quotes: their relative precision can be much less than 53 bits. This derives error transport, not a universal proof of the price kernel or the 200-iteration convergence limit.
+
+The random round-trip test likewise composes the forward 32-ULP price budget with the inverse budget, using minimum endpoint vega. It no longer has a 4× attainable rule or a repricing escape. It only attempts recovery of the generating σ when the forward uncertainty interval excludes both price boundaries. Boundary classification and exact-quote roots are tested separately; a rounded quote at the intrinsic need not identify the generating σ.
 
 ## 7. Greeks
 
@@ -157,17 +222,26 @@ Brackets that cancel near the money are evaluated in DD, using `Normal_dd` for �
 
 Terms in 1/T are rewritten so that √T and σ cancel analytically.
 
-**Forward-model rho** (Black-76, displaced Black, Bachelier) is −T·V. For a live contract the scorer requires rho = RN(−T·V) of the served price, bit for bit, and bounds its error by the family's price budget + 1 ULP. A separate 16-ULP rho budget was smaller than the 32-ULP out-of-the-money price budget it is composed from.
+**Forward-model rho** (Black-76, displaced Black, Bachelier) is −T·V. The scorer requires rho=RN(−T·served_price), bit for bit, then composes **absolute** error:
+
+    |rho−reference| ≤ |T| E_price + ulp(rho)/2 + ulp(reference)/2.
+
+E_price includes the price reference's rounding and the largest spacing in the possible price interval. A fixed “price budget + 1 ULP” is invalid because multiplication can change the binade: 32 price ULPs at 1 become 61 rho ULPs after multiplication by 1.9. A regression pins that counterexample.
 
 **Measured.** Every Greek's worst case is ≤ 6 ULP against an oracle that requires a closed-form route and mpmath differentiation of the price to agree. Away from the deep tails, finite differences of the served price agree to 1e-7 over random contracts.
 
-## Known limits, collected
+## Certification status and remaining proof obligations
 
-| Where | Limit | Status |
+| Layer | What is established | What is still missing |
 | --- | --- | --- |
-| Region III's erfcx difference | 10–23 ULP worst, the method's own | within budget (32); a DD erfcx difference would remove it |
-| Component bounds for the double-word exp, expm1 and log, and for the kernel | measured envelopes (2^-100; 32 ULP), not proofs | the derived price and IV bounds compose them; deriving them is open |
-| Bachelier implied volatility | no derived bound; subnormal quotes lose precision | "in cell or 4 ULP" until derived |
-| x's terms cancelling below about 1e-16 of themselves | x carries 2^-104·(terms) absolutely; the zero-variance price switches to A − C | measured 1 ULP; a deeper cancellation needs triple-double |
-| Implied volatility | (1 + \|b/(s·b′)\|)·ε relative in σ, which can exceed a narrow rounding cell | measured 2.10× the bound |
-| Bounds generally | Measured over grids and fixed-seed random samples, not proved for all inputs | stated as envelopes in the stability policy |
+| DD primitives | published normal-intermediate theorems; two-operand/even-exponent normalization; subnormal regressions | a formal finite-exponent proof covering arbitrary low words and every call site |
+| DD exp/expm1/log | written analytical majorants, exact-rational checks, dense two-word corpus | independent/formal verification of the complete implementation |
+| Reduced log1p | corrected 0.14 majorant with positive margin; fractional-ULP oracle | whole-domain elementary guarantees beyond the reduced path |
+| Ordinary Black kernel and price regions | strict measured 8–32 ULP regression gates, no 4-ULP bypass | a uniform rounded Cody/Jäckel kernel analysis, including Region III cancellation |
+| Complement/IV | maximum-gap error included; argument sensitivity, threshold and nonlinear transport explicit | component envelopes and convergence are still conditional |
+| Normal_dd and non-rho Greeks | independent price differentiation, finite-difference checks, named cancellation mutants | DD normal-series proof, then per-Greek operation/conditioning bounds; current power-of-two ULP budgets remain measured |
+| Bachelier IV | conditional price-to-root bound, with subnormal quantum; no rounding-cell acceptance | uniform price-kernel and finite-iteration proof |
+| Random IV recovery | forward and inverse errors composed on identifiable inputs | inherits the component envelope premises |
+| Intrinsic branch rule | valid conservative rule; explicit surviving probe | a discriminating corpus/bound or proof of equivalence; no impossibility claim |
+
+Consequently the complete library is **not certified for all finite admitted inputs**. In particular, “all remaining measured budgets have been derived” would be false. Closing those rows requires analysis of the rounded rational kernels and cancelling Greek expressions, followed by extra-bit references, scorer changes, and mechanism-specific mutations. Existing measured gates remain enforced while these obligations are open.

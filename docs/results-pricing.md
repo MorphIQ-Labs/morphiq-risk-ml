@@ -56,7 +56,7 @@ The worst extreme-scale case (10 ULP at h = −4.6, s = 1) is in the normalised 
 
 ## What made the difference
 
-Each technique below is derived from first principles. Where a mutant can decide it, the mutation catalog (`scripts/mutation/`) removes it and requires the price oracle to fail. Where it cannot, the reason is in docs/error-analysis.md §5.1.
+Each technique below is derived from first principles. Where a mutant can decide it, the mutation catalog (`scripts/mutation/`) removes it and requires the price oracle to fail. Current coverage limits, including the surviving branch-rule probe, are in docs/error-analysis.md §5.1.
 
 | Technique | What it fixes | Mutant |
 | --- | --- | --- |

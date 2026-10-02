@@ -4,7 +4,7 @@
 
      dune exec --release bench/bench.exe
 
-   The numbers are for the machine that runs this. docs/performance.md
+   The numbers are for the machine that runs this. docs/results-slice.md
    records them with the machine and compiler. *)
 
 open Morphiq_risk

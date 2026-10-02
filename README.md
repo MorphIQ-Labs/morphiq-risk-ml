@@ -7,7 +7,7 @@ opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml
 eval "$(opam env --switch=morphiq-risk-ml)"
 opam install . --deps-only --with-test --locked   # versions pinned in morphiq_risk_ml.opam.locked
 opam install ocamlformat.0.27.0
-dune build && dune test          # every oracle, the manifest and the determinism digest
+dune build && dune test          # needs python3 stdlib for exact-rational bound checks
 dune build @fmt
 dune exec scripts/mutation/mutation.exe   # the mutation catalog
 dune exec --release bench/bench.exe

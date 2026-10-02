@@ -56,21 +56,29 @@ let scale a k = { hi = Float.ldexp a.hi k; lo = Float.ldexp a.lo k }
 
 (* DWDivDW3, JMP Algorithm 18: one Newton step for 1/b, then a product;
    relative error <= 9.8u^2. The bound assumes an unbounded exponent range,
-   and 1/b.hi overflows for a subnormal b, so b is first scaled exactly into
-   [1, 2) by 2^-k: a/b = 2^-k (a / (2^-k b)). The final scaling is exact
-   unless the quotient itself underflows. *)
+   so the divisor and any extreme dividend are normalised before the
+   reciprocal and product. A dividend in [2^-400,2^400] already leaves ample
+   exponent room for the reciprocal product and its residual.
+   Normalising only b lets the product underflow before a normal quotient
+   is restored. Final component scaling can lose a subnormal low word;
+   the finite-exponent bound includes that absolute rounding error. *)
 let div a b =
   if b.hi = 0.0 || not (Float.is_finite b.hi) then of_float (a.hi /. b.hi)
   else
-    let k = snd (Float.frexp b.hi) - 1 in
-    let b = scale b (-k) in
+    let ka =
+      if Float.abs a.hi >= 0x1p-400 && Float.abs a.hi <= 0x1p400 then 0
+      else snd (Float.frexp a.hi) - 1
+    in
+    let kb = snd (Float.frexp b.hi) - 1 in
+    let a = if ka = 0 then a else scale a (-ka) in
+    let b = scale b (-kb) in
     let th = 1.0 /. b.hi in
     let rh = Float.fma (-.b.hi) th 1.0 in
     let rl = -.(b.lo *. th) in
     let e = renormalise rh rl in
     let d = mul_float e th in
     let m = add_float d th in
-    scale (mul a m) (-k)
+    scale (mul a m) (ka - kb)
 
 let to_float a = a.hi +. a.lo
 
@@ -130,7 +138,11 @@ let exp x =
 (* e^x - 1. For |x| <= ln 2 / 2 the reduction has m = 0 and the doubled
    series is e^x - 1 itself, with no cancellation against 1. *)
 let expm1 x =
-  if Float.abs x.hi <= 0.34657359027997264 then expm1_reduced (scale x (-9))
+  (* Below this threshold |expm1(x)-x|/|x| < 2^-105. In particular,
+     dividing a subnormal x by 512 would destroy significant bits. *)
+  if Float.abs x.hi < 0x1p-104 then x
+  else if Float.abs x.hi <= 0.34657359027997264 then
+    expm1_reduced (scale x (-9))
   else sub (exp x) (of_float 1.0)
 
 let sqrt_half = 0x1.6a09e667f3bcdp-1
@@ -188,7 +200,13 @@ let to_float_scaled a k =
 let sqrt a =
   if a.hi <= 0.0 then of_float (Float.sqrt a.hi)
   else
+    let k =
+      if a.hi >= 0x1p-400 && a.hi <= 0x1p400 then 0
+      else (snd (Float.frexp a.hi) - 1) asr 1
+    in
+    let a = if k = 0 then a else scale a (-2 * k) in
     let sh = Float.sqrt a.hi in
     let rho1 = Float.fma (-.sh) sh a.hi in
     let rho2 = a.lo +. rho1 in
-    renormalise sh (rho2 /. (2.0 *. sh))
+    let result = renormalise sh (rho2 /. (2.0 *. sh)) in
+    if k = 0 then result else scale result k

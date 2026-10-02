@@ -14,7 +14,7 @@
 
 (library
  (name bounds)
- (modules bounds))
+ (modules bounds component_bounds))
 
 (test
  (name oracle_price)
@@ -36,7 +36,7 @@
  (name oracle_iv)
  (package morphiq_risk_ml)
  (modules oracle_iv)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds iv_bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -84,13 +84,15 @@
  (name properties)
  (package morphiq_risk_ml)
  (modules properties)
- (libraries morphiq_risk qcheck-core qcheck-core.runner))
+ (libraries morphiq_risk bounds iv_bounds qcheck-core qcheck-core.runner))
 
 (test
  (name dd_reference)
  (package morphiq_risk_ml)
  (modules dd_reference)
- (libraries morphiq_risk))
+ (libraries morphiq_risk bounds)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
  (name manifest)
@@ -102,3 +104,23 @@
   (glob_files ../oracle/fixtures/*.txt.gz))
  (action
   (run %{test} ../oracle)))
+
+(library
+ (name iv_bounds)
+ (modules iv_bounds)
+ (libraries morphiq_risk bounds))
+
+(test
+ (name numerical_regressions)
+ (modules numerical_regressions)
+ (libraries morphiq_risk bounds iv_bounds)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/regressions.txt})))
+
+(rule
+ (target component_bounds.ml)
+ (deps ../oracle/verify_bounds.py)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{deps} --ocaml))))
