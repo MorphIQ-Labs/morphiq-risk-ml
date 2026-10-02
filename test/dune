@@ -41,3 +41,9 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/data/greek_reference.txt})))
+
+(test
+ (name normal_dd_reference)
+ (package morphiq_risk_ml)
+ (modules normal_dd_reference)
+ (libraries morphiq_risk))

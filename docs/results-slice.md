@@ -11,7 +11,7 @@ Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Bla
 | Normal primitives | mpmath, 80 digits | 82,000 | all within FerroRisk's SPEC budgets; tail tightened to 6 ULP | [results-numerics.md](results-numerics.md) |
 | Prices | FerroRisk #440 | 50,094 | worst 3–16 ULP per region, against FerroRisk's 37–3,504 (4.3e15 at zero variance) | [results-pricing.md](results-pricing.md) |
 | Implied volatility | FerroRisk public IV at the #448 tip | 3,522 | every class matches; Black roots ≤ 2 ULP from exact | [results-iv.md](results-iv.md) |
-| Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 17 ULP except one documented cancellation (Black charm, 205) | [results-greeks.md](results-greeks.md) |
+| Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 17 ULP for every Greek (charm 4 after a double-double Φ) | [results-greeks.md](results-greeks.md) |
 
 ### 2. Iteration speed
 
@@ -22,7 +22,7 @@ Measured on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3`. The library is abo
 | Clean build | 0.71–0.76 s |
 | Incremental rebuild after editing `normal.ml` (at the root of the dependency graph) | 0.13 s |
 | Incremental rebuild after editing `black.ml` | 0.22–0.24 s |
-| Full test suite: every oracle, the property tests and the compile-failure tests | 0.31–0.41 s |
+| Full test suite: every oracle, the property tests and the compile-failure tests | 0.31–0.41 s (0.40 s with the double-double charm) |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
 Every mechanism claimed in the results docs has a mutant that fails rows when it is removed, and about 20 such mutants were run during development. Two lessons for mutation testing:
@@ -53,4 +53,3 @@ All six compile-failure tests pin the compiler's diagnostic, so a change in why 
 The following were out of scope (see SLICE.md):
 - American models, Heston, Merton, local vol, surfaces, risk, SIMD and batch APIs.
 - Performance against Rust, which was explicitly not measured.
-- A double-double Φ, which would remove the Black charm cancellation.

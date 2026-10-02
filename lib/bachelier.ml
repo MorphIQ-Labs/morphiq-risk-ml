@@ -204,9 +204,24 @@ let greeks a side sigma =
             Dd.to_float (Dd.add (Dd.of_float rate) (Dd.div (Dd.sub (Dd.of_float 1.0) d2_dd) (Dd.of_float (2.0 *. time))))
           else (1.0 -. (d *. d)) *. half_inverse_time
         in
+        (* charm = r Δ + D φ(d) d/(2T) = D (θ r Φ(θ d) + φ(d) d/(2T)): the
+           terms cancel near the money, so there the bracket is double-double. *)
+        let charm_dd () =
+          let d_dd = { Dd.hi = dh; lo = dl } in
+          let bracket =
+            Dd.add
+              (Dd.mul_float (Normal_dd.cdf (Dd.mul_float d_dd theta)) (theta *. rate))
+              (Dd.div (Dd.mul (Normal_dd.pdf d_dd) d_dd) (Dd.of_float (2.0 *. time)))
+          in
+          discount *. Dd.to_float bracket *. day
+        in
         let delta =
           if theta *. d <= 0.0 then theta *. g (base *. mills (-.theta *. d))
           else theta *. (discount -. g (base *. mills (theta *. d)))
+        in
+        let charm =
+          if Float.abs dh <= Normal_dd.limit && Float.is_finite (0.5 /. time) then charm_dd ()
+          else (rate *. delta *. day) +. g (base *. d /. (2.0 *. time) *. day)
         in
         {
           Greeks.delta = Ok delta;
@@ -216,7 +231,7 @@ let greeks a side sigma =
           rho;
           vanna = Ok (Units.per_volatility (g (-.base *. d_over_sigma)));
           volga = Ok (Units.per_volatility_squared (g (base *. rt *. d *. d_over_sigma)));
-          charm = Ok (Units.time_rate ((rate *. delta *. day) +. g (base *. d /. (2.0 *. time) *. day)));
+          charm = Ok (Units.time_rate charm);
           veta = Ok (Units.time_rate (g (base *. veta_bracket *. day)));
           color = Ok (Units.time_rate (g (base /. s *. color_bracket *. day)));
         }

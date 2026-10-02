@@ -21,7 +21,7 @@ Conventions are FerroRisk's:
 | rho | 6 (3,344) | 16 | 4 (1,074) | 8 |
 | vanna | 4 (2,592) | 8 | 2 (778) | 4 |
 | volga | 4 (2,616) | 8 | 3 (716) | 8 |
-| charm | 205 (2,889) | 512 | 24 (920) | 64 |
+| charm | 4 (2,889) | 8 | 2 (920) | 8 |
 | veta | 4 (2,172) | 8 | 2 (638) | 4 |
 | color | 5 (2,154) | 16 | 4 (632) | 8 |
 
@@ -36,7 +36,7 @@ The other reference statuses:
 | kink (payoff kink at expiry and strike) | 200 | all refused with `Payoff_kink` |
 | boundary (one-sided limits FerroRisk makes no claim about) | 9,472 | recorded: 8,768 values, 704 refusals |
 
-Black charm's 205 ULP is a documented cancellation. At the money `q·Δ` and `D_q·φ(d1)·∂d1/∂T` agree to about 1/80 of their size, and the result cannot be more accurate than Φ (binary64, a few ULP). A double-double Φ would remove it.
+Charm cancels at the money: `q·Δ` and `D_q·φ(d1)·∂d1/∂T` agree to about 1/80 of their size, and Bachelier's two terms behave the same way. Binary64 Φ cannot resolve that difference, and the first version measured 205 ULP (Black) and 24 ULP (Bachelier). Where |d| ≤ 6, both brackets are now evaluated in double-double (`Normal_dd`), giving 4 and 2 ULP. The tails keep the Mills-ratio form, which is already relatively accurate.
 
 FerroRisk states no per-region Greek accuracy contract for these models (#449). Its envelope measures a scaled error, not ULP, and describes itself as "not an accuracy contract". No row-level comparison is claimed.
 
@@ -49,6 +49,8 @@ FerroRisk states no per-region Greek accuracy contract for these models (#449). 
 | d1 and d2 in double-double | Vanna and volga where `x = s²/2` makes d2 ≈ 1e-17 | float d2: 18 fail |
 | Veta's `√T`-scaled bracket `q√T + √T·d1·w − 1/(2√T)` and color's bracket in double-double | Exact zero crossings, and subnormal T where `1/T` overflows | float bracket: 54 fail (Bachelier: 16) |
 | `1/T` terms rewritten so `√T` and σ cancel, e.g. `vega/(2T) = Aφ(d1)/(2√T)` | Subnormal T and σ | (covered by the reference's range rows) |
+| Charm's bracket `θqΦ(θd1) − φ(d1)·w` (Bachelier: `θrΦ(θd) + φ(d)·d/(2T)`) in double-double, with Φ and φ from `Normal_dd` | The at-the-money cancellation, 205 → 4 ULP | float bracket: 21 entries fail (Bachelier: 3) |
+| `Normal_dd`: φ from the double-double exp, and Φ from Marsaglia's series `½ + φ(d)·Σ d^(2k+1)/(2k+1)!!`, whose terms share a sign | A Φ accurate to about 106 bits for \|d\| ≤ 6 (the final `½ − …` for d < 0 loses log₂(1/(2Φ(d))) bits, about 30 at −6) | truncated series: 3 fail; a pinned mpmath test holds Φ to `2^-100/(2Φ(d))` and φ to 2^-100 |
 | Displaced Black shifts by the exact sum, carried as hi + lo through x and the legs | ~800 ULP in displaced tails | binary64 shift: 619 fail |
 
 ## The displaced-Black convention

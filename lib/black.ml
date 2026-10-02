@@ -296,7 +296,20 @@ let live_greeks side (c : Coordinates.live) sigma =
       else half_inverse_time
     in
     let day = 1.0 /. Units.days_per_year in
+    (* charm = q Δ - D_q φ(d1) w = D_q (θ q Φ(θ d1) - φ(d1) w). Near the money
+       the two terms agree to within ~1/80 of their size, more than binary64
+       Φ can resolve, so there the bracket is evaluated in double-double;
+       in the tails the Mills-ratio form below is already relative. *)
+    let charm_dd () =
+      let d1_theta = Dd.mul_float d1_dd theta in
+      let bracket = Dd.sub (Dd.mul_float (Normal_dd.cdf d1_theta) (theta *. q)) (Dd.mul (Normal_dd.pdf d1_dd) w_dd) in
+      dq *. Dd.to_float bracket *. day
+    in
     let delta = (theta *. a_part /. spot) +. g (theta *. base *. a_mills /. spot) in
+    let charm =
+      if Float.abs d1_dd.Dd.hi <= Normal_dd.limit then charm_dd ()
+      else (q *. delta *. day) -. g (base /. spot *. w *. day)
+    in
     let rho =
       if c.tied then rho_forward ()
       else Ok (up (theta *. time *. c_part) +. g ~k:e_up (theta *. time *. base *. c_mills))
@@ -314,7 +327,7 @@ let live_greeks side (c : Coordinates.live) sigma =
       rho;
       vanna = Ok (Units.per_volatility (g (-.base /. spot *. d2_over_sigma)));
       volga = Ok (Units.per_volatility_squared (g ~k:e_up (base *. rt_full *. d1 *. d2_over_sigma)));
-      charm = Ok (Units.time_rate ((q *. delta *. day) -. g (base /. spot *. w *. day)));
+      charm = Ok (Units.time_rate charm);
       veta = Ok (Units.time_rate (g ~k:e_up (base *. veta_bracket *. day)));
       color = Ok (Units.time_rate (g ~k:e_down (base /. (spot *. spot *. s) *. color_bracket *. day)));
     }
