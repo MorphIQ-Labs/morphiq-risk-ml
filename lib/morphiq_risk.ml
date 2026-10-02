@@ -11,6 +11,7 @@ module Bachelier = Bachelier
 module Normal = Normal
 
 module Internal = struct
+  module Elementary = Elementary
   module Cody = Cody
   module Split = Split
   module Dd = Dd

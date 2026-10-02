@@ -92,16 +92,16 @@ let erfcx_tail y =
 let exp_neg_square y =
   let ysq = Float.trunc (y *. 16.0) /. 16.0 in
   let del = (y -. ysq) *. (y +. ysq) in
-  Float.exp (-.ysq *. ysq) *. Float.exp (-.del)
+  Elementary.exp (-.ysq *. ysq) *. Elementary.exp (-.del)
 
 let exp_square y =
   let ysq = Float.trunc (y *. 16.0) /. 16.0 in
   let del = (y -. ysq) *. (y +. ysq) in
-  Float.exp (ysq *. ysq) *. Float.exp del
+  Elementary.exp (ysq *. ysq) *. Elementary.exp del
 
 (* exp(y^2) * erfc(y) for y >= 0. *)
 let erfcx_nonnegative y =
-  if y <= thresh then Float.exp (y *. y) *. (1.0 -. erf_small y)
+  if y <= thresh then Elementary.exp (y *. y) *. (1.0 -. erf_small y)
   else if y <= 4.0 then erfcx_mid y
   else if y >= xhuge then sqrpi /. y
   else erfcx_tail y

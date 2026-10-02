@@ -26,7 +26,7 @@ let scaled_exp_neg ?(k = 0) m hi lo =
   else
     let n = Float.floor (hi /. ln2_hi) in
     let r = Float.fma (-.n) ln2_hi hi -. (n *. ln2_lo) in
-    Float.ldexp (m *. (Float.exp (-.r) *. (1.0 -. lo))) (k - int_of_float n)
+    Float.ldexp (m *. (Elementary.exp (-.r) *. (1.0 -. lo))) (k - int_of_float n)
 
 (* sqrt t = hi + lo to first order (one Newton correction from the exact
    residual t - hi^2). *)

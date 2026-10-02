@@ -30,6 +30,7 @@ module Normal = Normal
 (** Numerical building blocks, exposed for testing and research. They are
     not covered by the stability policy and may change in any release. *)
 module Internal : sig
+  module Elementary = Elementary
   module Cody = Cody
   module Split = Split
   module Dd = Dd

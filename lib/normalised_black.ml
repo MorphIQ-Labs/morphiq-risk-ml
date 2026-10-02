@@ -164,7 +164,7 @@ let vega_exponent hh hl t tl =
 let with_cody x xl s sl =
   let hh, hl = Split.quotient_dd x xl s sl in
   let h = hh +. hl and t = 0.5 *. s in
-  let half_exp sign = Float.exp (sign *. 0.5 *. x) *. (1.0 +. (sign *. 0.5 *. xl)) in
+  let half_exp sign = Elementary.exp (sign *. 0.5 *. x) *. (1.0 +. (sign *. 0.5 *. xl)) in
   let q1 = -.inv_sqrt_2 *. (h +. t) and q2 = -.inv_sqrt_2 *. (h -. t) in
   let gauss () =
     let e, el = vega_exponent hh hl t (0.5 *. sl) in
@@ -207,8 +207,8 @@ let ln_vega x s =
   let h = x /. s and t = 0.5 *. s in
   (-.0.5 *. ln_two_pi) -. (0.5 *. ((h *. h) +. (t *. t)))
 
-let vega x s = Float.exp (ln_vega x s)
-let inv_vega x s = sqrt_two_pi *. Float.exp (0.5 *. (((x /. s) *. (x /. s)) +. (0.25 *. s *. s)))
+let vega x s = Elementary.exp (ln_vega x s)
+let inv_vega x s = sqrt_two_pi *. Elementary.exp (0.5 *. (((x /. s) *. (x /. s)) +. (0.25 *. s *. s)))
 
 (* (b / vega, ln vega), the scaled function and its scale (reference
    scaled_normalised_black_and_ln_vega). *)
@@ -216,7 +216,7 @@ let scaled_and_ln_vega x s =
   let lv = ln_vega x s in
   if region_i x s then (Asymptotic.scaled (x /. s) (0.5 *. s), lv)
   else if region_ii x s then (small_t_scaled (x /. s) (0.5 *. s), lv)
-  else (with_cody x 0.0 s 0.0 *. Float.exp (-.lv), lv)
+  else (with_cody x 0.0 s 0.0 *. Elementary.exp (-.lv), lv)
 
 (* b_max - b = (erfcx((t+h)/sqrt 2) + erfcx((t-h)/sqrt 2)) / 2 * exp(-(h^2+t^2)/2),
    free of cancellation (reference complementary_normalised_black), with

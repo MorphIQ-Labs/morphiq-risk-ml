@@ -239,21 +239,21 @@ let lower_map x s =
   let fpp =
     pi_over_six *. y /. (s2 *. s) *. phi_cdf
     *. ((8.0 *. sqrt_three *. s *. ax) +. ((3.0 *. s2 *. (s2 -. 8.0)) -. (8.0 *. x *. x)) *. phi_cdf /. phi)
-    *. Float.exp ((2.0 *. y) +. (0.25 *. s2))
+    *. Elementary.exp ((2.0 *. y) +. (0.25 *. s2))
   in
   let phi2 = phi_cdf *. phi_cdf in
-  let fp = two_pi *. y *. phi2 *. Float.exp (y +. (0.125 *. s *. s)) in
+  let fp = two_pi *. y *. phi2 *. Elementary.exp (y +. (0.125 *. s *. s)) in
   let f = two_pi_over_sqrt_twenty_seven *. ax *. (phi2 *. phi_cdf) in
   (f, fp, fpp)
 
 let inverse_lower_map x f =
   Float.abs
-    (x /. (sqrt_three *. Normal.norm_inv (sqrt_three_over_third_root_two_pi *. Float.cbrt f /. Float.cbrt (Float.abs x))))
+    (x /. (sqrt_three *. Normal.norm_inv (sqrt_three_over_third_root_two_pi *. Elementary.cbrt f /. Elementary.cbrt (Float.abs x))))
 
 let upper_map x s =
   let f = 0.5 *. Cody.erfc (0.5 *. inv_sqrt_2 *. s) in
   let w = (x /. s) *. (x /. s) in
-  (f, -0.5 *. Float.exp (0.5 *. w), sqrt_pi_over_two *. Float.exp (w +. (0.125 *. s *. s)) *. w /. s)
+  (f, -0.5 *. Elementary.exp (0.5 *. w), sqrt_pi_over_two *. Elementary.exp (w +. (0.125 *. s *. s)) *. w /. s)
 
 let inverse_upper_map f = -2.0 *. Normal.norm_inv f
 
@@ -263,7 +263,7 @@ let lowest ln_beta x s0 =
     if n >= iterations || not (Float.abs ds > epsilon_float *. s) then s
     else
       let bx, ln_vega = Normalised_black.scaled_and_ln_vega x s in
-      let ln_b = Float.log bx +. ln_vega and bpob = 1.0 /. bx in
+      let ln_b = Elementary.log bx +. ln_vega and bpob = 1.0 /. bx in
       let h = x /. s in
       let x2_over_s3 = h *. h /. s in
       let b_h2 = x2_over_s3 -. (s /. 4.0) in
@@ -299,7 +299,7 @@ let highest beta_bar x s0 =
       let h = x /. s and t = s /. 2.0 in
       let gp = 2.0 /. sqrt_two_pi /. (Cody.erfcx ((t +. h) *. inv_sqrt_2) +. Cody.erfcx ((t -. h) *. inv_sqrt_2)) in
       let b_bar = Normalised_black.vega x s /. gp in
-      let g = Float.log (beta_bar /. b_bar) in
+      let g = Elementary.log (beta_bar /. b_bar) in
       let x2_over_s3 = h *. h /. s in
       let b_h2 = x2_over_s3 -. (s /. 4.0) in
       let c = 3.0 *. (x2_over_s3 /. s) in
@@ -338,7 +338,7 @@ let middle beta x s0 =
    subtraction would give; it decides the highest branch near the maximum.
    [ln_beta] likewise carries ln β where β itself is subnormal. *)
 let solve ?beta_bar ?ln_beta beta x =
-  let b_max = Float.exp (0.5 *. x) in
+  let b_max = Elementary.exp (0.5 *. x) in
   let beta_bar = match beta_bar with Some b -> b | None -> b_max -. beta in
   if x = 0.0 then atm beta beta_bar
   else
@@ -359,7 +359,7 @@ let solve ?beta_bar ?ln_beta beta x =
             let t = beta /. b_l in
             ((f_l *. t) +. (b_l *. (1.0 -. t))) *. t
         in
-        lowest (match ln_beta with Some l -> l | None -> Float.log beta) x (inverse_lower_map x f)
+        lowest (match ln_beta with Some l -> l | None -> Elementary.log beta) x (inverse_lower_map x f)
       else
         let inv_v_c = sqrt_two_pi /. b_max and inv_v_l = Normalised_black.inv_vega x s_l in
         let r = Rational_cubic.convex_fit_right b_l b_c s_l s_c inv_v_l inv_v_c 0.0 false in

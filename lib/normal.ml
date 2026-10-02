@@ -31,8 +31,8 @@ let log_norm_cdf x =
   else if x = Float.neg_infinity then Float.neg_infinity
   else
     let u = Float.abs x in
-    if u <= erf_region then Float.log (norm_cdf x)
-    else if x > 0.0 then Float.log1p (-.upper_tail u)
+    if u <= erf_region then Elementary.log (norm_cdf x)
+    else if x > 0.0 then Elementary.log1p (-.upper_tail u)
     else
       (* The half-square is formed directly, h + l = u^2/2 exactly, so it
          stays finite wherever ln Phi is (x^2 itself overflows first). *)
@@ -41,7 +41,7 @@ let log_norm_cdf x =
       if h = Float.infinity then Float.neg_infinity
       else
         let l = Float.fma half_u u (-.h) in
-        Float.log (0.5 *. Cody.erfcx_nonnegative (u *. inv_sqrt_2)) -. h -. l
+        Elementary.log (0.5 *. Cody.erfcx_nonnegative (u *. inv_sqrt_2)) -. h -. l
 
 (* M. J. Wichura, Algorithm AS 241 (PPND16), Appl. Statist. 37 (1988) 477-484. *)
 module As241 = struct
@@ -143,7 +143,7 @@ let norm_inv p =
     let q = p -. 0.5 in
     if Float.abs q <= As241.split1 then As241.central q
     else
-      let r = Float.sqrt (-.Float.log (if q < 0.0 then p else 1.0 -. p)) in
+      let r = Float.sqrt (-.Elementary.log (if q < 0.0 then p else 1.0 -. p)) in
       let z = if r <= As241.split2 then As241.intermediate r else As241.far r in
       if q < 0.0 then -.z else z
 
