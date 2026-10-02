@@ -2,6 +2,8 @@
 
 An internal experiment that rebuilds one slice of FerroRisk in OCaml. The slice and its exit criteria are defined in [SLICE.md](SLICE.md).
 
+Contributor and agent guidance: [AGENTS.md](AGENTS.md). `CLAUDE.md` delegates to that same contract.
+
 ```sh
 opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml-option-flambda
 eval "$(opam env --switch=morphiq-risk-ml)"
