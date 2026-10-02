@@ -10,6 +10,17 @@
  (libraries morphiq_risk))
 
 (test
+ (name fp_contract)
+ (modules fp_contract)
+ (modes byte exe)
+ (libraries morphiq_fp))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:fp_contract.bc})))
+
+(test
  (name oracle_normal)
  (package morphiq_risk_ml)
  (modules oracle_normal)

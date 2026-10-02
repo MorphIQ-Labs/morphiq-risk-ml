@@ -29,6 +29,8 @@ Read [SLICE.md](SLICE.md), [model contracts](docs/model-contracts.md),
 [determinism](docs/determinism.md) and [stability](docs/stability.md) before
 changing behavior. Consult the relevant `docs/results-*.md` evidence as well;
 historical results must not be mistaken for current acceptance rules.
+Compiler, arithmetic or backend work additionally follows the
+[numerical backend contract](docs/numerical-backend-contract.md).
 
 - `lib/fp/` owns the binary64 multiplication boundary that prevents implicit
   multiply-add contraction; explicit fused operations use `Float.fma`.

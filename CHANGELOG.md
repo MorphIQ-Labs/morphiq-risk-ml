@@ -4,6 +4,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Numerical backend conformance
+
+- Defined the arithmetic, optimization, AD and foreign-backend contract, including separate model, numerical-error and replay obligations. Retained the existing multiplication boundary after a worked contraction assessment.
+- Added native and bytecode IEEE witnesses to ordinary CI. No pricing implementation, served value, dependency, compiler choice or default mutation selection changes in this step.
+
 ### IV termination and computational failure
 
 - Added `Iv.Non_convergence` and `Iv.Numerical_failure`. This breaks exhaustive caller matches and is a major-class API change (a minor-version increment while at `0.y.z`); no release is tagged here.

@@ -28,3 +28,5 @@ Prices and finite Greeks in the committed corpora are checked against per-input 
 Ordinary CI runs the full test suite on all three platforms, formatting, and the seven [core mutation checks](docs/mutation-policy.md). The full mutation catalog is a separate manual/weekly workflow; it does not run on each PR or push.
 
 The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, canonical filenames, and a separate list of book and implementation references.
+
+The [numerical backend contract](docs/numerical-backend-contract.md) defines required arithmetic semantics, optimization assessment, AD/FFI obligations, and conformance evidence. Native and bytecode arithmetic probes run in the ordinary suite.
