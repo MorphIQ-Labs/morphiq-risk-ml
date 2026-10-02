@@ -10,7 +10,7 @@
  (modules oracle_normal)
  (libraries morphiq_risk)
  (action
-  (run %{test} %{dep:../oracle/data/normal_reference.txt})))
+  (run %{test} %{dep:../oracle/fixtures/normal.txt})))
 
 (test
  (name oracle_price)
@@ -19,8 +19,8 @@
  (libraries morphiq_risk)
  (action
   (progn
-   (run %{test} %{dep:../oracle/data/european_price_reference.txt})
-   (run %{test} %{dep:../oracle/data/displaced_price_reference.txt}))))
+   (run %{test} %{dep:../oracle/fixtures/european.txt})
+   (run %{test} %{dep:../oracle/fixtures/displaced.txt}))))
 
 (test
  (name lbr_round_trip)
@@ -34,7 +34,7 @@
  (modules oracle_iv)
  (libraries morphiq_risk)
  (action
-  (run %{test} %{dep:../oracle/data/public_iv_reference.txt})))
+  (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
 (test
  (name oracle_greeks)
@@ -42,7 +42,7 @@
  (modules oracle_greeks budget_greeks)
  (libraries morphiq_risk)
  (action
-  (run %{test} %{dep:../oracle/data/greek_reference.txt})))
+  (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
 (test
  (name normal_dd_reference)
@@ -62,7 +62,7 @@
  (modules oracle_elementary)
  (libraries morphiq_risk)
  (action
-  (run %{test} %{dep:../oracle/data/elementary_reference.txt})))
+  (run %{test} %{dep:../oracle/fixtures/elementary.txt})))
 
 (test
  (name determinism)
@@ -71,3 +71,9 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:determinism.digest})))
+
+(test
+ (name properties)
+ (package morphiq_risk_ml)
+ (modules properties)
+ (libraries morphiq_risk qcheck-core qcheck-core.runner))

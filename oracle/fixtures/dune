@@ -1,0 +1,49 @@
+; Decompress the committed oracle fixtures for the tests.
+
+(rule
+ (deps elementary.txt.gz)
+ (target elementary.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps normal.txt.gz)
+ (target normal.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps european.txt.gz)
+ (target european.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps displaced.txt.gz)
+ (target displaced.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps iv.txt.gz)
+ (target iv.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps greeks.txt.gz)
+ (target greeks.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))

@@ -47,8 +47,9 @@ demonstrates or refutes.
 
 ## Oracle
 
-Scoring uses FerroRisk's retained mpmath and QuantLib references, which are
-independent of the Rust implementation. `oracle/fetch.sh` reads them from
+Scoring uses this project's own oracles (docs/oracles.md). FerroRisk's
+references remain an optional cross-check. Historically they were the first
+oracle, and they are independent of the Rust implementation. `oracle/fetch.sh` reads them from
 pinned FerroRisk commits into `oracle/data/`, which is git-ignored. Most
 fixtures are pinned to the `!551` head. The IV reference and FerroRisk's
 observed IV envelope are pinned to the #448 stack tip (`c1d2b66f`), because

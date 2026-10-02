@@ -2,12 +2,13 @@
    (oracle/convert_public_iv.py). Expected outcome by reference status:
 
    - root: a volatility in the rounding cell (every σ whose exact price rounds
-     to the quote), or within the enforced ULP budget of the exact root. How
+     to the quote), or within 4x the inverse's attainable relative accuracy
+     (1 + |b/(s b')|) ε of the exact root (docs/error-analysis.md §6). How
      many rows are no further from the root than FerroRisk's own largest
      observed error (public_iv_observed_envelope.json) is reported alongside.
    - zero_volatility_limit, rounded_zero_volatility_bound: σ = 0 exactly.
    - below_exact_intrinsic: Below_intrinsic.
-   - no_finite_inverse: Above_maximum.
+   - no_finite_inverse, root_outside_binary64: Above_maximum.
    - expiry_not_identifiable: Not_identifiable_at_expiry.
    - invalid_input: a refusal naming the parameter, unless the model has no
      such input (Black-76, displaced Black and Bachelier take no dividend
@@ -125,11 +126,22 @@ let () =
                      if u <= 4.0 then st.within_4 <- st.within_4 + 1;
                      if within_ferro then st.within_ferro <- st.within_ferro + 1;
                      if u > st.worst_ulp then st.worst_ulp <- u;
-                     (* Enforced: in the cell, or within the measured worst distance from
-                        the exact root (2 ULP for the Black family with its final
-                        correction, 4 without; 4 for Bachelier, FerroRisk's floor). *)
-                     let budget = if model = "bachelier" then 4.0 else 2.0 in
-                     let ok = in_cell || u <= budget in
+                     (* Enforced: in the rounding cell, or within 4x the inverse's
+                        attainable relative accuracy (1 + |b/(s b')|) ε (Jäckel;
+                        docs/error-analysis.md §6). For Bachelier, 4 ULP. *)
+                     let attainable =
+                       if model = "bachelier" then 4.0 *. epsilon_float
+                       else
+                         let s' = s +. shift and k' = k +. shift in
+                         let q' = if model = "bsm" then q else r in
+                         let x = -.Float.abs (Float.log (s' /. k') +. ((r -. q') *. t)) in
+                         let sd = root *. Float.sqrt t in
+                         if sd > 0.0 && Float.is_finite sd then
+                           let b = Internal.Normalised_black.b x sd and v = Internal.Normalised_black.vega x sd in
+                           4.0 *. (1.0 +. Float.abs (b /. (sd *. v))) *. epsilon_float
+                         else 4.0 *. epsilon_float
+                     in
+                     let ok = in_cell || Float.abs (v -. root) <= attainable *. root || u <= 2.0 in
                      record ok;
                      if not ok then fail (Printf.sprintf "Root %h in [%h, %h]" root lo hi)
                  | _ -> record false; fail (Printf.sprintf "Root %h" root))
@@ -141,7 +153,7 @@ let () =
                  let ok = got = Below in
                  record ok;
                  if not ok then fail "Below_intrinsic"
-             | "no_finite_inverse" ->
+             | "no_finite_inverse" | "root_outside_binary64" ->
                  let ok = got = Above in
                  record ok;
                  if not ok then fail "Above_maximum"

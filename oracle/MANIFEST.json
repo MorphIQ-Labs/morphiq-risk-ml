@@ -1,0 +1,68 @@
+{
+  "displaced": {
+    "fixture_sha256": "19fecff91d45f24d87b77d3492348ef24db509c0b0e457d435fc944529ebdc9f",
+    "generator": "gen_displaced.py",
+    "generator_sha256": "43be2c2d4874a9d7385e91a2f0b39767075eb8ad489a40b4d623d90cf5aedec0",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 41760,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  },
+  "elementary": {
+    "fixture_sha256": "a98d98e94476db7aeceb2f096277f011cca43b557eb023d9e5ce0344308e9fc2",
+    "generator": "gen_elementary.py",
+    "generator_sha256": "c72dc9691d1d95cb4bb5a3af4d2a6c4a718e0538837c12fd7972d443abb0bacd",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 111470,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  },
+  "european": {
+    "fixture_sha256": "141295e62a7ee166ac0b99da35824dc2f5d590582a27d5df1c9b7e5ed27f5d24",
+    "generator": "gen_european.py",
+    "generator_sha256": "c1911c6ed7cf50e9bb124b7f68241ad98569fbaf1f18b3da6309240e3ecd69d1",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 57296,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  },
+  "greeks": {
+    "fixture_sha256": "6247be6acff3d9139bf13b345ef520c1ec07f36d0c6cc807ee0293a5da20e866",
+    "generator": "gen_greeks.py",
+    "generator_sha256": "3fd89f7cd996b708304371827d28bef049d08827636d989c32a94d56c81d4b23",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 66400,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  },
+  "iv": {
+    "fixture_sha256": "ca41c49d140b2eb22f53d0326898634266011b7be4724dffb498b026625e1d5c",
+    "generator": "gen_iv.py",
+    "generator_sha256": "1a51799e7e6b5027f3830fa865772349958da97fa89b68cc36c611ecc68fdf47",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 8314,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  },
+  "normal": {
+    "fixture_sha256": "77cda09c24c615010f3e75852c2e0dad2e31e5643a6f7a364f478c3b0263ba3a",
+    "generator": "gen_normal.py",
+    "generator_sha256": "2b788121942d4444891891ec5c1ebc594392fc9d375a6e90a78b68b6d90eb1de",
+    "mpmath": "1.3.0",
+    "python": "3.14.8",
+    "rows": 82000,
+    "shared_sha256": {
+      "common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7"
+    }
+  }
+}

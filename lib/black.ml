@@ -11,6 +11,7 @@ module Coordinates = struct
     cash : float;  (** K e^(-rT): the discounted strike. *)
     x : float;  (** ln(asset / cash), high part. *)
     x_low : float;  (** Its low part: x + x_low is ln(asset / cash) to ~106 bits. *)
+    x_terms : float;  (** |ln(S/K)| + |(r - q)T|: the size of x's parts, before they cancel. *)
     exponent : int;  (** Prices are computed on inputs scaled by 2^-exponent. *)
     time : float;
     root_time : float;
@@ -61,21 +62,21 @@ module Coordinates = struct
   let make ?(tied = false) ?(spot_low = 0.0) ?(strike_low = 0.0) ~spot ~strike ~time ~rate ~yield () =
     if time = 0.0 then Expiry { spot; strike; rate; yield }
     else
-      let exponent = (snd (Float.frexp spot) + snd (Float.frexp strike)) / 2 in
+      (* Floor, not truncation: the exponent must shift by exactly j when S and
+         K both scale by 2^j, so a price is exactly homogeneous. *)
+      let exponent = (snd (Float.frexp spot) + snd (Float.frexp strike)) asr 1 in
       let scale v = Float.ldexp v (-exponent) in
       let spot' = scale spot and strike' = scale strike in
       (* ln((S + Sl)/(K + Kl)) = ln(S/K) + Sl/S - Kl/K to first order. *)
-      let x =
-        Dd.add
-          (Dd.add (log_ratio spot strike) (carry ~rate ~yield ~time))
-          (Dd.of_float ((spot_low /. spot) -. (strike_low /. strike)))
-      in
+      let ln_ratio = log_ratio spot strike and carried = carry ~rate ~yield ~time in
+      let x = Dd.add (Dd.add ln_ratio carried) (Dd.of_float ((spot_low /. spot) -. (strike_low /. strike))) in
       Live
         {
           asset = spot' *. exp_neg_product yield time *. (1.0 +. (spot_low /. spot));
           cash = strike' *. exp_neg_product rate time *. (1.0 +. (strike_low /. strike));
           x = x.hi;
           x_low = x.lo;
+          x_terms = Float.abs ln_ratio.hi +. Float.abs carried.hi;
           exponent;
           time;
           root_time = fst (Split.sqrt time);
@@ -114,7 +115,13 @@ let precise_legs (c : Coordinates.live) =
   let leg hi lo rate = Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate c.time))) { Dd.hi; lo } in
   let asset = leg c.spot c.spot_low c.yield and cash = leg c.strike c.strike_low c.rate in
   let x = { Dd.hi = c.x; lo = c.x_low } in
-  let forward_intrinsic = if Float.abs c.x <= 0.35 then Dd.mul cash (Dd.expm1 x) else Dd.sub asset cash in
+  (* C (e^x - 1) is exact in relative terms when x itself is: its error is
+     2^-104 C (|ln(S/K)| + |(r - q)T|). Once those terms are large and
+     cancel (a forward placed at the strike through carry), A - C is better,
+     with error 2^-104 A. *)
+  let forward_intrinsic =
+    if Float.abs c.x <= 0.35 && c.x_terms <= 1.0 then Dd.mul cash (Dd.expm1 x) else Dd.sub asset cash
+  in
   (asset, cash, forward_intrinsic)
 
 let live_price side (c : Coordinates.live) sigma =
@@ -172,11 +179,19 @@ let live_implied side (c : Coordinates.live) price =
     if p = intrinsic.hi then root 0.0 else Iv.Below_intrinsic
   else
     let otm = Dd.sub (Dd.of_float p) (if intrinsic.hi > 0.0 then intrinsic else Dd.of_float 0.0) in
-    if otm.hi = 0.0 then root 0.0
+    (* A positive quote can underflow to 0 when rescaled by 2^-exponent. It
+       still has a positive root: the inversion then runs on ln β, taken from
+       the unscaled quote. *)
+    let underflowed = otm.hi = 0.0 && intrinsic.hi <= 0.0 && price > 0.0 in
+    if otm.hi = 0.0 && not underflowed then root 0.0
     else
       let x, xl = if c.x > 0.0 then (-.c.x, -.c.x_low) else (c.x, c.x_low) in
-      let m = Float.sqrt c.asset *. Float.sqrt c.cash in
-      let beta = Dd.to_float otm /. m in
+      (* m = sqrt(A C) and β = otm/m from the double-double legs: three
+         roundings in m would otherwise reach σ amplified by the inverse's
+         conditioning β/(s b'), several ULP at high volatility. *)
+      let m_dd = Dd.mul (Dd.sqrt asset) (Dd.sqrt cash) in
+      let m = Dd.to_float m_dd in
+      let beta = Float.max (Dd.to_float (Dd.div otm m_dd)) (if underflowed then 0x1p-1074 else 0.0) in
       (* ln β from the unscaled quote where nothing is subtracted from it: β
          itself can be subnormal, and rescaling a subnormal quote by
          2^-exponent drops its bits. LBR's lowest branch works on ln β. *)
@@ -187,7 +202,7 @@ let live_implied side (c : Coordinates.live) price =
       in
       (* β̄ = b_max - β from the exact distance to the maximum: near the
          maximum β itself rounds to b_max and loses it. *)
-      let beta_bar = Dd.to_float (Dd.sub maximum (Dd.of_float p)) /. m in
+      let beta_bar = Dd.to_float (Dd.div (Dd.sub maximum (Dd.of_float p)) m_dd) in
       let b_max = Elementary.exp (0.5 *. x) in
       if beta <= 0.0 then Iv.Below_smallest_volatility
       else
@@ -198,6 +213,12 @@ let live_implied side (c : Coordinates.live) price =
           else if beta > 0.5 *. b_max then
             (* Correct on the complement: β - b = b̄(s) - β̄. *)
             s +. ((Normalised_black.complement x xl s 0.0 -. beta_bar) /. Normalised_black.vega x s)
+          else if beta < 0x1p-900 then
+            (* β is near or in the subnormals, where it keeps few bits (and a
+               subnormal quote loses more to rescaling). Newton on ln b, from
+               the exact ln β: s += (ln β - ln b) b / b'. *)
+            let ln_b, bx = Normalised_black.ln_b_and_scaled x xl s in
+            s +. ((ln_beta -. ln_b) *. bx)
           else s +. ((beta -. Normalised_black.scaled 1.0 x xl s 0.0) /. Normalised_black.vega x s)
         in
         (* σ = s / sqrt T, with sqrt T's low part. *)

@@ -2,3 +2,5 @@ oracle/data/
 _build/
 *.install
 oracle/.venv/
+oracle/fixtures/*.txt
+__pycache__/

@@ -20,6 +20,7 @@ val ln2 : t
 val log_float : float -> t
 (** [ln a] for positive, finite [a]. *)
 
+val sqrt : t -> t
 val exp : t -> t
 val expm1 : t -> t
 

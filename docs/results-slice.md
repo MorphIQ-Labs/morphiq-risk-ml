@@ -6,14 +6,18 @@ Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Bla
 
 ### 1. Accuracy
 
-| Layer | Oracle | Rows | Result | Detail |
-| --- | --- | ---: | --- | --- |
-| Normal primitives | mpmath, 80 digits | 82,000 | all within FerroRisk's SPEC budgets; tail tightened to 6 ULP | [results-numerics.md](results-numerics.md) |
-| Prices | FerroRisk #440 | 50,094 | worst 2–16 ULP per region, against FerroRisk's 37–3,504 (4.3e15 at zero variance) | [results-pricing.md](results-pricing.md) |
-| Displaced prices | this project's exact-sum oracle | 41,760 | worst 1–15 ULP per region | [results-pricing.md](results-pricing.md) |
-| Cross-quantity consistency | price ↔ IV ↔ Greeks | 128 | displaced equals Black-76 bit for bit on representable sums; IV inverts the served price; Greeks match finite differences of it | `test/consistency.ml` |
-| Implied volatility | FerroRisk public IV at the #448 tip | 3,522 | every class matches; Black roots ≤ 2 ULP from exact | [results-iv.md](results-iv.md) |
-| Greeks | FerroRisk Greek reference | 61,621 | worst ≤ 6 ULP for every Greek | [results-greeks.md](results-greeks.md) |
+Measured against this project's own oracles (docs/oracles.md): mpmath, refined to agreement between precisions, committed and hash-checked. FerroRisk's references are an optional cross-check (`scripts/ferro_crosscheck.sh`), and every row of them also passes.
+
+| Layer | Oracle | Rows | Worst error |
+| --- | --- | ---: | --- |
+| Elementary functions | `elementary` | 111,470 | ≤ 1 ULP (exp, expm1, log, log1p) |
+| Normal distribution | `normal` | 82,000 | ≤ 4 ULP, tails included |
+| Prices: BSM, Black-76, Bachelier | `european` (grid, carry-cancelled forwards, random) | 57,296 | 1–22 ULP per region; zero variance 1; Bachelier ≤ 5 |
+| Prices: displaced Black | `displaced` (exact sums) | 41,760 | 1–15 ULP per region |
+| Implied volatility | `iv` (exact roots and rounding cells) | 8,254 | every outcome class matches; roots in their rounding cell or within 4× Jäckel's attainable accuracy (Black-family worst 4–7 ULP from the exact root) |
+| Greeks | `greeks` (closed form vs mpmath differentiation) | 66,400 | ≤ 7 ULP for every Greek; underflow and kink classes exact |
+| Properties | `test/properties.ml` (random, fixed seed) | 22,000 | bounds, parity, monotonicity, Greek signs, exact homogeneity, translation, IV within 2.10× attainable, finite differences |
+| Cross-quantity consistency | `test/consistency.ml` | 128 | displaced = Black-76 bit for bit; IV inverts the served price; Greeks match finite differences |
 
 ### 2. Iteration speed
 

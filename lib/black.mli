@@ -11,6 +11,7 @@ module Coordinates : sig
     cash : float;  (** [K e^(-rT)], scaled by [2^-exponent]. *)
     x : float;  (** [ln(asset / cash)], high part. *)
     x_low : float;  (** Its low part: [x + x_low] carries about 106 bits. *)
+    x_terms : float;  (** [|ln(S/K)| + |(r - q)T|], the size of [x]'s parts before they cancel. *)
     exponent : int;  (** Prices are computed at scale [2^-exponent]. *)
     time : float;
     root_time : float;

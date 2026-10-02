@@ -126,3 +126,12 @@ let to_float_scaled a k =
       else f +. 1.0
     in
     Float.ldexp n (-1074)
+
+(* sqrt a to double-double: one Newton correction from the residual
+   a - hi^2, formed exactly. *)
+let sqrt a =
+  if a.hi <= 0.0 then of_float (Float.sqrt a.hi)
+  else
+    let hi = Float.sqrt a.hi in
+    let r = sub a (two_prod hi hi) in
+    renormalise hi (r.hi /. (2.0 *. hi))
