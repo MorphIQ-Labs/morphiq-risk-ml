@@ -59,10 +59,14 @@ let price model side ~s ~k ~t ~r ~q ~sigma ~shift =
       let a = get (Black.Black76.admit { forward = s; strike = k; time_to_expiry = t; rate = r }) in
       Black.Black76.price a side lognormal
   | "displaced" ->
-      (* #440 measures displaced Black on binary64-shifted coordinates (its
-         oracle shifts in binary64 before pricing). Displaced here shifts by
-         the exact sum, as FerroRisk's IV and Greek references do, so the #440
-         rows are Black-76 on fl(F + d) and fl(K + d). *)
+      (* The contract: Black-76 on the exact sums F + d and K + d
+         (oracle/gen_displaced.py). *)
+      let a =
+        get (Black.Displaced.admit { forward = s; strike = k; displacement = shift; time_to_expiry = t; rate = r })
+      in
+      Black.Displaced.price a side lognormal
+  | "black76_shifted" ->
+      (* FerroRisk #440's displaced rows: Black-76 on fl(F + d) and fl(K + d). *)
       let a = get (Black.Black76.admit { forward = s +. shift; strike = k +. shift; time_to_expiry = t; rate = r }) in
       Black.Black76.price a side lognormal
   | "bachelier" ->
@@ -76,7 +80,7 @@ let scale model ~s ~k ~t ~r ~q ~shift =
   match model with
   | "bsm" -> Float.max (s *. Float.exp (-.q *. t)) (k *. dr)
   | "black76" -> dr *. Float.max s k
-  | "displaced" -> dr *. Float.max (s +. shift) (k +. shift)
+  | "displaced" | "black76_shifted" -> dr *. Float.max (s +. shift) (k +. shift)
   | _ -> dr *. Float.max (Float.abs s) (Float.abs k)
 
 type stat = {

@@ -41,6 +41,10 @@ demonstrates or refutes.
 5. **One kernel per family.** BSM, Black-76 and displaced Black are one
    functor-parameterised lognormal kernel over the carry and shift choices.
 
+## Contracts
+
+[docs/model-contracts.md](docs/model-contracts.md) defines what each model computes. Every input is exact, and price, implied volatility and Greeks describe one function. Accuracy is measured against those definitions.
+
 ## Oracle
 
 Scoring uses FerroRisk's retained mpmath and QuantLib references, which are
@@ -55,7 +59,8 @@ their squash-merge commits as the MRs land.
 | --- | --- |
 | `normal_premium_reference.json` | Normal CDF and premium tails |
 | `public_iv_reference.json`, `public_iv_observed_envelope.json` | IV outcome classes and rounding cells for all four models, with FerroRisk's own per-row σ errors |
-| `440-*.jsonl.gz` (#440 study) | 50,094 exact-input European prices with regions |
+| `440-*.jsonl.gz` (#440 study) | 50,094 exact-input European prices with regions. Its displaced rows price on binary64-shifted coordinates, so they are scored as `black76_shifted` (Black-76 on fl(F + d), fl(K + d)). |
+| `oracle/gen_displaced.py` (this project's own) | 41,760 displaced Black prices on the exact sums, at mpmath 60/120 digits. 26,400 of them have F + d or K + d unrepresentable. |
 | `iv_inverse_reference.json` | Normalised-inverse rounding cells |
 | `bachelier_quantlib_reference.json` | Bachelier price and IV |
 | `greek_derivative_reference.json`, `black_greek_boundary_reference.json` | Analytic Greeks |

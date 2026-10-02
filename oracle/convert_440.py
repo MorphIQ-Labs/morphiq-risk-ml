@@ -96,7 +96,12 @@ def main(candidates, oracle, out):
             else:
                 continue
             shift = row["shift"] or bits(0.0)
-            fields = [row["model"], row["type"], region(row, o)] + [
+            # #440 prices displaced Black on binary64-shifted coordinates, so its
+            # displaced rows measure Black-76 on fl(F + d), fl(K + d). They are
+            # labelled for what they measure; displaced Black itself (exact sums)
+            # has its own oracle, gen_displaced.py.
+            model = "black76_shifted" if row["model"] == "displaced" else row["model"]
+            fields = [model, row["type"], region(row, o)] + [
                 row[k] for k in ("s", "k", "t", "r", "q", "sigma")] + [shift, bits(ref)]
             w.write(" ".join(fields) + "\n")
 

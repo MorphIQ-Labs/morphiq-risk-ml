@@ -100,39 +100,6 @@ module type MODEL = sig
   val coordinates : admitted -> Coordinates.t
 end
 
-(* θ (asset - cash), the discounted forward intrinsic before flooring. Near the
-   money it is cash (e^x - 1), so the two legs' roundings do not cancel. *)
-let forward_intrinsic theta (c : Coordinates.live) =
-  if Float.abs c.x < 1.0 then
-    theta *. c.cash *. (Float.expm1 c.x +. (Float.exp c.x *. c.x_low))
-  else theta *. (c.asset -. c.cash)
-
-let live_price side (c : Coordinates.live) sigma =
-  let theta = Side.sign side in
-  let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = c.root_time; lo = c.root_time_low } sigma in
-  let intrinsic = forward_intrinsic theta c in
-  let m () = Float.sqrt c.asset *. Float.sqrt c.cash in
-  if sigma = 0.0 then Float.ldexp (Float.max intrinsic 0.0) c.exponent
-  else if c.x = 0.0 && s < 0x1p-500 then
-    (* Exactly at the money b = erf(s/sqrt 8) = s/sqrt(2 pi) (1 - s^2/24 ...);
-       s itself may underflow while m s does not, so s is never formed. *)
-    Split.product_ldexp [ m (); Normalised_black.inv_sqrt_2pi; sigma; c.root_time ] c.exponent
-  else if s = 0.0 then Float.ldexp (Float.max intrinsic 0.0) c.exponent
-  else
-    (* The out-of-the-money part, at -|x|, carrying x's low part with it. *)
-    let x, xl = if c.x > 0.0 then (-.c.x, -.c.x_low) else (c.x, c.x_low) in
-    let m = m () in
-    if theta *. c.x > 0.0 then Float.ldexp (intrinsic +. Normalised_black.scaled m x xl s sl) c.exponent
-    else
-      (* Applying the scale inside the kernel keeps a deep out-of-the-money
-         value from underflowing before it is scaled back. *)
-      Normalised_black.scaled ~k:c.exponent m x xl s sl
-
-let price_coordinates coordinates side sigma =
-  match coordinates with
-  | Coordinates.Expiry { spot; strike; _ } -> Float.max (Side.sign side *. (spot -. strike)) 0.0
-  | Coordinates.Live c -> live_price side c (Vol.to_float sigma)
-
 (* The legs and the discounted forward intrinsic in double-double (~106
    bits), at the coordinates' scale. They decide where a quote falls relative
    to the zero-volatility price and the maximum. *)
@@ -142,6 +109,42 @@ let precise_legs (c : Coordinates.live) =
   let x = { Dd.hi = c.x; lo = c.x_low } in
   let forward_intrinsic = if Float.abs c.x <= 0.35 then Dd.mul cash (Dd.expm1 x) else Dd.sub asset cash in
   (asset, cash, forward_intrinsic)
+
+let live_price side (c : Coordinates.live) sigma =
+  let theta = Side.sign side in
+  let { Dd.hi = s; lo = sl } = Dd.mul_float { Dd.hi = c.root_time; lo = c.root_time_low } sigma in
+  (* θ (asset - cash) to ~106 bits: the zero-variance price is its correctly
+     rounded value, the same boundary the inverse classifies quotes against. *)
+  let intrinsic () =
+    let _, _, forward_intrinsic = precise_legs c in
+    Dd.mul_float forward_intrinsic theta
+  in
+  let zero_variance () =
+    let i = intrinsic () in
+    Float.ldexp (if i.hi > 0.0 then Dd.to_float i else 0.0) c.exponent
+  in
+  let m () = Float.sqrt c.asset *. Float.sqrt c.cash in
+  if sigma = 0.0 then zero_variance ()
+  else if c.x = 0.0 && s < 0x1p-500 then
+    (* Exactly at the money b = erf(s/sqrt 8) = s/sqrt(2 pi) (1 - s^2/24 ...);
+       s itself may underflow while m s does not, so s is never formed. *)
+    Split.product_ldexp [ m (); Normalised_black.inv_sqrt_2pi; sigma; c.root_time ] c.exponent
+  else if s = 0.0 then zero_variance ()
+  else
+    (* The out-of-the-money part, at -|x|, carrying x's low part with it. *)
+    let x, xl = if c.x > 0.0 then (-.c.x, -.c.x_low) else (c.x, c.x_low) in
+    let m = m () in
+    if theta *. c.x > 0.0 then
+      Float.ldexp (Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float (Normalised_black.scaled m x xl s sl)))) c.exponent
+    else
+      (* Applying the scale inside the kernel keeps a deep out-of-the-money
+         value from underflowing before it is scaled back. *)
+      Normalised_black.scaled ~k:c.exponent m x xl s sl
+
+let price_coordinates coordinates side sigma =
+  match coordinates with
+  | Coordinates.Expiry { spot; strike; _ } -> Float.max (Side.sign side *. (spot -. strike)) 0.0
+  | Coordinates.Live c -> live_price side c (Vol.to_float sigma)
 
 let root sigma = match Vol.lognormal sigma with Ok v -> Iv.Root v | Error _ -> Iv.Above_maximum
 
