@@ -1,0 +1,8 @@
+(library
+ (name morphiq_fp)
+ (public_name morphiq_risk_ml.fp)
+ (foreign_stubs
+  (language c)
+  (names morphiq_fp_stubs)
+  (flags
+   (:standard -ffp-contract=off))))

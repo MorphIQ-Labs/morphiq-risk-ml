@@ -17,12 +17,12 @@ let ln2_lo = 0x1.a39ef35793c76p-33
 let inv_ln2 = 0x1.71547652b82fep0
 
 (* Horner evaluation of c0 + c1 v + c2 v^2 + ... from a coefficient array,
-   highest power evaluated first. *)
+   highest power first, one explicit fused multiply-add per step. *)
 let horner coefficients v =
   let n = Array.length coefficients in
   let acc = ref coefficients.(n - 1) in
   for i = n - 2 downto 0 do
-    acc := coefficients.(i) +. (v *. !acc)
+    acc := Float.fma v !acc coefficients.(i)
   done;
   !acc
 
