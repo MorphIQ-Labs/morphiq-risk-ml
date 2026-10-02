@@ -15,7 +15,7 @@ Worst error per region, ours vs FerroRisk's published SPEC §7.1 (#440) contract
 | Black family, near ATM, tiny variance | 4,016 | 4 | 552 | 0.0099 | 0.10 |
 | Black family, OTM | 9,897 | 16 | 3,504 | 2.06 | 17.9 |
 | Black family, strike outside [1e-100, 1e100] | 19,320 | 10 | 7.3e6 | 1.79 | 613 |
-| Black family, zero variance | 4,278 | 8 | 4.3e15 | 0.54 | 567 |
+| Black family, zero variance | 4,278 | 1 | 4.3e15 | 0.54 | 567 |
 | Bachelier, all regions | 3,036 | 3 | 329 | 5.07 | 4.3 |
 
 The enforced ULP budgets are the measured worst with about 2× headroom, so a regression to FerroRisk-level error fails.
@@ -43,6 +43,16 @@ A rounded-shift implementation fails 2,450 of these contracts: up to 1.6e9 ULP n
 The zero-variance price and the in-the-money intrinsic are computed from the double-double legs the inverse uses to classify quotes, then rounded once. Zero-variance prices are now 0–1 ULP (Bachelier 0). More importantly, a served zero-variance price always has an inverse: either σ = 0 or an exact positive root that reprices to it.
 
 The binary64 intrinsic it replaced could land below the exact intrinsic. The inverse then correctly reported `Below_intrinsic` for the library's own price. `test/consistency.ml` found that; a mutant that restores it fails with "no root for its own price".
+
+## A zero-variance cancellation
+
+The #440 grid's worst zero-variance case is a put with S ≈ 9.8e-151, K = 1e-150 and (r − q)T = 0.02. Its value (3.2e-168) is 3e-18 of either leg. Checked independently with mpmath at 400 digits, FerroRisk's reference is right to 1.8e-17. We were at 1.2e-15, which is 8 ULP.
+
+The cause was the log-moneyness's quotient remainder `(S − qK)/(qK)`. It was rounded to binary64, costing about 1e-33 in x, and that error survives a cancellation to 1e-18. With the remainder and its second-order term carried in double-double, the case is now 1 ULP. A mutant that rounds the remainder fails that row.
+
+## Known limit: Region III's erfcx difference
+
+The worst extreme-scale case (10 ULP at h = −4.6, s = 1) is in the normalised Black function's Region III. There, `b = e^(−(h²+t²)/2)·(erfcx(q1) − erfcx(q2))/2` and the two erfcx values cancel by about 6×. This is the method's own accuracy, the same as Jäckel's reference, and FerroRisk's value checks out to 4.7e-17 against mpmath. It stays within budget (32) and is analysed in [error-analysis.md](error-analysis.md).
 
 ## What made the difference
 

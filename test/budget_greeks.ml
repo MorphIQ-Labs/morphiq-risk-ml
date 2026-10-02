@@ -4,7 +4,7 @@ let values =
   [
     ("black delta", 16.0);
     ("black gamma", 8.0);
-    ("black theta", 64.0);
+    ("black theta", 8.0);
     ("black vega", 8.0);
     ("black rho", 16.0);
     ("black vanna", 8.0);
@@ -14,7 +14,7 @@ let values =
     ("black color", 16.0);
     ("bachelier delta", 8.0);
     ("bachelier gamma", 4.0);
-    ("bachelier theta", 32.0);
+    ("bachelier theta", 8.0);
     ("bachelier vega", 4.0);
     ("bachelier rho", 8.0);
     ("bachelier vanna", 4.0);

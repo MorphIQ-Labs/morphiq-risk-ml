@@ -32,10 +32,17 @@ module Coordinates = struct
     let lo = Float.fma a b (-.p) in
     if p >= 0.0 then Split.scaled_exp_neg 1.0 p lo else Float.exp (-.p) *. (1.0 -. lo)
 
-  (* ln(S / K) in double-double, carrying the remainder of the quotient. *)
+  (* ln(S / K) in double-double. With q = fl(S/K), S/K = q (1 + ρ) where
+     ρ = (S - q K)/(q K) and S - q K is exact (fma). Then
+     ln(S/K) = ln q + ρ - ρ^2/2 + O(ρ^3), |ρ| <= 2^-53, with ρ itself in
+     double-double: a rounded ρ costs ~1e-33 in x, which matters when the
+     result cancels to ~1e-18 of its terms (a zero-variance price at the
+     forward). *)
   let log_ratio s k =
-    let q, r = Split.quotient s k in
-    if Float.is_finite q && q >= Float.min_float then Dd.add (Dd.log_float q) (Dd.of_float (r /. q))
+    let q = s /. k in
+    if Float.is_finite q && q >= Float.min_float then
+      let rho = Dd.div (Dd.of_float (Float.fma (-.q) k s)) (Dd.mul_float (Dd.of_float k) q) in
+      Dd.add (Dd.log_float q) (Dd.sub rho (Dd.mul_float (Dd.mul rho rho) 0.5))
     else Dd.sub (Dd.log_float s) (Dd.log_float k)
 
   (* (r - q) T in double-double: both products are exact. *)
@@ -121,7 +128,7 @@ let live_price side (c : Coordinates.live) sigma =
   in
   let zero_variance () =
     let i = intrinsic () in
-    Float.ldexp (if i.hi > 0.0 then Dd.to_float i else 0.0) c.exponent
+    if i.hi > 0.0 then Dd.to_float_scaled i c.exponent else 0.0
   in
   let m () = Float.sqrt c.asset *. Float.sqrt c.cash in
   if sigma = 0.0 then zero_variance ()
@@ -135,7 +142,7 @@ let live_price side (c : Coordinates.live) sigma =
     let x, xl = if c.x > 0.0 then (-.c.x, -.c.x_low) else (c.x, c.x_low) in
     let m = m () in
     if theta *. c.x > 0.0 then
-      Float.ldexp (Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float (Normalised_black.scaled m x xl s sl)))) c.exponent
+      Dd.to_float_scaled (Dd.add (intrinsic ()) (Dd.of_float (Normalised_black.scaled m x xl s sl))) c.exponent
     else
       (* Applying the scale inside the kernel keeps a deep out-of-the-money
          value from underflowing before it is scaled back. *)
@@ -309,6 +316,23 @@ let live_greeks side (c : Coordinates.live) sigma =
       dq *. Dd.to_float bracket *. day
     in
     let delta = (theta *. a_part /. spot) +. g (theta *. base *. a_mills /. spot) in
+    (* theta (annual) = θ(q A Φ(θ d1) - r C Φ(θ d2)) - A φ(d1) σ/(2 √T). Its terms
+       cancel near the money and for forward models (q = r), so where |d1| and
+       |d2| are at most 6 the whole expression is double-double, legs included. The tails use the
+       Mills-ratio form, which is already relative. *)
+    let d2_dd = Dd.sub d1_dd s_dd in
+    let annual_theta =
+      if Float.abs d1_dd.Dd.hi <= Normal_dd.limit && Float.abs d2_dd.Dd.hi <= Normal_dd.limit then
+        let asset, cash, _ = precise_legs c in
+        let leg leg_dd rate d = Dd.mul (Dd.mul_float leg_dd rate) (Normal_dd.cdf (Dd.mul_float d theta)) in
+        let carry_terms = Dd.mul_float (Dd.sub (leg asset q d1_dd) (leg cash r d2_dd)) theta in
+        let diffusion = Dd.div (Dd.mul (Dd.mul asset (Normal_dd.pdf d1_dd)) (Dd.of_float sigma)) (Dd.mul_float rt_dd 2.0) in
+        Dd.to_float_scaled (Dd.sub carry_terms diffusion) e_up
+      else
+        (r *. price)
+        +. up (theta *. (q -. r) *. a_part)
+        +. g ~k:e_up ((theta *. (q -. r) *. base *. a_mills) -. (base *. sigma /. (2.0 *. rt_full)))
+    in
     let charm =
       if Float.abs d1_dd.Dd.hi <= Normal_dd.limit then charm_dd ()
       else (q *. delta *. day) -. g (base /. spot *. w *. day)
@@ -320,12 +344,7 @@ let live_greeks side (c : Coordinates.live) sigma =
     {
       Greeks.delta = Ok delta;
       gamma = Ok (g ~k:e_down (base /. (spot *. spot *. s)));
-      theta =
-        Ok
-          (Units.per_calendar_day
-             ((r *. price)
-             +. up (theta *. (q -. r) *. a_part)
-             +. g ~k:e_up ((theta *. (q -. r) *. base *. a_mills) -. (base *. sigma /. (2.0 *. rt_full)))));
+      theta = Ok (Units.per_calendar_day annual_theta);
       vega = Ok (Units.per_volatility (g ~k:e_up (base *. rt_full)));
       rho;
       vanna = Ok (Units.per_volatility (g (-.base /. spot *. d2_over_sigma)));

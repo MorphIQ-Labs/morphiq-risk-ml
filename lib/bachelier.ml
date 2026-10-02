@@ -221,6 +221,21 @@ let greeks a side sigma =
           if theta *. d <= 0.0 then theta *. g (base *. mills (-.theta *. d))
           else theta *. (discount -. g (base *. mills (theta *. d)))
         in
+        (* theta (annual) = r V - D φ(d) σ/(2 √T) = D (r θΔ Φ(θ d) + φ(d)(r s - σ/(2 √T))),
+           double-double where |d| <= 6: the terms cancel near the money. *)
+        let theta_annual =
+          if Float.abs dh <= Normal_dd.limit then
+            let d_dd = { Dd.hi = dh; lo = dl } in
+            let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
+            let s_dd = { Dd.hi = s; lo = sl } in
+            let first = Dd.mul (Dd.mul_float delta rate) (Normal_dd.cdf (Dd.mul_float d_dd theta)) in
+            let second =
+              Dd.mul (Normal_dd.pdf d_dd)
+                (Dd.sub (Dd.mul_float s_dd rate) (Dd.div (Dd.of_float sigma_f) (Dd.mul_float rt_dd 2.0)))
+            in
+            Dd.to_float (Dd.mul (Dd.exp (Dd.neg (Dd.two_prod rate time))) (Dd.add first second))
+          else (rate *. value) -. g (base *. sigma_f /. (2.0 *. rt))
+        in
         let charm =
           if Float.abs dh <= Normal_dd.limit && Float.is_finite (0.5 /. time) then charm_dd ()
           else (rate *. delta *. day) +. g (base *. d /. (2.0 *. time) *. day)
@@ -228,7 +243,7 @@ let greeks a side sigma =
         {
           Greeks.delta = Ok delta;
           gamma = Ok (g (base /. s));
-          theta = Ok (Units.per_calendar_day ((rate *. value) -. g (base *. sigma_f /. (2.0 *. rt))));
+          theta = Ok (Units.per_calendar_day theta_annual);
           vega = Ok (Units.per_volatility (g (base *. rt)));
           rho;
           vanna = Ok (Units.per_volatility (g (-.base *. d_over_sigma)));
