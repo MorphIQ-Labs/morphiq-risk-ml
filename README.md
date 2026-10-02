@@ -24,3 +24,5 @@ The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Int
 Prices and finite Greeks in the committed corpora are checked against per-input analytical bounds, with exact-rational rounded-kernel checks and extra-bit references. Historical ULP targets remain additional quality gates. IV envelopes and universal finite-input coverage still have the limitations listed in the [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).
 
 Ordinary CI runs the full test suite on all three platforms, formatting, and the seven [core mutation checks](docs/mutation-policy.md). The full mutation catalog is a separate manual/weekly workflow; it does not run on each PR or push.
+
+The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, and an explicit list of unavailable papers and non-paper references.

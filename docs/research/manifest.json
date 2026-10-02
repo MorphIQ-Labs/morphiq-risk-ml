@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "inventory_base_commit": "130ce0a581699adca278be0fc74022645b9f3f41",
+  "scope": "Research papers explicitly cited in the current tracked source/documentation and the PR 12 source audit; not the recursive bibliographies of those papers.",
+  "documents": [
+    {
+      "file": "joldes-muller-popescu-2017-double-word-bounds-hal-v3.pdf",
+      "title": "Tight and rigorous error bounds for basic building blocks of double-word arithmetic",
+      "authors": "Mioara Joldes; Jean-Michel Muller; Valentina Popescu",
+      "year": 2017,
+      "version": "HAL v3",
+      "source_url": "https://hal.science/hal-01351529v3/document",
+      "doi": "10.1145/3121432",
+      "cited_in": [
+        "lib/dd.ml",
+        "lib/dd.mli",
+        "docs/error-analysis.md",
+        "CHANGELOG.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "2a820178d2ef079559de9940d7af38258fac24558d406be64779ea901486cbc0",
+      "bytes": 476909,
+      "pages": 28
+    },
+    {
+      "file": "muller-rideau-2022-formalization-double-word-hal-v2.pdf",
+      "title": "Formalization of double-word arithmetic, and comments on “Tight and rigorous error bounds for basic building blocks of double-word arithmetic”",
+      "authors": "Jean-Michel Muller; Laurence Rideau",
+      "year": 2022,
+      "version": "HAL v2",
+      "source_url": "https://hal.science/hal-02972245v2/document",
+      "doi": "10.1145/3484514",
+      "cited_in": [
+        "docs/error-analysis.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "099e710ab98c82227fe7a16610b7e283ff6d69f22e8d2887e06bc1dd8edabf8b",
+      "bytes": 741154,
+      "pages": 30
+    },
+    {
+      "file": "lefevre-et-al-2023-euclidean-norms-hal-v2.pdf",
+      "title": "Accurate calculation of Euclidean norms using double-word arithmetic",
+      "authors": "Vincent Lefèvre; Nicolas Louvet; Jean-Michel Muller; Joris Picot; Laurence Rideau",
+      "year": 2023,
+      "version": "HAL v2",
+      "source_url": "https://hal.science/hal-03482567v2/document",
+      "doi": "10.1145/3568672",
+      "cited_in": [
+        "lib/dd.ml",
+        "lib/dd.mli",
+        "docs/error-analysis.md",
+        "CHANGELOG.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "a60eb7edbf7e6ca4454d97f0c2a1eee89806093a6f487cb429c087678858ac93",
+      "bytes": 1027744,
+      "pages": 51
+    },
+    {
+      "file": "boldo-et-al-2023-floating-point-arithmetic.pdf",
+      "title": "Floating-point arithmetic",
+      "authors": "Sylvie Boldo; Claude-Pierre Jeannerod; Guillaume Melquiond; Jean-Michel Muller",
+      "year": 2023,
+      "version": "Acta Numerica 32, 203–290; publisher PDF",
+      "source_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/287C4D5F6D4A43FBEEB1ABED2A405AAF/S0962492922000101a.pdf/floatingpoint_arithmetic.pdf",
+      "doi": "10.1017/S0962492922000101",
+      "cited_in": [
+        "docs/error-analysis.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "dd4b872b56306e32f475aefc860cf77e46c0b6e8534251f3a5ad6143c2336444",
+      "bytes": 949385,
+      "pages": 88
+    },
+    {
+      "file": "jaeckel-2015-lets-be-rational.pdf",
+      "title": "Let’s be rational",
+      "authors": "Peter Jäckel",
+      "year": 2015,
+      "version": "Author revision dated 2016-03-25; first version 2013-11-24",
+      "source_url": "http://www.jaeckel.org/LetsBeRational.pdf",
+      "doi": null,
+      "cited_in": [
+        "lib/lbr.ml",
+        "lib/lbr.mli",
+        "lib/normalised_black.ml",
+        "SLICE.md",
+        "docs/error-analysis.md",
+        "docs/results-iv.md",
+        "docs/results-pricing.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "351a9e2cc603f8817be74a9719e5269bd61784fc7a3d36e2d7131fa25b1a104d",
+      "bytes": 1268150,
+      "pages": 12
+    },
+    {
+      "file": "jaeckel-2017-implied-normal-volatility.pdf",
+      "title": "Implied Normal Volatility",
+      "authors": "Peter Jäckel",
+      "year": 2017,
+      "version": "Author revision dated 2017-06-06; first version 2016-12-02",
+      "source_url": "http://www.jaeckel.org/ImpliedNormalVolatility.pdf",
+      "doi": null,
+      "cited_in": [
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "68122768321c091ae0427afeec01589281ad41492859280a12e2553e92d4f3bc",
+      "bytes": 765681,
+      "pages": 3
+    },
+    {
+      "file": "wichura-1988-as241-normal-percentage-points.pdf",
+      "title": "Algorithm AS 241: The Percentage Points of the Normal Distribution",
+      "authors": "Michael J. Wichura",
+      "year": 1988,
+      "version": "Journal scan with JSTOR cover; university-hosted copy",
+      "source_url": "https://csg.sph.umich.edu/abecasis/gas_power_calculator/algorithm-as-241-the-percentage-points-of-the-normal-distribution.pdf",
+      "doi": "10.2307/2347330",
+      "cited_in": [
+        "lib/normal.ml",
+        "lib/normal.mli",
+        "SLICE.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "2e7df5d457e2797a1e13c0ae9f5816c742c5e85fffa3f04ddf428990a9689a74",
+      "bytes": 523582,
+      "pages": 9
+    },
+    {
+      "file": "marsaglia-2004-evaluating-normal-distribution.pdf",
+      "title": "Evaluating the Normal Distribution",
+      "authors": "George Marsaglia",
+      "year": 2004,
+      "version": "Journal of Statistical Software 11(4), 1–11; publisher PDF",
+      "source_url": "https://www.jstatsoft.org/index.php/jss/article/download/v011i04/13",
+      "doi": "10.18637/jss.v011.i04",
+      "cited_in": [
+        "lib/normal_dd.ml",
+        "docs/error-analysis.md",
+        "docs/results-greeks.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "eb8a9ac1f519c1720e66cab5120826ef4217fb1ee546349b3dcba528c9c7981c",
+      "bytes": 283684,
+      "pages": 11
+    },
+    {
+      "file": "dekker-1971-extending-available-precision.pdf",
+      "title": "A Floating-Point Technique for Extending the Available Precision",
+      "authors": "T. J. Dekker",
+      "year": 1971,
+      "version": "Numerische Mathematik 18, 224–242; university-hosted journal scan",
+      "source_url": "https://csclub.uwaterloo.ca/~pbarfuss/dekker1971.pdf",
+      "doi": "10.1007/BF01397083",
+      "cited_in": [
+        "lib/dd.ml"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "41ece4987012f243cf67c2ff78baa0fd62f5a12f6859f7817b92770f1bd60b2e",
+      "bytes": 970552,
+      "pages": 19
+    },
+    {
+      "file": "dekker-1970-extending-precision-cwi-report.pdf",
+      "title": "A floating-point technique for extending the available precision",
+      "authors": "T. J. Dekker",
+      "year": 1970,
+      "version": "CWI report MR 118/70; predecessor to the cited 1971 journal article",
+      "source_url": "https://ir.cwi.nl/pub/9159/9159D.pdf",
+      "doi": null,
+      "cited_in": [
+        "lib/dd.ml"
+      ],
+      "relationship": "supplemental",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "f37098a7a70f18b300062ccfbeedd657c2e053746419a22efb38386f545f4633",
+      "bytes": 1222839,
+      "pages": 42
+    },
+    {
+      "file": "hida-li-bailey-2008-qd-library.pdf",
+      "title": "Library for Double-Double and Quad-Double Arithmetic",
+      "authors": "Yozo Hida; Xiaoye S. Li; David H. Bailey",
+      "year": 2008,
+      "version": "Author technical report dated 2008-05-08",
+      "source_url": "https://www.davidhbailey.com/dhbpapers/qd.pdf",
+      "doi": null,
+      "cited_in": [
+        "docs/error-analysis.md"
+      ],
+      "relationship": "supplemental",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "aea02b65374391ff75f72ed342861fea05efc3a68968c04883335eb51185cb3f",
+      "bytes": 194502,
+      "pages": 24
+    }
+  ],
+  "unavailable": [
+    {
+      "title": "Rational Chebyshev approximations for the error function",
+      "authors": "W. J. Cody",
+      "year": 1969,
+      "doi": "10.1090/S0025-5718-1969-0247736-4",
+      "source_url": "https://www.ams.org/mcom/1969-23-107/S0025-5718-1969-0247736-4/S0025-5718-1969-0247736-4.pdf",
+      "cited_in": [
+        "lib/cody.ml",
+        "SLICE.md"
+      ],
+      "status": "unavailable",
+      "checked_on": "2026-10-02",
+      "reason": "Publisher PDF returned HTTP 403; an indexed mirror was unreachable. No PDF or placeholder stored."
+    },
+    {
+      "title": "Table-driven implementation of the exponential function in IEEE floating-point arithmetic",
+      "authors": "Ping Tak Peter Tang",
+      "year": 1989,
+      "doi": "10.1145/63522.214389",
+      "source_url": "https://dl.acm.org/doi/pdf/10.1145/63522.214389",
+      "cited_in": [
+        "lib/elementary.ml"
+      ],
+      "status": "unavailable",
+      "checked_on": "2026-10-02",
+      "reason": "Publisher PDF returned HTTP 403. Crossref and OpenAlex identify the same publisher location; no alternative downloadable copy located. The source comment gives only the shorthand Tang 1989; this is the matching exponential-function paper."
+    }
+  ]
+}
