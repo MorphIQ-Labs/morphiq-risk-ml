@@ -1,0 +1,19 @@
+(** Standard normal distribution.
+
+    Every function returns NaN for a NaN argument. *)
+
+val norm_pdf : float -> float
+(** Density [phi(x)]. Symmetric bit for bit: [norm_pdf x = norm_pdf (-.x)]. *)
+
+val norm_cdf : float -> float
+(** Distribution [Phi(x)], built on Cody's [calerf]. The tail's [exp(-x^2/2)]
+    uses an exactly split square, so the rounding of the argument does not
+    grow with [x^2]. *)
+
+val log_norm_cdf : float -> float
+(** [ln Phi(x)]. Returns [-0.0] or [neg_infinity] where the value is not
+    representable. *)
+
+val norm_inv : float -> float
+(** [Phi^-1(p)] by Wichura's AS241 (PPND16). Returns [neg_infinity] at 0,
+    [infinity] at 1, and NaN outside [\[0, 1\]]. *)

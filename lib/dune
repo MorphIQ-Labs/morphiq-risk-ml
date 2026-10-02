@@ -1,0 +1,7 @@
+(library
+ (name morphiq_risk)
+ (public_name morphiq_risk_ml)
+ (flags
+  (:standard -strict-sequence -w +a-4-40-41-42-44-45-70))
+ (ocamlopt_flags
+  (:standard -O3)))

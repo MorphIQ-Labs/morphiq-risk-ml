@@ -1,0 +1,4 @@
+oracle/data/
+_build/
+*.install
+oracle/.venv/

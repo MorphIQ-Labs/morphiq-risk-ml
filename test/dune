@@ -1,0 +1,13 @@
+(test
+ (name test_morphiq_risk)
+ (package morphiq_risk_ml)
+ (modules test_morphiq_risk)
+ (libraries morphiq_risk alcotest qcheck-core qcheck-alcotest))
+
+(test
+ (name oracle_normal)
+ (package morphiq_risk_ml)
+ (modules oracle_normal)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/data/normal_reference.txt})))

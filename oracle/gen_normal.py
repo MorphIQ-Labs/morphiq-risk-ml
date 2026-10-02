@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Independent references for the standard normal primitives.
+
+mpmath at 80 significant digits evaluates the exact binary64 argument. Each
+row stores the reference rounded to nearest binary64. The corpus covers:
+- every finite binade of both signs
+- signed zero
+- Cody's interval cuts and their representable neighbours
+- a dense body/tail grid
+- probabilities across the full open unit interval for the inverse
+
+Output lines: `<fn> <arg hex bits> <reference hex bits>`.
+"""
+import math
+import random
+import struct
+import sys
+
+import mpmath as mp
+from mpmath.libmp import to_float
+
+mp.mp.dps = 80
+SQRT2 = mp.sqrt(2)
+
+
+def bits(x):
+    return struct.pack(">d", x).hex()
+
+
+def from_bits(h):
+    return struct.unpack(">d", bytes.fromhex(h))[0]
+
+
+def neighbours(x, n=3):
+    i = struct.unpack(">q", struct.pack(">d", x))[0]
+    return [struct.unpack(">d", struct.pack(">q", i + k))[0] for k in range(-n, n + 1)]
+
+
+def to_double(v):
+    # Correct rounding including the subnormal range: mpmath rounds to a
+    # 53-bit mantissa first, so round explicitly at the subnormal quantum.
+    if v == 0:
+        return 0.0
+    if abs(v) < mp.mpf(2) ** -1022:
+        q = mp.mpf(2) ** -1074
+        return math.copysign(float(mp.nint(v / q)) * 5e-324, float(mp.sign(v)))
+    if abs(v) >= mp.mpf(2) ** 1024:
+        return float("inf") if v > 0 else float("-inf")
+    return to_float(mp.mpf(v)._mpf_, rnd="n")
+
+
+# Beyond this |x| every binary64 pdf/cdf value is an endpoint: x^2/2 >= 2048
+# exceeds the 744.4 needed to fall below the smallest subnormal.
+SATURATED = 64
+
+
+def erfcx(x):
+    x = mp.mpf(x)
+    if x > 45:
+        # Asymptotic series; the 30th term is below 1e-80 for x > 45.
+        t, total = mp.mpf(1), mp.mpf(1)
+        for k in range(1, 30):
+            t *= -(2 * k - 1) / (2 * x * x)
+            total += t
+        return total / (x * mp.sqrt(mp.pi))
+    return mp.erfc(x) * mp.exp(x * x)
+
+
+def phi(x):
+    return mp.mpf(0) if abs(x) > SATURATED else mp.npdf(x)
+
+
+def cdf(x):
+    if x > SATURATED:
+        return mp.mpf(1)
+    if x < -SATURATED:
+        return mp.mpf(0)
+    return mp.ncdf(x)
+
+
+def logcdf(x):
+    x = mp.mpf(x)
+    if x > SATURATED:
+        return -mp.mpf(10) ** -400  # -Q(x): rounds to -0.0
+    if x > 0:
+        return mp.log1p(-mp.ncdf(-x))
+    if x < -20:
+        z = -x / SQRT2
+        return mp.log(erfcx(z) / 2) - z * z
+    return mp.log(mp.ncdf(x))
+
+
+def inv(p):
+    p = mp.mpf(p)
+    if p == mp.mpf("0.5"):
+        return mp.mpf(0)
+    target = mp.log(p) if p < mp.mpf("0.5") else mp.log(1 - p)
+    side = -1 if p < mp.mpf("0.5") else 1
+    # Start from the asymptotic tail estimate; converge in log space.
+    t = mp.sqrt(-2 * target)
+    x0 = -t if side < 0 else t
+
+    def f(x):
+        return (logcdf(x) if side < 0 else logcdf(-x)) - target
+
+    return mp.findroot(f, x0, tol=mp.mpf(10) ** -70)
+
+
+def arguments():
+    xs = {0.0, -0.0}
+    rng = random.Random(20261002)
+    for e in range(-1074, 1024):
+        for m in (1.0, 1.5) if e > -1022 else (1.0,):
+            x = m * 2.0**e if e > -1022 else 2.0**e
+            if x != 0 and x != float("inf"):
+                xs.update((x, -x))
+    for e in range(-40, 10):
+        for _ in range(16):
+            x = rng.uniform(1, 2) * 2.0**e
+            xs.update((x, -x))
+    cuts = [0.46875, 4.0, 26.543, 26.628, 6.71e7]
+    for c in cuts:
+        for v in neighbours(c):
+            xs.update((v, -v))
+        for v in neighbours(c * 1.4142135623730951):
+            xs.update((v, -v))
+    for k in range(-40 * 64, 40 * 64 + 1):
+        xs.add(k / 64.0)
+    for _ in range(4000):
+        xs.add(rng.uniform(-40, 40))
+    return sorted(xs)
+
+
+def probabilities():
+    ps = set()
+    rng = random.Random(1988)
+    for e in range(-1074, 0):
+        for m in (1.0, 1.5, 1.9):
+            p = m * 2.0**e
+            if 0 < p < 1:
+                ps.add(p)
+    for _ in range(4000):
+        ps.add(rng.random())
+    for k in range(1, 2048):
+        ps.add(k / 2048.0)
+    for c in (0.075, 0.925, 0.5):
+        for v in neighbours(c):
+            ps.add(v)
+    for e in range(1, 53):
+        ps.add(1.0 - 2.0**-e)
+    return sorted(p for p in ps if 0 < p < 1)
+
+
+def main(out):
+    with open(out, "w") as f:
+        f.write(f"# mpmath {mp.__version__} dps {mp.mp.dps}\n")
+        for x in arguments():
+            X = mp.mpf(x)
+            f.write(f"pdf {bits(x)} {bits(to_double(phi(X)))}\n")
+            f.write(f"cdf {bits(x)} {bits(to_double(cdf(X)))}\n")
+            if x != 0.0 or bits(x) == bits(0.0):
+                ref = to_double(logcdf(X))
+                f.write(f"logcdf {bits(x)} {bits(ref)}\n")
+            if x > -26.628:
+                f.write(f"erfcx {bits(x)} {bits(to_double(erfcx(X)))}\n")
+        for p in probabilities():
+            f.write(f"inv {bits(p)} {bits(to_double(inv(p)))}\n")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1])
