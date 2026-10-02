@@ -51,6 +51,10 @@ let sqrt t =
     let scaled = if k = 0 then t else Float.ldexp t (-2 * k) in
     let hi = Float.sqrt scaled in
     let lo = Float.fma (-.hi) hi scaled /. (2.0 *. hi) in
+    (* Pair_sqrt (LLMPR Algorithm 7) need not be normalized at a rounding
+       boundary. Algorithm 8's Fast2Sum restores the DD consumer invariant. *)
+    let sum = hi +. lo in
+    let hi, lo = (sum, lo -. (sum -. hi)) in
     if k = 0 then (hi, lo) else (Float.ldexp hi k, Float.ldexp lo k)
 
 (* (n + nl) / (d + dl) = q + r to first order, for normalized input pairs. *)
@@ -76,7 +80,11 @@ let quotient_dd n nl d dl =
       reduced (Float.ldexp n (-en)) (Float.ldexp nl (-en)) (Float.ldexp d (-ed))
         (Float.ldexp dl (-ed))
     in
-    (Float.ldexp q (en - ed), Float.ldexp r (en - ed))
+    let hi = Float.ldexp q (en - ed) and lo = Float.ldexp r (en - ed) in
+    (* The low word's subnormal rounding can break nonoverlap at a tie. *)
+    if lo <> 0.0 && Float.abs lo < Float.min_float && Float.is_finite hi then
+      two_sum hi lo
+    else (hi, lo)
 
 (* q = n / d with its remainder: n / d = q + r exactly to first order. *)
 let quotient n d =

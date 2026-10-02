@@ -14,7 +14,7 @@ Measured against this project's own oracles (docs/oracles.md): mpmath, refined t
 | Normal distribution | `normal` | 82,000 | ≤ 4 ULP, tails included |
 | Prices: BSM, Black-76, Bachelier | `european` (grid, carry-cancelled forwards, random) | 57,296 | 1–22 ULP per region; zero variance 1; Bachelier ≤ 5 |
 | Prices: displaced Black | `displaced` (exact sums) | 41,760 | 1–19 ULP per region |
-| Implied volatility | `iv` (exact roots and rounding cells) | 8,254 | every outcome class matches; Black-family roots within their derived bound (Bachelier: price-error/vega bound) (Black-family worst 4–7 ULP from the exact root) |
+| Implied volatility | `iv` (exact roots and rounding cells) | 8,314 | every outcome class matches; Black-family roots within their derived bound (Bachelier: price-error/vega bound) (Black-family worst 4–7 ULP from the exact root) |
 | Greeks | `greeks` (closed form vs mpmath differentiation) | 66,400 | all 65,980 finite rows satisfy analytical certificates; 420 kink refusals; see results-greeks |
 | Properties | `test/properties.ml` (random, fixed seed) | 22,000 | bounds, parity, monotonicity, Greek signs, exact homogeneity, translation, IV composes forward and inverse error on identifiable inputs, finite differences |
 | Cross-quantity consistency | `test/consistency.ml` | 128 | displaced = Black-76 bit for bit; IV inverts the served price; Greeks match finite differences |
@@ -147,3 +147,33 @@ Sequential runs on the same Apple M1 Pro and OCaml 5.3.0+flambda, using the same
 | Bachelier | in the money | price | 738 | 743 | +0.7% |
 | Bachelier | in the money | implied volatility | 5793 | 6002 | +3.6% |
 | Bachelier | in the money | all ten Greeks | 12205 | 12405 | +1.6% |
+
+### PR #12 audit versus 76c3cc5
+
+The normalization audit leaves all 6,061,230 bytes of the public determinism corpus unchanged (`f402d24368b0028ab140dcecbed0b767dbdcf8456c978829a0187353f4d8c44a`). Internal pair representations do change: for example, Split.sqrt(0x1.fffffffffffffp-1) previously returned a halfway, overlapping pair. Fast2Sum preserves its sum while satisfying the DD consumer precondition.
+
+Sequential default-profile runs on the same Apple M1 Pro / OCaml 5.3.0+flambda compare an isolated archive of 76c3cc5 with the audited implementation. Each entry is a median of seven runs after warm-up over 20,000 contracts. These single-session timings include noise; they are not a statistical performance guarantee. Exact rational checks are test-only and are absent from these library benchmarks.
+
+| Model | Regime | Quantity | Before ns/op | After ns/op | Change |
+| --- | --- | --- | ---: | ---: | ---: |
+| BSM | near the money | admit | 1207 | 1247 | +3.3% |
+| BSM | near the money | price | 1134 | 1143 | +0.8% |
+| BSM | near the money | implied volatility | 3083 | 3092 | +0.3% |
+| BSM | near the money | all ten Greeks | 10935 | 10994 | +0.5% |
+| Bachelier | near the money | price | 448 | 447 | -0.2% |
+| Bachelier | near the money | implied volatility | 3494 | 3486 | -0.2% |
+| Bachelier | near the money | all ten Greeks | 6760 | 6831 | +1.1% |
+| BSM | OTM tail | admit | 1208 | 1214 | +0.5% |
+| BSM | OTM tail | price | 191 | 191 | +0.0% |
+| BSM | OTM tail | implied volatility | 3026 | 3025 | -0.0% |
+| BSM | OTM tail | all ten Greeks | 14612 | 14879 | +1.8% |
+| Bachelier | OTM tail | price | 104 | 104 | +0.0% |
+| Bachelier | OTM tail | implied volatility | 6385 | 6394 | +0.1% |
+| Bachelier | OTM tail | all ten Greeks | 8948 | 9106 | +1.8% |
+| BSM | in the money | admit | 1208 | 1214 | +0.5% |
+| BSM | in the money | price | 1728 | 1740 | +0.7% |
+| BSM | in the money | implied volatility | 3138 | 3141 | +0.1% |
+| BSM | in the money | all ten Greeks | 19094 | 19362 | +1.4% |
+| Bachelier | in the money | price | 719 | 725 | +0.8% |
+| Bachelier | in the money | implied volatility | 5767 | 5768 | +0.0% |
+| Bachelier | in the money | all ten Greeks | 11963 | 12150 | +1.6% |

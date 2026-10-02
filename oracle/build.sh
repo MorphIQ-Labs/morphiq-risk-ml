@@ -25,4 +25,4 @@ for name in "$@"; do
   "$PY" "$gen" "fixtures/$name.txt"
   gzip -n -9 -f "fixtures/$name.txt"
 done
-"$PY" write_manifest.py
+"$PY" write_manifest.py "$@"

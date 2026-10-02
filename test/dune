@@ -112,8 +112,16 @@
 
 (library
  (name certified)
- (modules certified kernel_polynomials certificate_mode)
- (libraries morphiq_risk bounds))
+ (modules
+  certified
+  kernel_polynomials
+  certificate_mode
+  exact_dyadic
+  checked_dd
+  checked_normal_dd)
+ (libraries morphiq_risk morphiq_fp bounds zarith)
+ (flags
+  (:standard -open Morphiq_fp)))
 
 (rule
  (target certificate_mode.ml)
@@ -155,6 +163,7 @@
   ../oracle/verify_bounds.py
   ../oracle/kernel_certificates.py
   ../lib/elementary.ml
+  ../lib/split.ml
   ../lib/cody.ml
   ../lib/normalised_black.ml
   ../lib/normal_dd.ml)
@@ -162,3 +171,34 @@
   (with-stdout-to
    %{target}
    (run python3 %{dep:../oracle/verify_bounds.py} --ocaml))))
+
+(rule
+ (target checked_dd.ml)
+ (deps ../oracle/instrument_dd.py ../lib/dd.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/instrument_dd.py}))))
+
+(rule
+ (target checked_normal_dd.ml)
+ (deps ../oracle/instrument_dd.py ../lib/normal_dd.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/instrument_dd.py} normal))))
+
+(rule
+ (alias runtest)
+ (deps ../oracle/test_manifest.py ../oracle/write_manifest.py)
+ (action
+  (run python3 %{dep:../oracle/test_manifest.py})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../oracle/MANIFEST
+  (glob_files ../oracle/*.py)
+  (glob_files ../oracle/fixtures/*.txt.gz))
+ (action
+  (run python3 %{dep:../oracle/write_manifest.py})))

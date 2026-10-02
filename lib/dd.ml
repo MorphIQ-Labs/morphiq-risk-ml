@@ -52,7 +52,14 @@ let mul a b =
   let c2 = Float.fma a.lo b.hi t1 in
   renormalise p.hi (p.lo +. c2)
 
-let scale a k = { hi = Float.ldexp a.hi k; lo = Float.ldexp a.lo k }
+let scale a k =
+  let hi = Float.ldexp a.hi k and lo = Float.ldexp a.lo k in
+  (* Rounding a low word onto the subnormal grid can create a halfway
+     overlap with an odd high significand. Restore the DD invariant before
+     the pair is consumed by another primitive. Fast2Sum preserves its sum. *)
+  if lo <> 0.0 && Float.abs lo < Float.min_float && Float.is_finite hi then
+    renormalise hi lo
+  else { hi; lo }
 
 (* DWDivDW3, JMP Algorithm 18: one Newton step for 1/b, then a product;
    relative error <= 9.8u^2. The bound assumes an unbounded exponent range,

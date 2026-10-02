@@ -5,6 +5,8 @@
    is accepted. Unsupported exponent/domain cases are explicit, never passes. *)
 open Morphiq_risk
 open Internal
+module Dd = Checked_dd
+module Normal_dd = Checked_normal_dd
 
 exception Unsupported of string
 
@@ -65,17 +67,19 @@ module D = struct
 
   let make v e =
     require
-      (Float.is_finite v.Dd.hi && Float.is_finite v.lo && Float.is_finite e)
-      "nonfinite DD ball";
+      (Float.is_finite v.Dd.hi && Float.is_finite v.lo && Float.is_finite e
+     && e >= 0.0)
+      "invalid DD ball";
+    require (v.hi +. v.lo = v.hi) "DD words violate nonoverlap";
     { v; e }
 
   let of_float v = make (Dd.of_float v) 0.0
   let input hi lo e = make { Dd.hi; lo } e
   let neg a = { a with v = Dd.neg a.v }
 
-  (* The additive allowance covers gradual underflow in primitive operations.
-     Multiplication additionally requires normal high products: there is no
-     unbounded-exponent theorem for an overflowing high product. *)
+  (* Every executed primitive checks this fixed finite-exponent allowance
+     with exact rationals in Checked_dd. This is a per-input witness, not a
+     universal extension of the published unbounded-exponent theorems. *)
   let rounding v eps =
     let m = abs v.Dd.hi +^ abs v.lo in
     (eps *^ m /^ down (1.0 -. eps)) +^ (32.0 *. quantum)
@@ -155,10 +159,14 @@ let dd_of_ball (a : t) = D.input a.v 0.0 a.e
 let root_time time =
   require (time > 0.0) "positive maturity required";
   let hi, lo = Split.sqrt time in
+  Exact_dyadic.sqrt (Dd.of_float time) { Dd.hi; lo };
   D.input hi lo (3.125 *. Bounds.u2 *^ (abs hi +^ abs lo))
 
 let quotient (a : D.t) (b : D.t) =
   let hi, lo = Split.quotient_dd a.v.hi a.v.lo b.v.hi b.v.lo in
+  Exact_dyadic.binary "split quotient" Q.div
+    (Exact_dyadic.times 16 Exact_dyadic.u2)
+    a.v b.v { Dd.hi; lo };
   let lower = down (down (abs b.v.hi -. abs b.v.lo) -. b.e) in
   require (lower > 0.0) "split denominator interval contains zero";
   let er = D.rounding { Dd.hi; lo } (16.0 *. Bounds.u2) in
@@ -840,9 +848,10 @@ let black model ~side ~s:spot_input ~k:strike_input ~t:time ~r:rate ~q:yield
         let lead = D.sub (D.mulf carry 2.0) x in
         let tail = D.div (D.of_float sigma) (D.mulf rt_dd 4.0) in
         if lead.v.hi = 0.0 then (
-          let denominator = D.magnitude sd *^ (2.0 *. time) in
+          let sd_lower = down (down (abs sd.v.hi -. abs sd.v.lo) -. sd.e) in
+          let denominator = down (sd_lower *. (2.0 *. time)) in
           require (denominator > 0.0) "w denominator";
-          D.make tail.v (tail.e +^ (lead.e /^ down denominator)))
+          D.make tail.v (tail.e +^ (lead.e /^ denominator)))
         else D.add (D.div lead (D.mulf sd (2.0 *. time))) tail
       in
       let d1_dd () =

@@ -35,10 +35,10 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 
 - **Building fixtures.** `oracle/build.sh [name…]` regenerates fixtures. Each is compressed with `gzip -n -9`, so the bytes are reproducible.
 - **The manifest.** `oracle/write_manifest.py` (run by `oracle/build.sh`) writes `oracle/MANIFEST`, one line per fixture:
-  - its generator's BLAKE2b-256 and the shared `common.py`'s;
+  - its generator's BLAKE2b-256, the shared `common.py`'s, and transitive local generator imports;
   - the mpmath and Python versions;
   - the row count and the fixture's own BLAKE2b-256.
-- **The check.** `test/manifest.ml`, part of `dune test` and so of CI, recomputes the hashes with OCaml's `Digest.BLAKE256`. It fails if a fixture's bytes changed, if a generator or `common.py` changed without regeneration, or if a fixture is missing. It needs no Python.
+- **The check.** `test/manifest.ml`, part of `dune test` and so of CI, recomputes the hashes with OCaml's `Digest.BLAKE256`. It fails if a fixture's bytes changed, if a generator or `common.py` changed without regeneration, or if a fixture is missing. A Python standard-library check also verifies the dependency graph, row counts and complete record set. Partial rebuilds preserve unselected provenance and fail if an unselected fixture is stale; calling the writer without names only validates.
 - **Toolchain.** The generators need mpmath 1.3.0: `python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0`.
 
 ## What the oracles have caught
@@ -62,4 +62,7 @@ The nine committed fixtures include extra-bit component and Greek references. Th
 
 `kernel_certificates.py` separately encloses differential residuals of the actual rounded Cody/Jäckel coefficients using exact Bernstein bounds. `lift_polynomials.py` checks the Black expansion coefficients against integral/moment identities and lifts their actual operation grouping into the test algebra. `Certified` propagates these component bounds through every committed price and finite Greek; no measured ULP envelope is a premise of those certificates. See [the derivations](error-analysis.md#8-rounded-kernels-and-complete-pricegreek-expressions).
 
-All 33 mutation mechanisms are checked with replay bit-identity assertions disabled, so numerical error must trigger the designated guard. The separate `--probe intrinsic-terms` run still survives and exits 1; it is deliberately excluded provisionally, not classified as equivalent. Ordinary accuracy tests retain replay identity to detect drift between the arithmetic model and implementation.
+All 35 mutation mechanisms are checked with replay bit-identity assertions disabled, so numerical error must trigger the designated guard. The separate `--probe intrinsic-terms` run still survives and exits 1; it is deliberately excluded provisionally, not classified as equivalent. Ordinary accuracy tests retain replay identity to detect drift between the arithmetic model and implementation.
+
+
+The PR #12 audit adds exact rational primitive postconditions to a generated replay of the production DD source, including its elementary and normal-series callers. Allowances are fixed before execution. Nonoverlap checks apply to inputs and component results. They exposed both a binade-boundary defect in low-word sampling and missing normalization after subnormal scaling and split square root; see the [audit record](error-analysis.md#pr-12-source-and-assumption-audit). Zarith 1.14 is needed only for tests.

@@ -15,6 +15,9 @@ depends: [
   "cmdliner" {= "1.3.0" & with-test}
   "cppo" {= "1.8.0" & with-doc}
   "crunch" {= "4.1.0" & with-doc}
+  "conf-gmp" {= "5" & with-test}
+  "conf-pkg-config" {= "5" & with-test}
+  "zarith" {= "1.14" & with-test}
   "dune" {= "3.24.2"}
   "fmt" {= "0.11.0" & with-test}
   "fpath" {= "0.7.3" & with-doc}

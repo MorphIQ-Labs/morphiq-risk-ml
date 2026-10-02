@@ -4,6 +4,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### PR #12 source and assumption audit
+
+- Compared DD algorithms with their original papers and later formalization, and recorded primary source versions and hashes. Corrected the negative-expm1 tail normalization, the scaled exponential's ln(2) split dependency, the erfcx derivative interval and a Greek denominator lower bound. The existing component ceilings still hold.
+- Added test-only exact rational primitive witnesses and enforced DD nonoverlap. Regenerated the 48,203-row DD fixture after fixing input normalization at binade boundaries; 22,425 rows retain nonzero low words.
+- Fixed DD/split quotient normalization after subnormal low-word scaling, and added the published final Fast2Sum to split square root. The public determinism corpus is byte-for-byte unchanged against 76c3cc5. Two new mutation guards cover normalization, bringing the catalog to 35.
+- Pinned transitive generator dependencies and made partial fixture rebuilds preserve unrelated provenance. Missing, duplicate and stale records now fail. These checks do not assert a universal finite-exponent theorem or resolve the outstanding IV convergence obligations.
+
 ### Rounded-kernel and Greek certification
 
 - Added exact-rational differential-residual certificates for the rounded Cody erfcx and Jäckel Y′ kernels, integral remainder bounds for both Black expansions, and analytical Normal_dd bounds (200u² relative for density, 512u² absolute for CDF). Operation-by-operation propagation now checks all 99,056 price and 65,980 finite Greek rows independently of the historical measured quality budgets.

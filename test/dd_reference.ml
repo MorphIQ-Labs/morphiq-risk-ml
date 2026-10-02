@@ -2,6 +2,8 @@
    Both input words are exercised; errors are scored at the reference's scale.
    No library DD operation participates in the error calculation. *)
 open Morphiq_risk.Internal
+module Dd = Certified.Dd
+module Normal_dd = Certified.Normal_dd
 
 let error (got : Dd.t) exponent h l tail =
   if not (Float.is_finite got.hi && Float.is_finite got.lo) then Float.infinity
@@ -61,8 +63,8 @@ let () =
                  | _ -> invalid_arg fn
                in
                incr rows;
-               if fn = "split_quotient" && got.hi +. got.lo <> got.hi then
-                 failwith "split quotient words overlap";
+               if got.hi +. got.lo <> got.hi then
+                 failwith (fn ^ " result words overlap");
                if a.lo <> 0.0 || b.lo <> 0.0 then incr nonzero_low;
                let e = error got exponent (f h) (f l) (f tail) in
                (* At most one quantum from independently scaling two result

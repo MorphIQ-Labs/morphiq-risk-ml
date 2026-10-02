@@ -12,6 +12,7 @@
  (depends
   (ocaml (>= 5.3))
   ocaml-option-flambda
+  (zarith :with-test)
   (alcotest :with-test)
   (qcheck-core :with-test)
   (qcheck-alcotest :with-test)))

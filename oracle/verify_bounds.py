@@ -37,6 +37,7 @@ def exp_interval(x):
     return low, low + x**(n+1)/F(factorial(n+1))/(1-x/F(n+2))
 
 z = F(347,1000)
+assert upper/2 + 8*u*746 < z
 elow, _ = exp_interval(z)
 assert z*elow/(elow-1) < F(121,100)
 weights = F(0)
@@ -56,7 +57,7 @@ cap_tail = r**8/(factorial(9)*(1-r/10))/u2
 stop_tail = F(1, 2**113)/(5*(1-r/6))/u2
 # The sum of |s_j|/(2-|s_j|) in the nine doublings is < .24.
 # Their relative error transport is < 1.21 on |512r| <= .347.
-reduced = F(121, 100)*(series*F(1001,1000) + max(cap_tail, stop_tail) + 9*add/u2 + F(6, 5))*inflate
+reduced = F(121, 100)*(series*F(1001,1000) + max(cap_tail, stop_tail)/(1-r) + 9*add/u2 + F(6, 5))*inflate
 assert reduced < 80
 # |expm1(z)|/exp(z) < .416 for |z| <= .347; one final DD add,
 # plus reduction error <= (2 + 3|x|)u².
@@ -122,7 +123,12 @@ assert erf_small < 26*u
 
 # Split.scaled_exp_neg: |n|<6000, reduced |r|<.7. Two reduction roundings
 # plus the two-word ln2 residual; three product/correction roundings.
-split_reduction = F(7,5)*u + 6000*(ln_error+u2)
+split_source = (root/'lib/split.ml').read_text()
+split_hi = fp_literal(re.search(r'let ln2_hi = (\S+)',split_source).group(1))
+split_lo = fp_literal(re.search(r'let ln2_lo = (\S+)',split_source).group(1))
+split_ln_error = max(abs(split_hi+split_lo-lower),abs(split_hi+split_lo-upper))
+assert F(4096)/split_hi*(1+u) < 6000
+split_reduction = F(7,5)*u + 6000*(split_ln_error+u2)
 split_factor = (1+4*u)*(1+u)**3/(1-split_reduction)
 for lo_squared in [F(0),F(1,10**6)]:
     error = split_factor*(1+lo_squared/(2*(1-F(1,1000))))-1
@@ -133,7 +139,7 @@ assert F(2654,100)**2 > 1016*upper
 assert c_hi/F(2654,100) < F(1,32) # erfc(26.54)<2^-1021
 assert F(99,100)*4096 > (1025+2048+1075)*upper
 # Derivative bounds across a small interval straddling zero.
-assert F(1,100)+2*c_hi < 2
+assert F(2,100)+2*c_hi < 2
 mills_negative = (F(1254,1000)+F(1,200))/(1-F(1,80000))
 assert (1+F(1,40000))*mills_negative+F(1,200) < 2
 
@@ -160,6 +166,28 @@ pdf_error = (40+3*F(37,2)+5*F(37,2)+6)*inflate
 assert pdf_error < 200
 cdf_error = (F(1,2)*(series_error+200+5)+4)*inflate
 assert cdf_error < 512
+
+# Finite-exponent noise in the DD elementary/normal compositions. Primitive
+# allowances are checked exactly on execution (test/exact_dyadic.ml). Fewer
+# than 2^14 primitive calls each contribute <=32 quanta; the written absolute
+# transport bound is 2^60, including series sensitivity and nine doublings.
+assert 3**9 < 2**15
+assert exp_interval(F(19))[1] < 2**28
+transport = F(1)
+for k in range(1, 402):
+    transport *= max(F(1), F(37, 2*k+1))
+assert transport < 2**28
+assert 7*2**28 < 2**31
+assert 401*7*2**28 < 2**40
+assert (2**40 + 2**31)*(2**15 + 1)*16 < 2**60
+finite_noise = F(2**80, 2**1074)
+assert 2**14 * 32 * 2**60 < 2**80
+# Minimum nonzero magnitude needing a relative small-expm1 certificate is
+# >2^-106; log and the unscaled exp/pdf paths have larger minima. Use the
+# explicit spare margin below each ceiling, not a second use of inflate.
+assert finite_noise < u2/F(2**106)
+for value, ceiling in [(reduced,80),(exp_base,40),(log_total,32),(pdf_error,200),(cdf_error,512)]:
+    assert ceiling-value > 1
 
 if '--ocaml' in sys.argv:
     print('(* Generated after exact-rational verification; see oracle/verify_bounds.py. *)')

@@ -36,6 +36,24 @@ type mutant = {
 let catalog =
   [
     {
+      id = "split-root-nonoverlap";
+      file = "lib/split.ml";
+      snippet = "let hi, lo = (sum, lo -. (sum -. hi)) in";
+      replacement = "let hi, lo = (hi, lo) in";
+      killer = "dd_reference";
+      mechanism = "normalize the square-root correction before DD consumers";
+    };
+    {
+      id = "dd-scale-nonoverlap";
+      file = "lib/dd.ml";
+      snippet =
+        "if lo <> 0.0 && Float.abs lo < Float.min_float && Float.is_finite hi \
+         then";
+      replacement = "if false then";
+      killer = "dd_reference";
+      mechanism = "restore DD nonoverlap after subnormal low-word scaling";
+    };
+    {
       id = "scaled-exp-prefactor";
       file = "lib/split.ml";
       snippet = "(1077.0 +. float (ceiling_exponent + k)) *. ln2_hi";

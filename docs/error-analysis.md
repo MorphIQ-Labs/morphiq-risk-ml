@@ -69,13 +69,13 @@ After reduction |r| < R = 0.0007. The relative Taylor arithmetic bound, in u² u
 
 Seven additions cover the quadratic term and terms through degree 8. Each generated factorial needs at most eight divisions; eight power/product errors give the 40 term. For negative r, partial-sum magnitudes can exceed the final magnitude: multiply S by 1.001 (> 1/(1−R)). The relative omitted tail is bounded by the larger of
 
-    R^8/[9!(1−R/10)]
-    2^-113/[5(1−R/6)].
+    R^8/[9!(1−R/10)(1−R)]
+    2^-113/[5(1−R/6)(1−R)].
 
-The second expression treats early stopping: the tested small term is included before the loop exits. For doubling `s <- 2s+s²`, each addition contributes A; each multiplication is weighted by |s|/(2−|s|). The sum of these weights over nine doublings is below 0.24. Relative error transport through the whole doubling sequence is below 1.21, since |512r| ≤ 0.347 and |z exp(z)/expm1(z)| < 1.21. Consequently
+The factor 1/(1−R) also divides the tails by a lower bound for |expm1(r)|/|r| when r is negative. The second expression treats early stopping: the tested small term is included before the loop exits. For doubling `s <- 2s+s²`, each addition contributes A; each multiplication is weighted by |s|/(2−|s|). The sum of these weights over nine doublings is below 0.24. Relative error transport through the whole doubling sequence is below 1.21, since |512r| ≤ 0.347 and |z exp(z)/expm1(z)| < 1.21. Consequently
 
     H × 1.21 × [1.001 S + max(tails)/u² + 9A/u² + 1.2]
-      = 75.155662471… < 80.
+      = 75.166587403… < 80.
 
 This gives **ε_expm1 = 80u²** on |x| ≤ ln(2)/2. The tiny branch |x| < 2^-104 returns x; its omitted relative term is < 2u² and avoids losing x in division by 512.
 
@@ -319,7 +319,7 @@ Region III replays the actual erfc/erfcx branches, both positive legs, exponenti
     E_div = [E_a + (|RN(a/b)|+round(result)) E_b]
             / (|b|−E_b) + round(result).
 
-The denominator is rounded down and must be strictly positive. `round` includes a subnormal quantum. DD nodes use the published relative majorants, input perturbations and a conservative 32-quantum allowance for gradual underflow; finite outputs and domain checks remain mandatory. Coordinate logarithms, quotient remainders, displaced low parts, carry, root time, discount factors and DD cancellation are all propagated before model assembly. Thus a Greek close to zero receives an absolute bound from its actual terms, not a fixed relative or ULP allowance.
+The denominator is rounded down and must be strictly positive. `round` includes a subnormal quantum. DD nodes use the published relative majorants, input perturbations and a fixed 32-quantum allowance for gradual underflow. Each executed primitive in the generated DD replay checks that allowance with exact rational arithmetic, including inside exp/expm1/log and the normal series. Finite outputs and nonoverlap are enforced. These are per-input witnesses; the 32-quantum allowance is not asserted as a published or universal finite-exponent theorem. Coordinate logarithms, quotient remainders, displaced low parts, carry, root time, discount factors and DD cancellation are all propagated before model assembly. Thus a Greek close to zero receives an absolute bound from its actual terms, not a fixed relative or ULP allowance.
 
 Ordinary tests require the replay's center to match the library's served bits. This checks that the written arithmetic model follows the selected implementation path; it is not accuracy evidence by itself. **Mutation builds disable those replay-identity assertions.** A numerical mutant must still fail the independent reference comparison, a mathematical precondition or its designated regression test. Changing a result's last bit alone is not counted as a kill. All 33 catalogued mechanisms are detected under this rule; the separate intrinsic-guard probe remains provisional.
 
@@ -329,7 +329,7 @@ The certificates cover every price and finite Greek in the committed model fixtu
 
 | Layer | What is established | What is still missing |
 | --- | --- | --- |
-| DD primitives | published normal-intermediate theorems; two-operand/even-exponent normalization; subnormal regressions | a formal finite-exponent proof covering arbitrary low words and every call site |
+| DD primitives | published normal-intermediate theorems; two-operand/even-exponent normalization; exact rational primitive witnesses on the replayed inputs | a formal finite-exponent proof covering arbitrary low words and every call site |
 | DD exp/expm1/log | written analytical majorants, exact-rational checks, dense two-word corpus | independent/formal verification of the complete implementation |
 | Reduced log1p | corrected 0.14 majorant with positive margin; fractional-ULP oracle | whole-domain elementary guarantees beyond the reduced path |
 | Black/Bachelier prices | exact-rational rounded-kernel bounds, integral remainders and per-input propagation on all 99,056 rows; strict quality gates retained | independent/formal verification and extension beyond the checked finite domains |
@@ -340,3 +340,38 @@ The certificates cover every price and finite Greek in the committed model fixtu
 | Intrinsic branch rule | valid conservative rule; explicit surviving probe | a discriminating corpus/bound or proof of equivalence; no impossibility claim |
 
 Consequently the complete library is **not certified for all finite admitted inputs**. The price/Greek certificates no longer depend on measured ULP envelopes in their checked domains. Historical measured quality gates are still useful and remain enforced. IV and random recovery still compose historical, tighter measured kernel envelopes; migrating those scorers and proving finite-iteration convergence are separate outstanding obligations. The intrinsic branch probe's survival remains a corpus/bound limitation, not an impossibility result.
+
+
+### Finite-exponent noise in the checked DD compositions
+
+The exact primitive witnesses establish, for each executed operation, its fixed relative allowance plus at most 32 subnormal quanta. These additive errors must also be transported through the DD elementary and normal functions; checking each primitive alone is insufficient. A deliberately coarse absolute transport estimate suffices because the analytical ceilings have explicit spare margin.
+
+Before exp’s final power-of-two restoration, all Taylor factors have magnitude below one; the nine doubling derivatives are below three, hence their product is below 3^9 < 2^15. The log reduction denominator exceeds one, its series parameter is below 0.172 and its accumulator below 1.04. Its Horner factors contract; the final small products and sums fit within an additional factor 16. Integer-times-ln(2) products are separately checked primitive nodes, not repeated multiplications.
+
+For the normal series, |d|<7 and d²<37. The amplification of any term-recurrence perturbation is bounded by the product of max(1,37/(2k+1)), which is below exp(19)<2^28. The absolute series is below 7 exp(19)<2^31. Its sensitivity to d² is below 401·7 exp(19)<2^40: for d²≥1 use the degree bound, and for d²≤1 bound each power by one. This bound even permits the 400-iteration cap. The density path combines a contracting negative exponential with the reduced-exp calculation; final normal assembly multiplies it by the bounded series. Thus 16(2^40+2^31)(2^15+1)<2^60 bounds absolute transport from any primitive perturbation. Fewer than 2^14 primitive calls, including nested division calls and coefficient initialization, each contribute at most 32 quanta. Their total is below **2^80·2^-1074**. `verify_bounds.py` checks these numerical inequalities with rationals.
+
+This allowance fits inside the unused gap between each derived majorant and its published-in-this-repository ceiling: all five gaps exceed one u² unit. The smallest nonzero scale needing this argument is the direct expm1 branch, whose |x|≥2^-104 implies |expm1(x)|>2^-106. Nonzero log of a binary64 input, reduced exp plus one, and density on |d|≤6 have larger minima. The tiny expm1 branch returns its input and has its separate Taylor bound. Thus 2^80·2^-1074 < u²·2^-106 fits within the explicit spare margin; it does not reuse the higher-order inflation H. Exp’s final exponent restoration transports both the value and this error together, with the final component-rounding quantum accounted for separately.
+
+This argument relies on the exact primitive witnesses for the executed inputs. It does not turn the fixed 32-quantum allowance into a theorem for arbitrary inputs.
+
+## PR #12 source and assumption audit
+
+The source comparison uses the original algorithm boxes and later corrections, not a secondary implementation's measured accuracy. The downloaded research artifacts below are identified by SHA-256 so the comparison is reproducible.
+
+| Primary source | Version and SHA-256 | Audit result |
+| --- | --- | --- |
+| [Joldes–Muller–Popescu](https://hal.science/hal-01351529v3/document) | HAL v3; `2a820178d2ef079559de9940d7af38258fac24558d406be64779ea901486cbc0` | DD operations match Algorithms 4, 6, 9, 12 and 18. Finite-exponent assumptions remain explicit. |
+| [Muller–Rideau formalization](https://hal.science/hal-02972245v2/document) | HAL v2; `099e710ab98c82227fe7a16610b7e283ff6d69f22e8d2887e06bc1dd8edabf8b` | Confirms the primitive bounds, with corrected proofs. Retaining 5u² for multiplication is conservative. |
+| [Lefèvre et al., Euclidean norms](https://hal.science/hal-03482567v2/document) | HAL v2; `a60eb7edbf7e6ca4454d97f0c2a1eee89806093a6f487cb429c087678858ac93` | DD sqrt follows Algorithm 8. Split.sqrt now applies Algorithm 8’s Fast2Sum too; the unnormalized Algorithm 7 pair can violate the DD consumer precondition. |
+| [Jäckel, Let's Be Rational source archive](http://www.jaeckel.org/LetsBeRational.7z) | downloaded 2026-10-02; `da2f6870b213e04ef35b4d309269ee5ce12be5830d9733e5f29542bf7b652470` | Kernel region formulas and thresholds were compared with the author's C++. Our scaling changes and solver modifications need their own analysis. |
+| [Jäckel, Let's Be Rational paper](http://www.jaeckel.org/LetsBeRational.pdf) | downloaded 2026-10-02; `351a9e2cc603f8817be74a9719e5269bd61784fc7a3d36e2d7131fa25b1a104d` | The paper's reported accuracy does not prove convergence of every modified finite-exponent path here. |
+| [QD 2.3.24](https://github.com/BL-highprecision/QD/blob/v2.3.24/src/dd_real.cpp) | release tag v2.3.24 | Reference for reduction, Taylor stopping and nine doublings; the bounds in §1.2 are our derivation. |
+| [Cody CALERF](https://netlib.org/specfun/erf) | canonical Netlib source | Reference rational structure; §8 checks the actual stored coefficients and their differential residuals. |
+
+The audit corrected the negative-argument expm1 tail normalization (the majorant remains below 80u²), bound `Split.scaled_exp_neg` using its own stored ln(2) split, and extended the erfcx derivative inequality through the full allowed −0.01 endpoint. A zero-leading-term Greek branch now divides its uncertainty by a downward-rounded **lower** denominator bound.
+
+`oracle/instrument_dd.py` copies the production bindings and inserts exact rational postconditions; it does not rewrite their arithmetic. Zarith is a test-only dependency. For a computed pair z, each primitive checks its exact discrepancy against ε(|z_hi|+|z_lo|)/(1−ε)+32·2^-1074; the product residual uses one quantum. Square root checks the squares of the two rational interval endpoints. These checks cannot establish correctness for unexecuted inputs, and do not by themselves prove a transcendental approximation or its composed underflow allowance. The analytical derivations and independent high-precision oracle remain necessary. Mutation runs retain these mathematical checks while disabling bit-replay checks.
+
+The direct DD generator previously sampled low words symmetrically using ulp(hi), which can violate nonoverlap on the smaller-spacing side of a power of two. It now forms the exact rational sum and renormalizes both input words before evaluating the independent reference. The checker enforces the precondition instead of relying on that sampling assumption. It then exposed a production scaling defect: rounding a low word to the subnormal grid can create a halfway overlap with an odd high significand. DD scaling and the final split-quotient scaling now renormalize in this case; the extra Fast2Sum/TwoSum preserves the scaled pair’s sum exactly. Dedicated mutations remove the DD scaling repair and the split-root normalization. The latter was also exposed by enforcing nonoverlap on every component result; Split.sqrt now uses Algorithm 8’s final Fast2Sum.
+
+Fixture provenance now pins transitive local generator imports. A partial rebuild preserves unselected records and refuses to rewrite the manifest if any unselected fixture is stale. Missing and duplicate records fail; deleting an imported dependency from a record also fails. The extra-bit Greek fixture was regenerated to record its `gen_greeks.py` dependency.

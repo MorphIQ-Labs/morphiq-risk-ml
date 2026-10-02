@@ -6,6 +6,7 @@ subnormals. References are three binary64 words at a separate binary exponent,
 so neither the oracle nor its scorer loses the error to underflow.
 """
 import math
+from fractions import Fraction
 import random
 import sys
 from mpmath import mp
@@ -15,7 +16,14 @@ from common import bits
 def corpus():
     rng = random.Random(0xDDB0)
     def pair(x):
-        return x, math.ulp(x) * rng.uniform(-0.49, 0.49)
+        low = math.ulp(x) * rng.uniform(-0.49, 0.49)
+        # At a binade boundary the spacing below x is half the spacing
+        # above it. A symmetric half-ulp sample need not be nonoverlapping.
+        exact = Fraction(x) + Fraction(low)
+        hi = float(exact)
+        lo = float(exact - Fraction(hi))
+        assert hi + lo == hi
+        return hi, lo
     xs = [0., math.ldexp(1., -1074), -math.ldexp(1., -1074)]
     xs += [math.ldexp(s, e) for e in range(-1074, -1, 7) for s in (-1., 1.)]
     xs += [rng.uniform(-744., 709.) for _ in range(1800)]
