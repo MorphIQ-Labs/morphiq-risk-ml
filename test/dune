@@ -13,12 +13,13 @@
  (name fp_contract)
  (modules fp_contract)
  (modes byte exe)
- (libraries morphiq_fp))
-
-(rule
- (alias runtest)
+ (libraries morphiq_fp)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
  (action
-  (run %{exe:fp_contract.bc})))
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp
+   (run %{test}))))
 
 (test
  (name oracle_normal)
