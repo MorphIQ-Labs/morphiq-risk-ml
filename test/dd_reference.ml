@@ -13,6 +13,15 @@ let error (got : Dd.t) exponent h l tail =
     Bounds.expansion_error [ gh; -.h; gl; -.l; -.tail ]
 
 let () =
+  (* The positive-moment remainder requires a nonnegative tail coordinate.
+     An uncertainty interval crossing zero cannot certify that premise. *)
+  (match
+     Certified.black_kernel (Certified.c 1.0)
+       (Certified.D.input (-0x1p-100) 0.0 0x1p-99)
+       (Certified.D.of_float 1.0)
+   with
+  | _ -> failwith "accepted an unresolved kernel sign"
+  | exception Certified.Unsupported _ -> ());
   let rows = ref 0 and nonzero_low = ref 0 and failures = ref 0 in
   let worst = Hashtbl.create 5 in
   In_channel.with_open_text Sys.argv.(1) In_channel.input_lines

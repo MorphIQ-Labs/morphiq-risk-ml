@@ -576,6 +576,9 @@ let black_gaussian (h : D.t) (t : D.t) ?(k = 0) prefactor =
 
 let black_kernel ?(k = 0) m (x : D.t) (sd : D.t) =
   require (x.v.hi <= 0.0 && sd.v.hi > 0.0) "Black kernel domain";
+  require
+    (x.v.hi = 0.0 || abs x.v.hi > abs x.v.lo +^ x.e)
+    "non-ATM kernel moneyness sign unresolved";
   let tau =
     2.0 *. Float.sqrt (Float.sqrt (Float.sqrt (Float.sqrt epsilon_float)))
   in
@@ -723,6 +726,9 @@ let black model ~side ~s:spot_input ~k:strike_input ~t:time ~r:rate ~q:yield
   require_replay
     (x.v.hi = coord.x && x.v.lo = coord.x_low)
     "coordinate replay mismatch";
+  require
+    (x.v.hi = 0.0 || abs x.v.hi > abs x.v.lo +^ x.e)
+    "live Black moneyness sign unresolved";
   (* Scaling input words must be exact before these error-free sums apply. *)
   require
     (Float.ldexp coord.spot coord.exponent = sh
