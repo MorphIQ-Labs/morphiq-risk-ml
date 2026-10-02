@@ -589,8 +589,10 @@ let black_kernel ?(k = 0) m (x : D.t) (sd : D.t) =
     let result =
       scale (mul m (erf (mul (mulf (constant Normal.inv_sqrt_2) 0.5) sd_hi))) k
     in
-    (* |partial b/partial x| <= exp(|x|/2)/2; include x formation uncertainty. *)
-    ball result.v (result.e +^ up (Float.ldexp (magnitude m *^ x.e) k)))
+    (* Across either sign of uncertain moneyness, the full normalized
+       call/put derivative has magnitude <= exp(|x|/2) < 2 for |x| < .01.
+       This also covers a true ITM intrinsic hidden by a rounded ATM x. *)
+    ball result.v (result.e +^ up (Float.ldexp (2.0 *^ magnitude m *^ x.e) k)))
   else
     let h = quotient x sd in
     let t = D.input (0.5 *. sv) (0.5 *. sd.v.lo) ((0.5 *^ sd.e) +^ quantum) in
@@ -769,7 +771,7 @@ let black model ~side ~s:spot_input ~k:strike_input ~t:time ~r:rate ~q:yield
       in
       let result = D.to_scaled (D.mulf intrinsic theta) coord.exponent in
       ball result.v (result.e +^ quantum))
-  else if greek = "price" && coord.x = 0.0 && sd.v.hi < 0x1p-500 then
+  else if greek = "price" && coord.x = 0.0 && sd.v.hi < 0x1p-500 then (
     let m = mul (sqrt asset) (sqrt cash) in
     let rt_hi = ball rt_dd.v.hi (abs rt_dd.v.lo +^ rt_dd.e) in
     let result =
@@ -777,8 +779,9 @@ let black model ~side ~s:spot_input ~k:strike_input ~t:time ~r:rate ~q:yield
         [ m; constant Normalised_black.inv_sqrt_2pi; c sigma; rt_hi ]
         coord.exponent
     in
-    let x_error = up (Float.ldexp (magnitude m *^ x.e) coord.exponent) in
-    ball result.v (result.e +^ (magnitude result *^ 0x1p-999) +^ x_error)
+    require (x.e < 0.01) "tiny-variance ATM uncertainty";
+    let x_error = up (Float.ldexp (2.0 *^ magnitude m *^ x.e) coord.exponent) in
+    ball result.v (result.e +^ (magnitude result *^ 0x1p-999) +^ x_error))
   else
     let () =
       require (sd.v.hi >= 0x1p-1000) "Black total volatility underflows"

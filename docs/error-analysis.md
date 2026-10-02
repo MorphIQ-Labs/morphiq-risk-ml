@@ -368,7 +368,7 @@ The source comparison uses the original algorithm boxes and later corrections, n
 | [QD 2.3.24](https://github.com/BL-highprecision/QD/blob/v2.3.24/src/dd_real.cpp) | release tag v2.3.24 | Reference for reduction, Taylor stopping and nine doublings; the bounds in §1.2 are our derivation. |
 | [Cody CALERF](https://netlib.org/specfun/erf) | canonical Netlib source | Reference rational structure; §8 checks the actual stored coefficients and their differential residuals. |
 
-The non-ATM live-price and kernel replays now require the moneyness sign to be resolved by its interval; the ATM branch retains its explicit absolute perturbation bound. This enforces the nonnegative tail-coordinate premise of the moment remainder rather than assuming it from the rounded center.
+The non-ATM live-price and kernel replays now require the moneyness sign to be resolved by its interval; the ATM branch uses the full call/put derivative bound |∂b/∂x|≤exp(|x|/2)<2 on |x|<0.01, covering either sign of a true moneyness hidden by the rounded zero. This enforces the nonnegative tail-coordinate premise of the moment remainder rather than assuming it from the rounded center.
 
 The audit corrected the negative-argument expm1 tail normalization (the majorant remains below 80u²), bound `Split.scaled_exp_neg` using its own stored ln(2) split, and extended the erfcx derivative inequality through the full allowed −0.01 endpoint. A zero-leading-term Greek branch now divides its uncertainty by a downward-rounded **lower** denominator bound.
 
