@@ -35,9 +35,11 @@ These definitions are what the library computes. Every accuracy claim is measure
 
 ## Implied volatility
 
-- **Exact quotes.** A quote is an exact number. If the model price attains it, the inverse returns the exact root, and that root reprices to the quote.
-- **Classes.** Otherwise the inverse returns one of the #448 classes (`Iv.t`): below intrinsic, above maximum, not identifiable at expiry, or below the smallest volatility.
-- **Rounded bound.** A quote below the exact discounted intrinsic that equals its correctly rounded value is the binary64 rounding of the zero-volatility price, and returns σ = 0 (#448).
+- **Exact quotes, representable answers.** A quote denotes its exact binary64 value. `Root sigma` is a representable approximation to its real inverse; it does not promise an unrepresentable exact real root or exact repricing. The rounded intrinsic exception below is explicit.
+- **Computational success.** For positive roots, the normalized evaluator either equals its target or brackets it between adjacent floating-point total volatilities. The final conversion to annual volatility adds rounding. This establishes termination of the implemented evaluator, not a universal exact-model error bound. Executed per-input price/vega certificates and the retained quality gates assess exact-root accuracy on the checked corpus; see [the IV analysis](error-analysis.md#6-implied-volatility).
+- **Mathematical classes.** Below intrinsic, above maximum, expiry non-identifiability and below-smallest-volatility are distinct from computational failure. A computed zero, NaN or infinity in a positive-root calculation does not establish one of these classes.
+- **Failure.** `Non_convergence` means an iteration budget was exhausted; `Numerical_failure` means an evaluation, bracket, normalization or conversion was unresolved. Neither includes a usable root. Callers must handle both variants explicitly. They may not replace failure with a mathematical classification or a last iterate.
+- **Rounded bound.** A quote below the exact discounted intrinsic that equals its correctly rounded value is the binary64 rounding of the zero-volatility price, and returns σ = 0 (#448). The DD classification still needs domain/uncertainty enforcement beyond the checked corpus; this remains a production-readiness obligation under #13/#14.
 
 ## Greeks
 

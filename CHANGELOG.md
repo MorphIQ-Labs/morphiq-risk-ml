@@ -4,6 +4,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### IV termination and computational failure
+
+- Added `Iv.Non_convergence` and `Iv.Numerical_failure`. This breaks exhaustive caller matches and is a major-class API change (a minor-version increment while at `0.y.z`); no release is tagged here.
+- Bachelier no longer returns the last iterate at a cap or accepts a small Newton step alone. Both inverse families check an evaluator match or adjacent-float residual bracket; safeguarded binary64-encoding bisection gives a finite arithmetic termination bound. Nonfinite arithmetic and failed positive-root conversion no longer claim mathematical non-existence.
+- Exact-root and recovery scorers now execute analytical price/vega transport certificates alongside unchanged historical quality gates. The certificates are a posteriori test evidence, not runtime error enclosures.
+- On the unchanged IV fixture, baseline `7b93c2a` versus this change, worst root errors in ULPs are BSM 4→5, Black-76 4→4, displaced 5→5, and Bachelier 8,992,716,596→6,084,654,728 (subnormal-quote conditioning). All 5,575 root rows pass their existing quality gates and the added certificates. Generators and provenance in `oracle/MANIFEST` are unchanged. See [the audit](docs/iv-termination-audit.md) for scope and remaining blockers.
+- Added two optional mutation mechanisms for exhaustion and nonfinite evaluator output (37 total); the default core remains seven. The complement-correction witness is now the independent near-maximum regression.
+- The intentional IV changes update the determinism digest to `a7748579580fce931e2b271d66f2822f99f1fa1e737d5738209d3b282b57a5e4`; price and Greek implementations are unchanged.
+
 ### PR #12 source and assumption audit
 
 - Default CI now runs seven core numerical mutation checks; the full 35-mutant catalog runs separately on manual dispatch or a weekly schedule. Full accuracy and certification tests remain in ordinary CI. See `docs/mutation-policy.md` for selection and local commands.

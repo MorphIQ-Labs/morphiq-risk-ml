@@ -234,7 +234,7 @@ let price_coordinates coordinates side sigma =
 let root sigma =
   match Vol.lognormal sigma with
   | Ok v -> Iv.Root v
-  | Error _ -> Iv.Above_maximum
+  | Error _ -> Iv.Numerical_failure
 
 (* Invert a live quote. The quote is compared with DD approximations to
    the zero-volatility price and the maximum. Its out-of-the-money part is
@@ -248,7 +248,16 @@ let live_implied side (c : Coordinates.live) price =
     if theta > 0.0 then forward_intrinsic else Dd.neg forward_intrinsic
   in
   let maximum = if theta > 0.0 then asset else cash in
-  if Dd.compare_float maximum p <= 0 then Iv.Above_maximum
+  if
+    not
+      (Float.is_finite p && Float.is_finite c.x && Float.is_finite c.x_low
+     && Float.is_finite c.x_terms && Float.is_finite asset.hi
+     && Float.is_finite asset.lo && Float.is_finite cash.hi
+     && Float.is_finite cash.lo && asset.hi > 0.0 && cash.hi > 0.0
+      && Float.is_finite intrinsic.hi
+      && Float.is_finite intrinsic.lo)
+  then Iv.Numerical_failure
+  else if Dd.compare_float maximum p <= 0 then Iv.Above_maximum
   else if intrinsic.hi > 0.0 && Dd.compare_float intrinsic p > 0 then
     (* Below the exact zero-volatility price. A quote equal to that price's
        correctly rounded value is its binary64 rounding, so σ = 0 (#448). *)
@@ -289,7 +298,7 @@ let live_implied side (c : Coordinates.live) price =
         Dd.to_float (Dd.div (Dd.sub maximum (Dd.of_float p)) m_dd)
       in
       let b_max = Elementary.exp (0.5 *. x) in
-      if beta <= 0.0 then Iv.Below_smallest_volatility
+      if not (Float.is_finite beta && beta > 0.0) then Iv.Numerical_failure
       else
         let beta = Float.min beta (Float.pred b_max) in
         let s = Lbr.solve ~beta_bar ~ln_beta beta x in
@@ -311,13 +320,24 @@ let live_implied side (c : Coordinates.live) price =
             +. (beta -. Normalised_black.scaled 1.0 x xl s 0.0)
                /. Normalised_black.vega x s
         in
-        (* σ = s / sqrt T, with sqrt T's low part. *)
-        let sigma =
-          s /. c.root_time *. (1.0 -. (c.root_time_low /. c.root_time))
+        let value, target =
+          if beta > 0.5 *. b_max then
+            ((fun s -> -.Normalised_black.complement x xl s 0.0), -.beta_bar)
+          else if beta < 0x1p-900 then
+            ((fun s -> fst (Normalised_black.ln_b_and_scaled x xl s)), ln_beta)
+          else ((fun s -> Normalised_black.scaled 1.0 x xl s 0.0), beta)
         in
-        if Float.is_nan sigma || sigma = Float.infinity then Iv.Above_maximum
-        else if sigma <= 0.0 then Iv.Below_smallest_volatility
-        else root sigma
+        match Iv_iteration.refine ~value ~target ~candidate:s with
+        | Error Iv_iteration.Non_convergence -> Iv.Non_convergence
+        | Error Iv_iteration.Numerical_failure -> Iv.Numerical_failure
+        | Ok s ->
+            (* σ = s / sqrt T, with sqrt T's low part. *)
+            let sigma =
+              s /. c.root_time *. (1.0 -. (c.root_time_low /. c.root_time))
+            in
+            if not (Float.is_finite sigma && sigma > 0.0) then
+              Iv.Numerical_failure
+            else root sigma
 
 let sqrt_pi_over_2 = 1.253314137315500251207882642405522626503493370305
 

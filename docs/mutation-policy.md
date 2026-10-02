@@ -22,7 +22,7 @@ or certify the remaining IV assumptions. `core_ids` in
 `scripts/mutation/mutation.ml` is the executable selection. Missing or ambiguous
 core entries fail, and CLI regression checks run in the ordinary test suite.
 
-The **full mutation assurance** workflow runs all 35 catalogued mechanisms on
+The **full mutation assurance** workflow runs the full catalog of mechanisms on
 manual dispatch and each Monday at 06:00 UTC on the default branch. It has no
 PR/push trigger and is not a required PR check. A survivor or invalid mutation
 still fails this workflow and its log is retained as an artifact: optional

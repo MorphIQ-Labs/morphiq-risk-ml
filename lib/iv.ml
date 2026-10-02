@@ -4,3 +4,5 @@ type 'coordinate t =
   | Above_maximum
   | Not_identifiable_at_expiry
   | Below_smallest_volatility
+  | Non_convergence
+  | Numerical_failure

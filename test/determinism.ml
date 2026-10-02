@@ -26,6 +26,8 @@ let emit_iv to_float = function
   | Ok Iv.Above_maximum -> Buffer.add_string buf "above\n"
   | Ok Iv.Not_identifiable_at_expiry -> Buffer.add_string buf "expiry\n"
   | Ok Iv.Below_smallest_volatility -> Buffer.add_string buf "smallest\n"
+  | Ok Iv.Non_convergence -> Buffer.add_string buf "non_convergence\n"
+  | Ok Iv.Numerical_failure -> Buffer.add_string buf "numerical_failure\n"
   | Error _ -> Buffer.add_string buf "refused\n"
 
 let rate r =

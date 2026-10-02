@@ -185,8 +185,8 @@ exercise changed gate scripts and their failure controls before pushing them.
    exact-rational checks, per-input replay certificates, empirical envelopes
    and cross-platform digests establish different facts. The
    [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations)
-   is authoritative: checked price/Greek domains are not every finite input
-   admitted by the API; IV still has conditional premises. Test certificates
+   is authoritative: checked certificate domains are not every finite input
+   admitted by the API; IV runtime boundaries still need uncertainty enforcement. Test certificates
    are not runtime certificates or formal verification of the compiler.
 7. **Preserve arithmetic semantics.** Keep `Morphiq_fp` multiplication and
    explicit `Float.fma` usage. Do not introduce implicit contraction,
@@ -194,10 +194,10 @@ exercise changed gate scripts and their failure controls before pushing them.
    approximations without an operation-level analysis and independent checks.
    Portability evidence covers the tested platforms, not all architectures.
 
-The existing IV termination/failure gap is tracked in
-[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). Do not claim
-that its closed variant already represents every computational outcome or
-that an iteration cap proves convergence. Distinguish invalid input,
+The remaining IV exact-model boundary/enclosure gap is tracked in
+[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). Its variant now includes computational failures and its solver has a discrete
+termination bound. Do not claim that a rounded-evaluator bracket is an
+exact-model enclosure or that an iteration cap proves convergence. Distinguish invalid input,
 mathematical non-existence, insufficient representability and numerical
 failure; never turn a failed computation into a plausible successful value.
 Missing reference coverage is not itself mathematical invalidity. An offered

@@ -49,7 +49,7 @@ These were found by this project's own oracles and property tests, not FerroRisk
 - **The intrinsic's formulation** needed choosing by the size of x's parts. A carry-cancelled forward was 13 ULP off at zero variance.
 - **The scale exponent** used truncating division, which broke exact homogeneity.
 - **A subnormal quote** lost bits to rescaling before the inverse's final correction.
-- **"Within 2 ULP of the exact root"** held on FerroRisk's grid but not in general. The scorer composes normalization and kernel errors and accounts for conditioning; Jäckel's attainable accuracy alone is not an implementation error guarantee.
+- **"Within 2 ULP of the exact root"** held on FerroRisk's grid but not in general. The scorer now executes price/vega certificates and retains historical conditioned quality gates; Jäckel's attainable accuracy alone is not an implementation error guarantee.
 - **In the generators themselves:** a false agreed zero at T = 1e-200, and an unconverged root returned as a value. Both are fixed by rules 3 and 4.
 
 ## Bound and scorer controls
@@ -62,7 +62,7 @@ The nine committed fixtures include extra-bit component and Greek references. Th
 
 `kernel_certificates.py` separately encloses differential residuals of the actual rounded Cody/Jäckel coefficients using exact Bernstein bounds. `lift_polynomials.py` checks the Black expansion coefficients against integral/moment identities and lifts their actual operation grouping into the test algebra. `Certified` propagates these component bounds through every committed price and finite Greek; no measured ULP envelope is a premise of those certificates. See [the derivations](error-analysis.md#8-rounded-kernels-and-complete-pricegreek-expressions).
 
-The 35 mutation mechanisms run with replay bit-identity assertions disabled, so numerical error must trigger the designated guard. Ordinary CI runs seven core mechanisms; the full catalog runs manually or weekly under the [mutation execution policy](mutation-policy.md). The separate `--probe intrinsic-terms` run still survives and exits 1; it is deliberately excluded provisionally, not classified as equivalent. Ordinary accuracy tests retain replay identity to detect drift between the arithmetic model and implementation.
+The curated mutation mechanisms run with replay bit-identity assertions disabled, so numerical error must trigger the designated guard. Ordinary CI runs seven core mechanisms; the full catalog runs manually or weekly under the [mutation execution policy](mutation-policy.md). The separate `--probe intrinsic-terms` run still survives and exits 1; it is deliberately excluded provisionally, not classified as equivalent. Ordinary accuracy tests retain replay identity to detect drift between the arithmetic model and implementation.
 
 
 The PR #12 audit adds exact rational primitive postconditions to a generated replay of the production DD source, including its elementary and normal-series callers. Allowances are fixed before execution. Nonoverlap checks apply to inputs and component results. They exposed both a binade-boundary defect in low-word sampling and missing normalization after subnormal scaling and split square root; see the [audit record](error-analysis.md#pr-12-source-and-assumption-audit). Zarith 1.14 is needed only for tests.
