@@ -399,7 +399,7 @@ let live_greeks side (c : Coordinates.live) sigma =
         vanna = Ok (Units.per_volatility 0.0);
         volga = Ok (Units.per_volatility_squared 0.0);
         charm = Greeks.daily (on (theta *. q *. dq));
-        veta = Greeks.daily 0.0;
+        veta = Greeks.daily_volatility 0.0;
         color = Greeks.daily 0.0;
       }
   else
@@ -541,7 +541,9 @@ let live_greeks side (c : Coordinates.live) sigma =
           (Units.per_volatility_squared
              (g ~k:e_up (base *. rt_full *. d1 *. d2_over_sigma)));
       charm = Ok (Units.time_rate charm);
-      veta = Ok (Units.time_rate (g ~k:e_up (base *. veta_bracket *. day)));
+      veta =
+        Ok
+          (Units.volatility_time_rate (g ~k:e_up (base *. veta_bracket *. day)));
       color =
         Ok
           (Units.time_rate

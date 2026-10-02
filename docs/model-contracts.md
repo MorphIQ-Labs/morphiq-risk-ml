@@ -45,5 +45,6 @@ These definitions are what the library computes. Every accuracy claim is measure
 
 - **Time.** Time Greeks are `−∂/∂T / 365`: per calendar day, as remaining maturity decreases.
 - **Volatility.** Volatility Greeks are per unit volatility in the model's own coordinate, and the types keep the coordinates apart.
+- **Mixed time/volatility.** Veta keeps both the per-calendar-day tag and the normal/lognormal volatility coordinate. Use `Units.annualise_volatility` to convert its time unit. Raw unit constructors are trusted labels, not value/provenance validation; see [the type audit](type-boundary-audit.md).
 - **Rho.** For forward models, rho moves the rate with the forward held fixed: `−T·V`.
 - **Kinks.** At a payoff kink (the strike at expiry, or the forward at zero variance), a spot or time derivative does not exist, and that Greek alone returns `Payoff_kink`.

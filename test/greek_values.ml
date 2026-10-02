@@ -5,6 +5,12 @@ let get = function Ok v -> v | Error e -> failwith (Refusal.to_string e)
 let rate =
   Result.map (fun v -> (v : Units.per_calendar_day Units.time_rate :> float))
 
+let volatility_rate r =
+  Result.map
+    (fun v ->
+      (v : (Units.per_calendar_day, _) Units.volatility_time_rate :> float))
+    r
+
 let per_vol r = Result.map (fun v -> (v : _ Units.per_volatility :> float)) r
 
 let per_vol2 r =
@@ -19,7 +25,7 @@ let pick (g : _ Greeks.t) = function
   | "vanna" -> per_vol g.vanna
   | "volga" -> per_vol2 g.volga
   | "charm" -> rate g.charm
-  | "veta" -> rate g.veta
+  | "veta" -> volatility_rate g.veta
   | "color" -> rate g.color
   | n -> invalid_arg n
 

@@ -10,12 +10,15 @@ type 'coordinate t = {
   vanna : 'coordinate Units.per_volatility value;
   volga : 'coordinate Units.per_volatility_squared value;
   charm : Units.per_calendar_day Units.time_rate value;
-  veta : Units.per_calendar_day Units.time_rate value;
+  veta : (Units.per_calendar_day, 'coordinate) Units.volatility_time_rate value;
   color : Units.per_calendar_day Units.time_rate value;
 }
 
 let kink = Error Payoff_kink
 let daily annual = Ok (Units.per_calendar_day annual)
+
+let daily_volatility annual =
+  Ok (Units.volatility_time_rate (annual /. Units.days_per_year))
 
 (* The payoff max(θ(S - K), 0) at expiry: off strike every derivative is the
    payoff's own (slope θ or 0), and the time Greeks are right limits in
@@ -55,6 +58,6 @@ let expiry ~theta ~spot ~strike ~rate ~yield =
       vanna = Ok (Units.per_volatility 0.0);
       volga = Ok (Units.per_volatility_squared 0.0);
       charm = daily (if itm then theta *. yield else 0.0);
-      veta = daily 0.0;
+      veta = daily_volatility 0.0;
       color = daily 0.0;
     }

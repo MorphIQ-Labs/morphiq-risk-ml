@@ -17,12 +17,18 @@ type 'coordinate t = {
   vanna : 'coordinate Units.per_volatility value;
   volga : 'coordinate Units.per_volatility_squared value;
   charm : Units.per_calendar_day Units.time_rate value;
-  veta : Units.per_calendar_day Units.time_rate value;
+  veta : (Units.per_calendar_day, 'coordinate) Units.volatility_time_rate value;
   color : Units.per_calendar_day Units.time_rate value;
 }
 
 val kink : 'a value
 val daily : float -> Units.per_calendar_day Units.time_rate value
+
+val daily_volatility :
+  float ->
+  (Units.per_calendar_day, 'coordinate) Units.volatility_time_rate value
+(** Convert a caller-established annual mixed time/volatility sensitivity to
+    per-calendar-day units. This helper does not validate its raw input. *)
 
 val expiry :
   theta:float ->

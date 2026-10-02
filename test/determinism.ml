@@ -33,6 +33,12 @@ let emit_iv to_float = function
 let rate r =
   Result.map (fun v -> (v : Units.per_calendar_day Units.time_rate :> float)) r
 
+let volatility_rate r =
+  Result.map
+    (fun v ->
+      (v : (Units.per_calendar_day, _) Units.volatility_time_rate :> float))
+    r
+
 let per_vol r = Result.map (fun v -> (v : _ Units.per_volatility :> float)) r
 
 let per_vol2 r =
@@ -47,7 +53,7 @@ let emit_greeks (g : _ Greeks.t) =
   emit_result (per_vol g.vanna);
   emit_result (per_vol2 g.volga);
   emit_result (rate g.charm);
-  emit_result (rate g.veta);
+  emit_result (volatility_rate g.veta);
   emit_result (rate g.color)
 
 let lognormal s = Result.get_ok (Vol.lognormal s)

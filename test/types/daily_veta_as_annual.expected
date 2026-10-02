@@ -1,0 +1,16 @@
+File "daily_veta_as_annual.ml", line 4, characters 50-72:
+4 | let invalid (g : Vol.lognormal Greeks.t) = annual (Result.get_ok g.veta)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type
+         "(Morphiq_risk__.Units.per_calendar_day, Morphiq_risk.Vol.lognormal)
+         Morphiq_risk__.Units.volatility_time_rate" =
+           "(Morphiq_risk__.Units.per_calendar_day,
+            Morphiq_risk.Vol.lognormal)
+           Morphiq_risk.Units.volatility_time_rate"
+       but an expression was expected of type
+         "(Morphiq_risk.Units.per_year, Morphiq_risk.Vol.lognormal)
+         Morphiq_risk.Units.volatility_time_rate"
+       Type
+         "Morphiq_risk__.Units.per_calendar_day" =
+           "Morphiq_risk.Units.per_calendar_day"
+       is not compatible with type "Morphiq_risk.Units.per_year"
