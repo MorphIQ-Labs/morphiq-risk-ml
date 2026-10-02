@@ -77,3 +77,9 @@
  (package morphiq_risk_ml)
  (modules properties)
  (libraries morphiq_risk qcheck-core qcheck-core.runner))
+
+(test
+ (name dd_reference)
+ (package morphiq_risk_ml)
+ (modules dd_reference)
+ (libraries morphiq_risk))
