@@ -38,6 +38,38 @@ type mutant = {
 let catalog =
   [
     {
+      id = "production-accuracy-limit";
+      file = "lib/production.ml";
+      snippet = "else if absolute_error > limit then Error Accuracy_exceeded";
+      replacement = "else if false then Error Accuracy_exceeded";
+      killer = "production_boundary";
+      mechanism = "a computed certificate must meet the requested accuracy";
+    };
+    {
+      id = "production-certificate-radius";
+      file = "lib/production.ml";
+      snippet = "let absolute_error = E.error_of_float enclosed value in";
+      replacement = "let absolute_error = 0.0 in";
+      killer = "production_reference";
+      mechanism = "the served leading word retains its actual absolute error";
+    };
+    {
+      id = "production-rho-coordinate";
+      file = "lib/model_enclosure.ml";
+      snippet = "if rho_forward then forward_rho ()";
+      replacement = "if true then forward_rho ()";
+      killer = "production_greek_reference";
+      mechanism = "BSM rho holds yield fixed even when its value equals rate";
+    };
+    {
+      id = "production-time-unit";
+      file = "lib/model_enclosure.ml";
+      snippet = "let daily v = E.div_float v Units.days_per_year in";
+      replacement = "let daily v = v in";
+      killer = "production_greek_reference";
+      mechanism = "runtime Greek certificates retain per-calendar-day units";
+    };
+    {
       id = "zero-variance-black-time";
       file = "lib/black.ml";
       snippet =
@@ -601,6 +633,9 @@ let guard_arguments = function
   | "oracle_elementary" -> [ [ "elementary" ] ]
   | "oracle_greeks" -> [ [ "greeks" ] ]
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
+  | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
+  | "production_greek_reference" -> [ [ "greek_bits" ] ]
+  | "production_boundary" -> [ [] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->

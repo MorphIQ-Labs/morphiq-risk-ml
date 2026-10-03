@@ -1,0 +1,15 @@
+File "production_veta_coordinate.ml", line 7, characters 31-36:
+7 |     Production.Veta ~max_error:limit
+                                   ^^^^^
+Error: The value "limit" has type
+         "(Morphiq_risk.Units.per_calendar_day, Morphiq_risk.Vol.normal)
+         Morphiq_risk.Units.volatility_time_rate"
+       but an expression was expected of type
+         "(Morphiq_risk__.Units.per_calendar_day,
+          Morphiq_risk.Production.Bsm.coordinate)
+         Morphiq_risk__.Units.volatility_time_rate" =
+           "(Morphiq_risk__.Units.per_calendar_day,
+            Morphiq_risk.Production.Bsm.coordinate)
+           Morphiq_risk.Units.volatility_time_rate"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk.Production.Bsm.coordinate" = "Morphiq_risk.Vol.lognormal"

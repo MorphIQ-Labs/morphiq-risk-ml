@@ -4,6 +4,11 @@
     is measured against those definitions (docs/results-slice.md). The stability
     policy (docs/stability.md) covers everything here except {!Internal}.
 
+    {!Production} provides enforced per-request numerical acceptance with
+    explicit typed absolute limits and private certificates. The fast model
+    functions below retain their documented checked-input assurance scope;
+    mathematical admission alone is not a numerical output certificate.
+
     {1 Use}
 
     {[
@@ -35,8 +40,10 @@ module Black = Black
 module Bachelier = Bachelier
 module Normal = Normal
 
+module Production : module type of Production
 (** Numerical building blocks, exposed for testing and research. They are not
     covered by the stability policy and may change in any release. *)
+
 module Internal : sig
   module Elementary = Elementary
   module Cody = Cody

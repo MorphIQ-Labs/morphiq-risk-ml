@@ -34,3 +34,9 @@ The [numerical backend contract](docs/numerical-backend-contract.md) defines req
 The [runtime enclosure foundation](docs/runtime-enclosures.md) and independent [model evaluator](docs/model-enclosures.md) support [certified IV acceptance](docs/certified-iv.md), including original-input boundary decisions. The fast price and Greek APIs remain separate from those runtime certificates.
 
 The [financial type audit](docs/type-boundary-audit.md) records enforced invariants, trusted raw-value labeling, all Greek units, and remaining caller obligations. Veta retains both its time unit and volatility coordinate.
+
+The candidate [production adapter](docs/production-boundary-design.md) requires
+explicit typed accuracy limits for prices and smooth Greeks and returns private
+certificates with outward absolute error. It preserves certified IV outcomes.
+Expiry/zero-volatility Greeks are explicitly unsupported by this adapter; its
+availability and institutional acceptance limits remain documented.

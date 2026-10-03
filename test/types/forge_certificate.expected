@@ -1,0 +1,5 @@
+File "forge_certificate.ml", line 3, characters 42-79:
+3 | let forged : float Production.certified = { value = 1.0; absolute_error = 0.0 }
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "float
+                                                Morphiq_risk.Production.certified"

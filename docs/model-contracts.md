@@ -13,6 +13,8 @@ These definitions are what the library computes. Every accuracy claim is measure
   `test/consistency.ml` checks these properties across quantities.
 - **Numerical outputs.** The target is the nearest-even binary64 value of the defined real quantity. Positive IV roots require a runtime rounding certificate. Fast price/Greek evaluations have implementation error, checked by the documented per-input analytical certificates and historical quality gates; admission alone does not establish a universal error guarantee. See [certification status](error-analysis.md#certification-status-and-remaining-proof-obligations).
 
+The separate [production adapter](production-boundary-design.md) serves prices and smooth Greeks with enforced, caller-requested absolute error bounds in their units. It uses these same exact models and preserves the certified IV contract. Its explicit boundary exclusions and computational failures are capability outcomes, not new financial definitions.
+
 ## Black-76 family
 
 | Model | Definition |

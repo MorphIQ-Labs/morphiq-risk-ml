@@ -1,3 +1,15 @@
+type sensitivity =
+  | Delta
+  | Gamma
+  | Theta
+  | Vega
+  | Rho
+  | Vanna
+  | Volga
+  | Charm
+  | Veta
+  | Color
+
 module type S = sig
   type scalar
 
@@ -26,6 +38,11 @@ module type S = sig
   val price_enclosed : t -> Side.t -> scalar -> scalar
   (** Also accepts exact two-word volatility midpoints for IV rounding
       decisions. *)
+
+  val greek : t -> Side.t -> float -> rho_forward:bool -> sensitivity -> scalar
+  (** Smooth positive-maturity/volatility derivative. Time quantities are per
+      calendar day. [rho_forward] is supplied by the model owner; BSM holds q
+      fixed even when its value equals r. *)
 
   val pdf : scalar -> scalar
   val cdf : scalar -> scalar

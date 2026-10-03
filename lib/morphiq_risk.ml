@@ -9,6 +9,7 @@ module Greeks = Greeks
 module Black = Black
 module Bachelier = Bachelier
 module Normal = Normal
+module Production = Production
 
 module Internal = struct
   module Elementary = Elementary

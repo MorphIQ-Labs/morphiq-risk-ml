@@ -4,6 +4,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Enforced production numerical boundary
+
+- Added `Production.Bsm`, `Black76`, `Displaced` and `Bachelier` with model-specific admission tokens. Prices and smooth Greeks require explicit typed absolute limits; successful private certificates retain finite values and outward error bounds meeting those limits. No empirical default, unchecked fast fallback or silent failure value is used.
+- Added original-input runtime enclosures for all ten smooth derivatives, with BSM/forward rho and time conventions derived explicitly. Expiry/zero-volatility Greeks are explicitly unsupported by this initial adapter. Invalid input, invalid accuracy, unsupported capability, numerical failure and exceeded accuracy remain distinct. Existing fast price/Greek and certified IV behavior is unchanged.
+- Public certificate tests cover 4,176 extra-bit references and 3,932 exact acceptance-limit controls; 2,376 interior requests satisfy a fixed test limit. Four negative compiler witnesses enforce certificate/model/unit boundaries. FLINT/Arb formal price-series differentiation independently validates all 2,506 smooth Greek references at 256–2048 bits without unresolved cases.
+- This supplies runtime numerical enforcement for #13, not institutional approval. Intended-use/materiality sign-off, independent human review and representative portfolio/operational acceptance remain required under Epic #27. See [the boundary specification](docs/production-boundary-design.md).
+
 ### Zero-volatility ATM Greek semantics
 
 - At positive maturity and zero volatility, Black-76/displaced/Bachelier ATM rho and theta are now zero instead of `Payoff_kink`. Their veta exists and is evaluated from the time derivative of right vega. BSM with S=K and r=q has the same theta/veta identity; its rho remains a kink because varying r holds q fixed.
