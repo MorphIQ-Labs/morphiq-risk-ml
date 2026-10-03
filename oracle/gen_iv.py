@@ -30,6 +30,7 @@ import mpmath
 from mpmath import mp, mpf
 
 from common import Contract, agreed, bits, round_binary64
+from price_rounding import price_reference
 
 NAN = bits(math.nan)
 INF = bits(math.inf)
@@ -102,10 +103,10 @@ def root_word(contract, target, extra):
 
 def classify(contract, sigma):
     if contract.t == 0:
-        q = agreed(lambda: contract.price(sigma))
+        q = price_reference(contract, sigma, lambda: agreed(lambda: contract.price(sigma)))
         return "expiry_not_identifiable", q, NAN, NAN, NAN
     extra = contract.digits(sigma)
-    quote = agreed(lambda: contract.price(sigma), extra)
+    quote = price_reference(contract, sigma, lambda: agreed(lambda: contract.price(sigma), extra))
     if quote is None or not math.isfinite(quote):
         return None
     with mp.workdps(120 + extra):
@@ -134,6 +135,11 @@ def classify(contract, sigma):
 
 
 def catalog(rng):
+    for model in ('bsm','black76','displaced','bachelier'):
+        shift=2.**-54 if model=='displaced' else 0.
+        for sigma in (1e-4,.01):
+            for call in (True,False):
+                yield Contract(model,call,math.nextafter(1.,math.inf),2.**-53,1.,0.,0.,shift),sigma
     times = (0.0, 1 / 31536000, 1 / 365, 1 / 12, 1.0, 5.0, 30.0)
     sigmas = (0.0, 1e-6, 0.01, 0.2, 1.0, 5.0)
     for model in ("bsm", "black76", "displaced"):
@@ -181,8 +187,7 @@ def main(out):
         for c, sigma in catalog(rng):
             result = classify(c, sigma)
             if result is None:
-                dropped += 1
-                continue
+                raise ArithmeticError(f'unresolved IV reference: {vars(c)} sigma={sigma.hex()}')
             status, quote, lo, hi, root = result
             fields = [c.model, "call" if c.call else "put", status, "-"]
             fields += [bits(v) for v in (c.s, c.k, c.t, c.r, c.q, sigma, c.shift, quote)]

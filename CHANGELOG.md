@@ -4,6 +4,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Intrinsic midpoint reference rounding
+
+- Fixed a price-oracle mechanism where two mpmath precisions could agree on the wrong binary64 reference after losing a positive time value at an exact intrinsic midpoint. European/displaced price generation and IV quote construction now use an exact rational, one-sided tail certificate where it resolves rounding. Unresolved rows fail regeneration rather than being dropped.
+- All prior fixture rows are unchanged. Added 24 European, eight displaced and 16 IV cases covering the minimized counterexample and sibling models. Library arithmetic, served values, replay and acceptance budgets are unchanged; a production regression checks that an error bound cannot erase the tiny positive increment.
+- The independent Arb campaign certifies all 99,088 price and 59,200 smooth-Greek reference cells, plus 5,579 positive IV roots, without unresolved cases. Thirty-two price comparisons use a separately implemented one-sided argument; 7,200 expiry-Greek rows remain explicitly outside analytic series scope. See [derivation and evidence](docs/oracle-midpoint-rounding.md).
+
 ### Enforced production numerical boundary
 
 - Added `Production.Bsm`, `Black76`, `Displaced` and `Bachelier` with model-specific admission tokens. Prices and smooth Greeks require explicit typed absolute limits; successful private certificates retain finite values and outward error bounds meeting those limits. No empirical default, unchecked fast fallback or silent failure value is used.

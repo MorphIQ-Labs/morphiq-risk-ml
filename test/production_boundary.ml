@@ -206,6 +206,26 @@ let () =
   let tail = get (p tiny 1e-10) in
   require "tiny value retains a finite absolute bound"
     (Float.is_finite tail.absolute_error && tail.absolute_error >= 0.);
+  (* A positive real time value lies above an exact intrinsic midpoint.
+     An outward absolute bound must retain it even if the served float loses it. *)
+  let midpoint =
+    get
+      (P.Bsm.admit
+         {
+           spot = Float.succ 1.;
+           strike = 0x1p-53;
+           time_to_expiry = 1.;
+           rate = 0.;
+           dividend_yield = 0.;
+         })
+  in
+  let tiny_vol = get (Vol.lognormal 1e-4) in
+  require "positive time value cannot be erased from the error bound"
+    (P.Bsm.evaluate midpoint Side.Call tiny_vol P.Price ~max_error:0x1p-53
+    = Error P.Accuracy_exceeded);
+  ignore
+    (get
+       (P.Bsm.evaluate midpoint Side.Call tiny_vol P.Price ~max_error:0x1p-52));
   Printf.printf
     "%d interior quantity requests; admission, accuracy, expiry, \
      zero-variance, tail and joint capability controls pass\n"

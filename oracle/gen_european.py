@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Exact-input European prices for BSM, Black-76 and Bachelier.
 
-This is this project's own price oracle. Every value comes from mpmath, refined
-until two consecutive precisions round to the same binary64 (common.agreed).
+This project's oracle uses exact one-sided tail rounding where it decides;
+other prices use precision-refined mpmath (common.agreed). Independent Arb
+audits validate the committed references beyond precision agreement.
 
 Families:
 - grid: strike scales 1e-300..1e300, forward/strike ratios from 1e-6 to 1e6
@@ -24,6 +25,7 @@ import mpmath
 from mpmath import mp
 
 from common import Contract, agreed, bits, region
+from price_rounding import price_reference
 
 RATIOS = (1e-6, 1e-3, 0.1, 0.5, 0.9, 0.99, 1 - 1e-6, 1 - 1e-10, 1 - 1e-15, 1.0,
           1 + 1e-15, 1 + 1e-10, 1 + 1e-6, 1.01, 1.1, 2.0, 10.0, 1e3, 1e6)
@@ -85,17 +87,25 @@ def random_family(rng, n=6000):
         yield Contract("bachelier", call, f, kk, t, r), normal
 
 
+def halfway():
+    # The intrinsic is the midpoint above even 1; positive time value selects
+    # its successor even when no feasible precision can retain that increment.
+    for model in ('bsm','black76','bachelier'):
+        for sigma in (1e-300,1e-12,1e-4,.01):
+            for call in (True,False):
+                yield Contract(model,call,math.nextafter(1.,math.inf),2.**-53,1.,0.,0.),sigma
+
+
 def main(out):
     rng = random.Random(20261003)
     kept = dropped = 0
     with open(out, "w") as w:
         w.write(f"# morphiq-risk-ml European price oracle, mpmath {mpmath.__version__}, dps 60..960 agreement\n")
-        for family, source in (("grid", grid()), ("cancel", cancel()), ("random", random_family(rng))):
+        for family, source in (("grid", grid()), ("cancel", cancel()), ("random", random_family(rng)), ("halfway", halfway())):
             for contract, sigma in source:
-                ref = 0.0 if contract.below_binary64(sigma) else agreed(lambda: contract.price(sigma), contract.digits(sigma))
+                ref = price_reference(contract, sigma, lambda: 0.0 if contract.below_binary64(sigma) else agreed(lambda: contract.price(sigma), contract.digits(sigma)))
                 if ref is None:
-                    dropped += 1
-                    continue
+                    raise ArithmeticError(f'unresolved European reference: {vars(contract)} sigma={sigma.hex()}')
                 with mp.workdps(60 + contract.digits(sigma)):
                     reg = region(contract, sigma, ref if ref == 0.0 else contract.price(sigma))
                 w.write(" ".join([contract.model, "call" if contract.call else "put", reg, family]
