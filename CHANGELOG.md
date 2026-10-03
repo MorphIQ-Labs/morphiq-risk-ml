@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Numerical-source provenance and replacement planning
+
+- Identify the actual StatLib AS241, Netlib CALERF and author-hosted QD 2.3.24
+  sources from the original development record and retained download hashes.
+- Replace the mismatched QD GitHub notices with the original tarball's COPYING
+  and BSD-LBNL-License document, preserve the StatLib distribution notice, and
+  install the corrected notices with the source-provenance report.
+- Plan qualified replacements for all three unresolved components under #64.
+  Source identification does not establish unrestricted redistribution rights;
+  that issue remains open. No numerical operations or served values change.
+
 ### Public project documentation and licensing
 
 - Replace the internal-experiment introduction with installation instructions,

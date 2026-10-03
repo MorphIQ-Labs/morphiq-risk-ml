@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-10-03",
+  "implementation_base_commit": "9f792d6b2a46b9e49256ec51810b915358d50d18",
+  "issue": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/64",
+  "evidence_scope": "Source identity and recorded development chronology; not a legal clearance or proof of every influence.",
+  "artifacts": [
+    {
+      "id": "morphiq-risk-ml-64-as241-f",
+      "title": "Wichura AS241 source",
+      "version": "StatLib PPND7/PPND16, original acquisition",
+      "source_url": "https://lib.stat.cmu.edu/apstat/241",
+      "retrieved_on": "2026-10-02",
+      "sha256": "24c28dbd77de4c3121c6a5f4338838023f7edefcf6ac9975249bb11ee7597277",
+      "bytes": 6298
+    },
+    {
+      "id": "morphiq-risk-ml-64-calerf-f",
+      "title": "Cody CALERF source",
+      "version": "March 19, 1990 Netlib source",
+      "source_url": "https://www.netlib.org/specfun/erf",
+      "retrieved_on": "2026-10-02",
+      "sha256": "7de11d2fe801e2d1a011e941f2717a09b553f8e7f3a66260767e5f78dc8ba9a3",
+      "bytes": 13926
+    },
+    {
+      "id": "morphiq-risk-ml-64-qd-2-3-24-tar-gz",
+      "title": "QD source distribution",
+      "version": "2.3.24 author-hosted tarball",
+      "source_url": "https://www.davidhbailey.com/dhbsoftware/qd-2.3.24.tar.gz",
+      "retrieved_on": "2026-10-02",
+      "sha256": "a47b6c73f86e6421e86a883568dd08e299b20e36c11a99bdfbe50e01bde60e38",
+      "bytes": 812215
+    },
+    {
+      "id": "morphiq-risk-ml-64-qd-copying-txt",
+      "title": "QD original COPYING",
+      "version": "2.3.24 author-hosted tarball member COPYING",
+      "source_url": "https://www.davidhbailey.com/dhbsoftware/qd-2.3.24.tar.gz",
+      "retrieved_on": "2026-10-02",
+      "sha256": "64b7db02cf5600cb70ff2f6dabd06b115a5ad07a95920cfd3ab09ffa6533f716",
+      "bytes": 725
+    },
+    {
+      "id": "morphiq-risk-ml-64-qd-bsd-lbnl-license-doc",
+      "title": "QD original license agreement",
+      "version": "2.3.24 tarball member BSD-LBNL-License.doc; footer 071106",
+      "source_url": "https://www.davidhbailey.com/dhbsoftware/qd-2.3.24.tar.gz",
+      "retrieved_on": "2026-10-02",
+      "sha256": "9c394dd15f8f0d39f410c683ade967140fcf7ad63bc49cf3ecfec941717d2c77",
+      "bytes": 39936
+    },
+    {
+      "id": "morphiq-risk-ml-64-dd_real-cpp",
+      "title": "QD double-double implementation",
+      "version": "2.3.24 tarball member src/dd_real.cpp",
+      "source_url": "https://www.davidhbailey.com/dhbsoftware/qd-2.3.24.tar.gz",
+      "retrieved_on": "2026-10-02",
+      "sha256": "8ae33304159caf3207928f1cb004887a2c0fe52f870e8c290dac0f7e1daded98",
+      "bytes": 30608
+    },
+    {
+      "id": "morphiq-risk-ml-64-statlib-policy-txt",
+      "title": "StatLib Applied Statistics distribution policy",
+      "version": "Retrieved 2026-10-03; archive publication policy",
+      "source_url": "https://lib.stat.cmu.edu/apstat/index",
+      "retrieved_on": "2026-10-03",
+      "sha256": "726ab0a0a91dfb103bc8fc95dc0c227b53c7aa027698d7cdc1d02df7a347bcdb",
+      "bytes": 29569
+    },
+    {
+      "id": "morphiq-risk-ml-64-specfun-readme-txt",
+      "title": "SPECFUN README",
+      "version": "SPECFUN 2.5 README retrieved 2026-10-03",
+      "source_url": "https://netlib.org/specfun/readme",
+      "retrieved_on": "2026-10-03",
+      "sha256": "bd1e737126e4b29d82394a34db30ca5cc8b8f84311fa8cad86802dd6302ec6b9",
+      "bytes": 1089
+    }
+  ],
+  "development_events": [
+    {
+      "at": "2026-10-02T10:48:03.994Z",
+      "event": "Fetched Netlib CALERF and StatLib AS241 source files",
+      "tool_use_id": "toolu_01LXcCubvkzXoNPAvBrwAc4Q",
+      "successful_result_at": "2026-10-02T10:48:05.034Z"
+    },
+    {
+      "at": "2026-10-02T10:48:07.558Z",
+      "event": "Read CALERF algorithm and coefficients",
+      "tool_use_id": "toolu_01CAPYHGddUGQs7fYq3Vq3wz"
+    },
+    {
+      "at": "2026-10-02T10:48:11.475Z",
+      "event": "Read AS241 source first section",
+      "tool_use_id": "toolu_018yc82f4BJHwNFHpfqrYdyu"
+    },
+    {
+      "at": "2026-10-02T10:48:14.312Z",
+      "event": "Read remainder of AS241 PPND16",
+      "tool_use_id": "toolu_01ETSsoM5TZw6LXMV5mEcKkB"
+    },
+    {
+      "at": "2026-10-02T10:49:19.698Z",
+      "event": "Wrote lib/cody.ml",
+      "tool_use_id": "toolu_01Ujb8w2vg7yA9Hga8HymQTp"
+    },
+    {
+      "at": "2026-10-02T10:50:01.076Z",
+      "event": "Wrote lib/normal.ml",
+      "tool_use_id": "toolu_01FbsGCani4bBihe4smYkVkD"
+    },
+    {
+      "at": "2026-10-02T13:37:04.644Z",
+      "event": "Fetched and extracted author-hosted QD 2.3.24 tarball",
+      "tool_use_id": "toolu_014fBm1sJ5nYa647dG6UEBFY",
+      "successful_result_at": "2026-10-02T13:37:06.407Z"
+    },
+    {
+      "at": "2026-10-02T13:38:01.705Z",
+      "event": "Read QD dd_real.cpp exp and log implementations",
+      "tool_use_id": "toolu_01Kho4d7U8yM38cq3Cvfps5a"
+    },
+    {
+      "at": "2026-10-02T13:38:28.366Z",
+      "event": "Wrote QD-derived exponential and trial log implementation",
+      "tool_use_id": "toolu_01AzJxsWJppaqcgwnMR1i5fe"
+    },
+    {
+      "at": "2026-10-02T13:39:09.115Z",
+      "event": "Corrected QD stopping threshold and extended exponential range",
+      "tool_use_id": "toolu_01PtbySTbCA2vXKxz3YHHDh8"
+    }
+  ],
+  "fresh_retrievals_matching_original_sha256": [
+    "as241.f",
+    "calerf.f",
+    "qd-2.3.24.tar.gz"
+  ],
+  "disposition": {
+    "AS241": "Source confirmed; applicable unrestricted redistribution permission unresolved.",
+    "CALERF": "Source confirmed; no explicit grant in the inspected source/README; unresolved.",
+    "QD": "Adaptation confirmed; original tarball license recovered and retained; commercial/form scope unresolved."
+  }
+}

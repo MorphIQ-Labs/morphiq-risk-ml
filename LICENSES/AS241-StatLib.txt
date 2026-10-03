@@ -1,0 +1,10 @@
+Wichura AS241: retained distribution notice
+
+Source: https://lib.stat.cmu.edu/apstat/index
+Retrieved: 2026-10-03
+
+The Royal Statistical Society holds the copyright to these routines, but has given its permission for their distribution provided that no
+fee is charged.
+
+This retained notice is not an assertion of unrestricted redistribution
+permission. See THIRD_PARTY_NOTICES.md and docs/source-provenance.md.

@@ -1,6 +1,8 @@
 (* W. J. Cody, "Rational Chebyshev approximations for the error function",
    Math. Comp. 23 (1969) 631-637; netlib specfun CALERF (March 19, 1990).
-   Coefficients are the published double-precision values. *)
+   Adapted after direct consultation of the Netlib source, including its
+   double-precision coefficients. Source identity and unresolved distribution
+   terms are recorded in docs/source-provenance.md and THIRD_PARTY_NOTICES.md. *)
 
 let thresh = 0.46875
 let sqrpi = 5.6418958354775628695e-1 (* 1/sqrt(pi) *)
