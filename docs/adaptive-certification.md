@@ -121,4 +121,6 @@ their designated numerical guards after a clean baseline and successful builds.
 [The retained log](evidence/adaptive-iv-mutations.txt) includes three new optional
 witnesses: the product shortcut's exponent condition, mandatory refinement when
 the first attempt is unresolved, and the reduced exponential's truncation tail.
-The full catalog has 40 mechanisms; the default core remains seven.
+These additions brought the catalog to 40 mechanisms at this stage; the
+default core remained seven. See [mutation policy](mutation-policy.md) for the
+current catalog count.

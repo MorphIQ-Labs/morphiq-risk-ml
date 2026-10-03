@@ -118,6 +118,11 @@ factors are never implicitly combined, even when their current rates agree.
 One named market factor cannot be bound to instruments in conflicting
 denominations. Different currencies require distinct factor bindings; an
 implicit FX transformation is never inferred.
+Bucket comparison treats positive and negative zero in BSM dividend yield or
+contractual displacement as equal: those parameterizations describe the same
+real model. Summary metadata retains a representative input key, without
+canonicalizing its zero sign. Plan identity still encodes all original input
+bits, including signed zeros.
 Quantities are explicit position multipliers. Nothing supplies an implicit
 contract multiplier, FX conversion, or common-volatility risk factor.
 

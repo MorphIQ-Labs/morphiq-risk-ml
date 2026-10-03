@@ -2,7 +2,9 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. Each still requires a clean baseline, a successful mutated
+seven core mutants. The integration-branch catalog currently contains **51
+mechanisms**; the smaller counts below describe its historical growth. Each
+selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
 errors and replay-bit changes do not count as kills.
 
@@ -72,7 +74,7 @@ make this reconciliation pass.
 
 ## Adaptive certification controls
 
-The current curated catalog has 40 mechanisms. Three additional optional
+This stage brought the curated catalog to 40 mechanisms. Three additional optional
 controls cover the first attempt's exponential remainder, the exact product
 quantum shortcut and the fallback needed to preserve full-evaluator availability.
 The default core remains the same seven. Both arithmetic configurations run
@@ -80,7 +82,7 @@ the independent ordinary primitive and model reference checks.
 
 ## Zero-volatility boundary regressions
 
-The catalog now has 43 mechanisms. Three optional witnesses cover Black ATM
+This stage brought the catalog to 43 mechanisms. Three optional witnesses cover Black ATM
 time smoothness, Bachelier ATM rho and the generally nonzero boundary veta.
 Their designated guard is `boundary_greeks`, which checks independent price
 derivatives and exact varied-coordinate identities. None is added to the
@@ -90,7 +92,8 @@ seven default core mechanisms.
 
 Four additional optional witnesses cover the requested accuracy limit, served
 certificate radius, BSM versus forward rho and time-unit conversion. The
-catalog has 47 mechanisms; default CI retains the same seven core witnesses.
+catalog reached 47 mechanisms at this stage; default CI retained the same seven
+core witnesses.
 The guards use independent reference error and contract rejection, not replay
 bit changes or compiler failures.
 

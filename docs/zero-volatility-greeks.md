@@ -69,7 +69,8 @@ python scripts/arb_boundary_audit.py oracle/fixtures/boundary_greeks.txt.gz \
 The complete local ordinary suite and install/format checks pass. All ten
 [affected/core mutation witnesses](evidence/boundary-greeks-mutations.txt) are
 killed after a clean baseline and successful builds. Default CI retains seven;
-three new boundary mechanisms are optional, bringing the full catalog to 43.
+three new boundary mechanisms are optional; they brought the catalog to 43 at
+this stage. See [mutation policy](mutation-policy.md) for the current count.
 
 The [A/B/B/A scalar check](evidence/boundary-greeks-bench.json) against
 `0681217` retains all 768 successful IV outcomes in every run. Positive-volatility
