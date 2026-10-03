@@ -1,0 +1,14 @@
+{
+  "mechanism": "disable advancement above an exact intrinsic upper midpoint",
+  "baseline_exit": 0,
+  "mutant_compile_exit": 0,
+  "mutant_guard_exit": 1,
+  "source_sha256": {
+    "price_rounding.py": "f74b08308fece4dc0e5fa30b7bff9a92f4c1b83368177b174b41def925e5dfd5",
+    "test_price_rounding.py": "5bf703d76818347ba64b88624801dcbe528abed22f32019caca63d0059dfa3eb"
+  },
+  "mutated_helper_sha256": "8be016f49f666fccd4478345984819c76b4ae7b61ae09da67a6e336f8a3115ae",
+  "baseline": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n",
+  "mutant": "..FF.\n======================================================================\nFAIL: test_positive_increment_above_even_lower_midpoint (__main__.Rounding.test_positive_increment_above_even_lower_midpoint)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/yq/gxnn8d696f58z2ksd9nltj1r0000gn/T/risk-price-rounding-mutation-hii_b3lu/test_price_rounding.py\", line 20, in test_positive_increment_above_even_lower_midpoint\n    self.assertEqual(tiny_time_value_rounding(c,sigma),math.nextafter(1.,math.inf))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != 1.0000000000000002\n\n======================================================================\nFAIL: test_proof_overrides_the_false_agreed_midpoint (__main__.Rounding.test_proof_overrides_the_false_agreed_midpoint)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/yq/gxnn8d696f58z2ksd9nltj1r0000gn/T/risk-price-rounding-mutation-hii_b3lu/test_price_rounding.py\", line 25, in test_proof_overrides_the_false_agreed_midpoint\n    self.assertEqual(price_reference(contract(),1e-4,lambda:1.),math.nextafter(1.,math.inf))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1.0 != 1.0000000000000002\n\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nFAILED (failures=2)\n",
+  "scope": "Isolated Python compile and exact numerical guard; the live sources and fixture provenance were never mutated. Separate from the 47-entry OCaml mutation catalog."
+}

@@ -1,0 +1,11 @@
+baseline passes (47 s)
+killed    certified-rounding-cell by certified_iv_reference
+killed    iv-original-shift by iv_termination
+killed    split-root-nonoverlap by dd_reference
+killed    dd-scale-nonoverlap by dd_reference
+killed    scaled-exp-prefactor by numerical_regressions
+killed    reference-expansion by numerical_regressions
+killed    quotient-remainder by numerical_regressions
+killed    greeks-theta-dd by oracle_greeks
+killed    bachelier-theta-dd by oracle_greeks
+9 of 9 mutants killed as catalogued

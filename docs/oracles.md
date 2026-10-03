@@ -33,6 +33,17 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 5. **Greeks have two routes.** Route 1 is the closed form; route 2 differentiates the mpmath price itself with `mpmath.diff`, including mixed and third-order partials. A value is resolved only when they agree to 1e-25.
 6. **Fixed-seed random families** in every generator test away from the grid (`random.Random(2026100x)`).
 
+### Intrinsic midpoint rounding
+
+The price generators and IV quote construction first apply the exact rational
+[positive-time-value rounding rule](oracle-midpoint-rounding.md) where its
+premises resolve a cell. It prevents two finite mpmath precisions from agreeing
+on an intrinsic midpoint after both lose a positive tail. Remaining rows use
+their existing refinement, with independent Arb audit evidence over the committed
+corpus; precision agreement alone is not promoted to a universal proof.
+Unresolved European/displaced/IV rows now fail regeneration instead of being
+dropped. The generators' transitive helper provenance is in `MANIFEST`.
+
 ## Provenance
 
 - **Building fixtures.** `oracle/build.sh [name…]` regenerates fixtures. Each is compressed with `gzip -n -9`, so the bytes are reproducible.

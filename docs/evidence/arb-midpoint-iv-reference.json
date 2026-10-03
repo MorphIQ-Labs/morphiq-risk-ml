@@ -1,0 +1,20 @@
+{
+  "method": "Strict opposite residual signs at exact adjacent-float midpoints, enclosed by FLINT/Arb erfc-based real-model evaluation",
+  "python_flint": "0.9.0",
+  "flint": "3.6.0",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "fixture_sha256": "c9ba81e47fbed982cdb8a49dc843d8e27262fa2e31588303b612ea816fc76e25",
+  "script_sha256": "fa66a9b48a88738b2aa50c4c47cd642369d8f0905a34dd5ec44875cc324f25b5",
+  "root_rows": {
+    "displaced": 1164,
+    "bachelier": 859,
+    "bsm": 1754,
+    "black76": 1802
+  },
+  "working_precision_counts": {
+    "256": 5579
+  },
+  "unresolved": [],
+  "adjacent_wrong_root_control": true,
+  "scope": "Independent interval audit of reference rounding cells, not an independent human review or a proof of all OCaml executions."
+}
