@@ -184,7 +184,8 @@ remains `f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b`:
 the new adapter and internal derivative capability do not change legacy served
 values or outcomes. All twelve [affected/core mutation witnesses](evidence/production-mutations.txt)
 are killed after a clean baseline and successful builds. Four optional mechanisms
-bring the catalog to 47; default CI retains seven.
+brought the catalog to 47 at this stage; default CI retained seven. See
+[mutation policy](mutation-policy.md) for the current catalog count.
 
 The [legacy API A/B/B/A check](evidence/production-compatibility-bench.json)
 against `ee1ffed` retains all 768 successful IV outcomes in every run. Legacy

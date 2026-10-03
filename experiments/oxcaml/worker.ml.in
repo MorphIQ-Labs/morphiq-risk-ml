@@ -1,0 +1,40 @@
+(* Only built in the isolated OxCaml tree after applying portable-numerics.patch. *)
+open Morphiq_risk
+
+type model = Bsm | Black76 | Displaced | Bachelier
+type input = { model : model; x : float; strike : float; time : float;
+               rate : float; yield : float; sigma : float; shift : float }
+type output = (float * float, string) result
+let (price @ portable) i : output =
+  let finish = function
+    | Ok c -> Ok (c.Production.value,c.absolute_error)
+    | Error _ -> Error "scalar refusal" in
+  match i.model with
+  | Bsm -> (match Production.Bsm.admit Black.Bsm_carry.{spot=i.x;strike=i.strike;time_to_expiry=i.time;rate=i.rate;dividend_yield=i.yield},Vol.lognormal i.sigma with
+    | Ok a,Ok v -> finish (Production.Bsm.evaluate a Side.Call v Production.Price ~max_error:1e-10)
+    | _ -> Error "admission")
+  | Black76 -> (match Production.Black76.admit Black.Black76_carry.{forward=i.x;strike=i.strike;time_to_expiry=i.time;rate=i.rate},Vol.lognormal i.sigma with
+    | Ok a,Ok v -> finish (Production.Black76.evaluate a Side.Call v Production.Price ~max_error:1e-10)
+    | _ -> Error "admission")
+  | Displaced -> (match Production.Displaced.admit Black.Displaced_carry.{forward=i.x;strike=i.strike;displacement=i.shift;time_to_expiry=i.time;rate=i.rate},Vol.lognormal i.sigma with
+    | Ok a,Ok v -> finish (Production.Displaced.evaluate a Side.Call v Production.Price ~max_error:1e-10)
+    | _ -> Error "admission")
+  | Bachelier -> (match Production.Bachelier.admit Bachelier.{forward=i.x;strike=i.strike;time_to_expiry=i.time;rate=i.rate},Vol.normal i.sigma with
+    | Ok a,Ok v -> finish (Production.Bachelier.evaluate a Side.Call v Production.Price ~max_error:1e-10)
+    | _ -> Error "admission")
+let (tile @ portable) inputs =
+  (* Mutable scratch is created and used exclusively inside the worker. *)
+  let count=ref 0 in
+  let outputs=List.map (fun i -> incr count;price i) inputs in
+  !count,outputs
+let inputs = List.init 16 (fun i ->
+  {model=(match i mod 4 with 0 -> Bsm | 1 -> Black76 | 2 -> Displaced | _ -> Bachelier);
+   x=(if i mod 4>=2 then -2. else 100.);strike=(if i mod 4>=2 then -1. else 100.);
+   time=0.5;rate=0.02;yield=0.01;sigma=(if i mod 4=3 then 10. else 0.2);shift=120.})
+let () =
+  let baseline=tile inputs in
+  let worker=Domain.Safe.spawn (fun () -> tile inputs) in
+  let parallel=Domain.join worker in
+  if baseline<>parallel then failwith "portable worker mismatch";
+  if List.exists Result.is_error (snd baseline) then failwith "portable pricing refusal";
+  Printf.printf "mode-checked four-model worker: %d identical certified prices\n" (fst baseline)

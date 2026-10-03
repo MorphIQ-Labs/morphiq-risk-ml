@@ -1,0 +1,6 @@
+baseline passes (49 s)
+killed    planner-snapshot-copy by planner_contract
+killed    planner-post-expiry by planner_contract
+killed    planner-scalar-radius by planner_contract
+killed    planner-incomplete-total by planner_contract
+4 of 4 mutants killed as catalogued

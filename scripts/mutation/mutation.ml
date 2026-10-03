@@ -38,6 +38,39 @@ type mutant = {
 let catalog =
   [
     {
+      id = "planner-snapshot-copy";
+      file = "lib/planner.ml";
+      snippet =
+        "let market = Array.copy market and portfolio = Array.copy portfolio in";
+      replacement = "let market = market and portfolio = portfolio in";
+      killer = "planner_contract";
+      mechanism = "caller mutations cannot change a frozen plan";
+    };
+    {
+      id = "planner-post-expiry";
+      file = "lib/planner.ml";
+      snippet = "if days < 0L then Error Post_expiry";
+      replacement = "if false then Error Post_expiry";
+      killer = "planner_contract";
+      mechanism = "post-expiry valuation has an explicit settlement exclusion";
+    };
+    {
+      id = "planner-scalar-radius";
+      file = "lib/planner.ml";
+      snippet = "(number q v.absolute_error)";
+      replacement = "0.0";
+      killer = "planner_contract";
+      mechanism = "aggregation retains each scalar certificate uncertainty";
+    };
+    {
+      id = "planner-incomplete-total";
+      file = "lib/planner.ml";
+      snippet = "complete = s.failed = 0 && Option.is_some successful_subset;";
+      replacement = "complete = Option.is_some successful_subset;";
+      killer = "planner_contract";
+      mechanism = "failed items prevent complete portfolio totals";
+    };
+    {
       id = "production-accuracy-limit";
       file = "lib/production.ml";
       snippet = "else if absolute_error > limit then Error Accuracy_exceeded";
@@ -635,7 +668,7 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "production_boundary" -> [ [] ]
+  | "production_boundary" | "planner_contract" -> [ [] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->

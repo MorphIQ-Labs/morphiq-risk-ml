@@ -1,0 +1,59 @@
+{
+  "compiler": "/private/tmp/risk-planner-ox-opam/risk-planner-ox52/bin/ocamlc.opt",
+  "version": "5.2.0+ox",
+  "compiler_sha256": "a992ca047c5e353f4257621628ee577286c403832f9653997e1cf793a35cae0b",
+  "controls": [
+    {
+      "case": "mutable_global",
+      "negative": {
+        "source": "let shared = ref 0\nlet worker = Domain.Safe.spawn (fun () -> incr shared)\n",
+        "returncode": 2,
+        "diagnostic": "File \"<temporary>/mutable_global_negative.ml\", line 2, characters 13-30:\n2 | let worker = Domain.Safe.spawn (fun () -> incr shared)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"<temporary>/mutable_global_negative.ml\", line 2, characters 47-53:\n2 | let worker = Domain.Safe.spawn (fun () -> incr shared)\n                                                   ^^^^^^\nError: This value is \"contended\"\n         because it is used inside the function at file \"<temporary>/mutable_global_negative.ml\", line 2, characters 31-54\n         which is expected to be \"portable\".\n       However, the highlighted expression is expected to be \"uncontended\".\n"
+      },
+      "positive": {
+        "source": "let worker = Domain.Safe.spawn (fun () -> let shared = ref 0 in incr shared)\n",
+        "returncode": 0,
+        "diagnostic": "File \"<temporary>/mutable_global_positive.ml\", line 1, characters 13-30:\n1 | let worker = Domain.Safe.spawn (fun () -> let shared = ref 0 in incr shared)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n"
+      }
+    },
+    {
+      "case": "shared_cache",
+      "negative": {
+        "source": "let cache = Hashtbl.create 4\nlet worker = Domain.Safe.spawn (fun () -> Hashtbl.replace cache 1 2)\n",
+        "returncode": 2,
+        "diagnostic": "File \"<temporary>/shared_cache_negative.ml\", line 2, characters 13-30:\n2 | let worker = Domain.Safe.spawn (fun () -> Hashtbl.replace cache 1 2)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"<temporary>/shared_cache_negative.ml\", line 2, characters 58-63:\n2 | let worker = Domain.Safe.spawn (fun () -> Hashtbl.replace cache 1 2)\n                                                              ^^^^^\nError: The value \"cache\" is \"nonportable\"\n       but is expected to be \"portable\"\n         because it is used inside the function at file \"<temporary>/shared_cache_negative.ml\", line 2, characters 31-68\n         which is expected to be \"portable\".\n"
+      },
+      "positive": {
+        "source": "let worker = Domain.Safe.spawn (fun () -> let cache = Hashtbl.create 4 in Hashtbl.replace cache 1 2)\n",
+        "returncode": 0,
+        "diagnostic": "File \"<temporary>/shared_cache_positive.ml\", line 1, characters 13-30:\n1 | let worker = Domain.Safe.spawn (fun () -> let cache = Hashtbl.create 4 in Hashtbl.replace cache 1 2)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n"
+      }
+    },
+    {
+      "case": "mutable_snapshot",
+      "negative": {
+        "source": "type snapshot = { mutable spot : float }\nlet snapshot = {spot=100.}\nlet worker = Domain.Safe.spawn (fun () -> snapshot.spot)\n",
+        "returncode": 2,
+        "diagnostic": "File \"<temporary>/mutable_snapshot_negative.ml\", line 3, characters 13-30:\n3 | let worker = Domain.Safe.spawn (fun () -> snapshot.spot)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"<temporary>/mutable_snapshot_negative.ml\", line 3, characters 42-50:\n3 | let worker = Domain.Safe.spawn (fun () -> snapshot.spot)\n                                              ^^^^^^^^\nError: This value is \"contended\"\n         because it is used inside the function at file \"<temporary>/mutable_snapshot_negative.ml\", line 3, characters 31-56\n         which is expected to be \"portable\".\n       However, the highlighted expression is expected to be \"shared\" or \"uncontended\"\n         because its mutable field \"spot\" is being read.\n"
+      },
+      "positive": {
+        "source": "type snapshot = { spot : float }\nlet snapshot = {spot=100.}\nlet worker = Domain.Safe.spawn (fun () -> snapshot.spot)\n",
+        "returncode": 0,
+        "diagnostic": "File \"<temporary>/mutable_snapshot_positive.ml\", line 3, characters 13-30:\n3 | let worker = Domain.Safe.spawn (fun () -> snapshot.spot)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n"
+      }
+    },
+    {
+      "case": "aliased_scratch",
+      "negative": {
+        "source": "let scratch = ref 0\nlet alias = scratch\nlet worker = Domain.Safe.spawn (fun () -> incr alias)\nlet () = incr scratch\n",
+        "returncode": 2,
+        "diagnostic": "File \"<temporary>/aliased_scratch_negative.ml\", line 3, characters 13-30:\n3 | let worker = Domain.Safe.spawn (fun () -> incr alias)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"<temporary>/aliased_scratch_negative.ml\", line 3, characters 47-52:\n3 | let worker = Domain.Safe.spawn (fun () -> incr alias)\n                                                   ^^^^^\nError: This value is \"contended\"\n         because it is used inside the function at file \"<temporary>/aliased_scratch_negative.ml\", line 3, characters 31-53\n         which is expected to be \"portable\".\n       However, the highlighted expression is expected to be \"uncontended\".\n"
+      },
+      "positive": {
+        "source": "let worker = Domain.Safe.spawn (fun () -> let scratch = ref 0 in let alias = scratch in incr alias; incr scratch)\n",
+        "returncode": 0,
+        "diagnostic": "File \"<temporary>/aliased_scratch_positive.ml\", line 1, characters 13-30:\n1 | let worker = Domain.Safe.spawn (fun () -> let scratch = ref 0 in let alias = scratch in incr alias; incr scratch)\n                 ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n"
+      }
+    }
+  ]
+}

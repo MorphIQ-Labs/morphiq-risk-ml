@@ -1,0 +1,27 @@
+[ERROR] Package conflict!
+  * No agreement on the version of ocaml-variants:
+    - (invariant) → ocaml-variants = 5.4.0+ox
+    - parallel → ppx_jane >= v0.18~preview.130.106+341 → ppxlib < 0.36.0 → ocaml < 5.4.0 → ocaml-variants < 5.3.2~
+    You can temporarily relax the switch invariant with `--update-invariant'
+  * No agreement on the version of ocaml-variants:
+    - (invariant) → ocaml-variants = 5.4.0+ox
+    - parallel → base = v0.18~preview.130.83+317 → ppxlib_jane = v0.18~preview.130.83+317 → ppxlib_ast → ocaml < 5.3.0 → ocaml-variants < 5.2.3~
+  * Incompatible packages:
+    - (invariant) → ocaml-variants = 5.4.0+ox
+    - parallel → ppx_jane >= v0.18~preview.130.106+341 → ppxlib < 0.36.0 → ocaml < 5.4.0 → ocaml-base-compiler < 5.3.1~
+  * Incompatible packages:
+    - (invariant) → ocaml-variants = 5.4.0+ox
+    - parallel → base = v0.18~preview.130.83+317 → ppxlib_jane = v0.18~preview.130.83+317 → ppxlib_ast → ocaml < 5.3.0 → dkml-base-compiler
+  * Incompatible packages:
+    - (invariant) → ocaml-variants = 5.4.0+ox
+    - parallel → base = v0.18~preview.130.83+317 → ppxlib_jane = v0.18~preview.130.83+317 → ppxlib_ast → ocaml < 5.3.0 → ocaml-base-compiler < 5.2.2~
+  * Missing dependency:
+    - parallel → ppx_jane >= v0.18~preview.130.106+341 → ppxlib < 0.36.0 → ocaml-migrate-parsetree → ocaml < 4.12 → ocaml-base-compiler (<= 4.11.1 | = 4.11.2 | = 4.11.3) | ocaml-system (<= 3.07+1 | = 3.07+2 | >= 3.08.0) | ocaml-variants < 4.11.4~
+    unmet availability conditions, e.g. '!(os = "macos" & arch = "arm64")'
+    unmet availability conditions, e.g. 'sys-ocaml-version = "5.5.1" & (os != "win32" | sys-ocaml-libc = "msvc")'
+    unmet availability conditions, e.g. 'os = "linux" & arch = "x86_64"'
+  * Missing dependency:
+    - parallel → base = v0.18~preview.130.83+317 → ppxlib_jane = v0.18~preview.130.83+317 → ppxlib_ast → ocaml < 5.3.0 → ocaml-variants < 5.2.1~ → system-msvc
+    unmet availability conditions: 'os = "win32"'
+
+No solution found, exiting

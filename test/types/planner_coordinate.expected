@@ -1,0 +1,9 @@
+File "planner_coordinate.ml", line 6, characters 47-53:
+6 | let lognormal : Vol.lognormal Planner.output = normal
+                                                   ^^^^^^
+Error: The value "normal" has type
+         "Morphiq_risk.Vol.normal Morphiq_risk.Planner.output"
+       but an expression was expected of type
+         "Morphiq_risk.Vol.lognormal Morphiq_risk.Planner.output"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk.Vol.lognormal"

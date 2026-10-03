@@ -1,0 +1,828 @@
+{
+  "protocol": "planner-measure-v1",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "source": "740cadcea619854befaef055250568d46cb9f365",
+  "binaries": {
+    "_build/default/bench/planner_scale.exe": "cd14110d767572cf5d2b27eba4c78c07064fadd8d550b02c6524f421c3ceb527",
+    "_build/default/bench/batch_layout.exe": "b2648a7bf2f039dca17e44e2050dc3c80f70de0d222beaf2d31e98cf4309ea37"
+  },
+  "runs": [
+    {
+      "label": "layout-0",
+      "argv": [
+        "--count",
+        "32"
+      ],
+      "started": "2026-10-03T17:13:15.758585+00:00",
+      "host_load": [
+        34.8759765625,
+        28.181640625,
+        17.6669921875
+      ],
+      "process_elapsed_s": 0.24242266605142504,
+      "result": {
+        "count": 32,
+        "scalar_s": 0.0354278088,
+        "batch_s": 0.0353901386,
+        "packed_s": 0.0352168083,
+        "scalar_words": 59506217,
+        "batch_words": 59506236,
+        "packed_words": 59506150,
+        "identical": true
+      },
+      "peak_rss_bytes": 6291456
+    },
+    {
+      "label": "layout-1",
+      "argv": [
+        "--count",
+        "32"
+      ],
+      "started": "2026-10-03T17:13:16.001771+00:00",
+      "host_load": [
+        34.8759765625,
+        28.181640625,
+        17.6669921875
+      ],
+      "process_elapsed_s": 0.11075729201547801,
+      "result": {
+        "count": 32,
+        "scalar_s": 0.0347290039,
+        "batch_s": 0.0341098309,
+        "packed_s": 0.0341207981,
+        "scalar_words": 59506217,
+        "batch_words": 59506236,
+        "packed_words": 59506150,
+        "identical": true
+      },
+      "peak_rss_bytes": 6307840
+    },
+    {
+      "label": "layout-2",
+      "argv": [
+        "--count",
+        "32"
+      ],
+      "started": "2026-10-03T17:13:16.113108+00:00",
+      "host_load": [
+        34.8759765625,
+        28.181640625,
+        17.6669921875
+      ],
+      "process_elapsed_s": 0.11133220896590501,
+      "result": {
+        "count": 32,
+        "scalar_s": 0.0341279507,
+        "batch_s": 0.034029007,
+        "packed_s": 0.0343770981,
+        "scalar_words": 59506217,
+        "batch_words": 59506236,
+        "packed_words": 59506150,
+        "identical": true
+      },
+      "peak_rss_bytes": 6307840
+    },
+    {
+      "label": "layout-0",
+      "argv": [
+        "--count",
+        "256"
+      ],
+      "started": "2026-10-03T17:13:16.224973+00:00",
+      "host_load": [
+        34.8759765625,
+        28.181640625,
+        17.6669921875
+      ],
+      "process_elapsed_s": 0.8566417919937521,
+      "result": {
+        "count": 256,
+        "scalar_s": 0.284085989,
+        "batch_s": 0.281559944,
+        "packed_s": 0.28234601,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "peak_rss_bytes": 8011776
+    },
+    {
+      "label": "layout-1",
+      "argv": [
+        "--count",
+        "256"
+      ],
+      "started": "2026-10-03T17:13:17.082217+00:00",
+      "host_load": [
+        34.8759765625,
+        28.181640625,
+        17.6669921875
+      ],
+      "process_elapsed_s": 0.8489534580148757,
+      "result": {
+        "count": 256,
+        "scalar_s": 0.277364969,
+        "batch_s": 0.277325869,
+        "packed_s": 0.284987926,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "peak_rss_bytes": 8028160
+    },
+    {
+      "label": "layout-2",
+      "argv": [
+        "--count",
+        "256"
+      ],
+      "started": "2026-10-03T17:13:17.932386+00:00",
+      "host_load": [
+        32.4833984375,
+        27.79638671875,
+        17.59228515625
+      ],
+      "process_elapsed_s": 0.8570999170187861,
+      "result": {
+        "count": 256,
+        "scalar_s": 0.282029152,
+        "batch_s": 0.282137156,
+        "packed_s": 0.28205514,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "peak_rss_bytes": 8028160
+    },
+    {
+      "label": "layout-0",
+      "argv": [
+        "--count",
+        "1024"
+      ],
+      "started": "2026-10-03T17:13:18.790105+00:00",
+      "host_load": [
+        32.4833984375,
+        27.79638671875,
+        17.59228515625
+      ],
+      "process_elapsed_s": 3.40765750000719,
+      "result": {
+        "count": 1024,
+        "scalar_s": 1.14027786,
+        "batch_s": 1.13365412,
+        "packed_s": 1.12527585,
+        "scalar_words": 1917285605,
+        "batch_words": 1917165152,
+        "packed_words": 1917289996,
+        "identical": true
+      },
+      "peak_rss_bytes": 10059776
+    },
+    {
+      "label": "layout-1",
+      "argv": [
+        "--count",
+        "1024"
+      ],
+      "started": "2026-10-03T17:13:22.198420+00:00",
+      "host_load": [
+        32.4833984375,
+        27.79638671875,
+        17.59228515625
+      ],
+      "process_elapsed_s": 3.398388750036247,
+      "result": {
+        "count": 1024,
+        "scalar_s": 1.12718892,
+        "batch_s": 1.13208413,
+        "packed_s": 1.12990689,
+        "scalar_words": 1917285605,
+        "batch_words": 1917165152,
+        "packed_words": 1917289996,
+        "identical": true
+      },
+      "peak_rss_bytes": 10059776
+    },
+    {
+      "label": "layout-2",
+      "argv": [
+        "--count",
+        "1024"
+      ],
+      "started": "2026-10-03T17:13:25.597430+00:00",
+      "host_load": [
+        30.2822265625,
+        27.41748046875,
+        17.51806640625
+      ],
+      "process_elapsed_s": 3.3973884159931913,
+      "result": {
+        "count": 1024,
+        "scalar_s": 1.13542819,
+        "batch_s": 1.12253404,
+        "packed_s": 1.13037801,
+        "scalar_words": 1917285605,
+        "batch_words": 1917165152,
+        "packed_words": 1917289996,
+        "identical": true
+      },
+      "peak_rss_bytes": 10059776
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "1",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:28.995457+00:00",
+      "host_load": [
+        28.25732421875,
+        27.044921875,
+        17.4443359375
+      ],
+      "process_elapsed_s": 3.7857699999585748,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 1,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 0.000105857849,
+        "planning_s": 0.00160813332,
+        "execution_s": 3.71283889,
+        "sink_s": 1.97887421e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 128,
+        "allocated_words": 6302557110,
+        "minor_collections": 24072,
+        "major_collections": 59,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 7897088
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "1",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:32.781897+00:00",
+      "host_load": [
+        26.39453125,
+        26.6787109375,
+        17.37109375
+      ],
+      "process_elapsed_s": 3.7208919579861686,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 1,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.1791153e-05,
+        "planning_s": 0.00153899193,
+        "execution_s": 3.70894814,
+        "sink_s": 2.40802765e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 128,
+        "allocated_words": 6302557110,
+        "minor_collections": 24072,
+        "major_collections": 59,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 7897088
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "1",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:36.503449+00:00",
+      "host_load": [
+        26.39453125,
+        26.6787109375,
+        17.37109375
+      ],
+      "process_elapsed_s": 3.7362294590566307,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 1,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.39369202e-05,
+        "planning_s": 0.0015900135,
+        "execution_s": 3.72661304,
+        "sink_s": 2.59876251e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 128,
+        "allocated_words": 6302557110,
+        "minor_collections": 24072,
+        "major_collections": 59,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 7897088
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "2",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:40.240417+00:00",
+      "host_load": [
+        24.76123046875,
+        26.3349609375,
+        17.30419921875
+      ],
+      "process_elapsed_s": 1.9634712500264868,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 2,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.70363617e-05,
+        "planning_s": 0.00158596039,
+        "execution_s": 1.95348001,
+        "sink_s": 1.21593475e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 256,
+        "allocated_words": 6302782424,
+        "minor_collections": 12582,
+        "major_collections": 50,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 11042816
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "2",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:42.204627+00:00",
+      "host_load": [
+        24.76123046875,
+        26.3349609375,
+        17.30419921875
+      ],
+      "process_elapsed_s": 1.9694568749982864,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 2,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.10758972e-05,
+        "planning_s": 0.00154089928,
+        "execution_s": 1.95661116,
+        "sink_s": 1.97887421e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 256,
+        "allocated_words": 6302764572,
+        "minor_collections": 12586,
+        "major_collections": 44,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 11878400
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "2",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:44.174807+00:00",
+      "host_load": [
+        23.2587890625,
+        25.9970703125,
+        17.23779296875
+      ],
+      "process_elapsed_s": 1.9671670409152284,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 2,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.39369202e-05,
+        "planning_s": 0.00157999992,
+        "execution_s": 1.95725107,
+        "sink_s": 1.28746033e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 256,
+        "allocated_words": 6302563393,
+        "minor_collections": 12582,
+        "major_collections": 45,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 11337728
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:46.142740+00:00",
+      "host_load": [
+        23.2587890625,
+        25.9970703125,
+        17.23779296875
+      ],
+      "process_elapsed_s": 1.1741772919194773,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.10758972e-05,
+        "planning_s": 0.00153303146,
+        "execution_s": 1.16447783,
+        "sink_s": 1.38282776e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 512,
+        "allocated_words": 6302660892,
+        "minor_collections": 6637,
+        "major_collections": 36,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 16842752
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:47.317623+00:00",
+      "host_load": [
+        23.2587890625,
+        25.9970703125,
+        17.23779296875
+      ],
+      "process_elapsed_s": 1.6669718750054017,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 0.000100135803,
+        "planning_s": 0.00163793564,
+        "execution_s": 1.65664697,
+        "sink_s": 1.90734863e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 512,
+        "allocated_words": 6302660896,
+        "minor_collections": 6764,
+        "major_collections": 36,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 16711680
+    },
+    {
+      "label": "live-small",
+      "argv": [
+        "--instruments",
+        "1000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "128"
+      ],
+      "started": "2026-10-03T17:13:48.985341+00:00",
+      "host_load": [
+        22.03662109375,
+        25.6982421875,
+        17.18359375
+      ],
+      "process_elapsed_s": 1.2118825840298086,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 9.70363617e-05,
+        "planning_s": 0.00160503387,
+        "execution_s": 1.20168591,
+        "sink_s": 1.28746033e-05,
+        "committed_rows": 3000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 512,
+        "allocated_words": 6302660892,
+        "minor_collections": 6627,
+        "major_collections": 36,
+        "digest": "e262c632cf101508b6b691e5d319f219638aed5092338337be13bea91dddfb5a",
+        "complete": true
+      },
+      "peak_rss_bytes": 16891904
+    },
+    {
+      "label": "live-medium",
+      "argv": [
+        "--instruments",
+        "10000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "128",
+        "--mode",
+        "aggregate"
+      ],
+      "started": "2026-10-03T17:13:50.197921+00:00",
+      "host_load": [
+        22.03662109375,
+        25.6982421875,
+        17.18359375
+      ],
+      "process_elapsed_s": 12.378634999971837,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 10000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 0.00123906136,
+        "planning_s": 0.0166978836,
+        "execution_s": 12.35202,
+        "sink_s": 2.50339508e-05,
+        "committed_rows": 30000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 512,
+        "allocated_words": 63031327728,
+        "minor_collections": 66562,
+        "major_collections": 102,
+        "digest": "e494f252b7504b639d4a9e2fb4fd3b071b2ec0ba27f55b28dfad24dc62af0f45",
+        "complete": true
+      },
+      "peak_rss_bytes": 29474816
+    },
+    {
+      "label": "live-medium",
+      "argv": [
+        "--instruments",
+        "10000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "128",
+        "--mode",
+        "stream"
+      ],
+      "started": "2026-10-03T17:14:02.577506+00:00",
+      "host_load": [
+        18.92578125,
+        24.83056640625,
+        17.0224609375
+      ],
+      "process_elapsed_s": 12.60183804098051,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 10000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 128,
+        "expiry": false,
+        "mode": "stream",
+        "packing_s": 0.00117301941,
+        "planning_s": 0.0169069767,
+        "execution_s": 12.5750089,
+        "sink_s": 0.00072145462,
+        "committed_rows": 30000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 512,
+        "allocated_words": 63031445615,
+        "minor_collections": 66287,
+        "major_collections": 99,
+        "digest": "e494f252b7504b639d4a9e2fb4fd3b071b2ec0ba27f55b28dfad24dc62af0f45",
+        "complete": true
+      },
+      "peak_rss_bytes": 28688384
+    },
+    {
+      "label": "live-million",
+      "argv": [
+        "--instruments",
+        "1000000",
+        "--scenarios",
+        "1",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "1024"
+      ],
+      "started": "2026-10-03T17:14:15.180095+00:00",
+      "host_load": [
+        16.78466796875,
+        24.1767578125,
+        16.88134765625
+      ],
+      "process_elapsed_s": 414.7027844999684,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000000,
+        "scenarios": 1,
+        "workers": 4,
+        "tile_rows": 1024,
+        "expiry": false,
+        "mode": "aggregate",
+        "packing_s": 0.18589592,
+        "planning_s": 1.74221396,
+        "execution_s": 412.738378,
+        "sink_s": 3.0040741e-05,
+        "committed_rows": 1000000,
+        "failures": 0,
+        "summary_count": 1,
+        "incomplete_summaries": 0,
+        "buffered_results": 4096,
+        "allocated_words": 2224156452629,
+        "minor_collections": 2302435,
+        "major_collections": 64,
+        "digest": "0727769c2a764cee97a3dfd34ae8d0e353115052af89dd41860c47bd68de80ab",
+        "complete": true
+      },
+      "peak_rss_bytes": 1136869376
+    },
+    {
+      "label": "expiry-million-grid",
+      "argv": [
+        "--instruments",
+        "1000000",
+        "--scenarios",
+        "3",
+        "--workers",
+        "4",
+        "--tile-rows",
+        "1024",
+        "--expiry"
+      ],
+      "started": "2026-10-03T17:21:09.886750+00:00",
+      "host_load": [
+        6.33203125,
+        11.92431640625,
+        13.734375
+      ],
+      "process_elapsed_s": 3.173340416047722,
+      "result": {
+        "version": "planner-scale-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1000000,
+        "scenarios": 3,
+        "workers": 4,
+        "tile_rows": 1024,
+        "expiry": true,
+        "mode": "aggregate",
+        "packing_s": 0.193500042,
+        "planning_s": 1.80785799,
+        "execution_s": 1.14752293,
+        "sink_s": 1.78813934e-05,
+        "committed_rows": 3000000,
+        "failures": 0,
+        "summary_count": 3,
+        "incomplete_summaries": 0,
+        "buffered_results": 4096,
+        "allocated_words": 1182687182,
+        "minor_collections": 6273,
+        "major_collections": 0,
+        "digest": "b10d31afb198870a12282514b545a50946fef8df2e5a4f602db1c8235c3580f3",
+        "complete": true
+      },
+      "peak_rss_bytes": 1021575168
+    }
+  ],
+  "complete": true
+}

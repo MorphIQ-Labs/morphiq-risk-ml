@@ -1,4 +1,4 @@
-let version = "0.2.0"
+let version = "0.3.0"
 
 module Side = Side
 module Refusal = Refusal
@@ -9,6 +9,9 @@ module Greeks = Greeks
 module Black = Black
 module Bachelier = Bachelier
 module Normal = Normal
+module Batch = Batch
+module Scenario = Scenario
+module Planner = Planner
 module Production = Production
 
 module Internal = struct
