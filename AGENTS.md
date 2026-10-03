@@ -136,6 +136,11 @@ its log. It has no PR/push trigger. Preserve this separation; adding assurance
 must not silently restore the full mutation workload to default CI. Scheduling
 requires the workflow to be present on the default branch.
 
+`candidate.yml` is a separate manual lane for one immutable commit already on
+main: three-platform source-artifact installation/native/bytecode validation,
+ordinary checks and a full mutation job. It neither publishes nor tags a release.
+Its full catalog does not change the seven-mutant default CI policy.
+
 Follow [docs/mutation-policy.md](docs/mutation-policy.md). Changes outside the
 core require the affected named mutants locally; broader campaigns remain
 explicit/manual or scheduled. A kill requires a clean baseline, a successful

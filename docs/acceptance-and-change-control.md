@@ -4,9 +4,9 @@ The current work establishes engineering evidence toward Epic #27. It does not
 approve deployment or freeze a release. The authoritative machine-readable
 [acceptance record](acceptance/pending.json) is deliberately pending. No release
 tag, package version change or deployment is authorized by a passing test alone.
-The current development package still declares 0.1.0; the public outcome/type
-changes require the version assessment in [stability](stability.md) before a
-release is selected.
+The candidate package declares 0.2.0: the public outcome/type changes require
+a minor increment under the pre-1.0 policy in [stability](stability.md).
+This selects candidate metadata, without tagging or publishing a release.
 
 The owner has since [reviewed and approved the delivered baseline](acceptance/owner-review-2026-10-03.md)
 and authorized canonical generated datasets. The resulting
@@ -77,6 +77,18 @@ formatting and the seven core mutations. Retain full curated mutations in the
 manual/release lane and all independent/reference reports with source hashes.
 Preserve surviving diagnostic probes separately; do not count a probe as a
 curated kill. Full mutations stay outside default PR CI.
+
+The manual [candidate workflow](../.github/workflows/candidate.yml) takes one
+full commit SHA already merged into main, repeats build/format/ordinary checks
+on all three platforms and verifies that platform's source artifact and
+isolated native/bytecode consumers. A separate manual job runs the full catalog.
+Reports, logs and source archives are retained as Actions artifacts for 90 days;
+download them into the controlled acceptance archive before that expiry.
+There is no publishing or tagging action. Dispatch with:
+
+```sh
+gh workflow run candidate.yml --ref main -f commit=FULL_CANDIDATE_SHA
+```
 
 ## Change-impact matrix
 

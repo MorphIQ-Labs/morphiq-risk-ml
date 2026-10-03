@@ -4,6 +4,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### 0.2.0 candidate and migration
+
+- Candidate metadata advances to 0.2.0 because the public IV/Greek outcome additions, typed financial boundaries and corrected zero-volatility refusal classes below are breaking changes under the `0.y.z` stability policy. Callers must handle the expanded exhaustive error variants and use the declared volatility/time units. The `Production` API requires explicit accuracy limits and handling of every refusal; admission alone never guarantees an output.
+- This version selection changes no numerical algorithm or result word. The replay digest remains `f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b`. Numerical compatibility and reference provenance for the earlier changes remain recorded below and in the linked reports.
+- A manual candidate workflow accepts only a full commit already on main, validates all three supported platforms, installs its source artifact into an isolated prefix, tests native/bytecode consumers and retains the full mutation catalog separately from default CI. Artifact identity and installed/package versions are checked; passing this workflow does not publish a release or manufacture an acceptance decision.
+- The owner-authorized 720-row canonical portfolio passes 7,920 independent price/Greek certificate checks and 720 IV rounding-cell checks across nine identical repetitions. All material comparator findings, including the initial failed gate and subsequent rho adjudication, are retained in [the report](docs/results-canonical-dataset.md).
+
 ### Intrinsic midpoint reference rounding
 
 - Fixed a price-oracle mechanism where two mpmath precisions could agree on the wrong binary64 reference after losing a positive time value at an exact intrinsic midpoint. European/displaced price generation and IV quote construction now use an exact rational, one-sided tail certificate where it resolves rounding. Unresolved rows fail regeneration rather than being dropped.
