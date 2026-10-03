@@ -86,8 +86,8 @@ let price a side sigma =
         time;
         _;
       } ->
-      (* D θ Δ to ~106 bits: the zero-variance price is its correctly rounded
-         value, the boundary the inverse classifies quotes against. *)
+      (* D θ Δ to ~106 bits. The public inverse separately encloses the
+         exact original-input boundary; this fast price is an approximation. *)
       let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
       let in_the_money = delta.hi > 0.0 in
       let intrinsic () =
@@ -261,13 +261,15 @@ let greeks a side sigma =
           {
             Greeks.delta = Greeks.kink;
             gamma = Greeks.kink;
-            theta = Greeks.kink;
+            theta = Greeks.daily 0.0;
             vega = Ok (Units.per_volatility (discount *. rt *. inv_sqrt_2pi));
-            rho = Greeks.kink;
+            rho = Ok 0.0;
             vanna = Greeks.kink;
             volga = Ok (Units.per_volatility_squared 0.0);
             charm = Greeks.kink;
-            veta = Greeks.kink;
+            veta =
+              Result.map Units.volatility_time_rate
+                (Boundary_greeks.veta ~weight:1.0 ~weight_low:0.0 ~rate ~time);
             color = Greeks.kink;
           }
         else

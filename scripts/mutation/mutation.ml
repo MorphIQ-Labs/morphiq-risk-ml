@@ -38,6 +38,31 @@ type mutant = {
 let catalog =
   [
     {
+      id = "zero-variance-black-time";
+      file = "lib/black.ml";
+      snippet =
+        "theta = (if smooth_time then Greeks.daily 0.0 else Greeks.kink);";
+      replacement = "theta = Greeks.kink;";
+      killer = "boundary_greeks";
+      mechanism = "a spot payoff kink does not erase a smooth time derivative";
+    };
+    {
+      id = "zero-variance-normal-rho";
+      file = "lib/bachelier.ml";
+      snippet = "rho = Ok 0.0;";
+      replacement = "rho = Greeks.kink;";
+      killer = "boundary_greeks";
+      mechanism = "ATM zero-variance forward rho exists and is zero";
+    };
+    {
+      id = "zero-variance-veta";
+      file = "lib/boundary_greeks.ml";
+      snippet = "rounded (E.div_float annual Units.days_per_year)";
+      replacement = "let _ = annual in Ok 0.0";
+      killer = "boundary_greeks";
+      mechanism = "the maturity derivative of right vega is generally nonzero";
+    };
+    {
       id = "enclosure-product-guard";
       file = "lib/enclosure.ml";
       snippet = "abs a >= 0x1p-485 && abs b >= 0x1p-485";
@@ -575,6 +600,7 @@ let guard_arguments = function
   | "oracle_normal" -> [ [ "normal" ] ]
   | "oracle_elementary" -> [ [ "elementary" ] ]
   | "oracle_greeks" -> [ [ "greeks" ] ]
+  | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->

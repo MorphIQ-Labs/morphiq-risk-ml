@@ -1,4 +1,4 @@
-type why = Payoff_kink
+type why = Payoff_kink | Numerical_failure
 type 'a value = ('a, why) result
 
 type 'coordinate t = {

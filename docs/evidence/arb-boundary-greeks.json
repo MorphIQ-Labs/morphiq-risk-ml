@@ -1,0 +1,22 @@
+{
+  "method": "Arb interval evaluation of derived veta and exact rounding-cell comparison",
+  "python_flint": "0.9.0",
+  "flint": "3.6.0",
+  "source_sha256": {
+    "oracle/fixtures/boundary_greeks.txt.gz": "d664981ca2e22e804a95470e7e7984a8be4424a91621a86468bf5f24dd0964ed",
+    "/Users/stephen/Development/MorphIQ-Labs/morphiq-risk-ml/scripts/arb_boundary_audit.py": "fc298edf0ce19b54e09f74ab7bfc90016ce5eec36de5ea431edd6c2e1c9677b3",
+    "oracle/gen_boundary_greeks.py": "d6efe723957f9b66d791bd1a2d48f607012554821a4c88d90fca60f800e95257"
+  },
+  "rows": {
+    "bsm": 132,
+    "black76": 132,
+    "displaced": 134,
+    "bachelier": 134
+  },
+  "precision_counts": {
+    "256": 532
+  },
+  "unresolved": [],
+  "adjacent_wrong_reference_rejected": true,
+  "scope": "Independent interval arithmetic; derivative identity additionally checked by nested price differentiation. Not human review."
+}

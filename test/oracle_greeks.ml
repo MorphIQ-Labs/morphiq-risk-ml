@@ -201,6 +201,8 @@ let () =
              | "kink" -> (
                  match got with
                  | Error Greeks.Payoff_kink -> note "kink -> refused"
+                 | Error Greeks.Numerical_failure ->
+                     fail "numerical failure is not a kink classification"
                  | Ok v ->
                      note "kink -> value";
                      fail (Printf.sprintf "got %h, expected a kink refusal" v))

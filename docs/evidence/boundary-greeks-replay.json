@@ -1,0 +1,92 @@
+{
+  "baseline_commit": "0681217",
+  "baseline_digest": "029a559e0d6360c69c4039b32d1f9123f0c0ae8e2c5811bc2dd4e57fd17b0651",
+  "candidate_digest": "f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b",
+  "records": 30240,
+  "changes": {
+    "theta": 350,
+    "rho": 270,
+    "veta": 350
+  },
+  "examples": [
+    {
+      "record": 1712,
+      "quantity": "theta",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1712,
+      "quantity": "rho",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1712,
+      "quantity": "veta",
+      "before": "refused",
+      "after": "bfe17ce5ca1c0458"
+    },
+    {
+      "record": 1727,
+      "quantity": "theta",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1727,
+      "quantity": "rho",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1727,
+      "quantity": "veta",
+      "before": "refused",
+      "after": "bfe17ce5ca1c0458"
+    },
+    {
+      "record": 1742,
+      "quantity": "theta",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1742,
+      "quantity": "rho",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1742,
+      "quantity": "veta",
+      "before": "refused",
+      "after": "bfe17ce5a6e6d4fd"
+    },
+    {
+      "record": 1757,
+      "quantity": "theta",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1757,
+      "quantity": "rho",
+      "before": "refused",
+      "after": "0000000000000000"
+    },
+    {
+      "record": 1757,
+      "quantity": "veta",
+      "before": "refused",
+      "after": "bfe17ce5a6e6d4fd"
+    }
+  ],
+  "source_sha256": {
+    "lib/black.ml": "cdc7ae9dc2d0e558e068c1e4ae5dce5f732e8db06e3f4f56055886b345c28a80",
+    "lib/bachelier.ml": "8a0ad32715739dcd11f624d1a569de75ab6b4ea25a0611556b3340a15b1f32c9",
+    "lib/boundary_greeks.ml": "c997d42772b7b56005da3b4482143a4beba5cd92b027adc1ec207e885206184a",
+    "lib/greeks.ml": "597681e7b69cc9667f83bf73e3dc97d6293467e14cd73c8857810ec54a818945"
+  },
+  "scope": "Replay compatibility; independent boundary derivative references separately establish accuracy. All changed fields were previously refused; prices, IVs and every previously served Greek value are unchanged."
+}

@@ -17,6 +17,7 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 | `regressions` | `gen_regressions.py` | five exact near-maximum ATM roots, 2,000 near-unit log-coordinate references and two rescued-tail regressions |
 | `greek_bits` | `gen_greek_bits.py` | 2,506 three-word/exponent Greek references, including 51 contracts at or adjacent to zeros of cancelling Greeks |
 | `model_enclosures` | `gen_model_enclosures.py` | 1,670 three-word/exponent original-input model prices, including sparse shifts, tiny carry/variance and tails; 110/220 or 400/800 digits |
+| `boundary_greeks` | `gen_boundary_greeks.py` | 532 positive-maturity zero-volatility ATM veta references from nested price differentiation at 400/800 digits, cross-checked with the analytical derivative |
 | `greeks` | `gen_greeks.py` | the ten Greeks for all four models, including the defined limits at expiry |
 
 ## Generation rules
