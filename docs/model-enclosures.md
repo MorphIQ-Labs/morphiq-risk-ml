@@ -6,6 +6,11 @@ It consumes the residual-based arithmetic in [runtime enclosures](runtime-enclos
 not the approximate production kernel or an empirical ULP allowance. An unresolved
 operation is a computational failure; a finite radius is not itself acceptance.
 
+The series depths below describe the full configuration. The
+[adaptive first attempt](adaptive-certification.md) uses the same formulas and
+explicit tails at smaller depths, including 64/65 Mills convergents. Its
+inconclusive decisions are retried with the full configuration.
+
 ## Normal distribution
 
 We derive the normalization constant rather than trusting a decimal literal.

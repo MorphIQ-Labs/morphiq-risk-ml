@@ -22,4 +22,5 @@ module Internal = struct
   module Enclosure = Enclosure
   module Model_enclosure = Model_enclosure
   module Certified_iv = Certified_iv
+  module Adaptive_iv = Adaptive_iv
 end

@@ -62,10 +62,18 @@ correctly rounded IV rows. Their former end-to-end witnesses no longer establish
 the necessity of those terms. None of these observations proves universal
 redundancy or permits removing the corresponding numerical mechanism.
 
-Those five now live alongside `intrinsic-terms` under `--probe`. The curated
-catalog has 37 mechanisms, including the new runtime acceptance, discarded-word
+Those five now live alongside `intrinsic-terms` under `--probe`. At that stage the
+catalog had 37 mechanisms, including the new runtime acceptance, discarded-word
 and original-shift witnesses. The default core still has seven: the compiled
 acceptance-bypass fault replaces the surviving proposal `iv-beta-bar` fault.
 `iv-complement-correction` still fails the independent near-maximum regression
 and remains curated. No bound or successful-root requirement was loosened to
 make this reconciliation pass.
+
+## Adaptive certification controls
+
+The current curated catalog has 40 mechanisms. Three additional optional
+controls cover the first attempt's exponential remainder, the exact product
+quantum shortcut and the fallback needed to preserve full-evaluator availability.
+The default core remains the same seven. Both arithmetic configurations run
+the independent ordinary primitive and model reference checks.

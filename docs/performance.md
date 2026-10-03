@@ -35,6 +35,40 @@ per call (8-byte words on this host), not resident memory.
 | bachelier | otm | 7.30–7.78 | 8.85–8.88 | 117.0 |
 | bachelier | itm | 7.33–7.34 | 4.47–4.48 | 58.6 |
 
+## Adaptive certificate comparison
+
+The [adaptive enclosure](adaptive-certification.md) comparison uses identical
+exact-model IV acceptance on both sides: A is `bd1562d`, the full-only
+certificate; B first tries two words and refines unresolved decisions to four.
+The [raw A/B/B/A report](evidence/adaptive-iv-bench.json) retains source hashes,
+all outcomes and the same measurement fields as the earlier baseline.
+All 768 cases succeed in all four runs, and the ordinary suite separately
+confirms unchanged rounding and replay. No computational test/profile ran
+alongside this measurement; this remains a shared workstation, not an isolated
+production host. One-minute load averages were about 2.3–2.6.
+
+| Model | Regime | Full-only ms/call | Adaptive ms/call | Adaptive allocated MB/call |
+| --- | --- | ---: | ---: | ---: |
+| bsm | atm | 6.66–6.66 | 0.653–0.654 | 9.64 |
+| bsm | otm | 16.28–16.39 | 1.020–1.021 | 15.36 |
+| bsm | itm | 5.73–5.75 | 0.507–0.509 | 7.52 |
+| black76 | atm | 5.98–5.98 | 0.581–0.586 | 8.62 |
+| black76 | otm | 16.12–16.36 | 1.009–1.012 | 15.20 |
+| black76 | itm | 5.99–5.99 | 0.534–0.536 | 7.89 |
+| displaced | atm | 6.26–6.33 | 0.608–0.608 | 9.02 |
+| displaced | otm | 16.38–16.44 | 1.024–1.029 | 15.41 |
+| displaced | itm | 5.92–6.00 | 0.522–0.524 | 7.75 |
+| bachelier | atm | 5.30–5.32 | 0.500–0.502 | 7.34 |
+| bachelier | otm | 8.87–8.87 | 0.578–0.582 | 8.67 |
+| bachelier | itm | 4.41–4.43 | 0.386–0.387 | 5.66 |
+
+The ranges are pairs of warm-run medians. Allocation is cumulative, not RSS.
+The improvement follows less expansion/series work and fewer temporary boxes;
+it does not weaken the required certificate. Sub-millisecond scalar calls still
+need workload-level assessment before any high-throughput production claim.
+Reproduce with the command below, the full-only baseline binary, and
+`--baseline-revision bd1562d --same-contract`.
+
 ## Reproduction and measurement contract
 
 ```sh
