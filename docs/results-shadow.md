@@ -81,3 +81,10 @@ limit is relaxed to make the workload faster.
 The diagnostic engineering criteria pass. Deployment acceptance remains pending
 actual business workload coverage, economic thresholds, operational requirements,
 independent human review and designated owner approval under #13/#15/#16/#17.
+
+## Subsequent generated qualification
+
+The owner-authorized [720-row canonical dataset campaign](results-canonical-dataset.md)
+extends this diagnostic with a frozen broader grid, raw QuantLib-generated
+quotes and independent original-input certification. This earlier report and
+its boundary/stress evidence remain intact.

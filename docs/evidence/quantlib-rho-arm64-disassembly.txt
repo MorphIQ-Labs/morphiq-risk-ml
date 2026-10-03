@@ -1,0 +1,49 @@
+
+/tmp/risk-independent-oracles/lib/python3.14/site-packages/QuantLib/_QuantLib.abi3.so:	file format mach-o arm64
+
+Disassembly of section __TEXT,__text:
+
+0000000001319c80 <__ZNK8QuantLib15BlackCalculator5valueEv>:
+ 1319c80: fd401000     	ldr	d0, [x0, #0x20]
+ 1319c84: fd400801     	ldr	d1, [x0, #0x10]
+ 1319c88: fd404002     	ldr	d2, [x0, #0x80]
+ 1319c8c: 6d441003     	ldp	d3, d4, [x0, #0x40]
+ 1319c90: 1e640842     	fmul	d2, d2, d4
+ 1319c94: 1f430821     	fmadd	d1, d1, d3, d2
+ 1319c98: 1e610800     	fmul	d0, d0, d1
+ 1319c9c: d65f03c0     	ret
+
+000000000131a8c8 <__ZNK8QuantLib15BlackCalculator3rhoEd>:
+ 131a8c8: d10603ff     	sub	sp, sp, #0x180
+ 131a8cc: a91557f6     	stp	x22, x21, [sp, #0x150]
+ 131a8d0: a9164ff4     	stp	x20, x19, [sp, #0x160]
+ 131a8d4: a9177bfd     	stp	x29, x30, [sp, #0x170]
+ 131a8d8: 9105c3fd     	add	x29, sp, #0x170
+ 131a8dc: 1e602008     	fcmp	d0, #0.0
+ 131a8e0: 54000acb     	b.lt	0x131aa38 <__ZNK8QuantLib15BlackCalculator3rhoEd+0x170>
+ 131a8e4: fd400c01     	ldr	d1, [x0, #0x18]
+ 131a8e8: d2e79608     	mov	x8, #0x3cb0000000000000 ; =4372995238176751616
+ 131a8ec: 9e670102     	fmov	d2, x8
+ 131a8f0: 1e622020     	fcmp	d1, d2
+ 131a8f4: 540002c9     	b.ls	0x131a94c <__ZNK8QuantLib15BlackCalculator3rhoEd+0x84>
+ 131a8f8: 6d450c02     	ldp	d2, d3, [x0, #0x50]
+ 131a8fc: 1e611842     	fdiv	d2, d2, d1
+ 131a900: 1e611861     	fdiv	d1, d3, d1
+ 131a904: fd400803     	ldr	d3, [x0, #0x10]
+ 131a908: 6d441404     	ldp	d4, d5, [x0, #0x40]
+ 131a90c: 1e640866     	fmul	d6, d3, d4
+ 131a910: 1f431842     	fmadd	d2, d2, d3, d6
+ 131a914: fd404006     	ldr	d6, [x0, #0x80]
+ 131a918: 1f460821     	fmadd	d1, d1, d6, d2
+ 131a91c: fd401002     	ldr	d2, [x0, #0x20]
+ 131a920: 1e6508c5     	fmul	d5, d6, d5
+ 131a924: 1f441463     	fmadd	d3, d3, d4, d5
+ 131a928: 1e614044     	fneg	d4, d2
+ 131a92c: 1e640863     	fmul	d3, d3, d4
+ 131a930: 1f410c41     	fmadd	d1, d2, d1, d3
+ 131a934: 1e600820     	fmul	d0, d1, d0
+ 131a938: a9577bfd     	ldp	x29, x30, [sp, #0x170]
+ 131a93c: a9564ff4     	ldp	x20, x19, [sp, #0x160]
+ 131a940: a95557f6     	ldp	x22, x21, [sp, #0x150]
+ 131a944: 910603ff     	add	sp, sp, #0x180
+ 131a948: d65f03c0     	ret
