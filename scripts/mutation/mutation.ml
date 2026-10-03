@@ -38,6 +38,35 @@ type mutant = {
 let catalog =
   [
     {
+      id = "enclosure-product-guard";
+      file = "lib/enclosure.ml";
+      snippet = "abs a >= 0x1p-485 && abs b >= 0x1p-485";
+      replacement = "abs a >= 0x1p-600 && abs b >= 0x1p-600";
+      killer = "enclosure_reference";
+      mechanism =
+        "the product shortcut must imply a representable residual quantum";
+    };
+    {
+      id = "iv-certification-refinement";
+      file = "lib/adaptive_iv.ml";
+      snippet = "Full.run inputs side ~quote ~proposal";
+      replacement = "Certified_iv.Numerical_failure";
+      killer = "oracle_iv";
+      mechanism =
+        "an inconclusive first certificate must retain full-evaluator \
+         availability";
+    };
+    {
+      id = "enclosure-series-tail";
+      file = "lib/enclosure.ml";
+      snippet = "let result = ref (add_error !sum tail) in";
+      replacement = "let result = ref (let _ = tail in !sum) in";
+      killer = "enclosure_reference";
+      mechanism =
+        "the cheaper exponential cannot discard its analytical truncation \
+         remainder";
+    };
+    {
       id = "certified-rounding-cell";
       file = "lib/certified_iv.ml";
       snippet = "if rounding_cell proposal then Root proposal";

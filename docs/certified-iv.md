@@ -66,8 +66,11 @@ coverage/failure-rate requirements, performance evidence and independent review.
 
 ## Working precision and residual scale
 
-The runtime uses [four-word expansions with explicit error radii](runtime-enclosures.md).
-Four words are a working-precision choice, never an assumed error bound. Each
+The runtime first tries two-word expansions, then
+[four-word expansions with explicit error radii](runtime-enclosures.md) if the
+first certificate cannot decide. [Both attempts](adaptive-certification.md) use
+the same acceptance criterion. Word count is a working-precision choice, never
+an assumed error bound. Each
 decision depends on propagated arithmetic and analytical remainder bounds.
 In particular, the normal tails use bracketing continued-fraction convergents;
 no measured normal-function ULP ceiling is part of this certificate.

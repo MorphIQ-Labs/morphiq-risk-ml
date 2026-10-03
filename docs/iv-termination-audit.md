@@ -12,7 +12,7 @@ portfolio validation and version acceptance remain Epic #27 obligations.
 | --- | --- |
 | Invalid original input or quote | Typed `Refusal` before inversion. |
 | Expiry | `Not_identifiable_at_expiry`. |
-| Intrinsic/maximum | Original-input four-word enclosures, including unscaled displaced low words. Unresolved signs fail. |
+| Intrinsic/maximum | Original-input expansion enclosures, including unscaled displaced low words. An inconclusive cheaper attempt retries the full enclosure; unresolved signs fail. |
 | Rounded intrinsic | Zero only after exact equality or a proved intrinsic rounding-cell decision, including tie parity. |
 | Initialization and Newton | Bounded fast computations supply untrusted proposals; a failed proposal falls back to 1.0 for certified bracketing. |
 | Price/residual evaluation | Independently enclosed real model. Quote scaling retains subnormal-quote information; nonfinite arithmetic or unresolved signs fail. |

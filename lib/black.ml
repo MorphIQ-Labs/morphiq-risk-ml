@@ -574,23 +574,23 @@ let implied_coordinates coordinates side price =
         Ok
           (try
              let model =
-               Model_enclosure.black ~spot:c.original_spot
-                 ~spot_low:c.original_spot_low ~strike:c.original_strike
-                 ~strike_low:c.original_strike_low ~time:c.time ~rate:c.rate
-                 ~yield:c.yield
+               Adaptive_iv.Black
+                 {
+                   spot = c.original_spot;
+                   spot_low = c.original_spot_low;
+                   strike = c.original_strike;
+                   strike_low = c.original_strike_low;
+                   time = c.time;
+                   rate = c.rate;
+                   yield = c.yield;
+                 }
              in
-             let intrinsic, maximum = Model_enclosure.bounds model side in
              let proposal =
                match live_implied side c price with
                | Iv.Root v when Vol.to_float v > 0.0 -> Vol.to_float v
                | _ -> 1.0
              in
-             match
-               Certified_iv.solve
-                 ~prepare_residual:(fun () ->
-                   Model_enclosure.inverse_residual model side price)
-                 ~intrinsic ~maximum ~quote:price ~proposal ()
-             with
+             match Adaptive_iv.solve model side ~quote:price ~proposal with
              | Certified_iv.Root v -> root v
              | Certified_iv.Below_intrinsic -> Iv.Below_intrinsic
              | Certified_iv.Above_maximum -> Iv.Above_maximum

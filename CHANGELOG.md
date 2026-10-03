@@ -4,6 +4,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Adaptive certified implied volatility
+
+- A two-word enclosed attempt precedes the existing four-word evaluator. Both enforce the same exact-input root rounding and boundary certificates; unresolved first attempts retry at full precision. Arithmetic and model code share derived residual/tail identities with immutable configurations and separate scalar types.
+- Controlled A/B/B/A measurement reduces certified IV from 4–17 ms to 0.39–1.03 ms on the recorded shared host, with all benchmark outcomes retained. See [performance evidence](docs/performance.md).
+- Inlining removes temporary arithmetic boxes, and an exponent-derived product shortcut avoids two frexp allocations without changing its underflow allowance. No acceptance budget or reference fixture changes.
+- Both configurations pass independent primitive, elementary and original-input model checks. The full ordinary suite and all 17 affected mutations pass; all 5,575 positive roots and the replay digest are unchanged. Three optional mechanisms bring the catalog to 40; default CI still runs seven. See [adaptive derivations and evidence](docs/adaptive-certification.md).
+
 ### Certified public implied volatility
 
 - Positive public IV roots now require a runtime certificate of nearest-even binary64 rounding of the exact-input model's real inverse. The fast inverses supply proposals only. Boundary classifications use original inputs, including both words of displaced sums; unresolved arithmetic returns `Numerical_failure`. See [the derivation](docs/certified-iv.md).

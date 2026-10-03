@@ -20,6 +20,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", type=Path, required=True)
     parser.add_argument("--baseline-revision", required=True)
+    parser.add_argument("--same-contract", action="store_true",
+                        help="A and B enforce the same certified IV contract")
     parser.add_argument("--candidate", type=Path, required=True)
     parser.add_argument("--count", type=int, default=64)
     parser.add_argument("--runs", type=int, default=5)
@@ -53,7 +55,9 @@ def main():
             "Allocated words use current-domain Gc.counters; collection/heap samples use Gc.quick_stat. CPU time includes GC but does not isolate it.",
             "Heap words are runtime heap samples, not peak RSS or total process memory.",
             "Synthetic scalar cases are not a representative institutional portfolio.",
-            "A has a weaker IV contract; A/B quantifies the changed guarantee's cost, not equivalent-accuracy speed."
+            ("A and B enforce the same exact-model IV rounding certificate."
+             if args.same_contract else
+             "A has a weaker IV contract; A/B quantifies the changed guarantee's cost, not equivalent-accuracy speed.")
         ],
         "runs": []
     }

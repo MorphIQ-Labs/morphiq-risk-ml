@@ -23,3 +23,22 @@ val solve :
     intrinsic-rounding convention. The proposal is untrusted. Arithmetic/sign
     uncertainty and exhausted work are explicit failures. Residual preparation
     happens only after boundary classification. *)
+
+module Fast : sig
+  val solve :
+    ?max_steps:int ->
+    prepare_residual:(unit -> Enclosure.Fast.t -> Enclosure.Fast.t) ->
+    intrinsic:Enclosure.Fast.t ->
+    maximum:Enclosure.Fast.t option ->
+    quote:float ->
+    proposal:float ->
+    unit ->
+    outcome
+  (** [prepare_residual ()] must return an enclosure of a positive scaling of
+      [price-quote], for a continuous strictly increasing real price on positive
+      volatility with the supplied intrinsic and optional supremum. A positive
+      Root is the nearest-even binary64 inverse; zero uses the documented
+      intrinsic-rounding convention. The proposal is untrusted. Arithmetic/sign
+      uncertainty and exhausted work are explicit failures. Residual preparation
+      happens only after boundary classification. *)
+end

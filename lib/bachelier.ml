@@ -197,21 +197,20 @@ let implied a side price =
         Ok
           (try
              let model =
-               Model_enclosure.normal ~forward:original_forward
-                 ~strike:original_strike ~time ~rate
+               Adaptive_iv.Normal
+                 {
+                   forward = original_forward;
+                   strike = original_strike;
+                   time;
+                   rate;
+                 }
              in
-             let intrinsic, maximum = Model_enclosure.bounds model side in
              let proposal =
                match implied_proposal a side price with
                | Ok (Iv.Root v) when Vol.to_float v > 0.0 -> Vol.to_float v
                | _ -> 1.0
              in
-             match
-               Certified_iv.solve
-                 ~prepare_residual:(fun () ->
-                   Model_enclosure.inverse_residual model side price)
-                 ~intrinsic ~maximum ~quote:price ~proposal ()
-             with
+             match Adaptive_iv.solve model side ~quote:price ~proposal with
              | Certified_iv.Root v -> root v
              | Certified_iv.Below_intrinsic -> Iv.Below_intrinsic
              | Certified_iv.Above_maximum -> Iv.Above_maximum

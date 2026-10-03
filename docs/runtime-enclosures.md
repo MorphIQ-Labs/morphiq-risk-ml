@@ -4,6 +4,11 @@ Runtime decisions use finite expansions and explicit radii; no measured kernel
 ULP budget or test-only rational arithmetic is a premise. The IEEE environment
 in [the backend contract](numerical-backend-contract.md) is required.
 
+The counts below describe the full four-word configuration. The
+[adaptive configuration](adaptive-certification.md) instantiates the same
+identities with two retained words and shorter series, propagates the actual
+remainder, and retries the full configuration when its certificate cannot decide.
+
 ## Representation and exact sums
 
 An enclosure means `|x-sum(words)| <= error`, retaining at most four binary64
