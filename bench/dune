@@ -10,7 +10,18 @@
  (modules assurance)
  (ocamlopt_flags
   (:standard -O3))
- (foreign_stubs
-  (language c)
-  (names assurance_clock))
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))
+
+(foreign_library
+ (archive_name assurance_clock)
+ (language c)
+ (names assurance_clock))
+
+(executable
+ (name shadow)
+ (modules shadow)
+ (ocamlopt_flags
+  (:standard -O3))
+ (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
