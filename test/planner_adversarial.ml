@@ -22,6 +22,7 @@ let position id quantity forward =
     {
       id;
       factor = forward;
+      rate_factor = "USD-flat";
       currency = "USD";
       quantity;
       model = Bachelier;

@@ -1,6 +1,11 @@
 # Changelog
 
-## 0.3.0 — scenario-planner integration (unreleased)
+
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical changes carry evidence per [docs/stability.md](docs/stability.md).
+
+## [Unreleased]
+
+### 0.3.0 — scenario-planner integration (unreleased)
 
 - Add typed scalar-equivalent batches, deterministic paired/Cartesian scenario
   ranges, immutable compile/explain plans, bounded sequential/parallel execution,
@@ -15,9 +20,6 @@
   institutional version. See [the contract](docs/scenario-planner.md).
 
 
-Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical changes carry evidence per [docs/stability.md](docs/stability.md).
-
-## [Unreleased]
 
 ### 0.2.0 candidate and migration
 

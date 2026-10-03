@@ -42,6 +42,7 @@ let position id factor model quantity =
       factor;
       model;
       quantity;
+      rate_factor = "USD-flat";
       currency = "USD";
       strike = 100.;
       expiry_day = 90;
@@ -303,6 +304,20 @@ let () =
   reject (compile ~scenarios:wrong ()) "shock coordinate";
   let other = ok (compile ~portfolio:[| portfolio.(0) |] ()) in
   reject (P.evaluate_tile other (P.tile plan 0)) "foreign tile";
+  let separated =
+    ok
+      (compile
+         ~portfolio:
+           [|
+             portfolio.(0);
+             { (portfolio.(1)) with rate_factor = "different-rate" };
+           |]
+         ())
+  in
+  check ((P.explain separated).groups = 6) "rate-factor aggregation separation";
+  reject
+    (compile ~portfolio:[| { (portfolio.(0)) with rate_factor = "" } |] ())
+    "missing rate factor";
   let empty = ok (compile ~portfolio:[||] ()) in
   check ((snd (run empty)).rows_committed = 0) "empty portfolio";
   let empty = ok (compile ~scenarios:(ok (S.paired [||])) ()) in

@@ -52,6 +52,7 @@ let () =
           {
             id = string_of_int i;
             factor = "F";
+            rate_factor = "USD-flat";
             currency = "USD";
             quantity = (if i mod 2 = 0 then 100. else -99.);
             model = Black76;

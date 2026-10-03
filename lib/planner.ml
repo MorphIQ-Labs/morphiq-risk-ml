@@ -14,6 +14,7 @@ type model =
 type position = {
   id : string;
   factor : string;
+  rate_factor : string;
   currency : string;
   quantity : float;
   model : model;
@@ -54,6 +55,7 @@ type coordinate = Lognormal | Normal
 type bucket = {
   currency : string;
   factor : string;
+  rate_factor : string;
   model : model;
   coordinate : coordinate;
   quantity_name : string;
@@ -116,6 +118,7 @@ let bucket (p : position) name =
   {
     currency = p.currency;
     factor = p.factor;
+    rate_factor = p.rate_factor;
     model = p.model;
     coordinate = coordinate p.model;
     quantity_name = name;
@@ -212,7 +215,8 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
       Array.mapi
         (fun _ (p : position) ->
           require
-            (p.id <> "" && p.currency <> "" && not (Hashtbl.mem ids p.id))
+            (p.id <> "" && p.currency <> "" && p.rate_factor <> ""
+            && not (Hashtbl.mem ids p.id))
             "duplicate/empty instrument identity";
           Hashtbl.add ids p.id ();
           require
@@ -340,6 +344,7 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
       (fun (p : position) ->
         token p.id;
         token p.factor;
+        token p.rate_factor;
         token p.currency;
         float p.quantity;
         model p.model;

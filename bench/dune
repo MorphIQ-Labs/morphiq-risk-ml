@@ -44,3 +44,10 @@
  (libraries morphiq_risk unix morphiq_fp)
  (flags
   (:standard -open Morphiq_fp)))
+
+(executable
+ (name batch_layout)
+ (modules batch_layout)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))

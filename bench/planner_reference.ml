@@ -73,6 +73,7 @@ let () =
           {
             id = string_of_int i;
             factor = factors.(i / 2);
+            rate_factor = "USD-flat";
             currency = "USD";
             quantity = 1.;
             model = models.(i / 2);

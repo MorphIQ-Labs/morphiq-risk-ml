@@ -109,9 +109,12 @@ Stable tiles carry plan identity, scenario index and contiguous instrument exten
 
 ## Aggregation proof and completeness (#26)
 
-Aggregation buckets retain currency, factor, model (including BSM carry or
+Aggregation buckets retain currency, market factor, explicit rate factor, model (including BSM carry or
 contractual displacement), volatility coordinate and quantity/unit. This is
 conservative: financially distinct factors or models are never netted implicitly.
+The caller names the rate factor: rho means a parallel unit change to the flat
+rate inputs of instruments sharing that factor. Instruments with distinct rate
+factors are never implicitly combined, even when their current rates agree.
 Quantities are explicit position multipliers. Nothing supplies an implicit
 contract multiplier, FX conversion, or common-volatility risk factor.
 

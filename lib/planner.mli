@@ -17,6 +17,7 @@ type model =
 type position = {
   id : string;
   factor : string;
+  rate_factor : string;
   currency : string;
   quantity : float;
   model : model;
@@ -120,6 +121,7 @@ val evaluate_tile : t -> tile -> (row array, string) result
 type bucket = {
   currency : string;
   factor : string;
+  rate_factor : string;
   model : model;
   coordinate : coordinate;
   quantity_name : string;
