@@ -286,3 +286,12 @@
  (deps ../scripts/test_acceptance.py ../scripts/check_acceptance.py)
  (action
   (run python3 %{dep:../scripts/test_acceptance.py})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_canonical_dataset.py
+  ../scripts/canonical_dataset.py
+  ../docs/evidence/canonical-portfolio.json.gz)
+ (action
+  (run python3 %{dep:../scripts/test_canonical_dataset.py})))
