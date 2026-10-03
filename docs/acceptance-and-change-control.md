@@ -12,8 +12,10 @@ The owner has since [reviewed and approved the delivered baseline](acceptance/ow
 and authorized canonical generated datasets. The resulting
 [720-row qualification](results-canonical-dataset.md) passes its fixed numerical
 criteria after explicit comparator adjudication. Those decisions and results
-are now retained; final candidate packaging and independent-review requirements
-must be assessed separately rather than treating all owner review as absent.
+are now retained. The [0.2.0 candidate dossier](candidate-0.2.0.md) identifies
+the exact source, source-compatibility evidence, artifacts and validation.
+Independent-review and deployment decisions are assessed separately rather
+than treating all owner review as absent.
 
 ## Dossier and decision
 
@@ -148,6 +150,12 @@ isolated bytecode stub path are applied after `opam exec` initializes its switch
 The [full catalog report](evidence/candidate-full-mutations.json) and
 [log](evidence/candidate-full-mutations.txt) retain a passing ordinary baseline
 and all 47 compiled numerical mutants detected. Their numerical source hashes
-remain unchanged through this documentation/tooling work. The current pending
-record [fails as intended](evidence/acceptance-pending-check.json). These checks
+remain unchanged through this documentation/tooling work. The earlier pending
+record [failed as intended](evidence/acceptance-pending-check.json). These checks
 supply engineering evidence without manufacturing an owner/reviewer decision.
+
+The [final 0.2.0 dossier](candidate-0.2.0.md) supersedes that packaging rehearsal:
+its exact main commit passes all supported-platform checks, native/bytecode
+artifact installation, canonical replay and the full 47-mutant catalog. The
+[current acceptance check](evidence/candidate-0.2.0-acceptance-check.json) still
+rejects the outstanding independent-review and final decision requirements.

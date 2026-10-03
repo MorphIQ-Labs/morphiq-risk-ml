@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "errors": [
+    "acceptance decision is pending",
+    "unresolved blockers remain",
+    "incomplete or unknown evidence categories",
+    "designated owner decisions missing"
+  ],
+  "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f",
+  "record_sha256": "3c76a0822f027122d4f171b45b65dad8a4d866b15536f1f2d8c63d11620bce54",
+  "checker_sha256": "1ed5fdb4682a36406df6a4df2cbbd6ed9e286f9748f5ad9a4681dfff16541828",
+  "missing_evidence_categories": [
+    "independent_review"
+  ],
+  "scope": "Artifact identity and supplied evidence hashes pass; independent review and final decisions remain genuinely pending."
+}
