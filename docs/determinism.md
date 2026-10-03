@@ -11,3 +11,12 @@ The library is designed to serve the same bits for the same inputs on every plat
 - **A digest checks it.** `test/determinism.ml` serves every quantity over a fixed corpus: price, implied volatility and the ten Greeks for BSM, displaced Black and Bachelier, 18,000+ contracts. It hashes the bit patterns with BLAKE2b-256 and compares the result with `test/determinism.digest`. CI runs it on Linux x86-64, Linux arm64 and macOS arm64.
 
 The digest was recorded on macOS arm64 (Apple M1 Pro), OCaml 5.3.0 + flambda, after the contraction fix. Before it, Linux x86-64 served a different digest. A change to any served value changes the digest, so an intentional numerical change updates `test/determinism.digest` in the same PR, with the evidence `docs/stability.md` requires.
+
+`test/fp_contract.ml` separately probes ties-to-even, gradual underflow,
+signed zero, explicit fused versus separate arithmetic, square root and
+nonfinite values. It exercises the multiplication boundary in native and
+bytecode modes, including allocation/collection around the bytecode wrapper.
+These small exact witnesses detect arithmetic-environment violations; they
+do not prove a whole compiler or replace price/Greek/IV reference checks.
+Candidate compiler/backends follow the
+[numerical execution contract](numerical-backend-contract.md).
