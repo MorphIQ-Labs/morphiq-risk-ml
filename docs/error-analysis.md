@@ -58,8 +58,8 @@ Their sum, with higher-order inflation, is **0.128144454533 < 0.14**. Thus the t
 
 ### 1.2 Double-word exp and expm1
 
-The exponential now uses a project-derived degree-24 Taylor polynomial,
-`expm1(r) = r (1 + r (1/2! + … + r/24!))`, directly on |r| < R = 0.347.
+The exponential now uses a project-derived degree-22 Taylor polynomial,
+`expm1(r) = r + r² (1/2! + r (1/3! + … + r/22!))`, directly on |r| < R = 0.347.
 There is no extra division by 512, stopping rule or doubling recurrence.
 `oracle/dd_exp_coefficients.py` splits each exact rational 1/n! into two
 nearest-even binary64 words. Its check reconstructs the stored values and
@@ -69,22 +69,29 @@ or implementation text is imported. Historical QD attribution is retained in
 the [source provenance record](source-provenance.md).
 
 Write A = 3u²+13u³, M = 5u² and H = 1/(1−100000u). For the coefficient of r^k,
-at most k multiplications and k additions contribute rounding. The sum of
+at most k multiplications and k additions contribute rounding. The separately
+rounded square and the final tail product respect that count. The coefficient
+1/2 is exact and its DD-plus-float addition costs at most 2u², below A; the
+leading coefficient 1 is represented by the original input r. The sum of
 their absolute weights after dividing by |r| is at most
 `sum k R^(k−1)/k! = exp(R)`. Coefficient splitting contributes at most another
 `u² exp(R)`. This bounds both signs without assuming all evaluated terms have
 the same sign. Since `|expm1(r)|/|r| >= 1−R`, a relative majorant in u² units is
 
     H [ ((A+M)/u² + 1) exp(R)/(1−R)
-        + R^24/[25! (1−R/26) (1−R) u²] ]
-      = 19.499846499… < 80.
+        + R^22/[23! (1−R/24) (1−R) u²] ]
+      = 19.875907520… < 80.
 
 The second term bounds the entire omitted Taylor tail by a geometric series.
 H bounds the higher-order products and reciprocal perturbations of fewer
 than 1000 error factors; all denominators in this construction are bounded
 away from zero. `oracle/verify_bounds.py` proves these inequalities with exact
 rationals and a rational exponential enclosure, without sampled errors.
-The published **ε_expm1 = 80u²** budget is unchanged.
+The published **ε_expm1 = 80u²** budget is unchanged. Inlining the Fast2Sum
+and product-residual helpers and selected Horner calls exposes temporary
+records to the compiler without changing primitive arithmetic or the explicit
+multiplication/FMA boundaries. The [optimization qualification](results-dd-exponential-optimization.md)
+checks both development and release profiles.
 
 For |r.hi| < 2^-104 the helper returns r. The omitted relative Taylor term is
 below 2u². This branch applies to both exp and expm1, keeping the leading
@@ -457,7 +464,7 @@ Consequently the complete library is **not certified for all finite admitted inp
 
 The exact primitive witnesses establish, for each executed operation, its fixed relative allowance plus at most 32 subnormal quanta. These additive errors must also be transported through the DD elementary and normal functions; checking each primitive alone is insufficient. A deliberately coarse absolute transport estimate suffices because the analytical ceilings have explicit spare margin.
 
-Before exp’s final power-of-two restoration, all Horner factors have magnitude below .347; their total absolute perturbation transport is bounded by the geometric sum 1/(1−.347) < 2. The final multiplication by r contracts. The tiny branch bypasses the polynomial. The log reduction denominator exceeds one, its series parameter is below 0.172 and its accumulator below 1.04. Its Horner factors contract; the final small products and sums fit within an additional factor 16. Integer-times-ln(2) products are separately checked primitive nodes, not repeated multiplications.
+Before exp’s final power-of-two restoration, all Horner factors have magnitude below .347; their total absolute perturbation transport is bounded by the geometric sum 1/(1−.347) < 2. The final multiplication by r² contracts, and the leading addition has unit absolute sensitivity. The tiny branch bypasses the polynomial. The log reduction denominator exceeds one, its series parameter is below 0.172 and its accumulator below 1.04. Its Horner factors contract; the final small products and sums fit within an additional factor 16. Integer-times-ln(2) products are separately checked primitive nodes, not repeated multiplications.
 
 For the normal series, |d|<7 and d²<37. The amplification of any term-recurrence perturbation is bounded by the product of max(1,37/(2k+1)), which is below exp(19)<2^28. The absolute series is below 7 exp(19)<2^31. Its sensitivity to d² is below 401·7 exp(19)<2^40: for d²≥1 use the degree bound, and for d²≤1 bound each power by one. This bound even permits the 400-iteration cap. The density path combines a contracting negative exponential with the reduced-exp calculation; final normal assembly multiplies it by the bounded series. Thus 16(2^40+2^31)(2+1)<2^60 bounds absolute transport from any primitive perturbation. Fewer than 2^14 primitive calls, including nested division calls and coefficient initialization, each contribute at most 32 quanta. Their total is below **2^80·2^-1074**. `verify_bounds.py` checks these numerical inequalities with rationals.
 

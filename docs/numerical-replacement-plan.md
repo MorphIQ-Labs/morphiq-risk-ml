@@ -5,7 +5,7 @@ instead of permission outreach. Owner: [#64](https://github.com/MorphIQ-Labs/mor
 under Epic #47. See the [source audit](source-provenance.md).
 
 This records the staged plan, not a claim of legal clearance. Stage 1 now
-has a [DD exponential implementation and qualification report](results-dd-exponential.md).
+has a [DD exponential implementation and qualification report](results-dd-exponential-optimization.md).
 AS241 and CALERF remain unchanged pending their own acceptance criteria. Do not rename functions, rearrange an adapted operation graph, or
 recite a paper citation and describe that as a new provenance chain. Since the
 existing sources have been inspected, do not claim a clean-room process.

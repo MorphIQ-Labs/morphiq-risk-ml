@@ -41,7 +41,12 @@ z = F(347,1000)
 assert upper/2 + 8*u*746 < z
 assert (exp_interval(z)[1]-1)*inflate < F(416,1000)
 
-# Direct degree-24 Taylor/Horner expm1. For coefficient k, at most k
+# Degree-22 expm1 as r + r²*(1/2 + r*(1/3! + ...)). The two leading
+# coefficients are exact; add_float costs <=2u², below the conservative add
+# allowance charged here. The separately rounded square and tail product
+# give each r^k coefficient at most k multiply roundings. Loop unrolling is
+# not used; inline annotations preserve the primitive operation order.
+# For coefficient k, at most k
 # multiplications and k additions affect r^k/k!. Summing absolute weights
 # gives sum k*z^(k-1)/k! <= exp(z). Splitting each exact rational coefficient
 # incurs at most u² relative error, also bounded by that sum. Divide by
@@ -52,7 +57,7 @@ for k, (hi, lo) in enumerate(coefficients, 1):
     assert abs(F(hi)+F(lo)-exact) <= u2*exact
     assert hi+lo == hi
 N = len(coefficients)
-assert N == 24
+assert N == 22
 rounding = ((add+mul)/u2+1)*exp_interval(z)[1]/(1-z)
 tail = z**N/(factorial(N+1)*(1-z/F(N+2))*(1-z))/u2
 reduced = (rounding+tail)*inflate

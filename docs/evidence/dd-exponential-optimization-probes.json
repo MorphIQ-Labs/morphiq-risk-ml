@@ -1,0 +1,248 @@
+{
+  "purpose": "Exploratory screens, not final acceptance or quiet-host timing; source patches are relative to initial PR67 a186cb2.",
+  "probes": [
+    {
+      "name": "inline_loop",
+      "dd_sha256": "9a852df7aba0ebc4b3a99bfd4672a6f46fce88c3d736fe3cc9f56d02c9afa66d",
+      "patch_from_initial": "--- initial/lib/dd.ml\n+++ inline_loop/lib/dd.ml\n@@ -129,15 +129,13 @@\n \n (* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)\n let expm1_reduced r =\n-  (* The omitted relative tail is below 2u\u00b2. This also keeps the Horner\n-     products away from underflow when exp calls us with a tiny argument. *)\n   if Float.abs r.hi < 0x1p-104 then r\n   else\n     let acc = ref exp_coefficients.(23) in\n     for k = 22 downto 0 do\n-      acc := add exp_coefficients.(k) (mul r !acc)\n+      acc := (add[@inlined always]) exp_coefficients.(k) ((mul[@inlined always]) r !acc)\n     done;\n-    mul r !acc\n+    (mul[@inlined always]) r !acc\n \n let exp x =\n   if x.hi < -745.2 then of_float 0.0\n",
+      "timings": [
+        {
+          "implementation": "pr67",
+          "pair": 0,
+          "load": [
+            19.4140625,
+            60.76416015625,
+            51.380859375
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,778.055,769.711,784.850,875.957\nexp_wide,779.796,764.799,795.543,875.957\nexpm1_reduced,726.104,714.195,730.348,814.960\nexpm1_wide,853.801,848.651,870.502,900.921\n"
+        },
+        {
+          "implementation": "inline_loop",
+          "pair": 0,
+          "load": [
+            19.4140625,
+            60.76416015625,
+            51.380859375
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,763.142,749.993,770.104,806.960\nexp_wide,763.953,760.698,779.653,806.960\nexpm1_reduced,706.351,702.453,711.095,745.963\nexpm1_wide,800.455,792.003,823.653,831.924\n"
+        },
+        {
+          "implementation": "inline_loop",
+          "pair": 1,
+          "load": [
+            19.4140625,
+            60.76416015625,
+            51.380859375
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,760.090,759.196,768.352,806.960\nexp_wide,775.850,761.497,798.297,806.960\nexpm1_reduced,721.896,682.747,746.143,745.963\nexpm1_wide,751.400,746.453,852.549,831.924\n"
+        },
+        {
+          "implementation": "pr67",
+          "pair": 1,
+          "load": [
+            19.4140625,
+            60.76416015625,
+            51.380859375
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,787.807,758.147,797.796,875.957\nexp_wide,767.052,738.251,780.308,875.957\nexpm1_reduced,692.153,686.908,720.358,814.960\nexpm1_wide,809.550,804.543,820.601,900.921\n"
+        }
+      ],
+      "decision": "Retained targeted call-site inlining in later candidates."
+    },
+    {
+      "name": "unrolled",
+      "dd_sha256": "06a4d2d44c4a4193de13462d1174b87062ac7248cf5c185ce931ad2f2d49f2d1",
+      "patch_from_initial": "--- initial/lib/dd.ml\n+++ unrolled/lib/dd.ml\n@@ -129,15 +129,33 @@\n \n (* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)\n let expm1_reduced r =\n-  (* The omitted relative tail is below 2u\u00b2. This also keeps the Horner\n-     products away from underflow when exp calls us with a tiny argument. *)\n   if Float.abs r.hi < 0x1p-104 then r\n   else\n-    let acc = ref exp_coefficients.(23) in\n-    for k = 22 downto 0 do\n-      acc := add exp_coefficients.(k) (mul r !acc)\n-    done;\n-    mul r !acc\n+    let acc = exp_coefficients.(23) in\n+    let acc = (add[@inlined always]) exp_coefficients.(22) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(21) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(20) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(19) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(18) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(17) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(16) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(15) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(14) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(13) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(12) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(11) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(10) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(9) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(8) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(7) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(6) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(5) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(4) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(3) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(2) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(1) ((mul[@inlined always]) r acc) in\n+    let acc = (add[@inlined always]) exp_coefficients.(0) ((mul[@inlined always]) r acc) in\n+    (mul[@inlined always]) r acc\n \n let exp x =\n   if x.hi < -745.2 then of_float 0.0\n",
+      "timings": [
+        {
+          "implementation": "pr67",
+          "pair": 0,
+          "load": [
+            16.65625,
+            58.8125,
+            50.79736328125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,766.349,761.700,768.995,875.957\nexp_wide,767.744,762.951,770.295,875.957\nexpm1_reduced,710.797,708.497,716.853,814.960\nexpm1_wide,853.348,834.000,867.307,900.921\n"
+        },
+        {
+          "implementation": "unrolled",
+          "pair": 0,
+          "load": [
+            16.65625,
+            58.8125,
+            50.79736328125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,845.540,817.955,864.053,737.964\nexp_wide,849.152,846.457,858.843,737.964\nexpm1_reduced,785.697,783.598,789.499,676.967\nexpm1_wide,871.944,844.944,902.450,762.928\n"
+        },
+        {
+          "implementation": "unrolled",
+          "pair": 1,
+          "load": [
+            16.65625,
+            58.8125,
+            50.79736328125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,849.211,814.795,871.706,737.964\nexp_wide,850.201,816.596,865.602,737.964\nexpm1_reduced,797.200,786.352,815.451,676.967\nexpm1_wide,872.755,857.055,901.139,762.928\n"
+        },
+        {
+          "implementation": "pr67",
+          "pair": 1,
+          "load": [
+            16.65625,
+            58.8125,
+            50.79736328125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,778.949,778.258,783.348,875.957\nexp_wide,780.952,768.793,793.993,875.957\nexpm1_reduced,726.449,708.246,734.198,814.960\nexpm1_wide,865.245,847.447,874.043,900.921\n"
+        }
+      ],
+      "decision": "Rejected: larger straight-line code was slower in this screen."
+    },
+    {
+      "name": "deep_loop",
+      "dd_sha256": "07955fdf4ca34c1f6c53dcffac2a1a45284324a0731267319943675c9cd864af",
+      "patch_from_initial": "--- initial/lib/dd.ml\n+++ deep_loop/lib/dd.ml\n@@ -18,6 +18,7 @@\n let renormalise hi lo =\n   let s = hi +. lo in\n   { hi = s; lo = lo -. (s -. hi) }\n+[@@inline always]\n \n (* AccurateDWPlusDW, JMP Algorithm 6: relative error <= 3u^2 + 13u^3. *)\n let add a b =\n@@ -33,6 +34,7 @@\n let two_prod a b =\n   let p = a *. b in\n   { hi = p; lo = Float.fma a b (-.p) }\n+[@@inline always]\n \n (* DWPlusFP, JMP Algorithm 4: relative error <= 2u^2. *)\n let add_float a y =\n@@ -129,15 +131,13 @@\n \n (* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)\n let expm1_reduced r =\n-  (* The omitted relative tail is below 2u\u00b2. This also keeps the Horner\n-     products away from underflow when exp calls us with a tiny argument. *)\n   if Float.abs r.hi < 0x1p-104 then r\n   else\n     let acc = ref exp_coefficients.(23) in\n     for k = 22 downto 0 do\n-      acc := add exp_coefficients.(k) (mul r !acc)\n+      acc := (add[@inlined always]) exp_coefficients.(k) ((mul[@inlined always]) r !acc)\n     done;\n-    mul r !acc\n+    (mul[@inlined always]) r !acc\n \n let exp x =\n   if x.hi < -745.2 then of_float 0.0\n",
+      "timings": [
+        {
+          "implementation": "pr67",
+          "pair": 0,
+          "load": [
+            9.51171875,
+            51.0322265625,
+            48.3447265625
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,740.254,737.894,743.949,875.957\nexp_wide,747.800,739.002,772.858,875.957\nexpm1_reduced,688.052,686.347,691.354,814.960\nexpm1_wide,807.655,806.701,842.357,900.921\n"
+        },
+        {
+          "implementation": "deep_loop",
+          "pair": 0,
+          "load": [
+            9.51171875,
+            51.0322265625,
+            48.3447265625
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,691.807,687.099,879.800,633.969\nexp_wide,692.654,690.043,699.794,633.969\nexpm1_reduced,636.899,635.993,641.346,577.972\nexpm1_wide,751.543,724.149,768.292,658.935\n"
+        },
+        {
+          "implementation": "deep_loop",
+          "pair": 1,
+          "load": [
+            9.51171875,
+            51.0322265625,
+            48.3447265625
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,689.900,687.253,716.090,633.969\nexp_wide,693.595,688.648,713.646,633.969\nexpm1_reduced,638.902,637.007,675.797,577.972\nexpm1_wide,714.600,712.049,726.497,658.935\n"
+        },
+        {
+          "implementation": "pr67",
+          "pair": 1,
+          "load": [
+            9.51171875,
+            51.0322265625,
+            48.3447265625
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,738.597,737.095,749.457,875.957\nexp_wide,739.551,737.405,743.604,875.957\nexpm1_reduced,687.754,685.346,690.353,814.960\nexpm1_wide,842.106,805.748,853.097,900.921\n"
+        }
+      ],
+      "decision": "Retained helper inlining; explicit arithmetic remains unchanged."
+    },
+    {
+      "name": "special_loop",
+      "dd_sha256": "31a2cd909fef1fb6c27cd5a90a3d484e9fa85a004232d7592899a76e5fe3b328",
+      "patch_from_initial": "--- initial/lib/dd.ml\n+++ special_loop/lib/dd.ml\n@@ -18,6 +18,7 @@\n let renormalise hi lo =\n   let s = hi +. lo in\n   { hi = s; lo = lo -. (s -. hi) }\n+[@@inline always]\n \n (* AccurateDWPlusDW, JMP Algorithm 6: relative error <= 3u^2 + 13u^3. *)\n let add a b =\n@@ -33,6 +34,7 @@\n let two_prod a b =\n   let p = a *. b in\n   { hi = p; lo = Float.fma a b (-.p) }\n+[@@inline always]\n \n (* DWPlusFP, JMP Algorithm 4: relative error <= 2u^2. *)\n let add_float a y =\n@@ -129,15 +131,15 @@\n \n (* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)\n let expm1_reduced r =\n-  (* The omitted relative tail is below 2u\u00b2. This also keeps the Horner\n-     products away from underflow when exp calls us with a tiny argument. *)\n   if Float.abs r.hi < 0x1p-104 then r\n   else\n     let acc = ref exp_coefficients.(23) in\n-    for k = 22 downto 0 do\n-      acc := add exp_coefficients.(k) (mul r !acc)\n+    for k = 22 downto 2 do\n+      acc := (add[@inlined always]) exp_coefficients.(k) ((mul[@inlined always]) r !acc)\n     done;\n-    mul r !acc\n+    let acc = (add_float[@inlined always]) ((mul[@inlined always]) r !acc) 0.5 in\n+    let acc = (add_float[@inlined always]) ((mul[@inlined always]) r acc) 1.0 in\n+    (mul[@inlined always]) r acc\n \n let exp x =\n   if x.hi < -745.2 then of_float 0.0\n",
+      "timings": [
+        {
+          "implementation": "pr67",
+          "pair": 0,
+          "load": [
+            8.39306640625,
+            39.3876953125,
+            44.09423828125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,761.652,760.400,768.554,875.957\nexp_wide,761.151,760.043,762.594,875.957\nexpm1_reduced,708.151,698.590,710.499,814.960\nexpm1_wide,834.703,831.056,838.292,900.921\n"
+        },
+        {
+          "implementation": "special_loop",
+          "pair": 0,
+          "load": [
+            8.39306640625,
+            39.3876953125,
+            44.09423828125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,696.349,685.608,715.351,601.970\nexp_wide,696.194,695.097,701.499,601.970\nexpm1_reduced,690.305,679.696,698.948,545.973\nexpm1_wide,699.198,697.756,719.202,626.937\n"
+        },
+        {
+          "implementation": "special_loop",
+          "pair": 1,
+          "load": [
+            8.39306640625,
+            39.3876953125,
+            44.09423828125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,674.999,674.355,678.301,601.970\nexp_wide,675.404,674.546,678.241,601.970\nexpm1_reduced,629.294,626.051,634.909,545.973\nexpm1_wide,700.045,698.650,707.245,626.937\n"
+        },
+        {
+          "implementation": "pr67",
+          "pair": 1,
+          "load": [
+            8.39306640625,
+            39.3876953125,
+            44.09423828125
+          ],
+          "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,739.205,737.894,744.092,875.957\nexp_wide,738.800,737.345,740.457,875.957\nexpm1_reduced,687.444,685.501,698.900,814.960\nexpm1_wide,813.341,806.308,815.558,900.921\n"
+        }
+      ],
+      "decision": "Retained exact coefficient specialization, then shortened the polynomial and preserved the leading r."
+    }
+  ],
+  "rejected_compile_probe": {
+    "name": "split_loop",
+    "reason": "Cross-module Split.two_sum forced inlining is unavailable with the development profile -opaque boundary; warning 55 is an error. No numerical kill or accuracy claim.",
+    "build_log": "File \"lib/dd.ml\", line 25, characters 13-55:\n25 |   let s, e = (Split.two_sum[@inlined always]) a.hi b.hi in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"lib/dd.ml\", line 26, characters 13-55:\n26 |   let t, f = (Split.two_sum[@inlined always]) a.lo b.lo in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"lib/dd.ml\", line 41, characters 13-52:\n41 |   let s, e = (Split.two_sum[@inlined always]) a.hi y in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"lib/dd.ml\", line 194, characters 15-52:\n194 |     let s, e = (Split.two_sum[@inlined always]) u ul in\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"lib/dd.ml\", line 138, characters 13-88:\n138 |       acc := (add[@inlined always]) exp_coefficients.(k) ((mul[@inlined always]) r !acc)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"lib/dd.ml\", line 168, characters 36-69:\n168 |   let u = div (of_float (m -. 1.0)) (add (of_float m) (of_float 1.0)) in\n                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\nFile \"test/checked_dd.ml\", line 54, characters 13-52:\n54 |   let s, e = (Split.two_sum[@inlined always]) a.hi y in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"test/checked_dd.ml\", line 231, characters 15-52:\n231 |     let s, e = (Split.two_sum[@inlined always]) u ul in\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"test/checked_dd.ml\", line 26, characters 13-55:\n26 |   let s, e = (Split.two_sum[@inlined always]) a.hi b.hi in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n\nFile \"test/checked_dd.ml\", line 27, characters 13-55:\n27 |   let t, f = (Split.two_sum[@inlined always]) a.lo b.lo in\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError (warning 55 [inlining-impossible]): Cannot inline: [@inlined] attribute was not used on this function application (the optimizer did not know what function was being applied)\n"
+  },
+  "degree22_factored": {
+    "dd_sha256": "32b7c66974b2329f6f5545c65176c472b0d16eb094445f7efd733b81651b6ec3",
+    "decision": "All DD and European-price rows pass, with unchanged European outputs relative to the initial degree-24 candidate. Superseded by the leading-r grouping."
+  },
+  "leading_r_release_screen": [
+    {
+      "pair": 0,
+      "implementation": "pr67",
+      "load": [
+        7.70556640625,
+        23.15625,
+        35.6796875
+      ],
+      "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,618.851,606.298,643.945,325.984\nexp_wide,625.205,615.859,657.558,325.984\nexpm1_reduced,589.442,578.499,602.603,308.985\nexpm1_wide,655.949,635.910,673.306,328.976\n"
+    },
+    {
+      "pair": 0,
+      "implementation": "optimized",
+      "load": [
+        7.70556640625,
+        23.15625,
+        35.6796875
+      ],
+      "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,474.191,444.055,494.254,80.996\nexp_wide,479.698,441.694,492.442,80.996\nexpm1_reduced,438.106,430.095,440.753,68.997\nexpm1_wide,501.204,495.255,509.048,83.990\n"
+    },
+    {
+      "pair": 1,
+      "implementation": "optimized",
+      "load": [
+        7.70556640625,
+        23.15625,
+        35.6796875
+      ],
+      "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,478.494,461.197,490.439,80.996\nexp_wide,469.601,449.443,486.350,80.996\nexpm1_reduced,432.444,411.499,434.458,68.997\nexpm1_wide,480.747,479.209,501.597,83.990\n"
+    },
+    {
+      "pair": 1,
+      "implementation": "pr67",
+      "load": [
+        7.70556640625,
+        23.15625,
+        35.6796875
+      ],
+      "stdout": "function,median_ns,min_ns,max_ns,allocated_words\nexp_reduced,622.654,595.653,636.697,325.984\nexp_wide,607.002,595.248,639.153,325.984\nexpm1_reduced,581.849,569.904,595.152,308.985\nexpm1_wide,625.551,604.355,649.750,328.976\n"
+    }
+  ]
+}

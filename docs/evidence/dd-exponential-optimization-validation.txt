@@ -1,0 +1,721 @@
+Log formatting: trailing whitespace removed; numerical output retained.
+Focused DD exponential optimization qualification, 2026-10-03
+lib/dd.ml SHA-256: 85963d7f8e5dd5f6463c9f1ba038740e0ecae49338dd5159939d2d9fce194c4a
+
+=== Development full ordinary suite; exit 0 ===
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.014s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.039s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.121s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+11 fixtures checked, 0 problems
+Volatility admission and mixed Greek unit boundaries passed
+cases 121, worst 0.99 x attainable at x=-10 s=1, over 8x: 0
+IV termination, failed proposals, exponent range and arithmetic failures passed
+qcheck random seed: 198264780
+Testing `morphiq_risk'.
+This run has ID `PJWIYDFO'.
+
+  [OK]          normal: exact points          0   values.
+  [OK]          dd: scaled rounding           0   single rounding into the su...
+  [OK]          normal: properties            0   phi(x) = phi(-x) bit for bit.
+  [OK]          normal: properties            1   Phi is nondecreasing.
+  [OK]          normal: properties            2   Phi(-x) ~ 1 - Phi(x).
+  [OK]          normal: properties            3   Phi^-1(Phi(x)) ~ x on [-8, 8].
+
+Full test results in `/private/tmp/morphiq-dd-exp-opt/_build/default/test/_build/_tests/morphiq_risk'.
+Test Successful in 0.015s. 6 tests run.
+planner adversarial: subnormal multiplication, cancellation, overflow and output transactions passed
+translation cases 32, self-consistency cases 96, failures 0
+1 instruments x 9 scenarios; 9 calculations; at most 4 buffered results
+plan 6acf42096d7bd8e6aab84cc028cecc2d3caeab4e57fa14ba96a29846c4245583
+scenario 0: 729.235984997 USD, numerical error <= 4.911e-14
+scenario 1: 4069.80587951 USD, numerical error <= 1.615e-13
+scenario 2: 11110.7350735 USD, numerical error <= 6.879e-13
+scenario 3: 642.012449235 USD, numerical error <= 4.5e-14
+scenario 4: 3904.8053328 USD, numerical error <= 6.477e-14
+scenario 5: 10997.8419659 USD, numerical error <= 1.411e-12
+scenario 6: 365.014482814 USD, numerical error <= 4.126e-14
+scenario 7: 3308.76482264 USD, numerical error <= 1.625e-13
+scenario 8: 10627.4992909 USD, numerical error <= 1.075e-12
+committed 9 rows; complete=true
+532 nearest-even boundary veta references; exact-zero, kink, adjacent and numerical-failure controls pass
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.215s
+
+OK
+normal_dd: all cases within budget
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               13270          5    7.426e-16     -0x1.45d0ce0b51d6p+2      0
+cdf tail (x <= -8)      5829          4    5.590e-16    -0x1.e38ea4327d7b6p+4      0
+erfcx                  15398          4    6.167e-16                0x1.d8p-1      0
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 19099          5    6.124e-16      0x1.c02fa2fc1c7fp+1      0
+pdf                    19099          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass
+planner: exact scalar/batch, rational aggregate enclosures, scenario coverage, isolation, failures and 1/2/3/4-worker replay passed
+log1p    27651 rows, worst 1 ulp at -0x1.f410eaa8a61f6p-1, worst 0.9334 ulp from exact
+log      21515 rows, worst 1 ulp at 0x1.ce283c2d11eaep-908, worst 0.9563 ulp from exact
+exp      31152 rows, worst 1 ulp at -0x1.63422c73c63f2p+9, worst 1.0321 ulp from exact
+expm1    31152 rows, worst 1 ulp at -0x1.2b708872320e1p+5, worst 1.3553 ulp from exact
+log1p reduced path: worst 0.5205 ulp from exact (bound 0.5 + 0.14)
+Full model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+First model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+2506 enclosed extra-bit Greek references, 0 explicit capability failures
+Full inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 23
+black76 unresolved: 1
+bsm certified: 27
+displaced certified: 15
+displaced unresolved: 3
+74/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+First inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 22
+black76 unresolved: 2
+bsm certified: 25
+bsm unresolved: 2
+displaced certified: 12
+displaced unresolved: 6
+68/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+2007 generated regressions and boundary controls passed
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+Full enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+First enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+4176 public price/Greek certificates; 3932 exact acceptance-limit controls
+generated error fail pass / total     time test name
+
+[ ]    0    0    0    0 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+[✓] 3000    0    0 3000 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+
+[ ]    0    0    0    0 / 3000     0.0s call - put = A - C
+[✓] 3000    0    0 3000 / 3000     0.0s call - put = A - C
+
+[ ]    0    0    0    0 / 3000     0.0s price is nondecreasing in σ
+[✓] 3000    0    0 3000 / 3000     0.0s price is nondecreasing in σ
+
+[ ]    0    0    0    0 / 3000     0.0s delta within its bounds; gamma, vega >= 0
+[✓] 3000    0    0 3000 / 3000     0.1s delta within its bounds; gamma, vega >= 0
+
+[ ]    0    0    0    0 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+[✓] 3000    0    0 3000 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+
+[ ]    0    0    0    0 / 3000     0.0s displaced = Black-76 on representable sums, bit for bit
+[✓] 3117    0    0 3000 / 3000     0.1s displaced = Black-76 on representable sums, bit for bit
+
+[ ]    0    0    0    0 / 3000     0.0s IV round trip composes forward and inverse error
+[ ]   40    0    0   36 / 3000     0.1s IV round trip composes forward and inverse error
+[ ]   66    0    0   59 / 3000     0.2s IV round trip composes forward and inverse error
+[ ]  109    0    0   97 / 3000     0.3s IV round trip composes forward and inverse error
+[ ]  146    0    0  130 / 3000     0.4s IV round trip composes forward and inverse error
+[ ]  186    0    0  165 / 3000     0.5s IV round trip composes forward and inverse error
+[ ]  227    0    0  202 / 3000     0.6s IV round trip composes forward and inverse error
+[ ]  262    0    0  236 / 3000     0.7s IV round trip composes forward and inverse error
+[ ]  297    0    0  270 / 3000     0.8s IV round trip composes forward and inverse error
+[ ]  337    0    0  306 / 3000     0.9s IV round trip composes forward and inverse error
+[ ]  378    0    0  343 / 3000     1.0s IV round trip composes forward and inverse error
+[ ]  413    0    0  376 / 3000     1.1s IV round trip composes forward and inverse error
+[ ]  462    0    0  416 / 3000     1.2s IV round trip composes forward and inverse error
+[ ]  504    0    0  455 / 3000     1.3s IV round trip composes forward and inverse error
+[ ]  539    0    0  488 / 3000     1.4s IV round trip composes forward and inverse error
+[ ]  573    0    0  519 / 3000     1.5s IV round trip composes forward and inverse error
+[ ]  603    0    0  547 / 3000     1.7s IV round trip composes forward and inverse error
+[ ]  637    0    0  580 / 3000     1.8s IV round trip composes forward and inverse error
+[ ]  669    0    0  609 / 3000     1.9s IV round trip composes forward and inverse error
+[ ]  704    0    0  643 / 3000     2.0s IV round trip composes forward and inverse error
+[ ]  736    0    0  674 / 3000     2.1s IV round trip composes forward and inverse error
+[ ]  768    0    0  706 / 3000     2.2s IV round trip composes forward and inverse error
+[ ]  807    0    0  743 / 3000     2.3s IV round trip composes forward and inverse error
+[ ]  836    0    0  772 / 3000     2.4s IV round trip composes forward and inverse error
+[ ]  870    0    0  804 / 3000     2.5s IV round trip composes forward and inverse error
+[ ]  902    0    0  836 / 3000     2.6s IV round trip composes forward and inverse error
+[ ]  930    0    0  862 / 3000     2.7s IV round trip composes forward and inverse error
+[ ]  971    0    0  900 / 3000     2.8s IV round trip composes forward and inverse error
+[ ] 1010    0    0  936 / 3000     2.9s IV round trip composes forward and inverse error
+[ ] 1052    0    0  975 / 3000     3.0s IV round trip composes forward and inverse error
+[ ] 1082    0    0 1003 / 3000     3.1s IV round trip composes forward and inverse error
+[ ] 1123    0    0 1041 / 3000     3.2s IV round trip composes forward and inverse error
+[ ] 1163    0    0 1077 / 3000     3.3s IV round trip composes forward and inverse error
+[ ] 1205    0    0 1116 / 3000     3.4s IV round trip composes forward and inverse error
+[ ] 1232    0    0 1143 / 3000     3.5s IV round trip composes forward and inverse error
+[ ] 1271    0    0 1178 / 3000     3.6s IV round trip composes forward and inverse error
+[ ] 1312    0    0 1218 / 3000     3.7s IV round trip composes forward and inverse error
+[ ] 1358    0    0 1261 / 3000     3.8s IV round trip composes forward and inverse error
+[ ] 1393    0    0 1294 / 3000     3.9s IV round trip composes forward and inverse error
+[ ] 1429    0    0 1328 / 3000     4.0s IV round trip composes forward and inverse error
+[ ] 1469    0    0 1366 / 3000     4.1s IV round trip composes forward and inverse error
+[ ] 1507    0    0 1403 / 3000     4.2s IV round trip composes forward and inverse error
+[ ] 1551    0    0 1445 / 3000     4.3s IV round trip composes forward and inverse error
+[ ] 1597    0    0 1488 / 3000     4.5s IV round trip composes forward and inverse error
+[ ] 1634    0    0 1522 / 3000     4.6s IV round trip composes forward and inverse error
+[ ] 1670    0    0 1557 / 3000     4.7s IV round trip composes forward and inverse error
+[ ] 1716    0    0 1599 / 3000     4.8s IV round trip composes forward and inverse error
+[ ] 1758    0    0 1639 / 3000     4.9s IV round trip composes forward and inverse error
+[ ] 1803    0    0 1680 / 3000     5.0s IV round trip composes forward and inverse error
+[ ] 1841    0    0 1717 / 3000     5.1s IV round trip composes forward and inverse error
+[ ] 1885    0    0 1758 / 3000     5.2s IV round trip composes forward and inverse error
+[ ] 1931    0    0 1802 / 3000     5.3s IV round trip composes forward and inverse error
+[ ] 1969    0    0 1838 / 3000     5.4s IV round trip composes forward and inverse error
+[ ] 2011    0    0 1879 / 3000     5.5s IV round trip composes forward and inverse error
+[ ] 2054    0    0 1920 / 3000     5.6s IV round trip composes forward and inverse error
+[ ] 2091    0    0 1956 / 3000     5.7s IV round trip composes forward and inverse error
+[ ] 2132    0    0 1994 / 3000     5.8s IV round trip composes forward and inverse error
+[ ] 2169    0    0 2031 / 3000     5.9s IV round trip composes forward and inverse error
+[ ] 2214    0    0 2072 / 3000     6.0s IV round trip composes forward and inverse error
+[ ] 2257    0    0 2113 / 3000     6.1s IV round trip composes forward and inverse error
+[ ] 2299    0    0 2154 / 3000     6.2s IV round trip composes forward and inverse error
+[ ] 2343    0    0 2195 / 3000     6.3s IV round trip composes forward and inverse error
+[ ] 2378    0    0 2228 / 3000     6.4s IV round trip composes forward and inverse error
+[ ] 2422    0    0 2268 / 3000     6.5s IV round trip composes forward and inverse error
+[ ] 2464    0    0 2308 / 3000     6.6s IV round trip composes forward and inverse error
+[ ] 2509    0    0 2350 / 3000     6.7s IV round trip composes forward and inverse error
+[ ] 2545    0    0 2382 / 3000     6.8s IV round trip composes forward and inverse error
+[ ] 2581    0    0 2418 / 3000     6.9s IV round trip composes forward and inverse error
+[ ] 2620    0    0 2457 / 3000     7.0s IV round trip composes forward and inverse error
+[ ] 2650    0    0 2487 / 3000     7.1s IV round trip composes forward and inverse error
+[ ] 2688    0    0 2522 / 3000     7.2s IV round trip composes forward and inverse error
+[ ] 2736    0    0 2565 / 3000     7.3s IV round trip composes forward and inverse error
+[ ] 2774    0    0 2601 / 3000     7.4s IV round trip composes forward and inverse error
+[ ] 2815    0    0 2638 / 3000     7.5s IV round trip composes forward and inverse error
+[ ] 2856    0    0 2677 / 3000     7.6s IV round trip composes forward and inverse error
+[ ] 2897    0    0 2716 / 3000     7.7s IV round trip composes forward and inverse error
+[ ] 2938    0    0 2755 / 3000     7.8s IV round trip composes forward and inverse error
+[ ] 2977    0    0 2793 / 3000     7.9s IV round trip composes forward and inverse error
+[ ] 3007    0    0 2820 / 3000     8.0s IV round trip composes forward and inverse error
+[ ] 3055    0    0 2862 / 3000     8.1s IV round trip composes forward and inverse error
+[ ] 3099    0    0 2902 / 3000     8.2s IV round trip composes forward and inverse error
+[ ] 3130    0    0 2931 / 3000     8.3s IV round trip composes forward and inverse error
+[ ] 3175    0    0 2969 / 3000     8.4s IV round trip composes forward and inverse error
+[✓] 3200    0    0 2989 / 3000     8.4s IV round trip composes forward and inverse error
+
+[ ]    0    0    0    0 / 1000     0.0s delta, vega, theta match differences of the price
+[✓] 1200    0    0  796 / 1000     0.0s delta, vega, theta match differences of the price
+================================================================================
+success (ran 8 tests)
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.14472 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+model status                                  rows  pass  in cell <=4ulp  <=ferro  worst ulp
+bachelier expiry_not_identifiable               70    70
+bachelier invalid_input                         15    15
+bachelier root                                 859   859      859    859        0          0
+bachelier rounded_zero_volatility_bound        420   420
+bachelier zero_volatility_limit                645   645
+black76 expiry_not_identifiable                 84    84
+black76 invalid_input                           15    15
+black76 no_finite_inverse                        4     4
+black76 root                                  1802  1802     1802   1802        0          0
+black76 rounded_zero_volatility_bound           56    56
+black76 zero_volatility_limit                  146   146
+bsm expiry_not_identifiable                     84    84
+bsm invalid_input                               15    15
+bsm no_finite_inverse                            4     4
+bsm root                                      1754  1754     1754   1754        0          0
+bsm rounded_zero_volatility_bound               90    90
+bsm zero_volatility_limit                      160   160
+displaced expiry_not_identifiable               84    84
+displaced invalid_input                         15    15
+displaced no_finite_inverse                      2     2
+displaced root                                1164  1164     1164   1164        0          0
+displaced rounded_zero_volatility_bound        345   345
+displaced zero_volatility_limit                497   497
+unresolved reference rows (no expectation):
+bsm runtime certification: 1754 roots, 0 numerical failures
+black76 runtime certification: 1802 roots, 0 numerical failures
+displaced runtime certification: 1164 roots, 0 numerical failures
+bachelier runtime certification: 859 roots, 0 numerical failures
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384         18      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          8      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         22      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+8330 batch IV fixture outcomes equal scalar; served roots equal independent reference
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            4        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415           23        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          5      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120         19      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+determinism digest f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b over 6069960 bytes
+
+=== Release full ordinary suite (-j 2); exit 0 ===
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.030s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.010s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.115s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.280s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+11 fixtures checked, 0 problems
+1 instruments x 9 scenarios; 9 calculations; at most 4 buffered results
+plan 6acf42096d7bd8e6aab84cc028cecc2d3caeab4e57fa14ba96a29846c4245583
+scenario 0: 729.235984997 USD, numerical error <= 4.911e-14
+scenario 1: 4069.80587951 USD, numerical error <= 1.615e-13
+scenario 2: 11110.7350735 USD, numerical error <= 6.879e-13
+scenario 3: 642.012449235 USD, numerical error <= 4.5e-14
+scenario 4: 3904.8053328 USD, numerical error <= 6.477e-14
+scenario 5: 10997.8419659 USD, numerical error <= 1.411e-12
+scenario 6: 365.014482814 USD, numerical error <= 4.126e-14
+scenario 7: 3308.76482264 USD, numerical error <= 1.625e-13
+scenario 8: 10627.4992909 USD, numerical error <= 1.075e-12
+committed 9 rows; complete=true
+qcheck random seed: 524717104
+Testing `morphiq_risk'.
+This run has ID `E54HLIRS'.
+
+  [OK]          normal: exact points          0   values.
+  [OK]          dd: scaled rounding           0   single rounding into the su...
+  [OK]          normal: properties            0   phi(x) = phi(-x) bit for bit.
+  [OK]          normal: properties            1   Phi is nondecreasing.
+  [OK]          normal: properties            2   Phi(-x) ~ 1 - Phi(x).
+  [OK]          normal: properties            3   Phi^-1(Phi(x)) ~ x on [-8, 8].
+
+Full test results in `/private/tmp/morphiq-dd-exp-opt/_build-release/default/test/_build/_tests/morphiq_risk'.
+Test Successful in 0.014s. 6 tests run.
+Volatility admission and mixed Greek unit boundaries passed
+IV termination, failed proposals, exponent range and arithmetic failures passed
+Full inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 23
+black76 unresolved: 1
+bsm certified: 27
+displaced certified: 15
+displaced unresolved: 3
+74/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+First inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 22
+black76 unresolved: 2
+bsm certified: 25
+bsm unresolved: 2
+displaced certified: 12
+displaced unresolved: 6
+68/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+Full model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+First model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+cases 121, worst 0.99 x attainable at x=-10 s=1, over 8x: 0
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               13270          5    7.426e-16     -0x1.45d0ce0b51d6p+2      0
+cdf tail (x <= -8)      5829          4    5.590e-16    -0x1.e38ea4327d7b6p+4      0
+erfcx                  15398          4    6.167e-16                0x1.d8p-1      0
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 19099          5    6.124e-16      0x1.c02fa2fc1c7fp+1      0
+pdf                    19099          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+normal_dd: all cases within budget
+translation cases 32, self-consistency cases 96, failures 0
+log1p    27651 rows, worst 1 ulp at -0x1.f410eaa8a61f6p-1, worst 0.9334 ulp from exact
+log      21515 rows, worst 1 ulp at 0x1.ce283c2d11eaep-908, worst 0.9563 ulp from exact
+exp      31152 rows, worst 1 ulp at -0x1.63422c73c63f2p+9, worst 1.0321 ulp from exact
+expm1    31152 rows, worst 1 ulp at -0x1.2b708872320e1p+5, worst 1.3553 ulp from exact
+log1p reduced path: worst 0.5205 ulp from exact (bound 0.5 + 0.14)
+Full enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+First enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+2506 enclosed extra-bit Greek references, 0 explicit capability failures
+2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass
+planner adversarial: subnormal multiplication, cancellation, overflow and output transactions passed
+planner: exact scalar/batch, rational aggregate enclosures, scenario coverage, isolation, failures and 1/2/3/4-worker replay passed
+4176 public price/Greek certificates; 3932 exact acceptance-limit controls
+8330 batch IV fixture outcomes equal scalar; served roots equal independent reference
+532 nearest-even boundary veta references; exact-zero, kink, adjacent and numerical-failure controls pass
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384         18      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          8      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         22      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+determinism digest f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b over 6069960 bytes
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.14472 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          5      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120         19      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+generated error fail pass / total     time test name
+
+[ ]    0    0    0    0 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+[✓] 3000    0    0 3000 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+
+[ ]    0    0    0    0 / 3000     0.0s call - put = A - C
+[✓] 3000    0    0 3000 / 3000     0.0s call - put = A - C
+
+[ ]    0    0    0    0 / 3000     0.0s price is nondecreasing in σ
+[✓] 3000    0    0 3000 / 3000     0.0s price is nondecreasing in σ
+
+[ ]    0    0    0    0 / 3000     0.0s delta within its bounds; gamma, vega >= 0
+[✓] 3000    0    0 3000 / 3000     0.0s delta within its bounds; gamma, vega >= 0
+
+[ ]    0    0    0    0 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+[✓] 3000    0    0 3000 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+
+[ ]    0    0    0    0 / 3000     0.0s displaced = Black-76 on representable sums, bit for bit
+[✓] 3117    0    0 3000 / 3000     0.0s displaced = Black-76 on representable sums, bit for bit
+
+[ ]    0    0    0    0 / 3000     0.0s IV round trip composes forward and inverse error
+[ ]   47    0    0   43 / 3000     0.1s IV round trip composes forward and inverse error
+[ ]   91    0    0   81 / 3000     0.2s IV round trip composes forward and inverse error
+[ ]  139    0    0  123 / 3000     0.3s IV round trip composes forward and inverse error
+[ ]  185    0    0  164 / 3000     0.4s IV round trip composes forward and inverse error
+[ ]  235    0    0  210 / 3000     0.5s IV round trip composes forward and inverse error
+[ ]  274    0    0  248 / 3000     0.6s IV round trip composes forward and inverse error
+[ ]  323    0    0  292 / 3000     0.7s IV round trip composes forward and inverse error
+[ ]  370    0    0  336 / 3000     0.8s IV round trip composes forward and inverse error
+[ ]  411    0    0  374 / 3000     0.9s IV round trip composes forward and inverse error
+[ ]  459    0    0  415 / 3000     1.0s IV round trip composes forward and inverse error
+[ ]  508    0    0  459 / 3000     1.1s IV round trip composes forward and inverse error
+[ ]  550    0    0  499 / 3000     1.2s IV round trip composes forward and inverse error
+[ ]  592    0    0  536 / 3000     1.3s IV round trip composes forward and inverse error
+[ ]  622    0    0  566 / 3000     1.4s IV round trip composes forward and inverse error
+[ ]  645    0    0  588 / 3000     1.5s IV round trip composes forward and inverse error
+[ ]  690    0    0  629 / 3000     1.6s IV round trip composes forward and inverse error
+[ ]  731    0    0  669 / 3000     1.7s IV round trip composes forward and inverse error
+[ ]  775    0    0  713 / 3000     1.8s IV round trip composes forward and inverse error
+[ ]  818    0    0  754 / 3000     1.9s IV round trip composes forward and inverse error
+[ ]  856    0    0  792 / 3000     2.0s IV round trip composes forward and inverse error
+[ ]  901    0    0  835 / 3000     2.1s IV round trip composes forward and inverse error
+[ ]  943    0    0  875 / 3000     2.2s IV round trip composes forward and inverse error
+[ ]  991    0    0  919 / 3000     2.3s IV round trip composes forward and inverse error
+[ ] 1035    0    0  960 / 3000     2.4s IV round trip composes forward and inverse error
+[ ] 1076    0    0  997 / 3000     2.5s IV round trip composes forward and inverse error
+[ ] 1121    0    0 1039 / 3000     2.6s IV round trip composes forward and inverse error
+[ ] 1163    0    0 1077 / 3000     2.7s IV round trip composes forward and inverse error
+[ ] 1208    0    0 1119 / 3000     2.8s IV round trip composes forward and inverse error
+[ ] 1249    0    0 1160 / 3000     2.9s IV round trip composes forward and inverse error
+[ ] 1297    0    0 1204 / 3000     3.0s IV round trip composes forward and inverse error
+[ ] 1342    0    0 1246 / 3000     3.1s IV round trip composes forward and inverse error
+[ ] 1389    0    0 1290 / 3000     3.3s IV round trip composes forward and inverse error
+[ ] 1431    0    0 1330 / 3000     3.4s IV round trip composes forward and inverse error
+[ ] 1474    0    0 1371 / 3000     3.5s IV round trip composes forward and inverse error
+[ ] 1518    0    0 1413 / 3000     3.6s IV round trip composes forward and inverse error
+[ ] 1567    0    0 1458 / 3000     3.7s IV round trip composes forward and inverse error
+[ ] 1609    0    0 1500 / 3000     3.8s IV round trip composes forward and inverse error
+[ ] 1647    0    0 1535 / 3000     3.9s IV round trip composes forward and inverse error
+[ ] 1692    0    0 1579 / 3000     4.0s IV round trip composes forward and inverse error
+[ ] 1738    0    0 1620 / 3000     4.1s IV round trip composes forward and inverse error
+[ ] 1782    0    0 1661 / 3000     4.2s IV round trip composes forward and inverse error
+[ ] 1827    0    0 1703 / 3000     4.3s IV round trip composes forward and inverse error
+[ ] 1869    0    0 1744 / 3000     4.4s IV round trip composes forward and inverse error
+[ ] 1917    0    0 1788 / 3000     4.5s IV round trip composes forward and inverse error
+[ ] 1957    0    0 1826 / 3000     4.6s IV round trip composes forward and inverse error
+[ ] 2001    0    0 1869 / 3000     4.7s IV round trip composes forward and inverse error
+[ ] 2045    0    0 1911 / 3000     4.8s IV round trip composes forward and inverse error
+[ ] 2083    0    0 1948 / 3000     4.9s IV round trip composes forward and inverse error
+[ ] 2127    0    0 1989 / 3000     5.0s IV round trip composes forward and inverse error
+[ ] 2166    0    0 2028 / 3000     5.1s IV round trip composes forward and inverse error
+[ ] 2213    0    0 2071 / 3000     5.2s IV round trip composes forward and inverse error
+[ ] 2257    0    0 2113 / 3000     5.3s IV round trip composes forward and inverse error
+[ ] 2300    0    0 2155 / 3000     5.4s IV round trip composes forward and inverse error
+[ ] 2347    0    0 2199 / 3000     5.5s IV round trip composes forward and inverse error
+[ ] 2391    0    0 2238 / 3000     5.6s IV round trip composes forward and inverse error
+[ ] 2434    0    0 2280 / 3000     5.7s IV round trip composes forward and inverse error
+[ ] 2481    0    0 2324 / 3000     5.8s IV round trip composes forward and inverse error
+[ ] 2521    0    0 2361 / 3000     5.9s IV round trip composes forward and inverse error
+[ ] 2562    0    0 2399 / 3000     6.0s IV round trip composes forward and inverse error
+[ ] 2598    0    0 2435 / 3000     6.1s IV round trip composes forward and inverse error
+[ ] 2640    0    0 2477 / 3000     6.2s IV round trip composes forward and inverse error
+[ ] 2673    0    0 2509 / 3000     6.3s IV round trip composes forward and inverse error
+[ ] 2722    0    0 2552 / 3000     6.4s IV round trip composes forward and inverse error
+[ ] 2762    0    0 2589 / 3000     6.5s IV round trip composes forward and inverse error
+[ ] 2808    0    0 2631 / 3000     6.6s IV round trip composes forward and inverse error
+[ ] 2848    0    0 2670 / 3000     6.7s IV round trip composes forward and inverse error
+[ ] 2894    0    0 2713 / 3000     6.8s IV round trip composes forward and inverse error
+[ ] 2935    0    0 2752 / 3000     6.9s IV round trip composes forward and inverse error
+[ ] 2977    0    0 2793 / 3000     7.0s IV round trip composes forward and inverse error
+[ ] 3010    0    0 2822 / 3000     7.1s IV round trip composes forward and inverse error
+[ ] 3059    0    0 2866 / 3000     7.2s IV round trip composes forward and inverse error
+[ ] 3104    0    0 2907 / 3000     7.3s IV round trip composes forward and inverse error
+[ ] 3135    0    0 2936 / 3000     7.4s IV round trip composes forward and inverse error
+[ ] 3186    0    0 2977 / 3000     7.5s IV round trip composes forward and inverse error
+[✓] 3200    0    0 2989 / 3000     7.5s IV round trip composes forward and inverse error
+
+[ ]    0    0    0    0 / 1000     0.0s delta, vega, theta match differences of the price
+[✓] 1200    0    0  796 / 1000     0.0s delta, vega, theta match differences of the price
+================================================================================
+success (ran 8 tests)
+2007 generated regressions and boundary controls passed
+model status                                  rows  pass  in cell <=4ulp  <=ferro  worst ulp
+bachelier expiry_not_identifiable               70    70
+bachelier invalid_input                         15    15
+bachelier root                                 859   859      859    859        0          0
+bachelier rounded_zero_volatility_bound        420   420
+bachelier zero_volatility_limit                645   645
+black76 expiry_not_identifiable                 84    84
+black76 invalid_input                           15    15
+black76 no_finite_inverse                        4     4
+black76 root                                  1802  1802     1802   1802        0          0
+black76 rounded_zero_volatility_bound           56    56
+black76 zero_volatility_limit                  146   146
+bsm expiry_not_identifiable                     84    84
+bsm invalid_input                               15    15
+bsm no_finite_inverse                            4     4
+bsm root                                      1754  1754     1754   1754        0          0
+bsm rounded_zero_volatility_bound               90    90
+bsm zero_volatility_limit                      160   160
+displaced expiry_not_identifiable               84    84
+displaced invalid_input                         15    15
+displaced no_finite_inverse                      2     2
+displaced root                                1164  1164     1164   1164        0          0
+displaced rounded_zero_volatility_bound        345   345
+displaced zero_volatility_limit                497   497
+unresolved reference rows (no expectation):
+bsm runtime certification: 1754 roots, 0 numerical failures
+black76 runtime certification: 1802 roots, 0 numerical failures
+displaced runtime certification: 1164 roots, 0 numerical failures
+bachelier runtime certification: 859 roots, 0 numerical failures
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            4        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415           23        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+
+=== Final DD trace/scorer; exit 0 ===
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.14472 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+
+=== Final European trace/scorer; exit 0 ===
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384         18      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          8      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         22      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+
+=== Final displaced trace/scorer; exit 0 ===
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          5      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120         19      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+
+=== Final ordinary Greek trace/scorer; exit 0 ===
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            4        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415           23        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+
+=== Final extra-bit Greek trace/scorer; exit 0 ===
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+
+Additional changed-row refinement: 24 optimization-relative and 29 QD-relative served rows; all references confirmed at 220/440 digits plus cancellation precision. See the two refined JSON records.
+
+=== Affected mutations; exit 0; child Dune builds capped at -j 2 ===
+baseline passes (124 s)
+killed    dd-scale-nonoverlap by dd_reference
+killed    expm1-tiny by dd_reference
+killed    dd-exp-degree by dd_reference
+3 of 3 mutants killed as catalogued
+
+Build/install/format passed. Isolated install: 10 documentation/notice files match source bytes.

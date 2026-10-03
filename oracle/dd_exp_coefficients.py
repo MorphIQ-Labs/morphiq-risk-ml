@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 import sys
 
-DEGREE = 24
+DEGREE = 22
 
 
 def split(value):
@@ -45,7 +45,7 @@ def check():
 if __name__ == '__main__':
     if sys.argv[1:] == ['--check']:
         check()
-        print('24 DD factorial splits and ln(2) verified from rational definitions')
+        print('22 DD factorial splits and ln(2) verified from rational definitions')
     elif not sys.argv[1:]:
         print('let exp_coefficients =\n  [|')
         for hi, lo in coefficients():

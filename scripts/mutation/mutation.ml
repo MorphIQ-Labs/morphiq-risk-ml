@@ -432,11 +432,11 @@ let catalog =
       id = "dd-exp-degree";
       file = "lib/dd.ml";
       snippet =
-        "let acc = ref exp_coefficients.(23) in\n    for k = 22 downto 0 do";
+        "let acc = ref exp_coefficients.(21) in\n    for k = 20 downto 2 do";
       replacement =
-        "let acc = ref exp_coefficients.(11) in\n    for k = 10 downto 0 do";
+        "let acc = ref exp_coefficients.(11) in\n    for k = 10 downto 2 do";
       killer = "dd_reference";
-      mechanism = "degree-24 Taylor remainder in the double-word exponential";
+      mechanism = "degree-22 Taylor remainder in the double-word exponential";
     };
     {
       id = "normal-dd-series";

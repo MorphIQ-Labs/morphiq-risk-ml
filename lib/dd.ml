@@ -14,10 +14,12 @@ type t = { hi : float; lo : float }
 let of_float hi = { hi; lo = 0.0 }
 
 (* Fast2Sum (Dekker 1971; JMP Algorithm 1): exact when hi's exponent is at
-   least lo's. *)
+   least lo's. Inlining lets callers eliminate temporary pairs while retaining
+   each explicitly rounded operation. *)
 let renormalise hi lo =
   let s = hi +. lo in
   { hi = s; lo = lo -. (s -. hi) }
+[@@inline always]
 
 (* AccurateDWPlusDW, JMP Algorithm 6: relative error <= 3u^2 + 13u^3. *)
 let add a b =
@@ -33,6 +35,7 @@ let sub a b = add a (neg b)
 let two_prod a b =
   let p = a *. b in
   { hi = p; lo = Float.fma a b (-.p) }
+[@@inline always]
 
 (* DWPlusFP, JMP Algorithm 4: relative error <= 2u^2. *)
 let add_float a y =
@@ -93,7 +96,7 @@ let to_float a = a.hi +. a.lo
 let ln2 = { hi = 0x1.62e42fefa39efp-1; lo = 0x1.abc9e3b39803fp-56 }
 let compare_float a f = if a.hi <> f then compare a.hi f else compare a.lo 0.0
 
-(* Project derivation from exp(x) = sum x^n/n!: direct degree-24 Horner
+(* Project derivation from exp(x) = sum x^n/n!: direct degree-22 Horner
    evaluation on |r| < .347, with exact-rational generated coefficient splits.
    See oracle/dd_exp_coefficients.py and docs/error-analysis.md, section 1.2.
    This replaces the historical QD adaptation; no QD table or stopping rule
@@ -123,21 +126,27 @@ let exp_coefficients =
     { hi = 0x1.e542ba4020225p-62; lo = 0x1.ea72b4afe3c2fp-120 };
     { hi = 0x1.71b8ef6dcf572p-66; lo = -0x1.d043ae40c4647p-120 };
     { hi = 0x1.0ce396db7f853p-70; lo = -0x1.aebcdbd20331cp-124 };
-    { hi = 0x1.761b41316381ap-75; lo = -0x1.3423c7d91404fp-130 };
-    { hi = 0x1.f2cf01972f578p-80; lo = -0x1.9ada5fcc1ab14p-135 };
   |]
 
-(* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)
+(* r + r²*(1/2 + r*(1/3! + ...)): preserve the exact leading r rather
+   than rounding 1 plus the correction before multiplying by r. The tail
+   uses DD Horner, with an exact binary64 coefficient at its final step. *)
 let expm1_reduced r =
-  (* The omitted relative tail is below 2u². This also keeps the Horner
-     products away from underflow when exp calls us with a tiny argument. *)
+  (* Below this threshold the omitted relative tail is below 2u²; bypassing
+     Horner also avoids subnormal leading products in both exp and expm1. *)
   if Float.abs r.hi < 0x1p-104 then r
   else
-    let acc = ref exp_coefficients.(23) in
-    for k = 22 downto 0 do
-      acc := add exp_coefficients.(k) (mul r !acc)
+    let acc = ref exp_coefficients.(21) in
+    for k = 20 downto 2 do
+      acc :=
+        (add [@inlined always]) exp_coefficients.(k)
+          ((mul [@inlined always]) r !acc)
     done;
-    mul r !acc
+    let acc =
+      (add_float [@inlined always]) ((mul [@inlined always]) r !acc) 0.5
+    in
+    (add [@inlined always]) r
+      ((mul [@inlined always]) ((mul [@inlined always]) r r) acc)
 
 let exp x =
   if x.hi < -745.2 then of_float 0.0

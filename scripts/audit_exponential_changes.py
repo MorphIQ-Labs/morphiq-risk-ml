@@ -22,24 +22,26 @@ from gen_greeks import closed_form, differentiated
 from gen_greek_bits import expansion
 
 
-def main():
+def main(source, destination):
     assert mpmath.__version__ == '1.3.0'
-    source = ROOT/'docs/evidence/dd-exponential-compatibility-changes.json.gz'
     rows = json.loads(gzip.decompress(source.read_bytes()))
     results = []
     for row in rows:
         if row['fixture'] == 'dd': continue
         fields = row['input_reference'].split()
         model, side, quantity = fields[:3]
-        s,k,t,r,q,sigma,shift = map(word, fields[3:10])
+        greek = row['fixture'] in ('greeks','greek_bits')
+        start = 4 if row['fixture']=='greeks' else 3
+        if row['fixture']=='greeks': assert fields[3] in ('resolved','single_route')
+        s,k,t,r,q,sigma,shift = map(word, fields[start:start+7])
         contract = Contract(model, side=='call', s,k,t,r,q,shift)
         refined = []
         for precision in (220,440):
             with mp.workdps(precision+contract.digits(sigma)):
                 value = (closed_form(contract,sigma)[quantity]
-                         if row['fixture']=='greek_bits' else contract.price(sigma))
+                         if greek else contract.price(sigma))
                 refined.append(expansion(value))
-                if row['fixture']=='greek_bits':
+                if greek:
                     independent = differentiated(contract,sigma)[quantity]
                     assert abs(value-independent) < mp.mpf('1e-150')*abs(value)
                 reference = float(value)
@@ -51,16 +53,18 @@ def main():
         results.append({**row,'refined_reference':refined[-1],
                         'signed_ulp_error':signed_errors,
                         'precision_digits':[220+contract.digits(sigma),440+contract.digits(sigma)],
-                        'differentiation_checked':row['fixture']=='greek_bits'})
+                        'differentiation_checked':greek})
     provenance={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in [Path(__file__),ROOT/'oracle/common.py',ROOT/'oracle/gen_greeks.py',ROOT/'oracle/gen_greek_bits.py']}
     output={'mpmath':mpmath.__version__,'source_sha256':provenance,'changed_served_rows':results}
-    (ROOT/'docs/evidence/dd-exponential-refined-changes.json').write_text(json.dumps(output,indent=2)+'\n')
+    destination.write_text(json.dumps(output,indent=2)+'\n')
     print(f'{len(results)} changed served rows refined; all committed references confirmed')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', action='version', version='audit_exponential_changes 1')
-    parser.parse_args()
-    main()
+    parser.add_argument('--changes', type=Path, default=ROOT/'docs/evidence/dd-exponential-compatibility-changes.json.gz')
+    parser.add_argument('--output', type=Path, default=ROOT/'docs/evidence/dd-exponential-refined-changes.json')
+    args = parser.parse_args()
+    main(args.changes, args.output)

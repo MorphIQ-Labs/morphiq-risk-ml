@@ -97,6 +97,17 @@ gh workflow run candidate.yml --ref main -f commit=FULL_CANDIDATE_SHA
 
 ## Change-impact matrix
 
+The pending DD exponential replacement and optimization in
+[PR #67](https://github.com/MorphIQ-Labs/morphiq-risk-ml/pull/67) is a numerical
+delta after the reviewed baseline. Its [qualification](results-dd-exponential-optimization.md)
+records the degree-22 derivation, unchanged budgets, 29 changed served oracle
+rows versus QD, development/release validation and shared-host performance.
+The public replay digest is unchanged, but that does not make the delta
+bit-identical on all inputs or extend earlier acceptance to this candidate.
+Independent delta review and final artifact qualification remain pending;
+AS241/CALERF provenance work under #64 remains a release blocker. No acceptance
+record or owner decision is changed by this engineering evidence.
+
 | Change | Required analysis and refreshed evidence |
 | --- | --- |
 | Formula, constant, range reduction, threshold or bound | Re-derive before scoring; primary-source assumptions and call sites; independent original-input references; affected mutations; per-case compatibility; independent numerical delta review. |

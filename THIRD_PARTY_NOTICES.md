@@ -12,7 +12,7 @@ records the actual downloaded sources, development chronology and hashes.
 | Material | Project use | Notice |
 | --- | --- | --- |
 | Peter Jäckel, Let's Be Rational, 2024 reference revision | Derived portions in `lib/lbr.ml`, `lib/normalised_black.ml`, and the generated polynomial replay from `oracle/lift_polynomials.py` | [Upstream permission and warranty notice](LICENSES/LetsBeRational.txt); existing source headers remain intact |
-| QD 2.3.24 author-hosted tarball, Hida, Li, and Bailey | Historical exponential adaptation, now replaced in `lib/dd.ml` by the [project-derived polynomial](docs/results-dd-exponential.md); retained notices identify earlier versions | [Original COPYING](LICENSES/QD-COPYING.txt), [original license DOC](LICENSES/QD-BSD-LBNL-License.doc), and [complete text extraction](LICENSES/QD-BSD-LBNL-License.txt); terms review remains open |
+| QD 2.3.24 author-hosted tarball, Hida, Li, and Bailey | Historical exponential adaptation, now replaced in `lib/dd.ml` by the [project-derived polynomial](docs/results-dd-exponential-optimization.md); retained notices identify earlier versions | [Original COPYING](LICENSES/QD-COPYING.txt), [original license DOC](LICENSES/QD-BSD-LBNL-License.doc), and [complete text extraction](LICENSES/QD-BSD-LBNL-License.txt); terms review remains open |
 | Wichura AS241 / Royal Statistical Society | Adapted inverse-normal regions and coefficient evaluation in `lib/normal.ml` | [StatLib distribution notice](LICENSES/AS241-StatLib.txt); no unrestricted grant established |
 | Cody CALERF, March 19, 1990 | Adapted error-function approximations in `lib/cody.ml` | Original author attribution retained; no explicit grant in the inspected source/README |
 | Sun fdlibm | `lib/elementary.ml` references the split logarithm constant, tiny-input rule, and related elementary-function constructions | [Sun permission notice](LICENSES/Sun-fdlibm.txt) |
@@ -58,7 +58,7 @@ The maintainer selected [replacements with documented provenance](docs/numerical
 Issue [#64](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/64) stays open
 until that work is qualified. Retaining notices does not establish clearance.
 Numerical replacements require independent references, compatibility evidence,
-updated certificates, and unchanged assurance requirements. The [DD exponential replacement](docs/results-dd-exponential.md) changes the
+updated certificates, and unchanged assurance requirements. The [DD exponential replacement](docs/results-dd-exponential-optimization.md) changes the
 current implementation; AS241 and CALERF remain pending. No release, outreach
 or signing of an upstream agreement is implied.
 

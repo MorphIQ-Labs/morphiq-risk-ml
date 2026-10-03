@@ -1,5 +1,11 @@
 # DD exponential replacement qualification
 
+**Historical initial candidate:** this report records the degree-24 version
+at `a186cb251aceee06c536d47fe67b406ee1eba218`. The subsequent
+[focused optimization report](results-dd-exponential-optimization.md) owns the
+current degree-22 implementation, compatibility results and updated timings.
+The original evidence below is retained unchanged.
+
 Date: 2026-10-03. Partial implementation of [#64](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/64).
 Baseline: `3260a56217a2270005f12717bc9a15e4a016d48f`, the provenance-audit
 head subsequently squash-merged as `e9591b29bb5d75e5bd90c110308a2c6557bbff39`.
