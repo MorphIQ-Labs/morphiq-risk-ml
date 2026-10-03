@@ -1,0 +1,122 @@
+name: candidate validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Full candidate commit SHA already merged into main
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: candidate-${{ inputs.commit }}
+  cancel-in-progress: false
+
+jobs:
+  identity:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Require an immutable candidate from main
+        env:
+          CANDIDATE: ${{ inputs.commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CANDIDATE" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse "$CANDIDATE^{commit}")" = "$CANDIDATE"
+          git merge-base --is-ancestor "$CANDIDATE" origin/main
+
+  artifact:
+    needs: identity
+    name: candidate artifact (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.commit }}
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install locked dependencies and formatter
+        run: |
+          opam install . --deps-only --with-test --locked --yes
+          opam install --yes "ocamlformat.$(sed -n 's/^version *= *//p' .ocamlformat)"
+      - name: Candidate build, format and ordinary tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          opam exec -- dune build @install @fmt 2>&1 | tee candidate-build.log
+          opam exec -- dune test 2>&1 | tee candidate-tests.log
+      - name: Archive, isolated installation and native/bytecode consumers
+        env:
+          CANDIDATE: ${{ inputs.commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/candidate_artifact.py --commit "$CANDIDATE" \
+            --switch "$(opam switch show)" --output "$RUNNER_TEMP/candidate" \
+            2>&1 | tee candidate-artifact.log
+      - name: Replay the independently certified canonical portfolio
+        shell: bash
+        run: |
+          set -euo pipefail
+          opam exec -- dune build bench/shadow.exe
+          python scripts/replay_canonical.py \
+            --campaign docs/evidence/canonical-shadow.json.gz \
+            --output candidate-replay.json 2>&1 | tee candidate-replay.log
+      - name: Retain candidate evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: candidate-${{ inputs.commit }}-${{ matrix.os }}
+          retention-days: 90
+          if-no-files-found: error
+          path: |
+            candidate-*.log
+            candidate-replay.json
+            ${{ runner.temp }}/candidate/source.tar.gz
+            ${{ runner.temp }}/candidate/report.json
+            ${{ runner.temp }}/candidate/build.log
+
+  full-mutations:
+    needs: identity
+    name: candidate full mutation catalog
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.commit }}
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install locked dependencies
+        run: opam install . --deps-only --with-test --locked --yes
+      - name: Full candidate mutation catalog (manual lane only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(opam exec -- ocamlopt -config-var flambda)" = true
+          opam exec -- dune exec scripts/mutation/mutation.exe 2>&1 | tee candidate-mutations.log
+      - name: Retain full mutation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: candidate-mutations-${{ inputs.commit }}
+          retention-days: 90
+          path: candidate-mutations.log
+          if-no-files-found: error

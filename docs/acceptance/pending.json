@@ -1,12 +1,12 @@
 {
   "status": "pending",
   "candidate_commit": null,
-  "package_version": "0.1.0",
+  "package_version": "0.2.0",
   "intended_use": null,
   "blockers": [
-    "Designated owner approval of intended use, economic materiality and permitted failures (#13)",
+    "Baseline owner approval is recorded; final-candidate intended-use/economic/failure disposition remains to be tied to its exact SHA (#13/#17)",
     "Independent human reviewer appointment, report, findings disposition and exact-commit delta review (#15)",
-    "Representative business portfolio, agreed operational requirements and owner deployment recommendation (#8/#16)",
+    "Owner-authorized canonical generated qualification is complete; deployment hardware, business materiality and operational requirements remain outside that scalar campaign (#8/#16)",
     "Final exact candidate/version, release artifacts, platform/full-mutation evidence and dated model-validation/release-owner acceptance (#17)"
   ],
   "evidence": {},
