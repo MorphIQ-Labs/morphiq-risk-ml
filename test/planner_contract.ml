@@ -259,6 +259,18 @@ let () =
       let events, _ = run ~workers plan in
       check (events = sequential) "parallel replay")
     [ 2; 3; 4 ];
+  let delayed = ref [] and coordinator = Domain.self () in
+  let delayed_status =
+    P.execute plan ~workers:4 ~cancellation:(P.cancellation ()) ~sink:(fun e ->
+        check (Domain.self () = coordinator) "sink escaped coordinator";
+        (* Simulate a consumer that cannot immediately accept the next row. *)
+        Unix.sleepf 0.001;
+        delayed := e :: !delayed;
+        Ok ())
+  in
+  check
+    (List.rev !delayed = sequential && delayed_status = c)
+    "slow sink changed replay or completion";
   let differently_tiled =
     ok (compile ~limits:{ limits with tile_rows = 3 } ())
   in

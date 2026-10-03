@@ -104,7 +104,10 @@ scalar, typed batch and packed-layout runs, 1/4-worker planner jobs, allocation,
 GC, peak RSS and ten small-job latency repetitions per environment. Alternate
 rounds reverse compiler order. All aggregate output digests agree. No other
 local build/test ran during this comparison; the host remains a shared
-workstation, and recorded load/variation limit generalization.
+workstation, and recorded load/variation limit generalization. Allocation fields
+are differences of global `Gc.quick_stat` snapshots, sampled at collections;
+they can omit uncollected tails and are not exact per-domain allocation totals.
+Elapsed times and process RSS are separate measurements.
 
 Median execution seconds for 256 instruments × three scenarios:
 

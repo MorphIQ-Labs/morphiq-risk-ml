@@ -16,7 +16,8 @@ deployment approval under Epic #27.
 - Output bytes agree across 1, 2, 3 and 4 workers. Ordinary tests also vary tile
   sizes, retain post-expiry and admission failures, check snapshot isolation,
   empty jobs, exact coverage, overflowed/resource-limited plans, sink failures
-  and cancellation. Two compiler-negative cases retain volatility-coordinate
+  and cancellation. A deliberately delayed sink must preserve the complete event
+  sequence and execute only on the coordinator. Two compiler-negative cases retain volatility-coordinate
   separation through batch/planner operations.
 - Exact rational arithmetic checks weighted aggregate intervals, including
   position multiplication, severe mixed-sign cancellation and subnormals.
@@ -55,7 +56,11 @@ All served bits and outcome classes agree. Median elapsed seconds:
 These small differences do not justify a representation optimization. Retain
 the thin typed batch API as the scalar-preserving execution boundary and the
 immutable-record layout for heterogeneous plans. Do not advertise a scalar
-kernel speedup. The main operational benefit is bounded orchestration,
+kernel speedup. [The existing kernel harness](performance.md#reproduction-and-measurement-contract)
+separately measures pre-admitted price/IV/Greek operations and admission; its
+recorded scalar measurements are historical baselines, not newly measured batch
+costs. The present layout and planner campaigns measure complete request costs.
+The main operational benefit is bounded orchestration,
 explicit outcomes and parallel execution without changing the pricing graph.
 
 ## Scale, memory and throughput
@@ -89,9 +94,13 @@ The manual million-instrument campaign used four workers and 1,024 rows/tile:
 | 1,000,000 expiry instruments × three scenarios | 0.194 | 1.808 | 1.148 | 1.022 GB | 4,096 |
 
 Every requested valuation completed with no scalar failure or incomplete total.
-The live run allocated about 2.224 trillion words cumulatively, with 2,302,435
-minor collections and 64 major collections. This is cumulative allocation, not
-resident memory. Runtime certificate arithmetic remains expensive; the planner
+The live run reported approximately 2.224 trillion allocated words, with
+2,302,435 minor collections and 64 major collections. These are differences of
+global `Gc.quick_stat` snapshots: allocation counters are sampled at collection
+boundaries and can omit uncollected tails. They describe cumulative allocation,
+not resident memory or exact per-domain allocation. The same sampling limitation
+applies to layout and compiler-comparison allocation fields; elapsed timings
+and process RSS are measured separately. Runtime certificate arithmetic remains expensive; the planner
 does not make that cost disappear. The expiry case measures orchestration and
 exact payoff arithmetic and must never be substituted for live-pricing speed.
 

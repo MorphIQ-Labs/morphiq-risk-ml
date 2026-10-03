@@ -305,7 +305,7 @@
 (test
  (name planner_contract)
  (modules planner_contract)
- (libraries morphiq_risk zarith))
+ (libraries morphiq_risk zarith unix))
 
 (test
  (name planner_adversarial)
