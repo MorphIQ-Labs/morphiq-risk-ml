@@ -1,0 +1,511 @@
+{
+  "protocol": "planner-counters-v1",
+  "host": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "scope": "Whole process: startup, packing, scalar, batch and packed layout; not isolated kernel counters",
+  "comparison_sha256": "5e1d4f88a701c63c1a01aca8e15167215d8a4c86713db3da9f88b49d5d28c08f",
+  "binaries": {
+    "upstream": "b2648a7bf2f039dca17e44e2050dc3c80f70de0d222beaf2d31e98cf4309ea37",
+    "ox54-unchanged": "37f15c08e8cd19b66ae7c077fdbc6fa170f5c529c7e3cd467b895f9526b3c74a",
+    "ox54-portable": "fd619e0c02266556593e68e1e6f642e13ad963b79070366312dfdca214bee543",
+    "ox52-unchanged": "ff6d2b668d9610d7efd39261f835466abcb7ab234b1dfbab0af67d73c5309066",
+    "ox52-portable": "37cfe240d07741c6c7692f6f009e6633ece8f5ce5fdd44e7812566b63679a6ea"
+  },
+  "runs": [
+    {
+      "variant": "upstream",
+      "repeat": 0,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/stephen/Development/MorphIQ-Labs/morphiq-risk-ml/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 12956524180,
+        "cycles_elapsed": 2634348410,
+        "peak_rss_bytes": 8011776,
+        "involuntary_context_switches": 17
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.282356977,
+        "batch_s": 0.280979156,
+        "packed_s": 0.279408216,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "time_l_stderr": "        0.84 real         0.84 user         0.00 sys\n             8011776  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 654  page reclaims\n                  32  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  17  involuntary context switches\n         12956524180  instructions retired\n          2634348410  cycles elapsed\n             6537600  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-unchanged",
+      "repeat": 0,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 10523976257,
+        "cycles_elapsed": 2238419642,
+        "peak_rss_bytes": 13156352,
+        "involuntary_context_switches": 6
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.237218142,
+        "batch_s": 0.237349987,
+        "packed_s": 0.237031937,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.71 real         0.71 user         0.00 sys\n            13156352  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 951  page reclaims\n                  33  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   6  involuntary context switches\n         10523976257  instructions retired\n          2238419642  cycles elapsed\n            11469184  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-portable",
+      "repeat": 0,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 10521173345,
+        "cycles_elapsed": 2246808232,
+        "peak_rss_bytes": 13090816,
+        "involuntary_context_switches": 9
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238478899,
+        "batch_s": 0.237841129,
+        "packed_s": 0.237498999,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            13090816  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 955  page reclaims\n                  23  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   9  involuntary context switches\n         10521173345  instructions retired\n          2246808232  cycles elapsed\n            11403648  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-unchanged",
+      "repeat": 0,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 10544936912,
+        "cycles_elapsed": 2248818109,
+        "peak_rss_bytes": 12664832,
+        "involuntary_context_switches": 5
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238038063,
+        "batch_s": 0.238090038,
+        "packed_s": 0.238129854,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707677,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            12664832  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 937  page reclaims\n                  33  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   5  involuntary context switches\n         10544936912  instructions retired\n          2248818109  cycles elapsed\n            11092352  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-portable",
+      "repeat": 0,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 10544855357,
+        "cycles_elapsed": 2262757157,
+        "peak_rss_bytes": 12763136,
+        "involuntary_context_switches": 8
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.23939395,
+        "batch_s": 0.239786148,
+        "packed_s": 0.238805056,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707474,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            12763136  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 940  page reclaims\n                  35  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   8  involuntary context switches\n         10544855357  instructions retired\n          2262757157  cycles elapsed\n            11043200  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-portable",
+      "repeat": 1,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.0390625,
+        4.8291015625,
+        6.8203125
+      ],
+      "counters": {
+        "instructions_retired": 10540920765,
+        "cycles_elapsed": 2254900283,
+        "peak_rss_bytes": 12763136,
+        "involuntary_context_switches": 27
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238518953,
+        "batch_s": 0.238121986,
+        "packed_s": 0.243911982,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707474,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.72 user         0.00 sys\n            12763136  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 940  page reclaims\n                  35  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  27  involuntary context switches\n         10540920765  instructions retired\n          2254900283  cycles elapsed\n            11043200  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-unchanged",
+      "repeat": 1,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 10541087557,
+        "cycles_elapsed": 2254002657,
+        "peak_rss_bytes": 12664832,
+        "involuntary_context_switches": 14
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.239537001,
+        "batch_s": 0.240847111,
+        "packed_s": 0.239562988,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707677,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.72 user         0.00 sys\n            12664832  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 938  page reclaims\n                  33  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  14  involuntary context switches\n         10541087557  instructions retired\n          2254002657  cycles elapsed\n            11092352  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-portable",
+      "repeat": 1,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 10517873555,
+        "cycles_elapsed": 2247281447,
+        "peak_rss_bytes": 13107200,
+        "involuntary_context_switches": 24
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.239012957,
+        "batch_s": 0.24170804,
+        "packed_s": 0.238868952,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.72 user         0.00 sys\n            13107200  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 956  page reclaims\n                  23  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  24  involuntary context switches\n         10517873555  instructions retired\n          2247281447  cycles elapsed\n            11420032  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-unchanged",
+      "repeat": 1,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 10522551028,
+        "cycles_elapsed": 2278436481,
+        "peak_rss_bytes": 13139968,
+        "involuntary_context_switches": 428
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.239037991,
+        "batch_s": 0.310986042,
+        "packed_s": 0.241531849,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.79 real         0.73 user         0.00 sys\n            13139968  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 960  page reclaims\n                  23  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 428  involuntary context switches\n         10522551028  instructions retired\n          2278436481  cycles elapsed\n            11452800  peak memory footprint\n"
+    },
+    {
+      "variant": "upstream",
+      "repeat": 1,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/stephen/Development/MorphIQ-Labs/morphiq-risk-ml/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 12956691021,
+        "cycles_elapsed": 2631907313,
+        "peak_rss_bytes": 8011776,
+        "involuntary_context_switches": 50
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.278898001,
+        "batch_s": 0.279716969,
+        "packed_s": 0.279168129,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "time_l_stderr": "        0.84 real         0.83 user         0.00 sys\n             8011776  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 654  page reclaims\n                  32  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  50  involuntary context switches\n         12956691021  instructions retired\n          2631907313  cycles elapsed\n             6537600  peak memory footprint\n"
+    },
+    {
+      "variant": "upstream",
+      "repeat": 2,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/stephen/Development/MorphIQ-Labs/morphiq-risk-ml/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 12957847365,
+        "cycles_elapsed": 2629882812,
+        "peak_rss_bytes": 8011776,
+        "involuntary_context_switches": 40
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.278645992,
+        "batch_s": 0.280045986,
+        "packed_s": 0.277446985,
+        "scalar_words": 479458284,
+        "batch_words": 479589242,
+        "packed_words": 479589332,
+        "identical": true
+      },
+      "time_l_stderr": "        0.84 real         0.83 user         0.00 sys\n             8011776  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 622  page reclaims\n                  64  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  40  involuntary context switches\n         12957847365  instructions retired\n          2629882812  cycles elapsed\n             6537600  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-unchanged",
+      "repeat": 2,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 10522453064,
+        "cycles_elapsed": 2254265351,
+        "peak_rss_bytes": 13156352,
+        "involuntary_context_switches": 14
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238739967,
+        "batch_s": 0.23844409,
+        "packed_s": 0.238581896,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            13156352  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 928  page reclaims\n                  56  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  14  involuntary context switches\n         10522453064  instructions retired\n          2254265351  cycles elapsed\n            11469184  peak memory footprint\n"
+    },
+    {
+      "variant": "ox54-portable",
+      "repeat": 2,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox54/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03564453125,
+        4.78173828125,
+        6.7919921875
+      ],
+      "counters": {
+        "instructions_retired": 10517912983,
+        "cycles_elapsed": 2256831528,
+        "peak_rss_bytes": 13090816,
+        "involuntary_context_switches": 6
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238985062,
+        "batch_s": 0.239151955,
+        "packed_s": 0.238849163,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440705637,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            13090816  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 955  page reclaims\n                  23  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   6  involuntary context switches\n         10517912983  instructions retired\n          2256831528  cycles elapsed\n            11403648  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-unchanged",
+      "repeat": 2,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52-unchanged/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03271484375,
+        4.7353515625,
+        6.763671875
+      ],
+      "counters": {
+        "instructions_retired": 10541425255,
+        "cycles_elapsed": 2247230210,
+        "peak_rss_bytes": 12681216,
+        "involuntary_context_switches": 6
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.238317966,
+        "batch_s": 0.238591909,
+        "packed_s": 0.237694025,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707677,
+        "identical": true
+      },
+      "time_l_stderr": "        0.72 real         0.71 user         0.00 sys\n            12681216  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 938  page reclaims\n                  33  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   6  involuntary context switches\n         10541425255  instructions retired\n          2247230210  cycles elapsed\n            11108736  peak memory footprint\n"
+    },
+    {
+      "variant": "ox52-portable",
+      "repeat": 2,
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/private/tmp/risk-planner-final-ox52/_build/default/bench/batch_layout.exe",
+        "--count",
+        "256"
+      ],
+      "host_load": [
+        2.03271484375,
+        4.7353515625,
+        6.763671875
+      ],
+      "counters": {
+        "instructions_retired": 10541242121,
+        "cycles_elapsed": 2245598371,
+        "peak_rss_bytes": 12746752,
+        "involuntary_context_switches": 6
+      },
+      "result": {
+        "count": 256,
+        "scalar_s": 0.23820281,
+        "batch_s": 0.23813796,
+        "packed_s": 0.237474203,
+        "scalar_words": 440702041,
+        "batch_words": 440703578,
+        "packed_words": 440707474,
+        "identical": true
+      },
+      "time_l_stderr": "        0.71 real         0.71 user         0.00 sys\n            12746752  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 939  page reclaims\n                  35  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   0  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   6  involuntary context switches\n         10541242121  instructions retired\n          2245598371  cycles elapsed\n            11043224  peak memory footprint\n"
+    }
+  ],
+  "complete": true
+}

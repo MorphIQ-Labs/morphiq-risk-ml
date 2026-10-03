@@ -122,7 +122,23 @@ was 45.55 ms (range 44.81–46.77 ms). Ox 5.4 portable was 39.75 ms
 Ten observations describe this small sample; they do not establish a production
 p99 or deadline. These timing jobs use the existing Domain-based planner compiled
 by each toolchain. They are **not** a benchmark of the canonical mode-checked
-scheduler prototype. Hardware counters were not collected.
+scheduler prototype.
+
+A separate [15-run process-counter probe](../../docs/evidence/planner-hardware-counters.json)
+uses the same SHA-256-verified binaries, three repetitions and alternating order
+for 256-item scalar/batch/packed runs. It retains the full macOS `time -l` output,
+including instructions retired, cycles elapsed, RSS and context switches.
+These counters include process startup and all three layouts, not only kernel
+execution; no cache-miss or stall attribution is inferred. No local build/test
+ran concurrently. Median counters (billions):
+
+| Environment | Instructions retired | Cycles elapsed |
+| --- | ---: | ---: |
+| Upstream 5.3 | 12.957 | 2.632 |
+| Ox 5.4, unchanged | 10.523 | 2.254 |
+| Ox 5.4, portable numerics | 10.518 | 2.247 |
+| Ox 5.2, unchanged | 10.541 | 2.249 |
+| Ox 5.2, portable numerics | 10.541 | 2.255 |
 
 This modest host-specific compiler improvement does not clear adoption:
 
@@ -161,7 +177,9 @@ For 5.4, omit `--canonical-parallel`. Omit `--portable` for unchanged-source
 comparisons. `check_modes.py --ocamlc /path/to/ox/ocamlc --output /tmp/modes.json`
 compiles the eight positive/negative controls. `scripts/audit_planner.py` runs
 the independent campaign with the existing pinned optional oracle environment.
-`compare.py --help` documents the manual comparison; it is not in default CI.
+`compare.py --help` documents the manual comparison; `counters.py --help`
+documents the separate pinned-binary process-counter probe. Neither runs in
+default CI.
 
 Primary basis: [OxCaml fork/join tutorial](https://oxcaml.org/documentation/tutorials/intro-to-parallelism-part-1/),
 [immutable arrays](https://oxcaml.org/documentation/miscellaneous-extensions/immutable-arrays/),
