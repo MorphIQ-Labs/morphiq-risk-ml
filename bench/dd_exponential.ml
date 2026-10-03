@@ -37,6 +37,9 @@ let () =
             print_endline Morphiq_risk.version;
             exit 0),
         "Library version" );
+      ( "--",
+        Arg.Rest (fun _ -> raise (Arg.Bad "unexpected positional argument")),
+        "End options" );
     ]
     (fun _ -> raise (Arg.Bad "unexpected positional argument"))
     "dd_exponential: fixed-corpus manual benchmark";
