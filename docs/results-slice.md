@@ -2,7 +2,11 @@
 
 Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Black and Bachelier) has prices, implied volatility and ten analytic Greeks. All are scored against FerroRisk's independent references, and every row with an expectation passes.
 
-## Exit criteria (SLICE.md)
+## Original exit criteria
+
+The [original slice proposal](https://github.com/MorphIQ-Labs/morphiq-risk-ml/blob/8125b70fa0c3fa62ab74d81196010545451c5796/SLICE.md) is retained in Git history.
+This section records the scalar experiment; current scope includes the planner
+and is described in [the documentation guide](README.md).
 
 ### 1. Accuracy
 
@@ -57,7 +61,7 @@ All nine compile-failure tests pin the compiler's diagnostic, so a change in why
 
 ## Not attempted in this slice
 
-The following were out of scope (see SLICE.md):
+The following were out of scope in the original proposal:
 - American models, Heston, Merton, local vol, surfaces, risk, SIMD and batch APIs.
 - Performance against Rust, which was explicitly not measured.
 

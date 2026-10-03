@@ -5,6 +5,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Public project documentation and licensing
+
+- Replace the internal-experiment introduction with installation instructions,
+  a certified pricing example, current capabilities and explicit limitations.
+  Add OCaml-specific contribution guidance and a documentation/evidence index.
+- License original contributions under Apache-2.0; preserve third-party notices
+  in source and installed documentation. Record the remaining AS241, CALERF,
+  and QD provenance questions explicitly in `THIRD_PARTY_NOTICES.md`.
+- Retire the original `SLICE.md` proposal to Git history. Remove research PDFs
+  from the tracked tree while retaining local copies, original-source links,
+  acquisition metadata, and hashes. Historical commits are unchanged.
+- No numerical code, API, reference fixture, dependency pin, or served value
+  changes. This cleanup does not publish a release or assert distribution
+  clearance for unresolved third-party material.
+
 ### 0.3.0 — scenario-planner integration (unreleased)
 
 - Add typed scalar-equivalent batches, deterministic paired/Cartesian scenario

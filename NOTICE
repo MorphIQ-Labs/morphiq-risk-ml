@@ -1,0 +1,18 @@
+morphiq-risk-ml
+Copyright 2026 Prophetizo LLC, doing business as MorphIQ Labs, and contributors.
+
+Original project contributions are licensed under the Apache License,
+Version 2.0. See LICENSE. Third-party material retains its own terms.
+
+This project includes material derived from Peter Jäckel's Let's Be Rational
+and implementations referencing QD, fdlibm, Cody CALERF, and Wichura AS241.
+See THIRD_PARTY_NOTICES.md and LICENSES/ for attribution, retained notices,
+the scope of each reference, and outstanding provenance questions.
+
+Research publications are identified by the bibliography and acquisition
+manifest in docs/research/. Their contents are not covered by the project
+license. Optional locally downloaded papers are not part of this distribution.
+
+FerroRisk is a separate project with separate licensing. References to it
+do not grant rights to its code or data. MorphIQ Labs names and trademarks
+are not licensed by this notice.

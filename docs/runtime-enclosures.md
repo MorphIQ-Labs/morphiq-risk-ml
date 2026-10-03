@@ -21,7 +21,7 @@ Knuth's TwoSum preserves the exact sum when its intermediates do not overflow;
 every intermediate is checked. Gradual underflow does not round a subnormal
 addition/difference: both operands are integer multiples of the least subnormal,
 and so is their exact sum. Repeated TwoSum implements Shewchuk's Grow-Expansion,
-Theorem 10, with zero elimination. See the [archived author report](research/1997-shewchuk-adaptive-precision-geometric-predicates.pdf).
+Theorem 10, with zero elimination. See the [author report](https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf).
 It preserves the exact sum while keeping components in magnitude order.
 Truncating to four words adds the outward sum of every discarded magnitude to
 the radius. The representation does not silently discard a small fifth word.

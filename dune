@@ -1,0 +1,10 @@
+(install
+ (package morphiq_risk_ml)
+ (section doc)
+ (files
+  NOTICE
+  THIRD_PARTY_NOTICES.md
+  (LICENSES/LetsBeRational.txt as LICENSES/LetsBeRational.txt)
+  (LICENSES/QD-BSD-3-Clause.txt as LICENSES/QD-BSD-3-Clause.txt)
+  (LICENSES/QD-COPYING.txt as LICENSES/QD-COPYING.txt)
+  (LICENSES/Sun-fdlibm.txt as LICENSES/Sun-fdlibm.txt)))

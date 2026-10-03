@@ -1,57 +1,130 @@
 # morphiq-risk-ml
 
-An internal experiment that rebuilds one slice of FerroRisk in OCaml. The slice and its exit criteria are defined in [SLICE.md](SLICE.md).
+An OCaml library for European option pricing, implied volatility, analytic
+Greeks, and deterministic portfolio scenarios.
 
-Contributor and agent guidance: [AGENTS.md](AGENTS.md). `CLAUDE.md` delegates to that same contract.
+The library implements Black–Scholes–Merton, Black-76, displaced Black, and
+Bachelier from their mathematical definitions. Model admission, volatility
+coordinates, and Greek units are represented in the public types. FerroRisk is
+an optional comparison implementation; it is not a dependency.
+
+**Status:** pre-1.0, with version 0.3.0 currently unreleased. The supported
+capabilities and numerical limitations below apply independently of release
+status. This project does not claim institutional deployment approval.
+
+## Capabilities
+
+| Capability | Contract |
+| --- | --- |
+| Prices | Calls and puts, including expiry and zero volatility |
+| Implied volatility | Positive roots require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly |
+| Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
+| Numerical acceptance | `Production` requires caller-selected absolute error limits and returns private value/error certificates or explicit failures |
+| Batch evaluation | Typed scalar-equivalent price, Greek, and externally supplied IV requests |
+| Scenario planning | Frozen portfolios and market inputs, paired or Cartesian shocks, bounded parallel execution, streamed outcomes, and deterministic weighted enclosures |
+
+The planner rolls valuation dates forward with fixed expiries and frozen
+markets. It reports post-expiry requests explicitly. Economic P&L, settlement,
+surface calibration, American exercise, stochastic-volatility models, SIMD,
+distributed execution, and durable resume are outside the current API.
+
+## Build and install from source
+
+The qualified toolchain is **OCaml 5.3.0 with Flambda**. You need opam and a C
+compiler; development checks also need Python 3 and the pinned test dependencies.
+CI runs on Linux x86-64, Linux ARM64, and macOS ARM64.
 
 ```sh
-opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml-option-flambda
-eval "$(opam env --switch=morphiq-risk-ml)"
-opam install . --deps-only --with-test --locked   # versions pinned in morphiq_risk_ml.opam.locked
-opam install ocamlformat.0.27.0
-dune build && dune test          # needs python3 stdlib for exact-rational bound checks
-dune build @fmt
-dune exec scripts/mutation/mutation.exe -- --core # seven required CI mutants
-dune exec scripts/mutation/mutation.exe   # full catalog (optional locally)
-dune exec --release bench/bench.exe
+git clone https://github.com/MorphIQ-Labs/morphiq-risk-ml.git
+cd morphiq-risk-ml
 
-# Regenerating oracles (mpmath 1.3.0), and the optional FerroRisk cross-check:
-python3 -m venv oracle/.venv && oracle/.venv/bin/pip install mpmath==1.3.0
-oracle/build.sh                  # regenerates fixtures and oracle/MANIFEST
-scripts/ferro_crosscheck.sh      # needs oracle/fetch.sh and the convert_* scripts
+# Create this switch once; reuse it if it already exists.
+opam switch create morphiq-risk-ml --packages=ocaml-variants.5.3.0+options,ocaml-option-flambda
+opam install --switch=morphiq-risk-ml . --locked
 ```
 
-The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Oracles: [docs/oracles.md](docs/oracles.md). Error analysis: [docs/error-analysis.md](docs/error-analysis.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).
+The opam/Dune package is `morphiq_risk_ml`; the OCaml module is `Morphiq_risk`.
+Add `(libraries morphiq_risk_ml)` to a consuming Dune executable or library.
+For reproducible integration, record the exact source commit and dependency
+lockfile. These instructions install the checkout, not a published opam release.
 
-Prices and finite Greeks in the committed corpora are checked against per-input analytical bounds, with exact-rational rounded-kernel checks and extra-bit references. Historical ULP targets remain additional quality gates. Positive IV results now require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly. Production-domain coverage and independent review still have the limitations listed in the [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).
+## Price with an explicit error limit
 
-Ordinary CI runs the full test suite on all three platforms, formatting, and the seven [core mutation checks](docs/mutation-policy.md). The full mutation catalog is a separate manual/weekly workflow; it does not run on each PR or push.
+```ocaml
+open Morphiq_risk
 
-The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, canonical filenames, and a separate list of book and implementation references.
+let price_call () =
+  match Vol.lognormal 0.2 with
+  | Error refusal -> Error (Production.Invalid_input refusal)
+  | Ok volatility -> (
+      match Production.Black76.admit
+        { forward = 100.; strike = 100.; time_to_expiry = 1.; rate = 0.02 }
+      with
+      | Error error -> Error error
+      | Ok admitted ->
+          Production.Black76.evaluate admitted Side.Call volatility
+            Production.Price ~max_error:1e-10)
 
-The [numerical backend contract](docs/numerical-backend-contract.md) defines required arithmetic semantics, optimization assessment, AD/FFI obligations, and conformance evidence. Native and bytecode arithmetic probes run in the ordinary suite.
+let () =
+  match price_call () with
+  | Ok certificate ->
+      Printf.printf "Price %.12g; absolute numerical error <= %.3g\n"
+        certificate.value certificate.absolute_error
+  | Error _ ->
+      failwith "Request refused: inspect the Production.error before retrying"
+```
 
-The [runtime enclosure foundation](docs/runtime-enclosures.md) and independent [model evaluator](docs/model-enclosures.md) support [certified IV acceptance](docs/certified-iv.md), including original-input boundary decisions. The fast price and Greek APIs remain separate from those runtime certificates.
+The example's error limit is illustrative; choose one appropriate to your units
+and application. Admission validates inputs but does not guarantee a successful
+evaluation. The certificate bounds numerical error in the exact model, not
+market-data or model risk. Applications must handle each `Production.error` and
+`Iv.t` outcome explicitly.
 
-The [financial type audit](docs/type-boundary-audit.md) records enforced invariants, trusted raw-value labeling, all Greek units, and remaining caller obligations. Veta retains both its time unit and volatility coordinate.
+Run the included portfolio example with one, two, or four workers:
 
-The candidate [production adapter](docs/production-boundary-design.md) requires
-explicit typed accuracy limits for prices and smooth Greeks and returns private
-certificates with outward absolute error. It preserves certified IV outcomes.
-Expiry/zero-volatility Greeks are explicitly unsupported by this adapter; its
-availability and institutional acceptance limits remain documented.
+```sh
+opam exec --switch=morphiq-risk-ml -- dune exec examples/scenario_job.exe -- --workers 2
+```
 
-## Scenario-planner integration
+## Numerical guarantees and limits
 
-`Planner.compile` freezes a portfolio, typed market factors and paired or
-Cartesian scenarios into an inspectable bounded plan. `Planner.execute` runs
-scalar-certified prices/Greeks sequentially or across domains, streams stable
-outcomes and emits deterministic weighted enclosures with explicit completeness.
-`Batch` also supports externally supplied IV requests. See the
-[scenario contract](docs/scenario-planner.md) for date rolls, units, resources,
-failures and replay. The work is on `integration/scenario-planner`; it has not
-been merged into main or accepted for institutional deployment.
+`Production` is the integration boundary for enforced accuracy. Certified prices
+cover expiry and zero variance where arithmetic resolves; certified smooth
+Greeks require positive maturity and volatility. Requests may fail because of
+unsupported boundaries, unresolved arithmetic, or an unmet accuracy limit.
 
-[Planner qualification](docs/results-planner.md) records the independent certificates,
-million-instrument campaign, memory/throughput limits and isolated
-[OxCaml decision](experiments/oxcaml/README.md).
+The fast `Black.*` and `Bachelier` price/Greek APIs have a separate, checked-corpus
+assurance scope. They do not perform runtime output certification. In particular,
+extreme valid inputs can return nonfinite fast Greeks
+([#62](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/62)). Planner
+compilation also has a known scaling issue with many distinct aggregation groups
+([#63](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/63)).
+
+The project retains independently generated references, analytical error bounds,
+exact-rational checks, negative type tests, mutation witnesses, and a determinism
+digest. These establish different facts; passing finite corpora is not a proof
+over every admitted input. See the
+[current assurance scope](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).
+
+## Documentation and contributions
+
+- [Documentation guide](docs/README.md): current contracts, derivations, and historical evidence.
+- [Public API](lib/morphiq_risk.mli), [model definitions](docs/model-contracts.md), and [production acceptance](docs/production-boundary-design.md).
+- [Scenario contract](docs/scenario-planner.md) and [measured planner results](docs/results-planner.md).
+- [Contributing](CONTRIBUTING.md): setup, checks, numerical changes, and pull requests.
+- [Compatibility policy](docs/stability.md) and [changelog](CHANGELOG.md).
+- [Issues](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues): bug reports and proposed work.
+
+## Licensing
+
+Original project contributions are licensed under [Apache-2.0](LICENSE).
+Copyright 2026 Prophetizo LLC, doing business as MorphIQ Labs, and contributors.
+Third-party material retains its own terms; see [NOTICE](NOTICE) and
+[third-party notices and provenance status](THIRD_PARTY_NOTICES.md). The latter
+records unresolved upstream provenance that must be settled before claiming
+complete distribution clearance. A project license does not resolve those items.
+
+Research papers retain their authors' and publishers' rights and are linked
+from the [bibliography](docs/research/README.md), rather than bundled in the
+source tree. This license applies to this project only; it does not license
+FerroRisk or other MorphIQ Labs repositories, or grant trademark rights.
