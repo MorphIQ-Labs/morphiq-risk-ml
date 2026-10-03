@@ -20,4 +20,5 @@ module Internal = struct
   module Lbr = Lbr
   module Iv_iteration = Iv_iteration
   module Enclosure = Enclosure
+  module Model_enclosure = Model_enclosure
 end

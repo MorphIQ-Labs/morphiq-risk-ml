@@ -37,6 +37,14 @@ type mutant = {
 let catalog =
   [
     {
+      id = "model-normalization";
+      file = "lib/model_enclosure.ml";
+      snippet = "let inv_sqrt_2pi = E.div one (E.sqrt (E.mul_float pi 2.0))";
+      replacement = "let inv_sqrt_2pi = E.exact 0.3989422804014327";
+      killer = "enclosure_reference";
+      mechanism = "normalization constant requires an enclosure of its low bits";
+    };
+    {
       id = "enclosure-fma-underflow";
       file = "lib/enclosure.ml";
       snippet = "(p, r, rounding r)";

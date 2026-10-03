@@ -28,3 +28,6 @@ val magnitude : t -> float
 val sign : t -> sign
 val compare_float : t -> float -> sign
 val error_of_float : t -> float -> float
+
+val add_error : t -> float -> t
+(** Enlarge a radius by a proved nonnegative error allowance. *)

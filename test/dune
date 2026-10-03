@@ -22,6 +22,13 @@
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
+ (name model_enclosure_reference)
+ (modules model_enclosure_reference)
+ (libraries morphiq_risk zarith)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/model_enclosures.txt})))
+
+(test
  (name fp_contract)
  (modules fp_contract)
  (modes byte exe)

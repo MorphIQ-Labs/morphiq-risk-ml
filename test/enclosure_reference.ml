@@ -142,6 +142,8 @@ let () =
                  | "exp" -> Some (E.exp a)
                  | "expm1" -> Some (E.expm1 a)
                  | "log" -> Some (E.log (E.exact (f ah)))
+                 | "normal_pdf" -> Some (Model_enclosure.pdf a)
+                 | "normal_cdf" -> Some (Model_enclosure.cdf a)
                  | "sqrt" -> Some (E.sqrt a)
                  | "split_sqrt" -> Some (E.sqrt (E.exact (f ah)))
                  | _ ->
