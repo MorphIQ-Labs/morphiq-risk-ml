@@ -21,6 +21,7 @@ from flint import arb, ctx, __FLINT_VERSION__
 from arb_reference_campaign import price, classify, positive_tail, classify_positive_tail
 from arb_greek_audit import derivative
 from arb_iv_audit import certify as certify_iv
+from canonical_dataset import load_dataset
 
 NAMES = ['price','delta','gamma','rho','theta','vega','vanna','volga','charm','veta','color']
 LIMIT = 1e-10
@@ -281,12 +282,14 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--worker',type=Path,default=Path('_build/default/bench/shadow.exe'))
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--input',type=Path,help='Captured canonical portfolio (JSON or gzip); quotes are preserved')
     parser.add_argument('--runs',type=int,default=3)
     parser.add_argument('--repeats',type=int,default=3)
     args=parser.parse_args()
     if args.runs<1 or args.repeats<1: parser.error('positive runs/repeats required')
     assert ql.__version__=='1.43' and importlib.metadata.version('python-flint')=='0.9.0'
-    rows=corpus();load0=os.getloadavg();runs=[];reference=None
+    dataset,rows=load_dataset(args.input) if args.input else (None,corpus())
+    load0=os.getloadavg();runs=[];reference=None
     for run in range(args.runs):
         result,stats=worker(args.worker,rows,args.repeats)
         if reference is None: reference=result
@@ -329,6 +332,13 @@ def main():
                 counts=counts,rows=records,aggregates=aggregates(rows,reference,comparators),findings=findings,failed_audits=bad,
                 deterministic_repetitions=args.runs*args.repeats,wrong_value_rejected=True,incomplete_aggregate_rejected=True,
                 scope='Synthetic diagnostic, not institutional portfolio representativeness or approval. Comparator discrepancies remain visible; no default CI dependency.')
+    if dataset is not None:
+        report.update(specification=dataset['specification'],
+                      input_artifact=dict(path=str(args.input),sha256=sha(args.input),rows_sha256=dataset['rows_sha256']),
+                      input_provenance={k:v for k,v in dataset.items() if k!='rows'},
+                      scope='Owner-authorized generated canonical scalar workload; no claim of observed institutional portfolio coverage or a latency SLA.')
+        for path in ['scripts/canonical_dataset.py','docs/canonical-dataset.md']:
+            report['source_sha256'][path]=sha(path)
     encoded=(json.dumps(report,indent=2,allow_nan=False)+'\n').encode()
     if args.output.suffix=='.gz':
         with args.output.open('wb') as stream:

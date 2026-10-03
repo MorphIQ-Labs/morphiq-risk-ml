@@ -8,6 +8,13 @@ The current development package still declares 0.1.0; the public outcome/type
 changes require the version assessment in [stability](stability.md) before a
 release is selected.
 
+The owner has since [reviewed and approved the delivered baseline](acceptance/owner-review-2026-10-03.md)
+and authorized canonical generated datasets. The resulting
+[720-row qualification](results-canonical-dataset.md) passes its fixed numerical
+criteria after explicit comparator adjudication. Those decisions and results
+are now retained; final candidate packaging and independent-review requirements
+must be assessed separately rather than treating all owner review as absent.
+
 ## Dossier and decision
 
 The [independent review package](independent-review-package.md) maps model,
