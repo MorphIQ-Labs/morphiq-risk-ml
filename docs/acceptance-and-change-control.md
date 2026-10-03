@@ -82,6 +82,9 @@ The manual [candidate workflow](../.github/workflows/candidate.yml) takes one
 full commit SHA already merged into main, repeats build/format/ordinary checks
 on all three platforms and verifies that platform's source artifact and
 isolated native/bytecode consumers. A separate manual job runs the full catalog.
+Each platform also replays all 720 canonical rows against the captured,
+independently certified price/Greek/IV output words without an oracle dependency.
+This is a replay identity check, distinct from the original independent audit.
 Reports, logs and source archives are retained as Actions artifacts for 90 days;
 download them into the controlled acceptance archive before that expiry.
 There is no publishing or tagging action. Dispatch with:

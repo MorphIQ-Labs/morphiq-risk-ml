@@ -26,6 +26,7 @@ def run(args,**kwargs):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--version',action='version',version='candidate artifact schema 1')
     parser.add_argument('--commit',required=True)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--switch',default='morphiq-risk-ml')

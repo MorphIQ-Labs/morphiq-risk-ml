@@ -295,3 +295,9 @@
   ../docs/evidence/canonical-portfolio.json.gz)
  (action
   (run python3 %{dep:../scripts/test_canonical_dataset.py})))
+
+(rule
+ (alias runtest)
+ (deps ../scripts/test_replay_canonical.py ../scripts/replay_canonical.py)
+ (action
+  (run python3 %{dep:../scripts/test_replay_canonical.py})))
