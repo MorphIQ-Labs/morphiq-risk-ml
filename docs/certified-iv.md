@@ -95,7 +95,7 @@ residual signs for all 5,575 fixture roots at 256-bit working precision; none
 is unresolved. [Versions and fixture/script hashes](evidence/arb-iv-reference.json)
 are retained. This independently checks the reference rounding decision beyond
 two mpmath precisions agreeing. It does not verify all OCaml executions or
-replace human review. See Johansson's [Arb paper](research/2016-johansson-arb-interval-arithmetic.pdf).
+replace human review. See Johansson's [Arb paper](https://arxiv.org/pdf/1611.02831v1).
 
 Reproduce outside ordinary CI with `python-flint==0.9.0`:
 

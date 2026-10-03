@@ -28,7 +28,7 @@ JMP is Joldes, Muller and Popescu, "Tight and rigorous error bounds for basic bu
 
 **Domain.** The primitive theorems assume no underflow or overflow. Scaling only the divisor does not establish this: `minsub/(3*minsub)` previously returned 0.5 instead of 1/3. Division now normalizes the divisor and extreme dividend before the reciprocal/product and restores their exponent difference. A dividend already in [2^-400,2^400] needs no normalization: multiplying by the normalized reciprocal leaves ample exponent room. Square root likewise normalizes by an even exponent. Independently scaling two result components costs at most one subnormal quantum, 2^-1074, in addition to the relative bound. A normal result alone never establishes the theorem's assumptions about intermediate values. `two_prod` is exact only when its residual is representable.
 
-The cited algorithms are also summarized, with later formalized bounds, in [Boldo, Jeannerod, Melquiond and Muller, Floating-point arithmetic, §5](https://doi.org/10.1017/S0962492922000101). We retain the conservative 5u² multiplication bound; that review gives the tighter 4u² for DWTimesDW3. Local PDFs, archived versions, checksums and acquisition provenance are indexed in the [research library](research/README.md).
+The cited algorithms are also summarized, with later formalized bounds, in [Boldo, Jeannerod, Melquiond and Muller, Floating-point arithmetic, §5](https://doi.org/10.1017/S0962492922000101). We retain the conservative 5u² multiplication bound; that review gives the tighter 4u² for DWTimesDW3. Original-source links, inspected versions, checksums and acquisition provenance are indexed in the [research bibliography](research/README.md).
 
 ## 1. Elementary functions (`Internal.Elementary`)
 

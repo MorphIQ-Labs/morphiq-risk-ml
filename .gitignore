@@ -4,3 +4,9 @@ _build/
 oracle/.venv/
 oracle/fixtures/*.txt
 __pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+_opam/
+# Papers retain third-party rights. Keep optional local copies out of distributions.
+docs/research/*.pdf

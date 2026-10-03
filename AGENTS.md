@@ -24,7 +24,7 @@ research and canonical implementations; it is not a line-by-line Rust port.
 FerroRisk is an optional independent comparison, not a runtime dependency or
 the definition of correctness.
 
-Read [SLICE.md](SLICE.md), [model contracts](docs/model-contracts.md),
+Read the [documentation guide](docs/README.md), [model contracts](docs/model-contracts.md),
 [error analysis](docs/error-analysis.md), [oracle methodology](docs/oracles.md),
 [determinism](docs/determinism.md) and [stability](docs/stability.md) before
 changing behavior. Consult the relevant `docs/results-*.md` evidence as well;
@@ -65,8 +65,9 @@ fixes should be contributed to their owner and consumed at a recorded version.
   generated and ignored.
 - `scripts/mutation/`: curated mechanisms, core selection and selection tests.
 - `bench/bench.ml`: scalar throughput harness; timings are host-dependent.
-- `docs/`: contracts, derivations and evidence; `docs/research/`: original PDFs,
-  provenance manifest, canonical filenames and SHA-256 checksums.
+- `docs/`: contracts, derivations and evidence; `docs/research/`: bibliography,
+  provenance manifest, canonical filenames and SHA-256 checksums. Downloaded
+  PDFs may be retained locally but are ignored and are not distributed.
 - `.github/workflows/`: GitHub Actions; `dune-project`: package/dependencies;
   `morphiq_risk_ml.opam.locked`: locked dependencies; `.ocamlformat`: formatter.
 
@@ -211,7 +212,7 @@ failure; never turn a failed computation into a plausible successful value.
 Missing reference coverage is not itself mathematical invalidity. An offered
 production capability restriction must be documented as such.
 
-Keep archived PDFs unchanged, including notices. Use
+Keep locally archived PDFs unchanged, including notices; do not commit them. Use
 `YYYY-first-author-short-title[-version].pdf`, record actual acquisition and
 version in the research manifest, and update `SHA256SUMS` and links together.
 Record unavailable papers honestly. Archiving a paper does not validate its
