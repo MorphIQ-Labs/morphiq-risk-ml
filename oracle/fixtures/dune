@@ -79,3 +79,11 @@
   (with-stdout-to
    %{target}
    (run gunzip -c %{deps}))))
+
+(rule
+ (deps boundary_greeks.txt.gz)
+ (target boundary_greeks.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))

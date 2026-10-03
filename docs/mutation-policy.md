@@ -77,3 +77,11 @@ controls cover the first attempt's exponential remainder, the exact product
 quantum shortcut and the fallback needed to preserve full-evaluator availability.
 The default core remains the same seven. Both arithmetic configurations run
 the independent ordinary primitive and model reference checks.
+
+## Zero-volatility boundary regressions
+
+The catalog now has 43 mechanisms. Three optional witnesses cover Black ATM
+time smoothness, Bachelier ATM rho and the generally nonzero boundary veta.
+Their designated guard is `boundary_greeks`, which checks independent price
+derivatives and exact varied-coordinate identities. None is added to the
+seven default core mechanisms.

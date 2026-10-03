@@ -4,6 +4,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Zero-volatility ATM Greek semantics
+
+- At positive maturity and zero volatility, Black-76/displaced/Bachelier ATM rho and theta are now zero instead of `Payoff_kink`. Their veta exists and is evaluated from the time derivative of right vega. BSM with S=K and r=q has the same theta/veta identity; its rho remains a kink because varying r holds q fixed.
+- Newly served boundary veta requires a finite nearest-even runtime enclosure certificate. `Greeks.Numerical_failure` distinguishes unresolved arithmetic/rounding from an undefined derivative. This adds an exhaustive public variant and changes refusal classes: it is a breaking change under the stability policy. Other fast Greeks keep their current assurance scope.
+- Replay changes only 350 theta, 270 rho and 350 veta fields from refusal to value; prices, IVs and all previously served Greek values are unchanged. The new digest is `f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b`. FLINT/Arb independently verifies all 532 reference rounding cells.
+- The new generator differentiates ATM prices at 400/800 digits and cross-checks the closed form, retaining 532 references including cancellation, exact displaced sums and extreme maturities. The prior positive-maturity Greek corpus skipped zero volatility and therefore did not cover this defect. See [the derivation and compatibility evidence](docs/zero-volatility-greeks.md).
+
 ### Adaptive certified implied volatility
 
 - A two-word enclosed attempt precedes the existing four-word evaluator. Both enforce the same exact-input root rounding and boundary certificates; unresolved first attempts retry at full precision. Arithmetic and model code share derived residual/tail identities with immutable configurations and separate scalar types.

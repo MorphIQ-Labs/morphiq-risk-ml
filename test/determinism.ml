@@ -6,8 +6,8 @@
    same bits.
 
    The library uses no platform libm (Elementary), so the only sources of
-   difference would be non-IEEE arithmetic or a compiler contracting a*b+c
-   into an fma, which OCaml does not do. *)
+   difference include non-IEEE arithmetic or implicit multiply-add contraction.
+   Morphiq_fp prevents contraction; explicit Float.fma remains intentional. *)
 
 open Morphiq_risk
 
@@ -18,7 +18,9 @@ let emit x =
 
 let emit_result = function
   | Ok v -> emit v
-  | Error _ -> Buffer.add_string buf "refused\n"
+  | Error Greeks.Payoff_kink -> Buffer.add_string buf "refused\n"
+  | Error Greeks.Numerical_failure ->
+      Buffer.add_string buf "greek_numerical_failure\n"
 
 let emit_iv to_float = function
   | Ok (Iv.Root v) -> emit (to_float v)

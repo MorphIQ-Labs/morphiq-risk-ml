@@ -2,10 +2,19 @@
 
     Time Greeks are [-d/dT / 365]: per calendar day, with remaining maturity
     decreasing. Volatility Greeks are per unit volatility in the model's own
-    coordinate. Where the payoff has a kink (at the strike, at expiry or at zero
-    variance) a spot or time derivative does not exist and is refused. *)
+    coordinate. Kinks are specific to the varied coordinate. At positive
+    maturity and zero-volatility ATM, forward rho/theta are zero and the time
+    derivative of right vega exists; spot derivatives remain undefined. *)
 
-type why = Payoff_kink
+type why =
+  | Payoff_kink
+  | Numerical_failure
+      (** [Payoff_kink] means the requested derivative is undefined.
+          [Numerical_failure] means the zero-volatility ATM veta enclosure could
+          not establish a finite rounded result. It is not a usable approximate
+          value. Other fast Greeks retain their documented checked-input
+          assurance scope. *)
+
 type 'a value = ('a, why) result
 
 type 'coordinate t = {

@@ -245,3 +245,10 @@
   (glob_files ../oracle/fixtures/*.txt.gz))
  (action
   (run python3 %{dep:../oracle/write_manifest.py})))
+
+(test
+ (name boundary_greeks)
+ (modules boundary_greeks)
+ (libraries morphiq_risk greek_values)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/boundary_greeks.txt})))

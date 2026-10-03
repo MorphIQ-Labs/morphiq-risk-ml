@@ -1,0 +1,12 @@
+baseline passes (46 s)
+killed    zero-variance-black-time by boundary_greeks
+killed    zero-variance-normal-rho by boundary_greeks
+killed    zero-variance-veta by boundary_greeks
+killed    certified-rounding-cell by certified_iv_reference
+killed    split-root-nonoverlap by dd_reference
+killed    dd-scale-nonoverlap by dd_reference
+killed    scaled-exp-prefactor by numerical_regressions
+killed    reference-expansion by numerical_regressions
+killed    greeks-theta-dd by oracle_greeks
+killed    bachelier-theta-dd by oracle_greeks
+10 of 10 mutants killed as catalogued

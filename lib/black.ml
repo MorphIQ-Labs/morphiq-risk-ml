@@ -181,8 +181,8 @@ let live_price side (c : Coordinates.live) sigma =
   let { Dd.hi = s; lo = sl } =
     Dd.mul_float { Dd.hi = c.root_time; lo = c.root_time_low } sigma
   in
-  (* θ (asset - cash) to ~106 bits: the zero-variance price is its correctly
-     rounded value, the same boundary the inverse classifies quotes against. *)
+  (* θ (asset - cash) to ~106 bits. This fast price is an approximation;
+     the public inverse separately encloses the exact original-input boundary. *)
   let intrinsic () =
     let _, _, forward_intrinsic = precise_legs c in
     Dd.mul_float forward_intrinsic theta
@@ -376,20 +376,30 @@ let live_greeks side (c : Coordinates.live) sigma =
   let rho_forward () = Ok (-.time *. price) in
   if sigma = 0.0 || (s = 0.0 && c.x <> 0.0) then
     (* Zero variance: the discounted payoff max(θ(A - C), 0). *)
-    if c.x = 0.0 then
+    if c.x = 0.0 && c.x_low = 0.0 then
+      let smooth_time =
+        q = r
+        && c.original_spot = c.original_strike
+        && c.original_spot_low = c.original_strike_low
+      in
       {
         Greeks.delta = Greeks.kink;
         gamma = Greeks.kink;
-        theta = Greeks.kink;
+        theta = (if smooth_time then Greeks.daily 0.0 else Greeks.kink);
         vega =
           Ok
             (Units.per_volatility
                (up (c.asset *. rt *. Normalised_black.inv_sqrt_2pi)));
-        rho = Greeks.kink;
+        rho = (if c.tied && smooth_time then Ok 0.0 else Greeks.kink);
         vanna = Greeks.kink;
         volga = Ok (Units.per_volatility_squared 0.0);
         charm = Greeks.kink;
-        veta = Greeks.kink;
+        veta =
+          (if smooth_time then
+             Result.map Units.volatility_time_rate
+               (Boundary_greeks.veta ~weight:c.original_spot
+                  ~weight_low:c.original_spot_low ~rate:r ~time)
+           else Greeks.kink);
         color = Greeks.kink;
       }
     else
