@@ -51,6 +51,8 @@ def main():
         certificates=count,scenarios=27,instruments=8,workers=[1,2,3,4],identical=True,
         corrupt_certificate_rejected=True,truncated_output_rejected=True,
         binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest(),
+        audit_context_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+        audit_sources={name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest() for name in ('audit_planner.py','shadow_campaign.py','arb_reference_campaign.py','arb_greek_audit.py')},
         output_sha256=hashlib.sha256(runs[0].encode()).hexdigest(),
         python_flint=importlib.metadata.version('python-flint'),flint=flint.__FLINT_VERSION__)
     args.output.write_text(json.dumps(report,indent=2)+'\n')

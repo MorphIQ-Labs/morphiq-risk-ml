@@ -1,0 +1,56 @@
+{
+  "source": "f05ec395f3fcaf3f12429c3f9dbbbae7655acf63",
+  "patch_sha256": "9c39c13dcf2fc2d2a4a4d178b16f51941947f15ef192068670a79ec13e595385",
+  "checks": [
+    {
+      "command": [
+        "bench/ox_worker.exe"
+      ],
+      "returncode": 0,
+      "stdout": "canonical mode-checked fork/join: 32 certified prices\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "test/determinism.exe",
+        "test/determinism.digest"
+      ],
+      "returncode": 0,
+      "stdout": "determinism digest f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b over 6069960 bytes\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "test/consistency.exe"
+      ],
+      "returncode": 0,
+      "stdout": "translation cases 32, self-consistency cases 96, failures 0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "test/production_boundary.exe"
+      ],
+      "returncode": 0,
+      "stdout": "2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "test/iv_termination.exe"
+      ],
+      "returncode": 0,
+      "stdout": "IV termination, failed proposals, exponent range and arithmetic failures passed\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "test/batch_iv_reference.exe",
+        "_build/default/oracle/fixtures/iv.txt"
+      ],
+      "returncode": 0,
+      "stdout": "8330 batch IV fixture outcomes equal scalar; served roots equal independent reference\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+--- a/lib/adaptive_iv.ml
++++ b/lib/adaptive_iv.ml
+@@ -16,6 +16,7 @@
+     (E : Enclosure.S)
+     (M : Model_enclosure.S with type scalar = E.t)
+     (Solver : sig
++@@ portable
+       val solve :
+         ?max_steps:int ->
+         prepare_residual:(unit -> E.t -> E.t) ->
+--- a/lib/adaptive_iv.mli
++++ b/lib/adaptive_iv.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Finite refinement between two enclosed implementations of the same model. *)
+ type model =
+   | Black of {
+--- a/lib/bachelier.mli
++++ b/lib/bachelier.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** European options under the normal (Bachelier) model. *)
+ 
+ type inputs = {
+--- a/lib/black.ml
++++ b/lib/black.ml
+@@ -135,12 +135,14 @@
+ end
+ 
+ module type CARRY = sig
++@@ portable
+   type inputs
+ 
+   val coordinates : inputs -> (Coordinates.t, Refusal.t) result
+ end
+ 
+ module type MODEL = sig
++@@ portable
+   type inputs
+   type admitted
+ 
+--- a/lib/black.mli
++++ b/lib/black.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** The lognormal (Black) family on one kernel.
+ 
+     BSM, Black-76 and displaced Black are applications of {!Make} to a {!CARRY}.
+@@ -7,6 +8,7 @@
+     applicative functor can share its admitted type. *)
+ 
+ module Coordinates : sig
++@@ portable
+   type live = private {
+     asset : float;  (** [S e^(-qT)], scaled by [2^-exponent]. *)
+     cash : float;  (** [K e^(-rT)], scaled by [2^-exponent]. *)
+@@ -43,12 +45,14 @@
+ end
+ 
+ module type CARRY = sig
++@@ portable
+   type inputs
+ 
+   val coordinates : inputs -> (Coordinates.t, Refusal.t) result
+ end
+ 
+ module type MODEL = sig
++@@ portable
+   type inputs
+ 
+   type admitted
+@@ -72,6 +76,7 @@
+ module Make (C : CARRY) : MODEL with type inputs = C.inputs
+ 
+ module Bsm_carry : sig
++@@ portable
+   type inputs = {
+     spot : float;
+     strike : float;
+@@ -84,6 +89,7 @@
+ end
+ 
+ module Black76_carry : sig
++@@ portable
+   type inputs = {
+     forward : float;
+     strike : float;
+@@ -95,6 +101,7 @@
+ end
+ 
+ module Displaced_carry : sig
++@@ portable
+   type inputs = {
+     forward : float;
+     strike : float;
+--- a/lib/boundary_greeks.mli
++++ b/lib/boundary_greeks.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ val veta :
+   weight:float ->
+   weight_low:float ->
+--- a/lib/certified_iv.mli
++++ b/lib/certified_iv.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Exact-model inverse acceptance; see docs/certified-iv.md. *)
+ type outcome =
+   | Root of float
+@@ -25,6 +26,7 @@
+     happens only after boundary classification. *)
+ 
+ module Fast : sig
++@@ portable
+   val solve :
+     ?max_steps:int ->
+     prepare_residual:(unit -> Enclosure.Fast.t -> Enclosure.Fast.t) ->
+--- a/lib/cody.mli
++++ b/lib/cody.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Cody's error-function approximations (netlib specfun [CALERF]). *)
+ 
+ val thresh : float
+--- a/lib/dd.ml
++++ b/lib/dd.ml
+@@ -1,3 +1,4 @@
++let ( .:() ) = Iarray.get
+ (* Double-double ("double-word") arithmetic: a value is the unevaluated sum
+    hi + lo with hi = RN(hi + lo) (Dekker 1971).
+ 
+@@ -105,7 +106,7 @@
+   for n = 1 to 17 do
+     a.(n) <- div a.(n - 1) (of_float (float n))
+   done;
+-  Array.sub a 3 15
++  Iarray.of_array (Array.sub a 3 15)
+ 
+ let inv_k = 1.0 /. 512.0
+ 
+@@ -117,14 +118,14 @@
+   let p = mul r r in
+   let s = ref (add r (scale p (-1))) in
+   let p = ref (mul p r) in
+-  let t = ref (mul !p inverse_factorials.(0)) in
++  let t = ref (mul !p inverse_factorials.:(0)) in
+   let i = ref 0 in
+   let continue = ref true in
+   while !continue do
+     s := add !s !t;
+     p := mul !p r;
+     incr i;
+-    t := mul !p inverse_factorials.(!i);
++    t := mul !p inverse_factorials.:(!i);
+     continue := Float.abs (to_float !t) > inv_k *. 0x1p-104 && !i < 5
+   done;
+   s := add !s !t;
+@@ -158,7 +159,7 @@
+ let series_terms = 22
+ 
+ let reciprocals =
+-  Array.init (series_terms + 1) (fun k ->
++  Iarray.init (series_terms + 1) (fun k ->
+       div (of_float 1.0) (of_float (float ((2 * k) + 1))))
+ 
+ (* ln m for m in [sqrt 1/2, sqrt 2]: 2 atanh u, u = (m-1)/(m+1), |u| <= 0.1716,
+@@ -166,9 +167,9 @@
+ let log_reduced m =
+   let u = div (of_float (m -. 1.0)) (add (of_float m) (of_float 1.0)) in
+   let v = mul u u in
+-  let acc = ref reciprocals.(series_terms) in
++  let acc = ref reciprocals.:(series_terms) in
+   for k = series_terms - 1 downto 0 do
+-    acc := add (mul !acc v) reciprocals.(k)
++    acc := add (mul !acc v) reciprocals.:(k)
+   done;
+   mul_float (mul u !acc) 2.0
+ 
+--- a/lib/dd.mli
++++ b/lib/dd.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Double-double arithmetic: [hi + lo] with [hi = RN(hi + lo)]. The primitives
+     are the published algorithms with proved relative error bounds (u = 2^-53,
+     no underflow or overflow): [add] 3u^2 + 13u^3, [add_float] 2u^2, [mul_float]
+--- a/lib/elementary.ml
++++ b/lib/elementary.ml
+@@ -1,3 +1,4 @@
++let ( .:() ) = Iarray.get
+ (* Elementary functions from IEEE-754 basic operations and fma only.
+ 
+    The platform libm is not used: its results differ between systems
+@@ -19,16 +20,16 @@
+ (* Horner evaluation of c0 + c1 v + c2 v^2 + ... from a coefficient array,
+    highest power first, one explicit fused multiply-add per step. *)
+ let horner coefficients v =
+-  let n = Array.length coefficients in
+-  let acc = ref coefficients.(n - 1) in
++  let n = Iarray.length coefficients in
++  let acc = ref coefficients.:(n - 1) in
+   for i = n - 2 downto 0 do
+-    acc := Float.fma v !acc coefficients.(i)
++    acc := Float.fma v !acc coefficients.:(i)
+   done;
+   !acc
+ 
+ (* 1/(n+1)! for n = 0..13, correctly rounded (checked against mpmath). *)
+ let exp_coefficients =
+-  [|
++  [:
+     1.0;
+     0.5;
+     0x1.5555555555555p-3;
+@@ -43,7 +44,7 @@
+     0x1.1eed8eff8d898p-29;
+     0x1.6124613a86d09p-33;
+     0x1.93974a8c07c9dp-37;
+-  |]
++  :]
+ 
+ (* e^r - 1 = r Σ r^n/(n+1)! for |r| <= ln 2 / 2 + a little; the degree-14
+    truncation is below 2^-60 relative on that interval. *)
+@@ -53,7 +54,7 @@
+    1/[22! (1-1/23)] < 2^-69. expm1 is then one Horner evaluation, without
+    recombining across a reduction. *)
+ let expm1_coefficients =
+-  [|
++  [:
+     0x1.0000000000000p+0;
+     0x1.0000000000000p-1;
+     0x1.5555555555555p-3;
+@@ -75,7 +76,7 @@
+     0x1.2f49b46814157p-57;
+     0x1.e542ba4020225p-62;
+     0x1.71b8ef6dcf572p-66;
+-  |]
++  :]
+ 
+ let expm1_direct x = x *. horner expm1_coefficients x
+ 
+@@ -114,7 +115,7 @@
+ 
+ (* 1/(2k+1) for k = 1..10, correctly rounded (checked against mpmath). *)
+ let atanh_coefficients =
+-  [|
++  [:
+     0x1.5555555555555p-2;
+     0x1.999999999999ap-3;
+     0x1.2492492492492p-3;
+@@ -125,7 +126,7 @@
+     0x1.e1e1e1e1e1e1ep-5;
+     0x1.af286bca1af28p-5;
+     0x1.8618618618618p-5;
+-  |]
++  :]
+ 
+ (* ln(1 + f) for f in [sqrt(1/2) - 1, sqrt 2 - 1], as 2 atanh(f / (2 + f)):
+    u = f/(2+f), |u| <= 0.1716, v = u^2 <= 0.0295, and the series
+--- a/lib/elementary.mli
++++ b/lib/elementary.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Deterministic elementary functions: IEEE-754 basic operations and fma only,
+     so they give the same bits on every conforming platform, unlike the system
+     libm. About 1 ULP (test/oracle_elementary.ml). *)
+--- a/lib/enclosure.ml
++++ b/lib/enclosure.ml
+@@ -2,6 +2,7 @@
+    precision is an error bound: all discarded words and tails remain enclosed.
+    See docs/runtime-enclosures.md and docs/adaptive-certification.md. *)
+ module type S = sig
++@@ portable
+   exception Unresolved of string
+ 
+   type t = private { hi : float; lo : float; tail : float list; error : float }
+@@ -39,6 +40,7 @@
+ end
+ 
+ module Make (Config : sig
++@@ portable
+   val words : int
+   val exp_terms : int
+   val log_terms : int
+--- a/lib/enclosure.mli
++++ b/lib/enclosure.mli
+@@ -1,6 +1,8 @@
++@@ portable
+ (** Runtime enclosures; fixed work configurations share the same proved residual
+     and remainder identities. Neither is production qualification. *)
+ module type S = sig
++@@ portable
+   exception Unresolved of string
+ 
+   type t = private { hi : float; lo : float; tail : float list; error : float }
+--- a/lib/fp/morphiq_fp.ml
++++ b/lib/fp/morphiq_fp.ml
+@@ -11,5 +11,5 @@
+    Float.fma. *)
+ 
+ external ( *. ) : (float[@unboxed]) -> (float[@unboxed]) -> (float[@unboxed])
+-  = "morphiq_fp_mul_byte" "morphiq_fp_mul"
++  @@ portable = "morphiq_fp_mul_byte" "morphiq_fp_mul"
+ [@@noalloc]
+--- a/lib/greeks.mli
++++ b/lib/greeks.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** First, second and mixed sensitivities of a European price.
+ 
+     Time Greeks are [-d/dT / 365]: per calendar day, with remaining maturity
+--- a/lib/iv.mli
++++ b/lib/iv.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** The outcome of inverting a quote for its volatility.
+ 
+     Mathematical classifications and computational failures are distinct.
+--- a/lib/iv_iteration.mli
++++ b/lib/iv_iteration.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Bounded inversion of an increasing binary64 evaluator. This is an arithmetic
+     termination contract, not a bound on the evaluator's error against a real
+     function. *)
+--- a/lib/lbr.mli
++++ b/lib/lbr.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Implied normalised Black volatility (Jäckel, "Let's Be Rational"). *)
+ 
+ val solve : ?beta_bar:float -> ?ln_beta:float -> float -> float -> float
+--- a/lib/model_enclosure.ml
++++ b/lib/model_enclosure.ml
+@@ -11,6 +11,7 @@
+   | Color
+ 
+ module type S = sig
++@@ portable
+   type scalar
+ 
+   type t
+@@ -56,6 +57,7 @@
+ module Make
+     (E : Enclosure.S)
+     (Config : sig
++@@ portable
+       val atan_terms : int
+       val normal_terms : int
+       val mills_steps : int
+--- a/lib/model_enclosure.mli
++++ b/lib/model_enclosure.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ type sensitivity =
+   | Delta
+   | Gamma
+@@ -11,6 +12,7 @@
+   | Color
+ 
+ module type S = sig
++@@ portable
+   type scalar
+ 
+   type t
+--- a/lib/normal.mli
++++ b/lib/normal.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Standard normal distribution.
+ 
+     Every function returns NaN for a NaN argument. *)
+--- a/lib/normal_dd.mli
++++ b/lib/normal_dd.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** The standard normal density and distribution in double-double. *)
+ 
+ val limit : float
+--- a/lib/normalised_black.ml
++++ b/lib/normalised_black.ml
+@@ -1,3 +1,4 @@
++let ( .:() ) = Iarray.get
+ (* ======================================================================================
+    Portions of this file are derived from "Let's Be Rational", whose reference
+    source resides at www.jaeckel.org/LetsBeRational.7z .
+@@ -362,10 +363,10 @@
+ 
+   (* Highest-order term first; the reference adds terms beyond A4 according to
+      the distance -h - t + τ + 1/2 from the region's upper border. *)
+-  let high_terms = [| a16; a15; a14; a13; a12; a11; a10; a9; a8; a7; a6; a5 |]
++  let high_terms = [: a16; a15; a14; a13; a12; a11; a10; a9; a8; a7; a6; a5 :]
+ 
+   let thresholds =
+-    [|
++    [:
+       12.347;
+       12.958;
+       13.729;
+@@ -378,12 +379,12 @@
+       38.93;
+       57.171;
+       99.347;
+-    |]
++    :]
+ 
+   (* Index of the first threshold above v (std::upper_bound). *)
+   let upper_bound v =
+-    let n = Array.length thresholds in
+-    let rec go i = if i < n && thresholds.(i) <= v then go (i + 1) else i in
++    let n = Iarray.length thresholds in
++    let rec go i = if i < n && thresholds.:(i) <= v then go (i + 1) else i in
+     go 0
+ 
+   (* The scaled function b / vega. *)
+@@ -393,9 +394,9 @@
+     let q = h /. r *. (h /. r) in
+     let omega = ref 0.0 in
+     for
+-      i = upper_bound (-.h -. t +. tau +. 0.5) to Array.length high_terms - 1
++      i = upper_bound (-.h -. t +. tau +. 0.5) to Iarray.length high_terms - 1
+     do
+-      omega := q *. (high_terms.(i) e +. !omega)
++      omega := q *. (high_terms.:(i) e +. !omega)
+     done;
+     let omega =
+       a0 e
+--- a/lib/normalised_black.mli
++++ b/lib/normalised_black.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Jäckel's normalised Black function for an out-of-the-money option. *)
+ 
+ val scaled : ?k:int -> float -> float -> float -> float -> float -> float
+--- a/lib/production.ml
++++ b/lib/production.ml
+@@ -31,6 +31,7 @@
+   | Color : ('c, Units.per_calendar_day Units.time_rate) quantity
+ 
+ module type MODEL = sig
++@@ portable
+   type inputs
+   type coordinate
+   type admitted
+@@ -135,6 +136,7 @@
+         }
+ 
+ module type SOURCE = sig
++@@ portable
+   type inputs
+   type admitted
+   type coordinate
+--- a/lib/production.mli
++++ b/lib/production.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Enforced per-request numerical acceptance for the scalar European slice.
+     Intended use and exclusions: [docs/production-boundary-design.md]. This API
+     is a candidate capability, not institutional deployment approval. *)
+@@ -35,6 +36,7 @@
+   | Color : ('c, Units.per_calendar_day Units.time_rate) quantity
+ 
+ module type MODEL = sig
++@@ portable
+   type inputs
+   type coordinate
+   type admitted
+--- a/lib/refusal.mli
++++ b/lib/refusal.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Why an input is not admitted.
+ 
+     The slice has no model/exercise-style refusal. Exercise style is not an
+--- a/lib/side.mli
++++ b/lib/side.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ type t = Call | Put
+ 
+ val sign : t -> float
+--- a/lib/split.mli
++++ b/lib/split.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Error-free transformations, and an exponential with an exactly split
+     argument. *)
+ 
+--- a/lib/units.mli
++++ b/lib/units.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Units carried by Greeks, as types.
+ 
+     A time derivative is quoted per calendar day (FerroRisk convention:
+--- a/lib/vol.mli
++++ b/lib/vol.mli
+@@ -1,3 +1,4 @@
++@@ portable
+ (** Volatility, tagged with its coordinate.
+ 
+     A lognormal (Black) volatility is dimensionless per root year. A normal

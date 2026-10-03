@@ -51,3 +51,7 @@ outcomes and emits deterministic weighted enclosures with explicit completeness.
 [scenario contract](docs/scenario-planner.md) for date rolls, units, resources,
 failures and replay. The work is on `integration/scenario-planner`; it has not
 been merged into main or accepted for institutional deployment.
+
+[Planner qualification](docs/results-planner.md) records the independent certificates,
+million-instrument campaign, memory/throughput limits and isolated
+[OxCaml decision](experiments/oxcaml/README.md).
