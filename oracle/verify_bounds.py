@@ -11,6 +11,7 @@ import sys
 import re
 from pathlib import Path
 import kernel_certificates
+import dd_exp_coefficients
 
 u = F(1, 2**53)
 u2 = u*u
@@ -38,26 +39,23 @@ def exp_interval(x):
 
 z = F(347,1000)
 assert upper/2 + 8*u*746 < z
-elow, _ = exp_interval(z)
-assert z*elow/(elow-1) < F(121,100)
-weights = F(0)
-for j in range(9):
-    _, upper_exp = exp_interval(z/F(2**(9-j)))
-    amplitude = upper_exp-1
-    weights += amplitude/(2-amplitude)
-assert weights*inflate < F(24,100)
 assert (exp_interval(z)[1]-1)*inflate < F(416,1000)
 
-# expm1 at |r| < .0007. Seven additions (including the quadratic term),
-# powers and generated factorials, and either the stopping rule or degree-8 cap.
-r = F(7, 10000)
-coeff = ((1+div)**8-1)/u2
-series = ((1+add)**7-1)/u2 + 5*r/2 + (40+coeff)*r*r/(6*(1-r))
-cap_tail = r**8/(factorial(9)*(1-r/10))/u2
-stop_tail = F(1, 2**113)/(5*(1-r/6))/u2
-# The sum of |s_j|/(2-|s_j|) in the nine doublings is < .24.
-# Their relative error transport is < 1.21 on |512r| <= .347.
-reduced = F(121, 100)*(series*F(1001,1000) + max(cap_tail, stop_tail)/(1-r) + 9*add/u2 + F(6, 5))*inflate
+# Direct degree-24 Taylor/Horner expm1. For coefficient k, at most k
+# multiplications and k additions affect r^k/k!. Summing absolute weights
+# gives sum k*z^(k-1)/k! <= exp(z). Splitting each exact rational coefficient
+# incurs at most u² relative error, also bounded by that sum. Divide by
+# |expm1(r)/r| >= 1-z, valid on both sides of zero.
+coefficients = dd_exp_coefficients.check()
+for k, (hi, lo) in enumerate(coefficients, 1):
+    exact = F(1, factorial(k))
+    assert abs(F(hi)+F(lo)-exact) <= u2*exact
+    assert hi+lo == hi
+N = len(coefficients)
+assert N == 24
+rounding = ((add+mul)/u2+1)*exp_interval(z)[1]/(1-z)
+tail = z**N/(factorial(N+1)*(1-z/F(N+2))*(1-z))/u2
+reduced = (rounding+tail)*inflate
 assert reduced < 80
 # |expm1(z)|/exp(z) < .416 for |z| <= .347; one final DD add,
 # plus reduction error <= (2 + 3|x|)u².
@@ -172,8 +170,8 @@ assert cdf_error < 512
 # Finite-exponent noise in the DD elementary/normal compositions. Primitive
 # allowances are checked exactly on execution (test/exact_dyadic.ml). Fewer
 # than 2^14 primitive calls each contribute <=32 quanta; the written absolute
-# transport bound is 2^60, including series sensitivity and nine doublings.
-assert 3**9 < 2**15
+# transport bound is 2^60, including series sensitivity and Horner evaluation.
+assert 1/(1-z) < 2 # reduced Horner perturbation transport
 assert exp_interval(F(19))[1] < 2**28
 transport = F(1)
 for k in range(1, 402):
@@ -181,7 +179,7 @@ for k in range(1, 402):
 assert transport < 2**28
 assert 7*2**28 < 2**31
 assert 401*7*2**28 < 2**40
-assert (2**40 + 2**31)*(2**15 + 1)*16 < 2**60
+assert (2**40 + 2**31)*(2 + 1)*16 < 2**60
 finite_noise = F(2**80, 2**1074)
 assert 2**14 * 32 * 2**60 < 2**80
 # Minimum nonzero magnitude needing a relative small-expm1 certificate is

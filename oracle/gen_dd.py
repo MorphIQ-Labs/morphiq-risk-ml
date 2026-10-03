@@ -35,6 +35,27 @@ def corpus():
         for hi, lo in ((x, 0.), pair(x)):
             for fn in ('exp', 'expm1'):
                 yield fn, hi, lo, 0., 0.
+    # Deterministic exponential boundary sweep, separate from the historical
+    # RNG stream. Cover every reduction switch, both normalized low-word signs,
+    # the direct expm1/tiny switches, and finite exponent-range endpoints.
+    cuts = [(n + .5)*math.log(2.) for n in range(-1075, 1024)]
+    cuts += [s*x for s in (-1., 1.) for x in (2.**-104, .34657359027997264)]
+    cuts += [-745.2, -1075*math.log(2.), -1074*math.log(2.),
+             -1022*math.log(2.), math.nextafter(math.log(sys.float_info.max), -math.inf)]
+    for cut in cuts:
+        for x in (math.nextafter(cut, -math.inf), cut, math.nextafter(cut, math.inf)):
+            for low in (-.49*math.ulp(x), 0., .49*math.ulp(x)):
+                exact = Fraction(x)+Fraction(low)
+                hi = float(exact)
+                lo = float(exact-Fraction(hi))
+                assert hi+lo == hi
+                # This fixture scores finite outputs. Above the overflow
+                # rounding boundary belongs to the separate class contract.
+                with mp.workdps(110):
+                    if mp.mpf(hi)+mp.mpf(lo) > mp.log(mp.mpf(sys.float_info.max)):
+                        continue
+                for fn in ('exp', 'expm1'):
+                    yield fn, hi, lo, 0., 0.
     xs = [1., math.nextafter(1., 0.), math.nextafter(1., 2.),
           math.sqrt(.5), math.sqrt(2.), math.ldexp(1., -1074)]
     xs += [math.ldexp(rng.uniform(1., 2.), rng.randint(-1074, 1022)) for _ in range(2500)]

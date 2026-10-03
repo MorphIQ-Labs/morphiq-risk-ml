@@ -93,49 +93,51 @@ let to_float a = a.hi +. a.lo
 let ln2 = { hi = 0x1.62e42fefa39efp-1; lo = 0x1.abc9e3b39803fp-56 }
 let compare_float a f = if a.hi <> f then compare a.hi f else compare a.lo 0.0
 
-(* exp and expm1 adapt the QD library's dd_real (Hida, Li and Bailey,
-   qd-2.3.24, dd_real.cpp), with its reduction constant k = 512 and its
-   stopping rule. Copyright (c) 2003-2023, The Regents of the University of
-   California through Lawrence Berkeley National Laboratory; see the original
-   COPYING and BSD-LBNL-License documents in LICENSES/ and the scope review in
-   docs/source-provenance.md.
-   One departure: exp covers the binary64 range down to the
-   subnormals (QD returns 0 below -709), where the result's low part
-   underflows and the precision falls toward binary64's. *)
+(* Project derivation from exp(x) = sum x^n/n!: direct degree-24 Horner
+   evaluation on |r| < .347, with exact-rational generated coefficient splits.
+   See oracle/dd_exp_coefficients.py and docs/error-analysis.md, section 1.2.
+   This replaces the historical QD adaptation; no QD table or stopping rule
+   is used here. *)
 
-(* 1/n! for n = 3..17, as double-doubles. *)
-let inverse_factorials =
-  let a = Array.make 18 (of_float 1.0) in
-  for n = 1 to 17 do
-    a.(n) <- div a.(n - 1) (of_float (float n))
-  done;
-  Array.sub a 3 15
+let exp_coefficients =
+  [|
+    { hi = 0x1.0000000000000p+0; lo = 0x0.0p+0 };
+    { hi = 0x1.0000000000000p-1; lo = 0x0.0p+0 };
+    { hi = 0x1.5555555555555p-3; lo = 0x1.5555555555555p-57 };
+    { hi = 0x1.5555555555555p-5; lo = 0x1.5555555555555p-59 };
+    { hi = 0x1.1111111111111p-7; lo = 0x1.1111111111111p-63 };
+    { hi = 0x1.6c16c16c16c17p-10; lo = -0x1.f49f49f49f49fp-65 };
+    { hi = 0x1.a01a01a01a01ap-13; lo = 0x1.a01a01a01a01ap-73 };
+    { hi = 0x1.a01a01a01a01ap-16; lo = 0x1.a01a01a01a01ap-76 };
+    { hi = 0x1.71de3a556c734p-19; lo = -0x1.c154f8ddc6c00p-73 };
+    { hi = 0x1.27e4fb7789f5cp-22; lo = 0x1.cbbc05b4fa99ap-76 };
+    { hi = 0x1.ae64567f544e4p-26; lo = -0x1.c062e06d1f209p-80 };
+    { hi = 0x1.1eed8eff8d898p-29; lo = -0x1.2aec959e14c06p-83 };
+    { hi = 0x1.6124613a86d09p-33; lo = 0x1.f28e0cc748ebep-87 };
+    { hi = 0x1.93974a8c07c9dp-37; lo = 0x1.05d6f8a2efd1fp-92 };
+    { hi = 0x1.ae7f3e733b81fp-41; lo = 0x1.1d8656b0ee8cbp-97 };
+    { hi = 0x1.ae7f3e733b81fp-45; lo = 0x1.1d8656b0ee8cbp-101 };
+    { hi = 0x1.952c77030ad4ap-49; lo = 0x1.ac981465ddc6cp-103 };
+    { hi = 0x1.6827863b97d97p-53; lo = 0x1.eec01221a8b0bp-107 };
+    { hi = 0x1.2f49b46814157p-57; lo = 0x1.2650f61dbdcb4p-112 };
+    { hi = 0x1.e542ba4020225p-62; lo = 0x1.ea72b4afe3c2fp-120 };
+    { hi = 0x1.71b8ef6dcf572p-66; lo = -0x1.d043ae40c4647p-120 };
+    { hi = 0x1.0ce396db7f853p-70; lo = -0x1.aebcdbd20331cp-124 };
+    { hi = 0x1.761b41316381ap-75; lo = -0x1.3423c7d91404fp-130 };
+    { hi = 0x1.f2cf01972f578p-80; lo = -0x1.9ada5fcc1ab14p-135 };
+  |]
 
-let inv_k = 1.0 /. 512.0
-
-(* e^(512 r) - 1 for the reduced r = (x - m ln 2)/512: the Taylor series of
-   e^r - 1 until a term falls below 2^-104/512 (QD's dd_real::_eps), then
-   nine doublings
-   s <- 2s + s^2, each of which maps e^y - 1 to e^(2y) - 1 exactly. *)
+(* Factoring out r preserves relative accuracy as expm1(r) tends to zero. *)
 let expm1_reduced r =
-  let p = mul r r in
-  let s = ref (add r (scale p (-1))) in
-  let p = ref (mul p r) in
-  let t = ref (mul !p inverse_factorials.(0)) in
-  let i = ref 0 in
-  let continue = ref true in
-  while !continue do
-    s := add !s !t;
-    p := mul !p r;
-    incr i;
-    t := mul !p inverse_factorials.(!i);
-    continue := Float.abs (to_float !t) > inv_k *. 0x1p-104 && !i < 5
-  done;
-  s := add !s !t;
-  for _ = 1 to 9 do
-    s := add (scale !s 1) (mul !s !s)
-  done;
-  !s
+  (* The omitted relative tail is below 2u². This also keeps the Horner
+     products away from underflow when exp calls us with a tiny argument. *)
+  if Float.abs r.hi < 0x1p-104 then r
+  else
+    let acc = ref exp_coefficients.(23) in
+    for k = 22 downto 0 do
+      acc := add exp_coefficients.(k) (mul r !acc)
+    done;
+    mul r !acc
 
 let exp x =
   if x.hi < -745.2 then of_float 0.0
@@ -143,17 +145,12 @@ let exp x =
   else if x.hi = 0.0 then of_float 1.0
   else
     let m = Float.floor ((x.hi /. ln2.hi) +. 0.5) in
-    let r = scale (sub x (mul_float ln2 m)) (-9) in
+    let r = sub x (mul_float ln2 m) in
     scale (add (expm1_reduced r) (of_float 1.0)) (int_of_float m)
 
-(* e^x - 1. For |x| <= ln 2 / 2 the reduction has m = 0 and the doubled
-   series is e^x - 1 itself, with no cancellation against 1. *)
+(* e^x - 1 directly on the small interval, avoiding cancellation against 1. *)
 let expm1 x =
-  (* Below this threshold |expm1(x)-x|/|x| < 2^-105. In particular,
-     dividing a subnormal x by 512 would destroy significant bits. *)
-  if Float.abs x.hi < 0x1p-104 then x
-  else if Float.abs x.hi <= 0.34657359027997264 then
-    expm1_reduced (scale x (-9))
+  if Float.abs x.hi <= 0.34657359027997264 then expm1_reduced x
   else sub (exp x) (of_float 1.0)
 
 let sqrt_half = 0x1.6a09e667f3bcdp-1

@@ -1,0 +1,159 @@
+## baseline: dd
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.14472 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.283898 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+
+## baseline: european
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384         18      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          8      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         22      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          1       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+
+## baseline: displaced
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          5      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120         19      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+
+## baseline: greeks
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            4        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415           23        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+
+## baseline: greek_bits
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+
+## replacement: dd
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.14472 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+
+## replacement: european
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384         18      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          8      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         22      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          3       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.00182 of the analytical error budget E
+
+## replacement: displaced
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          5      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120         19      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+
+## replacement: greeks
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            4        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415           23        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+
+## replacement: greek_bits
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+
+## Affected mutations
+baseline passes (56 s)
+killed    expm1-tiny by dd_reference
+killed    dd-exp-degree by dd_reference
+2 of 2 mutants killed as catalogued

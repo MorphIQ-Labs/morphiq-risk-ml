@@ -71,6 +71,10 @@ let () =
                      (Dd.of_float got, 0.0, certificate.e)
                  | _ -> invalid_arg fn
                in
+               Bounds.trace line
+                 (Printf.sprintf "%016Lx %016Lx"
+                    (Int64.bits_of_float got.hi)
+                    (Int64.bits_of_float got.lo));
                incr rows;
                if got.hi +. got.lo <> got.hi then
                  failwith (fn ^ " result words overlap");

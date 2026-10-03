@@ -5,6 +5,23 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Independently derived DD exponential
+
+- Replace QD-derived `Dd.exp`/`Dd.expm1` with a direct degree-24 Taylor/Horner
+  polynomial and exact-rational generated coefficients; retain historical
+  provenance/notices. AS241 and CALERF remain pending under #64.
+- Preserve all error budgets; extend the DD oracle to 86,145 rows. Full ordinary
+  checks and the unchanged determinism digest pass locally.
+- Minor numerical change: 26 European prices move by at most 3 ULP and one
+  near-zero BSM theta by 1 ULP; no observed sign/class/refusal changes. Black
+  zero-variance worst error is 1 → 3 ULP (existing budget 4); other price-region
+  and ordinary Greek maxima are unchanged. The [qualification report](docs/results-dd-exponential.md)
+  pins fixture/generator hashes, per-row refined errors and compatibility scope.
+- Recorded tradeoff on Apple M1 Pro: DD primitives are 19–25% slower and affected
+  ATM/ITM price calls 23–31% slower; IV-dominated complete workflows vary about
+  −3% to +3%. See the report for repetitions, allocations and host limitations.
+  No release or version bump is made here.
+
 ### Numerical-source provenance and replacement planning
 
 - Identify the actual StatLib AS241, Netlib CALERF and author-hosted QD 2.3.24

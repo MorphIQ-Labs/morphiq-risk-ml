@@ -162,6 +162,7 @@ let () =
                try price model (side_of side) ~s ~k ~t ~r ~q ~sigma ~shift
                with Failure _ -> Float.nan
              in
+             Bounds.trace_float line got;
              let derived =
                if family = "black" && region = "zero_variance" then
                  Some

@@ -9,6 +9,7 @@
   (LICENSES/QD-BSD-LBNL-License.doc as LICENSES/QD-BSD-LBNL-License.doc)
   (LICENSES/QD-BSD-LBNL-License.txt as LICENSES/QD-BSD-LBNL-License.txt)
   (LICENSES/QD-COPYING.txt as LICENSES/QD-COPYING.txt)
+  (docs/results-dd-exponential.md as docs/results-dd-exponential.md)
   (docs/source-provenance.md as docs/source-provenance.md)
   (docs/numerical-replacement-plan.md as docs/numerical-replacement-plan.md)
   (docs/evidence/source-provenance-2026-10-03.json

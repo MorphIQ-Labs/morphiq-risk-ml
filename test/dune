@@ -204,6 +204,8 @@
  (target component_bounds.ml)
  (deps
   ../oracle/verify_bounds.py
+  ../oracle/dd_exp_coefficients.py
+  ../lib/dd.ml
   ../oracle/kernel_certificates.py
   ../lib/elementary.ml
   ../lib/split.ml

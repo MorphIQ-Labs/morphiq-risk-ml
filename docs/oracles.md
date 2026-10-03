@@ -13,7 +13,7 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 | `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
 | `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,760); 63% have an unrepresentable F + d or K + d |
 | `iv` | `gen_iv.py` | implied-volatility outcomes, exact roots and rounding cells for all four models, on a grid and a random sample |
-| `dd` | `gen_dd.py` | 48,203 three-word/exponent references, including 22,425 nonzero low words, reduction boundaries and subnormals |
+| `dd` | `gen_dd.py` | 86,145 three-word/exponent references, including 47,719 nonzero low words, every exponential reduction boundary and subnormals |
 | `regressions` | `gen_regressions.py` | five exact near-maximum ATM roots, 2,000 near-unit log-coordinate references and two rescued-tail regressions |
 | `greek_bits` | `gen_greek_bits.py` | 2,506 three-word/exponent Greek references, including 51 contracts at or adjacent to zeros of cancelling Greeks |
 | `model_enclosures` | `gen_model_enclosures.py` | 1,670 three-word/exponent original-input model prices, including sparse shifts, tiny carry/variance and tails; 110/220 or 400/800 digits |
@@ -90,3 +90,12 @@ source/wheel hashes, mapped inputs, all discrepancies and explicit adjudications
 It supplements the reference fixtures above; it does not replace them or make
 canonical binary64 outputs the definition of accuracy. Generation and interval
 campaigns remain outside ordinary CI.
+
+### Served-value compatibility traces
+
+Set `MORPHIQ_ORACLE_TRACE` to a distinct output path when running `oracle_price`,
+`oracle_greeks`, `greek_reference` or `dd_reference` directly. Each trace retains
+the fixture row and computed bit pattern (both words for DD), including Greek
+failure classifications. The ordinary tests perform no trace I/O. Compare
+baseline and candidate with identical fixtures and trace instrumentation; the
+[DD replacement report](results-dd-exponential.md) records such a campaign.

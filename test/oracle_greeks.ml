@@ -65,6 +65,11 @@ let () =
                | `Normal g -> pick g greek
                | exception Failure _ -> Ok Float.nan
              in
+             (match got with
+             | Ok v -> Bounds.trace_float line v
+             | Error Greeks.Payoff_kink -> Bounds.trace line "payoff_kink"
+             | Error Greeks.Numerical_failure ->
+                 Bounds.trace line "numerical_failure");
              let family =
                if model = "bachelier" then "bachelier" else "black"
              in

@@ -30,7 +30,8 @@ retain the inputs, toolchains, limitations, and outcomes of specific campaigns.
 They are reproducibility records, not disposable build output. Use each report's
 recorded commit and date; an older report does not redefine a current contract.
 
-Start with [planner qualification](results-planner.md),
+Start with [DD exponential replacement](results-dd-exponential.md),
+[planner qualification](results-planner.md),
 [canonical datasets](results-canonical-dataset.md),
 [performance](performance.md), and the original
 [scalar experiment results](results-slice.md).
