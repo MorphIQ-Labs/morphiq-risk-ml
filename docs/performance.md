@@ -118,3 +118,9 @@ fall back when its bound cannot decide, and preserve all existing successful
 reference cases and classifications. A finite observed failure rate does not
 establish a universal availability claim. Requirements and economic materiality
 must be fixed before institutional acceptance, not fitted to these timings.
+
+The [scalar shadow campaign](results-shadow.md) now supplies cold-process and
+per-row latency, cumulative allocation, peak child RSS, exact-input replay and
+canonical comparison evidence for the enforced production adapter. Its cost
+is material and its synthetic workload is not a production SLA. It does not
+replace the historical like-for-like A/B/B/A kernel measurements above.
