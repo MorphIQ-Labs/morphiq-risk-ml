@@ -30,3 +30,5 @@ Ordinary CI runs the full test suite on all three platforms, formatting, and the
 The [research library](docs/research/README.md) contains the collected reference PDFs, their source URLs and checksums, canonical filenames, and a separate list of book and implementation references.
 
 The [numerical backend contract](docs/numerical-backend-contract.md) defines required arithmetic semantics, optimization assessment, AD/FFI obligations, and conformance evidence. Native and bytecode arithmetic probes run in the ordinary suite.
+
+The [financial type audit](docs/type-boundary-audit.md) records enforced invariants, trusted raw-value labeling, all Greek units, and remaining caller obligations. Veta retains both its time unit and volatility coordinate.

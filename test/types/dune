@@ -146,3 +146,75 @@
  (alias runtest)
  (action
   (diff mixed_vega.expected mixed_vega.out)))
+
+(rule
+ (deps mixed_veta.ml ../../lib/morphiq_risk.cma)
+ (targets mixed_veta.out)
+ (action
+  (with-stderr-to
+   mixed_veta.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     mixed_veta.cmo
+     mixed_veta.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff mixed_veta.expected mixed_veta.out)))
+
+(rule
+ (deps veta_as_theta.ml ../../lib/morphiq_risk.cma)
+ (targets veta_as_theta.out)
+ (action
+  (with-stderr-to
+   veta_as_theta.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     veta_as_theta.cmo
+     veta_as_theta.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff veta_as_theta.expected veta_as_theta.out)))
+
+(rule
+ (deps daily_veta_as_annual.ml ../../lib/morphiq_risk.cma)
+ (targets daily_veta_as_annual.out)
+ (action
+  (with-stderr-to
+   daily_veta_as_annual.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     daily_veta_as_annual.cmo
+     daily_veta_as_annual.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff daily_veta_as_annual.expected daily_veta_as_annual.out)))

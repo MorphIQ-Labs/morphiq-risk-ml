@@ -1,9 +1,10 @@
 (** The lognormal (Black) family on one kernel.
 
     BSM, Black-76 and displaced Black are applications of {!Make} to a {!CARRY}.
-    A carry only maps the model's inputs to Black coordinates. Each application
-    has its own abstract [admitted] type, so a contract admitted by one model
-    cannot be priced, inverted or differentiated by another. *)
+    A carry only maps the model's inputs to Black coordinates. The built-in
+    models have distinct abstract [admitted] types, so a contract admitted by
+    one cannot be used by another. Reusing the same carry module with this
+    applicative functor can share its admitted type. *)
 
 module Coordinates : sig
   type live = private {
@@ -53,8 +54,9 @@ module type MODEL = sig
 
   val implied :
     admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
-  (** The volatility whose price is the quote, or why there is none. A quote
-      that is not a finite, nonnegative number is refused. *)
+  (** A representable inverse estimate, a mathematical classification, or an
+      explicit computational failure; see {!Iv.t}. A quote that is not a finite,
+      nonnegative number is refused. *)
 
   val greeks :
     admitted -> Side.t -> Vol.lognormal Vol.t -> Vol.lognormal Greeks.t

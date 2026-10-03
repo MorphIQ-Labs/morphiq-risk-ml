@@ -48,7 +48,7 @@ The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each cl
 | One kernel per family | Shown | BSM, Black-76 and displaced Black are `Black.Make` over three ~10-line carries. |
 | Exercise style unrepresentable | Shown | A European slice has no exercise-style input. |
 
-All six compile-failure tests pin the compiler's diagnostic, so a change in why something is rejected is visible.
+All nine compile-failure tests pin the compiler's diagnostic, so a change in why something is rejected is visible. The three mixed-veta tests cover its volatility coordinate, distinction from theta, and daily/annual separation; [the type audit](type-boundary-audit.md) also records unchecked labeling boundaries and remaining caller obligations.
 
 ## Where FerroRisk's references disagree with each other
 

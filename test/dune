@@ -10,6 +10,11 @@
  (libraries morphiq_risk))
 
 (test
+ (name unit_boundaries)
+ (modules unit_boundaries)
+ (libraries morphiq_risk))
+
+(test
  (name fp_contract)
  (modules fp_contract)
  (modes byte exe)

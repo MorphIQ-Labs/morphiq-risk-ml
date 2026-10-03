@@ -1,0 +1,14 @@
+File "mixed_veta.ml", line 7, characters 55-77:
+7 | let invalid (g : Vol.lognormal Greeks.t) = normal_veta (Result.get_ok g.veta)
+                                                           ^^^^^^^^^^^^^^^^^^^^^^
+Error: This expression has type
+         "(Morphiq_risk__.Units.per_calendar_day, Morphiq_risk.Vol.lognormal)
+         Morphiq_risk__.Units.volatility_time_rate" =
+           "(Morphiq_risk__.Units.per_calendar_day,
+            Morphiq_risk.Vol.lognormal)
+           Morphiq_risk.Units.volatility_time_rate"
+       but an expression was expected of type
+         "(Morphiq_risk.Units.per_calendar_day, Morphiq_risk.Vol.normal)
+         Morphiq_risk.Units.volatility_time_rate"
+       Type "Morphiq_risk.Vol.lognormal" is not compatible with type
+         "Morphiq_risk.Vol.normal"

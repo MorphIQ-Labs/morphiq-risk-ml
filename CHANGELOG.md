@@ -4,6 +4,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Financial type boundaries
+
+- Veta now retains both the time unit and volatility coordinate, preventing normal/lognormal veta mixing and accidental use as theta. Added `Units.annualise_volatility` and three compiler-rejection witnesses. This is a breaking public field-type change under the stability policy; its private-float representation and served numerical values are unchanged.
+- Documented every public construction/extraction boundary and each Greek's units. Raw unit-label constructors explicitly do not validate values or caller-selected tags. Model admission remains distinct from numerical certification and production-domain enforcement.
+
 ### Numerical backend conformance
 
 - Defined the arithmetic, optimization, AD and foreign-backend contract, including separate model, numerical-error and replay obligations. Retained the existing multiplication boundary after a worked contraction assessment.
