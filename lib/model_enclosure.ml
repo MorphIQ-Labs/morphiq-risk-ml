@@ -8,7 +8,7 @@ let up = Float.succ
 let down = Float.pred
 
 let hull a b =
-  let centre = E.of_words a.E.hi a.lo in
+  let centre = E.centre a in
   E.add_error centre (Float.max a.error (E.magnitude (E.sub b centre)))
 
 let positive_part a =
@@ -42,7 +42,14 @@ let exp a =
     let half = E.mul quarter quarter in
     E.mul half half)
 
-let pdf x = E.mul inv_sqrt_2pi (exp (E.scale (E.neg (E.mul x x)) (-1)))
+let beyond_tail x =
+  match E.compare_float x 40.0 with E.Positive | E.Zero -> true | _ -> false
+
+let negligible_tail = E.add_error zero 0x1p-1074
+
+let pdf x =
+  if beyond_tail x || beyond_tail (E.neg x) then negligible_tail
+  else E.mul inv_sqrt_2pi (exp (E.scale (E.neg (E.mul x x)) (-1)))
 
 let series_cdf x =
   let x2 = E.mul x x in
@@ -68,7 +75,9 @@ let mills x =
   hull (convergent 128) (convergent 129)
 
 let cdf x =
-  if E.magnitude x <= 4.0 then series_cdf x
+  if beyond_tail x then E.sub one negligible_tail
+  else if beyond_tail (E.neg x) then negligible_tail
+  else if E.magnitude x <= 4.0 then series_cdf x
   else
     match E.sign x with
     | E.Positive -> E.sub one (E.mul (pdf x) (mills x))
@@ -132,15 +141,18 @@ let bounds model side =
   | Normal c ->
       (E.mul c.discount (positive_part (E.mul_float c.distance theta)), None)
 
-let price model side sigma =
-  require (Float.is_finite sigma && sigma >= 0.0) "invalid model volatility";
+let price_enclosed model side sigma =
+  require
+    (E.sign sigma = E.Positive || E.sign sigma = E.Zero)
+    "unresolved model volatility";
   let theta = Side.sign side in
   let root_time =
     match model with Black c -> c.root_time | Normal c -> c.root_time
   in
-  if sigma = 0.0 || E.sign root_time = E.Zero then fst (bounds model side)
+  if E.sign sigma = E.Zero || E.sign root_time = E.Zero then
+    fst (bounds model side)
   else
-    let s = E.mul_float root_time sigma in
+    let s = E.mul root_time sigma in
     require (E.sign s = E.Positive) "total volatility interval not positive";
     match model with
     | Black c ->
@@ -156,3 +168,61 @@ let price model side sigma =
           (E.add
              (E.mul (E.mul_float c.distance theta) (cdf (E.mul_float d theta)))
              (E.mul s (pdf d)))
+
+let price model side sigma = price_enclosed model side (E.exact sigma)
+
+let inverse_residual model side quote =
+  if quote = 0.0 then fun sigma -> price_enclosed model side sigma
+  else
+    let log_quote = E.log (E.exact quote) in
+    let gaussian log_weight d =
+      E.mul inv_sqrt_2pi (exp (E.sub log_weight (E.scale (E.mul d d) (-1))))
+    in
+    let weighted_cdf log_weight d =
+      if E.magnitude d <= 4.0 then E.mul (exp log_weight) (cdf d)
+      else
+        match E.sign d with
+        | E.Negative -> E.mul (gaussian log_weight d) (mills (E.neg d))
+        | E.Positive ->
+            E.sub (exp log_weight) (E.mul (gaussian log_weight d) (mills d))
+        | E.Zero | E.Indeterminate ->
+            raise (E.Unresolved "weighted normal sign unresolved")
+    in
+    let intrinsic = E.div_float (fst (bounds model side)) quote in
+    match model with
+    | Black c ->
+        let log_asset = E.sub (E.log c.asset) log_quote
+        and log_cash = E.sub (E.log c.cash) log_quote in
+        fun sigma ->
+          if E.sign sigma = E.Zero then E.sub intrinsic one
+          else
+            let s = E.mul c.root_time sigma in
+            let h = E.div c.x s and half = E.scale s (-1) in
+            let theta = Side.sign side in
+            let d1 = E.mul_float (E.add h half) theta
+            and d2 = E.mul_float (E.sub h half) theta in
+            E.sub
+              (E.mul_float
+                 (E.sub (weighted_cdf log_asset d1) (weighted_cdf log_cash d2))
+                 theta)
+              one
+    | Normal c ->
+        let base = E.sub (E.log c.discount) log_quote in
+        fun sigma ->
+          if E.sign sigma = E.Zero then E.sub intrinsic one
+          else
+            let s = E.mul c.root_time sigma in
+            let d = E.div c.distance s in
+            let z =
+              match E.sign d with
+              | E.Negative -> E.neg d
+              | E.Positive | E.Zero -> d
+              | E.Indeterminate -> hull d (E.neg d)
+            in
+            let log_weight = E.add base (E.log s) in
+            let otm =
+              if E.magnitude z <= 4.0 then
+                E.mul (exp log_weight) (E.sub (pdf z) (E.mul z (cdf (E.neg z))))
+              else E.mul (gaussian log_weight z) (E.sub one (E.mul z (mills z)))
+            in
+            E.sub (E.add intrinsic otm) one

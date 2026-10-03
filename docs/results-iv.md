@@ -1,6 +1,21 @@
 # Results: implied volatility
 
-Historical cross-check measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`). The table below records the acceptance rules used for that run, not the current gates. Current exact-root tests execute analytical per-input price/vega certificates and retain the historical conditional budgets as separate quality gates; rounding-cell membership is diagnostic only. See [error-analysis.md §6](error-analysis.md#6-implied-volatility).
+Historical cross-check measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`). The historical tables record the acceptance rules used for those runs. Current exact-root tests require the correctly rounded reference root and execute analytical per-input price/vega certificates, retaining the historical conditional budgets as additional quality gates. The quote's price-rounding interval is diagnostic; the inverse's volatility-rounding cell is the runtime acceptance criterion. See [error-analysis.md §6](error-analysis.md#6-implied-volatility).
+
+## Current exact-model acceptance
+
+The current runtime acceptance path uses original-input arithmetic/model
+enclosures and decides the exact inverse's binary64 rounding cell. All 5,575
+positive roots in the current committed fixture match the correctly rounded
+reference: BSM 1,754, Black-76 1,802, displaced 1,162 and Bachelier 857. Every
+such row must succeed; numerical failure is not an accuracy pass. The generic
+solver also exercises forced exhaustion, unresolved values, tie parity and the
+full positive encoding. Existing historical quality and analytical transport
+checks remain additional gates. See [the contract](certified-iv.md).
+
+The comparison and mechanism counts below are retained historical evidence;
+new runtime certification can make an old proposal mutation redundant. Current
+curated mutation claims belong to the executable catalog and its latest run.
 
 ## Accuracy
 

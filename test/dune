@@ -10,6 +10,13 @@
  (libraries morphiq_risk))
 
 (test
+ (name certified_iv_reference)
+ (modules certified_iv_reference)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/iv.txt})))
+
+(test
  (name unit_boundaries)
  (modules unit_boundaries)
  (libraries morphiq_risk))

@@ -1,0 +1,39 @@
+Certified IV mutation reconciliation
+
+The full ordinary baseline passed under the mutation profile before each campaign.
+All compiled mutants ran their designated guard with the same fixture arguments
+as ordinary Dune actions. Direct guards also passed on the clean baseline.
+Replay identity is disabled in mutation builds. No budget was changed.
+
+Affected campaign (12 controls):
+baseline passes (68 s)
+killed    certified-rounding-cell by certified_iv_reference
+killed    enclosure-discarded-word by enclosure_reference
+killed    iv-original-shift by iv_termination
+killed    model-normalization by enclosure_reference
+killed    enclosure-fma-underflow by enclosure_reference
+killed    iv-iteration-cap by iv_termination
+killed    iv-nonfinite-value by iv_termination
+SURVIVED  bachelier-iv-quantum: absolute rounding error for subnormal Bachelier quotes
+SURVIVED  iv-rounded-bound: a quote equal to the rounded intrinsic is sigma = 0 (#448)
+SURVIVED  iv-beta-bar: beta-bar from the exact distance to the maximum
+SURVIVED  iv-ln-beta: ln beta from the unscaled quote
+killed    iv-complement-correction by numerical_regressions
+8 of 12 mutants killed as catalogued
+
+Core plus historical maximum-error control (8 controls):
+baseline passes (73 s)
+killed    certified-rounding-cell by certified_iv_reference
+killed    split-root-nonoverlap by dd_reference
+killed    dd-scale-nonoverlap by dd_reference
+killed    scaled-exp-prefactor by numerical_regressions
+killed    reference-expansion by numerical_regressions
+SURVIVED  iv-maximum-error: maximum-leg error amplified by the complement gap
+killed    greeks-theta-dd by oracle_greeks
+killed    bachelier-theta-dd by oracle_greeks
+7 of 8 mutants killed as catalogued
+
+Reconciliation: all seven selected core mechanisms are killed. The five
+historical IV survivors are now explicit probes, alongside intrinsic-terms.
+The current curated catalog is 37, with seven default core mechanisms. This
+records exercised guards; it does not prove universal redundancy of a survivor.

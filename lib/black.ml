@@ -25,6 +25,10 @@ module Coordinates = struct
         (** S's low part, for a spot that is an exact sum (S + d). *)
     strike : float;  (** K, scaled by 2^-exponent. *)
     strike_low : float;
+    original_spot : float;
+    original_spot_low : float;
+    original_strike : float;
+    original_strike_low : float;
     rate : float;
     yield : float;
     tied : bool;  (** The yield is the rate (a forward model): rho moves both. *)
@@ -120,6 +124,10 @@ module Coordinates = struct
           spot_low = scale spot_low;
           strike = strike';
           strike_low = scale strike_low;
+          original_spot = spot;
+          original_spot_low = spot_low;
+          original_strike = strike;
+          original_strike_low = strike_low;
           rate;
           yield;
           tied;
@@ -562,7 +570,35 @@ let implied_coordinates coordinates side price =
   else
     match coordinates with
     | Coordinates.Expiry _ -> Ok Iv.Not_identifiable_at_expiry
-    | Coordinates.Live c -> Ok (live_implied side c price)
+    | Coordinates.Live c ->
+        Ok
+          (try
+             let model =
+               Model_enclosure.black ~spot:c.original_spot
+                 ~spot_low:c.original_spot_low ~strike:c.original_strike
+                 ~strike_low:c.original_strike_low ~time:c.time ~rate:c.rate
+                 ~yield:c.yield
+             in
+             let intrinsic, maximum = Model_enclosure.bounds model side in
+             let proposal =
+               match live_implied side c price with
+               | Iv.Root v when Vol.to_float v > 0.0 -> Vol.to_float v
+               | _ -> 1.0
+             in
+             match
+               Certified_iv.solve
+                 ~prepare_residual:(fun () ->
+                   Model_enclosure.inverse_residual model side price)
+                 ~intrinsic ~maximum ~quote:price ~proposal ()
+             with
+             | Certified_iv.Root v -> root v
+             | Certified_iv.Below_intrinsic -> Iv.Below_intrinsic
+             | Certified_iv.Above_maximum -> Iv.Above_maximum
+             | Certified_iv.Below_smallest_volatility ->
+                 Iv.Below_smallest_volatility
+             | Certified_iv.Non_convergence -> Iv.Non_convergence
+             | Certified_iv.Numerical_failure -> Iv.Numerical_failure
+           with Enclosure.Unresolved _ -> Iv.Numerical_failure)
 
 module Make (C : CARRY) : MODEL with type inputs = C.inputs = struct
   type inputs = C.inputs

@@ -1,0 +1,86 @@
+# Performance evidence and limits
+
+## Certified IV baseline
+
+The first runtime-certified IV implementation prioritizes an enforced exact-model
+rounding guarantee. Its scalar cost is much larger than the proposal-only solver:
+about 4–17 milliseconds per call on this host, versus about 4–8 microseconds.
+This is a material regression, not a high-throughput production acceptance.
+Both paths used OCaml 5.3.0 with Flambda and `-O3`; changing to a different compiler
+is not a response to the measured numerical workload.
+
+[Raw A/B/B/A evidence](evidence/certified-iv-bench.json) records the source hashes,
+Apple M1 Pro/macOS host, load averages, batch timing summaries for each run,
+allocation/GC fields, sampled request percentiles and all IV outcome counts.
+A is `8e3b6ba`; B is the four-word runtime certificate. A and B have different
+accuracy guarantees. This measures the cost of the changed contract; it is not
+an equal-accuracy algorithm comparison. All 768 cases returned positive roots
+in each of the four runs. Separate reference tests establish accuracy.
+
+The range is the pair of run medians. Allocated MB are cumulative allocation
+per call (8-byte words on this host), not resident memory.
+
+| Model | Regime | A IV µs/call | B IV ms/call | B allocated MB/call |
+| --- | --- | ---: | ---: | ---: |
+| bsm | atm | 4.14–5.73 | 6.66–6.70 | 87.9 |
+| bsm | otm | 3.72–4.16 | 16.19–16.44 | 214.6 |
+| bsm | itm | 3.69–3.70 | 5.64–5.75 | 76.0 |
+| black76 | atm | 3.70–3.72 | 5.89–5.99 | 78.7 |
+| black76 | otm | 3.70–3.94 | 15.93–16.19 | 212.7 |
+| black76 | itm | 3.64–3.80 | 6.17–6.18 | 79.4 |
+| displaced | atm | 3.91–4.00 | 6.27–6.39 | 82.6 |
+| displaced | otm | 3.69–3.86 | 16.29–16.38 | 216.0 |
+| displaced | itm | 3.66–3.67 | 6.02–6.09 | 78.4 |
+| bachelier | atm | 6.41–6.84 | 5.30–5.45 | 69.9 |
+| bachelier | otm | 7.30–7.78 | 8.85–8.88 | 117.0 |
+| bachelier | itm | 7.33–7.34 | 4.47–4.48 | 58.6 |
+
+## Reproduction and measurement contract
+
+```sh
+opam exec --switch=morphiq-risk-ml -- dune build bench/assurance.exe
+python3 scripts/benchmark_assurance.py \
+  --baseline /path/to/baseline/assurance.exe --baseline-revision 8e3b6ba \
+  --candidate _build/default/bench/assurance.exe \
+  --count 64 --runs 5 --output /tmp/iv-bench.json
+```
+
+Build both binaries from the same benchmark source and switch. The fixed seed
+is in `bench/assurance.ml`. It times admission, price, IV, all Greeks and an
+end-to-end admission/price/IV/Greek call separately. Pre-timing IV outcome
+validation includes every case; mathematical classes and computational failures
+are never dropped from the timing denominator.
+
+Timing uses benchmark-only `CLOCK_MONOTONIC` C code. The public numerical library
+has no clock dependency. An empty dispatch/clock row measures overhead without
+subtracting it. Small scalar timings and 64-sample request percentiles are
+noisy; batch-average ns/op is not request tail latency. Five warm batches follow
+the first batch; the latter follows validation and is **not** cold-process latency.
+
+`Gc.counters` supplies current-domain allocated words: minor + major - promoted.
+`Gc.quick_stat` supplies sampled collection counts and heap size. Its allocation
+counters are delayed until collection on OCaml 5, so they must not be used for
+short-batch allocation deltas. A known-allocation control detects that mistake.
+CPU time includes GC; this harness does not isolate GC time. Heap samples are
+not peak RSS. A shared workstation, load averages and repeated runs do not
+establish a quiet-host SLA, cold-start behavior or a production latency distribution.
+
+## Remaining work
+
+A separate two-second, 1 ms sampling run of the 16-case/one-run harness
+collected 1,590 main-thread samples. Expansion accumulation (`go`) and TwoSum
+accounted for 552 and 364 top-of-stack samples respectively: about 58% together.
+This is evidence for reducing expansion work and allocation, rather than a
+compiler/build bottleneck. [The profile summary](evidence/certified-iv-profile.json)
+retains the exact command, binary/source hashes and top-of-stack counts. The
+profiled run is excluded from timing comparisons; it is a short workload sample,
+not a complete profile of every pricing regime.
+
+#8 still owns profiling-guided optimization and controlled operational
+measurement; #16 owns portfolios and integration overhead. Current evidence
+supports investigating expansion arithmetic and allocation, not weakening
+rounding acceptance. Any faster path must carry its own rigorous enclosure,
+fall back when its bound cannot decide, and preserve all existing successful
+reference cases and classifications. A finite observed failure rate does not
+establish a universal availability claim. Requirements and economic materiality
+must be fixed before institutional acceptance, not fitted to these timings.

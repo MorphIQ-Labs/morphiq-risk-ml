@@ -6,7 +6,8 @@ let power2 n =
   if n >= 0 then Q.of_bigint (Z.shift_left Z.one n)
   else Q.make Z.one (Z.shift_left Z.one (-n))
 
-let centre (a : E.t) = Q.add (Q.of_float a.hi) (Q.of_float a.lo)
+let centre (a : E.t) =
+  List.fold_left (fun sum x -> Q.add sum (Q.of_float x)) Q.zero (E.words a)
 
 let check label result reference uncertainty =
   let discrepancy = Q.abs (Q.sub (centre result) reference) in

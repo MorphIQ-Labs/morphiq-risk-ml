@@ -1,96 +1,101 @@
 # Runtime enclosure derivation
 
-This is the derivation for an independent, bounded arithmetic enclosure used
-to distinguish resolved model decisions from numerical uncertainty. It does
-not import the test suite's exact-rational witnesses or a measured ULP budget
-as a runtime premise. The ordinary IEEE environment in
-[the backend contract](numerical-backend-contract.md) is required.
+Runtime decisions use finite expansions and explicit radii; no measured kernel
+ULP budget or test-only rational arithmetic is a premise. The IEEE environment
+in [the backend contract](numerical-backend-contract.md) is required.
 
-## Representation and primitive bounds
+## Representation and exact sums
 
-An enclosure `(h,l,e)` means `|x-(h+l)| <= e`, with all three words finite and
-`e >= 0`. The sum `h+l` is a real unevaluated sum, not a rounded addition.
-The radius uses upward-rounded nonnegative operations: a binary64 operation
-followed by its successor. Lower denominators use downward rounding. Overflow,
-an unresolved denominator or a nonfinite radius is failure, never a usable
-infinite certificate.
+An enclosure means `|x-sum(words)| <= error`, retaining at most four binary64
+words. Every field is finite and the radius is nonnegative. Radius operations
+round outward with successor/predecessor; nonfinite intermediates fail.
+Overflow is never a usable infinite certificate. Four words provide additional
+working precision; the radius, not a nominal bit count, determines each decision.
 
-`TwoSum(a,b)` gives the exact sum as two words when its operations do not
-overflow. All intermediates are checked. Gradual underflow does not introduce
-an inexact addition here: binary64 operands and their sums/differences are
-integer multiples of the least subnormal, and a result in the subnormal range
-is representable exactly. This is Knuth's error-free addition, also the
-published primitive underlying the existing double-word algorithms.
+Knuth's TwoSum preserves the exact sum when its intermediates do not overflow;
+every intermediate is checked. Gradual underflow does not round a subnormal
+addition/difference: both operands are integer multiples of the least subnormal,
+and so is their exact sum. Repeated TwoSum implements Shewchuk's Grow-Expansion,
+Theorem 10, with zero elimination. See the [archived author report](research/1997-shewchuk-adaptive-precision-geometric-predicates.pdf).
+It preserves the exact sum while keeping components in magnitude order.
+Truncating to four words adds the outward sum of every discarded magnitude to
+the radius. The representation does not silently discard a small fifth word.
 
-For a product, compute `p=RN(a*b)` and `r=RN(fma(a,b,-p))`. Without requiring
-the fused residual to be exact, the exact product lies within `p+r ± R(r)`,
-where `R(v)` is an upper bound for half the largest adjacent spacing, with
-one least subnormal used when that half-spacing is unrepresentable. This
-follows directly from correctly rounded FMA, including underflow. Zero and
-multiplication by ±1 have exact special cases. A scalar product retained as
-one word instead has error at most `|r|+R(r)`.
+The loop was checked against the author's unchanged `grow_expansion_zeroelim`
+in [predicates.c](https://www.cs.cmu.edu/afs/cs/project/quake/public/code/predicates.c).
+The executed baseline performs 32,009 exact-rational postcondition checks;
+[source hash, compiler and flags](evidence/canonical-expansion.json) are retained.
+`scripts/canonical_expansion.py SOURCE --output REPORT` reproduces that campaign.
+The OCaml primitive campaign separately uses exact rationals.
 
-Addition sums the high words with TwoSum, then the low words and high-word
-residual. Each discarded low-addition residual is obtained with TwoSum and
-added to the radius. Renormalization is another exact TwoSum. Multiplication
-uses the high product/residual and all three cross products, including
-`a_low*b_low`; it accounts for every product and low-addition rounding. Input
-uncertainty contributes
+## Products and division
 
-    |a_center| E_b + (|b_center| + E_b) E_a.
+For binary64 operands a,b, let `p=RN(a*b)` and `r=fma(a,b,-p)`. The exact product
+residual has at most 53 significant bits (the standard error-free TwoProduct
+argument underlying the published DD primitives). The remaining finite-exponent
+obligation is representability of its least bit. If `frexp(a)` and `frexp(b)`
+have exponents ea,eb, their product is an integer multiple of
+`2^(ea+eb-106)`. Thus `ea+eb>=-968` ensures that quantum is at least `2^-1074`,
+and the fused residual is exact. Otherwise retain an absolute quantum allowance
+for possible residual underflow. Zero and multiplication by ±1 are exact cases.
+A zero fused residual alone is never evidence of an exact product.
 
-For division by an exact scalar `b`, choose `q=RN(a_high/b)`, form the fused
-residual of `a_high-q*b`, add `a_low`, and divide that correction by `b`.
-The first quotient's rounding is corrected by the residual; only the residual,
-low addition and correction division errors, plus `E_a/|b|`, remain.
+Multiply every retained word pair, retaining both p and r, then exactly sum the
+terms and bound truncation as above. Input radii contribute
 
-General division writes `b=b_high(1+rho)`, including `b_low` and its error in
-the enclosure for rho. For `|rho| < 1/2`, evaluate `1-rho+rho²` and add the
-explicit geometric remainder `|rho|³/(1-|rho|)`, multiplied by the magnitude
-of `a/b_high`. No assumption that the denominator's low word is negligible
-replaces that remainder. A denominator whose sign cannot be resolved fails.
+    |a_center| E_b + (|b_center|+E_b) E_a.
 
-Scaling by a power of two is exact whenever the scaled word is normal; each
-word that enters the subnormal range receives an absolute quantum bound.
-The radius itself is scaled upward. These rules remain conservative for
-sparse low words and underflow rather than extending an unbounded-exponent
-relative theorem by assertion.
+Division by an exact scalar uses four residual corrections. Starting with
+remainder a, choose `q=RN(remainder_high/b)`, add q to the quotient expansion,
+and update the enclosed remainder by subtracting the enclosed exact product
+q*b. After four corrections, enlarge the quotient radius by
+`magnitude(remainder)/|b|`, outward rounded. This is an a posteriori identity:
+the proposal's rounding is accounted for by its residual, with no assumed
+relative accuracy for the four corrections and no assertion that it converged.
+
+For general division write `b=b_high*(1+rho)`, including every lower word and
+the input radius in rho. Require its enclosed magnitude r to be below 1/2.
+Evaluate `1-rho+rho²-rho³` and enlarge by `r^4/(1-r)`, multiplied by the
+magnitude of `a/b_high`. This is the explicit geometric remainder. An unresolved
+denominator or nonfinite correction fails.
+
+Power-of-two scaling is exact for each normal resulting word; each word entering
+the subnormal range receives one absolute quantum allowance. Scale the radius
+outward and renormalize through exact sums, accounting for discarded words.
 
 ## Elementary enclosures
 
-For `exp` and `expm1`, require the entire argument interval to lie in
-`[-256,256]`, and reduce exactly by `2^10`. For `|r|<=1/4`, evaluate 24 Taylor
-terms. If `t_25` is the first omitted term, the tail is bounded by
+For exp/expm1 require the whole input interval inside `[-256,256]` and reduce
+by `2^10`. Evaluate 48 Taylor terms at `|r|<=1/4`; the first omitted term t49
+has remaining tail bounded by
 
-    |t_25| / (1 - |r|/26).
+    |t49| / (1-|r|/50).
 
-Every subsequent term ratio is no larger than `|r|/26`. The term enclosure
-includes argument and arithmetic uncertainty. Ten squarings reconstruct exp;
-ten updates `y <- 2y+y²` reconstruct expm1 without subtracting one. Every
-update propagates its actual primitive enclosure. The fixed iteration counts
-bound execution; the remainder is evaluated, not assumed negligible.
+Ten squarings reconstruct exp; ten `y <- 2y+y²` updates reconstruct expm1.
+Every operation propagates its enclosure. The fixed work count and explicit
+remainder replace an assumption that small terms are negligible.
 
-For a positive logarithm, power-of-two normalization gives `x=2^k m` with the
-high word of m in `[1,2)`. Set `z=(m-1)/(m+1)` and require its enclosed
-magnitude to be below one half. After 64 terms of
-`2 sum z^(2n+1)/(2n+1)`, bound the remaining tail by
+For log normalize by a power of two, `x=2^k m`, set `z=(m-1)/(m+1)` and require
+its enclosed magnitude below 1/2. After 96 terms of `2 sum z^(2n+1)/(2n+1)`,
+the tail is bounded by
 
-    2 |z^129| / (129 (1-|z|²)).
+    2 |z^193| / (193 (1-|z|²)).
 
-The constant ln(2) is enclosed by the same series at the exact rational
-argument 1/3. No host logarithm or unverified decimal constant supplies it.
+Enclose ln(2) by this same series at the exact rational argument 1/3.
 
-For square root, normalize by an even exponent before taking the hardware
-square root q of the high word. Compute an enclosure for `d=x-q²`, and use
-`q+d/(2q)`. For every positive x in the input interval,
+For sqrt normalize by an even exponent and choose the hardware sqrt of the
+leading word as an initial proposal q. For any exact positive proposal q,
 
-    |sqrt(x) - q - (x-q²)/(2q)|
-      = (sqrt(x)-q)²/(2q)
-      <= |x-q²|²/(2q³).
+    |sqrt(x)-q-(x-q²)/(2q)|
+      = (sqrt(x)-q)²/(2q) <= |x-q²|²/(2q³).
 
-Add that explicit remainder and rescale. Positivity and every division are
-checked. The scalar square-root result is a proposal whose finite error is
-accounted for by this identity, not an assumed double-word theorem.
+Evaluate that correction and explicit remainder with enclosures. Repeat three
+times, choosing the retained expansion's center as the next exact proposal and
+recomputing the residual against the original normalized input. Taking a center
+here does not claim it is the exact root: the next residual accounts for its
+entire error. A proved lower bound on q supplies the remainder denominator.
+Finally rescale with its underflow allowance. This identity remains the guarantee
+whether or not the expected quadratic improvement occurs.
 
 ## Scope
 
@@ -106,9 +111,10 @@ documented derivations; a primitive enclosure alone does not qualify a model.
 The deterministic and seeded generated primitive campaign checks all endpoint
 combinations with exact rationals, including uncertainty propagated from a
 prior operation. The elementary campaign uses the existing precision-refined
-three-word fixtures: 19,058 rows lie in this implementation's function/domain
-scope; 5,988 exponential rows exceed its explicit guard and 23,157 rows exercise
-other functions. Those rows are reported separately, never counted as passes.
+three-word fixtures: 19,058 elementary rows and 7,940 normal-function rows lie
+in this implementation's function/domain scope; 5,988 exponential rows exceed
+its explicit guard and 15,217 rows exercise other functions. Those rows are
+reported separately, never counted as passes.
 The original DD reference test continues to exercise all 48,203 rows.
 
 The optional `enclosure-fma-underflow` mutant removes the residual's rounding

@@ -46,6 +46,14 @@ evaluate `exp(a/4)` and square twice, propagating the enclosure at each step.
 It requires `|a|<=1024`. Overflow or a nonfinite radius remains failure;
 underflow contributes an absolute radius and may prevent a useful decision.
 
+If an interval proves `|x|>=40`, bound the density and the smaller tail by
+one least subnormal rather than evaluating an overflowing square. Indeed
+`phi(x) < exp(-800) < 2^-1074`: the first five nonnegative terms of the exp
+series prove `exp(0.7)>2`, so `1074 log(2) < 751.8 < 800`. Integration by
+parts gives `Phi(-x) < phi(x)/x < phi(x)` for `x>=40`. The enclosure retains
+that absolute quantum as uncertainty; multiplying by a large currency
+prefactor does not erase it or pretend the exact tail was zero.
+
 ## Model expressions and boundaries
 
 For lognormal coordinates, let `S,K` be the exact (possibly displaced) values,
@@ -91,3 +99,28 @@ lognormal coordinate. The references use erfc-based mpmath formulas at
 110/220 digits, increased to 400/800 for sparse and tiny inputs. Agreement
 does not constitute a formal interval proof of the reference. The scorer
 includes the normalized three-word expansion's absolute uncertainty.
+
+## Quote-scaled inverse residual
+
+For a strictly positive quote Q, the sign of `V/Q-1` equals the sign of
+`V-Q`. Evaluate this residual directly; dividing an already underflowed normal
+probability by Q cannot recover its lost information. For a positive weight W,
+
+    W phi(d) / Q = exp(log(W) - log(Q) - d²/2) / sqrt(2*pi).
+
+For a negative normal argument, multiply this expression by the bounded Mills
+ratio. For a positive argument, use `W/Q` minus its weighted smaller tail.
+All logarithms, squares, differences and exponentials retain their enclosures.
+This does not assume the transformed exponent is exact; its uncertainty is
+propagated. It also must not use the unweighted `|d|>=40` shortcut: a currency
+or quote prefactor can rescue a very small tail.
+
+For Bachelier, set `z=|delta|/s`. The out-of-the-money price divided by Q is
+
+    exp(log(D)+log(s)-log(Q)-z²/2) / sqrt(2*pi) * (1-z R(z)).
+
+For small z, evaluate `phi(z)-z Phi(-z)` directly and multiply by `D s/Q`.
+Add the nonnegative intrinsic/Q for the in-the-money side. These are identities
+of the same real model; cancellation remains explicitly bounded. A denominator
+or exponent that cannot be resolved fails. Normalizing the residual changes
+neither boundary semantics nor the inverse's volatility rounding criterion.

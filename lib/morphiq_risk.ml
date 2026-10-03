@@ -21,4 +21,5 @@ module Internal = struct
   module Iv_iteration = Iv_iteration
   module Enclosure = Enclosure
   module Model_enclosure = Model_enclosure
+  module Certified_iv = Certified_iv
 end

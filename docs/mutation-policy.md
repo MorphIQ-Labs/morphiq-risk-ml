@@ -6,13 +6,21 @@ seven core mutants. Each still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
 errors and replay-bit changes do not count as kills.
 
+The full ordinary baseline runs once under the mutation profile. Each mutant
+must then build successfully and fail its designated guard, invoked with the
+same fixtures as its ordinary Dune action. Every selected direct guard must
+also pass before mutations start. Both price fixture actions are retained.
+This avoids repeating unrelated numerical campaigns for each primitive fault.
+Missing binaries/fixtures, unmapped guards and signal-terminated tests are
+harness failures, never kills. Ordinary tests exercise these failure controls.
+
 | Core mutant | Reason for default coverage |
 | --- | --- |
 | `split-root-nonoverlap` | Square-root output must satisfy DD consumer preconditions. |
 | `dd-scale-nonoverlap` | Subnormal scaling must preserve DD nonoverlap. |
 | `reference-expansion` | Reference scoring must retain cancelling low words. |
 | `scaled-exp-prefactor` | A large currency prefactor can rescue a representable Gaussian tail. |
-| `iv-beta-bar` | Near-maximum inversion needs the compensated distance to the maximum. |
+| `certified-rounding-cell` | A fast proposal must not bypass exact-model root acceptance. |
 | `greeks-theta-dd` | Black Greek cancellation needs double-word arithmetic. |
 | `bachelier-theta-dd` | Bachelier Greek cancellation needs double-word arithmetic. |
 
@@ -41,5 +49,23 @@ dune exec scripts/mutation/mutation.exe -- quotient-remainder
 
 For changes to a mechanism outside the core, run its named mutant locally as
 part of the affected checks; use the full catalog for broader assurance. The
-separate `--probe intrinsic-terms` diagnostic remains provisionally excluded
-and currently survives; it is not included in either passing catalog.
+separate `--probe` diagnostics are excluded from the passing catalog.
+
+## Reconciled after runtime IV certification
+
+The 13-mechanism affected campaign killed eight faults and found five compiled
+survivors. `iv-rounded-bound`, `iv-beta-bar` and `iv-ln-beta` now change only
+untrusted proposal computations; runtime classification/correction preserved
+every tested public outcome. `bachelier-iv-quantum` and `iv-maximum-error` change historical
+root-error scorers whose rounded-reference difference is now zero on all
+correctly rounded IV rows. Their former end-to-end witnesses no longer establish
+the necessity of those terms. None of these observations proves universal
+redundancy or permits removing the corresponding numerical mechanism.
+
+Those five now live alongside `intrinsic-terms` under `--probe`. The curated
+catalog has 37 mechanisms, including the new runtime acceptance, discarded-word
+and original-shift witnesses. The default core still has seven: the compiled
+acceptance-bypass fault replaces the surviving proposal `iv-beta-bar` fault.
+`iv-complement-correction` still fails the independent near-maximum regression
+and remains curated. No bound or successful-root requirement was loosened to
+make this reconciliation pass.

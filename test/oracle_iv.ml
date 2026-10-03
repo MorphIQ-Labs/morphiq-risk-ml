@@ -1,11 +1,9 @@
-(* Scores implied volatility against FerroRisk's public IV reference
-   (oracle/convert_public_iv.py). Expected outcome by reference status:
+(* Scores implied volatility against the independently precision-refined
+   exact-input reference (oracle/convert_public_iv.py). Expected outcome:
 
-   - root: for the Black family, within the derived bound of the exact root
-     (black_root_bound, docs/error-analysis.md §6); for Bachelier, an absolute price-error budget
-     transported through the minimum vega between candidate and reference. How
-     many rows are no further from the root than FerroRisk's own largest
-     observed error (public_iv_observed_envelope.json) is reported alongside.
+   - root: exactly the nearest-even binary64 reference root, also satisfying
+     the historical quality gate and the independent price/vega transport
+     certificate. FerroRisk's observed envelope is diagnostic only.
    - zero_volatility_limit, rounded_zero_volatility_bound: σ = 0 exactly.
    - below_exact_intrinsic: Below_intrinsic.
    - no_finite_inverse, root_outside_binary64: Above_maximum.
@@ -116,6 +114,7 @@ let show = function
 type stat = {
   mutable n : int;
   mutable pass : int;
+  mutable numerical_failure : int;
   mutable in_cell : int;
   mutable within_4 : int;
   mutable within_ferro : int;
@@ -173,6 +172,7 @@ let () =
                      {
                        n = 0;
                        pass = 0;
+                       numerical_failure = 0;
                        in_cell = 0;
                        within_4 = 0;
                        within_ferro = 0;
@@ -236,10 +236,15 @@ let () =
                          Printf.eprintf "IV certificate unsupported: %s\n" why;
                          false
                      in
-                     let ok = ok && certified in
+                     let ok = v = root && ok && certified in
                      record ok;
                      if not ok then
                        fail (Printf.sprintf "Root %h in [%h, %h]" root lo hi)
+                 | Numerical_failure ->
+                     record false;
+                     st.numerical_failure <- st.numerical_failure + 1;
+                     Printf.eprintf "IV unresolved: %s\n" line;
+                     fail "certified Root"
                  | _ ->
                      record false;
                      fail (Printf.sprintf "Root %h" root))
@@ -287,6 +292,16 @@ let () =
            (show st.in_cell) (show st.within_4) (show st.within_ferro)
            (if root then Printf.sprintf "%.0f" st.worst_ulp else ""));
   Printf.printf "unresolved reference rows (no expectation):\n";
+  (* No root row may be silently refused or merely approximately correct. *)
+  List.iter
+    (fun model ->
+      match Hashtbl.find_opt stats (model ^ " root") with
+      | None -> ()
+      | Some st ->
+          Printf.printf
+            "%s runtime certification: %d roots, %d numerical failures\n" model
+            st.pass st.numerical_failure)
+    [ "bsm"; "black76"; "displaced"; "bachelier" ];
   Hashtbl.fold (fun k v acc -> (k, v) :: acc) unresolved []
   |> List.sort compare
   |> List.iter (fun (k, v) -> Printf.printf "  %-60s %d\n" k v);

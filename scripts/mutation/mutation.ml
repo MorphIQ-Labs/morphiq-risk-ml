@@ -11,7 +11,8 @@
    the named test fails (so the kill comes from the oracle or property that
    guards the mechanism).
 
-   The suite runs under the [mutation] dune profile, which disables the
+   The full baseline runs once; each compiled mutant runs its named guard.
+   Everything uses the [mutation] dune profile, which disables the
    determinism digest (any numerical change trips it) and leaves warnings
    non-fatal. Work happens in a temporary copy of the tracked files; the
    checkout is never modified.
@@ -37,6 +38,30 @@ type mutant = {
 let catalog =
   [
     {
+      id = "certified-rounding-cell";
+      file = "lib/certified_iv.ml";
+      snippet = "if rounding_cell proposal then Root proposal";
+      replacement = "if true then Root proposal";
+      killer = "certified_iv_reference";
+      mechanism = "a proposal cannot bypass exact-model rounding acceptance";
+    };
+    {
+      id = "enclosure-discarded-word";
+      file = "lib/enclosure.ml";
+      snippet = "else take 0 kept (error +^ abs x) rest";
+      replacement = "else take 0 kept error rest";
+      killer = "enclosure_reference";
+      mechanism = "discarded expansion words remain in the absolute radius";
+    };
+    {
+      id = "iv-original-shift";
+      file = "lib/black.ml";
+      snippet = "original_spot_low = spot_low;";
+      replacement = "original_spot_low = 0.0;";
+      killer = "iv_termination";
+      mechanism = "classification retains original sparse shifted input words";
+    };
+    {
       id = "model-normalization";
       file = "lib/model_enclosure.ml";
       snippet = "let inv_sqrt_2pi = E.div one (E.sqrt (E.mul_float pi 2.0))";
@@ -47,8 +72,8 @@ let catalog =
     {
       id = "enclosure-fma-underflow";
       file = "lib/enclosure.ml";
-      snippet = "(p, r, rounding r)";
-      replacement = "(p, r, 0.0)";
+      snippet = "let error = if ea + eb >= -968 then 0.0 else quantum in";
+      replacement = "let error = if ea + eb >= -968 then 0.0 else 0.0 in";
       killer = "enclosure_reference";
       mechanism =
         "a fused product residual can underflow and is not always exact";
@@ -166,14 +191,6 @@ let catalog =
       mechanism = "price ULP counts do not survive multiplication by T";
     };
     {
-      id = "bachelier-iv-quantum";
-      file = "test/iv_bounds.ml";
-      snippet = "+. 0x1p-1074 in";
-      replacement = "+. 0.0 in";
-      killer = "oracle_iv";
-      mechanism = "absolute rounding error for subnormal Bachelier quotes";
-    };
-    {
       id = "quotient-remainder";
       file = "lib/black.ml";
       snippet =
@@ -219,14 +236,6 @@ let catalog =
          (f l) (f tail) in";
       killer = "dd_reference";
       mechanism = "nonfinite component outputs must fail the DD scorer";
-    };
-    {
-      id = "iv-maximum-error";
-      file = "test/iv_bounds.ml";
-      snippet = "u +. (e_max /. gap_lower)";
-      replacement = "u +. (0.0 /. gap_lower)";
-      killer = "numerical_regressions";
-      mechanism = "maximum-leg error amplified by the complement gap";
     };
     {
       id = "floor-exponent";
@@ -317,34 +326,6 @@ let catalog =
       mechanism = "Marsaglia's series to double-double precision";
     };
     {
-      id = "iv-rounded-bound";
-      file = "lib/black.ml";
-      snippet = "if p = intrinsic.hi then root 0.0 else Iv.Below_intrinsic";
-      replacement = "if false then root 0.0 else Iv.Below_intrinsic";
-      killer = "oracle_iv";
-      mechanism = "a quote equal to the rounded intrinsic is sigma = 0 (#448)";
-    };
-    {
-      id = "iv-beta-bar";
-      file = "lib/black.ml";
-      snippet = "Dd.to_float (Dd.div (Dd.sub maximum (Dd.of_float p)) m_dd)";
-      replacement = "Elementary.exp (0.5 *. x) -. beta";
-      killer = "oracle_iv";
-      mechanism = "beta-bar from the exact distance to the maximum";
-    };
-    {
-      id = "iv-ln-beta";
-      file = "lib/black.ml";
-      snippet =
-        "(if intrinsic.hi > 0.0 then Elementary.log (Dd.to_float otm)\n\
-        \         else Elementary.log price -. (float c.exponent *. \
-         Split.ln2_hi))\n\
-        \        -. Elementary.log m";
-      replacement = "Elementary.log beta";
-      killer = "oracle_iv";
-      mechanism = "ln beta from the unscaled quote";
-    };
-    {
       id = "iv-complement-correction";
       file = "lib/black.ml";
       snippet = "else if beta > 0.5 *. b_max then";
@@ -405,7 +386,7 @@ let core_ids =
     "dd-scale-nonoverlap";
     "reference-expansion";
     "scaled-exp-prefactor";
-    "iv-beta-bar";
+    "certified-rounding-cell";
     "greeks-theta-dd";
     "bachelier-theta-dd";
   ]
@@ -422,6 +403,50 @@ let core_catalog () =
    Run with --probe intrinsic-terms; exit 1 means a compiled survivor. *)
 let probes =
   [
+    {
+      id = "iv-maximum-error";
+      file = "test/iv_bounds.ml";
+      snippet = "u +. (e_max /. gap_lower)";
+      replacement = "u +. (0.0 /. gap_lower)";
+      killer = "numerical_regressions";
+      mechanism = "maximum-leg error amplified by the complement gap";
+    };
+    {
+      id = "bachelier-iv-quantum";
+      file = "test/iv_bounds.ml";
+      snippet = "+. 0x1p-1074 in";
+      replacement = "+. 0.0 in";
+      killer = "oracle_iv";
+      mechanism = "absolute rounding error for subnormal Bachelier quotes";
+    };
+    {
+      id = "iv-rounded-bound";
+      file = "lib/black.ml";
+      snippet = "if p = intrinsic.hi then root 0.0 else Iv.Below_intrinsic";
+      replacement = "if false then root 0.0 else Iv.Below_intrinsic";
+      killer = "oracle_iv";
+      mechanism = "a quote equal to the rounded intrinsic is sigma = 0 (#448)";
+    };
+    {
+      id = "iv-beta-bar";
+      file = "lib/black.ml";
+      snippet = "Dd.to_float (Dd.div (Dd.sub maximum (Dd.of_float p)) m_dd)";
+      replacement = "Elementary.exp (0.5 *. x) -. beta";
+      killer = "oracle_iv";
+      mechanism = "beta-bar from the exact distance to the maximum";
+    };
+    {
+      id = "iv-ln-beta";
+      file = "lib/black.ml";
+      snippet =
+        "(if intrinsic.hi > 0.0 then Elementary.log (Dd.to_float otm)\n\
+        \         else Elementary.log price -. (float c.exponent *. \
+         Split.ln2_hi))\n\
+        \        -. Elementary.log m";
+      replacement = "Elementary.log beta";
+      killer = "oracle_iv";
+      mechanism = "ln beta from the unscaled quote";
+    };
     {
       id = "intrinsic-terms";
       file = "lib/black.ml";
@@ -511,21 +536,47 @@ let replace needle by hay =
   let i = find 0 in
   String.sub hay 0 i ^ by ^ String.sub hay (i + n) (String.length hay - i - n)
 
-(* The tests dune reports as failed: each failure cites its stanza's
-   "(name <test>)" line. *)
-let failed_tests output =
-  let key = "(name " in
-  let k = String.length key in
-  let rec scan i acc =
-    match String.index_from_opt output i '(' with
-    | None -> acc
-    | Some j when j + k <= String.length output && String.sub output j k = key
-      ->
-        let stop = String.index_from output (j + k) ')' in
-        scan stop (String.sub output (j + k) (stop - j - k) :: acc)
-    | Some j -> scan (j + 1) acc
+(* Mirror each designated test's ordinary action, including both price files.
+   Missing mappings or fixtures fail before any mutant is scored. Native
+   executables avoid an ambient bytecode DLL search-path dependency. *)
+let guard_arguments = function
+  | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
+  | "oracle_iv" | "certified_iv_reference" -> [ [ "iv" ] ]
+  | "enclosure_reference" | "dd_reference" -> [ [ "dd" ] ]
+  | "oracle_normal" -> [ [ "normal" ] ]
+  | "oracle_elementary" -> [ [ "elementary" ] ]
+  | "oracle_greeks" -> [ [ "greeks" ] ]
+  | "numerical_regressions" -> [ [ "regressions" ] ]
+  | "iv_termination" | "normal_dd_reference" | "properties"
+  | "test_morphiq_risk" ->
+      [ [] ]
+  | name -> failwith ("no explicit mutation guard action for " ^ name)
+
+type guard_result = Passed | Rejected of string | Invalid of string
+
+let guard ~cwd name =
+  let executable = "_build/default/test/" ^ name ^ ".exe" in
+  let actions =
+    List.map
+      (List.map (fun fixture ->
+           "_build/default/oracle/fixtures/" ^ fixture ^ ".txt"))
+      (guard_arguments name)
   in
-  List.sort_uniq compare (scan 0 [])
+  if
+    not
+      (List.for_all
+         (fun file -> Sys.file_exists (Filename.concat cwd file))
+         (executable :: List.concat actions))
+  then Invalid ("missing executable/fixture for " ^ name)
+  else
+    let results = List.map (run ~cwd executable) actions in
+    if
+      List.exists (fun (code, _) -> code <> 0 && code <> 1 && code <> 2) results
+    then Invalid ("guard did not finish normally: " ^ name)
+    else
+      match List.find_opt (fun (code, _) -> code <> 0) results with
+      | None -> Passed
+      | Some (_, output) -> Rejected output
 
 (* Symbolic links (dune's _build/.../latest) are removed, not followed. *)
 let rec remove_tree path =
@@ -535,6 +586,46 @@ let rec remove_tree path =
       (Sys.readdir path);
     Sys.rmdir path)
   else Sys.remove path
+
+let guard_controls () =
+  let work = Filename.temp_dir "mutation-guard-controls" "" in
+  Fun.protect
+    ~finally:(fun () -> remove_tree work)
+    (fun () ->
+      let dir = Filename.concat work "_build/default/test" in
+      mkdir_p dir;
+      let script name body =
+        let path = Filename.concat dir (name ^ ".exe") in
+        write path ("#!/bin/sh\n" ^ body ^ "\n");
+        Unix.chmod path 0o700
+      in
+      let check message ok = if not ok then failwith message in
+      check "missing guard was accepted"
+        (match guard ~cwd:work "iv_termination" with
+        | Invalid _ -> true
+        | _ -> false);
+      script "iv_termination" "exit 0";
+      check "passing guard was rejected"
+        (guard ~cwd:work "iv_termination" = Passed);
+      List.iter
+        (fun code ->
+          script "iv_termination" ("exit " ^ string_of_int code);
+          check "completed rejecting guard was not recorded"
+            (match guard ~cwd:work "iv_termination" with
+            | Rejected _ -> true
+            | _ -> false))
+        [ 1; 2 ];
+      script "iv_termination" "kill -TERM $$";
+      check "signalled guard was called a kill"
+        (match guard ~cwd:work "iv_termination" with
+        | Invalid _ -> true
+        | _ -> false);
+      script "oracle_iv" "exit 1";
+      check "missing fixture was called a kill"
+        (match guard ~cwd:work "oracle_iv" with
+        | Invalid _ -> true
+        | _ -> false);
+      print_endline "mutation guard controls pass")
 
 let score work m =
   let path = Filename.concat work m.file in
@@ -549,23 +640,13 @@ let score work m =
           | c, _ when c <> 0 ->
               Error (Printf.sprintf "INVALID   %s: does not compile" m.id)
           | _ -> (
-              match dune ~cwd:work [ "test" ] with
-              | 0, _ ->
+              match guard ~cwd:work m.killer with
+              | Passed ->
                   Error (Printf.sprintf "SURVIVED  %s: %s" m.id m.mechanism)
-              | _, output ->
-                  let failed = failed_tests output in
-                  if List.mem m.killer failed then
-                    let others = List.filter (( <> ) m.killer) failed in
-                    Ok
-                      (Printf.sprintf "killed    %s by %s%s" m.id m.killer
-                         (if others = [] then ""
-                          else " (also " ^ String.concat ", " others ^ ")"))
-                  else
-                    Error
-                      (Printf.sprintf
-                         "MISFIRED  %s: killed by [%s], expected %s" m.id
-                         (String.concat ", " failed)
-                         m.killer)))
+              | Invalid why ->
+                  Error (Printf.sprintf "INVALID   %s: %s" m.id why)
+              | Rejected _ ->
+                  Ok (Printf.sprintf "killed    %s by %s" m.id m.killer)))
   | n ->
       Error
         (Printf.sprintf "STALE     %s: snippet occurs %d times in %s" m.id n
@@ -573,6 +654,9 @@ let score work m =
 
 let () =
   let args = List.tl (Array.to_list Sys.argv) in
+  if args = [ "--self-test" ] then (
+    guard_controls ();
+    exit 0);
   let args, catalog =
     match args with
     | "--probe" :: rest -> (rest, probes)
@@ -612,6 +696,18 @@ let () =
           | _ ->
               Printf.printf "baseline passes (%.0f s)\n%!"
                 (Unix.gettimeofday () -. start);
+              (* Establish that the direct actions start and pass with the
+                 very same arguments before attributing a failure to mutation. *)
+              List.map (fun m -> m.killer) selected
+              |> List.sort_uniq compare
+              |> List.iter (fun name ->
+                     match guard ~cwd:work name with
+                     | Passed -> ()
+                     | Rejected output ->
+                         failwith
+                           ("direct baseline guard failed: " ^ name ^ "\n"
+                          ^ output)
+                     | Invalid why -> failwith why);
               let bad =
                 List.fold_left
                   (fun bad m ->

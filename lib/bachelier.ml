@@ -17,6 +17,8 @@ type inputs = {
 type coordinates =
   | Expiry of { forward : float; strike : float; rate : float }
   | Live of {
+      original_forward : float;
+      original_strike : float;
       discount : float;
       rate : float;
       distance : float;
@@ -43,6 +45,8 @@ let admit i =
     Ok
       (Live
          {
+           original_forward = i.forward;
+           original_strike = i.strike;
            discount = Black.Coordinates.exp_neg_product i.rate i.time_to_expiry;
            rate = i.rate;
            distance;
@@ -72,8 +76,16 @@ let price a side sigma =
   | Expiry { forward; strike; _ } ->
       Float.max (theta *. (forward -. strike)) 0.0
   | Live
-      { discount; distance; distance_low; root_time; root_time_low; rate; time }
-    ->
+      {
+        discount;
+        distance;
+        distance_low;
+        root_time;
+        root_time_low;
+        rate;
+        time;
+        _;
+      } ->
       (* D θ Δ to ~106 bits: the zero-variance price is its correctly rounded
          value, the boundary the inverse classifies quotes against. *)
       let delta = { Dd.hi = theta *. distance; lo = theta *. distance_low } in
@@ -125,7 +137,7 @@ let root sigma =
   | Ok v -> Iv.Root v
   | Error _ -> Iv.Numerical_failure
 
-let implied a side price =
+let implied_proposal a side price =
   if not (Float.is_finite price && price >= 0.0) then
     Error (Refusal.Invalid_input { parameter = Refusal.Price; value = price })
   else
@@ -174,6 +186,40 @@ let implied a side price =
                   (if not (Float.is_finite sigma && sigma > 0.0) then
                      Iv.Numerical_failure
                    else root sigma))
+
+let implied a side price =
+  if not (Float.is_finite price && price >= 0.0) then
+    Error (Refusal.Invalid_input { parameter = Refusal.Price; value = price })
+  else
+    match a with
+    | Expiry _ -> Ok Iv.Not_identifiable_at_expiry
+    | Live { original_forward; original_strike; time; rate; _ } ->
+        Ok
+          (try
+             let model =
+               Model_enclosure.normal ~forward:original_forward
+                 ~strike:original_strike ~time ~rate
+             in
+             let intrinsic, maximum = Model_enclosure.bounds model side in
+             let proposal =
+               match implied_proposal a side price with
+               | Ok (Iv.Root v) when Vol.to_float v > 0.0 -> Vol.to_float v
+               | _ -> 1.0
+             in
+             match
+               Certified_iv.solve
+                 ~prepare_residual:(fun () ->
+                   Model_enclosure.inverse_residual model side price)
+                 ~intrinsic ~maximum ~quote:price ~proposal ()
+             with
+             | Certified_iv.Root v -> root v
+             | Certified_iv.Below_intrinsic -> Iv.Below_intrinsic
+             | Certified_iv.Above_maximum -> Iv.Above_maximum
+             | Certified_iv.Below_smallest_volatility ->
+                 Iv.Below_smallest_volatility
+             | Certified_iv.Non_convergence -> Iv.Non_convergence
+             | Certified_iv.Numerical_failure -> Iv.Numerical_failure
+           with Enclosure.Unresolved _ -> Iv.Numerical_failure)
 
 let sqrt_pi_over_2 = 1.253314137315500251207882642405522626503493370305
 let mills z = sqrt_pi_over_2 *. Cody.erfcx_nonnegative (z *. Normal.inv_sqrt_2)

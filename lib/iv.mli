@@ -5,12 +5,13 @@
 
 type 'coordinate t =
   | Root of 'coordinate Vol.t
-      (** A representable approximation to the inverse of the exact binary64
-          quote. An arbitrary real root need not be representable, and exact
-          repricing is not promised. See docs/error-analysis.md section 6 for
-          the accuracy evidence and its scope. Zero when the quote is the
-          discounted intrinsic, or its correctly rounded value below it (#448).
-          A quote that rounds the intrinsic upward has a positive real root. *)
+      (** A positive value is the nearest-even binary64 rounding of the real
+          inverse of the exact quote, established by runtime model enclosures
+          under the documented IEEE arithmetic contract. Exact repricing is not
+          promised. Unresolved enclosures return [Numerical_failure]. See
+          docs/certified-iv.md. Zero when the quote is the discounted intrinsic,
+          or its correctly rounded value below it (#448). A quote that rounds
+          the intrinsic upward has a positive real root. *)
   | Below_intrinsic
       (** Below the zero-volatility price: no volatility attains it. *)
   | Above_maximum
@@ -24,6 +25,6 @@ type 'coordinate t =
       (** The finite iteration budget was exhausted without satisfying the
           solver's stopping criterion. No successful iterate is returned. *)
   | Numerical_failure
-      (** Arithmetic, a bracket or a conversion could not be resolved. This is
-          not evidence of a price above the mathematical maximum or of a root
-          below the smallest volatility. *)
+      (** Arithmetic, a boundary comparison or the root's rounding cell could
+          not be resolved. This is not evidence of a price above the
+          mathematical maximum or of a root below the smallest volatility. *)

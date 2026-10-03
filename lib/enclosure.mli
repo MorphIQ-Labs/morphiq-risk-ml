@@ -4,14 +4,19 @@
 
 exception Unresolved of string
 
-type t = private { hi : float; lo : float; error : float }
-(** The real value is within [error] of the unevaluated sum [hi+lo]. All fields
-    are finite and [error] is nonnegative. *)
+type t = private { hi : float; lo : float; tail : float list; error : float }
+(** The real value is within [error] of the unevaluated sum of [words]. All
+    fields are finite and [error] is nonnegative. *)
 
 type sign = Negative | Zero | Positive | Indeterminate
 
 val exact : float -> t
 val of_words : float -> float -> t
+val words : t -> float list
+
+val centre : t -> t
+(** Exact retained expansion, used only as a new arithmetic proposal. *)
+
 val add : t -> t -> t
 val sub : t -> t -> t
 val neg : t -> t

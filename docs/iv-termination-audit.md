@@ -1,30 +1,37 @@
 # IV termination and failure audit
 
-This change addresses the silent-success and false-classification paths in
-Bug #14. It does **not** close that issue or qualify Epic #27 for production.
-The remaining exact-model boundary and runtime uncertainty obligations below
-must be resolved before claiming that scope complete.
+The public inverse now requires an exact-model runtime certificate. Fast
+Black/Bachelier inverses supply proposals only; their rounded comparisons or
+convergence checks cannot classify a quote or accept a public root. This
+addresses Bug #14's numerical contract; independent review, production use,
+portfolio validation and version acceptance remain Epic #27 obligations.
 
 ## Path audit
 
-| Path | Result and remaining scope |
+| Path | Enforced result |
 | --- | --- |
-| Invalid original input or quote | Typed `Refusal`, before inversion; unchanged. |
-| Expiry | `Not_identifiable_at_expiry`; unchanged. |
-| Black maximum/intrinsic and Bachelier intrinsic | DD comparison retained after finite-coordinate checks. It is still an approximation; uncertainty at an unresolved boundary needs enforcement. |
-| Rounded intrinsic | Historical zero-volatility convention retained and tested; not an assertion that arbitrary DD evaluation is correctly rounded. |
-| Black initialization | LBR's fixed Householder count produces a proposal. It no longer establishes successful inversion by itself. |
-| Black complement/log/ordinary correction | Each uses the appropriate evaluator in final validation. A failed local bracket returns `Numerical_failure`. |
-| Bachelier initialization | Outward upper endpoint plus evaluated zero lower endpoint. Both residual signs are checked. |
-| Newton proposal | A nonfinite or out-of-bracket proposal falls back to bisection. |
-| Price evaluation | A nonfinite evaluation is an explicit computational failure. |
-| Stagnation | Small steps are not success; an evaluated match or adjacent-float sign bracket is required. |
-| Iteration exhaustion | `Non_convergence`, with no candidate exposed as `Root`. Forced exhaustion is tested. |
-| Final coordinate conversion | Nonfinite/nonpositive positive-root results are `Numerical_failure`. Overflow/underflow alone does not prove `Above_maximum`/`Below_smallest_volatility`. |
-| Exact-root accuracy | Executed price/vega certificates plus unchanged historical quality gates on all 5,575 positive oracle roots. These are test evidence, not runtime enclosures. |
+| Invalid original input or quote | Typed `Refusal` before inversion. |
+| Expiry | `Not_identifiable_at_expiry`. |
+| Intrinsic/maximum | Original-input four-word enclosures, including unscaled displaced low words. Unresolved signs fail. |
+| Rounded intrinsic | Zero only after exact equality or a proved intrinsic rounding-cell decision, including tie parity. |
+| Initialization and Newton | Bounded fast computations supply untrusted proposals; a failed proposal falls back to 1.0 for certified bracketing. |
+| Price/residual evaluation | Independently enclosed real model. Quote scaling retains subnormal-quote information; nonfinite arithmetic or unresolved signs fail. |
+| Stagnation | No small-step or rounded-price-equality success. |
+| Bracket and stopping | At most 64 encoding expansions and 63 bisections, then a proved exact midpoint decision; alternatively a proved rounding cell. |
+| Iteration exhaustion | `Non_convergence`; no last iterate becomes a root. Forced exhaustion is tested. |
+| Final coordinate | Certification evaluates annual volatility directly. A positive root is nearest-even binary64; under/overflow cannot impersonate a representability classification. |
+| Extreme representability | `Below_smallest_volatility` or `Above_maximum` requires a proved endpoint comparison. Otherwise numerical failure. |
+| Accuracy | All 5,575 positive reference roots must match the correctly rounded reference, alongside analytical transport and historical quality checks. |
 
-See [the derivation](error-analysis.md#6-implied-volatility) for the integer
-bisection termination bound and nonlinear certificate transport.
+See [runtime arithmetic](runtime-enclosures.md), [model enclosures](model-enclosures.md)
+and [exact-model IV acceptance](certified-iv.md) for the derivations.
+
+The sparse shifted contract `F=K=2^64`, displacement `2^-1074`, T=1, r=0,
+quote `2^64` has a finite real inverse: its maximum is strictly greater than
+the quote. Losing the displacement during currency scaling would incorrectly
+classify it as above maximum. Original input words now preserve that distinction;
+the unresolved inverse explicitly returns `Numerical_failure`. The tiny-carry
+price path is similarly not evidence that a classification can be resolved.
 
 ## Canonical reference
 
@@ -62,12 +69,18 @@ flags and every comparison. It is optional research tooling, outside CI.
 
 ## Compatibility and observed accuracy
 
+The current public contract is stronger: all 5,575 exact-quote reference roots
+are correctly rounded (zero ULP from the rounded reference), with no refusals
+in that corpus. The tables below retain the earlier proposal/termination-stage
+evidence at `55d4d9e`; they do not describe final certified acceptance.
+
+
 Adding two cases to the exhaustive `Iv.t` variant is a breaking API change
 under [the stability policy](stability.md). Callers must handle computational
 failure separately from mathematical classifications. No release is tagged
 by this work.
 
-On the existing exact-input IV fixture, baseline `7b93c2a` versus this change:
+At the first termination stage, baseline `7b93c2a` versus `55d4d9e`:
 
 | Model | Positive roots | Worst root ULPs before | After | Existing quality gate |
 | --- | ---: | ---: | ---: | --- |
@@ -88,7 +101,12 @@ The intentional IV changes move the determinism digest from
 Cross-platform CI must validate the new digest; a local digest alone does not
 establish platform agreement.
 
-## Performance evidence
+## Historical proposal-stage performance evidence
+
+The current certified inverse is substantially more expensive. The
+[current A/B/B/A benchmark and profile](performance.md) report its cost,
+allocation, GC and measurement limitations. The numbers in this historical
+section must not be used for the runtime-certified API.
 
 [Four retained ABBA runs](evidence/iv-termination-bench.json) compare baseline
 `7b93c2a` with the candidate library source hashes on an Apple M1 Pro, OCaml
@@ -122,12 +140,11 @@ benchmark does not establish safe parallel throughput or institutional fitness.
 - Enforce a supported production domain and the error/materiality requirements
   fixed for it (#13). Current model admission still accepts more than the
   executed certificate domains.
-- Bound classification uncertainty at intrinsic/maximum and exponent extremes,
-  including the special tiny-carry price path. Finite DD words alone do not
-  establish an exact mathematical comparison.
-- Expose an exact-model enclosure or an explicit unresolved outcome when a
-  caller needs a runtime error guarantee. An adjacent bracket for a rounded
-  evaluator is not automatically a bracket for the exact real model.
+- Extend availability where needed by the supported production use. Runtime
+  enclosures now enforce uncertainty rather than claiming every admitted input
+  can be successfully resolved. Price/Greek production guarantees are separate.
+- Measure the additional cost of runtime certification; the historical timings
+  above cover proposal generation and are not current public inverse timings.
 - Complete independent review, representative-engine shadow validation,
   operational performance requirements, and named acceptance of an exact
   candidate (#15, #16, #17). None is supplied by a passing local test suite.
