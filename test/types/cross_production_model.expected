@@ -1,0 +1,9 @@
+File "cross_production_model.ml", line 4, characters 30-31:
+4 |   Production.Black76.evaluate a Side.Call
+                                  ^
+Error: The value "a" has type
+         "Morphiq_risk.Production.Bsm.admitted" =
+           "Morphiq_risk__Production.Bsm.admitted"
+       but an expression was expected of type
+         "Morphiq_risk.Production.Black76.admitted" =
+           "Morphiq_risk__Production.Black76.admitted"

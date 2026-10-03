@@ -85,3 +85,11 @@ time smoothness, Bachelier ATM rho and the generally nonzero boundary veta.
 Their designated guard is `boundary_greeks`, which checks independent price
 derivatives and exact varied-coordinate identities. None is added to the
 seven default core mechanisms.
+
+## Production acceptance boundary
+
+Four additional optional witnesses cover the requested accuracy limit, served
+certificate radius, BSM versus forward rho and time-unit conversion. The
+catalog has 47 mechanisms; default CI retains the same seven core witnesses.
+The guards use independent reference error and contract rejection, not replay
+bit changes or compiler failures.

@@ -252,3 +252,25 @@
  (libraries morphiq_risk greek_values)
  (action
   (run %{test} %{dep:../oracle/fixtures/boundary_greeks.txt})))
+
+(test
+ (name production_greek_reference)
+ (modules production_greek_reference)
+ (libraries morphiq_risk zarith)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/greek_bits.txt})))
+
+(test
+ (name production_reference)
+ (modules production_reference)
+ (libraries morphiq_risk zarith)
+ (action
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/greek_bits.txt}
+   %{dep:../oracle/fixtures/model_enclosures.txt})))
+
+(test
+ (name production_boundary)
+ (modules production_boundary)
+ (libraries morphiq_risk))

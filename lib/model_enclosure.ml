@@ -1,3 +1,15 @@
+type sensitivity =
+  | Delta
+  | Gamma
+  | Theta
+  | Vega
+  | Rho
+  | Vanna
+  | Volga
+  | Charm
+  | Veta
+  | Color
+
 module type S = sig
   type scalar
 
@@ -26,6 +38,11 @@ module type S = sig
   val price_enclosed : t -> Side.t -> scalar -> scalar
   (** Also accepts exact two-word volatility midpoints for IV rounding
       decisions. *)
+
+  val greek : t -> Side.t -> float -> rho_forward:bool -> sensitivity -> scalar
+  (** Smooth positive-maturity/volatility derivative. Time quantities are per
+      calendar day. [rho_forward] is supplied by the model owner; BSM holds q
+      fixed even when its value equals r. *)
 
   val pdf : scalar -> scalar
   val cdf : scalar -> scalar
@@ -136,6 +153,10 @@ struct
           raise (E.Unresolved "normal argument sign unresolved")
 
   type black = {
+    spot : E.t;
+    time : float;
+    rate : float;
+    yield : float;
     asset : E.t;
     cash : E.t;
     distance : E.t;
@@ -143,7 +164,14 @@ struct
     root_time : E.t;
   }
 
-  type normal = { discount : E.t; distance : E.t; root_time : E.t }
+  type normal = {
+    discount : E.t;
+    distance : E.t;
+    root_time : E.t;
+    time : float;
+    rate : float;
+  }
+
   type t = Black of black | Normal of normal
 
   let discount rate time = exp (E.neg (E.mul (E.exact rate) (E.exact time)))
@@ -164,6 +192,10 @@ struct
     let carry = E.mul (E.sub (E.exact rate) (E.exact yield)) (E.exact time) in
     Black
       {
+        spot;
+        time;
+        rate;
+        yield;
         asset;
         cash;
         distance;
@@ -175,6 +207,8 @@ struct
     require (Float.is_finite time && time >= 0.0) "invalid model maturity";
     Normal
       {
+        time;
+        rate;
         discount = discount rate time;
         distance = E.sub (E.exact forward) (E.exact strike);
         root_time = E.sqrt (E.exact time);
@@ -220,6 +254,119 @@ struct
                (E.mul s (pdf d)))
 
   let price model side sigma = price_enclosed model side (E.exact sigma)
+
+  (* Differentiation and the absolute acceptance contract are derived in
+     docs/production-greek-enclosures.md. No measured error envelope is used. *)
+  let greek model side sigma ~rho_forward quantity =
+    let time, root_time =
+      match model with
+      | Black c -> (c.time, c.root_time)
+      | Normal c -> (c.time, c.root_time)
+    in
+    require
+      (time > 0.0 && Float.is_finite sigma && sigma > 0.0)
+      "smooth Greek requires positive maturity and volatility";
+    let t = E.exact time and vol = E.exact sigma in
+    let total = E.mul root_time vol in
+    let theta = Side.sign side in
+    let daily v = E.div_float v Units.days_per_year in
+    let half_inverse_time () = E.div (E.exact 0.5) t in
+    let forward_rho () = E.neg (E.mul t (price model side sigma)) in
+    match model with
+    | Black c -> (
+        let h = E.div c.x total and half = E.scale total (-1) in
+        let d1 = E.add h half and d2 = E.sub h half in
+        let p = E.mul c.asset (pdf d1) in
+        let vega () = E.mul p root_time in
+        let delta () =
+          E.mul_float
+            (E.mul (E.div c.asset c.spot) (cdf (E.mul_float d1 theta)))
+            theta
+        in
+        let gamma () = E.div (E.div p c.spot) (E.mul c.spot total) in
+        let w () =
+          let carry = E.mul (E.sub (E.exact c.rate) (E.exact c.yield)) t in
+          E.add
+            (E.div (E.sub (E.scale carry 1) c.x) (E.mul (E.scale t 1) total))
+            (E.div vol (E.scale root_time 2))
+        in
+        match quantity with
+        | Delta -> delta ()
+        | Gamma -> gamma ()
+        | Theta ->
+            daily
+              (E.sub
+                 (E.mul_float
+                    (E.sub
+                       (E.mul_float
+                          (E.mul c.asset (cdf (E.mul_float d1 theta)))
+                          c.yield)
+                       (E.mul_float
+                          (E.mul c.cash (cdf (E.mul_float d2 theta)))
+                          c.rate))
+                    theta)
+                 (E.div (E.mul p vol) (E.scale root_time 1)))
+        | Vega -> vega ()
+        | Rho ->
+            if rho_forward then forward_rho ()
+            else
+              E.mul_float
+                (E.mul t (E.mul c.cash (cdf (E.mul_float d2 theta))))
+                theta
+        | Vanna -> E.neg (E.div (E.mul (E.div p c.spot) d2) vol)
+        | Volga -> E.div (E.mul (vega ()) (E.mul d1 d2)) vol
+        | Charm ->
+            daily
+              (E.sub
+                 (E.mul_float (delta ()) c.yield)
+                 (E.mul (E.div p c.spot) (w ())))
+        | Veta ->
+            daily
+              (E.mul (vega ())
+                 (E.sub
+                    (E.add (E.exact c.yield) (E.mul d1 (w ())))
+                    (half_inverse_time ())))
+        | Color ->
+            daily
+              (E.mul (gamma ())
+                 (E.add
+                    (E.add (E.exact c.yield) (E.mul d1 (w ())))
+                    (half_inverse_time ()))))
+    | Normal c -> (
+        let d = E.div c.distance total in
+        let d2 = E.mul d d and p = E.mul c.discount (pdf d) in
+        let delta () =
+          E.mul_float (E.mul c.discount (cdf (E.mul_float d theta))) theta
+        in
+        let vega () = E.mul p root_time in
+        let gamma () = E.div p total in
+        match quantity with
+        | Delta -> delta ()
+        | Gamma -> gamma ()
+        | Theta ->
+            daily
+              (E.sub
+                 (E.mul_float (price model side sigma) c.rate)
+                 (E.div (E.mul p vol) (E.scale root_time 1)))
+        | Vega -> vega ()
+        | Rho -> forward_rho ()
+        | Vanna -> E.neg (E.div (E.mul p d) vol)
+        | Volga -> E.div (E.mul (vega ()) d2) vol
+        | Charm ->
+            daily
+              (E.add
+                 (E.mul_float (delta ()) c.rate)
+                 (E.mul (E.mul p d) (half_inverse_time ())))
+        | Veta ->
+            daily
+              (E.mul (vega ())
+                 (E.sub (E.exact c.rate)
+                    (E.mul (E.add one d2) (half_inverse_time ()))))
+        | Color ->
+            daily
+              (E.mul (gamma ())
+                 (E.add (E.exact c.rate)
+                    (E.mul (E.sub one d2) (half_inverse_time ())))))
 
   let inverse_residual model side quote =
     if quote = 0.0 then fun sigma -> price_enclosed model side sigma

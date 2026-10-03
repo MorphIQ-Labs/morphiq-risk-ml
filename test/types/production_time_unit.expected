@@ -1,0 +1,12 @@
+File "production_time_unit.ml", line 7, characters 32-37:
+7 |     Production.Theta ~max_error:limit
+                                    ^^^^^
+Error: The value "limit" has type
+         "Morphiq_risk.Units.per_year Morphiq_risk.Units.time_rate"
+       but an expression was expected of type
+         "Morphiq_risk__.Units.per_calendar_day Morphiq_risk__.Units.time_rate"
+           =
+           "Morphiq_risk__.Units.per_calendar_day Morphiq_risk.Units.time_rate"
+       Type "Morphiq_risk.Units.per_year" is not compatible with type
+         "Morphiq_risk__.Units.per_calendar_day" =
+           "Morphiq_risk.Units.per_calendar_day"

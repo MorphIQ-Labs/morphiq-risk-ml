@@ -218,3 +218,99 @@
  (alias runtest)
  (action
   (diff daily_veta_as_annual.expected daily_veta_as_annual.out)))
+
+(rule
+ (deps forge_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets forge_certificate.out)
+ (action
+  (with-stderr-to
+   forge_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_certificate.cmo
+     forge_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_certificate.expected forge_certificate.out)))
+
+(rule
+ (deps cross_production_model.ml ../../lib/morphiq_risk.cma)
+ (targets cross_production_model.out)
+ (action
+  (with-stderr-to
+   cross_production_model.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     cross_production_model.cmo
+     cross_production_model.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff cross_production_model.expected cross_production_model.out)))
+
+(rule
+ (deps production_veta_coordinate.ml ../../lib/morphiq_risk.cma)
+ (targets production_veta_coordinate.out)
+ (action
+  (with-stderr-to
+   production_veta_coordinate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     production_veta_coordinate.cmo
+     production_veta_coordinate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff production_veta_coordinate.expected production_veta_coordinate.out)))
+
+(rule
+ (deps production_time_unit.ml ../../lib/morphiq_risk.cma)
+ (targets production_time_unit.out)
+ (action
+  (with-stderr-to
+   production_time_unit.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     production_time_unit.cmo
+     production_time_unit.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff production_time_unit.expected production_time_unit.out)))
