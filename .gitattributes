@@ -3,3 +3,6 @@
 experiments/oxcaml/portable-numerics.patch whitespace=-blank-at-eol
 # Preserve the upstream QD notice byte-for-byte, including original whitespace.
 LICENSES/QD-COPYING.txt whitespace=-blank-at-eol,-blank-at-eof
+LICENSES/QD-BSD-LBNL-License.doc binary
+# Unedited textutil extraction; the original DOC is authoritative.
+LICENSES/QD-BSD-LBNL-License.txt whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab

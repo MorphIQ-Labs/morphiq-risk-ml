@@ -4,7 +4,14 @@
  (files
   NOTICE
   THIRD_PARTY_NOTICES.md
+  (LICENSES/AS241-StatLib.txt as LICENSES/AS241-StatLib.txt)
   (LICENSES/LetsBeRational.txt as LICENSES/LetsBeRational.txt)
-  (LICENSES/QD-BSD-3-Clause.txt as LICENSES/QD-BSD-3-Clause.txt)
+  (LICENSES/QD-BSD-LBNL-License.doc as LICENSES/QD-BSD-LBNL-License.doc)
+  (LICENSES/QD-BSD-LBNL-License.txt as LICENSES/QD-BSD-LBNL-License.txt)
   (LICENSES/QD-COPYING.txt as LICENSES/QD-COPYING.txt)
+  (docs/source-provenance.md as docs/source-provenance.md)
+  (docs/numerical-replacement-plan.md as docs/numerical-replacement-plan.md)
+  (docs/evidence/source-provenance-2026-10-03.json
+   as
+   docs/evidence/source-provenance-2026-10-03.json)
   (LICENSES/Sun-fdlibm.txt as LICENSES/Sun-fdlibm.txt)))

@@ -44,7 +44,10 @@ let log_norm_cdf x =
         Elementary.log (0.5 *. Cody.erfcx_nonnegative (u *. inv_sqrt_2))
         -. h -. l
 
-(* M. J. Wichura, Algorithm AS 241 (PPND16), Appl. Statist. 37 (1988) 477-484. *)
+(* M. J. Wichura, Algorithm AS 241 (PPND16), Appl. Statist. 37 (1988) 477-484.
+   Adapted after reading the StatLib source; Royal Statistical Society
+   copyright. See LICENSES/AS241-StatLib.txt and docs/source-provenance.md
+   for the distribution notice and unresolved permission scope. *)
 module As241 = struct
   let split1 = 0.425
   let split2 = 5.0

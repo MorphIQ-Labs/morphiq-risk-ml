@@ -20,6 +20,8 @@ been retired; it remains in Git history.
 - [Runtime enclosures](runtime-enclosures.md), [model enclosures](model-enclosures.md), and [Greek enclosures](production-greek-enclosures.md).
 - [Certified IV](certified-iv.md), [adaptive certification](adaptive-certification.md), and [zero-volatility Greeks](zero-volatility-greeks.md).
 - [Research bibliography](research/README.md): original publications, source links, and historical acquisition checksums.
+- [Numerical source provenance](source-provenance.md): actual implementation sources, retained terms and unresolved distribution status.
+- [Numerical replacement plan](numerical-replacement-plan.md): staged replacement of AS241, CALERF and the QD-derived exponential, with qualification requirements.
 
 ## Evidence and history
 

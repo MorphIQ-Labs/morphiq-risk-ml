@@ -93,9 +93,13 @@ let to_float a = a.hi +. a.lo
 let ln2 = { hi = 0x1.62e42fefa39efp-1; lo = 0x1.abc9e3b39803fp-56 }
 let compare_float a f = if a.hi <> f then compare a.hi f else compare a.lo 0.0
 
-(* exp and expm1 follow the QD library's dd_real (Hida, Li and Bailey,
+(* exp and expm1 adapt the QD library's dd_real (Hida, Li and Bailey,
    qd-2.3.24, dd_real.cpp), with its reduction constant k = 512 and its
-   stopping rule. One departure: exp covers the binary64 range down to the
+   stopping rule. Copyright (c) 2003-2023, The Regents of the University of
+   California through Lawrence Berkeley National Laboratory; see the original
+   COPYING and BSD-LBNL-License documents in LICENSES/ and the scope review in
+   docs/source-provenance.md.
+   One departure: exp covers the binary64 range down to the
    subnormals (QD returns 0 below -709), where the result's low part
    underflows and the precision falls toward binary64's. *)
 
