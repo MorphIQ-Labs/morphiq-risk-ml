@@ -62,7 +62,8 @@ substitute numerical kernels silently.
 ## Research publications and historical evidence
 
 The [bibliography](docs/research/README.md) links to original sources. Downloaded
-PDFs are excluded from the current tracked tree; optional local copies retain
+PDFs are preserved in the private research library described in the bibliography
+and excluded from the current tracked tree; optional local copies retain
 their original bytes and notices. The acquisition manifest and SHA-256 list
 identify the exact versions used for research and do not grant redistribution
 rights. Earlier commits and existing clones may still contain the PDFs; this

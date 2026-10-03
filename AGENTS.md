@@ -212,11 +212,28 @@ failure; never turn a failed computation into a plausible successful value.
 Missing reference coverage is not itself mathematical invalidity. An offered
 production capability restriction must be documented as such.
 
-Keep locally archived PDFs unchanged, including notices; do not commit them. Use
-`YYYY-first-author-short-title[-version].pdf`, record actual acquisition and
-version in the research manifest, and update `SHA256SUMS` and links together.
-Record unavailable papers honestly. Archiving a paper does not validate its
-claims or relicense it under the project's code license.
+### Research references and preservation
+
+Research papers are durable assets. Preserve acquired originals and notices in
+the private [research library](https://github.com/MorphIQ-Labs/research-library),
+subject to their terms; follow its README.md, RIGHTS.md and AGENTS.md. Use
+`YYYY-first-author-short-title[-version].pdf` with the filename stem as a stable
+ID. Record exact versions, original sources, actual acquisition routes/dates,
+SHA-256, byte counts, consuming projects and document-specific rights status.
+Keep acquisition snapshots unchanged and unavailable papers explicit.
+
+This public project retains its bibliography, source links, version hashes,
+derivations, contracts, tests, fixtures, generators and numerical evidence.
+Builds and CI must not depend on private-library access. Local PDF copies are
+optional and ignored; do not commit them without recorded redistribution
+permission. Public availability or a related code license is not such evidence;
+private storage does not itself authorize broader team sharing. Keep publication
+rights separate from implementation provenance and the project's Apache license.
+
+Verify preservation and matching destination hashes before removing tracked
+research copies; update public references together. Untracking does not erase
+Git history, existing clones or archives. Do not rewrite history as incidental
+cleanup. See the [bibliography](docs/research/README.md) for the migration record.
 
 ## Invariants, Ownership, and Review
 

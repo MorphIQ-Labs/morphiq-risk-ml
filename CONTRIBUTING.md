@@ -79,7 +79,9 @@ The current solo-maintainer policy does not require a second person's approval;
 existing approvals are dismissed after new reviewable commits.
 
 Do not commit `_build/`, local environments, decompressed fixtures, scratch
-benchmarks, or downloaded research papers. Retain the fixtures, hashes, and
+benchmarks, or downloaded research papers. Follow the
+[research preservation policy](docs/research/README.md#preservation-and-access)
+for acquired papers. Retain the fixtures, hashes, and
 evidence that support numerical claims. Upstream code needs provenance and its
 original notices; see [third-party notices](THIRD_PARTY_NOTICES.md).
 

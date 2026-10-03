@@ -44,7 +44,7 @@ it is not the supported compiler or a prerequisite for ordinary builds.
 | Material | Treatment |
 | --- | --- |
 | Original `SLICE.md` proposal | Removed from the current tree; retained at its recorded Git revision |
-| Downloaded research PDFs | Kept only as optional ignored local files; link to original sources for distribution |
+| Downloaded research PDFs | Originals preserved in the private research library; optional local copies ignored; [bibliography and preservation policy](research/README.md) retain public provenance and source links |
 | Research metadata and checksums | Retained to identify the exact references used in numerical work |
 | Numerical fixtures, generators, certificates, and evidence | Retained with their provenance |
 | Candidate and acceptance records | Retained as dated records; never rewritten to imply a later acceptance |

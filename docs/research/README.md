@@ -53,6 +53,26 @@ See [third-party notices](../../THIRD_PARTY_NOTICES.md) for retained source
 notices and unresolved provenance questions. A reference to an algorithm does
 not itself establish an error bound or a source-code license.
 
+## Preservation and access
+
+The 18 acquired originals are preserved in the private
+[MorphIQ Labs research library](https://github.com/MorphIQ-Labs/research-library),
+with unchanged bytes and notices, the original acquisition records, and a
+catalog of versions, consuming projects and unresolved rights reviews. Stable
+document IDs are the canonical filenames in this manifest without `.pdf`.
+The archive's project index maps these IDs to `morphiq-risk-ml`.
+
+Library access is optional and restricted; public readers should use the original
+source links above. This project retains its own derivations, contracts, tests,
+fixtures, generators and validation evidence. Its build and CI do not use the
+private library. Research PDFs are durable assets, not disposable planning files.
+
+Publication redistribution rights are reviewed per document, separately from
+source-code licensing. A public download URL is not recorded permission to
+redistribute. The archive's initial rights records are explicitly unreviewed;
+private storage does not settle permission for broader sharing. Papers may be
+included publicly when the applicable permission is documented.
+
 ## Optional local reference copies
 
 Existing local PDFs are preserved unchanged and ignored by Git. If you obtain
