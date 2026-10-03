@@ -6,6 +6,12 @@ conflict/independence declaration exists, and no human sign-off is implied by
 Arb agreement, mutation results or this document. Review must identify the exact
 source commit and every later numerical/API/compiler delta needing re-review.
 
+The owner has separately [reviewed and approved the delivered baseline](acceptance/owner-review-2026-10-03.md).
+The [0.2.0 candidate dossier](candidate-0.2.0.md) identifies the final source,
+its compatibility with that baseline, canonical generated qualification and
+platform artifacts. This owner approval is retained without substituting it
+for the independent reviewer deliverables below.
+
 ## Mandate and deliverables
 
 The appointing owner should select a reviewer with floating-point error-analysis

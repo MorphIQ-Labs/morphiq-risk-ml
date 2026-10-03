@@ -158,3 +158,14 @@ and [platform counter](https://github.com/ocaml/ocaml/blob/5.3/runtime/unix.c):
 `caml_time_counter` supplies nanoseconds, using the raw uptime clock on this
 macOS build. The reader uses runtime span names rather than interpreting a
 collection counter as elapsed time.
+
+## Canonical generated workload and candidate validation
+
+The [720-row canonical qualification](results-canonical-dataset.md) extends the
+scalar workload with a pre-scoring frozen grid and nine repetitions. All
+7,920 price/Greek certificates and 720 IV rounding cells are independently
+checked. Median complete-row latency is 10.46–10.60 ms, with about 155 MB
+cumulative allocation per row on its recorded M1 Pro; this is not resident
+memory or a deployment SLA. The [0.2.0 dossier](candidate-0.2.0.md) additionally
+retains matching numerical replay on all three supported platforms. These
+results preserve the earlier kernel comparisons and separate GC profile above.

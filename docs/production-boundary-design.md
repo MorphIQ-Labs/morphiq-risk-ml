@@ -174,8 +174,10 @@ unproved rectangular guarantee of availability.
 The finite corpus does not guarantee availability for every valid request.
 Correctness of accepted outputs rests on the documented enclosure identities,
 checked arithmetic premises and acceptance rule; independent references test
-that implementation. Human review, intended-use/materiality approval and
-portfolio/operational acceptance remain explicit Epic #27 dependencies.
+that implementation. The owner has since [reviewed and approved this declared
+boundary](acceptance/owner-review-2026-10-03.md), closing #13. Independent numerical
+review, application-specific economic policy and target-deployment operational
+acceptance remain separate Epic #27 requirements.
 
 The complete local ordinary suite, install and formatting checks pass. Replay
 remains `f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b`:

@@ -1,15 +1,75 @@
 {
   "status": "pending",
-  "candidate_commit": null,
+  "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f",
   "package_version": "0.2.0",
-  "intended_use": null,
+  "intended_use": "Declared scalar BSM, Black-76, displaced Black and Bachelier capability: typed per-request absolute limits, exact-model positive-IV rounding and explicit failures; caller-owned economic/failure policy. No planner or deployment SLA.",
   "blockers": [
-    "Baseline owner approval is recorded; final-candidate intended-use/economic/failure disposition remains to be tied to its exact SHA (#13/#17)",
-    "Independent human reviewer appointment, report, findings disposition and exact-commit delta review (#15)",
-    "Owner-authorized canonical generated qualification is complete; deployment hardware, business materiality and operational requirements remain outside that scalar campaign (#8/#16)",
-    "Final exact candidate/version, release artifacts, platform/full-mutation evidence and dated model-validation/release-owner acceptance (#17)"
+    "Independent numerical reviewer scope/independence, theorem/call-site assessment and findings report remain required (#15).",
+    "Target-deployment operational qualification and the responsible owner recommendation remain outside the completed generated scalar campaign (#8/#16).",
+    "Final exact-candidate model-validation and engineering/release decisions remain to be recorded after those requirements are resolved (#17)."
   ],
-  "evidence": {},
+  "evidence": {
+    "domain": {
+      "path": "docs/production-boundary-design.md",
+      "sha256": "616f00de46f500f84d4c44e6d3794d11059878ead93dd1c0a41b6cc4f7093ca3",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "model_contract": {
+      "path": "docs/model-contracts.md",
+      "sha256": "86d788b207f11611eb156e232647c22ecb768f5021c96f18c0864a13b4e66c8e",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "reference_provenance": {
+      "path": "docs/oracles.md",
+      "sha256": "54e84b5d0aeb00760b47221fcafc3fd949bb11dbb115d5e13bdd128e66bdfd13",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "shadow": {
+      "path": "docs/results-canonical-dataset.md",
+      "sha256": "65b64768ee8dead76f723f22fe5731170f89c46b753e9954762e45e52f51b5f4",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "performance": {
+      "path": "docs/performance.md",
+      "sha256": "8a1474c0357035eb0c9b2cf5b60de6e0a2c429202bcd9d481832bbd3b450a45a",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "installation": {
+      "path": "docs/candidate-0.2.0.md",
+      "sha256": "7af750afb24664ca78bf7dfcf96c687a645f54f3a2edb98c76c3ed2ff49a2294",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "platform_ci": {
+      "path": "docs/evidence/candidate-0.2.0-ci.json",
+      "sha256": "35fd9ca9d95f726cef00ada9ce99f88339ab1092b4a8092782edb5c89c82b33d",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "full_mutations": {
+      "path": "docs/evidence/candidate-0.2.0-full-mutations.txt",
+      "sha256": "675bc9a7054780bba50d5409235ce4c9deecdce359c193b9998c71a07d6109d7",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    },
+    "rollback": {
+      "path": "docs/acceptance-and-change-control.md",
+      "sha256": "8ae0f5d4b517d0a37b41ba2155fe9225a66911e2879df6304acb0252da75889e",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    }
+  },
   "decisions": {},
-  "artifacts": []
+  "artifacts": [
+    {
+      "path": "source.tar.gz",
+      "sha256": "56c057ddf737ecc5e25b27b0f514d46dd5c1aba4bf67595feb0f13204b07352b",
+      "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f"
+    }
+  ],
+  "baseline_owner_review": {
+    "path": "docs/acceptance/owner-review-2026-10-03.md",
+    "sha256": "39953c627f30b27e0d4e2e9db3e99905afd5b047169b6f387e64eef8f4f632b1",
+    "reviewed_commit": "72878e3e90378788891bf0706272c176bb9552fa",
+    "date": "2026-10-03",
+    "statement": "I reviewed, and approve"
+  },
+  "candidate_validation": "docs/evidence/candidate-0.2.0-validation.json",
+  "source_compatibility": "docs/evidence/candidate-0.2.0-source-delta.json"
 }

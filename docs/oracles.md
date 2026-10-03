@@ -79,3 +79,14 @@ The curated mutation mechanisms run with replay bit-identity assertions disabled
 
 
 The PR #12 audit adds exact rational primitive postconditions to a generated replay of the production DD source, including its elementary and normal-series callers. Allowances are fixed before execution. Nonoverlap checks apply to inputs and component results. They exposed both a binade-boundary defect in low-word sampling and missing normalization after subnormal scaling and split square root; see the [audit record](error-analysis.md#pr-12-source-and-assumption-audit). Zarith 1.14 is needed only for tests.
+
+## Canonical generated qualification dataset
+
+The optional [canonical portfolio generator](../scripts/generate_canonical_dataset.py)
+uses pinned QuantLib 1.43 formula quotes and independently certified Arb prices
+from the original binary64 inputs. Its [frozen specification](canonical-dataset.md),
+[results](results-canonical-dataset.md) and committed exact-word dataset retain
+source/wheel hashes, mapped inputs, all discrepancies and explicit adjudications.
+It supplements the reference fixtures above; it does not replace them or make
+canonical binary64 outputs the definition of accuracy. Generation and interval
+campaigns remain outside ordinary CI.

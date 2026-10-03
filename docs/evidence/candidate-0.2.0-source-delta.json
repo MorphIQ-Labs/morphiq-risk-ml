@@ -1,0 +1,222 @@
+{
+  "reviewed_baseline": "72878e3e90378788891bf0706272c176bb9552fa",
+  "candidate_commit": "dcdd9a7f44c96fc8ecda042d95ce790bc7e6e17f",
+  "package_version": "0.2.0",
+  "numerical_library_delta": "Only Morphiq_risk.version changes from 0.1.0 to 0.2.0; every other lib file is byte-identical.",
+  "source_sha256": {
+    "lib/adaptive_iv.ml": {
+      "reviewed_sha256": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+      "candidate_sha256": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5"
+    },
+    "lib/adaptive_iv.mli": {
+      "reviewed_sha256": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+      "candidate_sha256": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57"
+    },
+    "lib/bachelier.ml": {
+      "reviewed_sha256": "8a0ad32715739dcd11f624d1a569de75ab6b4ea25a0611556b3340a15b1f32c9",
+      "candidate_sha256": "8a0ad32715739dcd11f624d1a569de75ab6b4ea25a0611556b3340a15b1f32c9"
+    },
+    "lib/bachelier.mli": {
+      "reviewed_sha256": "88354ebab4c374645836475c5430b75fcce361619c9a7a8772212b482b11644c",
+      "candidate_sha256": "88354ebab4c374645836475c5430b75fcce361619c9a7a8772212b482b11644c"
+    },
+    "lib/black.ml": {
+      "reviewed_sha256": "cdc7ae9dc2d0e558e068c1e4ae5dce5f732e8db06e3f4f56055886b345c28a80",
+      "candidate_sha256": "cdc7ae9dc2d0e558e068c1e4ae5dce5f732e8db06e3f4f56055886b345c28a80"
+    },
+    "lib/black.mli": {
+      "reviewed_sha256": "158c20bb98a3e32513f082a8196202928b9083f8f07f78cf7eb0edce099e4292",
+      "candidate_sha256": "158c20bb98a3e32513f082a8196202928b9083f8f07f78cf7eb0edce099e4292"
+    },
+    "lib/boundary_greeks.ml": {
+      "reviewed_sha256": "c997d42772b7b56005da3b4482143a4beba5cd92b027adc1ec207e885206184a",
+      "candidate_sha256": "c997d42772b7b56005da3b4482143a4beba5cd92b027adc1ec207e885206184a"
+    },
+    "lib/boundary_greeks.mli": {
+      "reviewed_sha256": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+      "candidate_sha256": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598"
+    },
+    "lib/certified_iv.ml": {
+      "reviewed_sha256": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+      "candidate_sha256": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501"
+    },
+    "lib/certified_iv.mli": {
+      "reviewed_sha256": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+      "candidate_sha256": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda"
+    },
+    "lib/cody.ml": {
+      "reviewed_sha256": "f5a42ac2eb8f5caa9201129434c2bf3a3b2cec041ad9c7efa0ccc0944c962556",
+      "candidate_sha256": "f5a42ac2eb8f5caa9201129434c2bf3a3b2cec041ad9c7efa0ccc0944c962556"
+    },
+    "lib/cody.mli": {
+      "reviewed_sha256": "2cf2d0afb67f93ed38b2961d43107410923caca6ba72398d8448f8ebcc09c4eb",
+      "candidate_sha256": "2cf2d0afb67f93ed38b2961d43107410923caca6ba72398d8448f8ebcc09c4eb"
+    },
+    "lib/dd.ml": {
+      "reviewed_sha256": "e0ff8c526dccc97648a624c99d45b3a3c5ff912d71725796be3013a78f5b17c5",
+      "candidate_sha256": "e0ff8c526dccc97648a624c99d45b3a3c5ff912d71725796be3013a78f5b17c5"
+    },
+    "lib/dd.mli": {
+      "reviewed_sha256": "30a025c1bc5252a87b5b54a016fbbb81e11ba6f8531447fcba686d5d8670ecdd",
+      "candidate_sha256": "30a025c1bc5252a87b5b54a016fbbb81e11ba6f8531447fcba686d5d8670ecdd"
+    },
+    "lib/dune": {
+      "reviewed_sha256": "5a7d7d5b4fd49f6e1621138aaf3cda662e7ac8fbed31a5579f1fc464252d0a33",
+      "candidate_sha256": "5a7d7d5b4fd49f6e1621138aaf3cda662e7ac8fbed31a5579f1fc464252d0a33"
+    },
+    "lib/elementary.ml": {
+      "reviewed_sha256": "02ff329566aac196b2facde4684da1e29ffbaeba27cae0892ed00eb50d0227da",
+      "candidate_sha256": "02ff329566aac196b2facde4684da1e29ffbaeba27cae0892ed00eb50d0227da"
+    },
+    "lib/elementary.mli": {
+      "reviewed_sha256": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+      "candidate_sha256": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409"
+    },
+    "lib/enclosure.ml": {
+      "reviewed_sha256": "cedc105b5b2d78263ed492fe7ecccbade43baae10f0d2363fe12758e794eef2a",
+      "candidate_sha256": "cedc105b5b2d78263ed492fe7ecccbade43baae10f0d2363fe12758e794eef2a"
+    },
+    "lib/enclosure.mli": {
+      "reviewed_sha256": "5f19ba3154932e58eb51dabef6a8186aa3f1731cd81c4c104b54e64b9f2ca860",
+      "candidate_sha256": "5f19ba3154932e58eb51dabef6a8186aa3f1731cd81c4c104b54e64b9f2ca860"
+    },
+    "lib/fp/dune": {
+      "reviewed_sha256": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+      "candidate_sha256": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0"
+    },
+    "lib/fp/morphiq_fp.ml": {
+      "reviewed_sha256": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+      "candidate_sha256": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7"
+    },
+    "lib/fp/morphiq_fp_stubs.c": {
+      "reviewed_sha256": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+      "candidate_sha256": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787"
+    },
+    "lib/greeks.ml": {
+      "reviewed_sha256": "597681e7b69cc9667f83bf73e3dc97d6293467e14cd73c8857810ec54a818945",
+      "candidate_sha256": "597681e7b69cc9667f83bf73e3dc97d6293467e14cd73c8857810ec54a818945"
+    },
+    "lib/greeks.mli": {
+      "reviewed_sha256": "4be9f1bdf47e9601093aa67c2dd28c8268b6f28faf6bbcd01018aeb8d764fd4f",
+      "candidate_sha256": "4be9f1bdf47e9601093aa67c2dd28c8268b6f28faf6bbcd01018aeb8d764fd4f"
+    },
+    "lib/iv.ml": {
+      "reviewed_sha256": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+      "candidate_sha256": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc"
+    },
+    "lib/iv.mli": {
+      "reviewed_sha256": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+      "candidate_sha256": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18"
+    },
+    "lib/iv_iteration.ml": {
+      "reviewed_sha256": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+      "candidate_sha256": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec"
+    },
+    "lib/iv_iteration.mli": {
+      "reviewed_sha256": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+      "candidate_sha256": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf"
+    },
+    "lib/lbr.ml": {
+      "reviewed_sha256": "c5c5a3f15f890d69b04e74333adfb8e9e18a014402b70f77c00311606ef1d557",
+      "candidate_sha256": "c5c5a3f15f890d69b04e74333adfb8e9e18a014402b70f77c00311606ef1d557"
+    },
+    "lib/lbr.mli": {
+      "reviewed_sha256": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+      "candidate_sha256": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396"
+    },
+    "lib/model_enclosure.ml": {
+      "reviewed_sha256": "d78a9d4c6fb33ffb88a9b13e57cd709b719aa44d3acff96b1113e9844350ad4d",
+      "candidate_sha256": "d78a9d4c6fb33ffb88a9b13e57cd709b719aa44d3acff96b1113e9844350ad4d"
+    },
+    "lib/model_enclosure.mli": {
+      "reviewed_sha256": "8c7c74e1108d3c0af7021352886504c790c0fb20c09d83a43c4d98262616a914",
+      "candidate_sha256": "8c7c74e1108d3c0af7021352886504c790c0fb20c09d83a43c4d98262616a914"
+    },
+    "lib/morphiq_risk.ml": {
+      "reviewed_sha256": "20460a1d367b704c95b7333d650751f796c40585d33cd19ef1599adc1918090e",
+      "candidate_sha256": "9769558a45235bd68343381d061cb9eda21e6468bc74c5802f356ebcf15cd4f0"
+    },
+    "lib/morphiq_risk.mli": {
+      "reviewed_sha256": "0c4d9fca19695c79a693ac59ca5dee139f9715e6bb71fe5b976d3f8f01f56e08",
+      "candidate_sha256": "0c4d9fca19695c79a693ac59ca5dee139f9715e6bb71fe5b976d3f8f01f56e08"
+    },
+    "lib/normal.ml": {
+      "reviewed_sha256": "a57f9bf6cfc6100d79dd90e67f8940107e738fbc2b24e2298560eba10d002821",
+      "candidate_sha256": "a57f9bf6cfc6100d79dd90e67f8940107e738fbc2b24e2298560eba10d002821"
+    },
+    "lib/normal.mli": {
+      "reviewed_sha256": "469600273a61a29420dce43602809b6ca3711a8d18d3cfc28ca76403b4f24f2a",
+      "candidate_sha256": "469600273a61a29420dce43602809b6ca3711a8d18d3cfc28ca76403b4f24f2a"
+    },
+    "lib/normal_dd.ml": {
+      "reviewed_sha256": "4a04a0d339574ceb9582b9999a996979e75e64a71c860b945f19047a07d33526",
+      "candidate_sha256": "4a04a0d339574ceb9582b9999a996979e75e64a71c860b945f19047a07d33526"
+    },
+    "lib/normal_dd.mli": {
+      "reviewed_sha256": "e5bd3910db763110dec86e27439e3f3b2e5efe1a6bc3af1c2df4af730f53da47",
+      "candidate_sha256": "e5bd3910db763110dec86e27439e3f3b2e5efe1a6bc3af1c2df4af730f53da47"
+    },
+    "lib/normalised_black.ml": {
+      "reviewed_sha256": "2c604934de6cf7188f2e66a31834249e521c39eb54b35d7a18b7d4435c3de3cd",
+      "candidate_sha256": "2c604934de6cf7188f2e66a31834249e521c39eb54b35d7a18b7d4435c3de3cd"
+    },
+    "lib/normalised_black.mli": {
+      "reviewed_sha256": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+      "candidate_sha256": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958"
+    },
+    "lib/production.ml": {
+      "reviewed_sha256": "0cae0f341dff5a1cd07a2ba5816c5ddc8a9c1e6024ffbe781b52c733750602ab",
+      "candidate_sha256": "0cae0f341dff5a1cd07a2ba5816c5ddc8a9c1e6024ffbe781b52c733750602ab"
+    },
+    "lib/production.mli": {
+      "reviewed_sha256": "5e932a4a8569c0854c4787fd2a2d1199b6d0a733c7c34cb63b6beb84d8fb4af7",
+      "candidate_sha256": "5e932a4a8569c0854c4787fd2a2d1199b6d0a733c7c34cb63b6beb84d8fb4af7"
+    },
+    "lib/refusal.ml": {
+      "reviewed_sha256": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+      "candidate_sha256": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0"
+    },
+    "lib/refusal.mli": {
+      "reviewed_sha256": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+      "candidate_sha256": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df"
+    },
+    "lib/side.ml": {
+      "reviewed_sha256": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+      "candidate_sha256": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e"
+    },
+    "lib/side.mli": {
+      "reviewed_sha256": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+      "candidate_sha256": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920"
+    },
+    "lib/split.ml": {
+      "reviewed_sha256": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef",
+      "candidate_sha256": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef"
+    },
+    "lib/split.mli": {
+      "reviewed_sha256": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+      "candidate_sha256": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2"
+    },
+    "lib/units.ml": {
+      "reviewed_sha256": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+      "candidate_sha256": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b"
+    },
+    "lib/units.mli": {
+      "reviewed_sha256": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+      "candidate_sha256": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e"
+    },
+    "lib/vol.ml": {
+      "reviewed_sha256": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+      "candidate_sha256": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99"
+    },
+    "lib/vol.mli": {
+      "reviewed_sha256": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+      "candidate_sha256": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd"
+    }
+  },
+  "oracle_sources_and_fixtures_unchanged": true,
+  "dependency_pins_unchanged": true,
+  "model_contracts_unchanged": true,
+  "default_ci_and_mutation_policy_unchanged": true,
+  "replay_digest": "f37fbff0dd5af9c27ad88322802ebab43d961de60f916504076356a50501de8b",
+  "scope": "Source compatibility evidence, not an independent human review or approval of the final artifact."
+}
