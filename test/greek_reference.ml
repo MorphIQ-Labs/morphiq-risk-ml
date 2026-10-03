@@ -29,6 +29,7 @@ let () =
                  | Ok v -> v
                  | Error _ -> failwith "refused extended Greek reference"
                in
+               Bounds.trace_float line got;
                let b =
                  if model = "bachelier" then
                    List.assoc greek

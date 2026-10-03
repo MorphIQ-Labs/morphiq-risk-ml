@@ -104,3 +104,13 @@ scalar certificate error in weighted aggregates, and incomplete totals. The
 catalog has 51 mechanisms; the seven default core witnesses
 are unchanged. The designated planner test checks behavior, including exact
 rational aggregate containment, rather than a replay digest alone.
+
+## Direct DD exponential replacement and optimization
+
+`dd-exp-degree` replaces the retired QD stopping-rule mutation: a degree-12
+polynomial must fail the unchanged DD oracle budget. `expm1-tiny` now injects
+a zero result for a nonzero tiny input. Removing the old outer tiny branch is
+no longer the same fault, since the shared reduced helper owns that handling.
+The optimized degree-22 loop uses the same degree-truncation witness.
+The catalog still contains 51 mechanisms, with the same seven default core
+witnesses. Historical mutation logs retain their original names.

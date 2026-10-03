@@ -74,13 +74,20 @@ would not erase the recorded source consultation.
 
 ## QD: original distribution differs from the GitHub notices
 
+**Current-tree update:** the exponential adaptation described below has been
+replaced by the project-derived direct Taylor/Horner implementation. The
+[qualification report](results-dd-exponential.md) records its generated
+coefficients, new operation graph and numerical checks. This is a replacement
+after inspecting the old source, not a claim of clean-room development. The
+following findings and retained notices remain the historical record.
+
 - Actual source: [Bailey's `qd-2.3.24.tar.gz`](https://www.davidhbailey.com/dhbsoftware/qd-2.3.24.tar.gz),
   downloaded at 13:37:04 UTC on 2026-10-02, SHA-256
   `a47b6c73f86e6421e86a883568dd08e299b20e36c11a99bdfbe50e01bde60e38`.
 - The session read `src/dd_real.cpp`'s exp/log functions at 13:38:01 UTC and
   wrote the adaptation at 13:38:28 UTC. The merged change is
   [`5d71ce9` / PR #6](https://github.com/MorphIQ-Labs/morphiq-risk-ml/commit/5d71ce9db0b72ca52779b6b53bd4d39b04511354).
-- Retained scope: exponential reduction by 512, the Taylor accumulation and
+- Historical scope: exponential reduction by 512, the Taylor accumulation and
   stopping structure, nine doublings, and their reuse in `expm1_reduced`.
   The project generates factorial coefficients, extends exponent handling and
   has its own tiny-expm1 handling. The trial QD Newton logarithm was discarded
@@ -110,7 +117,7 @@ this as a verified, ordinary BSD-3-Clause grant without resolving those points.
 
 **Disposition:** adaptation and original terms identified; notice packaging
 corrected; unrestricted commercial-distribution assessment remains unresolved.
-Replace the QD-derived exponential portion rather than silently substituting
+The replacement decision was to replace the QD-derived exponential portion rather than silently substituting
 another distribution's terms.
 
 ## What this change establishes
@@ -118,8 +125,9 @@ another distribution's terms.
 All three source identities and the QD notice mismatch are documented. Original
 project licensing remains Apache-2.0; it does not supersede upstream rights.
 All retained notices, this report, and the source-fingerprint record accompany
-installed documentation. No numerical operation, coefficient, fixture,
-dependency pin or tolerance changes in this audit.
+installed documentation. The original audit changed no numerical operation,
+coefficient, fixture, dependency pin or tolerance. The subsequent DD replacement
+is qualified separately in its linked report; AS241 and CALERF remain unchanged.
 
 Issue #64 stays open until each replacement is qualified and its current-source
 provenance is recorded. Historical provenance and applicable notices remain

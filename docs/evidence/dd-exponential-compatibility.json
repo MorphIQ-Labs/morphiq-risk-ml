@@ -1,0 +1,315 @@
+{
+  "fixtures": {
+    "dd": {
+      "changed": 37250,
+      "rows": 86145
+    },
+    "displaced": {
+      "changed": 0,
+      "class_changes": 0,
+      "max_ulp_movement": 0,
+      "rows": 41768,
+      "sign_changes": 0
+    },
+    "european": {
+      "changed": 26,
+      "class_changes": 0,
+      "max_ulp_movement": 3,
+      "rows": 57320,
+      "sign_changes": 0
+    },
+    "greek_bits": {
+      "changed": 1,
+      "class_changes": 0,
+      "max_ulp_movement": 1,
+      "rows": 2506,
+      "sign_changes": 0
+    },
+    "greeks": {
+      "changed": 0,
+      "class_changes": 0,
+      "max_ulp_movement": 0,
+      "rows": 66400,
+      "sign_changes": 0
+    }
+  },
+  "regions": {
+    "bachelier charm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1738,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 2
+    },
+    "bachelier color": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1724,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "bachelier delta": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1738,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "bachelier gamma": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1724,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier price deep_itm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 3918,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 2
+    },
+    "bachelier price itm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 800,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier price near_atm_tiny_variance": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 565,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 2
+    },
+    "bachelier price otm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 4976,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "bachelier price zero_variance": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 765,
+      "worst_after_ulp": 0,
+      "worst_before_ulp": 0
+    },
+    "bachelier rho": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1738,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "bachelier theta": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1738,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier vanna": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1719,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier vega": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1724,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier veta": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1724,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "bachelier volga": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 1719,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "black charm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5177,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "black color": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 6,
+      "worst_before_ulp": 6
+    },
+    "black delta": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5177,
+      "worst_after_ulp": 6,
+      "worst_before_ulp": 6
+    },
+    "black gamma": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "black price deep_itm": {
+      "changed": 3,
+      "max_ulp_movement": 1,
+      "rows": 21443,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 2
+    },
+    "black price extreme_scale": {
+      "changed": 3,
+      "max_ulp_movement": 1,
+      "rows": 12384,
+      "worst_after_ulp": 18,
+      "worst_before_ulp": 18
+    },
+    "black price itm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 7654,
+      "worst_after_ulp": 8,
+      "worst_before_ulp": 8
+    },
+    "black price near_atm_tiny_variance": {
+      "changed": 3,
+      "max_ulp_movement": 1,
+      "rows": 5743,
+      "worst_after_ulp": 6,
+      "worst_before_ulp": 6
+    },
+    "black price otm": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 31682,
+      "worst_after_ulp": 22,
+      "worst_before_ulp": 22
+    },
+    "black price zero_variance": {
+      "changed": 17,
+      "max_ulp_movement": 3,
+      "rows": 9158,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 1
+    },
+    "black rho": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5177,
+      "worst_after_ulp": 23,
+      "worst_before_ulp": 23
+    },
+    "black theta": {
+      "changed": 1,
+      "max_ulp_movement": 1,
+      "rows": 5177,
+      "worst_after_ulp": 8,
+      "worst_before_ulp": 8
+    },
+    "black vanna": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "black vega": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "black veta": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "black volga": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 5152,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "dd black_kernel": {
+      "changed": 0,
+      "rows": 3538
+    },
+    "dd div": {
+      "changed": 0,
+      "rows": 1911
+    },
+    "dd erfcx": {
+      "changed": 0,
+      "rows": 3984
+    },
+    "dd exp": {
+      "changed": 21965,
+      "rows": 27735
+    },
+    "dd expm1": {
+      "changed": 13521,
+      "rows": 27735
+    },
+    "dd log": {
+      "changed": 0,
+      "rows": 2506
+    },
+    "dd normal_cdf": {
+      "changed": 801,
+      "rows": 3970
+    },
+    "dd normal_pdf": {
+      "changed": 963,
+      "rows": 3970
+    },
+    "dd split_quotient": {
+      "changed": 0,
+      "rows": 1911
+    },
+    "dd split_sqrt": {
+      "changed": 0,
+      "rows": 2506
+    },
+    "dd sqrt": {
+      "changed": 0,
+      "rows": 2506
+    },
+    "dd y_prime": {
+      "changed": 0,
+      "rows": 3873
+    }
+  },
+  "trace_sha256": {
+    "after-dd": "01e1b41af23d273df01297c6907b74b31c39b2f50ae2e1621b1fb3fa2c503a7b",
+    "after-displaced": "327b1b921301812a63c855234cca1ecb1d3f303e5d2f09e84343f2858e0116c0",
+    "after-european": "3f095c7a1140cc4618ec80b758664c692488202fc2500ec3ae6bb65e8024d99f",
+    "after-greek_bits": "808aff2f9eafd77d9cf4e256f4b45f883f9fdc9ed7fc5e2cc2fa1c9ded3a0753",
+    "after-greeks": "5b69144839d4acfb984711d3d44ba3bbaa5b75ff17c8bd7bb88fd84abd06cb3c",
+    "before-dd": "7c19ae4acd0180199e6698d6de6355d2da33d79b7e8000d0ff27eec80b7c55ba",
+    "before-displaced": "327b1b921301812a63c855234cca1ecb1d3f303e5d2f09e84343f2858e0116c0",
+    "before-european": "89e9f128c07141cb36e1c71c0a0c67889e6e2ad1e1b637304df79d4a3dd9dba6",
+    "before-greek_bits": "e4efe7490a61088a39b7eb02a5e3537faa4483eb7da147a06cdcda257753daeb",
+    "before-greeks": "5b69144839d4acfb984711d3d44ba3bbaa5b75ff17c8bd7bb88fd84abd06cb3c"
+  }
+}

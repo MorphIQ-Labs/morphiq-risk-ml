@@ -5,6 +5,31 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Independently derived DD exponential
+
+- Replace QD-derived `Dd.exp`/`Dd.expm1` with a direct degree-22 polynomial
+  and exact-rational generated coefficients; retain historical provenance
+  and notices. AS241 and CALERF remain pending under #64.
+- Preserve all error budgets; extend the DD oracle to 86,145 rows. Complete
+  ordinary checks pass in development and release profiles; the public
+  determinism digest is unchanged.
+- Minor numerical change versus the QD baseline: 28 European prices move by
+  at most 2 ULP and one near-zero BSM theta by 1 ULP, without observed scalar
+  sign/class/refusal changes. Affected Black regions are deep ITM, extreme
+  scale, tiny variance and zero variance. Zero-variance worst error is
+  1 → 2 ULP (existing budget 4); other regional maxima are unchanged.
+  The [current qualification](docs/results-dd-exponential-optimization.md)
+  retains per-row precision refinement, regional error tables and fixture
+  provenance; the initial degree-24 report remains historical evidence.
+- Focused inlining, exact-coefficient specialization and preserving the leading
+  reduced argument recover the initial replacement's measured slowdown.
+  Release DD calls are 21–30% faster than that candidate on the shared M1 Pro
+  host; exp allocation falls from 326 to 81 words/call. ATM/ITM price medians
+  return to within about −4% to +3% of QD; complete IV-dominated workflows
+  remain within roughly ±2%. Timings are provisional, with both build
+  profiles, repeated runs, host load and allocations recorded in the report.
+  No release or version bump is made here.
+
 ### Numerical-source provenance and replacement planning
 
 - Identify the actual StatLib AS241, Netlib CALERF and author-hosted QD 2.3.24

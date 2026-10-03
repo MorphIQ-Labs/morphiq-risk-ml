@@ -1,0 +1,539 @@
+{
+  "mpmath": "1.3.0",
+  "source_sha256": {
+    "scripts/audit_exponential_changes.py": "f9af100c8eeffc99b2f6b64b054bb60e250c7d8c01f021edab49fb5adb52a548",
+    "oracle/common.py": "fa0ad5739b3b7199c872814595664eb1e421581a851aafcbb9307cb04d1c38f7",
+    "oracle/gen_greeks.py": "3fd89f7cd996b708304371827d28bef049d08827636d989c32a94d56c81d4b23",
+    "oracle/gen_greek_bits.py": "d58d69f821452a6fd591bf57f81b232b224ecc548c433efbacb55343cc3df83f"
+  },
+  "changed_served_rows": [
+    {
+      "fixture": "european",
+      "row_number": 4864,
+      "input_reference": "bsm put zero_variance 21326a9468296830 20ca2fe76a3f9475 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 1daa2b754fae8ae9",
+      "before": "1daa2b754fae8ae9",
+      "after": "1daa2b754fae8ae8",
+      "refined_reference": [
+        -548,
+        "3fea2b754fae8ae9",
+        "bc7325525fd1afca",
+        "b90ca05dcbb1afec"
+      ],
+      "signed_ulp_error": {
+        "before": "0.149576470171608306260035809354",
+        "after": "-0.850423529828391693739964190646"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 4866,
+      "input_reference": "bsm put extreme_scale 21326a9468296830 20ca2fe76a3f9475 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 1daa2b754fae8ae9",
+      "before": "1daa2b754fae8ae9",
+      "after": "1daa2b754fae8ae8",
+      "refined_reference": [
+        -548,
+        "3fea2b754fae8ae9",
+        "bc7325525fd1afca",
+        "b90ca05dcbb1afec"
+      ],
+      "signed_ulp_error": {
+        "before": "0.149576470171608306260035809354",
+        "after": "-0.850423529828391693739964190646"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 8186,
+      "input_reference": "bsm put zero_variance 2aa1c40301ffc2d0 2b2bff2ee48e0530 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 277a5a5c988e20cf",
+      "before": "277a5a5c988e20ce",
+      "after": "277a5a5c988e20cf",
+      "refined_reference": [
+        -391,
+        "3fea5a5c988e20cf",
+        "bc89a2021b709780",
+        "39282f96431e412a"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.59948680229502573235136773318",
+        "after": "0.40051319770497426764863226682"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 8188,
+      "input_reference": "bsm put near_atm_tiny_variance 2aa1c40301ffc2d0 2b2bff2ee48e0530 403e000000000000 3fc999999999999a 0000000000000000 01a56e1fc2f8f359 0000000000000000 277a5a5c988e20cf",
+      "before": "277a5a5c988e20ce",
+      "after": "277a5a5c988e20cf",
+      "refined_reference": [
+        -391,
+        "3fea5a5c988e20cf",
+        "bc89a2021b709780",
+        "39282f96431e412a"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.59948680229502573235136773318",
+        "after": "0.40051319770497426764863226682"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 11727,
+      "input_reference": "bsm call zero_variance 3fb70b5cdb03f677 3f50624dd2f1a9fc 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 3c4c2c49ccd932ed",
+      "before": "3c4c2c49ccd932ec",
+      "after": "3c4c2c49ccd932ed",
+      "refined_reference": [
+        -58,
+        "3fec2c49ccd932ed",
+        "bc83e5da96418879",
+        "3911c21c109e8d7c"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.689095834031711659203104134183",
+        "after": "0.310904165968288340796895865817"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 11729,
+      "input_reference": "bsm call near_atm_tiny_variance 3fb70b5cdb03f677 3f50624dd2f1a9fc 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 3c4c2c49ccd932ed",
+      "before": "3c4c2c49ccd932ec",
+      "after": "3c4c2c49ccd932ed",
+      "refined_reference": [
+        -58,
+        "3fec2c49ccd932ed",
+        "bc83e5da96418879",
+        "3911c21c109e8d7c"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.689095834031711659203104134183",
+        "after": "0.310904165968288340796895865817"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 14874,
+      "input_reference": "bsm put zero_variance 3f644e51f113d4d0 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 3c3f859f8d6f2065",
+      "before": "3c3f859f8d6f2064",
+      "after": "3c3f859f8d6f2065",
+      "refined_reference": [
+        -59,
+        "3fef859f8d6f2065",
+        "bc8d587388550b00",
+        "39181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.541476361144148665059436618054",
+        "after": "0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 14876,
+      "input_reference": "bsm put near_atm_tiny_variance 3f644e51f113d4d0 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 01a56e1fc2f8f359 0000000000000000 3c3f859f8d6f2065",
+      "before": "3c3f859f8d6f2064",
+      "after": "3c3f859f8d6f2065",
+      "refined_reference": [
+        -59,
+        "3fef859f8d6f2065",
+        "bc8d587388550b00",
+        "39181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.541476361144148665059436618054",
+        "after": "0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 14896,
+      "input_reference": "bsm put zero_variance 40568118ade1deaa 3ff0000000000000 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 3cd67495ea562cb7",
+      "before": "3cd67495ea562cb7",
+      "after": "3cd67495ea562cb6",
+      "refined_reference": [
+        -49,
+        "3fe67495ea562cb7",
+        "bc876ecc19923726",
+        "392299d20e459e03"
+      ],
+      "signed_ulp_error": {
+        "before": "0.366137528392629680271760367358",
+        "after": "-0.633862471607370319728239632642"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 14898,
+      "input_reference": "bsm put near_atm_tiny_variance 40568118ade1deaa 3ff0000000000000 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 3cd67495ea562cb7",
+      "before": "3cd67495ea562cb7",
+      "after": "3cd67495ea562cb6",
+      "refined_reference": [
+        -49,
+        "3fe67495ea562cb7",
+        "bc876ecc19923726",
+        "392299d20e459e03"
+      ],
+      "signed_ulp_error": {
+        "before": "0.366137528392629680271760367358",
+        "after": "-0.633862471607370319728239632642"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 15049,
+      "input_reference": "bsm call zero_variance 3f644e51f113d4d6 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 3c307a607290df9b",
+      "before": "3c307a607290df9c",
+      "after": "3c307a607290df9b",
+      "refined_reference": [
+        -59,
+        "3fe07a607290df9b",
+        "3c8d587388550b00",
+        "b9181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "0.541476361144148665059436618054",
+        "after": "-0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 15051,
+      "input_reference": "bsm call near_atm_tiny_variance 3f644e51f113d4d6 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 01a56e1fc2f8f359 0000000000000000 3c307a607290df9b",
+      "before": "3c307a607290df9c",
+      "after": "3c307a607290df9b",
+      "refined_reference": [
+        -59,
+        "3fe07a607290df9b",
+        "3c8d587388550b00",
+        "b9181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "0.541476361144148665059436618054",
+        "after": "-0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 15675,
+      "input_reference": "bsm call deep_itm 3ff028f5c28f5c29 3ff0000000000000 3ff0000000000000 0000000000000000 0000000000000000 3f847ae147ae147b 0000000000000000 3f863609390982dc",
+      "before": "3f863609390982dc",
+      "after": "3f863609390982db",
+      "refined_reference": [
+        -6,
+        "3fe63609390982dc",
+        "bc8b04cf444dd045",
+        "3917882d9262110b"
+      ],
+      "signed_ulp_error": {
+        "before": "0.422168556883893143280943415887",
+        "after": "-0.577831443116106856719056584113"
+      },
+      "precision_digits": [
+        226,
+        446
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 18415,
+      "input_reference": "bsm call zero_variance 40f5fa1219ce9378 408f400000000000 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 3d8b2c1e4efd267f",
+      "before": "3d8b2c1e4efd267e",
+      "after": "3d8b2c1e4efd267f",
+      "refined_reference": [
+        -38,
+        "3feb2c1e4efd267f",
+        "bc8def4ca712bcc4",
+        "b91054c3258914fe"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.532269322245202173982850943191",
+        "after": "0.467730677754797826017149056809"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 18417,
+      "input_reference": "bsm call near_atm_tiny_variance 40f5fa1219ce9378 408f400000000000 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 3d8b2c1e4efd267f",
+      "before": "3d8b2c1e4efd267e",
+      "after": "3d8b2c1e4efd267f",
+      "refined_reference": [
+        -38,
+        "3feb2c1e4efd267f",
+        "bc8def4ca712bcc4",
+        "b91054c3258914fe"
+      ],
+      "signed_ulp_error": {
+        "before": "-0.532269322245202173982850943191",
+        "after": "0.467730677754797826017149056809"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 21584,
+      "input_reference": "bsm put zero_variance 5f7b7fe9c4becf40 5f138d352e5096af 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 5bfbbb245bb048c3",
+      "before": "5bfbbb245bb048c4",
+      "after": "5bfbbb245bb048c3",
+      "refined_reference": [
+        449,
+        "3febbb245bb048c3",
+        "3c75e0466258b8b3",
+        "38f3d6abfb22aa54"
+      ],
+      "signed_ulp_error": {
+        "before": "0.829093172053541852609282410812",
+        "after": "-0.170906827946458147390717589188"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 21586,
+      "input_reference": "bsm put extreme_scale 5f7b7fe9c4becf40 5f138d352e5096af 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 5bfbbb245bb048c3",
+      "before": "5bfbbb245bb048c4",
+      "after": "5bfbbb245bb048c3",
+      "refined_reference": [
+        449,
+        "3febbb245bb048c3",
+        "3c75e0466258b8b3",
+        "38f3d6abfb22aa54"
+      ],
+      "signed_ulp_error": {
+        "before": "0.829093172053541852609282410812",
+        "after": "-0.170906827946458147390717589188"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 24928,
+      "input_reference": "bsm put zero_variance 7ea0cd4c1e8482fc 7e37e43c8800759c 403e000000000000 bfa999999999999a 3fb999999999999a 0000000000000000 0000000000000000 7b2c215edd23bd45",
+      "before": "7b2c215edd23bd46",
+      "after": "7b2c215edd23bd45",
+      "refined_reference": [
+        948,
+        "3fec215edd23bd45",
+        "3c8472104bc6eba5",
+        "b92285d2e7bed3ab"
+      ],
+      "signed_ulp_error": {
+        "before": "0.680538106917372780902850654827",
+        "after": "-0.319461893082627219097149345173"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 24930,
+      "input_reference": "bsm put extreme_scale 7ea0cd4c1e8482fc 7e37e43c8800759c 403e000000000000 bfa999999999999a 3fb999999999999a 01a56e1fc2f8f359 0000000000000000 7b2c215edd23bd45",
+      "before": "7b2c215edd23bd46",
+      "after": "7b2c215edd23bd45",
+      "refined_reference": [
+        948,
+        "3fec215edd23bd45",
+        "3c8472104bc6eba5",
+        "b92285d2e7bed3ab"
+      ],
+      "signed_ulp_error": {
+        "before": "0.680538106917372780902850654827",
+        "after": "-0.319461893082627219097149345173"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 29579,
+      "input_reference": "black76 call deep_itm 3ff028f5c28f5c29 3ff0000000000000 3ff0000000000000 0000000000000000 0000000000000000 3f847ae147ae147b 0000000000000000 3f863609390982dc",
+      "before": "3f863609390982dc",
+      "after": "3f863609390982db",
+      "refined_reference": [
+        -6,
+        "3fe63609390982dc",
+        "bc8b04cf444dd045",
+        "3917882d9262110b"
+      ],
+      "signed_ulp_error": {
+        "before": "0.422168556883893143280943415887",
+        "after": "-0.577831443116106856719056584113"
+      },
+      "precision_digits": [
+        226,
+        446
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 38883,
+      "input_reference": "bsm call zero_variance 3f644e51f113d4d4 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 3bde981ca437e6dd",
+      "before": "3bde981ca437e6e0",
+      "after": "3bde981ca437e6df",
+      "refined_reference": [
+        -65,
+        "3fee981ca437e6dd",
+        "3c861ce21542bff4",
+        "b8fc886fe6a6e831"
+      ],
+      "signed_ulp_error": {
+        "before": "2.65448711322551456380394355547",
+        "after": "1.65448711322551456380394355547"
+      },
+      "precision_digits": [
+        237,
+        457
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 38895,
+      "input_reference": "bsm call zero_variance 3f644e51f113d4d6 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 3c307a607290df9b",
+      "before": "3c307a607290df9c",
+      "after": "3c307a607290df9b",
+      "refined_reference": [
+        -59,
+        "3fe07a607290df9b",
+        "3c8d587388550b00",
+        "b9181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "0.541476361144148665059436618054",
+        "after": "-0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 38901,
+      "input_reference": "bsm call zero_variance 3f644e51f113d4d7 3ff0000000000000 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 3c387a607290df9b",
+      "before": "3c387a607290df9c",
+      "after": "3c387a607290df9b",
+      "refined_reference": [
+        -59,
+        "3fe87a607290df9b",
+        "3c8d587388550b00",
+        "b9181c886fe6a6e8"
+      ],
+      "signed_ulp_error": {
+        "before": "0.541476361144148665059436618054",
+        "after": "-0.458523638855851334940563381946"
+      },
+      "precision_digits": [
+        236,
+        456
+      ],
+      "differentiation_checked": false
+    },
+    {
+      "fixture": "european",
+      "row_number": 39214,
+      "input_reference": "bsm put zero_variance 5e88d036fe9aec7c 5f138d352e5096af 403e000000000000 3fc999999999999a 0000000000000000 0000000000000000 0000000000000000 5b01c84e403f61db",
+      "before": "5b01c84e403f61d9",
+      "after": "5b01c84e403f61da",
+      "refined_reference": [
+        434,
+        "3fe1c84e403f61db",
+        "bc80cdbdfdbd96c7",
+        "b921c9e1918b4824"
+      ],
+      "signed_ulp_error": {
+        "before": "-1.73744249554296774207557706809",
+        "after": "-0.737442495542967742075577068093"
+      },
+      "precision_digits": [
+        238,
+        458
+      ],
+      "differentiation_checked": false
+    }
+  ]
+}

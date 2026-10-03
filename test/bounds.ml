@@ -146,3 +146,22 @@ let scaled_price_error ~time ~price ~got ~reference ~budget =
   let spacing = ulp (Float.abs price +. radius) in
   let price_error = (budget +. 0.5) *. spacing in
   (Float.abs time *. price_error) +. (0.5 *. ulp got) +. (0.5 *. ulp reference)
+
+(* Optional compatibility evidence: original fixture row plus served bits.
+   Separate invocations use distinct destinations; ordinary tests do no I/O. *)
+let trace_output =
+  lazy
+    (match Sys.getenv_opt "MORPHIQ_ORACLE_TRACE" with
+    | None -> None
+    | Some path ->
+        let channel = open_out path in
+        at_exit (fun () -> close_out channel);
+        Some channel)
+
+let trace line result =
+  match Lazy.force trace_output with
+  | None -> ()
+  | Some channel -> Printf.fprintf channel "%s\t%s\n" line result
+
+let trace_float line value =
+  trace line (Printf.sprintf "%016Lx" (Int64.bits_of_float value))

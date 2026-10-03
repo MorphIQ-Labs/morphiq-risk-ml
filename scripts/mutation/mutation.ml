@@ -333,10 +333,10 @@ let catalog =
     {
       id = "expm1-tiny";
       file = "lib/dd.ml";
-      snippet = "if Float.abs x.hi < 0x1p-104 then x";
-      replacement = "if false then x";
+      snippet = "if Float.abs r.hi < 0x1p-104 then r";
+      replacement = "if Float.abs r.hi < 0x1p-104 then of_float 0.0";
       killer = "dd_reference";
-      mechanism = "retain tiny expm1 inputs before division by 512";
+      mechanism = "retain the nonzero tiny expm1 result";
     };
     {
       id = "intrinsic-tiny-carry";
@@ -429,12 +429,14 @@ let catalog =
       mechanism = "log1p's quotient remainder";
     };
     {
-      id = "dd-exp-threshold";
+      id = "dd-exp-degree";
       file = "lib/dd.ml";
-      snippet = "inv_k *. 0x1p-104";
-      replacement = "inv_k *. epsilon_float";
+      snippet =
+        "let acc = ref exp_coefficients.(21) in\n    for k = 20 downto 2 do";
+      replacement =
+        "let acc = ref exp_coefficients.(11) in\n    for k = 10 downto 2 do";
       killer = "dd_reference";
-      mechanism = "QD's 2^-104 stopping rule in the double-double exp";
+      mechanism = "degree-22 Taylor remainder in the double-word exponential";
     };
     {
       id = "normal-dd-series";

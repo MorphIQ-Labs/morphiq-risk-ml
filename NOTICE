@@ -5,10 +5,11 @@ Original project contributions are licensed under the Apache License,
 Version 2.0. See LICENSE. Third-party material retains its own terms.
 
 This project includes material derived from Peter Jäckel's Let's Be Rational
-and adaptations of QD exponential routines, Cody CALERF, and Wichura AS241,
+and adaptations of Cody CALERF and Wichura AS241,
 plus constructions referencing fdlibm. AS241 originates with Michael J.
-Wichura and the Royal Statistical Society. QD's original distribution
-attributes copyright to the Regents of the University of California through
+Wichura and the Royal Statistical Society. Earlier versions adapted QD's
+exponential routines; these have been replaced by a project-derived polynomial.
+QD's original distribution attributes copyright to the Regents of the University of California through
 Lawrence Berkeley National Laboratory.
 See THIRD_PARTY_NOTICES.md and LICENSES/ for attribution, retained notices,
 the scope of each reference, and outstanding provenance questions.
