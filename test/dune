@@ -14,13 +14,13 @@
 
 (library
  (name bounds)
- (modules bounds))
+ (modules bounds component_bounds))
 
 (test
  (name oracle_price)
  (package morphiq_risk_ml)
  (modules oracle_price)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds certified)
  (action
   (progn
    (run %{test} %{dep:../oracle/fixtures/european.txt})
@@ -36,7 +36,7 @@
  (name oracle_iv)
  (package morphiq_risk_ml)
  (modules oracle_iv)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds iv_bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -44,7 +44,7 @@
  (name oracle_greeks)
  (package morphiq_risk_ml)
  (modules oracle_greeks budget_greeks)
- (libraries morphiq_risk bounds)
+ (libraries morphiq_risk bounds certified greek_values)
  (action
   (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
@@ -52,7 +52,7 @@
  (name normal_dd_reference)
  (package morphiq_risk_ml)
  (modules normal_dd_reference)
- (libraries morphiq_risk))
+ (libraries morphiq_risk bounds))
 
 (test
  (name consistency)
@@ -74,7 +74,7 @@
  (modules determinism)
  (libraries morphiq_risk)
  ; Any numerical change moves the digest, so the mutation catalog
- ; (scripts/mutation.py) runs without it.
+ ; (scripts/mutation/mutation.ml) runs without it.
  (enabled_if
   (<> %{profile} mutation))
  (action
@@ -84,13 +84,15 @@
  (name properties)
  (package morphiq_risk_ml)
  (modules properties)
- (libraries morphiq_risk qcheck-core qcheck-core.runner))
+ (libraries morphiq_risk bounds iv_bounds qcheck-core qcheck-core.runner))
 
 (test
  (name dd_reference)
  (package morphiq_risk_ml)
  (modules dd_reference)
- (libraries morphiq_risk))
+ (libraries morphiq_risk bounds certified)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
  (name manifest)
@@ -102,3 +104,101 @@
   (glob_files ../oracle/fixtures/*.txt.gz))
  (action
   (run %{test} ../oracle)))
+
+(library
+ (name iv_bounds)
+ (modules iv_bounds)
+ (libraries morphiq_risk bounds))
+
+(library
+ (name certified)
+ (modules
+  certified
+  kernel_polynomials
+  certificate_mode
+  exact_dyadic
+  checked_dd
+  checked_normal_dd)
+ (libraries morphiq_risk morphiq_fp bounds zarith)
+ (flags
+  (:standard -open Morphiq_fp)))
+
+(rule
+ (target certificate_mode.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (echo "let require_replay = \"%{profile}\" <> \"mutation\""))))
+
+(library
+ (name greek_values)
+ (modules greek_values)
+ (libraries morphiq_risk))
+
+(test
+ (name greek_reference)
+ (modules greek_reference)
+ (libraries morphiq_risk bounds certified greek_values)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/greek_bits.txt})))
+
+(rule
+ (target kernel_polynomials.ml)
+ (deps ../oracle/lift_polynomials.py ../lib/normalised_black.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/lift_polynomials.py}))))
+
+(test
+ (name numerical_regressions)
+ (modules numerical_regressions)
+ (libraries morphiq_risk bounds iv_bounds)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/regressions.txt})))
+
+(rule
+ (target component_bounds.ml)
+ (deps
+  ../oracle/verify_bounds.py
+  ../oracle/kernel_certificates.py
+  ../lib/elementary.ml
+  ../lib/split.ml
+  ../lib/cody.ml
+  ../lib/normalised_black.ml
+  ../lib/normal_dd.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/verify_bounds.py} --ocaml))))
+
+(rule
+ (target checked_dd.ml)
+ (deps ../oracle/instrument_dd.py ../lib/dd.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/instrument_dd.py}))))
+
+(rule
+ (target checked_normal_dd.ml)
+ (deps ../oracle/instrument_dd.py ../lib/normal_dd.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../oracle/instrument_dd.py} normal))))
+
+(rule
+ (alias runtest)
+ (deps ../oracle/test_manifest.py ../oracle/write_manifest.py)
+ (action
+  (run python3 %{dep:../oracle/test_manifest.py})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../oracle/MANIFEST
+  (glob_files ../oracle/*.py)
+  (glob_files ../oracle/fixtures/*.txt.gz))
+ (action
+  (run python3 %{dep:../oracle/write_manifest.py})))

@@ -49,8 +49,9 @@ let exp_coefficients =
    truncation is below 2^-60 relative on that interval. *)
 let expm1_reduced r = r *. horner exp_coefficients r
 
-(* The same series to degree 21 for |x| <= 1, where 1/22! < 2^-70: expm1 is
-   then one Horner evaluation, without recombining across a reduction. *)
+(* The same series to degree 21 for |x| <= 1. Its absolute tail is at most
+   1/[22! (1-1/23)] < 2^-69. expm1 is then one Horner evaluation, without
+   recombining across a reduction. *)
 let expm1_coefficients =
   [|
     0x1.0000000000000p+0;

@@ -13,11 +13,11 @@ cd "$(dirname "$0")"
 PY=.venv/bin/python
 generator() {
   case "$1" in
-    elementary | normal | european | displaced | iv | greeks) echo "gen_$1.py" ;;
+    elementary | normal | european | displaced | iv | greeks | dd | regressions | greek_bits) echo "gen_$1.py" ;;
     *) echo "unknown fixture: $1" >&2; exit 2 ;;
   esac
 }
-if [ $# -eq 0 ]; then set -- elementary normal european displaced iv greeks; fi
+if [ $# -eq 0 ]; then set -- elementary normal european displaced iv greeks dd regressions greek_bits; fi
 mkdir -p fixtures
 for name in "$@"; do
   gen=$(generator "$name")
@@ -25,4 +25,4 @@ for name in "$@"; do
   "$PY" "$gen" "fixtures/$name.txt"
   gzip -n -9 -f "fixtures/$name.txt"
 done
-"$PY" write_manifest.py
+"$PY" write_manifest.py "$@"

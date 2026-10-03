@@ -1,0 +1,2 @@
+# Preserve the source bytes, including PDFs with long textual headers.
+*.pdf binary

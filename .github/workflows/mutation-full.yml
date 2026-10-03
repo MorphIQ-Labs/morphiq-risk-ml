@@ -1,0 +1,38 @@
+name: full mutation assurance
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays at 06:00 UTC, on the default branch.
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mutation-full-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  mutation-full:
+    name: full mutation catalog
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3.9.0
+        with:
+          ocaml-compiler: ocaml-variants.5.3.0+options,ocaml-option-flambda
+          dune-cache: true
+      - name: Install locked dependencies
+        run: opam install . --deps-only --with-test --locked --yes
+      - name: Full mutation catalog
+        shell: bash
+        run: |
+          set -o pipefail
+          opam exec -- dune exec scripts/mutation/mutation.exe 2>&1 | tee mutation-full.log
+      - name: Retain mutation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mutation-full-${{ github.sha }}
+          path: mutation-full.log
+          if-no-files-found: warn

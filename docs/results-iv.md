@@ -1,6 +1,6 @@
 # Results: implied volatility
 
-Measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`).
+Historical cross-check measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`). The table below records the acceptance rules used for that run, not the current gates. Current exact-root tests use conditional component-error/vega budgets for both model families, including maximum-gap uncertainty; rounding-cell membership is diagnostic only. See [error-analysis.md §6](error-analysis.md#6-implied-volatility).
 
 ## Accuracy
 

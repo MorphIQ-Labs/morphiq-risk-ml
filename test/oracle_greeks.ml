@@ -1,17 +1,8 @@
-(* Scores the ten Greeks against FerroRisk's Greek derivative reference
-   (oracle/convert_greeks.py). Each Greek's expected outcome follows its
-   reference status:
-
-   - resolved, single_route: the value, within the enforced ULP budget.
-   - below_binary64: the exact value underflows binary64, so expect a value
-     within 4 subnormal quanta of zero.
-   - above_binary64: the exact value overflows, so expect infinity or a refusal.
-   - kink: the derivative does not exist (payoff kink), so expect a refusal.
-   - boundary: a one-sided limit the reference makes no claim about. The
-     outcome is recorded.
-
-   Budgets are the measured worst per family and Greek with headroom; see
-   docs/results-greeks.md. *)
+(* Scores the ten Greeks against independently generated model references.
+   Every finite expected value also needs an analytical certificate, including
+   below-binary64 rows. Historical ULP targets are additional quality gates;
+   they are not premises of that certificate. Kinks require refusal.
+   Optional FerroRisk cross-check statuses are handled explicitly below. *)
 
 open Morphiq_risk
 
@@ -25,107 +16,7 @@ let ulps a b =
   if Float.is_nan a || Float.is_nan b then Float.infinity
   else Int64.to_float (Int64.abs (Int64.sub (ordered a) (ordered b)))
 
-let get = function Ok v -> v | Error e -> failwith (Refusal.to_string e)
-
-let rate =
-  Result.map (fun v -> (v : Units.per_calendar_day Units.time_rate :> float))
-
-let per_vol r = Result.map (fun v -> (v : _ Units.per_volatility :> float)) r
-
-let per_vol2 r =
-  Result.map (fun v -> (v : _ Units.per_volatility_squared :> float)) r
-
-let pick (g : _ Greeks.t) = function
-  | "delta" -> g.delta
-  | "gamma" -> g.gamma
-  | "theta" -> rate g.theta
-  | "vega" -> per_vol g.vega
-  | "rho" -> g.rho
-  | "vanna" -> per_vol g.vanna
-  | "volga" -> per_vol2 g.volga
-  | "charm" -> rate g.charm
-  | "veta" -> rate g.veta
-  | "color" -> rate g.color
-  | n -> invalid_arg n
-
-let greeks model side ~s ~k ~t ~r ~q ~sigma ~shift =
-  match model with
-  | "bsm" ->
-      let a =
-        get
-          (Black.Bsm.admit
-             {
-               spot = s;
-               strike = k;
-               time_to_expiry = t;
-               rate = r;
-               dividend_yield = q;
-             })
-      in
-      `Black (Black.Bsm.greeks a side (get (Vol.lognormal sigma)))
-  | "black76" ->
-      let a =
-        get
-          (Black.Black76.admit
-             { forward = s; strike = k; time_to_expiry = t; rate = r })
-      in
-      `Black (Black.Black76.greeks a side (get (Vol.lognormal sigma)))
-  | "displaced" ->
-      let a =
-        get
-          (Black.Displaced.admit
-             {
-               forward = s;
-               strike = k;
-               displacement = shift;
-               time_to_expiry = t;
-               rate = r;
-             })
-      in
-      `Black (Black.Displaced.greeks a side (get (Vol.lognormal sigma)))
-  | "bachelier" ->
-      let a =
-        get
-          (Bachelier.admit
-             { forward = s; strike = k; time_to_expiry = t; rate = r })
-      in
-      `Normal (Bachelier.greeks a side (get (Vol.normal sigma)))
-  | m -> invalid_arg m
-
-(* The library's price, for rho = -T V in the forward models. *)
-let price model side ~s ~k ~t ~r ~sigma ~shift =
-  match model with
-  | "black76" ->
-      let a =
-        get
-          (Black.Black76.admit
-             { forward = s; strike = k; time_to_expiry = t; rate = r })
-      in
-      Black.Black76.price a side (get (Vol.lognormal sigma))
-  | "displaced" ->
-      let a =
-        get
-          (Black.Displaced.admit
-             {
-               forward = s;
-               strike = k;
-               displacement = shift;
-               time_to_expiry = t;
-               rate = r;
-             })
-      in
-      Black.Displaced.price a side (get (Vol.lognormal sigma))
-  | "bachelier" ->
-      let a =
-        get
-          (Bachelier.admit
-             { forward = s; strike = k; time_to_expiry = t; rate = r })
-      in
-      Bachelier.price a side (get (Vol.normal sigma))
-  | m -> invalid_arg m
-
-let forward_rho model greek =
-  greek = "rho" && List.mem model [ "black76"; "displaced"; "bachelier" ]
+open Greek_values
 
 let budget = Hashtbl.create 32
 
@@ -140,8 +31,16 @@ type stat = {
   mutable worst_line : string;
 }
 
+let certificate model ~side ~s ~k ~t ~r ~q ~sigma ~shift greek =
+  if t = 0.0 || sigma = 0.0 then
+    Certified.boundary model ~side ~s ~k ~t ~r ~q ~sigma ~shift greek
+  else if model = "bachelier" then
+    List.assoc greek (Certified.bachelier ~side ~s ~k ~t ~r ~sigma ())
+  else Certified.black model ~side ~s ~k ~t ~r ~q ~sigma ~shift greek
+
 let () =
   let stats = Hashtbl.create 64 and other = Hashtbl.create 16 in
+  let certified = ref 0 and certificate_domains = Hashtbl.create 8 in
   let failures = ref [] in
   let ic = open_in Sys.argv.(1) in
   let show_worst = Array.length Sys.argv > 2 in
@@ -203,6 +102,31 @@ let () =
                  st.n <- st.n + 1;
                  match got with
                  | Ok v ->
+                     (try
+                        let b =
+                          certificate model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                            greek
+                        in
+                        if not (Certified.replay_matches v b) then (
+                          st.fails <- st.fails + 1;
+                          fail
+                            (Printf.sprintf
+                               "certificate replay %h differs from served %h"
+                               b.v v))
+                        else if not (Certified.check ~got:v ~reference b) then (
+                          st.fails <- st.fails + 1;
+                          fail
+                            (Printf.sprintf "derived error %.4g exceeds %.4g"
+                               (Float.abs (v -. reference))
+                               b.e))
+                        else incr certified
+                      with Certified.Unsupported why ->
+                        st.fails <- st.fails + 1;
+                        fail ("derived certificate unavailable: " ^ why);
+                        Hashtbl.replace certificate_domains why
+                          (1
+                          + Option.value ~default:0
+                              (Hashtbl.find_opt certificate_domains why)));
                      let u = ulps v reference in
                      st.errors <- u :: st.errors;
                      if u > st.worst then (
@@ -210,17 +134,17 @@ let () =
                        st.worst_line <- line);
                      (* Forward models, live: rho = -T V exactly, so it must
                         be RN(-T V) of the served price, and its error is the
-                        price's plus one rounding: the family's price budget
-                        + 1 ULP. At expiry rho is the contract's limit. *)
+                        price's absolute error multiplied by T, plus rounding.
+                        ULP spacings must be converted before composition. At expiry rho is the contract's limit. *)
                      let composed_ok, b =
                        if forward_rho model greek && t > 0.0 then
                          let p = price model side ~s ~k ~t ~r ~sigma ~shift in
                          ( Int64.equal (Int64.bits_of_float v)
                              (Int64.bits_of_float (-.t *. p)),
-                           Bounds.price_ulp_budget_max
-                             (if model = "bachelier" then "bachelier"
-                              else "black")
-                           +. 1.0 )
+                           Bounds.scaled_price_error ~time:t ~price:p ~got:v
+                             ~reference
+                             ~budget:(Bounds.price_ulp_budget_max family)
+                           /. Bounds.ulp reference )
                        else
                          ( true,
                            Option.value ~default:Float.infinity
@@ -229,7 +153,12 @@ let () =
                      if not composed_ok then (
                        st.fails <- st.fails + 1;
                        fail (Printf.sprintf "rho %h is not RN(-T V)" v));
-                     if u > b then (
+                     if
+                       not
+                         (Bounds.within
+                            ~error:(Float.abs (v -. reference))
+                            ~bound:(b *. Bounds.ulp reference))
+                     then (
                        st.fails <- st.fails + 1;
                        fail
                          (Printf.sprintf
@@ -240,8 +169,19 @@ let () =
                      fail "refused a resolved derivative")
              | "below_binary64" -> (
                  match got with
-                 | Ok v when Float.abs v <= 4.0 *. 0x1p-1074 ->
-                     note "below_binary64 -> ~0"
+                 | Ok v when Float.abs v <= 4.0 *. 0x1p-1074 -> (
+                     note "below_binary64 -> ~0";
+                     try
+                       let b =
+                         certificate model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                           greek
+                       in
+                       if Certified.check ~got:v ~reference:0.0 b then
+                         incr certified
+                       else fail "derived subnormal Greek bound exceeded"
+                     with Certified.Unsupported why ->
+                       fail ("derived subnormal certificate unavailable: " ^ why)
+                     )
                  | Ok v ->
                      note "below_binary64 -> nonzero";
                      fail (Printf.sprintf "got %h, expected ~0" v)
@@ -278,6 +218,11 @@ let () =
     Array.sort compare a;
     if Array.length a = 0 then 0.0 else a.(Array.length a / 2)
   in
+  Printf.printf "Derived Greek certificates: %d rows\n" !certified;
+  Hashtbl.iter
+    (fun why n -> Printf.printf "outside certificate domain: %s: %d\n" why n)
+    certificate_domains;
+  if !certified = 0 then failwith "no derived Greek coverage";
   Printf.printf "%-18s %6s %12s %8s %8s %6s\n" "family greek" "rows" "worst ulp"
     "median" "budget" "fails";
   Hashtbl.fold (fun k _ acc -> k :: acc) stats []

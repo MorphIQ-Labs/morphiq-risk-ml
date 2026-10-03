@@ -1,3 +1,8 @@
 (executable
  (name mutation)
  (libraries unix))
+
+(rule
+ (alias runtest)
+ (action
+  (run python3 %{dep:test_selection.py} %{exe:mutation.exe})))

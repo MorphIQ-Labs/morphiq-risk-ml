@@ -1,6 +1,14 @@
 ; Decompress the committed oracle fixtures for the tests.
 
 (rule
+ (deps greek_bits.txt.gz)
+ (target greek_bits.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
  (deps elementary.txt.gz)
  (target elementary.txt)
  (action
@@ -43,6 +51,22 @@
 (rule
  (deps greeks.txt.gz)
  (target greeks.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps dd.txt.gz)
+ (target dd.txt)
+ (action
+  (with-stdout-to
+   %{target}
+   (run gunzip -c %{deps}))))
+
+(rule
+ (deps regressions.txt.gz)
+ (target regressions.txt)
  (action
   (with-stdout-to
    %{target}

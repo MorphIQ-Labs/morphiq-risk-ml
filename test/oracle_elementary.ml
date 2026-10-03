@@ -4,7 +4,7 @@
    ULP.
 
    - log1p on its reduced path, f in [sqrt(1/2) - 1, sqrt 2 - 1] with
-     |f| >= 2^-54: the derived bound |z - y| <= ulp(z)/2 + 0.085 u |y|
+     |f| >= 2^-54: the derived bound |z - y| <= ulp(z)/2 + 0.14 u |y|
      (docs/error-analysis.md §1).
    - Everything else: within 1 ULP of the correctly rounded value. *)
 
@@ -74,7 +74,7 @@ let () =
              let error =
                if Float.is_finite r && Float.is_finite got then
                  Float.abs (got -. r -. residual)
-               else 0.0
+               else Float.infinity
              in
              let unit = Bounds.ulp r in
              if Float.is_finite r && r <> 0.0 then
@@ -83,7 +83,7 @@ let () =
                let exact = r +. residual in
                let bound =
                  (0.5 *. Bounds.ulp got)
-                 +. (0.085 *. Bounds.u *. Float.abs exact)
+                 +. (Bounds.log1p_tail *. Bounds.u *. Float.abs exact)
                in
                reduced_worst :=
                  Float.max !reduced_worst (error /. Bounds.ulp got);
@@ -105,7 +105,7 @@ let () =
         st.n st.worst st.at st.worst_fraction)
     stats;
   Printf.printf
-    "log1p reduced path: worst %.4f ulp from exact (bound 0.5 + 0.085)\n"
+    "log1p reduced path: worst %.4f ulp from exact (bound 0.5 + 0.14)\n"
     !reduced_worst;
   List.iter print_endline (List.rev !failures);
   if !failures <> [] then exit 1

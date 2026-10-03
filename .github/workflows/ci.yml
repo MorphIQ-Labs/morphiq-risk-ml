@@ -6,7 +6,8 @@
 #   fixture manifest and the determinism digest, so a platform that serves
 #   different bits fails here.
 # - format: ocamlformat at the version .ocamlformat pins.
-# - mutation: every catalogued mechanism, removed, must fail its test.
+# - mutation: the seven core mechanisms must fail their designated tests.
+#   The full catalog runs separately in mutation-full.yml (manual/weekly).
 name: ci
 
 on:
@@ -69,5 +70,5 @@ jobs:
           dune-cache: true
       - name: Install locked dependencies
         run: opam install . --deps-only --with-test --locked --yes
-      - name: Mutation catalog
-        run: opam exec -- dune exec scripts/mutation/mutation.exe
+      - name: Core mutation catalog
+        run: opam exec -- dune exec scripts/mutation/mutation.exe -- --core

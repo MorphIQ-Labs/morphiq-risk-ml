@@ -1,8 +1,6 @@
-(* The double-double normal density and distribution against independent
-   values: mpmath at 60 digits, split into (hi, lo) and pinned here. The
-   density is held to 2^-100 relative. The distribution is held to
-   2^-100 / (2 Φ(d)): for d < 0 the series' final 1/2 + negative cancels,
-   losing log2(1/(2 Φ(d))) bits, about 30 at d = -6. *)
+(* Independent pinned values, with the analytical Normal_dd majorants from
+   the series derivation. The generated DD corpus additionally tests both
+   input words at thousands of normal arguments. *)
 open Morphiq_risk
 
 let cases =
@@ -59,9 +57,12 @@ let () =
         let x = Internal.Dd.of_float d in
         let ec = rel (Internal.Normal_dd.cdf x) cdf
         and ep = rel (Internal.Normal_dd.pdf x) pdf in
-        let cdf_budget = 0x1p-100 *. Float.max 1.0 (0.5 /. fst cdf) in
-        if ec > cdf_budget || ep > 0x1p-100 then
-          Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep)
+        let cdf_budget = Bounds.normal_cdf_absolute /. fst cdf in
+        if
+          not
+            (Float.is_finite ec && Float.is_finite ep && ec <= cdf_budget
+            && ep <= Bounds.normal_pdf_relative)
+        then Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep)
         else None)
       cases
   in
