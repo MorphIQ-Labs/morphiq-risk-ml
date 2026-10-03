@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "inventory_base_commit": "130ce0a581699adca278be0fc74022645b9f3f41",
-  "scope": "Research papers explicitly cited in the current tracked source/documentation and the PR 12 source audit; not the recursive bibliographies of those papers.",
+  "scope": "Research papers explicitly cited in tracked source/documentation, including the PR 12 audit and Epic 27 runtime enclosure work; not recursive bibliographies.",
   "documents": [
     {
       "file": "1900-bachelier-theorie-de-la-speculation.pdf",
@@ -313,6 +313,47 @@
       "sha256": "a60eb7edbf7e6ca4454d97f0c2a1eee89806093a6f487cb429c087678858ac93",
       "bytes": 1027744,
       "pages": 51
+    },
+    {
+      "file": "1997-shewchuk-adaptive-precision-geometric-predicates.pdf",
+      "title": "Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates",
+      "authors": "Jonathan Richard Shewchuk",
+      "year": 1997,
+      "version": "Author report CMU-CS-96-140R, dated October 1, 1997; from Discrete & Computational Geometry 18(3), 305–363",
+      "source_url": "https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf",
+      "cited_in": [
+        "lib/enclosure.ml",
+        "docs/runtime-enclosures.md"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-03",
+      "sha256": "5f047fd41666e53f6015497f68e42152e3a9d8d04556ab27f8b6fc92c74117d7",
+      "bytes": 556447,
+      "pages": 59,
+      "text_layer": "Text present; mathematical symbols use legacy encodings",
+      "validation_note": "Original author PDF retained unchanged; title, report identifier and page count verified with Poppler."
+    },
+    {
+      "file": "2016-johansson-arb-interval-arithmetic.pdf",
+      "title": "Arb: Efficient Arbitrary-Precision Midpoint-Radius Interval Arithmetic",
+      "authors": "Fredrik Johansson",
+      "year": 2016,
+      "version": "arXiv:1611.02831v1, 9 November 2016, author preprint",
+      "source_url": "https://arxiv.org/pdf/1611.02831v1",
+      "doi": "10.48550/arXiv.1611.02831",
+      "cited_in": [
+        "docs/certified-iv.md",
+        "scripts/arb_iv_audit.py"
+      ],
+      "relationship": "cited",
+      "status": "archived",
+      "retrieved_on": "2026-10-02",
+      "sha256": "44802d5cce02bf91a3d155870b8f315f2955866e283bfb48f6776a07f35f6ebf",
+      "bytes": 300134,
+      "pages": 12,
+      "text_layer": "searchable text",
+      "validation_note": "Poppler parses all 12 pages; extracted text confirms title and author. Original PDF retained unchanged."
     }
   ],
   "unavailable": [

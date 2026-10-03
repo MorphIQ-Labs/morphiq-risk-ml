@@ -24,6 +24,11 @@ module Coordinates : sig
         (** [S]'s low part where [S] is an exact sum ([F + d]). *)
     strike : float;  (** [K], scaled by [2^-exponent]. *)
     strike_low : float;
+    original_spot : float;
+    original_spot_low : float;
+    original_strike : float;
+    original_strike_low : float;
+        (** Exact unscaled input words retained for runtime decisions. *)
     rate : float;
     yield : float;
     tied : bool;  (** The yield is the rate (a forward model): rho moves both. *)
@@ -54,7 +59,7 @@ module type MODEL = sig
 
   val implied :
     admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result
-  (** A representable inverse estimate, a mathematical classification, or an
+  (** A correctly rounded positive inverse, a mathematical classification, or an
       explicit computational failure; see {!Iv.t}. A quote that is not a finite,
       nonnegative number is refused. *)
 
@@ -107,6 +112,6 @@ module Black76 : MODEL with type inputs = Black76_carry.inputs
 module Displaced : MODEL with type inputs = Displaced_carry.inputs
 (** Black-76 on the real numbers [forward + displacement] and
     [strike + displacement]. The sums are exact: never rounded, and carried as
-    double-doubles throughout. Where they are representable, price, implied
-    volatility and Greeks equal Black-76's on the sums bit for bit
-    (docs/model-contracts.md). *)
+    compensated words, including the runtime IV enclosure. Where they are
+    representable, price, implied volatility and Greeks equal Black-76's on the
+    sums bit for bit (docs/model-contracts.md). *)

@@ -4,6 +4,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Certified public implied volatility
+
+- Positive public IV roots now require a runtime certificate of nearest-even binary64 rounding of the exact-input model's real inverse. The fast inverses supply proposals only. Boundary classifications use original inputs, including both words of displaced sums; unresolved arithmetic returns `Numerical_failure`. See [the derivation](docs/certified-iv.md).
+- Runtime arithmetic retains four-word expansions with outward truncation and underflow allowances. Quote-scaled inverse residuals preserve information before tail probabilities underflow. Shewchuk's original paper is archived; executing the unchanged canonical expansion implementation passes 32,009 exact-rational postconditions.
+- All 5,575 positive reference roots are correctly rounded. The existing near-maximum regressions, 96 self-consistency cases and recovery property also pass. This establishes exercised availability, not success for every finite input or institutional acceptance.
+- FLINT/Arb independently encloses the rounding-cell residual signs for all 5,575 reference roots at 256-bit precision, with no unresolved rows. This strengthens reference validation beyond agreement of two mpmath precisions; it is not independent human review.
+- Five former IV mutations survive because certified acceptance repairs proposal changes or makes their historical root-error witness ineffective. They remain explicit probes. The default seven replace `iv-beta-bar` with `certified-rounding-cell`; the curated catalog has 37 mechanisms. The harness runs the full baseline once and each compiled mutant's designated guard, with missing-input/crash controls.
+- The replay digest changes to `029a559e0d6360c69c4039b32d1f9123f0c0ae8e2c5811bc2dd4e57fd17b0651`. Across 30,240 model records, 6,272 IV values change; prices, Greeks and outcome categories are unchanged. Earlier IV timing tables below concern the proposal solver and do not describe the new runtime certificate's cost.
+- A controlled-order scalar comparison records a material cost increase: about 4–17 ms per certified IV versus 4–8 µs for the proposal-only baseline on the recorded shared M1 Pro host. All 768 benchmark cases succeed in every run. The new monotonic-clock harness retains current-domain allocation, sampled GC and request-latency evidence; this is not production performance acceptance. See [performance evidence](docs/performance.md).
+
 ### Runtime model enclosure foundation
 
 - Added internal Black-family and Bachelier price enclosures from original inputs, a derived pi enclosure, a normal integral series with an explicit tail and NIST's bracketing Mills-ratio continued fraction. This is not yet wired into the public inverse or a production acceptance policy.

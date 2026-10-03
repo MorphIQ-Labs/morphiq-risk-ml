@@ -2,7 +2,10 @@ open Morphiq_risk.Internal
 module E = Enclosure
 
 let q = Q.of_float
-let centre (a : E.t) = Q.add (q a.hi) (q a.lo)
+
+let centre (a : E.t) =
+  List.fold_left (fun sum x -> Q.add sum (q x)) Q.zero (E.words a)
+
 let lower a = Q.sub (centre a) (q a.E.error)
 let upper a = Q.add (centre a) (q a.E.error)
 let endpoints a = [ lower a; upper a ]
@@ -115,8 +118,19 @@ let () =
     binary "random add" Q.add E.add a b;
     binary "random mul" Q.mul E.mul a b;
     binary "random div" Q.div E.div a b;
+    let expanded = E.mul a b in
+    binary "expanded-input div" Q.div E.div expanded a;
+    binary "expanded-input cancellation" Q.sub E.sub expanded expanded;
+    sqrt_check expanded;
     sqrt_check a
   done;
+  let terms = [ 1.0; 0x1p-53; 0x1p-106; 0x1p-159; 0x1p-212 ] in
+  let expanded =
+    List.fold_left (fun a x -> E.add a (E.exact x)) (E.exact 0.0) terms
+  in
+  check "discarded expansion word"
+    (List.fold_left (fun a x -> Q.add a (q x)) Q.zero terms)
+    Q.zero expanded;
   let rejected f =
     match f () with _ -> false | exception E.Unresolved _ -> true
   in
@@ -162,6 +176,7 @@ let () =
                    incr rows));
   if !rows = 0 then failwith "empty enclosure reference corpus";
   Printf.printf
-    "%d deterministic primitive cases, 2000 random compositions, %d elementary \
-     references; %d outside exponential guard; %d other-function rows\n"
+    "%d deterministic primitive cases, 2000 random compositions, %d \
+     elementary/normal references; %d outside exponential guard; %d \
+     other-function rows\n"
     !cases !rows !outside_exp !other_functions

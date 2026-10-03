@@ -1,0 +1,60 @@
+{
+  "baseline_commit": "8e3b6ba",
+  "baseline_digest": "a7748579580fce931e2b271d66f2822f99f1fa1e737d5738209d3b282b57a5e4",
+  "candidate_digest": "029a559e0d6360c69c4039b32d1f9123f0c0ae8e2c5811bc2dd4e57fd17b0651",
+  "source_sha256": {
+    "lib/enclosure.ml": "4f9392bda8b3293a2d0c498b02a86719d0b1a90c0b46f1aa2a86453ae1b2e8d8",
+    "lib/model_enclosure.ml": "47efc72e67f2a19bdfcbffe7b6a4c1e274655764957921e64b2bcc29a6f30941",
+    "lib/certified_iv.ml": "f489e90803252a7146e89d8610f064716e9b6f19a9345e128cddf2c1fefb6b0e",
+    "lib/black.ml": "c4c95661766a5b342f34be39a84bfd3020d2c5c21894c473acb12cf428d2ff34",
+    "lib/bachelier.ml": "840c41a961cc2ae8ca4268af771c7478d5a996eaf7fea1610d81386b6084ac30"
+  },
+  "records": 30240,
+  "changes": {
+    "greek_changes": 0,
+    "root -> root": 6272
+  },
+  "examples": [
+    {
+      "record": 92,
+      "before": "2138a8c5b7ff9c82",
+      "after": "2138a8c5b7ff9c83"
+    },
+    {
+      "record": 95,
+      "before": "3e112e0be826d695",
+      "after": "3e112e0be826d694"
+    },
+    {
+      "record": 98,
+      "before": "3f0a36e2eb1c432d",
+      "after": "3f0a36e2eb1c432c"
+    },
+    {
+      "record": 110,
+      "before": "3e112e0be826d695",
+      "after": "3e112e0be826d694"
+    },
+    {
+      "record": 113,
+      "before": "3f0a36e2eb1c432d",
+      "after": "3f0a36e2eb1c432c"
+    },
+    {
+      "record": 128,
+      "before": "3f0a36e2eb1c432d",
+      "after": "3f0a36e2eb1c432e"
+    },
+    {
+      "record": 131,
+      "before": "3f33a92a30553261",
+      "after": "3f33a92a30553262"
+    },
+    {
+      "record": 143,
+      "before": "3f0a36e2eb1c432d",
+      "after": "3f0a36e2eb1c432e"
+    }
+  ],
+  "scope": "Replay compatibility, not independent accuracy. Final local ordinary suite confirms this digest for the recorded library source hashes."
+}

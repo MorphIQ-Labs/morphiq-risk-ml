@@ -188,7 +188,7 @@ exercise changed gate scripts and their failure controls before pushing them.
    and cross-platform digests establish different facts. The
    [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations)
    is authoritative: checked certificate domains are not every finite input
-   admitted by the API; IV runtime boundaries still need uncertainty enforcement. Test certificates
+   admitted by the API; IV now enforces runtime boundary and rounding-cell enclosures. Test certificates
    are not runtime certificates or formal verification of the compiler.
 7. **Preserve arithmetic semantics.** Keep `Morphiq_fp` multiplication and
    explicit `Float.fma` usage. Do not introduce implicit contraction,
@@ -196,9 +196,9 @@ exercise changed gate scripts and their failure controls before pushing them.
    approximations without an operation-level analysis and independent checks.
    Portability evidence covers the tested platforms, not all architectures.
 
-The remaining IV exact-model boundary/enclosure gap is tracked in
-[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). Its variant now includes computational failures and its solver has a discrete
-termination bound. Do not claim that a rounded-evaluator bracket is an
+The IV contract work is tracked in
+[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). Public positive roots now require the [exact-model rounding certificate](docs/certified-iv.md),
+with explicit uncertainty failures and bounded work. Do not claim that a rounded-evaluator bracket is an
 exact-model enclosure or that an iteration cap proves convergence. Distinguish invalid input,
 mathematical non-existence, insufficient representability and numerical
 failure; never turn a failed computation into a plausible successful value.

@@ -12,7 +12,7 @@ opam install ocamlformat.0.27.0
 dune build && dune test          # needs python3 stdlib for exact-rational bound checks
 dune build @fmt
 dune exec scripts/mutation/mutation.exe -- --core # seven required CI mutants
-dune exec scripts/mutation/mutation.exe   # full 35-mutant catalog (optional locally)
+dune exec scripts/mutation/mutation.exe   # full catalog (optional locally)
 dune exec --release bench/bench.exe
 
 # Regenerating oracles (mpmath 1.3.0), and the optional FerroRisk cross-check:
@@ -23,7 +23,7 @@ scripts/ferro_crosscheck.sh      # needs oracle/fetch.sh and the convert_* scrip
 
 The public API is `Morphiq_risk` (see `lib/morphiq_risk.mli`); `Morphiq_risk.Internal` is unstable. Model definitions: [docs/model-contracts.md](docs/model-contracts.md). Oracles: [docs/oracles.md](docs/oracles.md). Error analysis: [docs/error-analysis.md](docs/error-analysis.md). Stability: [docs/stability.md](docs/stability.md). Changes: [CHANGELOG.md](CHANGELOG.md). Results: [docs/results-slice.md](docs/results-slice.md).
 
-Prices and finite Greeks in the committed corpora are checked against per-input analytical bounds, with exact-rational rounded-kernel checks and extra-bit references. Historical ULP targets remain additional quality gates. IV envelopes and universal finite-input coverage still have the limitations listed in the [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).
+Prices and finite Greeks in the committed corpora are checked against per-input analytical bounds, with exact-rational rounded-kernel checks and extra-bit references. Historical ULP targets remain additional quality gates. Positive IV results now require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly. Production-domain coverage and independent review still have the limitations listed in the [certification status](docs/error-analysis.md#certification-status-and-remaining-proof-obligations).
 
 Ordinary CI runs the full test suite on all three platforms, formatting, and the seven [core mutation checks](docs/mutation-policy.md). The full mutation catalog is a separate manual/weekly workflow; it does not run on each PR or push.
 
@@ -31,7 +31,6 @@ The [research library](docs/research/README.md) contains the collected reference
 
 The [numerical backend contract](docs/numerical-backend-contract.md) defines required arithmetic semantics, optimization assessment, AD/FFI obligations, and conformance evidence. Native and bytecode arithmetic probes run in the ordinary suite.
 
-The internal [runtime enclosure foundation](docs/runtime-enclosures.md) derives arithmetic and elementary-function error balls from rounding residuals and explicit remainders. It is not yet integrated into financial output acceptance or IV boundary classification.
-An independent [model enclosure layer](docs/model-enclosures.md) evaluates normal probabilities and original-input European prices for that integration work.
+The [runtime enclosure foundation](docs/runtime-enclosures.md) and independent [model evaluator](docs/model-enclosures.md) support [certified IV acceptance](docs/certified-iv.md), including original-input boundary decisions. The fast price and Greek APIs remain separate from those runtime certificates.
 
 The [financial type audit](docs/type-boundary-audit.md) records enforced invariants, trusted raw-value labeling, all Greek units, and remaining caller obligations. Veta retains both its time unit and volatility coordinate.

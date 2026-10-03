@@ -169,7 +169,19 @@ The existing 8–32 ULP budgets remain additional quality gates. They are measur
 
 ## 6. Implied volatility
 
-1. **Classification.** The quote is compared, to about 2^-104, with the DD intrinsic and the DD maximum.
+The public inverse now accepts a positive root only when independent runtime
+model enclosures prove its nearest-even binary64 rounding. Intrinsic/maximum
+comparisons use original input words, including sparse displaced low parts;
+uncertainty is an explicit computational failure. The enclosures include
+finite-exponent allowances, analytic remainders and the final volatility
+coordinate. See [the arithmetic derivation](runtime-enclosures.md),
+[model expressions](model-enclosures.md) and [root acceptance](certified-iv.md).
+All 5,575 positive oracle rows must match their correctly rounded reference;
+no failed or merely approximately correct root counts as a pass.
+
+The following fast calculations now produce **proposals only**:
+
+1. **Proposal classification.** DD intrinsic and maximum estimates select a candidate path; they cannot decide a public mathematical classification.
 2. **Normalisation.**
    - β = (quote − intrinsic⁺)/√(AC) and β̄ = (maximum − quote)/√(AC) are formed from the DD legs, then rounded once.
    - ln β is taken from the unscaled quote, because a subnormal quote loses bits when rescaled.
@@ -179,7 +191,7 @@ The existing 8–32 ULP budgets remain additional quality gates. They are measur
    - on ln b when β < 2^-900;
    - on b otherwise.
 
-### 6.1 Checked termination and explicit failures
+### 6.1 Bounded proposal generation
 
 `Iv_iteration` works with the implemented binary64 evaluator. Its successful
 exit is an evaluated equality, or an opposite-sign bracket whose endpoints
@@ -213,10 +225,11 @@ of successful termination. A nonfinite or nonpositive final volatility
 conversion is `Numerical_failure`, never `Above_maximum` or
 `Below_smallest_volatility` without an independent mathematical decision.
 
-This is not yet a runtime enclosure of the exact real root. Classification
-still uses DD approximations, and the conversion and evaluator errors require
-the analysis below. The production domain must exclude or explicitly resolve
-unsupported boundary uncertainty. See [the audit](iv-termination-audit.md).
+These evaluator checks are not the public acceptance criterion. A separate
+four-word enclosure evaluator certifies the annual-volatility rounding cell.
+It brackets by expansion in ordered float encodings (at most 64 steps), then
+bisects (at most 63 steps). Its default 128-step cap cannot itself report
+success. Unresolved signs fail. See [the audit](iv-termination-audit.md).
 
 ### 6.2 Executed exact-model certificates
 
@@ -245,8 +258,7 @@ that the generating volatility is the inverse of its rounded served quote.
 These are a posteriori certificates, not independent quality thresholds: a
 poor candidate can have a valid but large certified error bound. Consequently
 the historical quality gates below remain mandatory and unchanged. Their
-measured premises are not used by the analytical certificate. Corpus success
-does not promote the certificates into a universal runtime guarantee.
+measured premises are not used by the analytical certificate. The independent runtime acceptance proof is separate from these test certificates; corpus success does not establish universal availability.
 
 ### 6.3 Historical Black quality budget
 
@@ -390,7 +402,7 @@ Region III replays the actual erfc/erfcx branches, both positive legs, exponenti
 
 The denominator is rounded down and must be strictly positive. `round` includes a subnormal quantum. DD nodes use the published relative majorants, input perturbations and a fixed 32-quantum allowance for gradual underflow. Each executed primitive in the generated DD replay checks that allowance with exact rational arithmetic, including inside exp/expm1/log and the normal series. Finite outputs and nonoverlap are enforced. These are per-input witnesses; the 32-quantum allowance is not asserted as a published or universal finite-exponent theorem. Coordinate logarithms, quotient remainders, displaced low parts, carry, root time, discount factors and DD cancellation are all propagated before model assembly. Thus a Greek close to zero receives an absolute bound from its actual terms, not a fixed relative or ULP allowance.
 
-Ordinary tests require the replay's center to match the library's served bits. This checks that the written arithmetic model follows the selected implementation path; it is not accuracy evidence by itself. **Mutation builds disable those replay-identity assertions.** A numerical mutant must still fail the independent reference comparison, a mathematical precondition or its designated regression test. Changing a result's last bit alone is not counted as a kill. The catalog now contains 37 mechanisms under this rule; the separate intrinsic-guard probe remains provisional.
+Ordinary tests require the replay's center to match the library's served bits. This checks that the written arithmetic model follows the selected implementation path; it is not accuracy evidence by itself. **Mutation builds disable those replay-identity assertions.** A numerical mutant must still fail the independent reference comparison, a mathematical precondition or its designated regression test. Changing a result's last bit alone is not counted as a kill. The mutation catalog applies this rule; the separate intrinsic-guard probe remains provisional.
 
 The certificates cover every price and finite Greek in the committed model fixtures, plus the direct component and extra-bit Greek corpora. Unsupported arguments fail rather than returning an infinite radius or falling back to the historical measured budget. This is executable analytical error propagation, not formal verification of Python, OCaml, the compiler or every finite input admitted by the public API.
 
@@ -402,13 +414,13 @@ The certificates cover every price and finite Greek in the committed model fixtu
 | DD exp/expm1/log | written analytical majorants, exact-rational checks, dense two-word corpus | independent/formal verification of the complete implementation |
 | Reduced log1p | corrected 0.14 majorant with positive margin; fractional-ULP oracle | whole-domain elementary guarantees beyond the reduced path |
 | Black/Bachelier prices | exact-rational rounded-kernel bounds, integral remainders and per-input propagation on all 99,056 rows; strict quality gates retained | independent/formal verification and extension beyond the checked finite domains |
-| Complement/IV | maximum-gap error included; argument sensitivity, threshold and nonlinear transport explicit | runtime exact-model enclosures and boundary uncertainty outside the checked domain |
+| Black-family IV | original-input boundary enclosures, bounded work and runtime proof of correctly rounded positive roots | independent/formal review, broader availability and operational acceptance |
 | Normal_dd and all Greeks | DD series majorants and per-operation absolute bounds; 65,980 finite rows and 2,506 extra-bit references | independent/formal verification and coverage of all finite admitted inputs |
-| Bachelier IV | discrete termination bound and explicit failures; executed price/vega certificates; unchanged quality gate | runtime exact-model enclosure and supported classification domain |
-| Random IV recovery | executed analytical transport between two price balls; historical quality gate retained | domain enforcement and runtime reporting of certified uncertainty |
+| Bachelier IV | original-input boundary enclosures, quote-scaled residual and runtime proof of correctly rounded positive roots | independent/formal review, broader availability and operational acceptance |
+| Random IV recovery | certified exact-quote inverse plus analytical transport between generating and returned price balls | supported production use and operational acceptance |
 | Intrinsic branch rule | valid conservative rule; explicit surviving probe | a discriminating corpus/bound or proof of equivalence; no impossibility claim |
 
-Consequently the complete library is **not certified for all finite admitted inputs**. The price/Greek certificates no longer depend on measured ULP envelopes in their checked domains. Historical measured quality gates are still useful and remain enforced. IV and random recovery now additionally execute analytical per-input transport certificates. The historical measured budgets remain quality gates. Discrete solver termination is bounded; runtime exact-model enclosure and classification uncertainty across all admitted inputs remain outstanding obligations. The intrinsic branch probe's survival remains a corpus/bound limitation, not an impossibility result.
+Consequently the complete library is **not certified for all finite admitted inputs**. The price/Greek certificates no longer depend on measured ULP envelopes in their checked domains. Historical measured quality gates are still useful and remain enforced. IV and random recovery now additionally execute analytical per-input transport certificates. The historical measured budgets remain quality gates. Public IV success additionally requires a runtime exact-model rounding certificate; unresolved classifications and roots fail explicitly. This does not promise successful resolution of every admitted finite input or qualify the separate fast price/Greek APIs for every such input. The intrinsic branch probe's survival remains a corpus/bound limitation, not an impossibility result.
 
 
 ### Finite-exponent noise in the checked DD compositions

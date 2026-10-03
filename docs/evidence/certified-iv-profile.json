@@ -1,0 +1,17 @@
+{
+  "command": "sample <owned assurance PID> 2 1 -file /tmp/risk-certified-profile.txt",
+  "workload": "bench/assurance.exe --count 16 --runs 1",
+  "sampling_interval_ms": 1,
+  "duration_seconds": 2,
+  "main_thread_samples": 1590,
+  "binary_sha256": "bbd4507e13b53b341f21297c62caefd1dea9719f5e0e677abfbdc7f823b73a65",
+  "source_sha256": {
+    "lib/enclosure.ml": "4f9392bda8b3293a2d0c498b02a86719d0b1a90c0b46f1aa2a86453ae1b2e8d8",
+    "lib/model_enclosure.ml": "47efc72e67f2a19bdfcbffe7b6a4c1e274655764957921e64b2bcc29a6f30941",
+    "lib/certified_iv.ml": "f489e90803252a7146e89d8610f064716e9b6f19a9345e128cddf2c1fefb6b0e",
+    "bench/assurance.ml": "9bcabc815591240b84f4a91d3c1c4c48e45606226f825b12bdaa4b731ed2c8d0",
+    "bench/assurance_clock.c": "0cd7b94d611cf6864a019aba5b49ba8f3f4be3071d93f5009f924daadf18013c"
+  },
+  "top_of_stack_summary": "camlMorphiq_risk__Enclosure.go_242  (in assurance.exe)        552\n        camlMorphiq_risk__Enclosure.two_sum_202  (in assurance.exe)        364\n        camlStdlib__List.rev_append_366  (in assurance.exe)        165\n        _tlv_get_addr  (in libdyld.dylib)        72\n        camlMorphiq_risk__Enclosure.take_323  (in assurance.exe)        40\n        camlMorphiq_risk__Enclosure.fold_left_3576  (in assurance.exe)        34\n        camlMorphiq_risk__Enclosure.product_718  (in assurance.exe)        31\n        camlStdlib__List.fold_left_788  (in assurance.exe)        29\n        camlMorphiq_risk__Enclosure.pack_285  (in assurance.exe)        27\n        caml_frexp_float  (in assurance.exe)        27\n        camlMorphiq_risk__Enclosure.add_675  (in assurance.exe)        23\n        nextafter  (in libsystem_m.dylib)        22\n        camlMorphiq_risk__Enclosure.anon_fn$5benclosure.ml$3a113$2c12$2d$2d124$5d_839  (in assurance.exe)        21\n        camlMorphiq_risk__Enclosure.mul_788  (in assurance.exe)        19\n        caml_c_call  (in assurance.exe)        19\n        camlMorphiq_risk__Enclosure.anon_fn$5benclosure.ml$3a113$2c12$2d$2d124$5d_8285  (in assurance.exe)        11\n        camlMorphiq_risk__Enclosure.anon_fn$5benclosure.ml$3a69$2c35$2d$2d66$5d_553  (in assurance.exe)        10\n        caml_apply2  (in assurance.exe)        10\n        frexp  (in libsystem_m.dylib)        9\n        oldify_one  (in assurance.exe)        9\n        camlMorphiq_risk__Enclosure.div_float_927  (in assurance.exe)        8\n        camlMorphiq_risk__Enclosure.is_float_514  (in assurance.exe)        8\n        camlMorphiq_risk__Enclosure.magnitude_585  (in assurance.exe)        8\n        morphiq_fp_mul  (in assurance.exe)        8\n        camlMorphiq_risk__Enclosure.exact_412  (in assurance.exe)        7\n        pool_sweep  (in assurance.exe)        7\n        camlMorphiq_risk__Enclosure.anon_fn$5benclosure.ml$3a111$2c8$2d$2d202$5d_830  (in assurance.exe)        6\n        camlMorphiq_risk__Enclosure.is_zero_479  (in assurance.exe)        5\n        caml_alloc_small  (in assurance.exe)        5",
+  "scope": "Short independently instrumented workload; excluded from A/B/B/A timing. Top-of-stack counts are not exhaustive path-level cost attribution."
+}

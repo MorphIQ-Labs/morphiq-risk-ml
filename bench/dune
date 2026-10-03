@@ -1,5 +1,16 @@
 (executable
  (name bench)
+ (modules bench)
  (ocamlopt_flags
   (:standard -O3))
+ (libraries morphiq_risk unix))
+
+(executable
+ (name assurance)
+ (modules assurance)
+ (ocamlopt_flags
+  (:standard -O3))
+ (foreign_stubs
+  (language c)
+  (names assurance_clock))
  (libraries morphiq_risk unix))

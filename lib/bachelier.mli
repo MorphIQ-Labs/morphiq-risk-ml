@@ -16,7 +16,7 @@ val admit : inputs -> (admitted, Refusal.t) result
 val price : admitted -> Side.t -> Vol.normal Vol.t -> float
 
 val implied : admitted -> Side.t -> float -> (Vol.normal Iv.t, Refusal.t) result
-(** A representable inverse estimate, a mathematical classification, or an
+(** A correctly rounded positive inverse, a mathematical classification, or an
     explicit computational failure; see {!Iv.t}. *)
 
 val greeks : admitted -> Side.t -> Vol.normal Vol.t -> Vol.normal Greeks.t

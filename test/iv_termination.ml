@@ -70,6 +70,19 @@ let () =
   in
   require "nonfinite Black legs are not a mathematical classification"
     (Black.Bsm.implied bsm Side.Call 1.0 = Ok Iv.Numerical_failure);
+  let sparse =
+    get
+      (Black.Displaced.admit
+         {
+           forward = 0x1p64;
+           strike = 0x1p64;
+           displacement = 0x1p-1074;
+           time_to_expiry = 1.0;
+           rate = 0.0;
+         })
+  in
+  require "a sparse original shift cannot become a false maximum"
+    (Black.Displaced.implied sparse Side.Call 0x1p64 = Ok Iv.Numerical_failure);
   let normal =
     get
       (Bachelier.admit
