@@ -261,9 +261,9 @@ single-session timing differences do not establish a language-wide advantage.
 See [#8](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/8) and
 [#16](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/16).
 
-The planner is **planned, not implemented**. Its architecture lives in
-[Epic #23](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/23). When
-implementing that scope:
+The planner is implemented on the **integration branch**, not merged into main.
+Read [the scenario contract](docs/scenario-planner.md). Its architecture lives in
+[Epic #23](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/23). The implementation must preserve these obligations:
 
 - Compile frozen portfolio/market/scenario specifications into an inspectable
   plan; distinguish structural validity from per-item numerical admission.

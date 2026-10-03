@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 — scenario-planner integration (unreleased)
+
+- Add typed scalar-equivalent batches, deterministic paired/Cartesian scenario
+  ranges, immutable compile/explain plans, bounded sequential/parallel execution,
+  streamed outcomes and enclosure-based weighted aggregation (#20/#21/#24–#26).
+- Scenario dates roll forward against fixed expiries with explicit Actual/365
+  Fixed or Actual/360 and frozen market inputs. Post-expiry settlement is
+  explicitly unsupported; IV batching preserves the existing root contract.
+- No scalar pricing operation, formula, tolerance, outcome or reference fixture
+  changes. The scalar determinism digest remains unchanged. Planner certificate
+  checks use independent Arb price/series derivatives and exact-rational sums.
+- This is an integration-branch feature candidate, not a released or accepted
+  institutional version. See [the contract](docs/scenario-planner.md).
+
+
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical changes carry evidence per [docs/stability.md](docs/stability.md).
 
 ## [Unreleased]

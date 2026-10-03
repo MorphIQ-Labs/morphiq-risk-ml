@@ -1,0 +1,19 @@
+{
+  "method": "Original-input Arb price and order-three formal series derivatives; fixed 1e-10 typed scalar limits",
+  "certificates": 2376,
+  "scenarios": 27,
+  "instruments": 8,
+  "workers": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "identical": true,
+  "corrupt_certificate_rejected": true,
+  "truncated_output_rejected": true,
+  "binary_sha256": "6ca8cc884f65651ce5e5e3c641bdcb1ffcd8c21d156f60dd473edaba145d299b",
+  "output_sha256": "f3f24cbb32e0a6c151ab34038b6adb5428700cc0c9a14d814f1f11e049610fd6",
+  "python_flint": "0.9.0",
+  "flint": "3.6.0"
+}

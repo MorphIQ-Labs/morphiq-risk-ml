@@ -93,3 +93,11 @@ certificate radius, BSM versus forward rho and time-unit conversion. The
 catalog has 47 mechanisms; default CI retains the same seven core witnesses.
 The guards use independent reference error and contract rejection, not replay
 bit changes or compiler failures.
+
+## Scenario-planner integration
+
+Four optional witnesses exercise snapshot isolation, the post-expiry outcome,
+scalar certificate error in weighted aggregates, and incomplete totals. The
+integration-branch catalog has 51 mechanisms; the seven default core witnesses
+are unchanged. The designated planner test checks behavior, including exact
+rational aggregate containment, rather than a replay digest alone.

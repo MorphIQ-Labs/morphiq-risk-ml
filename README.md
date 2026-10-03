@@ -40,3 +40,14 @@ explicit typed accuracy limits for prices and smooth Greeks and returns private
 certificates with outward absolute error. It preserves certified IV outcomes.
 Expiry/zero-volatility Greeks are explicitly unsupported by this adapter; its
 availability and institutional acceptance limits remain documented.
+
+## Scenario-planner integration
+
+`Planner.compile` freezes a portfolio, typed market factors and paired or
+Cartesian scenarios into an inspectable bounded plan. `Planner.execute` runs
+scalar-certified prices/Greeks sequentially or across domains, streams stable
+outcomes and emits deterministic weighted enclosures with explicit completeness.
+`Batch` also supports externally supplied IV requests. See the
+[scenario contract](docs/scenario-planner.md) for date rolls, units, resources,
+failures and replay. The work is on `integration/scenario-planner`; it has not
+been merged into main or accepted for institutional deployment.

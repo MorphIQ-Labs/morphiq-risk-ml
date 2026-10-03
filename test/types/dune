@@ -314,3 +314,51 @@
  (alias runtest)
  (action
   (diff production_time_unit.expected production_time_unit.out)))
+
+(rule
+ (deps batch_coordinate.ml ../../lib/morphiq_risk.cma)
+ (targets batch_coordinate.out)
+ (action
+  (with-stderr-to
+   batch_coordinate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     batch_coordinate.cmo
+     batch_coordinate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff batch_coordinate.expected batch_coordinate.out)))
+
+(rule
+ (deps planner_coordinate.ml ../../lib/morphiq_risk.cma)
+ (targets planner_coordinate.out)
+ (action
+  (with-stderr-to
+   planner_coordinate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     planner_coordinate.cmo
+     planner_coordinate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff planner_coordinate.expected planner_coordinate.out)))

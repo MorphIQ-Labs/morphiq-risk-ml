@@ -39,6 +39,9 @@ module Greeks = Greeks
 module Black = Black
 module Bachelier = Bachelier
 module Normal = Normal
+module Batch = Batch
+module Scenario = Scenario
+module Planner = Planner
 
 module Production : module type of Production
 (** Numerical building blocks, exposed for testing and research. They are not

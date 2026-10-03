@@ -301,3 +301,13 @@
  (deps ../scripts/test_replay_canonical.py ../scripts/replay_canonical.py)
  (action
   (run python3 %{dep:../scripts/test_replay_canonical.py})))
+
+(test
+ (name planner_contract)
+ (modules planner_contract)
+ (libraries morphiq_risk zarith))
+
+(test
+ (name planner_adversarial)
+ (modules planner_adversarial)
+ (libraries morphiq_risk zarith))

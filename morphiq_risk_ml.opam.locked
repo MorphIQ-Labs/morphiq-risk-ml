@@ -1,6 +1,6 @@
 opam-version: "2.0"
 name: "morphiq_risk_ml"
-version: "0.2.0"
+version: "0.3.0"
 synopsis: "OCaml slice experiment rebuilding the FerroRisk European engine"
 depends: [
   "alcotest" {= "1.9.1" & with-test}

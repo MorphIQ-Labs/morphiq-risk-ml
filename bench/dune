@@ -30,3 +30,17 @@
  (name gc_trace)
  (modules gc_trace)
  (libraries runtime_events unix))
+
+(executable
+ (name planner_scale)
+ (modules planner_scale)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))
+
+(executable
+ (name planner_reference)
+ (modules planner_reference)
+ (libraries morphiq_risk unix morphiq_fp)
+ (flags
+  (:standard -open Morphiq_fp)))
