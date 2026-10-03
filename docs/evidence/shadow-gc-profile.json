@@ -1,0 +1,50 @@
+{
+  "input_sha256": "8042822397a3ee111baa9c4d92eed248ca22279d29cd1abc9b11defc9aef1cb2",
+  "source_sha256": {
+    "/Users/stephen/Development/MorphIQ-Labs/morphiq-risk-ml/scripts/profile_shadow_gc.py": "59a1b427606546ad9169160295f6fe333d815c72efab28fc1f4ef4f7d822e4c9",
+    "scripts/shadow_campaign.py": "2331bc3baa7d1d54b6e813af9ed5f838f3b54e9a27b43cb0aaf716e825606fd8",
+    "bench/gc_trace.ml": "0248f8ff98dd054d88196b147a1072ff01ac39ab3a5b62172e8f783eceb8c823",
+    "bench/dune": "9df3a967f617220ee099294e2be680ad0831a1502d24138255569b0d8eb054f2"
+  },
+  "worker_sha256": "00642637e656f9ff414a8d31ecb2feecd551ed66d485322a6670402792ec95e0",
+  "reader_sha256": "c4d5038f5a2a652112ba6524ef9255cf094ba575dd15cab3c2113081c17c73e0",
+  "rows": 258,
+  "numerical_replay_identical": true,
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "load_before": [
+    3.10205078125,
+    4.4521484375,
+    3.92919921875
+  ],
+  "load_after": [
+    3.013671875,
+    4.4111328125,
+    3.91748046875
+  ],
+  "instrumented_subprocess_seconds": 2.0678147499565966,
+  "phases": {
+    "minor": {
+      "count": 13797,
+      "total_ns": 19039136,
+      "p50_ns": 1167,
+      "p99_ns": 5000,
+      "max_ns": 233875
+    },
+    "major": {
+      "count": 13796,
+      "total_ns": 11275164,
+      "p50_ns": 291,
+      "p99_ns": 6833,
+      "max_ns": 122334
+    }
+  },
+  "gc_phase_union_ns_by_domain": {
+    "0": 30228220
+  },
+  "integrity": {
+    "lost_events": 0,
+    "unpaired_spans": 0
+  },
+  "source_documentation": "Installed OCaml 5.3.0 runtime_events.mli; EV_MINOR/EV_MAJOR begin/end timestamps, per-domain union",
+  "scope": "Separate instrumented whole-worker sample including startup/encoding/I/O, not uninstrumented request latency or a service-level claim. Minor and major durations may overlap; only the per-domain union removes overlap. No runtime pricing dependency added."
+}

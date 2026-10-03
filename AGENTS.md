@@ -342,7 +342,8 @@ FerroRisk's GitLab origin, CI stages, Cargo gates or release commands here.
   `vX.Y.Z` from `main`. **There is no automated release workflow here today.**
   Do not claim `prepare-release`, `tag-release`, release-plz or a semver gate
   exists. Do not invent a release/tag as a side effect of completing a PR;
-  release acceptance and controls are tracked in
+  release acceptance and controls are described in
+  [the acceptance dossier](docs/acceptance-and-change-control.md) and tracked in
   [#17](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/17).
 
 ## Definition of Done

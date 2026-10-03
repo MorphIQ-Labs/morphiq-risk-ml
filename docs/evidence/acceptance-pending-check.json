@@ -1,0 +1,12 @@
+{
+  "accepted": false,
+  "errors": [
+    "exact candidate SHA missing",
+    "acceptance decision is pending",
+    "approved intended use missing",
+    "unresolved blockers remain",
+    "incomplete or unknown evidence categories",
+    "designated owner decisions missing",
+    "release artifact checksums missing"
+  ]
+}
