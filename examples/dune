@@ -1,0 +1,9 @@
+(executable
+ (name scenario_job)
+ (modules scenario_job)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:scenario_job.exe} --workers 2)))

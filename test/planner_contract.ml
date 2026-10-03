@@ -232,6 +232,11 @@ let () =
   let plan = ok (compile ()) in
   let ex = P.explain plan in
   check
+    (ex.snapshot_id = "test-snapshot"
+    && List.length ex.kernels = 4
+    && ex.limits = limits)
+    "inspectable dependencies and kernels";
+  check
     (ex.instruments = 5 && ex.scenarios = 8 && ex.calculations = 120
    && ex.tiles = 24)
     "plan counts";
@@ -318,6 +323,11 @@ let () =
   reject
     (compile ~portfolio:[| { (portfolio.(0)) with rate_factor = "" } |] ())
     "missing rate factor";
+  reject
+    (compile
+       ~portfolio:[| portfolio.(0); { (portfolio.(1)) with currency = "EUR" } |]
+       ())
+    "factor denomination mismatch";
   let empty = ok (compile ~portfolio:[||] ()) in
   check ((snd (run empty)).rows_committed = 0) "empty portfolio";
   let empty = ok (compile ~scenarios:(ok (S.paired [||])) ()) in

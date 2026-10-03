@@ -115,6 +115,9 @@ conservative: financially distinct factors or models are never netted implicitly
 The caller names the rate factor: rho means a parallel unit change to the flat
 rate inputs of instruments sharing that factor. Instruments with distinct rate
 factors are never implicitly combined, even when their current rates agree.
+One named market factor cannot be bound to instruments in conflicting
+denominations. Different currencies require distinct factor bindings; an
+implicit FX transformation is never inferred.
 Quantities are explicit position multipliers. Nothing supplies an implicit
 contract multiplier, FX conversion, or common-volatility risk factor.
 
@@ -198,3 +201,13 @@ financial correctness.
   its positive and negative cases before making that claim.
 - Existing model, numerical backend and runtime enclosure contracts remain the
   authority for arithmetic. The planner introduces no new pricing formula.
+
+## Runnable job
+
+`opam exec --switch=morphiq-risk-ml -- dune exec examples/scenario_job.exe -- --workers 2`
+compiles a frozen BSM position across three spot levels and three valuation
+rolls, explains its bounded plan, and streams nine certified scenario totals.
+Run with `--workers 1` or `4` to change only physical execution. The source in
+[examples/scenario_job.ml](../examples/scenario_job.ml) shows the public API,
+including explicit rate-factor identity and numerical limits. The printed
+values are scenario valuations, not economic P&L.

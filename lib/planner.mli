@@ -48,6 +48,11 @@ type limits = {
 type t
 
 type explanation = {
+  snapshot_id : string;
+  kernels : string list;
+  limits : limits;
+  output_mode : output_mode;
+  dependency_reuse : string;
   instruments : int;
   scenarios : int;
   calculations : int;

@@ -39,6 +39,11 @@ type limits = {
 }
 
 type explanation = {
+  snapshot_id : string;
+  kernels : string list;
+  limits : limits;
+  output_mode : output_mode;
+  dependency_reuse : string;
   instruments : int;
   scenarios : int;
   calculations : int;
@@ -208,6 +213,7 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
           | _ -> false)
           "scenario coordinate mismatch")
       (Scenario.bindings scenarios);
+    let factor_currencies = Hashtbl.create (Array.length market) in
     let ids = Hashtbl.create instruments
     and calculations_per_scenario = ref 0
     and buckets = ref Buckets.empty in
@@ -227,6 +233,11 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
             "invalid instrument terms";
           require (Hashtbl.mem factors p.factor) "unbound instrument factor";
           let fi = Hashtbl.find factors p.factor in
+          (match Hashtbl.find_opt factor_currencies p.factor with
+          | None -> Hashtbl.add factor_currencies p.factor p.currency
+          | Some currency ->
+              require (currency = p.currency)
+                "market factor has conflicting denominations");
           require
             (match (p.model, market.(fi).market) with
             | Bsm b, Spot_market _ -> Float.is_finite b.dividend_yield
@@ -381,6 +392,20 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
         limits;
         explanation =
           {
+            snapshot_id;
+            kernels =
+              Array.to_list bucket_keys
+              |> List.map (fun b ->
+                     match b.model with
+                     | Bsm _ -> "Production.Bsm"
+                     | Black76 -> "Production.Black76"
+                     | Displaced _ -> "Production.Displaced"
+                     | Bachelier -> "Production.Bachelier")
+              |> List.sort_uniq String.compare;
+            limits;
+            output_mode;
+            dependency_reuse =
+              "frozen factor bindings; independent scalar requests";
             instruments;
             scenarios = scenario_count;
             calculations;
@@ -401,8 +426,15 @@ let explain t = t.explanation
 
 let manifest t =
   Printf.sprintf
-    "planner-replay-v1\nplan=%s\nconvention=%s\nocaml=%s\nword-size=%d\n"
+    "planner-replay-v1\n\
+     plan=%s\n\
+     convention=%s\n\
+     ocaml=%s\n\
+     word-size=%d\n\
+     snapshot=%S\n\
+     numerical-mode=IEEE-binary64-explicit-fma-gradual-underflow\n"
     t.explanation.plan_id convention Sys.ocaml_version Sys.word_size
+    t.explanation.snapshot_id
 
 type tile = {
   id : int;

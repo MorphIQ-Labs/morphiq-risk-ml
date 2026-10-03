@@ -311,3 +311,10 @@
  (name planner_adversarial)
  (modules planner_adversarial)
  (libraries morphiq_risk zarith))
+
+(test
+ (name batch_iv_reference)
+ (modules batch_iv_reference)
+ (libraries morphiq_risk)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/iv.txt})))
