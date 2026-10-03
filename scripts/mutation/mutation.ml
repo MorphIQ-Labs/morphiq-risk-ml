@@ -37,6 +37,15 @@ type mutant = {
 let catalog =
   [
     {
+      id = "enclosure-fma-underflow";
+      file = "lib/enclosure.ml";
+      snippet = "(p, r, rounding r)";
+      replacement = "(p, r, 0.0)";
+      killer = "enclosure_reference";
+      mechanism =
+        "a fused product residual can underflow and is not always exact";
+    };
+    {
       id = "iv-iteration-cap";
       file = "lib/iv_iteration.ml";
       snippet = "else if n >= max_iterations then Error Non_convergence";

@@ -19,4 +19,5 @@ module Internal = struct
   module Normalised_black = Normalised_black
   module Lbr = Lbr
   module Iv_iteration = Iv_iteration
+  module Enclosure = Enclosure
 end
