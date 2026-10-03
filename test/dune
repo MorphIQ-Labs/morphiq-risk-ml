@@ -280,3 +280,9 @@
  (deps ../oracle/test_price_rounding.py ../oracle/price_rounding.py)
  (action
   (run python3 %{dep:../oracle/test_price_rounding.py})))
+
+(rule
+ (alias runtest)
+ (deps ../scripts/test_acceptance.py ../scripts/check_acceptance.py)
+ (action
+  (run python3 %{dep:../scripts/test_acceptance.py})))

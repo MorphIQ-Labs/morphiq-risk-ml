@@ -124,3 +124,37 @@ per-row latency, cumulative allocation, peak child RSS, exact-input replay and
 canonical comparison evidence for the enforced production adapter. Its cost
 is material and its synthetic workload is not a production SLA. It does not
 replace the historical like-for-like A/B/B/A kernel measurements above.
+
+## Separate GC trace
+
+An out-of-process OCaml 5.3 `Runtime_events` reader now profiles the captured
+258-row shadow workload separately from ordinary timing. [The retained trace
+summary](evidence/shadow-gc-profile.json) has zero lost events and zero unpaired
+spans, and the worker's numerical results exactly match the uninstrumented
+replay. The reader computes a per-domain union to avoid double-counting nested
+minor/major work. Reproduce after building `bench/gc_trace.exe` with:
+
+```sh
+python scripts/profile_shadow_gc.py --output /tmp/shadow-gc-profile.json
+```
+
+The instrumented whole-worker sample takes about 2.068 seconds. It records
+13,797 minor spans totaling 19.04 ms (p99 5.00 us, max 233.88 us), and 13,796
+major-work spans totaling 11.28 ms (p99 6.83 us, max 122.33 us). Major-work spans
+are incremental slices, not full collection counts. Their per-domain union
+is 30.23 ms, about 1.5% of the sampled duration. This includes startup and output
+work and is not a per-request pause bound or a service-level guarantee.
+
+The collector spans account for a small fraction of this sample despite the
+large cumulative allocation. Together with the earlier expansion/TwoSum profile,
+this supports investigating arithmetic/boxing and repeated preparation rather
+than assuming stop-the-world GC dominates. Profiling is optional, adds no
+pricing-library dependency, and its instrumented time is excluded from the
+ordinary throughput/latency evidence.
+
+Timestamp units follow OCaml 5.3's
+[runtime event producer](https://github.com/ocaml/ocaml/blob/5.3/runtime/runtime_events.c)
+and [platform counter](https://github.com/ocaml/ocaml/blob/5.3/runtime/unix.c):
+`caml_time_counter` supplies nanoseconds, using the raw uptime clock on this
+macOS build. The reader uses runtime span names rather than interpreting a
+collection counter as elapsed time.

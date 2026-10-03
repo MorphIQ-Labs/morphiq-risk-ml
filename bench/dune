@@ -25,3 +25,8 @@
   (:standard -O3))
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name gc_trace)
+ (modules gc_trace)
+ (libraries runtime_events unix))
