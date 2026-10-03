@@ -1,7 +1,7 @@
 # Scenario-planner qualification
 
-The integration branch implements Epic #23's upstream OCaml delivery and keeps
-`main` untouched. The [contract](scenario-planner.md) defines dates, units,
+Epic #23's upstream OCaml delivery was qualified on the integration branch
+before merging. The [contract](scenario-planner.md) defines dates, units,
 structural compilation, bounded ownership, failure semantics and the aggregate
 containment argument. This is engineering qualification, not institutional
 deployment approval under Epic #27.

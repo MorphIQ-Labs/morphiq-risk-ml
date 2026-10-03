@@ -261,7 +261,7 @@ single-session timing differences do not establish a language-wide advantage.
 See [#8](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/8) and
 [#16](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/16).
 
-The planner is implemented on the **integration branch**, not merged into main.
+The planner implements immutable scenario plans and bounded execution.
 Read [the scenario contract](docs/scenario-planner.md). Its architecture lives in
 [Epic #23](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/23). The implementation must preserve these obligations:
 

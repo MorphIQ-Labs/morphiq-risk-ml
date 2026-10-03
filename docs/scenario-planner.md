@@ -1,10 +1,8 @@
 # Scenario planning contract (version 1)
 
-Epic #23 is implemented on `integration/scenario-planner`. This feature extends
-orchestration of the existing European scalar contract; it does not change
-prices, Greeks, IV acceptance, or institutional deployment approval. The owner
-requested autonomous completion on an integration branch and explicitly barred
-merging it to main.
+Epic #23 supplies the scenario planner. This feature extends orchestration of
+the existing European scalar contract; it does not change prices, Greeks, IV
+acceptance, or institutional deployment approval.
 
 ## Financial meaning (#24)
 

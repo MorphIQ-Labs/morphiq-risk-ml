@@ -16,7 +16,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - No scalar pricing operation, formula, tolerance, outcome or reference fixture
   changes. The scalar determinism digest remains unchanged. Planner certificate
   checks use independent Arb price/series derivatives and exact-rational sums.
-- This is an integration-branch feature candidate, not a released or accepted
+- This is an unreleased feature candidate, not an accepted
   institutional version. See [the contract](docs/scenario-planner.md).
 
 
