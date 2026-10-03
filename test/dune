@@ -5,6 +5,11 @@
  (libraries morphiq_risk alcotest qcheck-core qcheck-alcotest))
 
 (test
+ (name iv_termination)
+ (modules iv_termination)
+ (libraries morphiq_risk))
+
+(test
  (name oracle_normal)
  (package morphiq_risk_ml)
  (modules oracle_normal)
@@ -108,7 +113,7 @@
 (library
  (name iv_bounds)
  (modules iv_bounds)
- (libraries morphiq_risk bounds))
+ (libraries morphiq_risk bounds certified))
 
 (library
  (name certified)

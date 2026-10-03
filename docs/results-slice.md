@@ -14,7 +14,7 @@ Measured against this project's own oracles (docs/oracles.md): mpmath, refined t
 | Normal distribution | `normal` | 82,000 | ≤ 4 ULP, tails included |
 | Prices: BSM, Black-76, Bachelier | `european` (grid, carry-cancelled forwards, random) | 57,296 | 1–22 ULP per region; zero variance 1; Bachelier ≤ 5 |
 | Prices: displaced Black | `displaced` (exact sums) | 41,760 | 1–19 ULP per region |
-| Implied volatility | `iv` (exact roots and rounding cells) | 8,314 | every outcome class matches; roots within conditional regression budgets (not complete inverse certificates) (Black-family worst 4–7 ULP from the exact root) |
+| Implied volatility | `iv` (exact roots and rounding cells) | 8,314 | every outcome class matches; roots satisfy per-input price/vega certificates and unchanged historical quality gates (not runtime enclosures) |
 | Greeks | `greeks` (closed form vs mpmath differentiation) | 66,400 | all 65,980 finite rows satisfy analytical certificates; 420 kink refusals; see results-greeks |
 | Properties | `test/properties.ml` (random, fixed seed) | 22,000 | bounds, parity, monotonicity, Greek signs, exact homogeneity, translation, IV composes forward and inverse error on identifiable inputs, finite differences |
 | Cross-quantity consistency | `test/consistency.ml` | 128 | displaced = Black-76 bit for bit; IV inverts the served price; Greeks match finite differences |
@@ -31,7 +31,7 @@ Historical slice measurements on an Apple M1 Pro with OCaml 5.3.0 + flambda `-O3
 | Full test suite: every oracle, the consistency, property and compile-failure tests | 0.54–0.55 s, with the 41,760-row displaced oracle and double-double intrinsics |
 | One mutant: rebuild plus the full suite | 0.73 s |
 
-The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each claimed mechanism and requires the test that guards it to fail. The expanded catalog has 35 mechanisms (see the numerical assurance audit below). Three lessons for mutation testing:
+The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each claimed mechanism and requires the test that guards it to fail. The expanded catalog is recorded in the mutation runner; the numerical assurance audit below retains its historical counts. Three lessons for mutation testing:
 
 - **Equivalent mutants are common.** A last-digit change to a 17-digit literal often parses to the same double, and a mutant that only breaks compilation, such as an unused variable under warnings-as-errors, is not a kill.
 - **Budgets come from the error analysis, not from the mutants.** Tightening a measured budget until a mutant dies proves nothing. The price/component scorers check derived bounds (docs/error-analysis.md §1, §5.1, §8); IV budgets retain the conditional limitations in §6, and a survivor can also expose a corpus or scoring-resolution gap.

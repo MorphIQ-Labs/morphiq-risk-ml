@@ -43,6 +43,8 @@ type outcome =
   | Above
   | Expiry
   | Smallest
+  | Non_convergence
+  | Numerical_failure
   | Refused of string
 
 let of_iv to_float = function
@@ -51,6 +53,8 @@ let of_iv to_float = function
   | Iv.Above_maximum -> Above
   | Iv.Not_identifiable_at_expiry -> Expiry
   | Iv.Below_smallest_volatility -> Smallest
+  | Iv.Non_convergence -> Non_convergence
+  | Iv.Numerical_failure -> Numerical_failure
 
 let refused (Refusal.Invalid_input { parameter; _ }) =
   Refused (parameter_name parameter)
@@ -105,6 +109,8 @@ let show = function
   | Above -> "Above_maximum"
   | Expiry -> "Not_identifiable_at_expiry"
   | Smallest -> "Below_smallest_volatility"
+  | Non_convergence -> "Non_convergence"
+  | Numerical_failure -> "Numerical_failure"
   | Refused p -> "Refused " ^ p
 
 type stat = {
@@ -219,6 +225,18 @@ let () =
                                 ~side_call:(side = Side.Call) ~s ~k ~t ~r ~q
                                 ~shift ~quote:target ~root ~candidate:v)
                      in
+                     let certified =
+                       try
+                         Bounds.within
+                           ~error:(Float.abs (v -. root))
+                           ~bound:
+                             (Iv_bounds.certified_root_bound model ~side ~s ~k
+                                ~t ~r ~q ~shift ~quote:target ~root ~candidate:v)
+                       with Certified.Unsupported why ->
+                         Printf.eprintf "IV certificate unsupported: %s\n" why;
+                         false
+                     in
+                     let ok = ok && certified in
                      record ok;
                      if not ok then
                        fail (Printf.sprintf "Root %h in [%h, %h]" root lo hi)

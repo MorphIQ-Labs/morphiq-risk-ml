@@ -208,9 +208,16 @@ let round_trip =
               ~t:c.t ~r:c.r ~q:c.q ~shift:0.0 ~quote:p ~root:c.sigma
             *. c.sigma
           in
+          let certified =
+            Iv_bounds.certified_recovery_bound "bsm" ~side:(side c) ~s:c.s
+              ~k:c.k ~t:c.t ~r:c.r ~q:c.q ~shift:0.0 ~sigma:c.sigma ~candidate
+          in
           Bounds.within
             ~error:(Float.abs (candidate -. c.sigma))
-            ~bound:(forward +. inverse)
+            ~bound:certified
+          && Bounds.within
+               ~error:(Float.abs (candidate -. c.sigma))
+               ~bound:(forward +. inverse)
       | _ -> p = 0.0)
 
 let derivative g h =

@@ -37,6 +37,26 @@ type mutant = {
 let catalog =
   [
     {
+      id = "iv-iteration-cap";
+      file = "lib/iv_iteration.ml";
+      snippet = "else if n >= max_iterations then Error Non_convergence";
+      replacement = "else if n >= max_iterations then Ok candidate";
+      killer = "iv_termination";
+      mechanism = "iteration exhaustion cannot manufacture a root";
+    };
+    {
+      id = "iv-nonfinite-value";
+      file = "lib/iv_iteration.ml";
+      snippet =
+        "let v = value candidate in\n\
+        \          if not (Float.is_finite v) then Error Numerical_failure";
+      replacement =
+        "let v = value candidate in\n\
+        \          if not (Float.is_finite v) then Ok candidate";
+      killer = "iv_termination";
+      mechanism = "nonfinite evaluator output is an arithmetic failure";
+    };
+    {
       id = "split-root-nonoverlap";
       file = "lib/split.ml";
       snippet = "let hi, lo = (sum, lo -. (sum -. hi)) in";
@@ -312,7 +332,7 @@ let catalog =
       file = "lib/black.ml";
       snippet = "else if beta > 0.5 *. b_max then";
       replacement = "else if false then";
-      killer = "oracle_iv";
+      killer = "numerical_regressions";
       mechanism = "the final Newton step on the complement near the maximum";
     };
     {

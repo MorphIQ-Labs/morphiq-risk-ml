@@ -102,34 +102,28 @@ let sqrt_two_pi = Normalised_black.sqrt_two_pi
    falling back to bisection whenever a step leaves the bracket. *)
 let solve_total_volatility ~discount ~abs_distance ~abs_low target =
   let beta = target /. discount in
-  if abs_distance = 0.0 then beta *. sqrt_two_pi
-  else
-    let f s = otm ~discount ~abs_distance ~abs_low s 0.0 in
-    let rec go n lo hi s =
-      let v = f s in
-      if n >= 200 || v = target then s
-      else
-        let lo, hi = if v < target then (s, hi) else (lo, s) in
-        let d = abs_distance /. s in
-        let slope = discount *. Normal.norm_pdf d in
-        let step = (Elementary.log target -. Elementary.log v) *. v /. slope in
-        let next = s +. step in
-        let next =
-          if next > lo && next < hi && Float.is_finite next then next
-          else 0.5 *. (lo +. hi)
-        in
-        if
-          Float.abs (next -. s) <= epsilon_float *. s
-          || hi -. lo <= epsilon_float *. hi
-        then next
-        else go (n + 1) lo hi next
-    in
-    let lo = beta *. sqrt_two_pi
-    and hi = (beta +. abs_distance) *. sqrt_two_pi in
-    go 0 lo hi (Float.sqrt lo *. Float.sqrt hi)
+  let upper =
+    Float.succ
+      (Float.succ
+         (Float.succ beta +. Float.succ (abs_distance +. Float.abs abs_low))
+      *. Float.succ sqrt_two_pi)
+  in
+  let value s =
+    if s = 0.0 then 0.0 else otm ~discount ~abs_distance ~abs_low s 0.0
+  in
+  let proposal s v =
+    let d = abs_distance /. s in
+    let slope = discount *. Normal.norm_pdf d in
+    s +. ((Elementary.log target -. Elementary.log v) *. v /. slope)
+  in
+  Iv_iteration.solve ~value ~proposal ~target ~lower:0.0 ~upper
+    ~initial:(Float.sqrt (beta *. sqrt_two_pi) *. Float.sqrt upper)
+    ()
 
 let root sigma =
-  match Vol.normal sigma with Ok v -> Iv.Root v | Error _ -> Iv.Above_maximum
+  match Vol.normal sigma with
+  | Ok v -> Iv.Root v
+  | Error _ -> Iv.Numerical_failure
 
 let implied a side price =
   if not (Float.is_finite price && price >= 0.0) then
@@ -138,7 +132,7 @@ let implied a side price =
     match a with
     | Expiry _ -> Ok Iv.Not_identifiable_at_expiry
     | Live { distance; distance_low; time; root_time; root_time_low; rate; _ }
-      ->
+      -> (
         let theta = Side.sign side in
         (* The zero-volatility price D θ Δ in double-double. *)
         let discount_dd = Dd.exp (Dd.neg (Dd.two_prod rate time)) in
@@ -146,7 +140,17 @@ let implied a side price =
           Dd.mul_float { Dd.hi = distance; lo = distance_low } theta
         in
         let intrinsic = Dd.mul discount_dd delta in
-        if intrinsic.hi > 0.0 && Dd.compare_float intrinsic price > 0 then
+        if
+          not
+            (Float.is_finite discount_dd.hi
+            && discount_dd.hi > 0.0
+            && Float.is_finite discount_dd.lo
+            && Float.is_finite distance
+            && Float.is_finite distance_low
+            && Float.is_finite intrinsic.hi
+            && Float.is_finite intrinsic.lo)
+        then Ok Iv.Numerical_failure
+        else if intrinsic.hi > 0.0 && Dd.compare_float intrinsic price > 0 then
           Ok (if price = intrinsic.hi then root 0.0 else Iv.Below_intrinsic)
         else
           let otm_target =
@@ -156,18 +160,20 @@ let implied a side price =
           if otm_target.hi = 0.0 then Ok (root 0.0)
           else
             let abs_distance, abs_low = abs_parts distance distance_low in
-            let s =
+            match
               solve_total_volatility ~discount:(Dd.to_float discount_dd)
                 ~abs_distance ~abs_low (Dd.to_float otm_target)
-            in
-            let sigma =
-              s /. root_time *. (1.0 -. (root_time_low /. root_time))
-            in
-            Ok
-              (if Float.is_nan sigma || sigma = Float.infinity then
-                 Iv.Above_maximum
-               else if sigma <= 0.0 then Iv.Below_smallest_volatility
-               else root sigma)
+            with
+            | Error Iv_iteration.Non_convergence -> Ok Iv.Non_convergence
+            | Error Iv_iteration.Numerical_failure -> Ok Iv.Numerical_failure
+            | Ok s ->
+                let sigma =
+                  s /. root_time *. (1.0 -. (root_time_low /. root_time))
+                in
+                Ok
+                  (if not (Float.is_finite sigma && sigma > 0.0) then
+                     Iv.Numerical_failure
+                   else root sigma))
 
 let sqrt_pi_over_2 = 1.253314137315500251207882642405522626503493370305
 let mills z = sqrt_pi_over_2 *. Cody.erfcx_nonnegative (z *. Normal.inv_sqrt_2)

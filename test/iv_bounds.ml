@@ -1,5 +1,46 @@
 open Morphiq_risk
 
+(* A posteriori transport of an executed analytical price certificate.
+   The residual is measured; its uncertainty is certified rather than assumed
+   from a ULP budget. Historical requirements below remain separate quality
+   gates, not premises of this bound. *)
+let certificate model ~side ~s ~k ~t ~r ~q ~shift ~sigma greek =
+  if model = "bachelier" then
+    List.assoc greek (Certified.bachelier ~side ~s ~k ~t ~r ~sigma ())
+  else Certified.black model ~side ~s ~k ~t ~r ~q ~shift ~sigma greek
+
+let certified_root_bound model ~side ~s ~k ~t ~r ~q ~shift ~quote ~root
+    ~candidate =
+  let open Certified in
+  let cert sigma greek =
+    certificate model ~side ~s ~k ~t ~r ~q ~shift ~sigma greek
+  in
+  (* The oracle supplies RN(root), so include its entire rounding interval.
+     Both model vegas have their minimum at an interval endpoint: normal
+     vega increases; Black vega has one maximum. *)
+  let lo = Float.min candidate (Float.pred root)
+  and hi = Float.max candidate (Float.succ root) in
+  require (lo > 0.0 && Float.is_finite hi) "IV reference interval";
+  let vl = cert lo "vega" and vh = cert hi "vega" in
+  let vmin = Float.min (down (vl.v -. vl.e)) (down (vh.v -. vh.e)) in
+  require (vmin > 0.0) "IV vega lower bound";
+  let price = cert candidate "price" in
+  let residual = magnitude (sub price (exact quote)) in
+  (residual /^ vmin) +^ round root
+
+let certified_recovery_bound model ~side ~s ~k ~t ~r ~q ~shift ~sigma ~candidate
+    =
+  let open Certified in
+  let cert sigma greek =
+    certificate model ~side ~s ~k ~t ~r ~q ~shift ~sigma greek
+  in
+  let lo = Float.min sigma candidate and hi = Float.max sigma candidate in
+  require (lo > 0.0 && Float.is_finite hi) "IV recovery interval";
+  let vl = cert lo "vega" and vh = cert hi "vega" in
+  let vmin = Float.min (down (vl.v -. vl.e)) (down (vh.v -. vh.e)) in
+  require (vmin > 0.0) "IV recovery vega lower bound";
+  magnitude (sub (cert candidate "price") (cert sigma "price")) /^ vmin
+
 (* Conditional error budget for Black roots, composed from normalization
    error and the separately enforced kernel envelope. This is an accuracy
    requirement tested against an independent root, not a convergence theorem

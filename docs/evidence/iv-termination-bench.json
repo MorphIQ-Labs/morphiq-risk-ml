@@ -1,0 +1,66 @@
+{
+  "baseline": "7b93c2a",
+  "order": "ABBA",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "processor": "Apple M1 Pro",
+  "ocaml": "5.3.0 Flambda -O3",
+  "method": "Existing scalar harness: median 7 passes after warmup; ns/op is throughput, not request latency. Shared workstation; no host isolation or production SLA inferred.",
+  "runs": [
+    {
+      "run": "A1",
+      "output": "| Model | Regime | Quantity | ns/op |\n| --- | --- | --- | ---: |\n| BSM | near the money | admit | 965 |\n| BSM | near the money | price | 934 |\n| BSM | near the money | implied volatility | 2636 |\n| BSM | near the money | all ten Greeks | 8854 |\n| Bachelier | near the money | price | 383 |\n| Bachelier | near the money | implied volatility | 3295 |\n| Bachelier | near the money | all ten Greeks | 5552 |\n| BSM | OTM tail | admit | 968 |\n| BSM | OTM tail | price | 182 |\n| BSM | OTM tail | implied volatility | 2644 |\n| BSM | OTM tail | all ten Greeks | 12028 |\n| Bachelier | OTM tail | price | 97 |\n| Bachelier | OTM tail | implied volatility | 6135 |\n| Bachelier | OTM tail | all ten Greeks | 7408 |\n| BSM | in the money | admit | 966 |\n| BSM | in the money | price | 1408 |\n| BSM | in the money | implied volatility | 2754 |\n| BSM | in the money | all ten Greeks | 15624 |\n| Bachelier | in the money | price | 595 |\n| Bachelier | in the money | implied volatility | 5826 |\n| Bachelier | in the money | all ten Greeks | 10006 |\n| elementary | - | Elementary.exp | 29 |\n| elementary | - | libm exp | 10 |\n| elementary | - | Elementary.log | 37 |\n| elementary | - | libm log | 10 |\n"
+    },
+    {
+      "run": "B1",
+      "output": "| Model | Regime | Quantity | ns/op |\n| --- | --- | --- | ---: |\n| BSM | near the money | admit | 965 |\n| BSM | near the money | price | 933 |\n| BSM | near the money | implied volatility | 3219 |\n| BSM | near the money | all ten Greeks | 8804 |\n| Bachelier | near the money | price | 382 |\n| Bachelier | near the money | implied volatility | 6077 |\n| Bachelier | near the money | all ten Greeks | 5557 |\n| BSM | OTM tail | admit | 966 |\n| BSM | OTM tail | price | 182 |\n| BSM | OTM tail | implied volatility | 3221 |\n| BSM | OTM tail | all ten Greeks | 12038 |\n| Bachelier | OTM tail | price | 97 |\n| Bachelier | OTM tail | implied volatility | 6584 |\n| Bachelier | OTM tail | all ten Greeks | 7417 |\n| BSM | in the money | admit | 966 |\n| BSM | in the money | price | 1407 |\n| BSM | in the money | implied volatility | 3369 |\n| BSM | in the money | all ten Greeks | 15605 |\n| Bachelier | in the money | price | 593 |\n| Bachelier | in the money | implied volatility | 6620 |\n| Bachelier | in the money | all ten Greeks | 9872 |\n| elementary | - | Elementary.exp | 30 |\n| elementary | - | libm exp | 10 |\n| elementary | - | Elementary.log | 39 |\n| elementary | - | libm log | 10 |\n"
+    },
+    {
+      "run": "B2",
+      "output": "| Model | Regime | Quantity | ns/op |\n| --- | --- | --- | ---: |\n| BSM | near the money | admit | 994 |\n| BSM | near the money | price | 950 |\n| BSM | near the money | implied volatility | 3238 |\n| BSM | near the money | all ten Greeks | 8964 |\n| Bachelier | near the money | price | 383 |\n| Bachelier | near the money | implied volatility | 6078 |\n| Bachelier | near the money | all ten Greeks | 5549 |\n| BSM | OTM tail | admit | 967 |\n| BSM | OTM tail | price | 183 |\n| BSM | OTM tail | implied volatility | 3205 |\n| BSM | OTM tail | all ten Greeks | 12037 |\n| Bachelier | OTM tail | price | 97 |\n| Bachelier | OTM tail | implied volatility | 6587 |\n| Bachelier | OTM tail | all ten Greeks | 7410 |\n| BSM | in the money | admit | 970 |\n| BSM | in the money | price | 1406 |\n| BSM | in the money | implied volatility | 3368 |\n| BSM | in the money | all ten Greeks | 15598 |\n| Bachelier | in the money | price | 595 |\n| Bachelier | in the money | implied volatility | 6628 |\n| Bachelier | in the money | all ten Greeks | 9866 |\n| elementary | - | Elementary.exp | 29 |\n| elementary | - | libm exp | 10 |\n| elementary | - | Elementary.log | 37 |\n| elementary | - | libm log | 9 |\n"
+    },
+    {
+      "run": "A2",
+      "output": "| Model | Regime | Quantity | ns/op |\n| --- | --- | --- | ---: |\n| BSM | near the money | admit | 965 |\n| BSM | near the money | price | 932 |\n| BSM | near the money | implied volatility | 2639 |\n| BSM | near the money | all ten Greeks | 8813 |\n| Bachelier | near the money | price | 382 |\n| Bachelier | near the money | implied volatility | 3341 |\n| Bachelier | near the money | all ten Greeks | 5554 |\n| BSM | OTM tail | admit | 966 |\n| BSM | OTM tail | price | 178 |\n| BSM | OTM tail | implied volatility | 2647 |\n| BSM | OTM tail | all ten Greeks | 12131 |\n| Bachelier | OTM tail | price | 98 |\n| Bachelier | OTM tail | implied volatility | 6531 |\n| Bachelier | OTM tail | all ten Greeks | 7504 |\n| BSM | in the money | admit | 965 |\n| BSM | in the money | price | 1424 |\n| BSM | in the money | implied volatility | 2822 |\n| BSM | in the money | all ten Greeks | 15735 |\n| Bachelier | in the money | price | 596 |\n| Bachelier | in the money | implied volatility | 5750 |\n| Bachelier | in the money | all ten Greeks | 9972 |\n| elementary | - | Elementary.exp | 29 |\n| elementary | - | libm exp | 10 |\n| elementary | - | Elementary.log | 37 |\n| elementary | - | libm log | 10 |\n"
+    }
+  ],
+  "library_sha256": {
+    "lib/bachelier.ml": "e616d862d604142495a7111efb63ad4ada06ec84b441b016b5c43462bfcfbaae",
+    "lib/bachelier.mli": "002259c15b6caef120bf3ef7faa5547961939c53c6f81d0c1c8f4b5fea725b69",
+    "lib/black.ml": "945342a570411db9be345e3585658e8c35f854f341ed224d74c29bfb1a1c6690",
+    "lib/black.mli": "3140b3ddf9c83bcd2329e5e3f764c5d67e1705aa00143f07531477c75bc844d8",
+    "lib/cody.ml": "f5a42ac2eb8f5caa9201129434c2bf3a3b2cec041ad9c7efa0ccc0944c962556",
+    "lib/cody.mli": "2cf2d0afb67f93ed38b2961d43107410923caca6ba72398d8448f8ebcc09c4eb",
+    "lib/dd.ml": "e0ff8c526dccc97648a624c99d45b3a3c5ff912d71725796be3013a78f5b17c5",
+    "lib/dd.mli": "30a025c1bc5252a87b5b54a016fbbb81e11ba6f8531447fcba686d5d8670ecdd",
+    "lib/elementary.ml": "02ff329566aac196b2facde4684da1e29ffbaeba27cae0892ed00eb50d0227da",
+    "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+    "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+    "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+    "lib/greeks.ml": "41f9571ae25941266379391f5fbbb5bdb9c9f0c3d1e8da37acf5e3082ef2de61",
+    "lib/greeks.mli": "bcc0d6d9de88827fb47926d90c65a5cdac18948a4ba8b0a1338d3af7f955e285",
+    "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+    "lib/iv.mli": "0909f7e88448aa5dfb1a41c56bde2a036635aaca896b26c0da656f55c3d017d1",
+    "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+    "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+    "lib/lbr.ml": "c5c5a3f15f890d69b04e74333adfb8e9e18a014402b70f77c00311606ef1d557",
+    "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+    "lib/morphiq_risk.ml": "be33e465bcace027ccbbb62732d8325d7840f0e5698804a2812107cd36a4ab7c",
+    "lib/morphiq_risk.mli": "f2abea0a368907aff470c30d55aba513a97a7d403038ae4fed99e4d55170a0f7",
+    "lib/normal.ml": "a57f9bf6cfc6100d79dd90e67f8940107e738fbc2b24e2298560eba10d002821",
+    "lib/normal.mli": "469600273a61a29420dce43602809b6ca3711a8d18d3cfc28ca76403b4f24f2a",
+    "lib/normal_dd.ml": "4a04a0d339574ceb9582b9999a996979e75e64a71c860b945f19047a07d33526",
+    "lib/normal_dd.mli": "e5bd3910db763110dec86e27439e3f3b2e5efe1a6bc3af1c2df4af730f53da47",
+    "lib/normalised_black.ml": "2c604934de6cf7188f2e66a31834249e521c39eb54b35d7a18b7d4435c3de3cd",
+    "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+    "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+    "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+    "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+    "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+    "lib/split.ml": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef",
+    "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+    "lib/units.ml": "2f5aa89633b656a6d53a7dbbc4eca044861d4e11924bfbd8510bc1ea84be880e",
+    "lib/units.mli": "d2f8ca90a7626deb71aeb90ff66e1f3408e09441ee7318d4fa79ceb9b3dd1603",
+    "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+    "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd"
+  }
+}

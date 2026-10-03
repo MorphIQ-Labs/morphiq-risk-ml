@@ -1,16 +1,16 @@
 (** The outcome of inverting a quote for its volatility.
 
-    Every quote either has an inverse or belongs to exactly one class that
-    explains why it has none. The classes follow FerroRisk #448's
-    identifiability table, and callers must handle each of them. *)
+    Mathematical classifications and computational failures are distinct.
+    Failure does not imply that a mathematical inverse is absent. *)
 
 type 'coordinate t =
   | Root of 'coordinate Vol.t
-      (** The volatility whose exact model price is the quote, which is taken as
-          an exact number. Zero when the quote is the discounted intrinsic, or
-          its correctly rounded value below it (#448). A quote that rounds the
-          intrinsic upward has a positive exact root, and that root reprices to
-          the quote. *)
+      (** A representable approximation to the inverse of the exact binary64
+          quote. An arbitrary real root need not be representable, and exact
+          repricing is not promised. See docs/error-analysis.md section 6 for
+          the accuracy evidence and its scope. Zero when the quote is the
+          discounted intrinsic, or its correctly rounded value below it (#448).
+          A quote that rounds the intrinsic upward has a positive real root. *)
   | Below_intrinsic
       (** Below the zero-volatility price: no volatility attains it. *)
   | Above_maximum
@@ -20,3 +20,10 @@ type 'coordinate t =
       (** At expiry the price does not depend on volatility. *)
   | Below_smallest_volatility
       (** The root is below the smallest positive binary64. *)
+  | Non_convergence
+      (** The finite iteration budget was exhausted without satisfying the
+          solver's stopping criterion. No successful iterate is returned. *)
+  | Numerical_failure
+      (** Arithmetic, a bracket or a conversion could not be resolved. This is
+          not evidence of a price above the mathematical maximum or of a root
+          below the smallest volatility. *)

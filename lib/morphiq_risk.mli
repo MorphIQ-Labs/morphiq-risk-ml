@@ -45,4 +45,5 @@ module Internal : sig
   module Normal_dd = Normal_dd
   module Normalised_black = Normalised_black
   module Lbr = Lbr
+  module Iv_iteration = Iv_iteration
 end

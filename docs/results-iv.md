@@ -1,6 +1,6 @@
 # Results: implied volatility
 
-Historical cross-check measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`). The table below records the acceptance rules used for that run, not the current gates. Current exact-root tests use conditional component-error/vega budgets for both model families, including maximum-gap uncertainty; rounding-cell membership is diagnostic only. See [error-analysis.md §6](error-analysis.md#6-implied-volatility).
+Historical cross-check measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`). The table below records the acceptance rules used for that run, not the current gates. Current exact-root tests execute analytical per-input price/vega certificates and retain the historical conditional budgets as separate quality gates; rounding-cell membership is diagnostic only. See [error-analysis.md §6](error-analysis.md#6-implied-volatility).
 
 ## Accuracy
 
@@ -34,6 +34,6 @@ One design note on dead weight: a second log-space correction for subnormal β w
 
 ## Types
 
-`Iv.t` is one closed variant: `Root`, `Below_intrinsic`, `Above_maximum`, `Not_identifiable_at_expiry` or `Below_smallest_volatility`. The scorer's exhaustive match over it compiles only because every class is handled.
+`Iv.t` is one closed variant: `Root`, `Below_intrinsic`, `Above_maximum`, `Not_identifiable_at_expiry` `Below_smallest_volatility`, `Non_convergence` or `Numerical_failure`. The scorer's exhaustive match over it compiles only because every class is handled.
 
 The volatility is typed by coordinate. `Black.*.implied` returns `Vol.lognormal Iv.t` and `Bachelier.implied` returns `Vol.normal Iv.t`, so a Bachelier inverse cannot be fed back into a Black price.
