@@ -51,8 +51,8 @@ The previous `volatility-49` unresolved result is retained in #60 history.
 
 ## Reference resolution correction, version 2
 
-The v1 comparison retained 39 failed containment comparisons caused by
-insufficient oracle resolution and 28 unresolved reference rows. These are not
+The v1 comparison retained 39 failed containment comparisons, including observable oracle-resolution
+limits, and 28 unresolved reference rows. These are not
 silently scored as runtime defects or passes. In particular, 100 decimal
 printed digits can obscure a deficit smaller than 1e-300 from an exactly
 representable currency value, and a 256-bit relative stopping goal cannot
@@ -93,3 +93,39 @@ accuracy. Final interval width and certificate containment still decide
 acceptance; the requested quadrature tolerance is not presumed achieved.
 All 649 rows are rerun under one generator version, preserving full outcome
 accounting. No runtime code, limit, certificate or accuracy allowance changes.
+
+## Direct analytical adjudication of large variance
+
+At s=80 the valid deficit bound of order exp(-800) is wider than the ambitious
+1200-bit normalized quadrature goal, even though it can be far narrower than a
+binary64 runtime certificate. Refining arithmetic cannot narrow an analytical
+inequality's mathematical width. Keep the failed resolution target explicit.
+For unresolved rows satisfying the original exact v>=6400 precondition,
+`exchange_tail_adjudication.py` retains a 4096-bit closed-form interval and the
+independent finite payoff-deficit bound from the original protocol, marked
+`resolution_goal_met=false`. The same strict complete-interval containment
+check must then succeed; otherwise the row remains unadjudicated. This is a
+direct inequality proof for the exercised input, not a claim that quadrature
+met its target. It changes no bound formula, threshold or runtime allowance.
+The pre-adjudication reference and its hash remain in the evidence chain.
+
+## Intermediate-variance payoff-deficit integration
+
+The remaining s=sqrt(3200) row is poorly resolved by subtracting the broad
+positive payoff integral from an almost exact currency value. Split the actual
+expectation D=E[min(X,b)] at the exact crossing z0 instead. Completing the square
+on the X-weighted half gives two positive tail integrals, with
+x1=s-z0=d1 and x2=z0=-d2:
+
+    D = a*phi(x1)*J(x1) + b*phi(x2)*J(x2),
+    J(x) = integral_0^infinity exp(-x*t-t^2/2) dt.
+
+This independently integrates the payoff deficit; it never evaluates a normal
+CDF in that route. Enclosed original-input x1,x2 must both lie strictly in
+(0,40). Integrate each entire integrand on [0,64], with at most 10,000
+evaluations each (20,000 total), degree 128, depth 30 and the same precision
+ladder/tolerance rule. For t>=64, the exponent derivative magnitude is at
+least x+64, so the omitted J tail is at most
+`exp(-64*x-2048)/(x+64)`. Enclose C=a-D and require the unchanged a*2^-1200
+reference goal, independent-route overlap and full runtime containment. Retain
+the previous unresolved result as provenance. No runtime formula or bound changes.

@@ -68,8 +68,8 @@ because the quadrature route reaches its capability guard. Ten requests fail
 explicitly for arithmetic or requested accuracy, seven fail input construction
 or admission, and two reject the accuracy limit. All three mandatory ordinary
 prices and eight exact boundary controls succeed. These are finite-corpus
-observations; the unadjudicated row is not an accuracy pass. Full qualification
-of the extension remains [#61](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/61).
+observations; the unadjudicated row is not an accuracy pass. The subsequent [#61 qualification record](exchange-qualification.md) resolves
+this reference gap and reports the broader campaign and remaining gate status.
 
 Before runtime changes, QuantLib `79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c`
 was built and executed. The [build record](evidence/exchange-implementation/quantlib-build.json)

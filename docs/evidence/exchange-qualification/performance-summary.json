@@ -1,0 +1,83 @@
+{
+  "runtime_source": "6226b8a8cb35c765c83c97c02dd58d8d15bcde40",
+  "harness_sha256": "0163550a3b43adda2024da63b70cba18a48b8ac0404ed686a9da3e690b814e12",
+  "rounds": 7,
+  "warmup_calls_per_phase": 20,
+  "evaluation_calls_per_round": 100,
+  "admission_calls_per_round": 20000,
+  "order": "alternating evaluation/end-to-end; identical inputs/outcomes",
+  "summary": {
+    "ordinary/admission": {
+      "median_ns": 5.841255,
+      "min_ns": 5.841255,
+      "max_ns": 5.853176,
+      "bytes_per_call": 56.005
+    },
+    "ordinary/end-to-end": {
+      "median_ns": 1663370.132446,
+      "min_ns": 1582789.421082,
+      "max_ns": 1959261.894226,
+      "bytes_per_call": 21414712.96
+    },
+    "ordinary/evaluation": {
+      "median_ns": 1952719.688416,
+      "min_ns": 1657078.266144,
+      "max_ns": 2033259.868622,
+      "bytes_per_call": 21414656.96
+    },
+    "singular/admission": {
+      "median_ns": 5.853176,
+      "min_ns": 5.841255,
+      "max_ns": 5.90086,
+      "bytes_per_call": 56.005
+    },
+    "singular/end-to-end": {
+      "median_ns": 823590.755463,
+      "min_ns": 767610.07309,
+      "max_ns": 992350.578308,
+      "bytes_per_call": 9679672.96
+    },
+    "singular/evaluation": {
+      "median_ns": 802719.593048,
+      "min_ns": 724399.089813,
+      "max_ns": 958018.302917,
+      "bytes_per_call": 9679616.96
+    },
+    "tail/admission": {
+      "median_ns": 5.90086,
+      "min_ns": 5.841255,
+      "max_ns": 23.698807,
+      "bytes_per_call": 56.005
+    },
+    "tail/end-to-end": {
+      "median_ns": 5528061.389923,
+      "min_ns": 5288970.470428,
+      "max_ns": 5810680.389404,
+      "bytes_per_call": 63554800.96
+    },
+    "tail/evaluation": {
+      "median_ns": 5413019.657135,
+      "min_ns": 5342800.617218,
+      "max_ns": 5662679.672241,
+      "bytes_per_call": 63554744.96
+    },
+    "failure/admission": {
+      "median_ns": 5.853176,
+      "min_ns": 5.853176,
+      "max_ns": 5.90086,
+      "bytes_per_call": 56.005
+    },
+    "failure/end-to-end": {
+      "median_ns": 50.067902,
+      "min_ns": 50.067902,
+      "max_ns": 50.067902,
+      "bytes_per_call": 408.96
+    },
+    "failure/evaluation": {
+      "median_ns": 40.531158,
+      "min_ns": 38.146973,
+      "max_ns": 40.531158,
+      "bytes_per_call": 352.96
+    }
+  }
+}

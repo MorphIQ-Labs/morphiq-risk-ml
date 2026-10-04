@@ -99,7 +99,7 @@ def main():
     report=dict(commit=commit,tree=run(['git','rev-parse',commit+'^{tree}']),package_version=versions['native'],
                 source_archive_sha256=sha(archive),source_tar_sha256=hashlib.sha256(tar).hexdigest(),
                 archive_bytes=archive.stat().st_size,source_tar_reproduced=True,
-                installed_files_sha256=files,installed_notices_sha256=notice_hashes,consumer_sha256=sha(smoke),consumer_contract='four-model Batch price/Delta/IV; Scenario paired/cartesian; Planner limits, expiry, partial totals, cancellation, sink failure, worker replay',smoke_native=True,smoke_bytecode=True,package_path=str(found),
+                installed_files_sha256=files,installed_notices_sha256=notice_hashes,consumer_sha256=sha(smoke),consumer_contract='Exchange price, exact expiry and accuracy rejection; four-model Batch price/Delta/IV; Scenario paired/cartesian; Planner limits, expiry, partial totals, cancellation, sink failure, worker replay',smoke_native=True,smoke_bytecode=True,package_path=str(found),
                 platform=platform.platform(),machine=platform.machine(),ocaml=ocaml,flambda=flambda,
                 ocaml_config=run(opam+['ocamlopt','-config']),
                 installed_packages=run(['opam','list','--switch='+args.switch,'--installed','--columns=name,version','--short']),
