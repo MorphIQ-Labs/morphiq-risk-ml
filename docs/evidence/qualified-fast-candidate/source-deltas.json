@@ -1,0 +1,69 @@
+{
+  "baseline": "d9967018b219f8b68c0e485e5a78a7973a101a1c",
+  "candidate": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+  "baseline_lib_tree": "6b6e483c1dfe5d0d8b10d186de5244f1379fe2f9",
+  "candidate_lib_tree": "0da7e7fda5ef50b4bd7696580829fd9a3adea598",
+  "files": [
+    {
+      "path": "lib/batch.ml",
+      "before_sha256": "56cc1a71a43d8c95c50dceb78638f6d3f32f892681c8902664c61e025bf80c82",
+      "after_sha256": "a3f6b340916f7e9ac39e0ab49edf306f464332e507648660e639125283f2eb1e"
+    },
+    {
+      "path": "lib/batch.mli",
+      "before_sha256": "4c60e91a5c9fc96edcba7dc3c51a1e475ffd2af096dea7c820906f8566e8d83a",
+      "after_sha256": "9a21b8fc7d9cc74ca9030d0071ec885c5ca81ad79657e0d8d42418e909e4110d"
+    },
+    {
+      "path": "lib/dd.ml",
+      "before_sha256": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+      "after_sha256": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec"
+    },
+    {
+      "path": "lib/enclosure.ml",
+      "before_sha256": "10d33a321037c6ef85357213f963b58bd035ce0acf3840cb924e60357c8e8d56",
+      "after_sha256": "f871a544ff6fd88b668809896cbfa005ae01dd46eab2765bd499e4ec9440f7fb"
+    },
+    {
+      "path": "lib/enclosure.mli",
+      "before_sha256": "5f19ba3154932e58eb51dabef6a8186aa3f1731cd81c4c104b54e64b9f2ca860",
+      "after_sha256": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133"
+    },
+    {
+      "path": "lib/model_enclosure.ml",
+      "before_sha256": "b11b4159d437d0434f562593eaa66f285783a0fe0170bf4c1311c4e4af1ca014",
+      "after_sha256": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54"
+    },
+    {
+      "path": "lib/model_enclosure.mli",
+      "before_sha256": "f2bebf75133980a96e6ab04de1cc4d54a1c9927beac32d8c92325e22c81e4bd5",
+      "after_sha256": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7"
+    },
+    {
+      "path": "lib/planner.ml",
+      "before_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "after_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+    },
+    {
+      "path": "lib/planner.mli",
+      "before_sha256": "7cf2a140306d85e8fb4677d5d2024a16155ba1ca598f401ed332d3d46abfd164",
+      "after_sha256": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec"
+    },
+    {
+      "path": "lib/production.ml",
+      "before_sha256": "0cae0f341dff5a1cd07a2ba5816c5ddc8a9c1e6024ffbe781b52c733750602ab",
+      "after_sha256": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133"
+    },
+    {
+      "path": "lib/production.mli",
+      "before_sha256": "5e932a4a8569c0854c4787fd2a2d1199b6d0a733c7c34cb63b6beb84d8fb4af7",
+      "after_sha256": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8"
+    },
+    {
+      "path": "lib/split.ml",
+      "before_sha256": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef",
+      "after_sha256": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b"
+    }
+  ],
+  "scope": "Library delta inventory for independent review; hashes are identity, not numerical assurance."
+}

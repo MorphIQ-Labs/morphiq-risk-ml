@@ -12,7 +12,31 @@ its compatibility with that baseline, canonical generated qualification and
 platform artifacts. This owner approval is retained without substituting it
 for the independent reviewer deliverables below.
 
-## Current engineering delta (2026-10-04, after #88)
+## Current candidate handoff (2026-10-04, after #102)
+
+The [integrated candidate dossier](candidate-fast-optimized.md) pins
+`f703546ea736d456f64e74be6ef9d2da2c10ef88`, incorporating shared certified
+preparation/Greeks, ordered-sum and packed-storage optimizations, compiled
+Fast batch/scenario APIs, and native DD allocation improvements. Its change
+map and [library delta inventory](evidence/qualified-fast-candidate/source-deltas.json)
+identify the source and review obligations since the previous qualified
+Exchange candidate. Follow that dossier for the executed platform, artifact,
+replay and mutation results and their limits.
+
+Review the per-output certification limits and lazy dependencies, expansion
+storage/finite-exponent arguments, Fast/certified type separation, original-input
+admission, concurrent reuse, scheduler ownership and failure cleanup. Fast
+prices have no runtime error certificate; finite-corpus scalar equivalence is
+not a whole-domain error bound. Native optimization preserves the exercised
+output words but increases sampled bytecode allocation. Compiler/profile
+conformance and performance claims must remain separate.
+
+No independent reviewer has been appointed or contacted. This refreshed
+handoff neither extends the earlier owner approval nor supplies the remaining
+human theorem/call-site assessment, findings dispositions or release decision.
+Historical campaigns and unresolved references below retain their original scope.
+
+## Earlier engineering delta (2026-10-04, after #88)
 
 Runtime source `7fb59a3ae282fad60709bbbb123b2e4414772c1e` adds certified scalar
 Exchange and the private-buffer enclosure optimization to the earlier handoff
@@ -107,6 +131,7 @@ must be able to reject a claim without negotiating its tolerance after scoring.
 | Compiler/platform | [Numerical backend](numerical-backend-contract.md), [determinism](determinism.md) | Check contraction, explicit FMA, subnormals, rounding mode and supported-platform evidence. A digest is not an accuracy proof. |
 | Operational use | [Performance](performance.md), [shadow results](results-shadow.md) | Are scalar cost/allocation/failure rates acceptable for the actual workload? The separate GC trace covers the diagnostic; business workload coverage remains incomplete. |
 | Typed Batch and scenarios | [Scenario contract](scenario-planner.md), `lib/batch.ml`, `lib/scenario.ml`, type rejection and scalar/Batch equivalence tests | Do coordinate/result types, frozen inputs, quantity units, fixed expiry/day count and post-expiry outcomes match the intended use? |
+| Fast batch/scenario assurance separation | [Fast batch](fast-batch.md), [fast planner](fast-planner.md), [integrated qualification](fast-integration-qualification.md), [allocation tradeoffs](results-fast-allocation.md) | Check frozen admission, concurrent reuse, finite-result failures, unweighted price metadata, shared scheduler behavior and separation from certified limits/totals. |
 | Planner execution and totals | [Stress protocol](planner-stress-protocol.md), [results](planner-stress-results.md), [current rerun](adversarial-assurance-closeout.md), `lib/planner.ml` | Recheck checked counts, resource bounds, wave/join ordering, cancellation checkpoints, sink commits and independent aggregate intervals. Finite schedules do not prove race freedom or durable delivery. |
 
 The research manifest records original PDF hashes and versions. Black (1976)
@@ -155,5 +180,5 @@ finite test corpus.
 The [optimized candidate qualification](candidate-exchange-optimized.md) retains
 source `d9967018b219f8b68c0e485e5a78a7973a101a1c`, all three platform installation
 reports, six full Exchange replays and 84 compiled mutation kills. This is
-engineering evidence for the current delta, not the independent reviewer report
+engineering evidence for that earlier delta, not the independent reviewer report
 or a replacement for the earlier unresolved-reference dispositions.

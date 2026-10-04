@@ -1,0 +1,78 @@
+{
+  "status": "pending",
+  "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+  "package_version": "0.3.0",
+  "intended_use": "Proposed experimental scope: typed European scalar prices/Greeks and certified IV; certified Exchange price; certified grouped Batch/Planner; separate approximate compiled Fast batch/scenario prices. No approved business deployment or SLA.",
+  "blockers": [
+    "Independent numerical reviewer scope/independence, theorem/call-site assessment and findings report remain required (#15).",
+    "Target-deployment operational qualification and the responsible owner recommendation remain outside the completed generated scalar campaign (#8/#16).",
+    "Final exact-candidate model-validation and engineering/release decisions remain to be recorded after those requirements are resolved (#17)."
+  ],
+  "evidence": {
+    "domain": {
+      "path": "docs/candidate-fast-optimized.md",
+      "sha256": "a16747ee2d1811f20be0f46081abdf0c2254da297a3891d7a3234fbea26a3438",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "model_contract": {
+      "path": "docs/model-contracts.md",
+      "sha256": "b70a9dc09e54598093a06fb8b0763f03b7fe7848f5a6f0a61b1dff7a5d1c163b",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "reference_provenance": {
+      "path": "docs/oracles.md",
+      "sha256": "3d0a84f4976c80720928bb308243d639e2ab1e7e5c82e680a03fc09d1c59c504",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "shadow": {
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-canonical.json",
+      "sha256": "bcb8c9456527c969d6948c4a0a11172346866042f69f05e899e750e0f6acbc1f",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+      "scope": "Current-source exact replay of captured canonical references; no new independent or business-workload campaign."
+    },
+    "performance": {
+      "path": "docs/results-fast-allocation.md",
+      "sha256": "c2aec971e88dd01427064460d2c2ea30bb2ecf7ae1dba3900b73e45b0146ac58",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+      "scope": "Inherited paired shared-host measurements from unchanged production sources; not operational acceptance."
+    },
+    "installation": {
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-artifact.json",
+      "sha256": "c7fcdb0d9d2f3fa12977adb48e9329a88c083a55dc2125f8e4d5e02b7b7df8d1",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "platform_ci": {
+      "path": "docs/evidence/qualified-fast-candidate/ci-workflow.json",
+      "sha256": "6fa5d852f0ba832d1706b0eb703cde5c31ae3694986f5313b7d451e343a7cf15",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "full_mutations": {
+      "path": "docs/evidence/qualified-fast-candidate/full-mutations.log.gz",
+      "sha256": "0328da2a1858285baac333116f6e6fbd341bdb683d5b4f1827116ca2ec2fed19",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    "rollback": {
+      "path": "docs/acceptance-and-change-control.md",
+      "sha256": "469ccad116c8dcb726ba8e6a22ef79c226f81dc96fa73013c83daf4f8d34ecaa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    }
+  },
+  "decisions": {},
+  "artifacts": [
+    {
+      "path": "source.tar.gz",
+      "sha256": "14d6829fce370610363cb1012376ccceab5b510cdfd52574aa0c3f59dadeaeff",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    }
+  ],
+  "baseline_owner_review": {
+    "path": "docs/acceptance/owner-review-2026-10-03.md",
+    "sha256": "39953c627f30b27e0d4e2e9db3e99905afd5b047169b6f387e64eef8f4f632b1",
+    "reviewed_commit": "72878e3e90378788891bf0706272c176bb9552fa",
+    "date": "2026-10-03",
+    "statement": "I reviewed, and approve"
+  },
+  "candidate_validation": "docs/evidence/qualified-fast-candidate/receipt.json",
+  "source_compatibility": "docs/evidence/qualified-fast-candidate/source-deltas.json",
+  "scope": "Engineering qualification only; historical owner approval is not transferred to this source."
+}

@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+  "package_version": "0.3.0",
+  "decision": "qualified-experimental",
+  "assessor": "Codex, maintainer-directed engineering qualification; no independent human signature",
+  "workflow_url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37238843530",
+  "ci_url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37238293731",
+  "source_archive_sha256": "14d6829fce370610363cb1012376ccceab5b510cdfd52574aa0c3f59dadeaeff",
+  "retention": "Public receipts/logs under docs/evidence/qualified-fast-candidate; original downloads and archives retained in the maintainer acceptance store under the full candidate SHA.",
+  "limitations": [
+    "Finite-corpus and supported-platform evidence; not a universal error or concurrency proof",
+    "Existing canonical/Exchange references replayed, not regenerated; earlier unresolved-reference and availability findings retain their original source scope",
+    "Bytecode allocation regression and four-worker scaling limits remain explicit; no target-host/business-workload acceptance",
+    "No independent human review, institutional release/deployment acceptance, tag or publication"
+  ],
+  "evidence": [
+    {
+      "category": "scope",
+      "path": "docs/evidence/qualified-fast-candidate/README.md",
+      "sha256": "b5d602c193546b5fa175ca9489108501af0172d92741d92a57cc636430a8e7cd",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ci-workflow.json",
+      "sha256": "6fa5d852f0ba832d1706b0eb703cde5c31ae3694986f5313b7d451e343a7cf15",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ci.log.gz",
+      "sha256": "364aaae7162b2ed012f764f2b238331a4a826d06ed11cd6dede576ed5c380b3c",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/evidence/qualified-fast-candidate/collect.py",
+      "sha256": "a474490b3ac548605e5dae4bf47ff860b2c875e379421eb4a7224849903b5328",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "mutations",
+      "path": "docs/evidence/qualified-fast-candidate/full-mutations.log.gz",
+      "sha256": "0328da2a1858285baac333116f6e6fbd341bdb683d5b4f1827116ca2ec2fed19",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-artifact.json",
+      "sha256": "c7fcdb0d9d2f3fa12977adb48e9329a88c083a55dc2125f8e4d5e02b7b7df8d1",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+      "platform": "macos-15"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-candidate-artifact.log.gz",
+      "sha256": "a3f3f3b2df8015af7908509074a3fc1d6ba95dae397fbdde91d5e7cbed21a754",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-candidate-replay.log.gz",
+      "sha256": "0d6e7f06f2e34b7f4be73cc9853e8bc690e257806cdb19f03d4586ab3db79402",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "planner",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-candidate-tests.log.gz",
+      "sha256": "422279d18e8fa1f7c353c835f963d5e99bf4f8f4ecf371ea8bb1aac7789cb4bb",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-canonical.json",
+      "sha256": "bcb8c9456527c969d6948c4a0a11172346866042f69f05e899e750e0f6acbc1f",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-exchange-bytecode.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/macos-15-exchange-native.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/evidence/qualified-fast-candidate/pending-acceptance-check.json",
+      "sha256": "6680495e69633ef261be786e69dcabeb1749ae35e9464d9a74024bb9b2a7f74e",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/receipt.json",
+      "sha256": "5027085a6f0753b8554ead738cb4b98617004febc427aa2686b6deeaa07ceadd",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "provenance",
+      "path": "docs/evidence/qualified-fast-candidate/source-deltas.json",
+      "sha256": "60e638737d3f32ddb58a80f2e867623f77524a01808708625b5b641c0acfc58f",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-artifact.json",
+      "sha256": "aeb87088f0f4610fe0b8fdbf30c1d609130b96a49722618567785e6793cbf9fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+      "platform": "ubuntu-24.04-arm"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-artifact.log.gz",
+      "sha256": "e73eec16c8e4ac07c5cb929bf40c18498be0e664fcb9fa4864f1703485677eaa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-replay.log.gz",
+      "sha256": "beba01fb04c790d4a02bca6cda808dec1f9f318946730091d75e3c0a096dd571",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-tests.log.gz",
+      "sha256": "d145cfc4492caf173106af25d89f1de1fa83dc04d57ac3da3019096a91838f3d",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-canonical.json",
+      "sha256": "fc95dc6927091be53ba6695b750ec60f93a1967e514db7e6dbdb32ca2601b09a",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-exchange-bytecode.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-exchange-native.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-artifact.json",
+      "sha256": "2b9a888d02cd3011f9cf04d2323c6ba9db781d23edacb92548b707c2a9dbe2e7",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+      "platform": "ubuntu-24.04"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-artifact.log.gz",
+      "sha256": "e73eec16c8e4ac07c5cb929bf40c18498be0e664fcb9fa4864f1703485677eaa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-replay.log.gz",
+      "sha256": "fe2561ff3c25afaf0b84f30cf77eb12eb960955940004ce9ffb1d2031b8e38cb",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-tests.log.gz",
+      "sha256": "eccd56398134ca258bc4e12276652dedf1fac54363584587605090ff0252b8f7",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-canonical.json",
+      "sha256": "892ce6b2f2b0a139ec890e94aa01a54044c844384bb27d4b8bf94ab174430de5",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-exchange-bytecode.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/ubuntu-24.04-exchange-native.txt.gz",
+      "sha256": "9c6be05e3aedb9b78a62b898b1d2f48efcd770fdaa81e861ce38f26212a166fa",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/qualified-fast-candidate/workflow.json",
+      "sha256": "df3dae287f142badafd3f19a72763c0741da3a75f2dc20c1edc62f124842ed17",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/candidate-fast-optimized.md",
+      "sha256": "a16747ee2d1811f20be0f46081abdf0c2254da297a3891d7a3234fbea26a3438",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/experimental-baseline.md",
+      "sha256": "59433c9cf97701a079c3ad466ea38a76277ea3f43825642db0cdc37d417145fb",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/independent-review-package.md",
+      "sha256": "913e1f5c9ca0cc2c0cf89cb122236035a6e3364006b7cac80093b90d3d988f08",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    },
+    {
+      "category": "scope",
+      "path": "docs/acceptance/pending-fast-candidate.json",
+      "sha256": "88a71e2f81367412e900200dc9c9289f25a42fc539aa99126bd5e1349637a8a5",
+      "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88"
+    }
+  ]
+}
