@@ -1,0 +1,67 @@
+ordinary served 0x1.aa4850a1f07b6p+3 0x1.922ccfd52b572p-52
+reverse served 0x1.dbda9d04e3bc9p+2 0x1.1f0b74d50794p-52
+equal-assets served 0x1.67e19eece4401p+3 0x1.4aa54bf03d033p-51
+correlation-3 served 0x1.fb431ba249062p+3 0x1.dd69f58a8f0aap-51
+correlation-4 served 0x1.fb431ba249062p+3 0x1.288241b16fbd7p-52
+correlation-5 served 0x1.fb431ba249063p+3 0x1.3c542fb757cebp-53
+correlation-6 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-7 served 0x1.3bdc38d4f4be4p+4 0x1.2e17099cd2538p-50
+correlation-8 served 0x1.fb431ba249062p+3 0x1.c64b0c5f4bc0fp-52
+correlation-9 served 0x1.fb431ba249062p+3 0x1.8e859033a108ep-51
+correlation-10 served 0x1.fb431ba249063p+3 0x1.565ec6da266d1p-52
+correlation-11 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-12 served 0x1.3bdc38d4f4be4p+4 0x1.333807ad6bb54p-51
+correlation-13 served 0x1.67e19eece4401p+3 0x1.4aa54bf03d033p-51
+correlation-14 served 0x1.67e19eece44p+3 0x1.ecfcc1f60c1bfp-52
+correlation-15 served 0x1.67e19eece4401p+3 0x1.d0dc1c91ffb1p-53
+correlation-16 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-17 served 0x1.c9cf1e9626435p+3 0x1.f023b33fb7791p-52
+correlation-18 served 0x1.fea5680c943e5p-24 0x1.7919bf1121722p-79
+correlation-19 served 0x1.fea5680c943e5p-24 0x1.968549eaa6572p-81
+correlation-20 served 0x1.fea5680c943e6p-24 0x1.9399b5c43bafp-79
+correlation-21 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-22 served 0x1.fe6ef53bb5da5p+1 0x1.9cc39c87650eap-54
+correlation-23 served 0x0p+0 0x0p+0
+correlation-24 served 0x1.3f276107dca6fp-50 0x1.54346b7ea940ap-98
+correlation-25 served 0x1.3f276107dca6fp-50 0x1.54346b7ea940ap-98
+correlation-26 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-27 served 0x1.fe6ef53bb5d9fp+1 0x1.6cf60dceaa036p-54
+expiry-28 served 0x1.4p+2 0x0p+0
+expiry-29 served 0x0p+0 0x0p+0
+expiry-30 served 0x0p+0 0x0p+0
+expiry-31 served 0x0p+0 0x0p+0
+expiry-32 served 0x1.9p+6 0x0p+0
+expiry-33 served 0x0p+0 0x0p+0
+zero-receive served 0x0p+0 0x0p+0
+zero-deliver served 0x1.8c051a5ca12a6p+6 0x1.fee0afddbc912p-51
+zero-variance served 0x1.78b6043efd3a3p+2 0x1.cc856c008f0c6p-54
+zero-variance-atm served 0x0p+0 0x0p+0
+currency--1000 served 0x1.10d21f1ff6119p-1003 0x0.00000000255dfp-1022
+currency--500 served 0x1.10d21f1ff6119p-503 0x1.2aebbf5044f1cp-557
+currency-500 accuracy_exceeded
+currency-1000 accuracy_exceeded
+time-42 numerical_failure
+time-43 numerical_failure
+time-44 served 0x1.dcf853712b907p+2 0x1.e5175b5f507e2p-52
+time-45 served 0x1.dae4d5fcf2999p+3 0x1.8e53331c17244p-52
+volatility-46 numerical_failure
+volatility-47 numerical_failure
+volatility-48 numerical_failure
+volatility-49 unadjudicated 0x1.9p+6 0x0.0000000000281p-1022
+negative-yield served 0x1.2ba2666d7f317p+3 0x1.bb10df9387985p-51
+discount-overflow numerical_failure
+carry-cancellation served 0x1.8c051a5ca12a6p-53 0x1.cd600c922d6dp-110
+deep-otm served 0x1.fc3e969f1dfedp-499 0x1.5cf477fb91505p-553
+deep-itm served 0x1.ee88e9cd5abd4p+9 0x1.f461b467aefe7p-45
+exact-only accuracy_exceeded
+demanding-limit accuracy_exceeded
+invalid-57 invalid_input
+invalid-58 invalid_input
+invalid-59 invalid_input
+invalid-60 invalid_input
+invalid-61 invalid_input
+invalid-62 invalid_input
+invalid-63 invalid_input
+invalid-64 invalid_accuracy
+invalid-65 invalid_accuracy
+exchange: 66 rows, 47 certificates, 10 explicit numerical/accuracy failures, 1 served but reference unresolved

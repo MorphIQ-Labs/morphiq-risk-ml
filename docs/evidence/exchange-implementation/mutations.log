@@ -1,0 +1,8 @@
+baseline passes (55 s)
+killed    exchange-correlation-term by exchange_reference
+killed    exchange-rounded-degeneracy by exchange_reference
+killed    exchange-discounted-leg-rounding by exchange_reference
+killed    exchange-deliver-yield by exchange_reference
+killed    exchange-certificate-radius by exchange_reference
+killed    exchange-accuracy-limit by exchange_reference
+6 of 6 mutants killed as catalogued

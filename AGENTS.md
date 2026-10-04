@@ -40,6 +40,10 @@ Compiler, arithmetic or backend work additionally follows the
 - `Black.Make` shares the lognormal kernel across carry/shift choices;
   `Bachelier` owns the normal model. Model-specific abstract admission types
   and volatility coordinates enforce structural separation.
+- `Exchange` owns certified scalar two-asset European exchange prices, with
+  typed correlation, original-input covariance and private currency certificates.
+  Read [its contract and limits](docs/exchange-prices.md); Greeks, inverse
+  parameters and portfolio adapters are outside this additive API.
 - `Production` owns per-request runtime numerical acceptance for prices and smooth Greeks, with explicit typed absolute limits and private certificates. Read [its supported capability](docs/production-boundary-design.md); mathematical admission is not output acceptance, and the adapter is not institutional sign-off.
 - `lib/morphiq_risk.mli` defines the primary public interface.
   `Morphiq_risk.Internal` is an unstable research/testing surface, not an

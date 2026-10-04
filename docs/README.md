@@ -10,7 +10,7 @@ been retired; it remains in Git history.
 
 ## Current contracts
 
-- [First model extension design](first-model-extension.md): selected certified scalar exchange prices, original-input contract, references and implementation gate; not an implemented capability.
+- [First model extension design](first-model-extension.md): selected certified scalar exchange prices, original-input contract, references and implementation gate; [implementation evidence](exchange-prices.md) is separate and broader qualification remains open.
 - [Model contracts](model-contracts.md): exact input meaning, model definitions, Greek conventions, and IV outcomes.
 - [Production boundary](production-boundary-design.md): per-request numerical acceptance and explicit capability exclusions.
 - [Scenario planner](scenario-planner.md): shocks, date rolls, resource limits, aggregation, and execution failures.

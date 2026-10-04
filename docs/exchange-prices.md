@@ -102,3 +102,43 @@ The runner reads case ID followed by the nine hex words in corpus field order;
 it records the actual year fraction for every evaluated row. QuantLib is an
 optional comparator only; no QuantLib runtime source or coefficients were
 copied into Exchange. Project derivations and original code retain Apache-2.0.
+
+
+## Cost and compatibility
+
+The [initial measurements](evidence/exchange-implementation/performance-summary.json)
+use source `f3fc971`, OCaml 5.3.0 Flambda and the library's -O3 setting on an
+Apple M1 Pro, macOS 27.0. Host load averages were 5.24/4.05/5.15; this is not an
+idle-host baseline. Each phase warmed up 20 calls, then took five samples of
+200 evaluations (20,000 admissions), with a major collection before each sample.
+Raw [samples](evidence/exchange-implementation/performance-v1.txt) and
+[environment](evidence/exchange-implementation/performance-host.txt) retain the
+variation and allocation measurements. Phases ran consecutively; these are
+initial costs, not a paired optimization speedup claim or a performance gate.
+
+| Case | Median evaluation | Allocated bytes/call |
+| --- | ---: | ---: |
+| Ordinary | 1.502 ms | 21,414,656 |
+| Near singular correlation | 0.654 ms | 9,679,616 |
+| Deep out of the money | 4.409 ms | 63,554,744 |
+| Discount-domain failure | 45 ns | 352 |
+| Existing certified BSM control | 1.283 ms | 18,038,704 |
+
+Admission costs roughly 6 ns and 56 bytes; end-to-end costs and sample ranges
+are retained separately. The expansion arithmetic allocates substantially.
+Optimization needs a separately controlled round with unchanged certificate
+contracts and paired workloads; it is not inferred from these short timings.
+The existing BSM control has different semantics and is not an equivalent
+exchange-option competitor.
+
+The complete ordinary suite passed on the implementation source, including
+independent containment, exact boundaries, compile-failure type witnesses,
+fixture provenance, scalar/portfolio regression and replay checks. The prior
+public replay digest remains
+`5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199`.
+All [six optional exchange mutations](evidence/exchange-implementation/mutations.log)
+were killed by numerical witnesses after a clean baseline and successful mutated
+builds. The complete 83-mutant catalog was not rerun; default CI still
+runs the existing seven core mechanisms. Cross-platform CI, broader #61
+qualification, representative workloads and independent human review have
+their own status and are not implied by these local checks.
