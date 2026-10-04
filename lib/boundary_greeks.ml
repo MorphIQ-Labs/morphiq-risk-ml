@@ -3,27 +3,8 @@
    nearest-even binary64; arithmetic uncertainty is not a payoff kink. *)
 module E = Enclosure
 
-let even x = Int64.logand (Int64.bits_of_float x) 1L = 0L
-
-let midpoint lower upper =
-  E.add (E.exact lower) (E.scale (E.sub (E.exact upper) (E.exact lower)) (-1))
-
 let rounded value =
-  let accepts candidate =
-    if not (Float.is_finite candidate) then false
-    else if E.compare_float value candidate = E.Zero then true
-    else
-      let lower = Float.pred candidate and upper = Float.succ candidate in
-      if not (Float.is_finite lower && Float.is_finite upper) then false
-      else
-        let left = E.sign (E.sub value (midpoint lower candidate))
-        and right = E.sign (E.sub value (midpoint candidate upper)) in
-        (left = E.Positive || (left = E.Zero && even candidate))
-        && (right = E.Negative || (right = E.Zero && even candidate))
-  in
-  match
-    List.find_opt accepts [ value.hi; Float.pred value.hi; Float.succ value.hi ]
-  with
+  match Enclosure_round.nearest value with
   | Some value -> Ok value
   | None -> Error Greeks.Numerical_failure
 

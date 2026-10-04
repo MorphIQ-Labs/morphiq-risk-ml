@@ -512,3 +512,36 @@
     %{dep:../scripts/planner_stress.py}
     check
     %{exe:planner_stress.exe}))))
+
+(test
+ (name carry_cancellation)
+ (modules carry_cancellation)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_carry_cancellation.py
+  ../scripts/carry_cancellation_reference.py
+  ../scripts/numerical_campaign.py
+  ../scripts/numerical_cases.py
+  ../scripts/numerical_reference.py
+  ../scripts/arb_reference_campaign.py
+  ../scripts/arb_greek_audit.py
+  ../scripts/arb_iv_audit.py
+  ../scripts/fixture_catalog.py
+  ../oracle/common.py
+  ../oracle/gen_iv.py
+  ../oracle/price_rounding.py
+  ../oracle/challenges/carry-cancellation-v1.json.gz
+  ../oracle/challenges/carry-cancellation-v1.json.gz.manifest.json)
+ (action
+  (run
+   python3
+   %{dep:../scripts/check_carry_cancellation.py}
+   --reference
+   %{dep:../oracle/challenges/carry-cancellation-v1.json.gz}
+   --runner
+   %{exe:numerical_boundary_runner.exe}
+   --output
+   carry-cancellation-report.json)))

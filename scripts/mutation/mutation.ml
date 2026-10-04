@@ -38,6 +38,22 @@ type mutant = {
 let catalog =
   [
     {
+      id = "cancelled-price-refinement";
+      file = "lib/black.ml";
+      snippet = "Float.abs c.x <= noise";
+      replacement = "false && Float.abs c.x <= noise";
+      killer = "carry_cancellation";
+      mechanism = "severe carry cancellation must refine original inputs";
+    };
+    {
+      id = "cancelled-price-cell";
+      file = "lib/black.ml";
+      snippet = "Enclosure_round.nearest ~exponent enclosed";
+      replacement = "Some (Float.ldexp enclosed.hi exponent)";
+      killer = "carry_cancellation";
+      mechanism = "an unresolved price cell must not serve its expansion centre";
+    };
+    {
       id = "greek-finite-result";
       file = "lib/greeks.ml";
       snippet = "not (Float.is_finite (number value))";
@@ -802,7 +818,9 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "production_boundary" | "planner_contract" | "prepared_division" -> [ [] ]
+  | "production_boundary" | "planner_contract" | "prepared_division"
+  | "carry_cancellation" ->
+      [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "oracle_assurance" | "iv_termination" | "normal_dd_reference" | "properties"

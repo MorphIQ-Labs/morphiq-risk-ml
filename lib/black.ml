@@ -176,7 +176,7 @@ let precise_legs (c : Coordinates.live) =
   in
   (asset, cash, forward_intrinsic)
 
-let live_price side (c : Coordinates.live) sigma =
+let live_price_approx side (c : Coordinates.live) sigma =
   let theta = Side.sign side in
   let { Dd.hi = s; lo = sl } =
     Dd.mul_float { Dd.hi = c.root_time; lo = c.root_time_low } sigma
@@ -236,6 +236,83 @@ let live_price side (c : Coordinates.live) sigma =
       (* Applying the scale inside the kernel keeps a deep out-of-the-money
          value from underflowing before it is scaled back. *)
       Normalised_black.scaled ~k:c.exponent m x xl s sl
+
+(* DD terms can lose the intrinsic before carry cancellation. The dispatch
+   threshold is conservative, not an error certificate for the other fast paths.
+   Refine the original real model; an unresolved cell must not reuse the DD price. *)
+let live_price side (c : Coordinates.live) sigma =
+  (* The normal-intermediate coordinate bound has 32u² for log, 9u²
+     for assembly, 15u³ for the quotient correction and 5u² for shifted
+     low parts. Round these up for dispatch only: 64u², 16u³ and 8u².
+     Require actual cancellation too, so a tiny uncancelled carry is not
+     confused with exhausted precision by the absolute quotient allowance. *)
+  let low_noise =
+    if c.original_spot_low <> 0.0 || c.original_strike_low <> 0.0 then 0x1p-103
+    else 0.0
+  in
+  let noise = (0x1p-100 *. c.x_terms) +. 0x1p-155 +. low_noise in
+  if
+    Float.is_finite c.x_terms && c.x_terms > 0.0
+    && Float.abs c.x <= 0.5 *. c.x_terms
+    && Float.abs c.x <= noise
+  then
+    try
+      let exact_scale original scaled =
+        Float.is_finite scaled && Float.ldexp scaled c.exponent = original
+      in
+      let scaled =
+        exact_scale c.original_spot c.spot
+        && exact_scale c.original_spot_low c.spot_low
+        && exact_scale c.original_strike c.strike
+        && exact_scale c.original_strike_low c.strike_low
+      in
+      let spot, spot_low, strike, strike_low, exponent =
+        if scaled then (c.spot, c.spot_low, c.strike, c.strike_low, c.exponent)
+        else
+          ( c.original_spot,
+            c.original_spot_low,
+            c.original_strike,
+            c.original_strike_low,
+            0 )
+      in
+      let enclosed =
+        if sigma = 0.0 then
+          let module E = Enclosure in
+          (* Dq [(S-K) - K expm1(-(r-q)T)] retains the small exponential
+             terms before cancellation. Form every operand from original words
+             (or their proved exact power-of-two scaling). *)
+          let spot = E.of_words spot spot_low
+          and strike = E.of_words strike strike_low in
+          let carry =
+            E.mul (E.sub (E.exact c.rate) (E.exact c.yield)) (E.exact c.time)
+          in
+          let difference =
+            E.sub (E.sub spot strike) (E.mul strike (E.expm1 (E.neg carry)))
+          in
+          let quarter =
+            E.exp
+              (E.scale (E.neg (E.mul (E.exact c.yield) (E.exact c.time))) (-2))
+          in
+          let half = E.mul quarter quarter in
+          let value =
+            E.mul_float (E.mul (E.mul half half) difference) (Side.sign side)
+          in
+          match E.sign value with
+          | E.Positive -> value
+          | E.Zero | E.Negative -> E.exact 0.0
+          | E.Indeterminate -> raise (E.Unresolved "cancelled payoff sign")
+        else
+          let model =
+            Model_enclosure.black ~spot ~spot_low ~strike ~strike_low
+              ~time:c.time ~rate:c.rate ~yield:c.yield
+          in
+          Model_enclosure.price model side sigma
+      in
+      match Enclosure_round.nearest ~exponent enclosed with
+      | Some value -> value
+      | None -> Float.nan
+    with Enclosure.Unresolved _ -> Float.nan
+  else live_price_approx side c sigma
 
 let price_coordinates coordinates side sigma =
   match coordinates with

@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **66
+seven core mutants. The catalog currently contains **68
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -150,3 +150,11 @@ or restore premature maturity multiplication in live/zero-volatility BSM rho.
 Their independent exact-input Greek references reject successful nonfinite
 values, false finite zeros and incorrect subnormal values. The core remains
 seven mechanisms; the complete optional catalog contains 66.
+
+## Severe carry-cancellation price refinement (#76)
+
+Two additional optional mechanisms remove original-input refinement or accept an
+uncertified expansion centre. The exact-word `carry_cancellation` guard checks
+independently rounded reference values and refusal of an unresolved cell. The
+full catalog now contains 68 mechanisms; the seven default core mutants are
+unchanged. Execution evidence is retained with the carry-cancellation report.
