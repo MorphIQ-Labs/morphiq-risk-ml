@@ -13,7 +13,7 @@ missing guard-dispatch mapping; it is a harness failure, not a mutant kill.
 `replay.json` and `installed-artifact.json` retain complete public-output and
 installed-consumer checks. Source artifacts remain outside the public checkout.
 
-`sample.txt.gz` and `profile-harness.ml` retain the baseline diagnostic.
+`sample.txt.gz` and `profile-harness.ml.gz` retain the baseline diagnostic.
 `probe-abba.json.gz` and `discarded-storage-probe.ml.gz` retain the rejected
 storage experiment; that source is not the production implementation.
 
