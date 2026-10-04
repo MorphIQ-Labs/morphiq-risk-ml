@@ -58,3 +58,7 @@ Production.Bsm.evaluate_many admitted Side.Call volatility outputs
 Pattern matching each `Outcome` on its quantity recovers the result's units.
 The output list uses O(number of requests) storage, as do the scalar results it
 replaces; this API is a fixed-model group, not a full-portfolio result cube.
+
+[Qualification and paired performance results](results-shared-certification.md)
+record the immutable sources, independent references, mutation controls,
+installed-package checks, allocation reductions and shared-host timing limits.
