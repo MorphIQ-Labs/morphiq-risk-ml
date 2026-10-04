@@ -671,3 +671,25 @@
    CAML_LD_LIBRARY_PATH
    ../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
    (run %{test}))))
+
+(test
+ (name fast_batch)
+ (modules fast_batch)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp
+   (run %{test}))))
+
+(test
+ (name fast_batch_reference)
+ (modules fast_batch_reference)
+ (libraries oracle_fixture morphiq_risk)
+ (action
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/european.txt}
+   %{dep:../oracle/fixtures/displaced.txt})))

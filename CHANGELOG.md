@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Compiled fast price batches (#96)
+
+- Add `Batch.Fast` one-shot and immutable compiled price batches for all four
+  European models. Reuse model admission across executions; preserve ordered
+  per-item failures and fresh output ownership, including concurrent reuse.
+- Fast results are finite nonnegative approximate prices with no runtime error
+  certificate. Nonfinite/negative scalar outputs become explicit numerical
+  failures. Existing scalar and certified APIs remain unchanged. Coordinate
+  and certificate separation are checked by compile-failure witnesses.
+- Additive public API; no version bump or release. See the
+  [contract and ownership](docs/fast-batch.md) and
+  [qualification and measured costs](docs/results-fast-batch.md).
+
 ### Packed certification storage (#8)
 
 - Replace boxed enclosure lists/tuples with immutable all-float records and

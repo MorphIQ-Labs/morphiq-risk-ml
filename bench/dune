@@ -151,3 +151,9 @@
  (name allocation_profile)
  (modules allocation_profile)
  (libraries morphiq_risk))
+
+(executable
+ (name fast_batch)
+ (modules fast_batch)
+ (libraries morphiq_risk)
+ (foreign_archives assurance_clock))

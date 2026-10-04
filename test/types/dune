@@ -506,3 +506,51 @@
  (alias runtest)
  (action
   (diff multi_time_unit.expected multi_time_unit.out)))
+
+(rule
+ (deps fast_batch_coordinate.ml ../../lib/morphiq_risk.cma)
+ (targets fast_batch_coordinate.out)
+ (action
+  (with-stderr-to
+   fast_batch_coordinate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     fast_batch_coordinate.cmo
+     fast_batch_coordinate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff fast_batch_coordinate.expected fast_batch_coordinate.out)))
+
+(rule
+ (deps fast_batch_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets fast_batch_certificate.out)
+ (action
+  (with-stderr-to
+   fast_batch_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     fast_batch_certificate.cmo
+     fast_batch_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff fast_batch_certificate.expected fast_batch_certificate.out)))
