@@ -47,7 +47,7 @@ from exchange_qualification_reference import reference
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--version',action='version',version='exchange-qualification 2')
+    parser.add_argument('--version',action='version',version='exchange-qualification 3')
     sub=parser.add_subparsers(dest='command',required=True)
     sub.add_parser('freeze')
     worker=sub.add_parser('worker');worker.add_argument('input',type=Path)

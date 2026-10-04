@@ -68,7 +68,7 @@ def reference(row):
                     def positive_branch(z, analytic):
                         return ((-variance/2+s*z).exp()-b/a)*(-z*z/2).exp()/norm
                     integral = acb.integral(positive_branch, start, L,
-                        rel_tol=arb(2)**(-min(precision//2,1280)), abs_tol=arb(2)**(-min(precision//2,1280)), **QUADRATURE).real * a
+                        rel_tol=arb(2)**(-precision//2), abs_tol=arb(2)**(-precision//2), **QUADRATURE).real * a
                     strip = arb(0)
                     if hi > lo:
                         strip = (hi-lo)*a*(-variance/2+s*hi).exp()/norm

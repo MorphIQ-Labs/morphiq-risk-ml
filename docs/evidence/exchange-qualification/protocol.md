@@ -76,3 +76,20 @@ this is a finite absolute bound, it must still fit inside the served runtime
 certificate; neither passing the reference goal nor route overlap implies
 acceptance. Remaining coarse intervals, errors or unresolved results stay
 explicit. Case membership, original limits and runtime source are unchanged.
+
+## Bounded quadrature work correction, version 3
+
+The stronger 1200-bit reference goal exposed an integration resource issue:
+at 4096-bit arithmetic, requesting a 2048-bit quadrature stopping goal exhausted
+the fixed evaluation budget on an ordinary case and returned a broad interval,
+although 2048-bit arithmetic had already reached roughly 1024-bit accuracy.
+The obsolete v2 campaign was stopped; its completed-status log and generator
+snapshot are retained as an aborted diagnostic run, not a completed campaign.
+
+Keep the 1200-bit reference goal and all original resource caps. Request
+quadrature tolerance `2^-min(p/2,1280)`, giving 80 guard bits beyond the required
+normalized reference resolution without demanding unused 2048-bit quadrature
+accuracy. Final interval width and certificate containment still decide
+acceptance; the requested quadrature tolerance is not presumed achieved.
+All 649 rows are rerun under one generator version, preserving full outcome
+accounting. No runtime code, limit, certificate or accuracy allowance changes.
