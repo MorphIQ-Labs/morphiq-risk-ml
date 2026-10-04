@@ -131,6 +131,17 @@ count adds constant retained state; the existing per-position closures capture
 additional counting state. This change addresses traversal cost, not allocation
 elimination or execution throughput. Full raw spreads remain available.
 
+## Integration after #71
+
+The PR was rebased onto `6a89c4e23cbe5460bbe2bbdcf6d9625bcae88f86` after #71
+landed during this work. Conflicts only combined the shared test registrations,
+changelog and documentation index. The planner implementation, focused guard,
+benchmark and timing driver are byte-identical to the measured candidate above.
+The combined build/install, formatting and full ordinary suite pass
+([integration log](evidence/planner-groups-integration.log.gz)). Release focused
+replay and all 2,376 planner reference rows still match the recorded baseline. The timing campaign predates this integration and does not
+claim a new measurement of #71's Greek changes; compilation never calls them.
+
 ## Reproduction
 
 In two isolated worktrees, check out the baseline and candidate revisions above.
