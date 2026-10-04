@@ -36,11 +36,11 @@ def main():
     with tempfile.TemporaryDirectory() as directory:
         path=Path(directory)/'rows.txt';path.write_text('\n'.join(map(wire,rows))+'\n')
         process=subprocess.run([str(args.runner.resolve()),str(path)],capture_output=True,text=True,timeout=120,check=True)
-    results=parse_results(process.stdout,rows);counts=Counter();outcomes=[];failures=0
+    results=parse_results(process.stdout,rows);counts=Counter();outcomes=[];failure_ids=set()
     for row in rows:
         actual=results[row['id']];expected=row['reference']
         if actual['status']!='value':
-            outcome='wrong_status';failures+=1;distance=None
+            outcome='wrong_status';failure_ids.add(row['id']);distance=None
         elif not math.isfinite(word(actual['value'])):
             outcome='unavailable';distance=None
         elif expected['status']!='interval' or 'rounded' not in expected:
@@ -49,20 +49,21 @@ def main():
             distance=ulps(word(actual['value']),word(expected['rounded']))
             # Existing maximum price diagnostics: no tolerance fitting to this corpus.
             outcome='value_checked' if distance <= 32 else 'quality_excursion'
-            if outcome=='quality_excursion': failures+=1
+            if outcome=='quality_excursion': failure_ids.add(row['id'])
         # The exact discovered case is a mandatory availability and correct-rounding regression.
         inp=row['inputs']
         required=(row['model']=='bsm' and row['side']=='call'
                   and inp['s']=='3ff0000000000001' and inp['k']=='3ff0000000000000'
                   and inp['t']=='3ff0000000000000' and inp['r']=='bcafffffffffffff'
                   and inp['sigma']=='0000000000000000' and inp['q']=='0000000000000000')
-        if required and (outcome!='value_checked' or distance!=0): failures+=1
-        if row['inputs']['sigma']=='0000000000000000' and outcome!='value_checked': failures+=1
+        if required and (outcome!='value_checked' or distance!=0): failure_ids.add(row['id'])
+        if row['inputs']['sigma']=='0000000000000000' and outcome!='value_checked': failure_ids.add(row['id'])
         counts[outcome]+=1
         outcomes.append(dict(id=row['id'],outcome=outcome,result=actual,ulps=distance,required=required))
     if sum(r['required'] for r in outcomes)!=1: raise ValueError('missing required case')
     try: revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True,stderr=subprocess.DEVNULL).strip()
     except subprocess.CalledProcessError: revision='unavailable'
+    failures=len(failure_ids)
     report=dict(scorer_source_commit=revision,runner_source_commit=args.runner_source or revision,reference_sha256=manifest['sha256'],
                 runner_sha256=hashlib.sha256(args.runner.read_bytes()).hexdigest(),
                 counts=dict(counts),failures=failures,outcomes=outcomes)
