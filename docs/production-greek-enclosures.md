@@ -86,3 +86,12 @@ including exact displaced sums, cancellations and tails. Tests exercise
 admission, capability and numerical-accuracy failures as outcomes, and enforce
 unit/model distinctions at compile time. Bounds are derived before those tests;
 failures do not authorize widening the requested limit.
+
+## Call-local reuse
+
+The multi-output owner may reuse an identical enclosure for fixed model, side,
+volatility and rho convention. [Shared Greek intermediates](shared-greek-intermediates.md)
+retain the operation graph and arithmetic preconditions above. Quantity-specific
+expressions are lazy so that a failure cannot suppress an independent derivative.
+Each final result still gets its own outward error calculation and typed limit.
+No error allowance changes; the same references and mutation witnesses apply.

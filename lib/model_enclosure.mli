@@ -44,6 +44,12 @@ module type S = sig
       calendar day. [rho_forward] is supplied by the model owner; BSM holds q
       fixed even when its value equals r. *)
 
+  val prepare_greeks :
+    t -> Side.t -> float -> rho_forward:bool -> sensitivity -> scalar
+  (** A private worker-owned evaluator for fixed inputs. Shares common setup and
+      lazily reuses quantity-specific expressions, including their failures. Do
+      not invoke one evaluator concurrently from multiple domains. *)
+
   val pdf : scalar -> scalar
   val cdf : scalar -> scalar
 

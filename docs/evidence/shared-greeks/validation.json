@@ -1,0 +1,10 @@
+{
+  "implementation": "e9572101db6e8b6a982937aa19b0c30102cceff3",
+  "full_ordinary_build_format_final_exit": 0,
+  "initial_combined_exit": 1,
+  "initial_error": "optional shadow renderer compile-time unit coercion; fixed in implementation commit; no runtime or test change required",
+  "named_mutations": 6,
+  "full_catalog_run": false,
+  "native_bytecode_installed": true,
+  "benchmark_sources_unchanged_since_implementation": true
+}

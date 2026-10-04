@@ -647,3 +647,15 @@
    CAML_LD_LIBRARY_PATH
    ../lib/fp
    (run %{test}))))
+
+(test
+ (name shared_greeks)
+ (modules shared_greeks)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp
+   (run %{test}))))

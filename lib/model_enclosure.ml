@@ -44,6 +44,12 @@ module type S = sig
       calendar day. [rho_forward] is supplied by the model owner; BSM holds q
       fixed even when its value equals r. *)
 
+  val prepare_greeks :
+    t -> Side.t -> float -> rho_forward:bool -> sensitivity -> scalar
+  (** A private worker-owned evaluator for fixed inputs. Shares common setup and
+      lazily reuses quantity-specific expressions, including their failures. Do
+      not invoke one evaluator concurrently from multiple domains. *)
+
   val pdf : scalar -> scalar
   val cdf : scalar -> scalar
 
@@ -261,7 +267,7 @@ struct
 
   (* Differentiation and the absolute acceptance contract are derived in
      docs/production-greek-enclosures.md. No measured error envelope is used. *)
-  let greek model side sigma ~rho_forward quantity =
+  let prepare_greeks model side sigma ~rho_forward =
     let time, root_time =
       match model with
       | Black c -> (c.time, c.root_time)
@@ -274,103 +280,105 @@ struct
     let total = E.mul root_time vol in
     let theta = Side.sign side in
     let daily v = E.div_float v Units.days_per_year in
-    let half_inverse_time () = E.div (E.exact 0.5) t in
-    let forward_rho () = E.neg (E.mul t (price model side sigma)) in
+    let half_inverse_time = lazy (E.div (E.exact 0.5) t) in
+    let price = lazy (price model side sigma) in
+    let forward_rho () = E.neg (E.mul t (Lazy.force price)) in
     match model with
     | Black c -> (
         let h = E.div c.x total and half = E.scale total (-1) in
         let d1 = E.add h half and d2 = E.sub h half in
         let p = E.mul c.asset (pdf d1) in
-        let vega () = E.mul p root_time in
-        let delta () =
-          E.mul_float
-            (E.mul (E.div c.asset c.spot) (cdf (E.mul_float d1 theta)))
-            theta
+        let vega = lazy (E.mul p root_time) in
+        let cdf1 = lazy (cdf (E.mul_float d1 theta))
+        and cdf2 = lazy (cdf (E.mul_float d2 theta)) in
+        let delta =
+          lazy
+            (E.mul_float (E.mul (E.div c.asset c.spot) (Lazy.force cdf1)) theta)
         in
-        let gamma () = E.div (E.div p c.spot) (E.mul c.spot total) in
-        let w () =
-          let carry = E.mul (E.sub (E.exact c.rate) (E.exact c.yield)) t in
-          E.add
-            (E.div (E.sub (E.scale carry 1) c.x) (E.mul (E.scale t 1) total))
-            (E.div vol (E.scale root_time 2))
+        let gamma = lazy (E.div (E.div p c.spot) (E.mul c.spot total)) in
+        let w =
+          lazy
+            (let carry = E.mul (E.sub (E.exact c.rate) (E.exact c.yield)) t in
+             E.add
+               (E.div (E.sub (E.scale carry 1) c.x) (E.mul (E.scale t 1) total))
+               (E.div vol (E.scale root_time 2)))
         in
-        match quantity with
-        | Delta -> delta ()
-        | Gamma -> gamma ()
-        | Theta ->
-            daily
-              (E.sub
-                 (E.mul_float
-                    (E.sub
-                       (E.mul_float
-                          (E.mul c.asset (cdf (E.mul_float d1 theta)))
-                          c.yield)
-                       (E.mul_float
-                          (E.mul c.cash (cdf (E.mul_float d2 theta)))
-                          c.rate))
-                    theta)
-                 (E.div (E.mul p vol) (E.scale root_time 1)))
-        | Vega -> vega ()
-        | Rho ->
-            if rho_forward then forward_rho ()
-            else
-              E.mul_float
-                (E.mul t (E.mul c.cash (cdf (E.mul_float d2 theta))))
-                theta
-        | Vanna -> E.neg (E.div (E.mul (E.div p c.spot) d2) vol)
-        | Volga -> E.div (E.mul (vega ()) (E.mul d1 d2)) vol
-        | Charm ->
-            daily
-              (E.sub
-                 (E.mul_float (delta ()) c.yield)
-                 (E.mul (E.div p c.spot) (w ())))
-        | Veta ->
-            daily
-              (E.mul (vega ())
-                 (E.sub
-                    (E.add (E.exact c.yield) (E.mul d1 (w ())))
-                    (half_inverse_time ())))
-        | Color ->
-            daily
-              (E.mul (gamma ())
-                 (E.add
-                    (E.add (E.exact c.yield) (E.mul d1 (w ())))
-                    (half_inverse_time ()))))
+        fun quantity ->
+          match quantity with
+          | Delta -> Lazy.force delta
+          | Gamma -> Lazy.force gamma
+          | Theta ->
+              daily
+                (E.sub
+                   (E.mul_float
+                      (E.sub
+                         (E.mul_float (E.mul c.asset (Lazy.force cdf1)) c.yield)
+                         (E.mul_float (E.mul c.cash (Lazy.force cdf2)) c.rate))
+                      theta)
+                   (E.div (E.mul p vol) (E.scale root_time 1)))
+          | Vega -> Lazy.force vega
+          | Rho ->
+              if rho_forward then forward_rho ()
+              else E.mul_float (E.mul t (E.mul c.cash (Lazy.force cdf2))) theta
+          | Vanna -> E.neg (E.div (E.mul (E.div p c.spot) d2) vol)
+          | Volga -> E.div (E.mul (Lazy.force vega) (E.mul d1 d2)) vol
+          | Charm ->
+              daily
+                (E.sub
+                   (E.mul_float (Lazy.force delta) c.yield)
+                   (E.mul (E.div p c.spot) (Lazy.force w)))
+          | Veta ->
+              daily
+                (E.mul (Lazy.force vega)
+                   (E.sub
+                      (E.add (E.exact c.yield) (E.mul d1 (Lazy.force w)))
+                      (Lazy.force half_inverse_time)))
+          | Color ->
+              daily
+                (E.mul (Lazy.force gamma)
+                   (E.add
+                      (E.add (E.exact c.yield) (E.mul d1 (Lazy.force w)))
+                      (Lazy.force half_inverse_time))))
     | Normal c -> (
         let d = E.div c.distance total in
         let d2 = E.mul d d and p = E.mul c.discount (pdf d) in
-        let delta () =
-          E.mul_float (E.mul c.discount (cdf (E.mul_float d theta))) theta
+        let delta =
+          lazy
+            (E.mul_float (E.mul c.discount (cdf (E.mul_float d theta))) theta)
         in
-        let vega () = E.mul p root_time in
-        let gamma () = E.div p total in
-        match quantity with
-        | Delta -> delta ()
-        | Gamma -> gamma ()
-        | Theta ->
-            daily
-              (E.sub
-                 (E.mul_float (price model side sigma) c.rate)
-                 (E.div (E.mul p vol) (E.scale root_time 1)))
-        | Vega -> vega ()
-        | Rho -> forward_rho ()
-        | Vanna -> E.neg (E.div (E.mul p d) vol)
-        | Volga -> E.div (E.mul (vega ()) d2) vol
-        | Charm ->
-            daily
-              (E.add
-                 (E.mul_float (delta ()) c.rate)
-                 (E.mul (E.mul p d) (half_inverse_time ())))
-        | Veta ->
-            daily
-              (E.mul (vega ())
-                 (E.sub (E.exact c.rate)
-                    (E.mul (E.add one d2) (half_inverse_time ()))))
-        | Color ->
-            daily
-              (E.mul (gamma ())
-                 (E.add (E.exact c.rate)
-                    (E.mul (E.sub one d2) (half_inverse_time ())))))
+        let vega = lazy (E.mul p root_time) in
+        let gamma = lazy (E.div p total) in
+        fun quantity ->
+          match quantity with
+          | Delta -> Lazy.force delta
+          | Gamma -> Lazy.force gamma
+          | Theta ->
+              daily
+                (E.sub
+                   (E.mul_float (Lazy.force price) c.rate)
+                   (E.div (E.mul p vol) (E.scale root_time 1)))
+          | Vega -> Lazy.force vega
+          | Rho -> forward_rho ()
+          | Vanna -> E.neg (E.div (E.mul p d) vol)
+          | Volga -> E.div (E.mul (Lazy.force vega) d2) vol
+          | Charm ->
+              daily
+                (E.add
+                   (E.mul_float (Lazy.force delta) c.rate)
+                   (E.mul (E.mul p d) (Lazy.force half_inverse_time)))
+          | Veta ->
+              daily
+                (E.mul (Lazy.force vega)
+                   (E.sub (E.exact c.rate)
+                      (E.mul (E.add one d2) (Lazy.force half_inverse_time))))
+          | Color ->
+              daily
+                (E.mul (Lazy.force gamma)
+                   (E.add (E.exact c.rate)
+                      (E.mul (E.sub one d2) (Lazy.force half_inverse_time)))))
+
+  let greek model side sigma ~rho_forward quantity =
+    prepare_greeks model side sigma ~rho_forward quantity
 
   let inverse_residual model side quote =
     if quote = 0.0 then fun sigma -> price_enclosed model side sigma

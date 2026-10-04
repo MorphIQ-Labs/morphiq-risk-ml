@@ -62,6 +62,11 @@ struct
                       (words
                          (Batch.evaluate_many A.model inputs side sigma requests)
                       = words expected);
+                    check "reordered outputs retain independent results"
+                      (words
+                         (A.evaluate_many admitted side sigma
+                            (List.rev requests))
+                      = words (List.rev expected));
                     check "empty requests"
                       (A.evaluate_many admitted side sigma [] = []))
                   [ Side.Call; Side.Put ])
