@@ -1,0 +1,9 @@
+{
+  "measured_runtime_commit": "856ef7a5f607818de27fb3fe4196077623fed730",
+  "reproducible_runtime_commit": "f0f536bffa26b25dc6d0e1d8c1008d6d08341aea",
+  "identical_runtime_tree": "2c9ca9c3439122b5e47920e06094392017e3ebab",
+  "baseline_commit": "7783c6b7b38a10e54ce6855525fdd64f45e365cf",
+  "baseline_main_commit": "385e819cbeeae8121f4910ac64fcc34348d4ca3b",
+  "baseline_tree": "31aea6eb75cd439d1b374052d3c30e62b0d1b1b6",
+  "note": "Signed rebase after PR #81 merged preserves each complete source tree; historical measurements and reports retain their actual commit identifiers."
+}

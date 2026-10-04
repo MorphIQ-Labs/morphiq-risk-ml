@@ -43,8 +43,10 @@ weakened there. The ten original #80 fields have permanent independent-value
 or numerical-failure regressions, with no false payoff-kink allowance.
 
 The baseline is `7783c6b7b38a10e54ce6855525fdd64f45e365cf` (PR #81's
-qualified tree). The qualified arithmetic is `856ef7a`; subsequent documentation
-and rebases preserve that runtime source. Per-row before/after outcomes,
+qualified tree). Measurements used `856ef7a`; the signed rebase onto merged #81 produces
+`f0f536bffa26b25dc6d0e1d8c1008d6d08341aea` with the **identical complete tree**.
+`source-map.json` retains this reproducible mapping. Subsequent documentation
+preserves that runtime source. Per-row before/after outcomes,
 references, runner binary hashes and scorer provenance are retained.
 
 ## Compatibility and public replay
