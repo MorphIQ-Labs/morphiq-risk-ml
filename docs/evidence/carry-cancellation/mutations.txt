@@ -1,0 +1,9 @@
+baseline passes (54 s)
+killed    cancelled-price-refinement by carry_cancellation
+killed    cancelled-price-cell by carry_cancellation
+killed    intrinsic-nonfinite-price by finite_greeks
+killed    zero-variance-veta by boundary_greeks
+killed    quotient-remainder by numerical_regressions
+killed    intrinsic-tiny-carry by numerical_regressions
+killed    intrinsic-expm1 by oracle_price
+7 of 7 mutants killed as catalogued

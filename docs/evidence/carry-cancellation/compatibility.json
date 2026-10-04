@@ -1,0 +1,28 @@
+{
+  "baseline_source": "b862fe2033af0a7c4a42128d77f66d29c7707b72",
+  "candidate_source": "fecf7c9",
+  "traces": [
+    {
+      "corpus": "european",
+      "rows": 57320,
+      "before_sha256": "d6e3dbeef575ebb867dc46d86130fe6ae9bc06a790ae97696795823efba73f81",
+      "after_sha256": "d6e3dbeef575ebb867dc46d86130fe6ae9bc06a790ae97696795823efba73f81",
+      "identical": true
+    },
+    {
+      "corpus": "displaced",
+      "rows": 41768,
+      "before_sha256": "9050ed9cdfb13e9d45192131ebb45e48b7b3aa3f460232ac68882330402cf486",
+      "after_sha256": "9050ed9cdfb13e9d45192131ebb45e48b7b3aa3f460232ac68882330402cf486",
+      "identical": true
+    },
+    {
+      "corpus": "greeks",
+      "rows": 66400,
+      "before_sha256": "6c6ef9f90bc8c964394e890c8075cd08563fad94c85f2b9391f558b557ff91b6",
+      "after_sha256": "6c6ef9f90bc8c964394e890c8075cd08563fad94c85f2b9391f558b557ff91b6",
+      "identical": true
+    }
+  ],
+  "determinism": "e2fae65de27c7f4add63b5a476c833fcc91f1efdafde9a73950ba34db3382593"
+}

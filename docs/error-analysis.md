@@ -195,6 +195,20 @@ The code uses expm1 for |x|≤0.35 and L+C_y≤1. This is a conservative validit
 
 **Mutation evidence.** Rounding the quotient remainder to one word now fails the independent coordinate corpus (`quotient-remainder`). Near S/K=1 the log term is small enough to distinguish it. The old assertion that no test could distinguish this was false. Removing the intrinsic terms guard still survives the current price corpus under the revised bounds. Run `dune exec scripts/mutation/mutation.exe -- --probe intrinsic-terms` to reproduce that specific result. The exclusion is provisional; a survivor is not a proof of equivalence or impossibility.
 
+### 5.1.1 Severe carry cancellation refinement (#76)
+
+When the DD coordinate lies within a conservative estimate of its formation
+uncertainty after cancellation, the fast price now refines from original words.
+Zero variance uses `exp(-qT) [(S-K) - K expm1(-(r-q)T)]` with runtime enclosures;
+positive variance uses the existing original-model enclosure. A finite result
+requires the complete interval to prove its binary64 rounding cell. Inconclusive
+refinement returns NaN, never an unchecked DD fallback. Exact currency scaling
+and cell comparisons at the normalized exponent preserve subnormal boundaries.
+The [method](carry-cancellation-design.md) defines dispatch, domains and limits;
+the [results](results-carry-cancellation.md) distinguish corrections, explicit
+availability losses and unaffected ordinary corpora. This branch does not turn
+the rest of the fast API into a universal certificate.
+
 ### 5.2 Independent price certificates and quality gates
 
 All **99,056 price rows** (57,296 European and 41,760 displaced) now require the per-input analytical certificate in §8, including expiry and zero variance. Unsupported domains, nonfinite radii and disagreement between the arithmetic replay and the served value fail the ordinary scorer. There is no measured-envelope fallback.

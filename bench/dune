@@ -87,3 +87,10 @@
   (:standard -O3))
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name carry_cancellation)
+ (modules carry_cancellation)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))
