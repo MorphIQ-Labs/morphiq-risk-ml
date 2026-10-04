@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "decision_date": "2026-10-04",
+  "baseline": "b10490a09ffa0c0c1f33227b1dc98d8197c3d21e",
+  "scope": "Research selection and planned qualification only; no model implementation, numerical scoring, canonical build or independent human approval is claimed.",
+  "paper": {
+    "id": "1976-margrabe-exchange-option-working-paper",
+    "title": "The Value of an Option to Exchange One Asset for Another",
+    "author": "William Margrabe",
+    "version": "Rodney L. White Center Working Paper No. 13-76; 20-page institutional scan",
+    "url": "https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2014/03/7613.pdf",
+    "sha256": "bd6442ef8152a227bac084806e7f057f13e84c60b6213786fc80de6d10f00904",
+    "bytes": 412637,
+    "retrieved_on": "2026-10-04",
+    "inspection": "Cover and printed pp. 2-6 visually inspected; mathematical scope is European no-dividend exchange, equation (7). Continuous yields are separately derived in the project contract.",
+    "preserved_in": "MorphIQ-Labs/research-library",
+    "archive_path": "papers/1976-margrabe-exchange-option-working-paper.pdf",
+    "public_redistribution": "not_cleared",
+    "rights_status": "unreviewed"
+  },
+  "canonical": {
+    "repository": "https://github.com/lballabio/QuantLib",
+    "commit": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+    "description": "v1.43-357-g79f08f66b",
+    "files": {
+      "LICENSE.TXT": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+      "ql/pricingengines/exotic/analyticeuropeanmargrabeengine.cpp": "7b2faadb0f8def0a3d15a3709d4e00578105ac51e720684d17bdd1e63032f29b",
+      "ql/pricingengines/exotic/analyticeuropeanmargrabeengine.hpp": "f6eb042b2ebb030a848dadfafaaca6f3a2bc844ebfe747f3439ad864a45104fc",
+      "ql/instruments/margrabeoption.cpp": "e03656c5962af64c99ed809b47f7a29a60b70507a006694ac32bbbf3f32550e5",
+      "ql/instruments/margrabeoption.hpp": "567d2caef5a473f5fa2949693caa03f42eb2e63a1c5c5928033e2e2d6f649b8a",
+      "test-suite/margrabeoption.cpp": "6ea3abea730d187535f7e3124959082b9b7da739fc501dd001ed1aef48b5a15c",
+      "ql/pricingengines/vanilla/jumpdiffusionengine.cpp": "573c1e5738b70820ec7582b259416ccf1619222a5ebd9a525d8741b022e771ae",
+      "ql/pricingengines/vanilla/analytichestonengine.cpp": "91cd55748a206597d04208152975d068a02db1514bb6995f57841954a509ce30"
+    },
+    "status": "Pinned and inspected; build and execution are required before changing runtime numerics in #60.",
+    "runtime_imports": "None; no upstream source or coefficients copied."
+  },
+  "independent_reference_plan": {
+    "methods": [
+      "Exact-rational covariance with Arb closed-form evaluation",
+      "Positive-part Gaussian expectation with rigorous quadrature and analytic tail bounds",
+      "Exact boundary identities"
+    ],
+    "precision_bits": [
+      256,
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "max_batch_rows": 64,
+    "worker_deadline_seconds": 60,
+    "max_lane_rows": 10000,
+    "implementation_status": "Planned, not implemented or scored. Subdivision/evaluation cap must be frozen before scoring."
+  }
+}
