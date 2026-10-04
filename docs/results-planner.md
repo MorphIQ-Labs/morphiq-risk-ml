@@ -39,6 +39,13 @@ Independent interval validation is evidence over its recorded corpus, not a
 universal availability theorem. Accepted scalar results and aggregates rely
 on their runtime enclosure contracts; failures remain possible elsewhere.
 
+## Compilation scaling follow-up
+
+The [group-count qualification](results-planner-compilation.md) addresses #63's
+quadratic compilation cost for heterogeneous aggregation keys. It adds both
+homogeneous and growing-group compile-only measurements; the historical
+million-instrument campaign below does not exercise that cardinality dimension.
+
 ## Layout decision
 
 [Raw measurements](evidence/planner-scale.json) retain source/binary hashes,

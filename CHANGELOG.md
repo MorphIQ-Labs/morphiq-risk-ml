@@ -23,6 +23,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   package checks and measured overhead. Correctness takes priority over baseline
   compatibility and availability.
 
+### Planner compilation group count
+
+- Remove the per-position full aggregation-map traversal. Count only new keys,
+  with a checked limit, preserving duplicate and signed-zero grouping, first
+  representatives, plan identities, ordered summaries and numerical outputs.
+- Patch-level performance change: 40,000 distinct-group compilation measures
+  2.318 s → 116 ms (about 20× faster); homogeneous books remain effectively
+  unchanged. The one-output corpus allocates six additional words per position.
+- [Qualification and reproduction](docs/results-planner-compilation.md) retain
+  boundary/fault controls, full-suite results and sequential repeated timings
+  with source/toolchain/host provenance. Long scale campaigns remain manual.
+
 ### Inverse-normal operation reuse
 
 - Reuse identical density/square values in inverse refinement and prepare the

@@ -1,0 +1,25 @@
+{
+  "candidate_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+  "controls": [
+    {
+      "name": "count-equivalent-groups",
+      "successful_build": true,
+      "exit_code": 2,
+      "rejection": "Fatal error: exception Failure(\"duplicates: wrong rejection\")",
+      "snippet": "if not (Buckets.mem key !buckets) then (",
+      "replacement": "if true then ("
+    },
+    {
+      "name": "bypass-group-limit",
+      "successful_build": true,
+      "exit_code": 2,
+      "rejection": "Fatal error: exception Failure(\"single: excess groups accepted\")",
+      "snippet": "(!group_count < limits.max_groups)",
+      "replacement": "true"
+    }
+  ],
+  "clean_guard": "planner groups: limits, duplicates, signed zeros, ordered totals; replay=add1883b68d8d6d69536da521294fc00f87a8bd0e2d02617101e7128848f447f\n",
+  "baseline_restored": true,
+  "test_sha256": "bb13b846d46839d8e69376d2ce3048003253094890f0cc7c8947d20a1c576386",
+  "command": "opam exec --switch=morphiq-risk-ml -- dune build --release -j 2 test/planner_groups.exe; _build/default/test/planner_groups.exe"
+}
