@@ -476,13 +476,8 @@
 
 (executable
  (name planner_stress)
- (modules
-  planner_stress
-  planner_stress_cases
-  planner_instrumented
-  planner_probe
-  planner_signature)
- (libraries morphiq_risk morphiq_fp zarith unix)
+ (modules planner_stress planner_stress_cases)
+ (libraries planner_test_instrumentation morphiq_risk morphiq_fp zarith unix)
  (flags
   (:standard -open Morphiq_fp)))
 
@@ -687,7 +682,7 @@
 (test
  (name fast_batch_reference)
  (modules fast_batch_reference)
- (libraries oracle_fixture morphiq_risk)
+ (libraries fast_reference_cases morphiq_risk)
  (action
   (run
    %{test}
@@ -705,3 +700,36 @@
    CAML_LD_LIBRARY_PATH
    ../lib/fp
    (run %{test}))))
+
+(library
+ (name fast_reference_cases)
+ (modules fast_reference_cases)
+ (libraries oracle_fixture morphiq_risk))
+
+(test
+ (name fast_planner_reference)
+ (modules fast_planner_reference)
+ (libraries fast_reference_cases morphiq_risk)
+ (action
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/european.txt}
+   %{dep:../oracle/fixtures/displaced.txt})))
+
+(library
+ (name planner_test_instrumentation)
+ (wrapped false)
+ (modules planner_instrumented planner_probe planner_signature)
+ (libraries morphiq_risk morphiq_fp zarith unix)
+ (flags
+  (:standard -open Morphiq_fp)))
+
+(executable
+ (name fast_planner_metrics)
+ (modules fast_planner_metrics)
+ (libraries planner_test_instrumentation morphiq_risk unix))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:fast_planner_metrics.exe} --check)))

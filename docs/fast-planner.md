@@ -122,3 +122,6 @@ planner compilers reuse different work: `Batch.Fast` caches admission for fixed
 requests, while `Planner.Fast` caches structural bindings and generates and admits
 rows lazily to maintain scenario memory bounds. Neither changes the underlying
 numerical kernel or guarantees a benefit from multiple workers on small jobs.
+
+See [integrated qualification](fast-integration-qualification.md) for retained
+fixture coverage, concurrency, memory measurements and platform evidence.

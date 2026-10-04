@@ -1,5 +1,11 @@
 (* Test-only domain and result-lifetime observations. Configuration is frozen
    before execution; shared observations use atomics. *)
+let worker_bytes = Atomic.make 0
+
+let allocated_bytes () =
+  let minor, promoted, major = Gc.counters () in
+  int_of_float (8. *. (minor +. major -. promoted))
+
 let spawned = Atomic.make 0
 let joined = Atomic.make 0
 let active = Atomic.make 0
@@ -18,7 +24,15 @@ let reset () =
     failwith "probe reset with unjoined domains";
   List.iter
     (fun x -> Atomic.set x 0)
-    [ spawned; joined; active; completed_tiles; retained_slots; peak_slots ];
+    [
+      worker_bytes;
+      spawned;
+      joined;
+      active;
+      completed_tiles;
+      retained_slots;
+      peak_slots;
+    ];
   attempts := 0;
   fail_spawn := -1;
   fail_domain := -1;
@@ -59,9 +73,14 @@ module Domains = struct
     if attempt = !fail_spawn then failwith "injected spawn rejection";
     let domain =
       Domain.spawn (fun () ->
+          let before = allocated_bytes () in
           ignore (Atomic.fetch_and_add active 1);
           Fun.protect
-            ~finally:(fun () -> ignore (Atomic.fetch_and_add active (-1)))
+            ~finally:(fun () ->
+              ignore
+                (Atomic.fetch_and_add worker_bytes
+                   (allocated_bytes () - before));
+              ignore (Atomic.fetch_and_add active (-1)))
             (fun () ->
               if attempt = !fail_domain then
                 failwith "injected domain exception";

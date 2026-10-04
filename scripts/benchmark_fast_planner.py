@@ -20,7 +20,12 @@ def main():
     parser.add_argument('--version', action='version', version='fast-planner-campaign-v1')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--runs', type=int, default=5)
+    parser.add_argument('--tile-rows', type=int, default=32)
+    parser.add_argument('--size', type=int)
     args = parser.parse_args()
+    sizes = (args.size,) if args.size is not None else (32, 256, 1024)
+    if args.tile_rows < 1 or args.tile_rows > 1000000 or any(n < 1 or n > 1000000 for n in sizes):
+        parser.error('size and tile rows must be in 1..1000000')
     if args.runs < 1:
         parser.error('runs must be positive')
     root = Path(__file__).resolve().parents[1]
@@ -30,6 +35,7 @@ def main():
     report = dict(protocol='fast-planner-campaign-v1', revision=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(),
                   sources_sha256={str(p.relative_to(root)): sha(p) for p in sources}, binary_sha256=sha(binary),
                   platform=platform.platform(), cpu_count=os.cpu_count(),
+                  workload=dict(sizes=sizes, scenarios=4, tile_rows=args.tile_rows, workers=[1,4]),
                   toolchain=subprocess.check_output(['ocamlopt', '-config'], text=True),
                   flags='Dune default profile; library -O3; benchmark standard flags',
                   measurements='ns, CPU ns and coordinator-domain bytes per whole four-scenario job; five samples after three warmups per phase; max(1,4096/n) iterations per sample; full major GC outside timing',
@@ -37,7 +43,7 @@ def main():
     if platform.system() == 'Darwin':
         report['hardware'] = subprocess.check_output(['sysctl', '-n', 'machdep.cpu.brand_string'], text=True).strip()
     phases = {'compile', 'execute-1', 'execute-4', 'pack-compile-execute'}
-    slots = {(n, phase, sample) for n in (32, 256, 1024) for phase in phases for sample in range(1, 6)}
+    slots = {(n, phase, sample) for n in sizes for phase in phases for sample in range(1, 6)}
     identities = {}
     def save():
         args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -45,7 +51,10 @@ def main():
     for i in range(args.runs):
         before = os.getloadavg()
         started = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        raw = subprocess.check_output([str(binary)], text=True)
+        command = [str(binary), '--tile-rows', str(args.tile_rows)]
+        if args.size is not None:
+            command += ['--size', str(args.size)]
+        raw = subprocess.check_output(command, text=True)
         seen, checks, samples = set(), set(), []
         for line in raw.splitlines():
             fields = line.split()
@@ -64,14 +73,14 @@ def main():
                 samples.append(dict(size=int(n), phase=phase, sample=int(sample), ns=float(ns), cpu_ns=float(cpu_ns), bytes=float(allocation)))
             else:
                 raise ValueError('unexpected output')
-        if seen != slots or checks != {32, 256, 1024}:
+        if seen != slots or checks != set(sizes):
             raise ValueError('incomplete coverage')
         report['runs'].append(dict(run=i, started=started, load_before=before, load_after=os.getloadavg(), raw=raw, samples=samples))
         save()
         print(f'completed process {i + 1}', flush=True)
     report['checks'] = identities
     report['summary'] = []
-    for n in (32, 256, 1024):
+    for n in sizes:
         for phase in sorted(phases):
             values = [s for r in report['runs'] for s in r['samples'] if s['size'] == n and s['phase'] == phase]
             report['summary'].append(dict(size=n, phase=phase, **{

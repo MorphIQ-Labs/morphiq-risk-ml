@@ -223,6 +223,44 @@ let () =
       copy.(0) <- { (copy.(0)) with strike = 1. };
       markets.(0) <- markets.(1);
       check (equal (fst (collect frozen)) events) "source snapshots";
+      let tile_rows = ok (F.evaluate_tile plan (F.tile plan 0)) in
+      tile_rows.(0) <- { (tile_rows.(0)) with price = Error F.Post_expiry };
+      check (equal (fst (collect plan)) events) "tile result ownership";
+      let concurrent =
+        List.init 3 (fun _ ->
+            Domain.spawn (fun () ->
+                List.init 3 (fun _ -> fst (collect ~workers:2 plan))))
+      in
+      List.iter
+        (fun handle ->
+          List.iter
+            (fun got -> check (equal got events) "concurrent plan reuse")
+            (Domain.join handle))
+        concurrent;
+      let nested = ref false in
+      let reentrant =
+        F.execute plan ~workers:2 ~cancellation:(P.cancellation ())
+          ~sink:(fun _ ->
+            if not !nested then (
+              nested := true;
+              check
+                (equal (fst (collect ~workers:2 plan)) events)
+                "reentrant reuse");
+            Ok ())
+      in
+      check (reentrant = done_) "reentrant completion";
+      let calls = ref 0 in
+      let raised =
+        F.execute plan ~workers:2 ~cancellation:(P.cancellation ())
+          ~sink:(fun _ ->
+            incr calls;
+            if !calls = 4 then failwith "sink-exception";
+            Ok ())
+      in
+      check
+        (raised.rows_committed = 3 && !calls = 4
+        && match raised.stop with P.Sink_failure _ -> true | _ -> false)
+        "sink exception prefix";
       let token = P.cancellation () in
       let seen = ref [] in
       let stopped =
@@ -330,3 +368,97 @@ let () =
   print_endline
     "fast planner: original-input prices, both date conventions, ownership, \
      worker replay, failures and limits pass"
+
+let () =
+  let f = Int64.float_of_bits in
+  List.iter
+    (fun volatility ->
+      let market =
+        P.
+          [|
+            {
+              name = "cancel";
+              market =
+                Spot_market
+                  {
+                    spot = f 0x3ff0000000000001L;
+                    volatility = ok (Vol.lognormal volatility);
+                  };
+            };
+            {
+              name = "overflow";
+              market =
+                Normal_market
+                  { forward = Float.max_float; volatility = ok (Vol.normal 0.) };
+            };
+          |]
+      in
+      let portfolio =
+        Array.init 3 (fun i ->
+            P.
+              {
+                id = string_of_int i;
+                factor = (if i = 2 then "overflow" else "cancel");
+                rate_factor = "r";
+                currency = "USD";
+                quantity = 1.;
+                model =
+                  (if i = 2 then Bachelier else Bsm { dividend_yield = 0. });
+                strike = (if i = 2 then -.Float.max_float else 1.);
+                expiry_day = 365;
+                rate = (if i = 2 then 0. else f 0xbcafffffffffffffL);
+                side = (if i = 1 then Side.Put else Side.Call);
+              })
+      in
+      let plan =
+        ok
+          (compile ~portfolio ~market
+             ~scenarios:(ok (S.cartesian [ S.Time [| 0; 365; 366 |] ]))
+             ())
+      in
+      let events, _ = collect ~workers:3 plan in
+      List.iter
+        (function
+          | F.Finished _ -> ()
+          | F.Row r ->
+              let expected =
+                if r.scenario_id = 2 then Error F.Post_expiry
+                else if r.instrument_index = 2 then
+                  Error (F.Scalar Batch.Fast.Numerical_failure)
+                else
+                  let inputs : Black.Bsm.inputs =
+                    {
+                      spot = f 0x3ff0000000000001L;
+                      strike = 1.;
+                      time_to_expiry = (if r.scenario_id = 0 then 1. else 0.);
+                      rate = f 0xbcafffffffffffffL;
+                      dividend_yield = 0.;
+                    }
+                  in
+                  Result.map_error
+                    (fun e -> F.Scalar e)
+                    (Batch.Fast.evaluate
+                       (Batch.Fast.Price
+                          ( Batch.Bsm,
+                            inputs,
+                            portfolio.(r.instrument_index).side,
+                            ok (Vol.lognormal volatility) )))
+              in
+              check (equal r.price expected)
+                "mixed cancellation/overflow/expiry";
+              if volatility = 0. && r.scenario_id = 0 && r.instrument_index = 0
+              then
+                check
+                  (r.price = Ok (f 0x3615555555555556L))
+                  "original-input cancellation cell";
+              if volatility <> 0. && r.scenario_id = 0 && r.instrument_index = 0
+              then
+                check
+                  (r.price = Error (F.Scalar Batch.Fast.Numerical_failure)
+                  || r.price = Ok (f 0x3615555555e74264L))
+                  "unresolved cancellation cell")
+        events)
+    [ 0.; 0x1p-160 ];
+  print_endline
+    "fast planner: carry-cancellation cells, payoff overflow and post-expiry \
+     remain explicit"

@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Integrated fast pricing qualification (#98)
+
+- Retain exact scalar equivalence for all 99,088 batch fixture outcomes and
+  77,744 planner outcomes whose original maturities fit the civil-day API.
+  Nonrepresentable maturities remain explicit; independent reference scoring
+  continues separately.
+- Add concurrent/reentrant planner reuse, tile-array ownership, sink exception,
+  carry-cancellation, overflow and worker-failure cleanup controls. Measure
+  bounded output, sampled live heap and allocation across pricing domains.
+- Production sources and numerical semantics are unchanged. See
+  [integrated qualification and limitations](docs/fast-integration-qualification.md).
+
 ### Fast-price scenario streaming (#97)
 
 - Add `Planner.Fast` frozen plans with bounded ordered price streaming and

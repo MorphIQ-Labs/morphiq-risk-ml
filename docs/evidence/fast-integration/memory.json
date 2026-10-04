@@ -1,0 +1,168 @@
+{
+  "protocol": "fast-memory-v1",
+  "revision": "1f6dd3b1cbd76287657c88b227cb0af4e66bb473",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "toolchain": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+  "sources_sha256": {
+    "lib/planner.ml": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78",
+    "test/fast_planner_metrics.ml": "32620862cf0727507d0ed48997035bdb037d9478d3447877b2bdcb65a7e2a963",
+    "test/planner_probe.ml": "f5a57e68134acf3ba496e29d1f8281a14c1742cce55214892457abe03c87a8ab",
+    "scripts/instrument_planner.py": "fdd6b4c665144c5a49b6acba46175b4d88295938f46579be89e7fe7938842f29",
+    "scripts/measure_fast_planner_memory.py": "08c98f5ce03ea263ec840997adcd52343e5e5482fb6505e0439541db4ede7313"
+  },
+  "binary_sha256": "b2485593340a848e433ebe4e2ac3c718c1d240cf295b6ec949d3b15a0ce0308d",
+  "scope": "Test-only source instrumentation. all_domain_bytes sums coordinator GC allocation and worker-body GC allocation, including probe overhead; domain runtime initialization/stacks are excluded. Live words are post-major-GC samples, not peak RSS. Fixed eight-position book, compact linear scenario axis, non-retaining sink.",
+  "runs": [
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 8,
+        "workers": 1,
+        "rows": 64,
+        "peak_slots": 4,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 5937,
+        "all_domain_bytes": 989200,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "finished": "2026-10-04T21:12:16.986783+00:00"
+    },
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 8,
+        "workers": 4,
+        "rows": 64,
+        "peak_slots": 16,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 6130,
+        "all_domain_bytes": 998392,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "finished": "2026-10-04T21:12:17.000482+00:00"
+    },
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 800,
+        "workers": 1,
+        "rows": 6400,
+        "peak_slots": 4,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 5937,
+        "all_domain_bytes": 104371536,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "finished": "2026-10-04T21:12:17.025128+00:00"
+    },
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 800,
+        "workers": 4,
+        "rows": 6400,
+        "peak_slots": 16,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 6130,
+        "all_domain_bytes": 105283608,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "finished": "2026-10-04T21:12:17.266409+00:00"
+    },
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 8000,
+        "workers": 1,
+        "rows": 64000,
+        "peak_slots": 4,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 5937,
+        "all_domain_bytes": 1044247696,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "finished": "2026-10-04T21:12:17.444027+00:00"
+    },
+    {
+      "measured": {
+        "injected_failure": false,
+        "scenarios": 8000,
+        "workers": 4,
+        "rows": 64000,
+        "peak_slots": 16,
+        "bound": 16,
+        "live_before": 5840,
+        "peak_live_sample": 6130,
+        "all_domain_bytes": 1053367768,
+        "source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78"
+      },
+      "load_before": [
+        131.1025390625,
+        78.2099609375,
+        65.86181640625
+      ],
+      "load_after": [
+        133.01611328125,
+        79.484375,
+        66.3837890625
+      ],
+      "finished": "2026-10-04T21:12:20.341195+00:00"
+    }
+  ],
+  "complete": true
+}

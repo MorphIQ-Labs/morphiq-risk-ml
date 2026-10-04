@@ -27,9 +27,17 @@ let evaluate_tile t work =
         (Array.fold_left (fun n row -> n + max 1 (List.length row.outcomes)) 0 rows));
     result)
 let execute t ~workers ~cancellation ~sink =''')
+source = replace_once(source, '  let execute (Plan p as plan) ~workers ~cancellation ~sink =', """  let evaluate_tile_original = evaluate_tile
+  let evaluate_tile plan work =
+    Planner_probe.evaluate work.id (fun () ->
+      let result = evaluate_tile_original plan work in
+      (match result with Error _ -> () | Ok rows -> Planner_probe.retain (Array.length rows));
+      result)
+  let execute (Plan p as plan) ~workers ~cancellation ~sink =""")
 source = replace_once(source, 'let run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =',
                       'module Domain = Planner_probe.Domains\n\nlet run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =')
 source = replace_once(source, 'next := !next + n', 'Planner_probe.release_wave ();\n        next := !next + n')
+source = replace_once(source, 'module Fast = struct', 'module Fast_original = struct')
 print('open Morphiq_risk\nopen Morphiq_risk.Internal')
 print('let instrumented_source_sha256 = "' + hashlib.sha256(Path(sys.argv[1]).read_bytes()).hexdigest() + '"')
 print(source)
@@ -39,3 +47,12 @@ let execute t ~workers ~cancellation ~sink =
   Fun.protect ~finally:Planner_probe.release_wave
     (fun () -> execute_original t ~workers ~cancellation ~sink)
 ''')
+
+print("""
+module Fast = struct
+  include Fast_original
+  let execute plan ~workers ~cancellation ~sink =
+    Fun.protect ~finally:Planner_probe.release_wave
+      (fun () -> Fast_original.execute plan ~workers ~cancellation ~sink)
+end
+""")
