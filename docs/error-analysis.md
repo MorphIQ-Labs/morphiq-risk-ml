@@ -544,6 +544,14 @@ currency scaling, with the existing multiplication/exponential allowances and
 matching certificate replay; no budget is widened. Independent exact-input
 references also check finite results, including the corrected subnormal rho.
 
+The [#77 refinement](rho-subnormal-design.md) additionally preserves the
+probability correction at half-subnormal rounding boundaries. Selected BSM
+rho results now require an original-input enclosure inside one nearest-even
+cell, with explicit failure otherwise. Analytical zero proofs and scaled
+Mills tails avoid losing the final product's scale. This does not certify
+unselected normal-range fast rho. See the [qualification and availability
+accounting](results-rho-midpoint.md).
+
 ## Fast Greek cancellation capability (#80)
 
 The exhausted-coordinate selector from §5.1.1 also bounds the offered fast

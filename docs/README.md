@@ -19,6 +19,7 @@ been retired; it remains in Git history.
 
 ## Numerical methods and verification
 
+- [Subnormal rho qualification](results-rho-midpoint.md): original-input rounding cells, zero proofs, availability and timing evidence.
 - [Error analysis](error-analysis.md): derivations and the current certification scope.
 - [Greek cancellation qualification](results-greek-cancellation.md): explicit coordinate/theta limits, independent references and compatibility evidence.
 - [Carry-cancellation price refinement](results-carry-cancellation.md): original-input correction, explicit availability limits and timing cost.

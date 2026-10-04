@@ -1,0 +1,9 @@
+baseline passes (54 s)
+killed    rho-quick-zero-threshold by rho_midpoint
+killed    rho-tail-exponent by rho_midpoint
+killed    rho-tail-zero-proof by rho_midpoint
+killed    rho-subnormal-refinement by rho_midpoint
+killed    rho-midpoint-probability by rho_midpoint
+killed    cancelled-greek-coordinate by greek_cancellation
+killed    greek-finite-result by finite_greeks
+7 of 7 mutants killed as catalogued
