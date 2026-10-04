@@ -77,27 +77,37 @@ struct
     finite low;
     (s, low)
 
-  (* Exact grow-expansion: carry a new word through an increasing-magnitude
-   expansion using TwoSum. No discarded bit is assumed negligible. *)
-  let grow expansion word =
-    let rec go result carry = function
-      | [] -> List.rev (if carry = 0.0 then result else carry :: result)
-      | term :: rest ->
-          let sum, residual = two_sum carry term in
-          go (if residual = 0.0 then result else residual :: result) sum rest
-    in
-    go [] word expansion
+  (* Exact grow-expansion in private scratch, in increasing-magnitude order.
+     At step j, used <= j: writing a residual cannot overwrite an unread term.
+     Each inserted word increases length by at most one. *)
+  let grow expansion length word =
+    let carry = ref word and used = ref 0 in
+    for j = 0 to length - 1 do
+      let sum, residual = two_sum !carry (Float.Array.get expansion j) in
+      if residual <> 0.0 then (
+        Float.Array.set expansion !used residual;
+        incr used);
+      carry := sum
+    done;
+    if !carry <> 0.0 then (
+      Float.Array.set expansion !used !carry;
+      incr used);
+    !used
 
   let pack terms error =
     require (Float.is_finite error && error >= 0.0) "invalid enclosure radius";
-    let expansion = List.fold_left grow [] terms |> List.rev in
-    let rec take n kept error = function
-      | [] -> (List.rev kept, error)
-      | x :: rest ->
-          if n > 0 then take (n - 1) (x :: kept) error rest
-          else take 0 kept (error +^ abs x) rest
+    (* No grow can retain more words than have been inserted. Scratch never
+       escapes this call, and all indexing remains checked. *)
+    let expansion = Float.Array.create (List.length terms) in
+    let length = List.fold_left (grow expansion) 0 terms in
+    let rec take n kept error j =
+      if j < 0 then (List.rev kept, error)
+      else
+        let x = Float.Array.get expansion j in
+        if n > 0 then take (n - 1) (x :: kept) error (j - 1)
+        else take 0 kept (error +^ abs x) (j - 1)
     in
-    let words, error = take Config.words [] error expansion in
+    let words, error = take Config.words [] error (length - 1) in
     require (Float.is_finite error) "nonfinite enclosure radius";
     match words with
     | [] -> { hi = 0.0; lo = 0.0; tail = []; error }

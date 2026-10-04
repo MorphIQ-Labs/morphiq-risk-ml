@@ -1,0 +1,54 @@
+{
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "build": "Dune default profile; lib and assurance -O3; same sources/switch/harness on both sides",
+  "commands": [
+    {
+      "command": [
+        "sw_vers"
+      ],
+      "output": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A428"
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "machdep.cpu.brand_string"
+      ],
+      "output": "Apple M1 Pro"
+    },
+    {
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "ocamlopt",
+        "-version"
+      ],
+      "output": "5.3.0"
+    },
+    {
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "ocamlopt",
+        "-config-var",
+        "flambda"
+      ],
+      "output": "true"
+    },
+    {
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "dune",
+        "--version"
+      ],
+      "output": "3.24.2"
+    }
+  ]
+}

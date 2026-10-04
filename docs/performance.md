@@ -169,3 +169,13 @@ cumulative allocation per row on its recorded M1 Pro; this is not resident
 memory or a deployment SLA. The [0.2.0 dossier](candidate-0.2.0.md) additionally
 retains matching numerical replay on all three supported platforms. These
 results preserve the earlier kernel comparisons and separate GC profile above.
+
+
+## Expansion allocation optimization
+
+The [private-buffer optimization](results-certificate-allocation.md) preserves
+the enclosure arithmetic and measured value/radius bits. Against `bea4620`,
+the paired shared-host exchange runs reduce allocation 65–74% and evaluation
+time 14–22%. The four-model IV workload allocates 46–52% less; its smaller
+observed timing differences are not deployment guarantees. Full samples,
+reference replay, failure outcomes and limits are retained in that report.

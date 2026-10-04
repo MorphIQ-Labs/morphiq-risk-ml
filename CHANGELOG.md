@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Certificate allocation (#8)
+
+- Replace temporary expansion lists with private checked float scratch while
+  preserving arithmetic order, retained words and error radii. No public API,
+  accuracy limit or numerical method changes.
+- Shared-host paired measurements reduce exchange allocation 65–74% and
+  evaluation time 14–22%; IV allocation falls 46–52%. Qualified exchange and
+  shadow value/radius replays and the public determinism digest are unchanged.
+  [Evidence, safety argument and measurement limits](docs/results-certificate-allocation.md).
+
 ### Exchange qualification (#61)
 
 - Retain 649 frozen original-word requests: 625 served certificates contain

@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **83
+seven core mutants. The catalog currently contains **84
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -193,3 +193,14 @@ misclassification, premature discounted-leg rounding, the deliver leg's yield,
 certificate radius and final absolute-limit enforcement. Each uses
 `exchange_reference`; only resolved independent intervals adjudicate numerical
 accuracy. The catalog now has 83 mechanisms; the default seven are unchanged.
+
+
+## Expansion allocation optimization (#8)
+
+The optional `enclosure-grow-residual` mechanism drops nonzero TwoSum residuals
+from the private scratch buffer. The existing exact-rational
+`enclosure_reference` guard must reject it. Discarded-word, product-guard,
+series-tail and FMA-underflow mechanisms remain applicable; the discarded-word
+locator follows the equivalent reverse array traversal. The current catalog
+has 84 mechanisms, with the same seven in default CI. See the
+[optimization evidence](results-certificate-allocation.md).
