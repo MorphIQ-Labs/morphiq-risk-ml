@@ -11,10 +11,11 @@ type why =
   | Numerical_failure
       (** [Payoff_kink] means the requested derivative is undefined.
           [Numerical_failure] means arithmetic could not produce a finite result
-          in that field's output units, or its required boundary enclosure could
-          not establish a rounded result. It is not a usable approximate value.
-          A finite fast Greek retains its documented checked-input assurance;
-          finite acceptance alone is not an accuracy certificate. *)
+          in that field's output units, its coordinate was unresolved, or its
+          required boundary enclosure could not establish a rounded result. It
+          is not a usable approximate value. A finite fast Greek retains its
+          documented checked-input assurance; finite acceptance alone is not an
+          accuracy certificate. *)
 
 type 'a value = ('a, why) result
 

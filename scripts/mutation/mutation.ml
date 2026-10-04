@@ -38,6 +38,41 @@ type mutant = {
 let catalog =
   [
     {
+      id = "smooth-theta-cancellation";
+      file = "lib/black.ml";
+      snippet = "terms > 0.0 && Float.abs value.hi <= noise";
+      replacement = "false && terms > 0.0 && Float.abs value.hi <= noise";
+      killer = "greek_cancellation";
+      mechanism = "unresolved DD discount-leg subtraction cannot serve theta";
+    };
+    {
+      id = "zero-variance-theta-cancellation";
+      file = "lib/black.ml";
+      snippet = "theta = Greeks.daily annual_theta;";
+      replacement =
+        "theta = Greeks.daily (up (on (theta *. ((q *. c.asset) -. (r *. \
+         c.cash)))));";
+      killer = "greek_cancellation";
+      mechanism =
+        "zero-variance theta must retain cancelling discount-leg terms";
+    };
+    {
+      id = "cancelled-greek-coordinate";
+      file = "lib/black.ml";
+      snippet = "needs_coordinate_refinement c\n        ||";
+      replacement = "false\n        ||";
+      killer = "greek_cancellation";
+      mechanism = "exhausted coordinates cannot serve inaccurate finite Greeks";
+    };
+    {
+      id = "underflowed-greek-coordinate";
+      file = "lib/black.ml";
+      snippet = "c.x = 0.0 && c.x_low = 0.0 && not exact_atm";
+      replacement = "false && c.x = 0.0 && c.x_low = 0.0 && not exact_atm";
+      killer = "greek_cancellation";
+      mechanism = "rounded zero carry is not an exact payoff kink";
+    };
+    {
       id = "cancelled-price-refinement";
       file = "lib/black.ml";
       snippet = "Float.abs c.x <= noise";
@@ -819,7 +854,7 @@ let guard_arguments = function
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
   | "production_boundary" | "planner_contract" | "prepared_division"
-  | "carry_cancellation" ->
+  | "carry_cancellation" | "greek_cancellation" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

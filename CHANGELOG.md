@@ -5,6 +5,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Greek cancellation and zero-variance theta (#80)
+
+- Refuse all fast Black-family Greeks when carry cancellation exhausts DD
+  coordinate precision, or a computed zero lacks original-input ATM identity.
+  Unresolved smooth-theta component cancellation refuses that field alone.
+  These are numerical capability limits, not payoff kinks.
+- Preserve cancelling zero-variance theta terms through a DD identity. Among
+  1,013 changed public replay words, independent original-input Arb references
+  improve the worst error from 13,458,194 ULP to at most 1 ULP. Other replay
+  quantities are unchanged; the existing 66,400 Greek oracle rows are unchanged.
+- **Major outcome/numerical change** (minor while 0.y.z). The 10,760-request
+  challenge changes 437 inaccurate values into 9 checked values and 428 explicit
+  failures; 32 wrong classes become failures. Another 738 previously within-budget
+  values become unavailable. No accuracy budget was widened.
+- The public digest becomes
+  `5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199`.
+  [Derivation, original-input reference provenance, per-row outcomes and timing](docs/results-greek-cancellation.md).
+
 ### Severe carry-cancellation price refinement (#76)
 
 - Recompute selected Black-family prices from original-input enclosures when

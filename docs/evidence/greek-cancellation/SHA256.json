@@ -1,0 +1,21 @@
+{
+  "lib/black.ml": "c81a85f5f881b4f5b7e4c09f4c60b3ec8aba7eea83d617487baefbb05ee3982f",
+  "lib/black.mli": "bcbfe845e1e364f2aecc2b453f4bfdbb189f7a2670b9782a5777154f561e2222",
+  "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+  "test/greek_cancellation.ml": "9c526425977792d3f1387ee36e07d06915e9058b932a3251cd7818bac1f0fbd0",
+  "test/determinism.digest": "b6d439b715b09c209b800ed216650222ac0893861770a9372ec35351217205ea",
+  "bench/greek_cancellation.ml": "ccc29c4e7225fea1bf211e919e1481b9267260552d1408cfa61a14fd849ddcf4",
+  "scripts/check_greek_cancellation.py": "b8ef96e67c60b0a5c01f788a3b332bdc0e4fcdcf64f36bdfc8f931907034f7ae",
+  "scripts/greek_cancellation_reference.py": "5aec9940c1d6c915f77312f60118c074b791b09413395244e4759c0c5cbc8cfa",
+  "scripts/audit_greek_replay.py": "0cfbbd9342574fb05d5545b3a5cca9ddb387cc208f7f2cda5d3e03a80b8c5b2f",
+  "oracle/challenges/greek-cancellation-v1.json.gz": "576fd01f27ac7dc3dc95b9ce276ca31fd7387a91f0eb389e93e58d040f65d4ce",
+  "oracle/challenges/greek-cancellation-v1.json.gz.manifest.json": "72d2c741e74c76deee479bcc0b6602c128e4dea2716f3ba0ef7c9f0b7146d284",
+  "docs/evidence/greek-cancellation/after-outcomes.json.gz": "7d1cdb5f9b37415893c158be7743552ef282c9d51e092f2fb8dccf3e8d449999",
+  "docs/evidence/greek-cancellation/before-outcomes.json.gz": "a778b598189c8c13a3b384324d1ef6510657011a55b747c46ee33a819bcdf43c",
+  "docs/evidence/greek-cancellation/compatibility.json": "b2121f4137ae7d4d59a54a1bd01f29bcbb85b0f02a315bf4964c756f904cbf3a",
+  "docs/evidence/greek-cancellation/mutations.txt": "8fe2ab86a3d5c497ff7ac30430ba363f701df5602467c18b158d192310d8bd88",
+  "docs/evidence/greek-cancellation/numerical-full.json.gz": "be1c2b571035913a3b5659bdbc5931d29f2bad2d1becc168edaadaca6fa14c31",
+  "docs/evidence/greek-cancellation/performance.json": "8af94675dc6f25f09ec121d4584c59cff523cf1ae7c88774e560e4593c292c3d",
+  "docs/evidence/greek-cancellation/replay-audit.json.gz": "1e2d76edf5b0385903f9897d9576943579185d479d74a9fa93cdad354608875e",
+  "docs/evidence/greek-cancellation/source-map.json": "81b2dc0c208527125ede6ca4ddf5cce3b62a8a902127acfff1343b7891162a10"
+}

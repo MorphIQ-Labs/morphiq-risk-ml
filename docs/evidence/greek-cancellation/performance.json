@@ -1,0 +1,849 @@
+{
+  "hardware": "Apple M1 Pro",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+  "dune": "3.24.2",
+  "baseline_source": "7783c6b7b38a10e54ce6855525fdd64f45e365cf",
+  "candidate_source": "856ef7a5f607818de27fb3fe4196077623fed730",
+  "harness_sha256": "ccc29c4e7225fea1bf211e919e1481b9267260552d1408cfa61a14fd849ddcf4",
+  "runs": [
+    {
+      "kind": "baseline",
+      "load": "9:48  up 7 days, 17:10, 12 users, load averages: 4.10 4.10 4.95",
+      "started_unix": 1791121738.7911732,
+      "seconds": 15.37164855003357,
+      "samples_ns": {
+        "ordinary-positive/admission": [
+          1273.608,
+          1191.187,
+          1137.495,
+          1129.913,
+          1127.791,
+          1134.396,
+          1115.704
+        ],
+        "ordinary-positive/price": [
+          1495.218,
+          1514.292,
+          1501.513,
+          1505.089,
+          1545.095,
+          1538.897,
+          1562.119
+        ],
+        "ordinary-positive/greeks": [
+          9234.715,
+          9234.405,
+          9190.297,
+          9197.187,
+          9440.303,
+          9287.095,
+          9383.607
+        ],
+        "ordinary-positive/admission+greeks": [
+          10625.005,
+          10595.989,
+          10475.206,
+          10502.601,
+          10506.01,
+          10404.992,
+          10381.389
+        ],
+        "ordinary-zero/admission": [
+          1134.3,
+          1133.8,
+          1133.394,
+          1128.912,
+          1125.503,
+          1115.894,
+          1119.709
+        ],
+        "ordinary-zero/price": [
+          1265.502,
+          1275.706,
+          1264.596,
+          1258.707,
+          1272.297,
+          1265.097,
+          1262.212
+        ],
+        "ordinary-zero/greeks": [
+          1399.183,
+          1403.213,
+          1414.99,
+          1409.292,
+          1406.312,
+          1393.294,
+          1407.909
+        ],
+        "ordinary-zero/admission+greeks": [
+          2557.111,
+          2571.797,
+          2573.8,
+          2594.709,
+          2619.195,
+          2579.093,
+          2599.406
+        ],
+        "cancel-zero/admission": [
+          1126.409,
+          1148.796,
+          1137.686,
+          1120.806,
+          1137.495,
+          1153.708,
+          1118.207
+        ],
+        "cancel-zero/price": [
+          54519.176,
+          53870.678,
+          53761.005,
+          53868.294,
+          53660.87,
+          54678.917,
+          55539.608
+        ],
+        "cancel-zero/greeks": [
+          55890.083,
+          54590.702,
+          55270.195,
+          54769.516,
+          54559.708,
+          55429.935,
+          53820.61
+        ],
+        "cancel-zero/admission+greeks": [
+          55279.732,
+          56819.916,
+          58529.377,
+          57199.001,
+          55260.658,
+          55670.738,
+          55139.065
+        ],
+        "cancel-positive/admission": [
+          1131.32,
+          1108.813,
+          1115.799,
+          1108.098,
+          1107.383,
+          1137.114,
+          1116.61
+        ],
+        "cancel-positive/price": [
+          902960.3,
+          901939.869,
+          891788.006,
+          893440.247,
+          899481.773,
+          897128.582,
+          900790.691
+        ],
+        "cancel-positive/greeks": [
+          912220.478,
+          900480.747,
+          901260.376,
+          899000.168,
+          905709.267,
+          908319.95,
+          906898.975
+        ],
+        "cancel-positive/admission+greeks": [
+          908110.142,
+          909459.591,
+          909471.512,
+          911498.07,
+          921201.706,
+          926527.977,
+          937550.068
+        ],
+        "cancel-tiny/admission": [
+          1156.402,
+          1133.108,
+          1116.395,
+          1111.889,
+          1117.301,
+          1111.603,
+          1110.005
+        ],
+        "cancel-tiny/price": [
+          4314169.884,
+          4298779.964,
+          4278199.673,
+          4317810.535,
+          4329528.809,
+          4298751.354,
+          4269227.982
+        ],
+        "cancel-tiny/greeks": [
+          4308137.894,
+          4444591.999,
+          4360818.863,
+          4317140.579,
+          4287710.19,
+          4313299.656,
+          4302070.141
+        ],
+        "cancel-tiny/admission+greeks": [
+          4287328.72,
+          4303581.715,
+          4330759.048,
+          4305160.046,
+          4310491.085,
+          4306969.643,
+          4356229.305
+        ]
+      },
+      "binary_sha256": "7260a1f0b0d81d49718d69c7a71ed4b0d5e16cf4ee9a5e25ba1e43998a988b3d"
+    },
+    {
+      "kind": "candidate",
+      "load": "9:49  up 7 days, 17:10, 12 users, load averages: 3.85 4.05 4.92",
+      "started_unix": 1791121754.172108,
+      "seconds": 7.1479811668396,
+      "samples_ns": {
+        "ordinary-positive/admission": [
+          1221.895,
+          1165.891,
+          1154.9,
+          1169.801,
+          1145.911,
+          1151.896,
+          1137.9
+        ],
+        "ordinary-positive/price": [
+          1527.596,
+          1533.89,
+          1544.309,
+          1502.585,
+          1497.912,
+          1522.398,
+          1516.294
+        ],
+        "ordinary-positive/greeks": [
+          9291.887,
+          9396.315,
+          9422.398,
+          9437.49,
+          9400.201,
+          9384.608,
+          9285.307
+        ],
+        "ordinary-positive/admission+greeks": [
+          10679.197,
+          10436.583,
+          10358.405,
+          10362.911,
+          10353.184,
+          10479.522,
+          10461.187
+        ],
+        "ordinary-zero/admission": [
+          1135.492,
+          1157.403,
+          1124.191,
+          1139.808,
+          1133.895,
+          1135.111,
+          1149.702
+        ],
+        "ordinary-zero/price": [
+          1320.1,
+          1302.004,
+          1279.402,
+          1310.897,
+          1286.101,
+          1280.999,
+          1282.692
+        ],
+        "ordinary-zero/greeks": [
+          2794.695,
+          2766.49,
+          2762.008,
+          2823.591,
+          2845.216,
+          2796.483,
+          2781.01
+        ],
+        "ordinary-zero/admission+greeks": [
+          3876.591,
+          3858.495,
+          3869.605,
+          3925.109,
+          3958.702,
+          3914.38,
+          3921.199
+        ],
+        "cancel-zero/admission": [
+          1130.199,
+          1125.503,
+          1117.611,
+          1119.089,
+          1127.696,
+          1117.11,
+          1150.894
+        ],
+        "cancel-zero/price": [
+          54118.633,
+          55620.67,
+          54900.646,
+          54378.51,
+          54152.012,
+          54359.436,
+          54090.023
+        ],
+        "cancel-zero/greeks": [
+          9.537,
+          11.921,
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          11.921
+        ],
+        "cancel-zero/admission+greeks": [
+          1180.172,
+          1120.567,
+          1099.11,
+          1130.104,
+          1099.11,
+          1161.098,
+          1089.573
+        ],
+        "cancel-positive/admission": [
+          1118.898,
+          1124.001,
+          1116.705,
+          1115.394,
+          1121.092,
+          1124.501,
+          1130.509
+        ],
+        "cancel-positive/price": [
+          903789.997,
+          904850.96,
+          900578.499,
+          901579.857,
+          904481.411,
+          893340.111,
+          898530.483
+        ],
+        "cancel-positive/greeks": [
+          21.458,
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          11.921,
+          9.537
+        ],
+        "cancel-positive/admission+greeks": [
+          1070.499,
+          1139.641,
+          1099.11,
+          1120.567,
+          1111.031,
+          1139.641,
+          1118.183
+        ],
+        "cancel-tiny/admission": [
+          1150.298,
+          1129.818,
+          1115.489,
+          1131.01,
+          1106.095,
+          1121.593,
+          1120.71
+        ],
+        "cancel-tiny/price": [
+          4416451.454,
+          4371888.638,
+          4359059.334,
+          4372551.441,
+          4330029.488,
+          4347980.022,
+          4376280.308
+        ],
+        "cancel-tiny/greeks": [
+          11.921,
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          11.921,
+          9.537
+        ],
+        "cancel-tiny/admission+greeks": [
+          1151.562,
+          1189.709,
+          1130.104,
+          1139.641,
+          1199.245,
+          1130.104,
+          1149.178
+        ]
+      },
+      "binary_sha256": "20d49553ea259fb4270ed7d12f9fbdccf814061c77f329178719bcf90486cb65"
+    },
+    {
+      "kind": "candidate",
+      "load": "9:49  up 7 days, 17:10, 12 users, load averages: 3.94 4.06 4.92",
+      "started_unix": 1791121761.326962,
+      "seconds": 7.024606943130493,
+      "samples_ns": {
+        "ordinary-positive/admission": [
+          1157.618,
+          1139.784,
+          1119.9,
+          1145.315,
+          1138.997,
+          1117.182,
+          1123.023
+        ],
+        "ordinary-positive/price": [
+          1508.212,
+          1529.288,
+          1511.002,
+          1520.3,
+          1498.199,
+          1511.312,
+          1503.491
+        ],
+        "ordinary-positive/greeks": [
+          9288.216,
+          9292.984,
+          9345.794,
+          9266.806,
+          9310.508,
+          9300.995,
+          9272.099
+        ],
+        "ordinary-positive/admission+greeks": [
+          10457.206,
+          10438.895,
+          10468.292,
+          10643.411,
+          10485.005,
+          10579.491,
+          10445.809
+        ],
+        "ordinary-zero/admission": [
+          1159.096,
+          1135.015,
+          1128.888,
+          1127.1,
+          1116.705,
+          1120.21,
+          1120.687
+        ],
+        "ordinary-zero/price": [
+          1259.089,
+          1281.5,
+          1306.2,
+          1278.901,
+          1266.193,
+          1263.618,
+          1273.68
+        ],
+        "ordinary-zero/greeks": [
+          2726.388,
+          2727.008,
+          2702.594,
+          2708.602,
+          2744.198,
+          2711.415,
+          2708.101
+        ],
+        "ordinary-zero/admission+greeks": [
+          3852.201,
+          3834.009,
+          3888.702,
+          3844.595,
+          3849.602,
+          3884.006,
+          3853.393
+        ],
+        "cancel-zero/admission": [
+          1118.994,
+          1118.493,
+          1107.597,
+          1128.197,
+          1116.109,
+          1115.203,
+          1109.505
+        ],
+        "cancel-zero/price": [
+          53820.61,
+          55091.381,
+          53889.751,
+          55599.213,
+          55170.059,
+          55301.189,
+          55148.602
+        ],
+        "cancel-zero/greeks": [
+          11.921,
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          9.537
+        ],
+        "cancel-zero/admission+greeks": [
+          1189.709,
+          1120.567,
+          1180.172,
+          1180.172,
+          1108.646,
+          1130.104,
+          1120.567
+        ],
+        "cancel-positive/admission": [
+          1116.395,
+          1131.487,
+          1127.315,
+          1112.39,
+          1146.102,
+          1128.507,
+          1113.915
+        ],
+        "cancel-positive/price": [
+          898277.76,
+          908470.154,
+          903141.499,
+          901129.246,
+          903019.905,
+          900011.063,
+          901188.85
+        ],
+        "cancel-positive/greeks": [
+          9.537,
+          21.458,
+          9.537,
+          9.537,
+          9.537,
+          11.921,
+          9.537
+        ],
+        "cancel-positive/admission+greeks": [
+          1111.031,
+          1158.714,
+          1130.104,
+          1111.031,
+          1111.031,
+          1099.11,
+          1099.11
+        ],
+        "cancel-tiny/admission": [
+          1108.503,
+          1112.986,
+          1131.701,
+          1137.519,
+          1109.481,
+          1136.708,
+          1128.292
+        ],
+        "cancel-tiny/price": [
+          4296879.768,
+          4337708.95,
+          4340472.221,
+          4373538.494,
+          4345569.611,
+          4335300.922,
+          4330029.488
+        ],
+        "cancel-tiny/greeks": [
+          9.537,
+          9.537,
+          9.537,
+          9.537,
+          11.921,
+          9.537,
+          9.537
+        ],
+        "cancel-tiny/admission+greeks": [
+          1120.567,
+          1108.646,
+          1111.031,
+          1099.11,
+          1120.567,
+          1130.104,
+          1099.11
+        ]
+      },
+      "binary_sha256": "20d49553ea259fb4270ed7d12f9fbdccf814061c77f329178719bcf90486cb65"
+    },
+    {
+      "kind": "baseline",
+      "load": "9:49  up 7 days, 17:10, 12 users, load averages: 3.64 3.99 4.88",
+      "started_unix": 1791121768.358908,
+      "seconds": 15.189068078994751,
+      "samples_ns": {
+        "ordinary-positive/admission": [
+          1134.61,
+          1125.598,
+          1133.895,
+          1128.888,
+          1125.002,
+          1116.705,
+          1114.798
+        ],
+        "ordinary-positive/price": [
+          1540.494,
+          1519.704,
+          1502.609,
+          1496.887,
+          1517.415,
+          1521.707,
+          1518.798
+        ],
+        "ordinary-positive/greeks": [
+          9413.6,
+          9476.495,
+          9399.605,
+          9458.494,
+          9432.22,
+          9343.1,
+          9467.292
+        ],
+        "ordinary-positive/admission+greeks": [
+          10461.402,
+          10375.285,
+          10413.408,
+          10656.691,
+          10686.302,
+          10548.902,
+          10597.396
+        ],
+        "ordinary-zero/admission": [
+          1172.09,
+          1153.708,
+          1123.595,
+          1164.007,
+          1130.605,
+          1149.201,
+          1146.388
+        ],
+        "ordinary-zero/price": [
+          1290.393,
+          1286.697,
+          1297.307,
+          1324.01,
+          1327.3,
+          1279.402,
+          1280.999
+        ],
+        "ordinary-zero/greeks": [
+          1434.994,
+          1436.996,
+          1400.805,
+          1415.61,
+          1391.792,
+          1392.102,
+          1420.808
+        ],
+        "ordinary-zero/admission+greeks": [
+          2545.714,
+          2567.601,
+          2542.4,
+          2537.084,
+          2517.819,
+          2556.801,
+          2539.492
+        ],
+        "cancel-zero/admission": [
+          1109.29,
+          1120.615,
+          1127.195,
+          1109.195,
+          1126.695,
+          1122.022,
+          1104.379
+        ],
+        "cancel-zero/price": [
+          54931.641,
+          53868.294,
+          54039.955,
+          54202.08,
+          53648.949,
+          54628.849,
+          54042.339
+        ],
+        "cancel-zero/greeks": [
+          54340.363,
+          55060.387,
+          54988.861,
+          54190.159,
+          55661.201,
+          53899.288,
+          54690.838
+        ],
+        "cancel-zero/admission+greeks": [
+          55348.873,
+          56490.898,
+          55758.953,
+          56490.898,
+          55439.472,
+          55220.127,
+          55100.918
+        ],
+        "cancel-positive/admission": [
+          1110.888,
+          1106.0,
+          1113.51,
+          1139.498,
+          1121.688,
+          1127.219,
+          1127.195
+        ],
+        "cancel-positive/price": [
+          898370.743,
+          892291.069,
+          902259.35,
+          900650.024,
+          895800.591,
+          898900.032,
+          894789.696
+        ],
+        "cancel-positive/greeks": [
+          907509.327,
+          902528.763,
+          904521.942,
+          913558.006,
+          925700.665,
+          928840.637,
+          926229.954
+        ],
+        "cancel-positive/admission+greeks": [
+          911371.708,
+          911288.261,
+          911700.726,
+          918490.887,
+          903959.274,
+          903849.602,
+          905239.582
+        ],
+        "cancel-tiny/admission": [
+          1129.103,
+          1109.314,
+          1106.596,
+          1110.697,
+          1110.601,
+          1128.387,
+          1121.116
+        ],
+        "cancel-tiny/price": [
+          4280531.406,
+          4288849.831,
+          4276700.02,
+          4266870.022,
+          4278059.006,
+          4268879.89,
+          4281871.319
+        ],
+        "cancel-tiny/greeks": [
+          4282882.214,
+          4293158.054,
+          4294741.154,
+          4279348.85,
+          4284389.019,
+          4287910.461,
+          4281418.324
+        ],
+        "cancel-tiny/admission+greeks": [
+          4290599.823,
+          4283919.334,
+          4279670.715,
+          4287269.115,
+          4298801.422,
+          4285290.241,
+          4294319.153
+        ]
+      },
+      "binary_sha256": "7260a1f0b0d81d49718d69c7a71ed4b0d5e16cf4ee9a5e25ba1e43998a988b3d"
+    }
+  ],
+  "median_ns": {
+    "ordinary-positive/admission": {
+      "baseline": 1129.4005,
+      "candidate": 1145.613
+    },
+    "ordinary-positive/price": {
+      "baseline": 1518.1064999999999,
+      "candidate": 1513.8029999999999
+    },
+    "ordinary-positive/greeks": {
+      "baseline": 9391.606,
+      "candidate": 9305.7515
+    },
+    "ordinary-positive/admission+greeks": {
+      "baseline": 10504.3055,
+      "candidate": 10459.1965
+    },
+    "ordinary-zero/admission": {
+      "baseline": 1133.597,
+      "candidate": 1134.455
+    },
+    "ordinary-zero/price": {
+      "baseline": 1277.554,
+      "candidate": 1281.2495
+    },
+    "ordinary-zero/greeks": {
+      "baseline": 1407.1105,
+      "candidate": 2753.103
+    },
+    "ordinary-zero/admission+greeks": {
+      "baseline": 2562.3559999999998,
+      "candidate": 3873.098
+    },
+    "cancel-zero/admission": {
+      "baseline": 1124.2155,
+      "candidate": 1118.7435
+    },
+    "cancel-zero/price": {
+      "baseline": 54041.147,
+      "candidate": 54639.578
+    },
+    "cancel-zero/greeks": {
+      "baseline": 54730.177,
+      "candidate": 9.537
+    },
+    "cancel-zero/admission+greeks": {
+      "baseline": 55555.104999999996,
+      "candidate": 1125.3355000000001
+    },
+    "cancel-positive/admission": {
+      "baseline": 1116.2044999999998,
+      "candidate": 1122.5465
+    },
+    "cancel-positive/price": {
+      "baseline": 898635.3875,
+      "candidate": 901384.3535
+    },
+    "cancel-positive/greeks": {
+      "baseline": 907204.1510000001,
+      "candidate": 9.537
+    },
+    "cancel-positive/admission+greeks": {
+      "baseline": 911329.9845,
+      "candidate": 1111.031
+    },
+    "cancel-tiny/admission": {
+      "baseline": 1114.1419999999998,
+      "candidate": 1124.9425
+    },
+    "cancel-tiny/price": {
+      "baseline": 4281201.362500001,
+      "candidate": 4346774.8165
+    },
+    "cancel-tiny/greeks": {
+      "baseline": 4293949.604,
+      "candidate": 9.537
+    },
+    "cancel-tiny/admission+greeks": {
+      "baseline": 4296560.2875,
+      "candidate": 1130.104
+    }
+  }
+}

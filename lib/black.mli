@@ -74,6 +74,10 @@ module type MODEL = sig
 
   val greeks :
     admitted -> Side.t -> Vol.lognormal Vol.t -> Vol.lognormal Greeks.t
+  (** Severe carry cancellation or a computed zero coordinate unsupported by
+      original-input ATM identity yields [Greeks.Numerical_failure] in every
+      field. Unresolved cancellation inside smooth theta additionally refuses
+      that field alone. These are capability limits, not payoff kinks. *)
 
   val coordinates : admitted -> Coordinates.t
 end

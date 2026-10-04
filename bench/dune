@@ -94,3 +94,10 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk unix))
+
+(executable
+ (name greek_cancellation)
+ (modules greek_cancellation)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))

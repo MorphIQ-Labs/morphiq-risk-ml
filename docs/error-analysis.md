@@ -543,3 +543,16 @@ establish a zero payoff. BSM rho retains the maturity exponent until final
 currency scaling, with the existing multiplication/exponential allowances and
 matching certificate replay; no budget is widened. Independent exact-input
 references also check finite results, including the corrected subnormal rho.
+
+## Fast Greek cancellation capability (#80)
+
+The exhausted-coordinate selector from §5.1.1 also bounds the offered fast
+Greek capability: selected requests refuse all fields before using those
+coordinates. A computed zero without original-input ATM identity likewise
+cannot establish a kink. Zero-volatility theta instead assembles
+`q(A-C)+(q-r)C` in DD before currency scaling. Smooth theta has a separate
+component-cancellation refusal where its DD leg subtraction loses precision;
+only that field fails. These selectors are explicit capability restrictions,
+not runtime error certificates for unselected results. See the
+[derivation](greek-cancellation-design.md) and
+[original-input qualification](results-greek-cancellation.md).
