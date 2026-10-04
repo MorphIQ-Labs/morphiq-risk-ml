@@ -20,6 +20,7 @@ been retired; it remains in Git history.
 - [Shared Greek intermediates](shared-greek-intermediates.md): dependency identity and deferred per-quantity failures.
 - [Shared certified preparation](shared-certification.md): typed multi-output requests, per-output limits and call-local reuse.
 - [Scenario planner](scenario-planner.md): shocks, date rolls, resource limits, aggregation, and execution failures.
+- [Worker and tile tuning](planner-worker-tuning.md): throughput, startup, first output and memory tradeoffs.
 - [Planner stress evidence](planner-stress-results.md): forced failure schedules, bounded output accounting and separate process-memory observations.
 - [Public interface](../lib/morphiq_risk.mli) and [type audit](type-boundary-audit.md).
 - [Stability](stability.md), [determinism](determinism.md), and [numerical backend](numerical-backend-contract.md).
