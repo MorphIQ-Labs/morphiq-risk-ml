@@ -8,9 +8,10 @@ engineering checks on the supported platforms, with explicit limitations and
 retained evidence. It does not mean institutional deployment approval, a release
 publication, a numerical proof over all inputs, or an independent human review.
 
-The source declares 0.3.0, currently unreleased. The qualification receipt is
-added after the manual exact-candidate workflow completes; no pending run may
-be presented as a successful qualification. Later evidence-only commits are
+The source declares 0.3.0, currently unreleased. The [qualified candidate dossier](candidate-0.3.0.md) records source
+`83b541e02ce3467536a6febc54a5eeb49004bc8a`, all three supported platforms and
+the complete 65-mutant campaign. Its [integrity receipt](evidence/experimental-0.3.0/dossier.json)
+retains the exact reports and hashes. Later evidence-only commits are
 identified separately from the candidate they describe. The historical
 [0.2.0 dossier](candidate-0.2.0.md) and [pending institutional decision](acceptance/pending.json)
 remain unchanged. Institutional requirements continue under #27 and
