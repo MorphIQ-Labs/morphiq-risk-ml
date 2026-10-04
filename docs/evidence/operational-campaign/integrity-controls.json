@@ -1,0 +1,20 @@
+[
+  {
+    "control": "staged library change",
+    "rejected_before_pricing": true
+  },
+  {
+    "control": "unstaged library change",
+    "rejected_before_pricing": true
+  },
+  {
+    "control": "untracked library change",
+    "rejected_before_pricing": true
+  },
+  {
+    "control": "impossible latency criterion",
+    "exit_code": 1,
+    "measurement_complete": true,
+    "deployment_accepted": false
+  }
+]

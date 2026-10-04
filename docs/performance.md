@@ -210,3 +210,11 @@ scheduler across fast and certified prices, 1/2/4 workers, portfolio sizes and
 tile sizes. It establishes workload-specific scaling with larger tiles, retains
 small-job regressions, and reports first-output and buffer tradeoffs. Use the
 [caller tuning guide](planner-worker-tuning.md) before selecting worker counts.
+
+## Configurable operational baseline
+
+The [operational campaign](operational-campaign.md) measures persistent concurrent
+client processes, plan reuse/recompilation, sink processing, individual request
+latencies, cancellation and process RSS. Its [local baseline](results-operational-campaign.md)
+retains all observations and pending operational targets. It complements the
+scalar shadow and worker/tile studies without declaring deployment acceptance.
