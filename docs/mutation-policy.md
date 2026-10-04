@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **94
+seven core mutants. The catalog currently contains **96
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -236,3 +236,7 @@ the seven-mutant default lane.
 The optional `fast-planner-tile` and `fast-planner-side` mechanisms exercise
 foreign-plan rejection and original option-side dispatch through fast scenarios.
 The shared snapshot/post-expiry mechanisms still protect both planner paths.
+
+The fast-allocation round adds `dd-exp-accumulator-low` and
+`dd-log-accumulator-low`: the independent DD reference guard must reject losing
+the low word between Horner iterations. The default core selection is unchanged.

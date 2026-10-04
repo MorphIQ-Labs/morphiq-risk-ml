@@ -1,0 +1,9 @@
+baseline passes (66 s)
+killed    expm1-tiny by dd_reference
+killed    displaced-exact-sum by oracle_price
+killed    bachelier-distance by oracle_price
+killed    dd-exp-accumulator-low by dd_reference
+killed    dd-log-accumulator-low by dd_reference
+killed    dd-exp-degree by dd_reference
+killed    normal-dd-series by normal_dd_reference
+7 of 7 mutants killed as catalogued

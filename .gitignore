@@ -1,6 +1,7 @@
 oracle/data/
 _build/
 _build-release/
+_build_release/
 *.install
 oracle/.venv/
 oracle/fixtures/*.txt

@@ -733,3 +733,9 @@
  (alias runtest)
  (action
   (run %{exe:fast_planner_metrics.exe} --check)))
+
+(executable
+ (name dd_word_replay)
+ (modules dd_word_replay)
+ (modes byte exe)
+ (libraries oracle_fixture morphiq_risk))

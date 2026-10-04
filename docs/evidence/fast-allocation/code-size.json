@@ -1,0 +1,58 @@
+[
+  {
+    "variant": "baseline",
+    "profile": "development",
+    "module": "Dd",
+    "object_bytes": 32432,
+    "size": "Segment : 19638\n\tSection (__TEXT, __text): 9416\n\tSection (__DATA, __data): 6536\n\tSection (__TEXT, __literal8): 120\n\tSection (__LD, __compact_unwind): 768\n\tSection (__TEXT, __eh_frame): 1416\n\tSection (__DWARF, __debug_line): 1293\n\tSection (__DWARF, __debug_line_str): 89\n\ttotal 19638\ntotal 19638\n"
+  },
+  {
+    "variant": "baseline",
+    "profile": "development",
+    "module": "Split",
+    "object_bytes": 13416,
+    "size": "Segment : 7606\n\tSection (__TEXT, __text): 3712\n\tSection (__DATA, __data): 2264\n\tSection (__TEXT, __literal8): 72\n\tSection (__LD, __compact_unwind): 352\n\tSection (__TEXT, __eh_frame): 640\n\tSection (__DWARF, __debug_line): 475\n\tSection (__DWARF, __debug_line_str): 91\n\ttotal 7606\ntotal 7606\n"
+  },
+  {
+    "variant": "baseline",
+    "profile": "release",
+    "module": "Dd",
+    "object_bytes": 30384,
+    "size": "Segment : 18094\n\tSection (__TEXT, __text): 8608\n\tSection (__DATA, __data): 5760\n\tSection (__TEXT, __literal8): 120\n\tSection (__LD, __compact_unwind): 768\n\tSection (__TEXT, __eh_frame): 1416\n\tSection (__DWARF, __debug_line): 1316\n\tSection (__DWARF, __debug_line_str): 106\n\ttotal 18094\ntotal 18094\n"
+  },
+  {
+    "variant": "baseline",
+    "profile": "release",
+    "module": "Split",
+    "object_bytes": 13408,
+    "size": "Segment : 7596\n\tSection (__TEXT, __text): 3696\n\tSection (__DATA, __data): 2264\n\tSection (__TEXT, __literal8): 72\n\tSection (__LD, __compact_unwind): 352\n\tSection (__TEXT, __eh_frame): 640\n\tSection (__DWARF, __debug_line): 473\n\tSection (__DWARF, __debug_line_str): 99\n\ttotal 7596\ntotal 7596\n"
+  },
+  {
+    "variant": "candidate",
+    "profile": "development",
+    "module": "Dd",
+    "object_bytes": 33496,
+    "size": "Segment : 20562\n\tSection (__TEXT, __text): 10080\n\tSection (__DATA, __data): 6648\n\tSection (__TEXT, __literal8): 120\n\tSection (__LD, __compact_unwind): 768\n\tSection (__TEXT, __eh_frame): 1480\n\tSection (__DWARF, __debug_line): 1386\n\tSection (__DWARF, __debug_line_str): 80\n\ttotal 20562\ntotal 20562\n"
+  },
+  {
+    "variant": "candidate",
+    "profile": "development",
+    "module": "Split",
+    "object_bytes": 13408,
+    "size": "Segment : 7597\n\tSection (__TEXT, __text): 3712\n\tSection (__DATA, __data): 2264\n\tSection (__TEXT, __literal8): 72\n\tSection (__LD, __compact_unwind): 352\n\tSection (__TEXT, __eh_frame): 640\n\tSection (__DWARF, __debug_line): 475\n\tSection (__DWARF, __debug_line_str): 82\n\ttotal 7597\ntotal 7597\n"
+  },
+  {
+    "variant": "candidate",
+    "profile": "release",
+    "module": "Dd",
+    "object_bytes": 30656,
+    "size": "Segment : 18438\n\tSection (__TEXT, __text): 9000\n\tSection (__DATA, __data): 5552\n\tSection (__TEXT, __literal8): 120\n\tSection (__LD, __compact_unwind): 768\n\tSection (__TEXT, __eh_frame): 1480\n\tSection (__DWARF, __debug_line): 1421\n\tSection (__DWARF, __debug_line_str): 97\n\ttotal 18438\ntotal 18438\n"
+  },
+  {
+    "variant": "candidate",
+    "profile": "release",
+    "module": "Split",
+    "object_bytes": 13400,
+    "size": "Segment : 7587\n\tSection (__TEXT, __text): 3696\n\tSection (__DATA, __data): 2264\n\tSection (__TEXT, __literal8): 72\n\tSection (__LD, __compact_unwind): 352\n\tSection (__TEXT, __eh_frame): 640\n\tSection (__DWARF, __debug_line): 473\n\tSection (__DWARF, __debug_line_str): 90\n\ttotal 7587\ntotal 7587\n"
+  }
+]

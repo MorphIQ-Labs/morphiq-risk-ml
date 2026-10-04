@@ -5,6 +5,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Fast pricing allocation (#8)
+
+- Keep DD Horner loop words in scalar accumulators and inline the existing
+  TwoSum primitive without changing arithmetic order, coefficients or budgets.
+  All 86,145 direct DD replay rows match across revisions, profiles and modes;
+  independent full suites retain their original requirements.
+- Release mixed compiled batch allocation falls 45.7% (1,283 → 697 bytes/price)
+  and single-worker scenario allocation falls 36.0% (4,145 → 2,651 bytes/row).
+  Paired execution medians improve 7.4%/9.2% on the measured shared M1 Pro.
+- Gains depend on native compiler visibility. Development gains are smaller;
+  sampled bytecode ITM execution allocates 5.1% more. Four-worker timings do
+  not establish a scaling improvement. See [profiles, spread and tradeoffs](docs/results-fast-allocation.md).
+- Add release-profile ordinary tests to the existing three-platform CI jobs;
+  required check names and the seven-mutant default lane remain unchanged.
+
 ### Integrated fast pricing qualification (#98)
 
 - Retain exact scalar equivalence for all 99,088 batch fixture outcomes and

@@ -1,11 +1,13 @@
 (* Error-free transformations and an exponential that takes its argument as
    an unevaluated sum, so rounding in a large exponent is not amplified. *)
 
-(* Knuth's TwoSum: a + b = s + e exactly. *)
+(* Knuth's TwoSum: a + b = s + e exactly. Inlining allows native callers
+   to eliminate the returned tuple and boxed words without changing rounding. *)
 let two_sum a b =
   let s = a +. b in
   let bb = s -. a in
   (s, a -. (s -. bb) +. (b -. bb))
+[@@inline always]
 
 (* u^2 = hi + lo exactly when the product and residual are representable. *)
 let square u =

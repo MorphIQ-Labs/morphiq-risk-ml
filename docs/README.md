@@ -42,6 +42,9 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
+[Fast allocation optimization](results-fast-allocation.md) records native gains,
+bytecode tradeoffs, exact word compatibility and paired workload measurements.
+
 [Integrated fast pricing qualification](fast-integration-qualification.md) covers
 fixture equivalence, concurrent ownership, bounded memory and measured reuse.
 
