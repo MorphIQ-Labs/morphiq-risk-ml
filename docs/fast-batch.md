@@ -87,3 +87,6 @@ sum cannot be presented with the certified planner's absolute-error promise.
 Existing scenario order, date conventions, grouping, cancellation and resource
 limits remain obligations of that integration. No public planner signature
 changes in the batch API delivery.
+
+See [integrated qualification](fast-integration-qualification.md) for retained
+fixture coverage, concurrency, memory measurements and platform evidence.

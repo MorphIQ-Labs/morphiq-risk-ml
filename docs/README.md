@@ -42,6 +42,9 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
+[Integrated fast pricing qualification](fast-integration-qualification.md) covers
+fixture equivalence, concurrent ownership, bounded memory and measured reuse.
+
 The `results-*.md` reports, `evidence/` artifacts, and dated candidate dossiers
 retain the inputs, toolchains, limitations, and outcomes of specific campaigns.
 They are reproducibility records, not disposable build output. Use each report's
