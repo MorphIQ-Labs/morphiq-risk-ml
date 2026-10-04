@@ -50,6 +50,7 @@ let () =
     (fun _ -> raise (Arg.Bad "unexpected argument"))
     "rho_midpoint: separate operation costs";
   bench "ordinary" 100. 95. 1. 0.02 0. 0.2 10000;
+  bench "ordinary-zero-otm" 95. 100. 1. 0.02 0. 0. 200;
   bench "midpoint" 1. 1. 0x1p-1074 0. 0. 0.25 200;
   bench "tiny-zero" 2. 1. 0x1p-1074 0. 0. 0. 200;
   bench "zero-tail" 1. 100. 1. 0. 0. 0.05 200;

@@ -47,4 +47,27 @@ let () =
   (match g.rho with
   | Ok 0. -> ()
   | _ -> failwith "proved tail zero lost availability");
+  List.iter
+    (fun (side, spot, rate, q, expected) ->
+      let a =
+        get
+          (Black.Bsm.admit
+             {
+               spot = f spot;
+               strike = 100.;
+               time_to_expiry = f 0x3f66719f3601671aL;
+               rate;
+               dividend_yield = q;
+             })
+      in
+      let g = Black.Bsm.greeks a side (get (Vol.lognormal 0.05)) in
+      match g.rho with
+      | Ok value when value = f expected -> ()
+      | _ -> failwith "existing independently resolved subnormal tail rho lost")
+    [
+      (Side.Call, 0x40569ef5a02e89c5L, 0.02, 0.02, 0x13d5L);
+      (Side.Call, 0x40569ef5a02e89c5L, 0.05, 0.01, 0x6241L);
+      (Side.Put, 0x405ba118083ca14bL, 0.02, 0.02, 0x80000000000015ecL);
+      (Side.Put, 0x405ba118083ca14bL, 0.05, 0.01, 0x800000000000046bL);
+    ];
   print_endline "rho midpoint: independently strict call/put rounding cells"

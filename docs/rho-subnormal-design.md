@@ -40,6 +40,16 @@ u exp(-u²/2), retaining the factor 1/(z sqrt(2pi))<1. Thus
 floor can destroy that information. This preserves ordinary underflowed-tail
 availability without weakening the final-cell requirement.
 
+For negative CDF arguments at or beyond -4 whose zero cell is not proved,
+evaluate the entire rho tail in units of 2^-1074:
+`exp(log T + log K - rT - z²/2 + 1074 log 2) R(z)/sqrt(2pi)`.
+Here R is the existing outward Mills-ratio owner, bounded by successive
+continued-fraction convergents. This avoids rounding a tiny CDF before its
+coefficient restores scale. The same final cell test uses exponent -1074.
+The central CDF path remains separate: replacing its exact dyadic coefficient
+by logarithms would lose the very small midpoint direction in the original
+witness. Signed zero follows the side for positive-volatility rho.
+
 If an outward magnitude bound proves the final value strictly below half the
 minimum subnormal, return zero directly. Otherwise accept only a full
 enclosing rounding cell. Arithmetic domain or cell uncertainty becomes a

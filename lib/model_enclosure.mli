@@ -46,6 +46,10 @@ module type S = sig
 
   val pdf : scalar -> scalar
   val cdf : scalar -> scalar
+
+  val mills : scalar -> scalar
+  (** Enclose Phi(-z)/phi(z) for an interval proved strictly positive. *)
+
   val pi : scalar
 
   val inverse_residual : t -> Side.t -> float -> scalar -> scalar

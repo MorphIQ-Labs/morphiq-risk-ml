@@ -38,6 +38,15 @@ type mutant = {
 let catalog =
   [
     {
+      id = "rho-tail-exponent";
+      file = "lib/black_rho.ml";
+      snippet = "-1074 )";
+      replacement = "-1073 )";
+      killer = "rho_midpoint";
+      mechanism =
+        "the normalized tail must restore the minimum-subnormal exponent";
+    };
+    {
       id = "rho-tail-zero-proof";
       file = "lib/black_rho.ml";
       snippet = "if below_zero_cell then";
@@ -57,8 +66,8 @@ let catalog =
     {
       id = "rho-midpoint-probability";
       file = "lib/black_rho.ml";
-      snippet = "Model_enclosure.cdf (E.mul_float d2 theta)";
-      replacement = "E.exact (Model_enclosure.cdf (E.mul_float d2 theta)).hi";
+      snippet = "Model_enclosure.cdf argument";
+      replacement = "E.exact (Model_enclosure.cdf argument).hi";
       killer = "rho_midpoint";
       mechanism =
         "rounding Phi before the scaled product loses midpoint direction";
