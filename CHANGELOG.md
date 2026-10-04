@@ -18,9 +18,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - All 8,330 fixed-quote IV outputs and measured iteration counts are unchanged;
   the financial replay digest is unchanged. A separate direct-inverse digest
   now covers the complete inverse fixture on each CI platform.
-- Direct inverse calls are 24–115× slower in release (about 1.6–4.3 µs in the
-  measured regimes); LBR proposals are 5.2× slower. The final shared-host campaign
-  is too contended to establish a reliable end-to-end regression estimate.
+- Direct inverse calls are 24–122× slower in release (about 1.6–4.4 µs in the
+  measured regimes); LBR proposals are 5.4× slower. A repeat after reduced host
+  activity measures complete workflows +2.9–4.6%; unchanged Bachelier paths
+  also move about 4%, so this is not an isolated AS241 regression estimate.
   These costs and allocation increases are explicit tradeoffs; no accuracy
   gate is relaxed.
 - [Qualification and reproduction](docs/results-inverse-normal.md) retain

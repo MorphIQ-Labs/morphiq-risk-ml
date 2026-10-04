@@ -149,6 +149,54 @@ guarantee. The Black-76 OTM baseline has run medians of 1.07, 1.81 and
 40.5% speedup as a contention warning, not an optimization result. The large direct-inverse/proposal cost remains explicit regardless
 of the application timing variation.
 
+## Repeat after reduced host activity
+
+The maintainer reported that the machine was quieter and requested another
+measurement. The [repeat campaign](evidence/inverse-normal-benchmark-repeat.json.gz)
+uses the **same binaries, arithmetic source hashes, harness hashes and inputs**.
+All task-owned computation had finished; no optimization was made. It retains
+three AB/BA/AB pairs in both profiles, batch spreads, allocations and outcomes.
+All 768 application IV outcomes remain roots in every run. One-minute load at
+run starts ranges from 7.77 to 9.81, versus 8.15–17.58 in the preceding campaign.
+This remains a shared workstation rather than a dedicated benchmark host.
+
+Release primitive medians, ns/call:
+
+| Operation | AS241 | Replacement | Ratio |
+| --- | ---: | ---: | ---: |
+| inverse_central | 25.1 | 2,712.8 | 108.3× |
+| inverse_tail | 35.8 | 4,379.7 | 122.2× |
+| inverse_extreme | 64.3 | 1,571.2 | 24.4× |
+| lbr_proposal | 839.2 | 4,502.1 | 5.4× |
+
+Release complete workflows, ns/call. Parentheses show the minimum and maximum
+of the three process-level medians, not per-request latency percentiles:
+
+| Model / regime | Before: median (range) | After: median (range) | Median change |
+| --- | ---: | ---: | ---: |
+| bsm / atm | 690,250 (688,641–711,906) | 711,531 (699,016–717,562) | +3.1% |
+| bsm / itm | 521,875 (521,328–524,078) | 539,750 (523,641–551,125) | +3.4% |
+| bsm / otm | 1,061,359 (1,054,750–1,083,812) | 1,092,406 (1,059,547–1,099,484) | +2.9% |
+| black76 / atm | 624,078 (620,750–626,922) | 645,453 (641,688–732,984) | +3.4% |
+| black76 / itm | 545,906 (544,875–554,578) | 570,781 (566,875–582,062) | +4.6% |
+| black76 / otm | 1,052,297 (1,049,828–1,058,719) | 1,097,125 (1,082,828–1,140,938) | +4.3% |
+| displaced / atm | 665,547 (663,438–671,828) | 690,375 (682,547–694,969) | +3.7% |
+| displaced / itm | 541,813 (540,062–544,812) | 559,734 (558,875–570,047) | +3.3% |
+| displaced / otm | 1,067,547 (1,067,328–1,068,359) | 1,110,266 (1,108,563–1,111,094) | +4.0% |
+| bachelier / atm | 509,531 (506,016–527,219) | 527,844 (520,078–532,625) | +3.6% |
+| bachelier / itm | 405,875 (404,875–417,391) | 421,563 (417,109–423,187) | +3.9% |
+| bachelier / otm | 605,516 (603,875–618,234) | 630,359 (623,766–646,891) | +4.1% |
+
+Complete workflow medians now range from **+2.9% to +4.6%**, with the large
+contention spikes absent. The direct-inverse and LBR costs remain substantial
+and consistent with the preceding campaign. However, Bachelier does not call
+`Normal.norm_inv`, and its unchanged workflow also moves by about 4%; unchanged
+price/Greek/admission paths move too. The full workflow difference therefore
+cannot all be attributed to replacing AS241. This is a more consistent shared-
+host comparison, not an isolated causal estimate or a regression upper bound.
+Both campaigns are retained; the post-merge optimization round will report
+standalone and application costs separately against this qualified baseline.
+
 ## Validation and disposition
 
 The [validation log](evidence/inverse-normal-validation.txt) records passing
