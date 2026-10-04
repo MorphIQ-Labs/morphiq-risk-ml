@@ -47,6 +47,21 @@ let () =
   (match g.rho with
   | Ok 0. -> ()
   | _ -> failwith "proved tail zero lost availability");
+  let tail2 =
+    get
+      (Black.Bsm.admit
+         {
+           spot = 1.;
+           strike = 2.;
+           time_to_expiry = 1.;
+           rate = 0.;
+           dividend_yield = 0.;
+         })
+  in
+  let g = Black.Bsm.greeks tail2 Side.Call (get (Vol.lognormal 0.015)) in
+  (match g.rho with
+  | Ok 0. -> ()
+  | _ -> failwith "full tail zero proof lost availability");
   List.iter
     (fun (side, spot, rate, q, expected) ->
       let a =

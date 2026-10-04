@@ -12,6 +12,26 @@ Phi by one half before multiplying loses which side of the midpoint applies.
 The one-ULP baseline error is within the existing 16-ULP rho allowance, but
 violates the independently proved rounded-zero check. That check is unchanged.
 
+## Inexpensive zero proofs
+
+For positive x, `1-1/x <= log x <= x-1`, by integrating 1/t.
+Thus original S/K has log bounds `(S-K)/S` and `(S-K)/K`.
+Its binary exponents independently give bounds `(es-ek-1)log2` and
+`(es-ek+1)log2`. Select either valid bound using its centre; this does not
+turn the chosen bound into an estimate of log itself. Add enclosed original
+carry. A strictly negative upper bound on signed log-forward proves an OTM
+zero-volatility rho exactly zero.
+
+For positive volatility, divide the signed upper bound by the positive
+original total volatility and subtract theta*s/2 to bound theta*d2 above.
+If that upper bound is at most -1, the same Mills inequality below bounds
+rho using `log(TK) < (te+ke)log2`. Only a strict enclosed comparison against
+the half-subnormal threshold permits zero. Otherwise full refinement runs.
+The exponent shortcuts require single original spot/strike words; low-word
+inputs skip them. An immutable enclosed log2 is constructed once. These
+shortcuts recover common-zero performance without trusting an approximate
+coordinate, probability, or previously served zero.
+
 ## Enclosed final rounding
 
 When a finite BSM rho proposal is subnormal, zero, or the smallest normal,

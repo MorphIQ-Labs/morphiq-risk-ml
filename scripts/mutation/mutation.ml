@@ -38,6 +38,17 @@ type mutant = {
 let catalog =
   [
     {
+      id = "rho-quick-zero-threshold";
+      file = "lib/black_rho.ml";
+      snippet =
+        "E.sign (E.sub log_upper (E.mul_float log_two (-1075.0))) = E.Negative";
+      replacement =
+        "E.sign (E.sub log_upper (E.mul_float log_two 1075.0)) = E.Negative";
+      killer = "rho_midpoint";
+      mechanism =
+        "the cheap proof must compare with the actual half-subnormal threshold";
+    };
+    {
       id = "rho-tail-exponent";
       file = "lib/black_rho.ml";
       snippet = "-1074 )";
