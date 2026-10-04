@@ -28,6 +28,10 @@ represented where the mathematical contract supports the mechanism.
 | arbitrary low words | exact sums of arbitrary finite high/low words through `Enclosure.of_words`, including overlap/cancellation | independent rational enclosure checks; DD normalized-word preconditions are not assumed for arbitrary inputs |
 | overflow interactions | finite individual inputs with overflowing shifted sum, distance, discount product or scaled derivative | admission versus computational failure versus incorrect successful output |
 
+The fixed central `greek_zeros` neighborhood (S/K around 1, T=1, sigma=0.25,
+zero rates) requires successful values as a bounded availability regression.
+This finite obligation does not extend to extreme-scale/capability regions.
+
 Smoke and full memberships are chosen by a versioned deterministic generator,
 not by observed pass/fail results. Full mode adds exponent/mantissa combinations
 and a fixed-seed sample. The smoke subset includes each region and all models;

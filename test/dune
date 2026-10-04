@@ -426,3 +426,8 @@
    %{exe:production_reference.exe}
    %{dep:../oracle/fixtures/greek_bits.txt}
    %{dep:../oracle/fixtures/model_enclosures.txt})))
+
+(executable
+ (name numerical_boundary_runner)
+ (modules numerical_boundary_runner)
+ (libraries morphiq_risk greek_values budget_greeks bounds))
