@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "command": "check",
+  "complete": true,
+  "source_commit": "f1ebc49aa1cdac729dffc9a101e055f96e39f0ed",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.8",
+  "runner_sha256": "148ecdd5997d96060a055e393256eb13327a2f3610456be1e5762f8e41b70c81",
+  "results": [
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+      "ocaml": "5.3.0"
+    }
+  ]
+}

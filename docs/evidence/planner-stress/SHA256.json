@@ -1,0 +1,12 @@
+{
+  "lib/planner.ml": "f46277e9db85283132f95f29d2de84197957bb813a5fb30742b9be76a7a8f396",
+  "lib/planner.mli": "7cf2a140306d85e8fb4677d5d2024a16155ba1ca598f401ed332d3d46abfd164",
+  "scripts/instrument_planner.py": "3988a27d0c42d8fcf2ae58cb5adabb80450fe2ce7f409c6e6e0fe7323ce31add",
+  "scripts/planner_stress.py": "4ffb59c089508504f56a9a6954a52fe466325405bb2a8607cc2186083b7f62cc",
+  "scripts/test_planner_stress.py": "91af4c8a794509503587362669a9c8ad8fee808d433afbdf8c9273f46cbd0519",
+  "test/planner_probe.ml": "acecb330d57a8c2e88b84a4771c5909c38e97b54b644fa324778905e3876f001",
+  "test/planner_stress.ml": "f9f7479e377a3f4d6ac767817dade4de6e0b22205ba878899dcbbf79cc5a0465",
+  "test/planner_stress_cases.ml": "d0ff5c22be0eaf20b8c99888ae84ccddd072c5a5ebd0483c7ad2d45dbdd83928",
+  "docs/evidence/planner-stress/repeated-checks.json": "3813a7d5abec8a4c1c25fbe46ef248aaae6c347d701485a38811631d90dc286e",
+  "docs/evidence/planner-stress/process-memory.json": "bcb7651eca2e5a0c62bf8702ca33eedc861a6df5179be9dbb430702757101794"
+}

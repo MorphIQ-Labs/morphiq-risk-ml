@@ -462,3 +462,53 @@
     --output
     numerical-smoke-report.json
     --contracts-only))))
+
+(rule
+ (target planner_instrumented.ml)
+ (deps ../lib/planner.ml ../scripts/instrument_planner.py)
+ (action
+  (with-stdout-to
+   %{target}
+   (run
+    python3
+    %{dep:../scripts/instrument_planner.py}
+    %{dep:../lib/planner.ml}))))
+
+(executable
+ (name planner_stress)
+ (modules
+  planner_stress
+  planner_stress_cases
+  planner_instrumented
+  planner_probe
+  planner_signature)
+ (libraries morphiq_risk morphiq_fp zarith unix)
+ (flags
+  (:standard -open Morphiq_fp)))
+
+(rule
+ (target planner_signature.ml)
+ (deps ../lib/planner.mli ../scripts/instrument_planner.py)
+ (action
+  (with-stdout-to
+   %{target}
+   (run
+    python3
+    %{dep:../scripts/instrument_planner.py}
+    --signature
+    %{dep:../lib/planner.mli}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/planner_stress.py
+  ../scripts/test_planner_stress.py
+  ../scripts/instrument_planner.py)
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_planner_stress.py})
+   (run
+    python3
+    %{dep:../scripts/planner_stress.py}
+    check
+    %{exe:planner_stress.exe}))))
