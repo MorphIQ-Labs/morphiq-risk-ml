@@ -176,3 +176,100 @@ val execute :
     marker can be promised for a broken sink. Cancellation emits Finished but
     never fabricates summaries of unvisited items. Never resumes/retries output.
     A fresh invocation is a new run and requires a fresh output destination. *)
+
+module Fast : sig
+  (** Bounded, price-only scenario streaming through the existing fast scalar
+      kernels. Results are approximate prices without runtime certificates.
+      Reuses the outer planner's model, market, date and scenario conventions.
+  *)
+
+  type limits = {
+    max_instruments : int;
+    max_scenarios : int;
+    max_calculations : int;
+    tile_rows : int;
+    max_workers : int;
+    max_buffered_results : int;
+  }
+
+  type t
+
+  type explanation = {
+    snapshot_id : string;
+    kernels : string list;
+    limits : limits;
+    instruments : int;
+    scenarios : int;
+    calculations : int;
+    tiles : int;
+    raw_value_bytes : int;
+    buffered_results : int;
+    plan_id : string;
+    convention : string;
+  }
+
+  val compile :
+    snapshot_id:string ->
+    base_day:int ->
+    day_count:day_count ->
+    portfolio:position array ->
+    market:factor array ->
+    scenarios:Scenario.t ->
+    limits:limits ->
+    (t, string) result
+  (** Freezes caller arrays and validates structural/resource contracts. Every
+      position/scenario pair requests one unweighted price, including
+      zero-weight positions. Numerical/volatility admission occurs after each
+      scenario's shocks. No accuracy limit, aggregate mode or synthetic
+      certificate. *)
+
+  val explain : t -> explanation
+
+  val manifest : t -> string
+  (** Records a distinct fast assurance convention and identity; certified
+      planner identities and manifests are unchanged. Eight raw value bytes per
+      calculation are a lower bound, excluding result/identity/heap overhead. *)
+
+  type tile = private {
+    id : int;
+    scenario : int;
+    first : int;
+    length : int;
+    plan_id : string;
+  }
+
+  val tile : t -> int -> tile
+
+  type error = Post_expiry | Scalar of Batch.Fast.error
+
+  type row = {
+    scenario_id : int;
+    instrument_index : int;
+    instrument_id : string;
+    factor_id : string;
+    currency : string;
+    coordinate : coordinate;
+    quantity : float;
+    price : (float, error) result;
+  }
+  (** [price] is per unit; [quantity] is the original position multiplier as
+      metadata. It is not silently applied. No weighted totals or error bounds
+      are produced. Failures retain their original row identity. *)
+
+  val evaluate_tile : t -> tile -> (row array, string) result
+  (** Rejects a foreign identity/extent; uses worker-local scratch. *)
+
+  type event = Row of row | Finished of completion
+
+  val execute :
+    t ->
+    workers:int ->
+    cancellation:cancellation ->
+    sink:(event -> (unit, string) result) ->
+    completion
+  (** Streams every row in scenario-major, original-position order. Shares the
+      certified executor's bounded wave, join, cancellation and sink-failure
+      semantics. All callbacks run on the coordinating domain. Reusing a plan
+      requires a fresh output destination; no durable resume/retry is implied.
+  *)
+end

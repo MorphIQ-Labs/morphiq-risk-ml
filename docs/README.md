@@ -10,6 +10,8 @@ been retired; it remains in Git history.
 
 ## Current contracts
 
+- [Fast scenario streaming](fast-planner.md): shared structural/scheduler contracts, distinct approximate prices and bounded output.
+
 - [Compiled fast price batches](fast-batch.md): frozen admission reuse, explicit failures and separation from runtime certificates.
 
 - [First model extension design](first-model-extension.md): selected certified scalar exchange prices, original-input contract, references and implementation gate; [implementation evidence](exchange-prices.md) is separate and broader qualification remains open.
@@ -100,4 +102,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Certified expansion sum optimization](results-certified-expansion-sums.md): magnitude-ordered exact residuals, finite guards, scalar/portfolio/Exchange/IV measurements and complete certificate replay.
 - [Certification allocation optimization](results-certification-allocation.md): packed immutable words, private buffers, 77% less representative price allocation, GC counts and IV timing tradeoffs.
 
+- [Fast planner measurements](results-fast-planner.md): bounded scenario costs, worker scaling and certified compatibility.
 - [Fast batch measurements](results-fast-batch.md): compile/reuse costs, direct scalar comparison, fixture equivalence and installed consumers.

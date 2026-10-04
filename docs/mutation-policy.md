@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **92
+seven core mutants. The catalog currently contains **94
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -232,3 +232,7 @@ The optional `fast-batch-finite` and `fast-batch-order` mechanisms exercise
 nonfinite scalar-result refusal and original-index preservation through mixed
 compiled fast requests. `fast_batch` is their direct guard. Neither expands
 the seven-mutant default lane.
+
+The optional `fast-planner-tile` and `fast-planner-side` mechanisms exercise
+foreign-plan rejection and original option-side dispatch through fast scenarios.
+The shared snapshot/post-expiry mechanisms still protect both planner paths.

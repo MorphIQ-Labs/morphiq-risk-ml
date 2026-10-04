@@ -209,6 +209,46 @@ let () =
   days.(0) <- 99;
   check ((S.point scenarios 0).offset_days = 0) "frozen scenarios";
   let paired = ok (S.paired (Array.init 3 (S.point scenarios))) in
+  let fast_limits : P.Fast.limits =
+    {
+      max_instruments = limits.max_instruments;
+      max_scenarios = limits.max_scenarios;
+      max_calculations = limits.max_calculations;
+      tile_rows = limits.tile_rows;
+      max_workers = limits.max_workers;
+      max_buffered_results = limits.max_buffered_results;
+    }
+  in
+  let fast_plan =
+    ok
+      (P.Fast.compile ~snapshot_id:"installed-fast" ~base_day:0
+         ~day_count:P.Actual_365_fixed ~portfolio ~market ~scenarios
+         ~limits:fast_limits)
+  in
+  let fast_run workers =
+    let rows = ref [] in
+    let done_ =
+      P.Fast.execute fast_plan ~workers ~cancellation:(P.cancellation ())
+        ~sink:(fun e ->
+          rows := e :: !rows;
+          Ok ())
+    in
+    check
+      (done_.stop = P.Complete && done_.rows_committed = 6)
+      "installed fast planner completion";
+    List.rev !rows
+  in
+  let fast_events = fast_run 1 in
+  check (fast_events = fast_run 2) "installed fast planner worker replay";
+  List.iter
+    (function
+      | P.Fast.Row r when r.scenario_id = 2 ->
+          check
+            (r.price = Error P.Fast.Post_expiry)
+            "installed fast post-expiry"
+      | P.Fast.Row r -> check (finite (ok r.price)) "installed fast price"
+      | P.Fast.Finished _ -> ())
+    fast_events;
   let plan = ok (compile scenarios) in
   let ex = P.explain plan in
   check

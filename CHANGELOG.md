@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Fast-price scenario streaming (#97)
+
+- Add `Planner.Fast` frozen plans with bounded ordered price streaming and
+  explicit row failures. Fast plan/tile/result types remain separate from
+  certified outputs; values are unweighted approximate prices, with position
+  quantity retained as metadata. No synthetic error radius or aggregate total.
+- Share structural validation, date/shock transformation, sink-failure handling
+  and the bounded scheduler with the certified planner. Existing certified
+  signatures, numerical formulas and replay identities remain unchanged.
+- Additive API without a version bump or release. See the
+  [contract, ownership and usage](docs/fast-planner.md) and
+  [validation, measured costs and host-load limits](docs/results-fast-planner.md).
+
 ### Compiled fast price batches (#96)
 
 - Add `Batch.Fast` one-shot and immutable compiled price batches for all four

@@ -1,0 +1,95 @@
+{
+  "scope": "Certified compilation identity before/after shared-structure refactor; timing in these control runs is not performance evidence.",
+  "runs": [
+    {
+      "variant": "baseline",
+      "binary_sha256": "17ed58b0edbfa40978952fbe7be12fb62471e4a62792519b53822c46764b211c",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 32,
+        "groups": 1,
+        "planning_s": 5.6999968364834785e-05,
+        "allocated_words": 7824,
+        "minor_collections": 0,
+        "major_collections": 0,
+        "plan_id": "fbbe788f0956057b4bbaeb420779b397840de8d007b5c276686d6c24d442eac5"
+      }
+    },
+    {
+      "variant": "candidate",
+      "binary_sha256": "109e25c4dfba3565c3a5dcad20e1da3cd9d5d29628dc00b72657449d0ed0eca2",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 32,
+        "groups": 1,
+        "planning_s": 5.9999991208314896e-05,
+        "allocated_words": 7826,
+        "minor_collections": 0,
+        "major_collections": 0,
+        "plan_id": "fbbe788f0956057b4bbaeb420779b397840de8d007b5c276686d6c24d442eac5"
+      }
+    },
+    {
+      "variant": "baseline",
+      "binary_sha256": "17ed58b0edbfa40978952fbe7be12fb62471e4a62792519b53822c46764b211c",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1024,
+        "groups": 16,
+        "planning_s": 0.0016690000193193555,
+        "allocated_words": 235779,
+        "minor_collections": 0,
+        "major_collections": 0,
+        "plan_id": "e38c3833d629cef46040fa11786eb2d2b683af5a69510583cc348a394cb0223e"
+      }
+    },
+    {
+      "variant": "candidate",
+      "binary_sha256": "109e25c4dfba3565c3a5dcad20e1da3cd9d5d29628dc00b72657449d0ed0eca2",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 1024,
+        "groups": 16,
+        "planning_s": 0.0016250000335276127,
+        "allocated_words": 235781,
+        "minor_collections": 0,
+        "major_collections": 0,
+        "plan_id": "e38c3833d629cef46040fa11786eb2d2b683af5a69510583cc348a394cb0223e"
+      }
+    },
+    {
+      "variant": "baseline",
+      "binary_sha256": "17ed58b0edbfa40978952fbe7be12fb62471e4a62792519b53822c46764b211c",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 4096,
+        "groups": 4096,
+        "planning_s": 0.010607999982312322,
+        "allocated_words": 1755096,
+        "minor_collections": 5,
+        "major_collections": 0,
+        "plan_id": "fa1d9038d742a965053ba583e6c18bff13d2e843a176ff657edf4ef995bd0fdc"
+      }
+    },
+    {
+      "variant": "candidate",
+      "binary_sha256": "109e25c4dfba3565c3a5dcad20e1da3cd9d5d29628dc00b72657449d0ed0eca2",
+      "result": {
+        "version": "planner-compile-v1",
+        "ocaml": "5.3.0",
+        "instruments": 4096,
+        "groups": 4096,
+        "planning_s": 0.010581000009551644,
+        "allocated_words": 1755098,
+        "minor_collections": 5,
+        "major_collections": 0,
+        "plan_id": "fa1d9038d742a965053ba583e6c18bff13d2e843a176ff657edf4ef995bd0fdc"
+      }
+    }
+  ]
+}

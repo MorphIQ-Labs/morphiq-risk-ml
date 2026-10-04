@@ -26,9 +26,9 @@ let evaluate_tile t work =
     | Ok rows -> Planner_probe.retain
         (Array.fold_left (fun n row -> n + max 1 (List.length row.outcomes)) 0 rows));
     result)
-module Domain = Planner_probe.Domains
-
 let execute t ~workers ~cancellation ~sink =''')
+source = replace_once(source, 'let run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =',
+                      'module Domain = Planner_probe.Domains\n\nlet run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =')
 source = replace_once(source, 'next := !next + n', 'Planner_probe.release_wave ();\n        next := !next + n')
 print('open Morphiq_risk\nopen Morphiq_risk.Internal')
 print('let instrumented_source_sha256 = "' + hashlib.sha256(Path(sys.argv[1]).read_bytes()).hexdigest() + '"')

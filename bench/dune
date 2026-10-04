@@ -157,3 +157,9 @@
  (modules fast_batch)
  (libraries morphiq_risk)
  (foreign_archives assurance_clock))
+
+(executable
+ (name fast_planner)
+ (modules fast_planner)
+ (libraries morphiq_risk)
+ (foreign_archives assurance_clock))

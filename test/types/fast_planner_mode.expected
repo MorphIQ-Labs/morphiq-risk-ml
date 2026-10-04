@@ -1,0 +1,5 @@
+File "fast_planner_mode.ml", line 4, characters 24-28:
+4 |   Planner.evaluate_tile plan tile
+                            ^^^^
+Error: The value "plan" has type "Morphiq_risk.Planner.Fast.t"
+       but an expression was expected of type "Morphiq_risk.Planner.t"

@@ -693,3 +693,15 @@
    %{test}
    %{dep:../oracle/fixtures/european.txt}
    %{dep:../oracle/fixtures/displaced.txt})))
+
+(test
+ (name fast_planner)
+ (modules fast_planner)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp
+   (run %{test}))))
