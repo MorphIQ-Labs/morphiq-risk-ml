@@ -199,6 +199,10 @@ Cross-platform evidence is measured separately; ordinary upstream OCaml does
 not prove race freedom, deterministic arithmetic on untested hardware, or
 financial correctness.
 
+The [planner stress campaign](planner-stress-results.md) records additional
+finite schedule, fault-injection, slot-bound and process-memory evidence. It
+does not extend the supported contracts above.
+
 ## Primary references
 
 - [OCaml 5.3 Domain API](https://ocaml.org/manual/5.3/api/Domain.html): spawn,

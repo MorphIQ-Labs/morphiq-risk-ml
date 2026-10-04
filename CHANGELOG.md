@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Planner stress assurance (#56)
+
+- Exercise worker/tile schedules, real-domain failure cleanup, concurrent
+  cancellation, sink transactions and checked resource boundaries through
+  test-only instrumentation of the exact planner source.
+- Retain repeated stress and separate fresh-process memory observations in
+  [the campaign report](docs/planner-stress-results.md). Runtime code and public
+  APIs are unchanged; finite stress results do not prove race freedom.
+
 ### Numerical boundary campaign (#54)
 
 - Add deterministic boundary/scale/cancellation and IV-cell challenges with
