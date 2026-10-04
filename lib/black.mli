@@ -59,7 +59,12 @@ module type MODEL = sig
   (** Inputs that passed this model's domain check. Only [admit] makes one. *)
 
   val admit : inputs -> (admitted, Refusal.t) result
+
   val price : admitted -> Side.t -> Vol.lognormal Vol.t -> float
+  (** Fast approximate price. Severe carry cancellation uses a bounded
+      original-input refinement and returns NaN if no rounding cell resolves.
+      Admission does not promise numerical availability. Use {!Production} when
+      a value must carry an explicit error certificate. *)
 
   val implied :
     admitted -> Side.t -> float -> (Vol.lognormal Iv.t, Refusal.t) result

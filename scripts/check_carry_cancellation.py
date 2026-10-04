@@ -21,6 +21,7 @@ def main():
     p.add_argument('--runner',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--record-only',action='store_true')
+    p.add_argument('--runner-source',help='Known source commit of a separately built runner')
     args=p.parse_args()
     data=args.reference.read_bytes()
     manifest=json.loads(Path(str(args.reference)+'.manifest.json').read_text())
@@ -62,7 +63,7 @@ def main():
     if sum(r['required'] for r in outcomes)!=1: raise ValueError('missing required case')
     try: revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True,stderr=subprocess.DEVNULL).strip()
     except subprocess.CalledProcessError: revision='unavailable'
-    report=dict(source_commit=revision,reference_sha256=manifest['sha256'],
+    report=dict(scorer_source_commit=revision,runner_source_commit=args.runner_source or revision,reference_sha256=manifest['sha256'],
                 runner_sha256=hashlib.sha256(args.runner.read_bytes()).hexdigest(),
                 counts=dict(counts),failures=failures,outcomes=outcomes)
     args.output.write_text(json.dumps(report,indent=2)+'\n')
