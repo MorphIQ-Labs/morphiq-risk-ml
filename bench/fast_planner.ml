@@ -44,6 +44,9 @@ let position i =
       side = (if i / 4 mod 2 = 0 then Side.Call else Side.Put);
     }
 
+let tile_rows = ref 32
+let sizes = ref [ 32; 256; 1024 ]
+
 let compile portfolio =
   let n = Array.length portfolio in
   ok
@@ -54,9 +57,9 @@ let compile portfolio =
            max_instruments = n;
            max_scenarios = 4;
            max_calculations = n * 4;
-           tile_rows = 32;
+           tile_rows = !tile_rows;
            max_workers = 4;
-           max_buffered_results = 128;
+           max_buffered_results = !tile_rows * 4;
          })
 
 let execute workers plan =
@@ -95,6 +98,8 @@ let sample n phase f =
 let () =
   Arg.parse
     [
+      ("--tile-rows", Arg.Set_int tile_rows, "Rows per tile");
+      ("--size", Arg.Int (fun n -> sizes := [ n ]), "Positions per job");
       ( "--version",
         Arg.Unit
           (fun () ->
@@ -104,6 +109,10 @@ let () =
     ]
     (fun _ -> raise (Arg.Bad "unexpected argument"))
     "Fast scenario planner phase benchmark";
+  if
+    !tile_rows < 1 || !tile_rows > 1000000
+    || List.exists (fun n -> n < 1 || n > 1000000) !sizes
+  then invalid_arg "benchmark size";
   List.iter
     (fun n ->
       let portfolio = Array.init n position in
@@ -131,4 +140,4 @@ let () =
       sample n "execute-4" (fun () -> execute 4 plan);
       sample n "pack-compile-execute" (fun () ->
           execute 1 (compile (Array.init n position))))
-    [ 32; 256; 1024 ]
+    !sizes
