@@ -408,6 +408,13 @@ This analysis exposed an actual numerical defect: the previous cutoff ignored m.
 
 ### 8.3 DD normal series, including cancellation
 
+The implementation prepares only the divisor-dependent intermediates of the
+unchanged DD divider for the fixed odd denominators. Dividend scaling and all
+rounded operations retain the original order and values. Paired CDF/density
+evaluation reuses the identical DD square and exponential. These substitutions
+do not change the following allowances; see the
+[operation-preserving qualification](results-inverse-optimization.md).
+
 For normalized |d.hi|≤6, d²<37. Marsaglia's series has same-sign terms q_n=d^(2n+1)/(2n+1)!!. Its recurrence uses a DD square, multiplication and division, giving 19.8u² per accumulated term index. The positive-series identity bounds Σn|q_n|/Σ|q_n| by d²/2. At index 128, |q_128/q_0|≤37^128/257!!<2^-120, so the implementation's 400-step cap cannot be reached.
 
 There are at most 129 DD additions. The resulting series allowance is

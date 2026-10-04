@@ -38,6 +38,32 @@ type mutant = {
 let catalog =
   [
     {
+      id = "prepared-quotient-exponent";
+      file = "lib/dd.ml";
+      snippet =
+        "scale (mul numerator divisor.reciprocal) (exponent - divisor.exponent)";
+      replacement = "scale (mul numerator divisor.reciprocal) exponent";
+      killer = "prepared_division";
+      mechanism = "prepared division restores the divisor exponent";
+    };
+    {
+      id = "prepared-reciprocal-residual";
+      file = "lib/dd.ml";
+      snippet = "let reciprocal = add_float d th in";
+      replacement = "let reciprocal = of_float th in";
+      killer = "prepared_division";
+      mechanism = "prepared reciprocal retains its low-word correction";
+    };
+    {
+      id = "prepared-numerator-scale";
+      file = "lib/dd.ml";
+      snippet = "else snd (Float.frexp numerator.hi) - 1";
+      replacement = "else 0";
+      killer = "prepared_division";
+      mechanism =
+        "prepared division normalizes extreme dividends before the product";
+    };
+    {
       id = "inverse-iteration-count";
       file = "lib/normal.ml";
       snippet = "let inverse_steps = 6";
@@ -731,7 +757,7 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "production_boundary" | "planner_contract" -> [ [] ]
+  | "production_boundary" | "planner_contract" | "prepared_division" -> [ [] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->

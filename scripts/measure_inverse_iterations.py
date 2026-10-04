@@ -50,7 +50,7 @@ let () = at_exit (fun () -> Printf.eprintf "COUNTS %d %d %d %d\\n" !lbr_calls !l
         trace=[s.removeprefix('RESULT ') for s in run.stderr.splitlines() if s.startswith('RESULT ')]
         assert trace
         data=dict(source_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
-                  source_sha256={name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('lib/normal.ml','lib/lbr.ml','lib/certified_iv.ml','test/oracle_iv.ml')},
+                  source_sha256={name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('lib/normal.ml','lib/normal_dd.ml','lib/dd.ml','lib/lbr.ml','lib/certified_iv.ml','test/oracle_iv.ml')},
                   counts=dict(zip(('lbr_iterated_calls','lbr_steps','certified_calls','certified_steps'),map(int,counters[0].split()[1:]))),
                   rows=len(trace),trace=trace,oracle_log=run.stdout)
         args.output.write_bytes(gzip.compress((json.dumps(data,indent=2)+'\n').encode(),mtime=0))

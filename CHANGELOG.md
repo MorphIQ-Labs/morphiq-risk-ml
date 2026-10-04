@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Inverse-normal operation reuse
+
+- Reuse identical density/square values in inverse refinement and prepare the
+  existing DD divisor intermediates for the normal series. Preserve numerical
+  operations, error allowances, all reference outputs and both replay digests.
+- Patch-level performance change: measured release central/tail inversion takes
+  39%/35% less time, LBR proposals 32% less, with 42–48% fewer allocated words.
+  Greek batches improve 15–37%; full workflows remain within about ±2% on the
+  shared host. The immutable table adds about 34.4 KiB of live heap.
+- [Qualification](docs/results-inverse-optimization.md) retains source hashes,
+  exact-rational checks, full replay, mutations, installed-package checks and
+  repeated timing/startup evidence. No version bump or accuracy-budget change.
+
 ### Project-derived inverse normal
 
 - Replace AS241's tables and regional reductions with bounded Gaussian-integral

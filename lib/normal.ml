@@ -108,11 +108,9 @@ let norm_inv p =
       if x <= Normal_dd.limit then
         let negative = Dd.of_float (-.x) in
         let probability = if p < 0.5 then p else 1.0 -. p in
-        let residual =
-          Dd.sub (Normal_dd.cdf negative) (Dd.of_float probability)
-        in
-        -.Dd.to_float
-            (Dd.sub negative (Dd.div residual (Normal_dd.pdf negative)))
+        let distribution, density = Normal_dd.cdf_and_pdf negative in
+        let residual = Dd.sub distribution (Dd.of_float probability) in
+        -.Dd.to_float (Dd.sub negative (Dd.div residual density))
       else x
     in
     if p < 0.5 then -.x else x
