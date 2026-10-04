@@ -34,6 +34,16 @@ type ('coordinate, 'value) quantity =
       ('c, (Units.per_calendar_day, 'c) Units.volatility_time_rate) quantity
   | Color : ('c, Units.per_calendar_day Units.time_rate) quantity
 
+type 'c request =
+  | Request : ('c, 'a) quantity * 'a -> 'c request
+      (** One requested quantity with its absolute error limit in the same
+          units. *)
+
+type 'c outcome =
+  | Outcome : ('c, 'a) quantity * ('a certified, error) result -> 'c outcome
+      (** One typed result for each request, in order, including
+          duplicates/errors. *)
+
 module type MODEL = sig
   type inputs
   type coordinate
@@ -62,18 +72,37 @@ module type MODEL = sig
       caller-specified weaker tolerance is substituted. *)
 end
 
+module type MULTI_OUTPUT_MODEL = sig
+  include MODEL
+
+  val evaluate_many :
+    admitted ->
+    Side.t ->
+    coordinate Vol.t ->
+    coordinate request list ->
+    coordinate outcome list
+  (** Equivalent to ordered scalar evaluations with a separate limit and result
+      per entry. Reuses immutable model preparation within this call only. Empty
+      lists return empty lists. A failure never suppresses later outputs;
+      concurrent calls on the same admitted model share no mutable scratch. *)
+end
+
 module Bsm :
-  MODEL with type inputs = Black.Bsm.inputs and type coordinate = Vol.lognormal
+  MULTI_OUTPUT_MODEL
+    with type inputs = Black.Bsm.inputs
+     and type coordinate = Vol.lognormal
 
 module Black76 :
-  MODEL
+  MULTI_OUTPUT_MODEL
     with type inputs = Black.Black76.inputs
      and type coordinate = Vol.lognormal
 
 module Displaced :
-  MODEL
+  MULTI_OUTPUT_MODEL
     with type inputs = Black.Displaced.inputs
      and type coordinate = Vol.lognormal
 
 module Bachelier :
-  MODEL with type inputs = Bachelier.inputs and type coordinate = Vol.normal
+  MULTI_OUTPUT_MODEL
+    with type inputs = Bachelier.inputs
+     and type coordinate = Vol.normal

@@ -26,6 +26,25 @@ let batch_model : type i c. (i, c) Batch.model -> i -> c Vol.t -> unit =
        && c.absolute_error <= 1e-10)
         "finite bounded certificate")
     results;
+  (match
+     Batch.evaluate_many model inputs Side.Call volatility
+       Production.
+         [
+           Request (Price, 1e-10);
+           Request (Delta, 1e-10);
+           Request (Theta, Units.time_rate 1e-10);
+         ]
+   with
+  | [
+   Production.Outcome (Production.Price, p);
+   Production.Outcome (Production.Delta, d);
+   Production.Outcome (Production.Theta, Ok t);
+  ] ->
+      check (p = results.(0) && d = results.(1)) "installed multi-output values";
+      check
+        (finite (t.value :> float) && (t.absolute_error :> float) <= 1e-10)
+        "installed typed multi-output theta"
+  | _ -> failwith "installed multi-output dispatch");
   let price = (ok results.(0)).value in
   (match
      ok

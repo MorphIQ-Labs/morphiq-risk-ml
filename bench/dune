@@ -123,3 +123,14 @@
  (name exchange_qualification_bench)
  (modules exchange_qualification_bench)
  (libraries morphiq_risk unix))
+
+(executable
+ (name shared_preparation)
+ (modules shared_preparation)
+ (libraries morphiq_risk unix))
+
+(executable
+ (name shared_portfolio)
+ (modules shared_portfolio)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))

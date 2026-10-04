@@ -1,0 +1,10 @@
+{
+  "baseline": {
+    "sha256": "f3f24cbb32e0a6c151ab34038b6adb5428700cc0c9a14d814f1f11e049610fd6",
+    "lines": 2376
+  },
+  "candidate": {
+    "sha256": "f3f24cbb32e0a6c151ab34038b6adb5428700cc0c9a14d814f1f11e049610fd6",
+    "lines": 2376
+  }
+}

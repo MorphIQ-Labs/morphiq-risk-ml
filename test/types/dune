@@ -458,3 +458,51 @@
  (alias runtest)
  (action
   (diff forge_exchange_admitted.expected forge_exchange_admitted.out)))
+
+(rule
+ (deps multi_coordinate.ml ../../lib/morphiq_risk.cma)
+ (targets multi_coordinate.out)
+ (action
+  (with-stderr-to
+   multi_coordinate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     multi_coordinate.cmo
+     multi_coordinate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff multi_coordinate.expected multi_coordinate.out)))
+
+(rule
+ (deps multi_time_unit.ml ../../lib/morphiq_risk.cma)
+ (targets multi_time_unit.out)
+ (action
+  (with-stderr-to
+   multi_time_unit.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     multi_time_unit.cmo
+     multi_time_unit.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff multi_time_unit.expected multi_time_unit.out)))

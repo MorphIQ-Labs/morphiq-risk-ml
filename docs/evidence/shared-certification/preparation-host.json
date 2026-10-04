@@ -1,0 +1,13 @@
+{
+  "load_before": [
+    109.9736328125,
+    48.30029296875,
+    22.63916015625
+  ],
+  "load_after": [
+    109.9736328125,
+    48.30029296875,
+    22.63916015625
+  ],
+  "scope": "Separate phase-cost diagnostic, no concurrent task-owned build/test"
+}
