@@ -10,7 +10,7 @@ FIXTURE = ROOT/'test/exchange_reference.tsv'
 MANIFEST = BASE/'fixture-manifest.json'
 SOURCES = ['scripts/exchange_fixture.py', 'scripts/exchange_reference.py',
            'docs/evidence/exchange-implementation/cases-v1.json',
-           'docs/evidence/exchange-implementation/references-v1.json', 'test/exchange_reference.tsv']
+           'docs/evidence/exchange-implementation/references-v2.json', 'test/exchange_reference.tsv']
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -20,7 +20,7 @@ def main():
     if not args.check:
         from flint import arb, ctx
         ctx.prec=512
-        data=json.loads((BASE/'references-v1.json').read_text())
+        data=json.loads((BASE/'references-v2.json').read_text())
         lines=[]
         for row in data['rows']:
             ref=row['reference']; status=ref['status']
@@ -35,7 +35,7 @@ def main():
     for name, digest in json.loads(MANIFEST.read_text()).items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest()!=digest:
             raise SystemExit('exchange fixture provenance mismatch: '+name)
-    data=json.loads((BASE/'references-v1.json').read_text())
+    data=json.loads((BASE/'references-v2.json').read_text())
     if data['generator_sha256'] != hashlib.sha256((ROOT/'scripts/exchange_reference.py').read_bytes()).hexdigest():
         raise SystemExit('reference generator mismatch')
     if data['corpus_sha256'] != hashlib.sha256((BASE/'cases-v1.json').read_bytes()).hexdigest():

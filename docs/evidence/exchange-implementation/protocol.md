@@ -46,3 +46,23 @@ No production runtime change is part of this protocol freeze. QuantLib's
 pinned canonical build, date/curve input mapping, runner and baseline will
 be retained before runtime implementation. Performance and broader #61
 qualification remain separate evidence, not implied by this reference setup.
+
+## Reference correction, version 2
+
+The first implementation comparison exposed an oracle limitation, not evidence
+of a runtime bound failure: the v1 absolute quadrature goal allowed an interval
+of order 2^-128 around a currency price of order 2^-1000. Its broad reference
+could not adjudicate a much tighter runtime certificate. The immutable v1
+results and generator snapshot are retained. Case membership is unchanged.
+
+Version 2 integrates payoff divided by a, then restores a with Arb. Its
+precision-dependent cutoff is `upper(s)+ceil(sqrt(2*p))`, so the omitted
+normal tails decrease at least exponentially in precision p under the same
+Mills argument. This is necessary for precision refinement to reduce tail
+uncertainty as well as quadrature error. The reference goal is now a fixed
+256 relative bits against min(a, abs(closed-form interval)'s upper bound),
+with exact zero requiring zero radius. It is independent of runtime output
+and caller tolerance. The same finite precision ladder, worker timeout,
+quadrature caps and unresolved accounting apply. This strengthens reference
+resolution; no runtime allowance is changed. Both revised routes must still
+overlap, and a coarse or unresolved reference is not a successful comparison.

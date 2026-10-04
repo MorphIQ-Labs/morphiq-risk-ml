@@ -82,3 +82,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Finite Greek results](finite-greek-results.md): per-field failures, subnormal rho scaling and independent extreme-input references.
 
 - [Planner compilation scaling](results-planner-compilation.md): distinct-group counting, limit/replay controls and homogeneous/heterogeneous timings.
+
+- [Certified scalar exchange prices](exchange-prices.md): additive API, numerical capability, focused implementation evidence and remaining #61 qualification.

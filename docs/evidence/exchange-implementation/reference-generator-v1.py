@@ -114,14 +114,14 @@ def reference(row):
                     raise ValueError('quadrature s<64 capability guard')
                 # Entire integrand; max() is NEVER passed to analytic quadrature.
                 z0 = (-log_ratio+variance/2)/s
-                L = s.upper()+math.ceil(math.sqrt(2*precision))
+                L = s.upper()+16
                 lo, hi = max(z0.lower(), -L), min(z0.upper(), L)
                 start = max(-L, min(z0.upper(), L))
                 norm = (2*arb.pi()).sqrt()
                 def positive_branch(z, analytic):
-                    return ((-variance/2+s*z).exp()-b/a)*(-z*z/2).exp()/norm
+                    return (a*(-variance/2+s*z).exp()-b)*(-z*z/2).exp()/norm
                 integral = acb.integral(positive_branch, start, L,
-                    rel_tol=arb(2)**(-precision//2), abs_tol=arb(2)**(-precision//2), **QUADRATURE).real * a
+                    rel_tol=arb(2)**(-precision//2), abs_tol=arb(2)**(-precision//2), **QUADRATURE).real
                 strip = arb(0)
                 if hi > lo:
                     strip = (hi-lo)*a*(-variance/2+s*hi).exp()/norm
@@ -136,9 +136,7 @@ def reference(row):
                 return dict(status='route_disagreement', precision=precision,
                             closed=closed.str(100, more=True), integral=integral.str(100, more=True))
             # A reference goal, not a runtime certificate tolerance.
-            goal = min(a.abs_upper(), closed.abs_upper()) * arb(2)**(-256)
-            if closed.is_zero():
-                goal = arb(0)
+            goal = max(arb(1), a.abs_upper())*arb('1e-25')
             if closed.rad() <= goal and integral.rad() <= goal:
                 return dict(status='interval', precision=precision, route=route,
                             closed=closed.str(100, more=True), integral=integral.str(100, more=True))
@@ -150,7 +148,7 @@ def reference(row):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--version', action='version', version='exchange-reference 2')
+    parser.add_argument('--version', action='version', version='exchange-reference 1')
     sub = parser.add_subparsers(dest='command', required=True)
     freeze = sub.add_parser('freeze'); freeze.add_argument('output', type=Path)
     run = sub.add_parser('run'); run.add_argument('corpus', type=Path); run.add_argument('output', type=Path)

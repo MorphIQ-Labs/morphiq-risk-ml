@@ -108,3 +108,8 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk unix))
+
+(executable
+ (name exchange_bench)
+ (modules exchange_bench)
+ (libraries morphiq_risk unix))

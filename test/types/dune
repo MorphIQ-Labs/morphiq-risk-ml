@@ -362,3 +362,99 @@
  (alias runtest)
  (action
   (diff planner_coordinate.expected planner_coordinate.out)))
+
+(rule
+ (deps forge_exchange_correlation.ml ../../lib/morphiq_risk.cma)
+ (targets forge_exchange_correlation.out)
+ (action
+  (with-stderr-to
+   forge_exchange_correlation.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_exchange_correlation.cmo
+     forge_exchange_correlation.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_exchange_correlation.expected forge_exchange_correlation.out)))
+
+(rule
+ (deps forge_exchange_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets forge_exchange_certificate.out)
+ (action
+  (with-stderr-to
+   forge_exchange_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_exchange_certificate.cmo
+     forge_exchange_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_exchange_certificate.expected forge_exchange_certificate.out)))
+
+(rule
+ (deps exchange_normal_volatility.ml ../../lib/morphiq_risk.cma)
+ (targets exchange_normal_volatility.out)
+ (action
+  (with-stderr-to
+   exchange_normal_volatility.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     exchange_normal_volatility.cmo
+     exchange_normal_volatility.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff exchange_normal_volatility.expected exchange_normal_volatility.out)))
+
+(rule
+ (deps forge_exchange_admitted.ml ../../lib/morphiq_risk.cma)
+ (targets forge_exchange_admitted.out)
+ (action
+  (with-stderr-to
+   forge_exchange_admitted.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_exchange_admitted.cmo
+     forge_exchange_admitted.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_exchange_admitted.expected forge_exchange_admitted.out)))

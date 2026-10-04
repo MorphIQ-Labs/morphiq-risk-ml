@@ -1,0 +1,10 @@
+File "exchange_normal_volatility.ml", line 4, characters 47-57:
+4 |   Exchange.{ spot = 100.; dividend_yield = 0.; volatility }
+                                                   ^^^^^^^^^^
+Error: The value "volatility" has type
+         "Morphiq_risk.Vol.normal Morphiq_risk.Vol.t"
+       but an expression was expected of type
+         "Morphiq_risk__.Vol.lognormal Morphiq_risk__.Vol.t" =
+           "Morphiq_risk__.Vol.lognormal Morphiq_risk.Vol.t"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk__.Vol.lognormal" = "Morphiq_risk.Vol.lognormal"

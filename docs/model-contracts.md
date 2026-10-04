@@ -43,6 +43,22 @@ The separate [production adapter](production-boundary-design.md) serves prices a
 - **Failure.** `Non_convergence` means an iteration budget was exhausted; `Numerical_failure` means an evaluation, bracket, normalization or conversion was unresolved. Neither includes a usable root. Callers must handle both variants explicitly. They may not replace failure with a mathematical classification or a last iterate.
 - **Rounded bound.** A quote below the exact discounted intrinsic returns σ = 0 (#448) only when an enclosure proves the correctly rounded intrinsic equals that quote. An unresolved comparison returns `Numerical_failure`. A quote rounding the intrinsic upward has a positive real inverse and must meet the positive-root certificate.
 
+## European exchange prices
+
+`Exchange` receives one unit of asset 1 against delivery of one unit of asset 2.
+Its original-input constant correlated lognormal model, continuous yields,
+closed form, exact boundaries and failure semantics are specified in the
+[selection contract](first-model-extension.md). Only certified scalar prices
+are exposed: a finite value/error pair must meet the caller's explicit absolute
+currency limit. Nearest-even rounding is not additionally promised by this
+certificate. Correlation is abstract, volatility coordinates stay lognormal,
+and reversing exchange swaps the complete asset records. Common interest rate
+cancels. [Usage, capability limits and evidence](exchange-prices.md).
+
+This additive API has no Greek, IV, Batch, Scenario or Planner adapter. Existing
+portfolio specifications describe one underlying and cannot express both asset
+shocks, yields and correlation with compatible aggregation semantics.
+
 ## Greeks
 
 - **Time.** Time Greeks are `−∂/∂T / 365`: per calendar day, as remaining maturity decreases.
