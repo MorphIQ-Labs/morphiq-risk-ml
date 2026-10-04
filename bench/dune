@@ -163,3 +163,8 @@
  (modules fast_planner)
  (libraries morphiq_risk)
  (foreign_archives assurance_clock))
+
+(executable
+ (name fast_allocation_profile)
+ (modules fast_allocation_profile)
+ (libraries morphiq_risk))

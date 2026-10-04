@@ -813,12 +813,32 @@ let catalog =
       mechanism = "log1p's quotient remainder";
     };
     {
+      id = "dd-exp-accumulator-low";
+      file = "lib/dd.ml";
+      snippet = "      lo := acc.lo\n    done;\n    let acc";
+      replacement = "      lo := 0.0\n    done;\n    let acc";
+      killer = "dd_reference";
+      mechanism = "exponential Horner retains both accumulator words";
+    };
+    {
+      id = "dd-log-accumulator-low";
+      file = "lib/dd.ml";
+      snippet = "    lo := acc.lo\n  done;\n  mul_float";
+      replacement = "    lo := 0.0\n  done;\n  mul_float";
+      killer = "dd_reference";
+      mechanism = "logarithm Horner retains both accumulator words";
+    };
+    {
       id = "dd-exp-degree";
       file = "lib/dd.ml";
       snippet =
-        "let acc = ref exp_coefficients.(21) in\n    for k = 20 downto 2 do";
+        "let initial = exp_coefficients.(21) in\n\
+        \    let hi = ref initial.hi and lo = ref initial.lo in\n\
+        \    for k = 20 downto 2 do";
       replacement =
-        "let acc = ref exp_coefficients.(11) in\n    for k = 10 downto 2 do";
+        "let initial = exp_coefficients.(11) in\n\
+        \    let hi = ref initial.hi and lo = ref initial.lo in\n\
+        \    for k = 10 downto 2 do";
       killer = "dd_reference";
       mechanism = "degree-22 Taylor remainder in the double-word exponential";
     };

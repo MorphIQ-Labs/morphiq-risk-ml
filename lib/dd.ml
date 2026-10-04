@@ -166,14 +166,22 @@ let expm1_reduced r =
      Horner also avoids subnormal leading products in both exp and expm1. *)
   if Float.abs r.hi < 0x1p-104 then r
   else
-    let acc = ref exp_coefficients.(21) in
+    (* Separate scalar accumulators let native code keep both words unboxed.
+       The coefficient order and every DD operation remain unchanged. *)
+    let initial = exp_coefficients.(21) in
+    let hi = ref initial.hi and lo = ref initial.lo in
     for k = 20 downto 2 do
-      acc :=
+      let acc =
         (add [@inlined always]) exp_coefficients.(k)
-          ((mul [@inlined always]) r !acc)
+          ((mul [@inlined always]) r { hi = !hi; lo = !lo })
+      in
+      hi := acc.hi;
+      lo := acc.lo
     done;
     let acc =
-      (add_float [@inlined always]) ((mul [@inlined always]) r !acc) 0.5
+      (add_float [@inlined always])
+        ((mul [@inlined always]) r { hi = !hi; lo = !lo })
+        0.5
     in
     (add [@inlined always]) r
       ((mul [@inlined always]) ((mul [@inlined always]) r r) acc)
@@ -206,11 +214,20 @@ let reciprocals =
 let log_reduced m =
   let u = div (of_float (m -. 1.0)) (add (of_float m) (of_float 1.0)) in
   let v = mul u u in
-  let acc = ref reciprocals.(series_terms) in
+  (* As in expm1_reduced, retain two scalar loop variables rather than a
+     heap-allocated record at every Horner step. *)
+  let initial = reciprocals.(series_terms) in
+  let hi = ref initial.hi and lo = ref initial.lo in
   for k = series_terms - 1 downto 0 do
-    acc := add (mul !acc v) reciprocals.(k)
+    let acc =
+      (add [@inlined always])
+        ((mul [@inlined always]) { hi = !hi; lo = !lo } v)
+        reciprocals.(k)
+    in
+    hi := acc.hi;
+    lo := acc.lo
   done;
-  mul_float (mul u !acc) 2.0
+  mul_float (mul u { hi = !hi; lo = !lo }) 2.0
 
 (* ln a for a positive, finite, normal a. *)
 let log_float a =
