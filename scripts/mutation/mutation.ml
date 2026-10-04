@@ -486,10 +486,27 @@ let catalog =
       mechanism = "grow-expansion retains every nonzero TwoSum residual";
     };
     {
+      id = "enclosure-packed-word";
+      file = "lib/enclosure.ml";
+      snippet = "fourth = retained 3;";
+      replacement = "fourth = 0.0;";
+      killer = "enclosure_reference";
+      mechanism = "a fixed enclosure slot cannot silently lose a retained word";
+    };
+    {
+      id = "enclosure-normal-exponent";
+      file = "lib/enclosure.ml";
+      snippet = "else field - 1022";
+      replacement = "else field - 1021";
+      killer = "enclosure_reference";
+      mechanism =
+        "normal frexp exponent decoding must preserve the product quantum bound";
+    };
+    {
       id = "enclosure-discarded-word";
       file = "lib/enclosure.ml";
-      snippet = "else take 0 kept (error +^ abs x) (j - 1)";
-      replacement = "else take 0 kept error (j - 1)";
+      snippet = "error := !error +^ abs x";
+      replacement = "error := !error";
       killer = "enclosure_reference";
       mechanism = "discarded expansion words remain in the absolute radius";
     };

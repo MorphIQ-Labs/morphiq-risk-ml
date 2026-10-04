@@ -146,3 +146,8 @@
  (modules certified_scalar)
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name allocation_profile)
+ (modules allocation_profile)
+ (libraries morphiq_risk))

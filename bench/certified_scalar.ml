@@ -15,16 +15,22 @@ let sample key n f =
   done;
   for round = 1 to 5 do
     Gc.full_major ();
-    let a = words () and cpu = Sys.time () and start = monotonic () in
+    let gc_before = Gc.quick_stat () in
+    let a = words () in
+    let cpu = Sys.time () in
+    let start = monotonic () in
     for _ = 1 to n do
       ignore (Sys.opaque_identity (f ()))
     done;
     let elapsed = monotonic () -. start in
     let cpu = Sys.time () -. cpu and allocation = 8. *. (words () -. a) in
-    Printf.printf "TIME %s %d %.3f %.3f %.3f\n%!" key round
+    let gc_after = Gc.quick_stat () in
+    Printf.printf "TIME %s %d %.3f %.3f %.3f %d %d\n%!" key round
       (elapsed *. 1e9 /. float n)
       (cpu *. 1e9 /. float n)
       (allocation /. float n)
+      (gc_after.minor_collections - gc_before.minor_collections)
+      (gc_after.major_collections - gc_before.major_collections)
   done
 
 let outcome = function
@@ -53,7 +59,7 @@ let () =
       ( "--version",
         Arg.Unit
           (fun () ->
-            print_endline "certified-scalar-v1";
+            print_endline "certified-scalar-v2";
             exit 0),
         "Print benchmark version" );
     ]
