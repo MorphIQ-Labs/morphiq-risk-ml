@@ -20,6 +20,33 @@ let () =
   require "ULP scorer rejects NaN" (ulps Float.nan 0. = Float.infinity);
   require "ULP scorer keeps one-word spacing" (ulps 1. (Float.succ 1.) = 1.);
   require "ULP scorer identifies signed zeros" (ulps 0. (-0.) = 0.);
+  (* T=3*minsub and K=1.5*2^900 give the exact normal product 9*2^-175.
+     ITM S/K=2 (call), 1/2 (put) and sigma<=1/4 put the omitted Gaussian
+     tail far below half an ULP; see adversarial-assurance-closeout.md.
+     A premature normalized cash*T product rounds before currency restoration.
+     Its wrong normal result bypasses the new subnormal-rho refinement. *)
+  List.iter
+    (fun (side, spot, sign) ->
+      let admitted =
+        get
+          (Black.Bsm.admit
+             {
+               spot;
+               strike = 0x1.8p900;
+               time_to_expiry = 0x1.8p-1073;
+               rate = 0.;
+               dividend_yield = 0.;
+             })
+      in
+      List.iter
+        (fun sigma ->
+          let result =
+            Black.Bsm.greeks admitted side (get (Vol.lognormal sigma))
+          in
+          require "premature maturity product corrupts normal-range rho"
+            (result.rho = Ok (sign *. 0x1.2p-172)))
+        [ 0.; 0.25 ])
+    [ (Side.Call, 0x1.8p901, 1.); (Side.Put, 0x1.8p899, -1.) ];
   Oracle_fixture.lines ~columns:[ 13 ] ~names:[ "finite_greeks" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then

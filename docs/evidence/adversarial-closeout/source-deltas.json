@@ -1,0 +1,83 @@
+{
+  "historical_candidate": "83b541e02ce3467536a6febc54a5eeb49004bc8a",
+  "campaign_source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+  "runtime_tree": "659fda95c4c5a6ee8253948828b4a197ec03da83",
+  "runtime_changes": [
+    {
+      "status": "M",
+      "path": "lib/black.ml",
+      "sha256": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac"
+    },
+    {
+      "status": "M",
+      "path": "lib/black.mli",
+      "sha256": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8"
+    },
+    {
+      "status": "A",
+      "path": "lib/black_rho.ml",
+      "sha256": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf"
+    },
+    {
+      "status": "A",
+      "path": "lib/black_rho.mli",
+      "sha256": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394"
+    },
+    {
+      "status": "M",
+      "path": "lib/boundary_greeks.ml",
+      "sha256": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc"
+    },
+    {
+      "status": "A",
+      "path": "lib/enclosure_round.ml",
+      "sha256": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff"
+    },
+    {
+      "status": "A",
+      "path": "lib/enclosure_round.mli",
+      "sha256": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa"
+    },
+    {
+      "status": "M",
+      "path": "lib/greeks.mli",
+      "sha256": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002"
+    },
+    {
+      "status": "M",
+      "path": "lib/model_enclosure.ml",
+      "sha256": "b11b4159d437d0434f562593eaa66f285783a0fe0170bf4c1311c4e4af1ca014"
+    },
+    {
+      "status": "M",
+      "path": "lib/model_enclosure.mli",
+      "sha256": "f2bebf75133980a96e6ab04de1cc4d54a1c9927beac32d8c92325e22c81e4bd5"
+    }
+  ],
+  "unchanged_blobs_or_trees": {
+    "lib/batch.ml": true,
+    "lib/batch.mli": true,
+    "lib/scenario.ml": true,
+    "lib/scenario.mli": true,
+    "lib/planner.ml": true,
+    "lib/planner.mli": true,
+    "oracle/MANIFEST": true,
+    "oracle/fixtures": true
+  },
+  "commits": [
+    "76128fd99b9649d92f5a473fa4fcc3de44e04cd2 docs: retain rho rounding qualification and performance evidence",
+    "dd15dcb811799c601f5cad725999a5c0987c0a4f perf: prove rho zeros before full enclosure refinement",
+    "557a49fb70e07df2e51d6966c5e62a49f38a49ca fix: retain certified tail rho availability and zero signs",
+    "44562b9b974fc88820c020b8b1d58c227a59cdad fix: preserve original-input rho subnormal rounding cells",
+    "6b156b2901f0603f44cd875317dc2db756c9e4c7 fix: reject unresolved Greek cancellation and stabilize theta (#82)",
+    "385e819cbeeae8121f4910ac64fcc34348d4ca3b fix: refine Black prices under severe carry cancellation (#81)",
+    "3f976deb23aa724016c1b8352c187bb5b34cba19 test: stress planner scheduling and output failure boundaries (#79)",
+    "2388e09184fd74c46bd8d7d5804c1b7013f03168 test: add systematic numerical boundary and availability campaign (#78)",
+    "efd73482ce39949574d5b83ce6894b465aa2b0cc test: harden oracle scoring, input controls and counterexample reduction (#75)",
+    "72f38911d82292f384e3dd524cee9c81168ec649 docs: retain qualified experimental 0.3.0 evidence (#74)"
+  ],
+  "campaign_main_merge": "eaf20a4c252b927c437596ed6089cb84dcf974c9",
+  "guard_reconciliation_source": "2345081b2b2e60ad6dca00a6412f3b98288b7868",
+  "guard_reconciliation_runtime_tree": "659fda95c4c5a6ee8253948828b4a197ec03da83",
+  "added_guard_sha256": "3f25329cb2b230d9381bd68dbb35202967c8b15e439313c19f3b307acd305fd3"
+}

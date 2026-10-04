@@ -1,0 +1,58 @@
+{
+  "mergeCommit": {
+    "oid": "eaf20a4c252b927c437596ed6089cb84dcf974c9"
+  },
+  "state": "MERGED",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-04T14:52:44Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37210542711/job/111460655555",
+      "name": "test (ubuntu-24.04)",
+      "startedAt": "2026-10-04T14:47:14Z",
+      "status": "COMPLETED",
+      "workflowName": "ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-04T14:51:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37210542711/job/111460655483",
+      "name": "test (ubuntu-24.04-arm)",
+      "startedAt": "2026-10-04T14:47:15Z",
+      "status": "COMPLETED",
+      "workflowName": "ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-04T14:53:49Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37210542711/job/111460655500",
+      "name": "test (macos-15)",
+      "startedAt": "2026-10-04T14:47:20Z",
+      "status": "COMPLETED",
+      "workflowName": "ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-04T14:50:34Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37210542711/job/111460655514",
+      "name": "format",
+      "startedAt": "2026-10-04T14:47:13Z",
+      "status": "COMPLETED",
+      "workflowName": "ci"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-04T14:54:52Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37210542711/job/111460655384",
+      "name": "mutation",
+      "startedAt": "2026-10-04T14:47:13Z",
+      "status": "COMPLETED",
+      "workflowName": "ci"
+    }
+  ]
+}

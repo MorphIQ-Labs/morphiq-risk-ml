@@ -1,0 +1,27 @@
+{
+  "source_receipt": "docs/evidence/oracle-assurance/validation.json",
+  "source_checks": {
+    "scripts/arb_greek_audit.py": {
+      "recorded_sha256": "b0c203906555c46fe1b4042964f9c0d6e5e5c3fbe532929d01b86284bd32b17a",
+      "current_sha256": "b0c203906555c46fe1b4042964f9c0d6e5e5c3fbe532929d01b86284bd32b17a"
+    },
+    "scripts/arb_iv_audit.py": {
+      "recorded_sha256": "c05e6d47b64e92894e3e8ccfd210535ba4a5a6a29c1622d279a7fc127be4e338",
+      "current_sha256": "c05e6d47b64e92894e3e8ccfd210535ba4a5a6a29c1622d279a7fc127be4e338"
+    },
+    "scripts/arb_reference_campaign.py": {
+      "recorded_sha256": "fcc6cf13e255234c4cc5f8e3102945b9545cb23cb0563ab1bf9f3a14eb333b06",
+      "current_sha256": "fcc6cf13e255234c4cc5f8e3102945b9545cb23cb0563ab1bf9f3a14eb333b06"
+    },
+    "scripts/fixture_catalog.py": {
+      "recorded_sha256": "d0cb8753fe061eadfb3344a62e91cb9bdabc5cde94424fc70bf62ff21c455f77",
+      "current_sha256": "d0cb8753fe061eadfb3344a62e91cb9bdabc5cde94424fc70bf62ff21c455f77"
+    }
+  },
+  "scope": "Historical independent fixture audits, not new runtime/certificate execution. The new numerical campaign verifies its own transitive source closure and immutable fixture hashes.",
+  "artifact_checks": {
+    "docs/evidence/oracle-assurance/arb-references.json": "0e71277746f6c7d100fc8153938f8a39c8cc378ea5196a0da8fa536d29844afb",
+    "docs/evidence/oracle-assurance/arb-iv.json": "c74fe2a8c9227345ec3078f85580620a0e3283a1ed1f17c5c965124765e2b542",
+    "docs/evidence/oracle-assurance/arb-greeks.json": "6140e8e64f0749d8744f94baefdfbe229c9ca2eb3bc975da1d1fe50b8b81a69b"
+  }
+}

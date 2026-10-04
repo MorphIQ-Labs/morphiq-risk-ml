@@ -17,6 +17,11 @@ identified separately from the candidate they describe. The historical
 remain unchanged. Institutional requirements continue under #27 and
 [acceptance and change control](acceptance-and-change-control.md).
 
+Subsequent scalar corrections and adversarial assurance are pinned separately
+in the [#57 adjudication](adversarial-assurance-closeout.md). That report updates
+the current engineering scope and independent-review package; it does not
+retroactively qualify new numerical behavior under the historical candidate.
+
 ## Claims, owners and executable evidence
 
 The following index connects current claims to their owning implementation and
@@ -113,10 +118,12 @@ checks; dependency or packaging changes invalidate installation/provenance
 checks. Documentation/evidence-only changes require integrity/link review and
 an explicit delta, not relabeling old executions as new runs.
 
-Remaining assurance work is tracked under #53–57, including broader numerical
-boundary campaigns, legacy ULP-scorer hardening, oracle uncertainty challenges,
-scheduling stress and independent adjudication. These limit experimental
-assurance and remain open. Institutional review, representative business
+The engineering work under #53–57 is adjudicated in the
+[current campaign closeout](adversarial-assurance-closeout.md): numerical
+boundaries, scorer/input hardening, reference reduction, scheduling stress and
+finding dispositions. Its finite coverage, unresolved references and explicit
+availability limits remain constraints on experimental assurance.
+Institutional review, representative business
 portfolios and release decisions remain #15–17; none are satisfied by this
 engineering closeout. There is no production SLA or blanket guarantee over all
 finite admitted inputs.

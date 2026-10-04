@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Adversarial assurance handoff (#57)
+
+- Retain strict numerical/reference/planner reruns, finding dispositions and
+  explicit unresolved/availability outcomes at source `76128fd`.
+- Add four independently proved normal-range rho regressions after the full
+  mutation run exposed two old guards masked by subnormal refinement. Runtime
+  arithmetic, allowances and committed reference fixtures are unchanged.
+- Refresh the independent-review package for scalar, Batch, Scenario and Planner,
+  with source deltas and theorem/call-site questions. This is engineering evidence,
+  not independent human sign-off, institutional acceptance or a release.
+  [Campaign adjudication](docs/adversarial-assurance-closeout.md).
+
 ### Subnormal BSM rho rounding (#77)
 
 - Refine zero/subnormal/smallest-normal BSM rho proposals from original-input

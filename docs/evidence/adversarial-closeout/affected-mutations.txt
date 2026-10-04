@@ -1,0 +1,6 @@
+baseline passes (77 s)
+killed    greek-finite-result by finite_greeks
+killed    intrinsic-nonfinite-price by finite_greeks
+killed    greek-live-rho-scale by finite_greeks
+killed    greek-zero-rho-scale by finite_greeks
+4 of 4 mutants killed as catalogued

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "command": "memory",
+  "complete": true,
+  "source_commit": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.8",
+  "runner_sha256": "9f2fe64b166cc84de06c5936d44d37e337a7d50887ac723d26479bcb823b2c5f",
+  "results": [
+    {
+      "book": 256,
+      "scenarios": 1,
+      "rows": 256,
+      "slot_bound": 384,
+      "heap_words": 123283,
+      "peak_rss_bytes": 15876096,
+      "elapsed_seconds": 0.11109837493859231
+    },
+    {
+      "book": 256,
+      "scenarios": 8,
+      "rows": 2048,
+      "slot_bound": 384,
+      "heap_words": 123283,
+      "peak_rss_bytes": 17743872,
+      "elapsed_seconds": 0.8380203749984503
+    },
+    {
+      "book": 4096,
+      "scenarios": 1,
+      "rows": 4096,
+      "slot_bound": 384,
+      "heap_words": 106899,
+      "peak_rss_bytes": 21725184,
+      "elapsed_seconds": 1.7110328329727054
+    },
+    {
+      "book": 4096,
+      "scenarios": 8,
+      "rows": 32768,
+      "slot_bound": 384,
+      "heap_words": 110995,
+      "peak_rss_bytes": 24150016,
+      "elapsed_seconds": 13.89004779199604
+    }
+  ]
+}

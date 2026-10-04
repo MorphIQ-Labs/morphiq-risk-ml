@@ -12,6 +12,53 @@ its compatibility with that baseline, canonical generated qualification and
 platform artifacts. This owner approval is retained without substituting it
 for the independent reviewer deliverables below.
 
+## Current engineering handoff (2026-10-04, #57)
+
+The current campaign source is `76128fd99b9649d92f5a473fa4fcc3de44e04cd2`,
+covering scalar BSM/Black-76/displaced Black/Bachelier prices, certified IV,
+ten Greek fields, typed Batch, Scenario and Planner. The [adjudication
+report](adversarial-assurance-closeout.md) retains exact inputs, independent
+uncertainty, dispositions, strict numerical reruns, reference reduction,
+planner stress and remaining coverage gaps. No reviewer has been appointed
+or contacted by this handoff. The historical owner approval and candidate
+dossiers are tied to their own revisions and do not approve later deltas.
+
+Relative to experimental candidate `83b541e02ce3467536a6febc54a5eeb49004bc8a`:
+
+- #55 changes test/reference scoring and input completeness, including the
+  overflowing signed ULP distance and historical one-sided midpoint reduction.
+  Committed fixture audits remain explicitly source-bound.
+- #54/#56 add versioned numerical and execution challenges. Batch, Scenario
+  and Planner runtime source is unchanged, but its expanded stress evidence
+  covers real-domain failure/cancellation boundaries and aggregate containment.
+- #76 changes selected Black prices to original-input cell refinement, with
+  NaN on unresolved cells; review the coordinate selector, stable `expm1`
+  identity, `Enclosure_round` and finite-exponent restoration.
+- #80 changes selected Greek availability, original-input kink classification,
+  zero-variance theta assembly and smooth-theta capability. Review the DD
+  cancellation majorants and field/all-field refusal boundaries.
+- #77 adds BSM rho final-cell refinement, normalized products, Mills tails and
+  analytical zero proofs. Review strict midpoint direction, negative-side
+  signs, exact exponent bounds and outward inequalities at actual call sites.
+
+These served-value/outcome changes require a new numerical delta review.
+They do not expand Production or IV acceptance contracts, or automatically
+transfer old fast-path accuracy claims. The [source delta inventory](evidence/adversarial-closeout/source-deltas.json)
+lists changed runtime files. Full revised derivations and per-row compatibility,
+availability and performance evidence are linked from the adjudication.
+
+The numerical campaign still has 166 unresolved references, 281 explicit
+failures and 17 nonfinite fast prices in 7,095 full requests. A successful
+strict diagnostic run is not whole-domain accuracy or availability. Reviewer
+attention must include these boundaries and the unselected normal-range fast
+paths, not only the corrected witnesses.
+
+The #57 full mutation run also exposed two rho-scaling guards masked by the
+new refinement. Commit `2345081b2b2e60ad6dca00a6412f3b98288b7868` adds four
+normal-range output witnesses with exact/Arb proofs, without changing runtime
+arithmetic or budgets. Review the original survivor log and affected rerun
+separately; the earlier campaign is not retroactively described as passing.
+
 ## Mandate and deliverables
 
 The appointing owner should select a reviewer with floating-point error-analysis
@@ -36,6 +83,8 @@ must be able to reject a claim without negotiating its tolerance after scoring.
 | Canonical comparisons | [Shadow specification](shadow-campaign.md), [results](results-shadow.md) | Reproduce mapping effects and all material formula discrepancies; do not treat a comparator as ground truth. |
 | Compiler/platform | [Numerical backend](numerical-backend-contract.md), [determinism](determinism.md) | Check contraction, explicit FMA, subnormals, rounding mode and supported-platform evidence. A digest is not an accuracy proof. |
 | Operational use | [Performance](performance.md), [shadow results](results-shadow.md) | Are scalar cost/allocation/failure rates acceptable for the actual workload? The separate GC trace covers the diagnostic; business workload coverage remains incomplete. |
+| Typed Batch and scenarios | [Scenario contract](scenario-planner.md), `lib/batch.ml`, `lib/scenario.ml`, type rejection and scalar/Batch equivalence tests | Do coordinate/result types, frozen inputs, quantity units, fixed expiry/day count and post-expiry outcomes match the intended use? |
+| Planner execution and totals | [Stress protocol](planner-stress-protocol.md), [results](planner-stress-results.md), [current rerun](adversarial-assurance-closeout.md), `lib/planner.ml` | Recheck checked counts, resource bounds, wave/join ordering, cancellation checkpoints, sink commits and independent aggregate intervals. Finite schedules do not prove race freedom or durable delivery. |
 
 The research manifest records original PDF hashes and versions. Black (1976)
 remains unavailable in the archive. The source audit distinguishes published

@@ -1,0 +1,552 @@
+{
+  "initial_exit": 1,
+  "initial_killed": 75,
+  "initial_survived": 2,
+  "affected_exit": 0,
+  "affected_killed": 4,
+  "source_delta": [
+    "test/finite_greeks.ml"
+  ],
+  "scope": "77 applicable kills across unchanged guards plus the four requalified affected guards; not one 77/77 full run at the later source.",
+  "mechanisms": {
+    "rho-quick-zero-threshold": {
+      "initial": "killed",
+      "guard": "rho_midpoint",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "rho-tail-exponent": {
+      "initial": "killed",
+      "guard": "rho_midpoint",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "rho-tail-zero-proof": {
+      "initial": "killed",
+      "guard": "rho_midpoint",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "rho-subnormal-refinement": {
+      "initial": "killed",
+      "guard": "rho_midpoint",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "rho-midpoint-probability": {
+      "initial": "killed",
+      "guard": "rho_midpoint",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "smooth-theta-cancellation": {
+      "initial": "killed",
+      "guard": "greek_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "zero-variance-theta-cancellation": {
+      "initial": "killed",
+      "guard": "greek_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "cancelled-greek-coordinate": {
+      "initial": "killed",
+      "guard": "greek_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "underflowed-greek-coordinate": {
+      "initial": "killed",
+      "guard": "greek_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "cancelled-price-refinement": {
+      "initial": "killed",
+      "guard": "carry_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "cancelled-price-cell": {
+      "initial": "killed",
+      "guard": "carry_cancellation",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "greek-finite-result": {
+      "initial": "killed",
+      "guard": "finite_greeks",
+      "evidence": "affected-mutations.txt",
+      "source": "2345081b2b2e60ad6dca00a6412f3b98288b7868",
+      "final": "killed"
+    },
+    "intrinsic-nonfinite-price": {
+      "initial": "killed",
+      "guard": "finite_greeks",
+      "evidence": "affected-mutations.txt",
+      "source": "2345081b2b2e60ad6dca00a6412f3b98288b7868",
+      "final": "killed"
+    },
+    "greek-live-rho-scale": {
+      "initial": "survived",
+      "guard": "finite_greeks",
+      "final": "killed",
+      "evidence": "affected-mutations.txt",
+      "source": "2345081b2b2e60ad6dca00a6412f3b98288b7868"
+    },
+    "greek-zero-rho-scale": {
+      "initial": "survived",
+      "guard": "finite_greeks",
+      "final": "killed",
+      "evidence": "affected-mutations.txt",
+      "source": "2345081b2b2e60ad6dca00a6412f3b98288b7868"
+    },
+    "prepared-quotient-exponent": {
+      "initial": "killed",
+      "guard": "prepared_division",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "prepared-reciprocal-residual": {
+      "initial": "killed",
+      "guard": "prepared_division",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "prepared-numerator-scale": {
+      "initial": "killed",
+      "guard": "prepared_division",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "inverse-iteration-count": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "inverse-dd-refinement": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "erfcx-leading-residual": {
+      "initial": "killed",
+      "guard": "oracle_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "erfcx-local-degree": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "erfcx-tail-degree": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "erf-series-degree": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "erfc-square-split": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "planner-snapshot-copy": {
+      "initial": "killed",
+      "guard": "planner_contract",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "planner-post-expiry": {
+      "initial": "killed",
+      "guard": "planner_contract",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "planner-scalar-radius": {
+      "initial": "killed",
+      "guard": "planner_contract",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "planner-incomplete-total": {
+      "initial": "killed",
+      "guard": "planner_contract",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "production-accuracy-limit": {
+      "initial": "killed",
+      "guard": "production_boundary",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "production-certificate-radius": {
+      "initial": "killed",
+      "guard": "production_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "production-rho-coordinate": {
+      "initial": "killed",
+      "guard": "production_greek_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "production-time-unit": {
+      "initial": "killed",
+      "guard": "production_greek_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "zero-variance-black-time": {
+      "initial": "killed",
+      "guard": "boundary_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "zero-variance-normal-rho": {
+      "initial": "killed",
+      "guard": "boundary_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "zero-variance-veta": {
+      "initial": "killed",
+      "guard": "boundary_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "enclosure-product-guard": {
+      "initial": "killed",
+      "guard": "enclosure_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "iv-certification-refinement": {
+      "initial": "killed",
+      "guard": "oracle_iv",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "enclosure-series-tail": {
+      "initial": "killed",
+      "guard": "enclosure_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "certified-rounding-cell": {
+      "initial": "killed",
+      "guard": "certified_iv_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "enclosure-discarded-word": {
+      "initial": "killed",
+      "guard": "enclosure_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "iv-original-shift": {
+      "initial": "killed",
+      "guard": "iv_termination",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "model-normalization": {
+      "initial": "killed",
+      "guard": "enclosure_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "enclosure-fma-underflow": {
+      "initial": "killed",
+      "guard": "enclosure_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "iv-iteration-cap": {
+      "initial": "killed",
+      "guard": "iv_termination",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "iv-nonfinite-value": {
+      "initial": "killed",
+      "guard": "iv_termination",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "split-root-nonoverlap": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "dd-scale-nonoverlap": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "scaled-exp-prefactor": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "split-root-scale": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "split-quotient-scale": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "split-quotient-nonoverlap": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "ulp-distance-overflow": {
+      "initial": "killed",
+      "guard": "oracle_assurance",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "reference-expansion": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "sqrt-exponent-scale": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "intrinsic-coordinate-scale": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "rho-ulp-propagation": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "quotient-remainder": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "division-numerator-scale": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "expm1-tiny": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "intrinsic-tiny-carry": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "dd-reference-nan": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "floor-exponent": {
+      "initial": "killed",
+      "guard": "properties",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "intrinsic-expm1": {
+      "initial": "killed",
+      "guard": "oracle_price",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "root-time-low": {
+      "initial": "killed",
+      "guard": "oracle_price",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "subnormal-rounding": {
+      "initial": "killed",
+      "guard": "test_morphiq_risk",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "displaced-exact-sum": {
+      "initial": "killed",
+      "guard": "oracle_price",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "bachelier-distance": {
+      "initial": "killed",
+      "guard": "oracle_price",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "gaussian-split": {
+      "initial": "killed",
+      "guard": "oracle_normal",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "log1p-remainder": {
+      "initial": "killed",
+      "guard": "oracle_elementary",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "dd-exp-degree": {
+      "initial": "killed",
+      "guard": "dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "normal-dd-series": {
+      "initial": "killed",
+      "guard": "normal_dd_reference",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "iv-complement-correction": {
+      "initial": "killed",
+      "guard": "numerical_regressions",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "greeks-theta-dd": {
+      "initial": "killed",
+      "guard": "oracle_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "greeks-charm-dd": {
+      "initial": "killed",
+      "guard": "oracle_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "greeks-veta-bracket": {
+      "initial": "killed",
+      "guard": "oracle_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    },
+    "bachelier-theta-dd": {
+      "initial": "killed",
+      "guard": "oracle_greeks",
+      "evidence": "initial-full-mutations.txt",
+      "source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+      "final": "killed"
+    }
+  }
+}

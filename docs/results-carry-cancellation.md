@@ -1,5 +1,9 @@
 # Severe carry-cancellation price qualification (#76)
 
+This source-bound report retains the Greek/rho findings known at its execution.
+Their subsequent corrections and remaining limits are recorded in the
+[#57 adjudication](adversarial-assurance-closeout.md).
+
 The original BSM zero-volatility witness now returns the independently proved
 nearest-even word `3615555555555556`, instead of `35f5555555555554`. Its error
 falls from 9,007,199,254,740,994 ULP to zero. The mathematical model and original

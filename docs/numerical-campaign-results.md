@@ -1,5 +1,9 @@
 # Numerical boundary campaign v1 (#54)
 
+This is the historical discovery report. The [#57 adjudication](adversarial-assurance-closeout.md)
+records the corrected implementation, strict reruns and remaining availability
+and reference limitations; the original observations below remain unchanged.
+
 The bounded campaign found **two fast-API quality discrepancies and no contract
 violations** on the exercised inputs. Both strict runs exit 1; this is not a
 clean accuracy campaign. The ordinary CI contract gate passes while reporting

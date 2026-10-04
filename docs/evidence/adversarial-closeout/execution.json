@@ -1,0 +1,78 @@
+{
+  "source_commit": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+  "runner_source": "dd15dcb811799c601f5cad725999a5c0987c0a4f",
+  "note": "Source 76128fd adds only docs/evidence to the measured runtime commit.",
+  "commands": [
+    {
+      "name": "smoke",
+      "command": [
+        "python3",
+        "scripts/numerical_campaign.py",
+        "check",
+        "--reference",
+        "oracle/challenges/numerical-smoke-v1.json.gz",
+        "--runner",
+        "/tmp/morphiq-rho-midpoint/_build/default/test/numerical_boundary_runner.exe",
+        "--output",
+        "/tmp/assurance-57-smoke.json"
+      ],
+      "exit": 0,
+      "seconds": 1.1715378761291504
+    },
+    {
+      "name": "full",
+      "command": [
+        "python3",
+        "scripts/numerical_campaign.py",
+        "check",
+        "--reference",
+        "docs/evidence/numerical-campaign/numerical-full-v1.json.gz",
+        "--runner",
+        "/tmp/morphiq-rho-midpoint/_build/default/test/numerical_boundary_runner.exe",
+        "--output",
+        "/tmp/assurance-57-full.json"
+      ],
+      "exit": 0,
+      "seconds": 3.3020708560943604
+    },
+    {
+      "name": "reference",
+      "command": [
+        "/tmp/morphiq-oracle-55-env/bin/python",
+        "scripts/oracle_challenge.py",
+        "--output",
+        "/tmp/assurance-57-reference.json"
+      ],
+      "exit": 0,
+      "seconds": 1.5801737308502197
+    },
+    {
+      "name": "planner",
+      "command": [
+        "python3",
+        "scripts/planner_stress.py",
+        "check",
+        "/tmp/morphiq-rho-midpoint/_build/default/test/planner_stress.exe",
+        "--repeats",
+        "5"
+      ],
+      "exit": 0,
+      "seconds": 18.245805978775024
+    },
+    {
+      "name": "memory",
+      "command": [
+        "python3",
+        "scripts/planner_stress.py",
+        "memory",
+        "/tmp/morphiq-rho-midpoint/_build/default/test/planner_stress.exe"
+      ],
+      "exit": 0,
+      "seconds": 16.85549783706665
+    }
+  ],
+  "runner_sha256": {
+    "numerical_boundary_runner.exe": "8c4dc78636abaebf8fbcd83753986efe8db74a1ff01c7b60923e36182559106b",
+    "planner_stress.exe": "9f2fe64b166cc84de06c5936d44d37e337a7d50887ac723d26479bcb823b2c5f"
+  }
+}
