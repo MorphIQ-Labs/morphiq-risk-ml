@@ -102,4 +102,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Certified expansion sum optimization](results-certified-expansion-sums.md): magnitude-ordered exact residuals, finite guards, scalar/portfolio/Exchange/IV measurements and complete certificate replay.
 - [Certification allocation optimization](results-certification-allocation.md): packed immutable words, private buffers, 77% less representative price allocation, GC counts and IV timing tradeoffs.
 
+- [Fast planner measurements](results-fast-planner.md): bounded scenario costs, worker scaling and certified compatibility.
 - [Fast batch measurements](results-fast-batch.md): compile/reuse costs, direct scalar comparison, fixture equivalence and installed consumers.

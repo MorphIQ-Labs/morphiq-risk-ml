@@ -116,7 +116,8 @@ let completion = F.execute plan ~workers:1 ~cancellation:(P.cancellation ())
 ```
 
 This prints per-unit scenario valuations, not portfolio totals or economic P&L.
-#97 owns this implementation; #98 owns integrated qualification. The batch and
+[Measurements and validation](results-fast-planner.md) cover this #97
+implementation; #98 owns integrated qualification. The batch and
 planner compilers reuse different work: `Batch.Fast` caches admission for fixed
 requests, while `Planner.Fast` caches structural bindings and generates and admits
 rows lazily to maintain scenario memory bounds. Neither changes the underlying

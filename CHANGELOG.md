@@ -15,7 +15,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   and the bounded scheduler with the certified planner. Existing certified
   signatures, numerical formulas and replay identities remain unchanged.
 - Additive API without a version bump or release. See the
-  [contract, ownership and usage](docs/fast-planner.md).
+  [contract, ownership and usage](docs/fast-planner.md) and
+  [validation, measured costs and host-load limits](docs/results-fast-planner.md).
 
 ### Compiled fast price batches (#96)
 
