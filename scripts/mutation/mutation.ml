@@ -38,6 +38,52 @@ type mutant = {
 let catalog =
   [
     {
+      id = "rho-quick-zero-threshold";
+      file = "lib/black_rho.ml";
+      snippet =
+        "E.sign (E.sub log_upper (E.mul_float log_two (-1075.0))) = E.Negative";
+      replacement =
+        "E.sign (E.sub log_upper (E.mul_float log_two 1075.0)) = E.Negative";
+      killer = "rho_midpoint";
+      mechanism =
+        "the cheap proof must compare with the actual half-subnormal threshold";
+    };
+    {
+      id = "rho-tail-exponent";
+      file = "lib/black_rho.ml";
+      snippet = "-1074 )";
+      replacement = "-1073 )";
+      killer = "rho_midpoint";
+      mechanism =
+        "the normalized tail must restore the minimum-subnormal exponent";
+    };
+    {
+      id = "rho-tail-zero-proof";
+      file = "lib/black_rho.ml";
+      snippet = "if below_zero_cell then";
+      replacement = "if false && below_zero_cell then";
+      killer = "rho_midpoint";
+      mechanism = "a proved underflowed tail must retain its zero rounding cell";
+    };
+    {
+      id = "rho-subnormal-refinement";
+      file = "lib/black.ml";
+      snippet = "(not c.tied) && Float.abs value <= Float.min_float";
+      replacement =
+        "false && (not c.tied) && Float.abs value <= Float.min_float";
+      killer = "rho_midpoint";
+      mechanism = "subnormal rho must retain its original-input rounding cell";
+    };
+    {
+      id = "rho-midpoint-probability";
+      file = "lib/black_rho.ml";
+      snippet = "Model_enclosure.cdf argument";
+      replacement = "E.exact (Model_enclosure.cdf argument).hi";
+      killer = "rho_midpoint";
+      mechanism =
+        "rounding Phi before the scaled product loses midpoint direction";
+    };
+    {
       id = "smooth-theta-cancellation";
       file = "lib/black.ml";
       snippet = "terms > 0.0 && Float.abs value.hi <= noise";
@@ -854,7 +900,7 @@ let guard_arguments = function
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
   | "production_boundary" | "planner_contract" | "prepared_division"
-  | "carry_cancellation" | "greek_cancellation" ->
+  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

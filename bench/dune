@@ -101,3 +101,10 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk unix))
+
+(executable
+ (name rho_midpoint)
+ (modules rho_midpoint)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))

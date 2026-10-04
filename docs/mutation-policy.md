@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **72
+seven core mutants. The catalog currently contains **77
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -164,4 +164,12 @@ unchanged. Execution evidence is retained with the carry-cancellation report.
 Four optional mutants cover bypassing exhausted-coordinate refusal, treating
 underflowed carry as an exact zero, restoring the inaccurate binary64
 zero-variance theta subtraction, and bypassing smooth-theta cancellation refusal. All use the independent `greek_cancellation`
-guard. The full catalog has 72 mechanisms; the default seven remain unchanged.
+guard. The full catalog at #80 had 72 mechanisms; the default seven remain unchanged.
+
+## Rho subnormal rounding (#77)
+
+Five optional mutants cover bypassing original-input rho refinement,
+rounding away the normal-probability correction, removing the proved tail
+zero path, restoring the wrong tail exponent and weakening the cheap zero
+proof threshold. Each uses the direct `rho_midpoint` witness. The catalog has 77
+mechanisms; the seven default core mutants are unchanged.

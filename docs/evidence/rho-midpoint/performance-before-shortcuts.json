@@ -1,0 +1,849 @@
+{
+  "hardware": "Apple M1 Pro",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+  "dune": "3.24.2",
+  "baseline_source": "5933a547e71cb58bbed7c7ad6383e87ba410b2a4",
+  "candidate_source": "557a49fb70e07df2e51d6966c5e62a49f38a49ca",
+  "harness_sha256": "ddc7ff13693ace799b64d05acc1539d2c61ca148539b8e1ca7256cb43f1b1c6d",
+  "runs": [
+    {
+      "kind": "baseline",
+      "load": "10:29  up 7 days, 17:50, 12 users, load averages: 2.04 6.94 16.38",
+      "started_unix": 1791124175.009866,
+      "seconds": 2.3053839206695557,
+      "samples_ns": {
+        "ordinary/admission": [
+          1118.016,
+          1111.889,
+          1118.898,
+          1127.41,
+          1121.497,
+          1155.186,
+          1132.917
+        ],
+        "ordinary/price": [
+          1546.717,
+          1519.585,
+          1498.103,
+          1514.292,
+          1494.217,
+          1495.099,
+          1491.904
+        ],
+        "ordinary/greeks": [
+          9147.501,
+          9170.008,
+          9172.606,
+          9168.792,
+          9423.399,
+          9179.211,
+          9386.802
+        ],
+        "ordinary/admission+greeks": [
+          10571.694,
+          10321.999,
+          10284.805,
+          10427.594,
+          10429.811,
+          10282.302,
+          10396.004
+        ],
+        "ordinary-zero-otm/admission": [
+          1156.592,
+          1131.988,
+          1141.62,
+          1140.881,
+          1123.81,
+          1112.39,
+          1125.717
+        ],
+        "ordinary-zero-otm/price": [
+          1285.076,
+          1274.347,
+          1264.811,
+          1285.076,
+          1255.274,
+          1250.505,
+          1254.082
+        ],
+        "ordinary-zero-otm/greeks": [
+          1325.607,
+          1314.878,
+          1324.415,
+          1314.878,
+          1320.839,
+          1314.878,
+          1319.647
+        ],
+        "ordinary-zero-otm/admission+greeks": [
+          2440.214,
+          2440.214,
+          2449.751,
+          2444.983,
+          2430.677,
+          2429.485,
+          2435.446
+        ],
+        "midpoint/admission": [
+          1126.194,
+          1124.406,
+          1121.497,
+          1125.693,
+          1122.093,
+          1121.402,
+          1126.099
+        ],
+        "midpoint/price": [
+          95.367,
+          95.367,
+          94.175,
+          90.599,
+          114.441,
+          90.599,
+          89.407
+        ],
+        "midpoint/greeks": [
+          1424.551,
+          1394.749,
+          1400.709,
+          1394.749,
+          1389.98,
+          1385.212,
+          1389.98
+        ],
+        "midpoint/admission+greeks": [
+          2579.689,
+          2554.655,
+          2570.152,
+          2574.921,
+          2599.955,
+          2579.689,
+          2565.384
+        ],
+        "tiny-zero/admission": [
+          1118.398,
+          1133.8,
+          1121.688,
+          1170.111,
+          1184.297,
+          1181.912,
+          1165.485
+        ],
+        "tiny-zero/price": [
+          75.102,
+          70.333,
+          70.333,
+          69.141,
+          75.102,
+          70.333,
+          70.333
+        ],
+        "tiny-zero/greeks": [
+          309.944,
+          305.176,
+          294.447,
+          309.944,
+          300.407,
+          300.407,
+          294.447
+        ],
+        "tiny-zero/admission+greeks": [
+          1510.382,
+          1494.884,
+          1479.387,
+          1505.613,
+          1654.625,
+          1574.755,
+          1560.45
+        ],
+        "zero-tail/admission": [
+          1108.503,
+          1103.497,
+          1130.795,
+          1120.114,
+          1111.984,
+          1092.505,
+          1106.095
+        ],
+        "zero-tail/price": [
+          95.367,
+          100.136,
+          94.175,
+          120.401,
+          95.367,
+          94.175,
+          95.367
+        ],
+        "zero-tail/greeks": [
+          925.064,
+          904.799,
+          904.799,
+          910.759,
+          1004.934,
+          889.301,
+          880.957
+        ],
+        "zero-tail/admission+greeks": [
+          2064.705,
+          2030.134,
+          2000.332,
+          2005.1,
+          2049.208,
+          2050.4,
+          1980.066
+        ]
+      },
+      "binary_sha256": "efcc502c50d6ae706edfbaa383f3f114b043ff4af71a7b0e73556a6d905abe63"
+    },
+    {
+      "kind": "candidate",
+      "load": "10:29  up 7 days, 17:50, 12 users, load averages: 2.04 6.94 16.38",
+      "started_unix": 1791124177.3227022,
+      "seconds": 5.273530721664429,
+      "samples_ns": {
+        "ordinary/admission": [
+          1139.784,
+          1118.708,
+          1117.897,
+          1114.893,
+          1113.701,
+          1134.801,
+          1121.116
+        ],
+        "ordinary/price": [
+          1492.31,
+          1505.589,
+          1495.004,
+          1500.607,
+          1495.886,
+          1494.002,
+          1496.005
+        ],
+        "ordinary/greeks": [
+          9405.184,
+          9150.815,
+          9165.692,
+          9134.698,
+          9357.595,
+          9225.607,
+          9155.202
+        ],
+        "ordinary/admission+greeks": [
+          10621.715,
+          10418.2,
+          10297.179,
+          10288.119,
+          10505.891,
+          10345.006,
+          10278.797
+        ],
+        "ordinary-zero-otm/admission": [
+          1117.992,
+          1115.704,
+          1132.417,
+          1134.992,
+          1166.201,
+          1143.503,
+          1120.996
+        ],
+        "ordinary-zero-otm/price": [
+          1310.11,
+          1294.613,
+          1305.342,
+          1299.381,
+          1300.573,
+          1289.845,
+          1289.845
+        ],
+        "ordinary-zero-otm/greeks": [
+          462859.869,
+          462430.716,
+          461354.256,
+          462355.614,
+          461319.685,
+          461740.494,
+          461814.404
+        ],
+        "ordinary-zero-otm/admission+greeks": [
+          463320.017,
+          463171.005,
+          462849.14,
+          463950.634,
+          462365.15,
+          462999.344,
+          463240.147
+        ],
+        "midpoint/admission": [
+          1121.783,
+          1125.503,
+          1120.687,
+          1130.605,
+          1119.304,
+          1125.193,
+          1121.902
+        ],
+        "midpoint/price": [
+          95.367,
+          109.673,
+          120.401,
+          90.599,
+          89.407,
+          90.599,
+          94.175
+        ],
+        "midpoint/greeks": [
+          29530.525,
+          29634.237,
+          30230.284,
+          29745.102,
+          29505.491,
+          29829.741,
+          29534.101
+        ],
+        "midpoint/admission+greeks": [
+          30890.703,
+          30654.669,
+          30660.629,
+          30699.968,
+          30934.811,
+          30729.771,
+          30950.308
+        ],
+        "tiny-zero/admission": [
+          1120.687,
+          1124.191,
+          1126.194,
+          1121.807,
+          1125.288,
+          1119.9,
+          1122.308
+        ],
+        "tiny-zero/price": [
+          75.102,
+          69.141,
+          70.333,
+          75.102,
+          70.333,
+          64.373,
+          70.333
+        ],
+        "tiny-zero/greeks": [
+          2189.875,
+          2205.372,
+          2204.18,
+          2250.671,
+          2214.909,
+          2179.146,
+          2175.57
+        ],
+        "tiny-zero/admission+greeks": [
+          3315.21,
+          3304.482,
+          3324.747,
+          3305.674,
+          3314.018,
+          3305.674,
+          3324.747
+        ],
+        "zero-tail/admission": [
+          1074.505,
+          1078.391,
+          1075.602,
+          1076.412,
+          1078.701,
+          1083.207,
+          1076.579
+        ],
+        "zero-tail/price": [
+          95.367,
+          95.367,
+          95.367,
+          89.407,
+          90.599,
+          94.175,
+          90.599
+        ],
+        "zero-tail/greeks": [
+          463389.158,
+          462756.157,
+          463389.158,
+          463349.819,
+          464060.307,
+          463880.301,
+          463719.368
+        ],
+        "zero-tail/admission+greeks": [
+          464900.732,
+          464659.929,
+          464760.065,
+          464849.472,
+          465919.971,
+          464299.917,
+          464709.997
+        ]
+      },
+      "binary_sha256": "67f9c90d646fc5782f12eb920241c0845b77e3af5da96457c7642f4189bc9deb"
+    },
+    {
+      "kind": "candidate",
+      "load": "10:29  up 7 days, 17:50, 12 users, load averages: 2.11 6.88 16.31",
+      "started_unix": 1791124182.603403,
+      "seconds": 5.2098798751831055,
+      "samples_ns": {
+        "ordinary/admission": [
+          1111.317,
+          1125.789,
+          1110.816,
+          1108.885,
+          1114.202,
+          1115.203,
+          1112.294
+        ],
+        "ordinary/price": [
+          1496.291,
+          1494.503,
+          1496.601,
+          1495.004,
+          1494.694,
+          1492.405,
+          1495.695
+        ],
+        "ordinary/greeks": [
+          9185.696,
+          9160.995,
+          9156.704,
+          9181.905,
+          9188.08,
+          9147.62,
+          9171.796
+        ],
+        "ordinary/admission+greeks": [
+          10287.905,
+          10277.796,
+          10294.604,
+          10274.1,
+          10298.896,
+          10308.599,
+          10274.601
+        ],
+        "ordinary-zero-otm/admission": [
+          1113.892,
+          1119.9,
+          1111.507,
+          1111.603,
+          1111.484,
+          1112.103,
+          1110.005
+        ],
+        "ordinary-zero-otm/price": [
+          1314.878,
+          1285.076,
+          1270.771,
+          1264.811,
+          1254.082,
+          1270.771,
+          1264.811
+        ],
+        "ordinary-zero-otm/greeks": [
+          462214.947,
+          462909.937,
+          463280.678,
+          462609.529,
+          462740.66,
+          463669.3,
+          463365.316
+        ],
+        "ordinary-zero-otm/admission+greeks": [
+          464429.855,
+          463739.634,
+          463885.069,
+          464199.781,
+          463719.368,
+          463520.288,
+          463000.536
+        ],
+        "midpoint/admission": [
+          1122.403,
+          1124.001,
+          1135.278,
+          1125.312,
+          1131.201,
+          1126.599,
+          1121.902
+        ],
+        "midpoint/price": [
+          94.175,
+          100.136,
+          95.367,
+          89.407,
+          95.367,
+          89.407,
+          95.367
+        ],
+        "midpoint/greeks": [
+          29855.967,
+          29739.141,
+          29820.204,
+          29760.599,
+          29704.571,
+          29715.3,
+          29820.204
+        ],
+        "midpoint/admission+greeks": [
+          30934.811,
+          30660.629,
+          30739.307,
+          31585.693,
+          31208.992,
+          30945.539,
+          31135.082
+        ],
+        "tiny-zero/admission": [
+          1127.696,
+          1124.883,
+          1121.02,
+          1125.598,
+          1123.095,
+          1125.908,
+          1128.602
+        ],
+        "tiny-zero/price": [
+          70.333,
+          69.141,
+          70.333,
+          65.565,
+          69.141,
+          65.565,
+          64.373
+        ],
+        "tiny-zero/greeks": [
+          2174.377,
+          2160.072,
+          2180.338,
+          2175.57,
+          2174.377,
+          2169.609,
+          2175.57
+        ],
+        "tiny-zero/admission+greeks": [
+          3319.979,
+          3315.21,
+          3309.25,
+          3305.674,
+          3324.747,
+          3345.013,
+          3315.21
+        ],
+        "zero-tail/admission": [
+          1078.2,
+          1079.988,
+          1081.491,
+          1078.391,
+          1084.304,
+          1075.006,
+          1071.596
+        ],
+        "zero-tail/price": [
+          90.599,
+          95.367,
+          94.175,
+          95.367,
+          89.407,
+          90.599,
+          89.407
+        ],
+        "zero-tail/greeks": [
+          464251.041,
+          464220.047,
+          465089.083,
+          465170.145,
+          464605.093,
+          465329.885,
+          466420.65
+        ],
+        "zero-tail/admission+greeks": [
+          466669.798,
+          466924.906,
+          470520.258,
+          467135.906,
+          465744.734,
+          466734.171,
+          466721.058
+        ]
+      },
+      "binary_sha256": "67f9c90d646fc5782f12eb920241c0845b77e3af5da96457c7642f4189bc9deb"
+    },
+    {
+      "kind": "baseline",
+      "load": "10:29  up 7 days, 17:50, 12 users, load averages: 2.02 6.78 16.22",
+      "started_unix": 1791124187.820687,
+      "seconds": 2.149207830429077,
+      "samples_ns": {
+        "ordinary/admission": [
+          1113.105,
+          1111.007,
+          1115.894,
+          1117.706,
+          1111.388,
+          1111.817,
+          1113.391
+        ],
+        "ordinary/price": [
+          1490.188,
+          1498.604,
+          1492.095,
+          1495.6,
+          1488.614,
+          1492.786,
+          1494.193
+        ],
+        "ordinary/greeks": [
+          9188.199,
+          9173.799,
+          9193.206,
+          9168.887,
+          9157.705,
+          9156.895,
+          9185.219
+        ],
+        "ordinary/admission+greeks": [
+          10284.615,
+          10296.082,
+          10272.717,
+          10264.587,
+          10280.204,
+          10276.103,
+          10279.584
+        ],
+        "ordinary-zero-otm/admission": [
+          1110.888,
+          1110.005,
+          1113.296,
+          1109.91,
+          1107.883,
+          1112.509,
+          1108.909
+        ],
+        "ordinary-zero-otm/price": [
+          1260.042,
+          1269.579,
+          1255.274,
+          1269.579,
+          1270.771,
+          1255.274,
+          1254.082
+        ],
+        "ordinary-zero-otm/greeks": [
+          1319.647,
+          1320.839,
+          1319.647,
+          1325.607,
+          1324.415,
+          1314.878,
+          1314.878
+        ],
+        "ordinary-zero-otm/admission+greeks": [
+          2430.677,
+          2429.485,
+          2435.446,
+          2429.485,
+          2430.677,
+          2440.214,
+          2429.485
+        ],
+        "midpoint/admission": [
+          1164.103,
+          1131.201,
+          1127.005,
+          1142.597,
+          1123.095,
+          1127.005,
+          1125.002
+        ],
+        "midpoint/price": [
+          95.367,
+          95.367,
+          94.175,
+          95.367,
+          104.904,
+          90.599,
+          89.407
+        ],
+        "midpoint/greeks": [
+          1419.783,
+          1404.285,
+          1400.709,
+          1424.551,
+          1400.709,
+          1394.749,
+          1415.014
+        ],
+        "midpoint/admission+greeks": [
+          2579.689,
+          2555.847,
+          2589.226,
+          2570.152,
+          2599.955,
+          2565.384,
+          2574.921
+        ],
+        "tiny-zero/admission": [
+          1126.194,
+          1126.099,
+          1123.095,
+          1124.501,
+          1127.315,
+          1127.601,
+          1128.602
+        ],
+        "tiny-zero/price": [
+          70.333,
+          69.141,
+          65.565,
+          70.333,
+          64.373,
+          65.565,
+          64.373
+        ],
+        "tiny-zero/greeks": [
+          284.91,
+          295.639,
+          289.679,
+          309.944,
+          294.447,
+          290.871,
+          289.679
+        ],
+        "tiny-zero/admission+greeks": [
+          1444.817,
+          1440.048,
+          1450.777,
+          1440.048,
+          1444.817,
+          1460.314,
+          1490.116
+        ],
+        "zero-tail/admission": [
+          1083.398,
+          1079.488,
+          1082.802,
+          1080.108,
+          1077.199,
+          1080.203,
+          1072.693
+        ],
+        "zero-tail/price": [
+          94.175,
+          95.367,
+          95.367,
+          94.175,
+          90.599,
+          89.407,
+          95.367
+        ],
+        "zero-tail/greeks": [
+          864.267,
+          890.493,
+          959.635,
+          874.996,
+          854.731,
+          835.657,
+          845.194
+        ],
+        "zero-tail/admission+greeks": [
+          1989.603,
+          1975.298,
+          1964.569,
+          1959.801,
+          1959.801,
+          1960.993,
+          2039.671
+        ]
+      },
+      "binary_sha256": "efcc502c50d6ae706edfbaa383f3f114b043ff4af71a7b0e73556a6d905abe63"
+    }
+  ],
+  "median_ns": {
+    "ordinary/admission": {
+      "baseline": 1116.8,
+      "candidate": 1115.048
+    },
+    "ordinary/price": {
+      "baseline": 1494.658,
+      "candidate": 1495.3494999999998
+    },
+    "ordinary/greeks": {
+      "baseline": 9173.2025,
+      "candidate": 9168.743999999999
+    },
+    "ordinary/admission+greeks": {
+      "baseline": 10284.71,
+      "candidate": 10295.8915
+    },
+    "ordinary-zero-otm/admission": {
+      "baseline": 1112.9025000000001,
+      "candidate": 1116.848
+    },
+    "ordinary-zero-otm/price": {
+      "baseline": 1262.4265,
+      "candidate": 1289.845
+    },
+    "ordinary-zero-otm/greeks": {
+      "baseline": 1319.647,
+      "candidate": 462520.1225
+    },
+    "ordinary-zero-otm/admission+greeks": {
+      "baseline": 2433.0615,
+      "candidate": 463420.15249999997
+    },
+    "midpoint/admission": {
+      "baseline": 1125.896,
+      "candidate": 1124.597
+    },
+    "midpoint/price": {
+      "baseline": 94.771,
+      "candidate": 94.771
+    },
+    "midpoint/greeks": {
+      "baseline": 1400.709,
+      "candidate": 29742.1215
+    },
+    "midpoint/admission+greeks": {
+      "baseline": 2574.921,
+      "candidate": 30912.757
+    },
+    "tiny-zero/admission": {
+      "baseline": 1127.458,
+      "candidate": 1124.537
+    },
+    "tiny-zero/price": {
+      "baseline": 70.333,
+      "candidate": 69.737
+    },
+    "tiny-zero/greeks": {
+      "baseline": 295.043,
+      "candidate": 2177.358
+    },
+    "tiny-zero/admission+greeks": {
+      "baseline": 1484.7514999999999,
+      "candidate": 3315.21
+    },
+    "zero-tail/admission": {
+      "baseline": 1087.9515000000001,
+      "candidate": 1078.2955000000002
+    },
+    "zero-tail/price": {
+      "baseline": 95.367,
+      "candidate": 92.387
+    },
+    "zero-tail/greeks": {
+      "baseline": 889.897,
+      "candidate": 464140.177
+    },
+    "zero-tail/admission+greeks": {
+      "baseline": 1994.9675000000002,
+      "candidate": 465832.35250000004
+    }
+  }
+}

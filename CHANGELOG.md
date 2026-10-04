@@ -5,6 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Subnormal BSM rho rounding (#77)
+
+- Refine zero/subnormal/smallest-normal BSM rho proposals from original-input
+  enclosures, preserving the one-sided correction at half-subnormal midpoints.
+  Unresolved cells return field-specific `Numerical_failure`; proved zeros use
+  inexpensive analytical bounds. No accuracy allowance is widened.
+- **Major outcome/numerical change** (minor while 0.y.z). Version-1 original-input
+  Arb references cover 11,630 requests. Of 480 baseline rounding differences
+  (at most two ULP, within the old 16-ULP allowance), 408 become checked values
+  and 72 explicit failures; another 72 previously checked values become
+  unavailable. Available selected outputs have zero ULP reference error.
+- The 66,400-row ordinary Greek trace and public replay digest are unchanged.
+  [Derivation, per-row evidence, uncertainty and performance](docs/results-rho-midpoint.md).
+
 ### Greek cancellation and zero-variance theta (#80)
 
 - Refuse all fast Black-family Greeks when carry cancellation exhausts DD

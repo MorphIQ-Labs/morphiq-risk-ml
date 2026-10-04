@@ -1,0 +1,47 @@
+[
+  {
+    "before": "class_checked",
+    "after": "class_checked",
+    "count": 1260
+  },
+  {
+    "before": "original_witness_failure",
+    "after": "value_checked",
+    "count": 2
+  },
+  {
+    "before": "quality_excursion",
+    "after": "value_checked",
+    "count": 17
+  },
+  {
+    "before": "reference_unresolved",
+    "after": "availability_failure",
+    "count": 60
+  },
+  {
+    "before": "reference_unresolved",
+    "after": "reference_unresolved",
+    "count": 52
+  },
+  {
+    "before": "rounding_cell_difference",
+    "after": "availability_failure",
+    "count": 72
+  },
+  {
+    "before": "rounding_cell_difference",
+    "after": "value_checked",
+    "count": 389
+  },
+  {
+    "before": "value_checked",
+    "after": "availability_failure",
+    "count": 72
+  },
+  {
+    "before": "value_checked",
+    "after": "value_checked",
+    "count": 9706
+  }
+]
