@@ -500,8 +500,15 @@
 
 (rule
  (alias runtest)
- (deps ../scripts/planner_stress.py ../scripts/test_planner_stress.py ../scripts/instrument_planner.py)
+ (deps
+  ../scripts/planner_stress.py
+  ../scripts/test_planner_stress.py
+  ../scripts/instrument_planner.py)
  (action
   (progn
    (run python3 %{dep:../scripts/test_planner_stress.py})
-   (run python3 %{dep:../scripts/planner_stress.py} check %{exe:planner_stress.exe}))))
+   (run
+    python3
+    %{dep:../scripts/planner_stress.py}
+    check
+    %{exe:planner_stress.exe}))))
