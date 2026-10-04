@@ -1,0 +1,489 @@
+{
+  "conclusion": "success",
+  "event": "workflow_dispatch",
+  "headSha": "d9967018b219f8b68c0e485e5a78a7973a101a1c",
+  "jobs": [
+    {
+      "completedAt": "2026-10-04T17:51:30Z",
+      "conclusion": "success",
+      "databaseId": 111494329110,
+      "name": "identity",
+      "startedAt": "2026-10-04T17:51:26Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-04T17:51:27Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-04T17:51:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:29Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-04T17:51:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:29Z",
+          "conclusion": "success",
+          "name": "Require an immutable candidate from main",
+          "number": 3,
+          "startedAt": "2026-10-04T17:51:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:29Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 6,
+          "startedAt": "2026-10-04T17:51:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:29Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 7,
+          "startedAt": "2026-10-04T17:51:29Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671/job/111494329110"
+    },
+    {
+      "completedAt": "2026-10-04T18:00:58Z",
+      "conclusion": "success",
+      "databaseId": 111494351460,
+      "name": "candidate artifact (macos-15)",
+      "startedAt": "2026-10-04T17:51:39Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-04T17:51:42Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-04T17:51:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:45Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-04T17:51:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:45Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-04T17:51:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:54:09Z",
+          "conclusion": "success",
+          "name": "Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 4,
+          "startedAt": "2026-10-04T17:51:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:55:57Z",
+          "conclusion": "success",
+          "name": "Install locked dependencies and formatter",
+          "number": 5,
+          "startedAt": "2026-10-04T17:54:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:58:09Z",
+          "conclusion": "success",
+          "name": "Candidate build, format and ordinary tests",
+          "number": 6,
+          "startedAt": "2026-10-04T17:55:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:42Z",
+          "conclusion": "success",
+          "name": "Archive, isolated installation and native/bytecode consumers",
+          "number": 7,
+          "startedAt": "2026-10-04T17:58:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:51Z",
+          "conclusion": "success",
+          "name": "Replay the independently certified canonical portfolio",
+          "number": 8,
+          "startedAt": "2026-10-04T18:00:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:53Z",
+          "conclusion": "success",
+          "name": "Retain candidate evidence",
+          "number": 9,
+          "startedAt": "2026-10-04T18:00:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:55Z",
+          "conclusion": "success",
+          "name": "Post Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 16,
+          "startedAt": "2026-10-04T18:00:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:55Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 17,
+          "startedAt": "2026-10-04T18:00:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:55Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 18,
+          "startedAt": "2026-10-04T18:00:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-10-04T18:00:55Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671/job/111494351460"
+    },
+    {
+      "completedAt": "2026-10-04T17:57:36Z",
+      "conclusion": "success",
+      "databaseId": 111494351501,
+      "name": "candidate artifact (ubuntu-24.04-arm)",
+      "startedAt": "2026-10-04T17:51:35Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-04T17:51:37Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-04T17:51:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:39Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-04T17:51:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:39Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-04T17:51:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:53:16Z",
+          "conclusion": "success",
+          "name": "Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 4,
+          "startedAt": "2026-10-04T17:51:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:54:21Z",
+          "conclusion": "success",
+          "name": "Install locked dependencies and formatter",
+          "number": 5,
+          "startedAt": "2026-10-04T17:53:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:55:57Z",
+          "conclusion": "success",
+          "name": "Candidate build, format and ordinary tests",
+          "number": 6,
+          "startedAt": "2026-10-04T17:54:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:22Z",
+          "conclusion": "success",
+          "name": "Archive, isolated installation and native/bytecode consumers",
+          "number": 7,
+          "startedAt": "2026-10-04T17:55:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:31Z",
+          "conclusion": "success",
+          "name": "Replay the independently certified canonical portfolio",
+          "number": 8,
+          "startedAt": "2026-10-04T17:57:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:33Z",
+          "conclusion": "success",
+          "name": "Retain candidate evidence",
+          "number": 9,
+          "startedAt": "2026-10-04T17:57:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:34Z",
+          "conclusion": "success",
+          "name": "Post Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 16,
+          "startedAt": "2026-10-04T17:57:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:34Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 17,
+          "startedAt": "2026-10-04T17:57:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:34Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 18,
+          "startedAt": "2026-10-04T17:57:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:35Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-10-04T17:57:34Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671/job/111494351501"
+    },
+    {
+      "completedAt": "2026-10-04T18:00:02Z",
+      "conclusion": "success",
+      "databaseId": 111494351512,
+      "name": "candidate artifact (ubuntu-24.04)",
+      "startedAt": "2026-10-04T17:51:32Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-04T17:51:34Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-04T17:51:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:35Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-04T17:51:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:36Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 3,
+          "startedAt": "2026-10-04T17:51:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:53:35Z",
+          "conclusion": "success",
+          "name": "Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 4,
+          "startedAt": "2026-10-04T17:51:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:54:57Z",
+          "conclusion": "success",
+          "name": "Install locked dependencies and formatter",
+          "number": 5,
+          "startedAt": "2026-10-04T17:53:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:57:48Z",
+          "conclusion": "success",
+          "name": "Candidate build, format and ordinary tests",
+          "number": 6,
+          "startedAt": "2026-10-04T17:54:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:59:47Z",
+          "conclusion": "success",
+          "name": "Archive, isolated installation and native/bytecode consumers",
+          "number": 7,
+          "startedAt": "2026-10-04T17:57:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:59:58Z",
+          "conclusion": "success",
+          "name": "Replay the independently certified canonical portfolio",
+          "number": 8,
+          "startedAt": "2026-10-04T17:59:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:59:59Z",
+          "conclusion": "success",
+          "name": "Retain candidate evidence",
+          "number": 9,
+          "startedAt": "2026-10-04T17:59:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:00Z",
+          "conclusion": "success",
+          "name": "Post Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 16,
+          "startedAt": "2026-10-04T17:59:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:00Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "number": 17,
+          "startedAt": "2026-10-04T18:00:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:01Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 18,
+          "startedAt": "2026-10-04T18:00:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:00:01Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-10-04T18:00:01Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671/job/111494351512"
+    },
+    {
+      "completedAt": "2026-10-04T18:22:59Z",
+      "conclusion": "success",
+      "databaseId": 111494351539,
+      "name": "candidate full mutation catalog",
+      "startedAt": "2026-10-04T17:51:33Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-04T17:51:35Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-04T17:51:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:51:38Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-10-04T17:51:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:53:40Z",
+          "conclusion": "success",
+          "name": "Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 3,
+          "startedAt": "2026-10-04T17:51:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T17:54:00Z",
+          "conclusion": "success",
+          "name": "Install locked dependencies",
+          "number": 4,
+          "startedAt": "2026-10-04T17:53:40Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:22:54Z",
+          "conclusion": "success",
+          "name": "Full candidate mutation catalog (manual lane only)",
+          "number": 5,
+          "startedAt": "2026-10-04T17:54:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:22:55Z",
+          "conclusion": "success",
+          "name": "Retain full mutation evidence",
+          "number": 6,
+          "startedAt": "2026-10-04T18:22:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:22:57Z",
+          "conclusion": "success",
+          "name": "Post Run ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7",
+          "number": 11,
+          "startedAt": "2026-10-04T18:22:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:22:57Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 12,
+          "startedAt": "2026-10-04T18:22:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-04T18:22:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-04T18:22:57Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671/job/111494351539"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37222093671",
+  "workflowName": "candidate validation"
+}

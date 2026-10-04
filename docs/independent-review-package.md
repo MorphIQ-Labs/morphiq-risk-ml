@@ -148,3 +148,12 @@ The engine's current exact-input assurance excludes market/model uncertainty.
 The owner must define those risks and the actual production boundary. A reviewer
 cannot supply institutional acceptance merely by checking this repository's
 finite test corpus.
+
+
+## Retained artifact delta
+
+The [optimized candidate qualification](candidate-exchange-optimized.md) retains
+source `d9967018b219f8b68c0e485e5a78a7973a101a1c`, all three platform installation
+reports, six full Exchange replays and 84 compiled mutation kills. This is
+engineering evidence for the current delta, not the independent reviewer report
+or a replacement for the earlier unresolved-reference dispositions.

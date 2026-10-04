@@ -77,3 +77,11 @@ closeout control tests and `actionlint` pass. The library and campaign consumer
 are unchanged from main `7fb59a3`; this rehearsal changes no numerical evidence
 or output expectation. Three-platform execution remains a separate post-merge
 manual candidate run; this local receipt does not claim its result.
+
+
+## Three-platform closeout
+
+The [optimized candidate receipt](candidate-exchange-optimized.md) now retains
+all six installed 649-row replays and the full 84-mutant campaign against
+`d9967018b219f8b68c0e485e5a78a7973a101a1c`. It supersedes the pending
+platform status of the local rehearsal above, without rewriting that receipt.

@@ -90,3 +90,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Certificate allocation optimization](results-certificate-allocation.md): identical-arithmetic private scratch, reference replay and paired exchange/IV measurements.
 
 - [Installed Exchange validation](installed-exchange-validation.md): full qualified native/bytecode replay through the isolated public package in the optional candidate lane.
+
+- [Optimized Exchange candidate](candidate-exchange-optimized.md): exact-source three-platform installation, six full Exchange replays and 84-mutant closeout.
