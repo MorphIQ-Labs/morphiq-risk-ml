@@ -19,6 +19,7 @@ been retired; it remains in Git history.
 
 ## Numerical methods and verification
 
+- [Adversarial assurance closeout](adversarial-assurance-closeout.md): current source, finding dispositions, retained uncertainty and review obligations.
 - [Subnormal rho qualification](results-rho-midpoint.md): original-input rounding cells, zero proofs, availability and timing evidence.
 - [Error analysis](error-analysis.md): derivations and the current certification scope.
 - [Greek cancellation qualification](results-greek-cancellation.md): explicit coordinate/theta limits, independent references and compatibility evidence.

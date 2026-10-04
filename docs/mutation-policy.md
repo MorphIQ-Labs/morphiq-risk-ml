@@ -173,3 +173,14 @@ rounding away the normal-probability correction, removing the proved tail
 zero path, restoring the wrong tail exponent and weakening the cheap zero
 proof threshold. Each uses the direct `rho_midpoint` witness. The catalog has 77
 mechanisms; the seven default core mutants are unchanged.
+
+## Adversarial closeout reconciliation (#57)
+
+The full campaign after #77 found that `greek-live-rho-scale` and
+`greek-zero-rho-scale` survived: final subnormal refinement repaired their old
+guard inputs. Premature multiplication still damages normal-range outputs.
+Four exact/independently enclosed ITM rho witnesses now require the correct
+normal results for both sides and zero/positive volatility. The catalog and
+seven default core selections are unchanged. The [closeout report](adversarial-assurance-closeout.md)
+retains the initial survivors, derivation, original words and affected guard
+rerun rather than treating survival as evidence of universal redundancy.

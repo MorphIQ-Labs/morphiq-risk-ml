@@ -1,5 +1,9 @@
 # Greek cancellation qualification (#80)
 
+This source-bound report retains the rho finding known at its execution.
+The [#57 adjudication](adversarial-assurance-closeout.md) records its subsequent
+correction and the current combined campaign outcomes.
+
 The fast Black-family Greek API now refuses exhausted DD coordinates instead
 of serving inaccurate finite sensitivities or inventing a payoff kink from a
 rounded zero. Zero-volatility theta uses a stable DD identity. A separate

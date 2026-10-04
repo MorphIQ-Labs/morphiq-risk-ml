@@ -1,0 +1,15 @@
+{
+  "source_commit": "2345081b2b2e60ad6dca00a6412f3b98288b7868",
+  "runtime_source": "76128fd99b9649d92f5a473fa4fcc3de44e04cd2",
+  "platform": "macOS 27 arm64, Apple M1 Pro",
+  "ocaml": "5.3.0 Flambda",
+  "dune": "3.24.2",
+  "ocamlformat": "0.27.0",
+  "jobs": 2,
+  "ordinary_command": "opam exec --switch=morphiq-risk-ml -- dune build @install @fmt @runtest -j 2",
+  "ordinary_exit": 0,
+  "affected_mutation_command": "DUNE_JOBS=2 opam exec --switch=morphiq-risk-ml -- dune exec scripts/mutation/mutation.exe -- greek-live-rho-scale greek-zero-rho-scale greek-finite-result intrinsic-nonfinite-price",
+  "affected_mutation_exit": 0,
+  "affected_killed": 4,
+  "scope": "Runtime unchanged; four direct normal-range rho witnesses added. Original full mutation outcome is retained separately."
+}
