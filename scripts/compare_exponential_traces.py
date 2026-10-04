@@ -27,10 +27,11 @@ def ordered(word):
     return -(n & ((1 << 63)-1)) if n >> 63 else n
 
 
-def main(before, after, output, include_normal=False):
+def main(before, after, output, include_normal=False, normal_only=False):
     summary = {'fixtures': {}, 'regions': {}, 'trace_sha256': {}}
     changes = []
-    for fixture in FIXTURES + (('normal',) if include_normal else ()):
+    fixtures = ('normal',) if normal_only else FIXTURES + (('normal',) if include_normal else ())
+    for fixture in fixtures:
         paths = [Path(f'{prefix}-{fixture}.tsv') for prefix in (before, after)]
         data = [p.read_text().splitlines() for p in paths]
         assert len(data[0]) == len(data[1]) and data[0], (fixture, 'row mismatch')
@@ -107,9 +108,10 @@ def main(before, after, output, include_normal=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', action='version', version='compare_exponential_traces 1')
+    parser.add_argument('--normal-only', action='store_true', help='Compare only the normal/scalar trace')
     parser.add_argument('--normal', action='store_true', help='Also compare normal/scalar error-function traces')
     parser.add_argument('baseline_prefix')
     parser.add_argument('candidate_prefix')
     parser.add_argument('output_prefix')
     args = parser.parse_args()
-    main(args.baseline_prefix, args.candidate_prefix, args.output_prefix, args.normal)
+    main(args.baseline_prefix, args.candidate_prefix, args.output_prefix, args.normal, args.normal_only)

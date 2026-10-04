@@ -15,8 +15,8 @@ val log_norm_cdf : float -> float
     representable. *)
 
 val norm_inv : float -> float
-(** [Phi^-1(p)] by Wichura's AS241 (PPND16). Returns [neg_infinity] at 0,
-    [infinity] at 1, and NaN outside [[0, 1]]. *)
+(** [Phi^-1(p)] by bounded, safeguarded Gaussian-integral inversion. Returns
+    [neg_infinity] at 0, [infinity] at 1, and NaN outside [[0, 1]]. *)
 
 val norm_cdf_dd : float -> float -> float
 (** [norm_cdf_dd hi lo] is [Phi(hi + lo)] for [|lo| <= ulp(hi)], to first order

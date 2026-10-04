@@ -1,0 +1,98 @@
+{
+  "fixtures": {
+    "normal": {
+      "changed": 7269,
+      "class_changes": 0,
+      "max_ulp_movement": 5,
+      "rows": 130394,
+      "sign_changes": 0
+    }
+  },
+  "normal_monotonicity": {
+    "cdf": {
+      "sampled_points": 20455,
+      "violations": 0
+    },
+    "erf": {
+      "sampled_points": 20455,
+      "violations": 0
+    },
+    "erfc": {
+      "sampled_points": 20455,
+      "violations": 0
+    },
+    "erfcx": {
+      "sampled_points": 16740,
+      "violations": 0
+    }
+  },
+  "regions": {
+    "normal cdf body": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 14278,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    },
+    "normal cdf tail": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 6177,
+      "worst_after_ulp": 5,
+      "worst_before_ulp": 5
+    },
+    "normal erf": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 20455,
+      "worst_after_ulp": 1,
+      "worst_before_ulp": 1
+    },
+    "normal erfc": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 20455,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "normal erfcx": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 16740,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 2
+    },
+    "normal inv central": {
+      "changed": 3768,
+      "max_ulp_movement": 4,
+      "rows": 6030,
+      "worst_after_ulp": 0,
+      "worst_before_ulp": 4
+    },
+    "normal inv tail": {
+      "changed": 3501,
+      "max_ulp_movement": 5,
+      "rows": 5349,
+      "worst_after_ulp": 2,
+      "worst_before_ulp": 6
+    },
+    "normal logcdf": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 20455,
+      "worst_after_ulp": 4,
+      "worst_before_ulp": 4
+    },
+    "normal pdf": {
+      "changed": 0,
+      "max_ulp_movement": 0,
+      "rows": 20455,
+      "worst_after_ulp": 3,
+      "worst_before_ulp": 3
+    }
+  },
+  "trace_sha256": {
+    "after-normal": "85ccad87820a810ba943f39588c4df529c2a84af99afb41da25a4171ee7432f1",
+    "before-normal": "f8e5a69c3b1bd081f8722dba1f58334f2576ab3d94c93c7c2785ee37dd4e9d98"
+  }
+}

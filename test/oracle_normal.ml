@@ -81,6 +81,8 @@ let () =
     Printf.eprintf "ERROR: %s missing; run oracle/gen_normal.py\n" path;
     exit 2);
   let trace = Option.map open_out (Sys.getenv_opt "MORPHIQ_ORACLE_TRACE") in
+  let inverse_bits = Buffer.create 200000 in
+  let inverse_points = ref [] in
   let stats = Hashtbl.create 8 in
   let failures = ref [] in
   let ic = open_in path in
@@ -91,6 +93,10 @@ let () =
          Scanf.sscanf line "%s %Lx %Lx" (fun fn xb rb ->
              let x = Int64.float_of_bits xb and r = Int64.float_of_bits rb in
              let got = eval fn x in
+             if fn = "inv" then (
+               inverse_points := (x, got) :: !inverse_points;
+               Buffer.add_string inverse_bits
+                 (Printf.sprintf "%016Lx\n" (Int64.bits_of_float got)));
              Option.iter
                (fun oc ->
                  Printf.fprintf oc "%s\t%016Lx\n" line (Int64.bits_of_float got))
@@ -164,6 +170,27 @@ let () =
       Printf.printf "%-20s %7d %10Ld %12.3e %24h %6d\n" k s.n s.worst
         s.worst_rel s.worst_x s.fails)
     names;
+  let rec monotone = function
+    | (p, x) :: ((q, y) :: _ as rest) ->
+        if x > y then
+          failures :=
+            Printf.sprintf "inverse monotonicity: %h -> %h; %h -> %h" p x q y
+            :: !failures;
+        monotone rest
+    | _ -> ()
+  in
+  monotone (List.sort compare !inverse_points);
   List.iter print_endline (List.rev !failures);
   Option.iter close_out trace;
-  if !failures <> [] then exit 1
+  if !failures <> [] then exit 1;
+  if Array.length Sys.argv > 2 then (
+    let digest =
+      Digest.BLAKE256.to_hex
+        (Digest.BLAKE256.string (Buffer.contents inverse_bits))
+    in
+    let expected =
+      String.trim (In_channel.with_open_text Sys.argv.(2) In_channel.input_all)
+    in
+    Printf.printf "inverse replay %s over %d bytes\n" digest
+      (Buffer.length inverse_bits);
+    if digest <> expected then failwith "inverse replay mismatch")

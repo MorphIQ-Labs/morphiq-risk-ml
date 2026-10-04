@@ -38,6 +38,23 @@ type mutant = {
 let catalog =
   [
     {
+      id = "inverse-iteration-count";
+      file = "lib/normal.ml";
+      snippet = "let inverse_steps = 6";
+      replacement = "let inverse_steps = 2";
+      killer = "oracle_normal";
+      mechanism = "bounded inverse iteration reaches its accuracy requirement";
+    };
+    {
+      id = "inverse-dd-refinement";
+      file = "lib/normal.ml";
+      snippet = "if x <= Normal_dd.limit then";
+      replacement = "if false then";
+      killer = "oracle_normal";
+      mechanism =
+        "double-word correction preserves sampled inverse monotonicity";
+    };
+    {
       id = "erfcx-leading-residual";
       file = "lib/cody.ml";
       snippet =

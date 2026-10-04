@@ -357,7 +357,7 @@ let one_minus_erfcx x =
                                      +. (1.2463320728346347e-2 *. x)))))))
 
 (* Exactly at the money b(0, s) = erf(s / sqrt 8); invert with the reference
-   Remez rational (accurate to 3.5e-17 on s in [0, 2]) and AS241 beyond. *)
+   Remez rational (accurate to 3.5e-17 on s in [0, 2]) and the project inverse normal beyond. *)
 let atm beta beta_bar =
   let beta_max = 0.6826894921370859 in
   if beta <= beta_max then

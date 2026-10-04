@@ -60,3 +60,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 
 - [Generated error functions](error-function-replacement.md): construction and rational bounds replacing CALERF.
 - [Error-function qualification](results-error-functions.md): compatibility, boundary references and performance.
+
+- [Inverse-normal construction](inverse-normal-replacement.md) and [qualification](results-inverse-normal.md): AS241 replacement, independent references and IV consumer costs.

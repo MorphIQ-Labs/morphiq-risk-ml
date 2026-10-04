@@ -148,6 +148,23 @@ def probabilities():
             ps.add(v)
     for e in range(1, 53):
         ps.add(1.0 - 2.0**-e)
+    # Preserve every old probability; add the replacement's switches and
+    # adjacent representable probabilities at all forward-polynomial cuts.
+    for c in (0.25,0.5,0.75):
+        ps.update(neighbours(c,32))
+    for k in range(1,129):
+        ps.add(k*2.0**-1074)
+        ps.add(from_bits(f'{0x3ff0000000000000-k:016x}'))
+    for e in range(2,54):
+        for c in (0.5-2.0**-e,0.5+2.0**-e):ps.update(neighbours(c))
+    with mp.workdps(160):
+        tail=to_double(mp.erfc(6/mp.sqrt(2))/2)
+        ps.update(neighbours(tail,32));ps.update(neighbours(1-tail,32))
+        for i in range(1,113):
+            tail=to_double(mp.erfc(mp.mpf(i)/4)/2)
+            if tail>0:
+                ps.update(neighbours(tail))
+                if 1-tail<1:ps.update(neighbours(1-tail))
     return sorted(p for p in ps if 0 < p < 1)
 
 

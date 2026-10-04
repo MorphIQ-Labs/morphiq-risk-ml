@@ -27,6 +27,14 @@ possible influence or decide the legal protection of individual expressions.
 
 ## AS241: source-informed adaptation
 
+**Current-tree update:** AS241's regions, coefficients and evaluation graph
+have been removed. The [replacement](inverse-normal-replacement.md) inverts
+the Gaussian integral with bounded safeguarded Newton steps and the existing
+qualified double-word CDF. Its sources are mathematical definitions and bounds,
+not another implementation's inverse tables. The [qualification](results-inverse-normal.md)
+records remaining limitations. This follows source consultation and is not a
+clean-room claim; the original rights findings below remain historical facts.
+
 - Actual source: [StatLib `apstat/241`](https://lib.stat.cmu.edu/apstat/241),
   Wichura's 1988 PPND7/PPND16 file, 6,298 bytes.
 - Downloaded on 2026-10-02 at 10:48:03 UTC; both sections were read before
@@ -47,7 +55,7 @@ retrieval of both the source and the policy. Do not claim a paper-only origin
 or borrow R's GPL permission to relabel this implementation.
 
 **Disposition:** source identity resolved; permission unresolved; replace the
-AS241-derived inverse implementation under the numerical change process.
+AS241-derived inverse implementation replaced under the numerical change process.
 
 ## CALERF: source-informed adaptation
 
@@ -135,7 +143,7 @@ project licensing remains Apache-2.0; it does not supersede upstream rights.
 All retained notices, this report, and the source-fingerprint record accompany
 installed documentation. The original audit changed no numerical operation,
 coefficient, fixture, dependency pin or tolerance. The subsequent DD replacement
-and CALERF replacements are qualified separately in their linked reports; AS241 remains unchanged.
+CALERF and inverse-normal replacements are qualified separately in their linked reports.
 
 Issue #64 stays open until each replacement is qualified and its current-source
 provenance is recorded. Historical provenance and applicable notices remain

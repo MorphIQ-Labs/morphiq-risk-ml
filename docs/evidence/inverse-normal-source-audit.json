@@ -1,0 +1,13 @@
+{
+  "baseline": "42eb6d1245509927152d204598d1e553fb4b127c",
+  "scope": "All tracked OCaml, Python, C and header files; exact former AS241 coefficient literals and module reference",
+  "former_unique_literals": 45,
+  "searched_files": 180,
+  "coefficient_hits": [],
+  "module_hits": [],
+  "current_source_sha256": {
+    "lib/normal.ml": "9c5fe2ed29ca9152748d66b30f38c5ba45f1b2c16f6672e4a83b3779da2aa5f1",
+    "oracle/inverse_normal_bounds.py": "c6a73e6ee909fc3d06a7b1b6d4854db27556b4406441ca97576264018b647068"
+  },
+  "limitations": "This source audit is not legal clearance, a clean-room claim, history rewriting, or final release-candidate acceptance."
+}
