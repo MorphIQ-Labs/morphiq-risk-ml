@@ -48,3 +48,31 @@ The previous `volatility-49` unresolved result is retained in #60 history.
 - Publish scope, finite outcome counts, unresolved/failure dispositions,
   qualification source/artifact/platform identities and a claims-map update.
   Experimental qualification is not a release or institutional approval.
+
+## Reference resolution correction, version 2
+
+The v1 comparison retained 39 failed containment comparisons caused by
+insufficient oracle resolution and 28 unresolved reference rows. These are not
+silently scored as runtime defects or passes. In particular, 100 decimal
+printed digits can obscure a deficit smaller than 1e-300 from an exactly
+representable currency value, and a 256-bit relative stopping goal cannot
+adjudicate a certificate dominated by tiny time value above exact intrinsic.
+The original generator, references, runtime outputs and scores remain intact.
+
+Version 2 targets a fixed absolute interval radius `a*2^-1200` for positive
+receive value, at the same bounded precision ladder and resource caps. This
+resolves below the 1074-bit normalized binary64 subnormal scale with a 126-bit
+margin; it is a reference resolution choice, not a runtime allowance. Retain
+1400 decimal digits (more than 4096 binary bits) including outward printed
+radius; scoring reparses and checks the complete retained intervals. Exact
+boundary identities remain exact.
+
+For very deep OTM cases, completing the square gives
+`C <= E[X 1(Z>z0)] = a Phi(d1)`. If the independently enclosed d1 satisfies
+`d1<=-42`, then `0<=C<=a*exp(-882)/(42*sqrt(2*pi))` by Mills' inequality.
+This bounds the positive payoff without evaluating a vanishing relative tail.
+It supplies the second route, alongside the independent closed form. Since
+this is a finite absolute bound, it must still fit inside the served runtime
+certificate; neither passing the reference goal nor route overlap implies
+acceptance. Remaining coarse intervals, errors or unresolved results stay
+explicit. Case membership, original limits and runtime source are unchanged.
