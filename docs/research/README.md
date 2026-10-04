@@ -75,6 +75,17 @@ included publicly when the applicable permission is documented.
 
 ## Optional local reference copies
 
+The subsequent #59 exchange-model selection adds Margrabe's **1976 working
+paper No. 13-76**, not the later 1978 journal edition. The unchanged 20-page
+[institutional scan](https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2014/03/7613.pdf)
+is preserved privately as `1976-margrabe-exchange-option-working-paper.pdf`:
+SHA-256 `bd6442ef8152a227bac084806e7f057f13e84c60b6213786fc80de6d10f00904`,
+412,637 bytes, acquired 2026-10-04. Rights remain unreviewed and public
+redistribution is not cleared. The [new acquisition/source inventory](../evidence/model-selection/sources.json)
+is separate from the immutable original campaign's manifest and checksum list.
+The [selection contract](../first-model-extension.md) records inspected pages,
+the explicit continuous-yield extension and pinned canonical implementation.
+
 Existing local PDFs are preserved unchanged and ignored by Git. If you obtain
 a reference yourself, keep its original notices and use the canonical filename
 in the manifest. To compare local copies with the historical acquisition:

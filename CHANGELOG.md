@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### First extension selection (#59)
+
+- Select certified scalar European exchange-option prices as the bounded first
+  model extension. Record original-input conventions, degeneracy/failure
+  semantics, reference and error-analysis plans, and qualification gates.
+  [Selection contract](docs/first-model-extension.md). This is a design decision;
+  implementation and qualification remain #60/#61, with existing behavior unchanged.
+
 ### Adversarial assurance handoff (#57)
 
 - Retain strict numerical/reference/planner reruns, finding dispositions and
