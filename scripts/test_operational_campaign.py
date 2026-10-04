@@ -105,16 +105,21 @@ class Controls(unittest.TestCase):
     def test_eof_truncation_timeout_and_failed_spawn_preserve_partial_run(self):
         config, case = small()
         case['concurrency'] = 1
-        config['timeout_seconds'] = .15
         for name, body in [('eof', 'pass'), ('truncated', 'print("{",flush=True)'),
                            ('timeout','import time\ntime.sleep(30)')]:
             with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp:
+                config['timeout_seconds'] = .15 if name == 'timeout' else 15
                 root = Path(tmp)
                 fake = root/'child'
                 fake.write_text('#!/usr/bin/env python3\n'+body+'\n')
                 fake.chmod(0o700)
-                with self.assertRaises(ValueError):
+                expected_error = json.JSONDecodeError if name == 'truncated' else ValueError
+                with self.assertRaises(expected_error) as caught:
                     run_case(fake, case, config, root/'run')
+                if name == 'eof':
+                    self.assertIn('worker EOF before ready', str(caught.exception))
+                elif name == 'timeout':
+                    self.assertIn('worker response timeout', str(caught.exception))
                 record = json.loads((root/'run/run.json').read_text())
                 self.assertFalse(record['complete'])
                 self.assertEqual(len(record['children']), 1)
