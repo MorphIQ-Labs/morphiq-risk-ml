@@ -97,3 +97,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 
 - [Certified expansion sum optimization](results-certified-expansion-sums.md): magnitude-ordered exact residuals, finite guards, scalar/portfolio/Exchange/IV measurements and complete certificate replay.
 - [Certification allocation optimization](results-certification-allocation.md): packed immutable words, private buffers, 77% less representative price allocation, GC counts and IV timing tradeoffs.
+
+- [Compiled fast price batches](fast-batch.md): frozen admission reuse, explicit failures and separation from runtime certificates.

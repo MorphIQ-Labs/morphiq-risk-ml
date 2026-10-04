@@ -11,6 +11,20 @@ let normal_vol = ok (Vol.normal 10.)
 
 let batch_model : type i c. (i, c) Batch.model -> i -> c Vol.t -> unit =
  fun model inputs volatility ->
+  let fast = Batch.Fast.Price (model, inputs, Side.Call, volatility) in
+  let fast_requests = [| fast |] in
+  let fast_plan = Batch.Fast.compile fast_requests in
+  let fast_results = Batch.Fast.execute fast_plan in
+  check
+    (Batch.Fast.length fast_plan = 1
+    && fast_results = Batch.Fast.run fast_requests
+    && fast_results.(0) = Batch.Fast.evaluate fast)
+    "installed compiled fast price";
+  check (finite (ok fast_results.(0))) "installed finite fast price";
+  fast_results.(0) <- Error Batch.Fast.Numerical_failure;
+  check
+    (Batch.Fast.execute fast_plan = Batch.Fast.run fast_requests)
+    "installed fast output isolation";
   let request q =
     Batch.Request
       (model, inputs, Side.Call, Batch.Evaluate (volatility, q, 1e-10))

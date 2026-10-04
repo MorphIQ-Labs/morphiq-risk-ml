@@ -57,3 +57,56 @@ let evaluate_many (type i c) (model : (i, c) model) (inputs : i) side
   | Black76 -> run (module Production.Black76)
   | Displaced -> run (module Production.Displaced)
   | Bachelier -> run (module Production.Bachelier)
+
+module Fast = struct
+  type request = Price : ('i, 'c) model * 'i * Side.t * 'c Vol.t -> request
+  type error = Invalid_input of Refusal.t | Numerical_failure
+  type outcome = (float, error) result
+
+  type prepared =
+    | Bsm_price of Black.Bsm.admitted * Side.t * Vol.lognormal Vol.t
+    | Black76_price of Black.Black76.admitted * Side.t * Vol.lognormal Vol.t
+    | Displaced_price of Black.Displaced.admitted * Side.t * Vol.lognormal Vol.t
+    | Bachelier_price of Bachelier.admitted * Side.t * Vol.normal Vol.t
+    | Invalid of Refusal.t
+
+  type t = prepared array
+
+  let prepare (Price (model, inputs, side, sigma)) =
+    match model with
+    | Bsm -> (
+        match Black.Bsm.admit inputs with
+        | Ok a -> Bsm_price (a, side, sigma)
+        | Error e -> Invalid e)
+    | Black76 -> (
+        match Black.Black76.admit inputs with
+        | Ok a -> Black76_price (a, side, sigma)
+        | Error e -> Invalid e)
+    | Displaced -> (
+        match Black.Displaced.admit inputs with
+        | Ok a -> Displaced_price (a, side, sigma)
+        | Error e -> Invalid e)
+    | Bachelier -> (
+        match Bachelier.admit inputs with
+        | Ok a -> Bachelier_price (a, side, sigma)
+        | Error e -> Invalid e)
+
+  let finish value =
+    if Float.is_finite value && value >= 0.0 then Ok value
+    else Error Numerical_failure
+
+  let price = function
+    | Invalid e -> Error (Invalid_input e)
+    | Bsm_price (a, side, sigma) -> finish (Black.Bsm.price a side sigma)
+    | Black76_price (a, side, sigma) ->
+        finish (Black.Black76.price a side sigma)
+    | Displaced_price (a, side, sigma) ->
+        finish (Black.Displaced.price a side sigma)
+    | Bachelier_price (a, side, sigma) -> finish (Bachelier.price a side sigma)
+
+  let evaluate request = price (prepare request)
+  let run requests = Array.map evaluate requests
+  let compile requests = Array.map prepare requests
+  let length = Array.length
+  let execute batch = Array.map price batch
+end

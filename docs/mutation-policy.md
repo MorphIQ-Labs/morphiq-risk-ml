@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **90
+seven core mutants. The catalog currently contains **92
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -227,3 +227,8 @@ mechanisms. The seven default CI selections remain unchanged.
 product quantum. The independent rational `enclosure_reference` guard owns both.
 The discarded-word mechanism now targets the same outward allowance in its
 array loop. The optional catalog has 90 entries; default CI still selects seven.
+
+The optional `fast-batch-finite` and `fast-batch-order` mechanisms exercise
+nonfinite scalar-result refusal and original-index preservation through mixed
+compiled fast requests. `fast_batch` is their direct guard. Neither expands
+the seven-mutant default lane.

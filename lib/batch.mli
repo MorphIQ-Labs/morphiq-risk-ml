@@ -35,3 +35,45 @@ val evaluate_many :
     per-output limits. Shares preparation only within this call. Admission
     errors appear for every requested output; an empty list returns an empty
     list. *)
+
+module Fast : sig
+  (** Fast approximate prices, without runtime error certificates. Compilation
+      reuses scalar admission; it does not establish numerical availability. *)
+
+  type request = Price : ('i, 'c) model * 'i * Side.t * 'c Vol.t -> request
+  type error = Invalid_input of Refusal.t | Numerical_failure
+
+  type outcome = (float, error) result
+  (** Success is a finite, nonnegative approximate price in the model's price
+      units. NaN, infinity and negative scalar outputs are numerical failures.
+      No value is clamped; finite successful words, including zero signs, are
+      preserved. This is not a [Production.certified] value. *)
+
+  val evaluate : request -> outcome
+
+  val run : request array -> outcome array
+  (** One-shot admission and pricing, with one ordered result per input. Empty
+      input yields empty output. Callers must not mutate input arrays during the
+      call; returned arrays are fresh. *)
+
+  type t
+  (** An immutable frozen batch of admitted inputs or per-item admission errors.
+      Model inputs, sides and volatilities are fixed. Changed inputs require a
+      new compilation. No cross-item value cache or numerical result is stored.
+  *)
+
+  val compile : request array -> t
+  (** Admits each item once and snapshots the supplied array. Admission errors
+      remain at their original indices. Do not mutate the array during this
+      call; mutation afterwards cannot affect the compiled batch. O(n) retained
+      storage; callers control n. No scenario cube or worker pool is created. *)
+
+  val length : t -> int
+
+  val execute : t -> outcome array
+  (** Prices every admitted item without repeating admission; allocates a fresh
+      ordered result array. Safe to reuse/concurrently execute one immutable
+      batch. Mutating returned arrays cannot affect future executions. Expected
+      numerical failures are per-item; programming/runtime exceptions propagate.
+  *)
+end

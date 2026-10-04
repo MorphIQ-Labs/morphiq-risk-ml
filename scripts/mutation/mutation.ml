@@ -38,6 +38,25 @@ type mutant = {
 let catalog =
   [
     {
+      id = "fast-batch-finite";
+      file = "lib/batch.ml";
+      snippet = "if Float.is_finite value && value >= 0.0 then Ok value";
+      replacement = "if true then Ok value";
+      killer = "fast_batch";
+      mechanism = "fast batch must refuse an overflowing scalar price";
+    };
+    {
+      id = "fast-batch-order";
+      file = "lib/batch.ml";
+      snippet = "let execute batch = Array.map price batch";
+      replacement =
+        "let execute batch = Array.init (Array.length batch) (fun i -> price \
+         batch.(Array.length batch - i - 1))";
+      killer = "fast_batch";
+      mechanism =
+        "compiled fast results preserve original item order and failures";
+    };
+    {
       id = "exchange-correlation-term";
       file = "lib/exchange.ml";
       snippet = "E.sub (E.exact 1.) (E.exact a.rho)";
@@ -1019,7 +1038,7 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "enclosure_sum" | "shared_greeks" | "production_boundary"
+  | "fast_batch" | "enclosure_sum" | "shared_greeks" | "production_boundary"
   | "production_multi" | "planner_contract" | "prepared_division"
   | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
       [ [] ]
