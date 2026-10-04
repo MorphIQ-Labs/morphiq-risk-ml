@@ -192,3 +192,14 @@ version bump or release in this PR. The earlier owner acceptance does not
 implicitly accept this later implementation. Historical rights findings and
 notices remain; #64 needs a final source/artifact audit and exact-main-candidate
 qualification after the stacked changes land.
+
+
+## Certificate allocation delta
+
+The [allocation qualification](results-certificate-allocation.md) records
+private expansion scratch replacing temporary lists without changing the
+arithmetic graph, acceptance limits or observed certificates. It supplies
+candidate-specific engineering and performance evidence; it does not update
+an earlier institutional acceptance or authorize release. Independent human
+review (#15), business workload assessment (#16) and release decisions (#17)
+remain separate obligations. Performance work continues under #8.

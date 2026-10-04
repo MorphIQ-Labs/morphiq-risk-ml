@@ -1,0 +1,14 @@
+{
+  "README.md": "4640034f6661fcc4e659a53b38193b4a1c2eabfd83b5b3187f6159e402cdff91",
+  "assurance-abba.json": "65139d2b8de2743d5d50eaab46db0fb259d678f04c946800a858a5d986446ce2",
+  "assurance-summary.json": "49c8ff7d61e98d16c53eb679d8680062507d8c16d7b5b8159683033731932176",
+  "candidate-shadow.txt.gz": "5266a58332a8c079da2bf90c6598fdf8fa15cdd78c039cea4f1b0b7d229131b6",
+  "compatibility.json": "5af407b05de64bd7b0fc9f2d78f9187ace1f5a474b7481aeea3659144fa9d431",
+  "exchange-abba.json": "fefb538ca26ba13b02e3b4d7b5d6aa970a3a4d8811429344f5b58eff9b33f1ce",
+  "exchange-score.json.gz": "926faa44790afb0d8fd35b3a1b183b69ae84a2a48fcfa8d1dfb6c169a6018f6e",
+  "host.json": "8c912f0f73157ef00b1e17bdceddd1d53f9f200e318dc555645c7e43ecee6665",
+  "list-prototype.json": "b83c0fb3505c2a038ae5b3d1c0ba66149371a74e18fae0d69e6d5b951489f5ab",
+  "mutations.log": "700a3ac74420190ec31b38c9beb95a41e0993f6b09429d3a3611d554c278b861",
+  "ordinary.log.gz": "837e9cd0b012f796720b8e33425981ef014672353ba0bf5ab2a7fc70e14f0125",
+  "profile-summary.json": "ff86c7ffc3da07e1936089ddea333065f4e18b4077f9e346231ec94a12ef9f30"
+}

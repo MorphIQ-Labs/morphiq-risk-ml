@@ -1,0 +1,12 @@
+{
+  "exchange_rows": 649,
+  "exchange_qualified_replay_identical": true,
+  "exchange_sha256": "0b9430f73d941565f194a416837294d12de2316883f9a1db2686a2a20827ab0a",
+  "shadow_rows": 258,
+  "shadow_output_rows": 3258,
+  "shadow_values_radii_outcomes_identical": true,
+  "shadow_sha256": "4683670d167f91a2e4d1cc1a0a4b48343d97710cf18c1ed39b9685b7bb5d551e",
+  "exchange_bytecode_matches_native_and_qualified": true,
+  "candidate_source_commit": "d81e2302fa1b0c0a6954954169716e722ace07d5",
+  "candidate_enclosure_sha256": "10d33a321037c6ef85357213f963b58bd035ce0acf3840cb924e60357c8e8d56"
+}

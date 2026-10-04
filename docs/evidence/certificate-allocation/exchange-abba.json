@@ -1,0 +1,2444 @@
+{
+  "schema": 1,
+  "baseline_revision": "bea4620a94104ab526fb61f6919012e5f9faa309",
+  "candidate_parent": "d81e2302fa1b0c0a6954954169716e722ace07d5",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "order": "ABBA",
+  "source_sha256": {
+    "lib/enclosure.ml": "10d33a321037c6ef85357213f963b58bd035ce0acf3840cb924e60357c8e8d56",
+    "bench/exchange_qualification_bench.ml": "0163550a3b43adda2024da63b70cba18a48b8ac0404ed686a9da3e690b814e12",
+    "bench/dune": "f1b320cd68134a303568927ecc81cfe4b365d83cfb99bc30f392028fe1d04461",
+    "scripts/benchmark_exchange_allocation.py": "788751e29abf699371fb49b5f108176ccd13a06cb16def12f3eaddf1cd1433da"
+  },
+  "limits": [
+    "Shared workstation; no deployment SLA.",
+    "No task-owned test, build or profiler runs during timing.",
+    "100 calls per evaluation batch, 7 batches, 20 warm-up pairs.",
+    "Allocation is cumulative bytes per call, not resident memory.",
+    "Correctness and complete-corpus compatibility checked separately."
+  ],
+  "runs": [
+    {
+      "label": "A1",
+      "binary_sha256": "5422ebca4270fec4873a0663b35a31a51b4be44cd1a67c4aaee3112fe5334092",
+      "elapsed_seconds": 9.628313166904263,
+      "load_before": [
+        4.52392578125,
+        4.56103515625,
+        4.22509765625
+      ],
+      "load_after": [
+        4.2958984375,
+        4.50927734375,
+        4.21044921875
+      ],
+      "rows": [
+        {
+          "phase": "ordinary/admission",
+          "round": 1,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 1,
+          "ns": 1501719.95163,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 1,
+          "ns": 1503529.548645,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 2,
+          "ns": 5.698204,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 2,
+          "ns": 1496660.709381,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 2,
+          "ns": 1499788.761139,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 3,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 3,
+          "ns": 1498990.058899,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 3,
+          "ns": 1500029.563904,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 4,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 4,
+          "ns": 1503400.802612,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 4,
+          "ns": 1498708.724976,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 5,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 5,
+          "ns": 1500339.508057,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 5,
+          "ns": 1498649.120331,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 6,
+          "ns": 5.757809,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 6,
+          "ns": 1496391.296387,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 6,
+          "ns": 1541759.967804,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 7,
+          "ns": 5.853176,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 7,
+          "ns": 1571450.233459,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 7,
+          "ns": 1545848.846436,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 1,
+          "ns": 5.90086,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 1,
+          "ns": 661551.952362,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 1,
+          "ns": 656681.060791,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 2,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 2,
+          "ns": 656359.195709,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 2,
+          "ns": 655820.36972,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 3,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 3,
+          "ns": 657610.89325,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 3,
+          "ns": 658180.713654,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 4,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 4,
+          "ns": 678911.209106,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 4,
+          "ns": 666940.21225,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 5,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 5,
+          "ns": 661420.822144,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 5,
+          "ns": 656549.930573,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 6,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 6,
+          "ns": 658650.398254,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 6,
+          "ns": 657441.616058,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 7,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 7,
+          "ns": 683331.489563,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 7,
+          "ns": 687620.639801,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 1,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 1,
+          "ns": 4533882.141113,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 1,
+          "ns": 4610099.79248,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 2,
+          "ns": 5.710125,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 2,
+          "ns": 4500339.031219,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 2,
+          "ns": 4444370.269775,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 3,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 3,
+          "ns": 4468419.551849,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 3,
+          "ns": 4445428.848267,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 4,
+          "ns": 5.698204,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 4,
+          "ns": 4481699.466705,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 4,
+          "ns": 4448368.549347,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 5,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 5,
+          "ns": 4442131.519318,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 5,
+          "ns": 4475688.934326,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 6,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 6,
+          "ns": 4469258.785248,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 6,
+          "ns": 4456570.148468,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 7,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 7,
+          "ns": 4493520.259857,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 7,
+          "ns": 4467837.810516,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 1,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 2,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 2,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 2,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 3,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 3,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 3,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 4,
+          "ns": 5.757809,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 4,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 4,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 5,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 5,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 5,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 6,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 7,
+          "ns": 5.710125,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 7,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 7,
+          "ns": 40.531158,
+          "bytes": 352.96
+        }
+      ]
+    },
+    {
+      "label": "B1",
+      "binary_sha256": "9e11a0f0ef85a08ea20ea86d608886d4e66938946df5e06dbc0367f81a578f60",
+      "elapsed_seconds": 7.869634208967909,
+      "load_before": [
+        4.2958984375,
+        4.50927734375,
+        4.21044921875
+      ],
+      "load_after": [
+        4.1826171875,
+        4.47607421875,
+        4.20166015625
+      ],
+      "rows": [
+        {
+          "phase": "ordinary/admission",
+          "round": 1,
+          "ns": 5.805492,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 1,
+          "ns": 1286890.506744,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 1,
+          "ns": 1267461.776733,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 2,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 2,
+          "ns": 1275157.928467,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 2,
+          "ns": 1268038.749695,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 3,
+          "ns": 5.590916,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 3,
+          "ns": 1270129.680634,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 3,
+          "ns": 1267480.85022,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 4,
+          "ns": 5.805492,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 4,
+          "ns": 1269049.64447,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 4,
+          "ns": 1273729.801178,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 5,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 5,
+          "ns": 1287710.666656,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 5,
+          "ns": 1256179.80957,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 6,
+          "ns": 5.805492,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 6,
+          "ns": 1268999.576569,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 6,
+          "ns": 1253960.132599,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 7,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 7,
+          "ns": 1286361.217499,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 7,
+          "ns": 1273629.665375,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 1,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 1,
+          "ns": 572030.544281,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 1,
+          "ns": 569119.45343,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 2,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 2,
+          "ns": 561800.003052,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 2,
+          "ns": 564548.969269,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 3,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 3,
+          "ns": 584681.034088,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 3,
+          "ns": 562391.281128,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 4,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 4,
+          "ns": 563499.927521,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 4,
+          "ns": 566210.746765,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 5,
+          "ns": 5.948544,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 5,
+          "ns": 574388.504028,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 5,
+          "ns": 565049.648285,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 6,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 6,
+          "ns": 563077.926636,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 6,
+          "ns": 576729.774475,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 7,
+          "ns": 561099.052429,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 7,
+          "ns": 564789.772034,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 1,
+          "ns": 5.698204,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 1,
+          "ns": 3486440.181732,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 1,
+          "ns": 3476569.652557,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 2,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 2,
+          "ns": 3476409.912109,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 2,
+          "ns": 3473989.963531,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 3,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 3,
+          "ns": 3475809.09729,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 3,
+          "ns": 3483939.170837,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 4,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 4,
+          "ns": 3494679.927826,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 4,
+          "ns": 3526320.457458,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 5,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 5,
+          "ns": 3484780.788422,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 5,
+          "ns": 3482041.358948,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 6,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 6,
+          "ns": 3480660.915375,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 6,
+          "ns": 3477370.738983,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 7,
+          "ns": 3530249.595642,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 7,
+          "ns": 3477520.942688,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 1,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 1,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 2,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 2,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 2,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 3,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 3,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 3,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 4,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 4,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 4,
+          "ns": 40.531158,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 5,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 5,
+          "ns": 47.683716,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 5,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 6,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 6,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 7,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 7,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 7,
+          "ns": 40.531158,
+          "bytes": 352.96
+        }
+      ]
+    },
+    {
+      "label": "B2",
+      "binary_sha256": "9e11a0f0ef85a08ea20ea86d608886d4e66938946df5e06dbc0367f81a578f60",
+      "elapsed_seconds": 7.696160292020068,
+      "load_before": [
+        4.1826171875,
+        4.47607421875,
+        4.20166015625
+      ],
+      "load_after": [
+        3.927734375,
+        4.41796875,
+        4.1826171875
+      ],
+      "rows": [
+        {
+          "phase": "ordinary/admission",
+          "round": 1,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 1,
+          "ns": 1253249.645233,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 1,
+          "ns": 1252520.084381,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 2,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 2,
+          "ns": 1254210.472107,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 2,
+          "ns": 1251709.461212,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 3,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 3,
+          "ns": 1252579.689026,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 3,
+          "ns": 1253769.397736,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 4,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 4,
+          "ns": 1254608.631134,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 4,
+          "ns": 1253359.31778,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 5,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 5,
+          "ns": 1257839.202881,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 5,
+          "ns": 1254119.873047,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 6,
+          "ns": 5.698204,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 6,
+          "ns": 1254251.003265,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 6,
+          "ns": 1251688.00354,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 7,
+          "ns": 1253960.132599,
+          "bytes": 6765208.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 7,
+          "ns": 1253778.934479,
+          "bytes": 6765152.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 1,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 1,
+          "ns": 560970.306396,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 1,
+          "ns": 561800.003052,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 2,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 2,
+          "ns": 560832.023621,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 2,
+          "ns": 561280.250549,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 3,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 3,
+          "ns": 560338.497162,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 3,
+          "ns": 561258.792877,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 4,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 4,
+          "ns": 562970.638275,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 4,
+          "ns": 561120.510101,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 5,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 5,
+          "ns": 561470.985413,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 5,
+          "ns": 560431.480408,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 6,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 6,
+          "ns": 562300.682068,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 6,
+          "ns": 561270.713806,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 7,
+          "ns": 5.698204,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 7,
+          "ns": 562071.800232,
+          "bytes": 3385344.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 7,
+          "ns": 560021.400452,
+          "bytes": 3385288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 1,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 1,
+          "ns": 3474681.377411,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 1,
+          "ns": 3488109.111786,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 2,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 2,
+          "ns": 3483500.480652,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 2,
+          "ns": 3478679.656982,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 3,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 3,
+          "ns": 3489449.0242,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 3,
+          "ns": 3487408.161163,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 4,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 4,
+          "ns": 3480339.050293,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 4,
+          "ns": 3479750.156403,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 5,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 5,
+          "ns": 3476629.257202,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 5,
+          "ns": 3485469.818115,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 6,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 6,
+          "ns": 3593339.920044,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 6,
+          "ns": 3638770.580292,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 7,
+          "ns": 3537988.66272,
+          "bytes": 16703344.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 7,
+          "ns": 3539760.112762,
+          "bytes": 16703288.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 1,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 2,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 2,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 2,
+          "ns": 38.146973,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 3,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 3,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 3,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 4,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 4,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 4,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 5,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 5,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 5,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 6,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 6,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 7,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 7,
+          "ns": 50.067902,
+          "bytes": 352.96
+        }
+      ]
+    },
+    {
+      "label": "A2",
+      "binary_sha256": "5422ebca4270fec4873a0663b35a31a51b4be44cd1a67c4aaee3112fe5334092",
+      "elapsed_seconds": 9.556042124982923,
+      "load_before": [
+        3.927734375,
+        4.41796875,
+        4.1826171875
+      ],
+      "load_after": [
+        4.07275390625,
+        4.435546875,
+        4.19140625
+      ],
+      "rows": [
+        {
+          "phase": "ordinary/admission",
+          "round": 1,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 1,
+          "ns": 1523449.420929,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 1,
+          "ns": 1513059.139252,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 2,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 2,
+          "ns": 1533880.233765,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 2,
+          "ns": 1514539.718628,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 3,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 3,
+          "ns": 1524939.537048,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 3,
+          "ns": 1529412.269592,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 4,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 4,
+          "ns": 1526169.776917,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 4,
+          "ns": 1527841.091156,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 5,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 5,
+          "ns": 1532349.586487,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 5,
+          "ns": 1527731.41861,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 6,
+          "ns": 5.710125,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 6,
+          "ns": 1510848.999023,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 6,
+          "ns": 1500480.175018,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/admission",
+          "round": 7,
+          "ns": 5.65052,
+          "bytes": 56.005
+        },
+        {
+          "phase": "ordinary/end-to-end",
+          "round": 7,
+          "ns": 1500930.786133,
+          "bytes": 21414712.96
+        },
+        {
+          "phase": "ordinary/evaluation",
+          "round": 7,
+          "ns": 1500430.107117,
+          "bytes": 21414656.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 1,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 1,
+          "ns": 657529.830933,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 1,
+          "ns": 659420.490265,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 2,
+          "ns": 5.841255,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 2,
+          "ns": 658359.527588,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 2,
+          "ns": 656750.202179,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 3,
+          "ns": 5.507469,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 3,
+          "ns": 657629.966736,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 3,
+          "ns": 655319.690704,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 4,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 4,
+          "ns": 655069.351196,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 4,
+          "ns": 658740.997314,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 5,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 5,
+          "ns": 657608.509064,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 5,
+          "ns": 656611.919403,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 6,
+          "ns": 5.590916,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 6,
+          "ns": 657291.412354,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 6,
+          "ns": 655140.87677,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/admission",
+          "round": 7,
+          "ns": 5.495548,
+          "bytes": 56.005
+        },
+        {
+          "phase": "singular/end-to-end",
+          "round": 7,
+          "ns": 655539.035797,
+          "bytes": 9679672.96
+        },
+        {
+          "phase": "singular/evaluation",
+          "round": 7,
+          "ns": 657160.282135,
+          "bytes": 9679616.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 1,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 1,
+          "ns": 4417440.891266,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 1,
+          "ns": 4415369.033813,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 2,
+          "ns": 5.543232,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 2,
+          "ns": 4422590.732574,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 2,
+          "ns": 4423120.02182,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 3,
+          "ns": 5.590916,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 3,
+          "ns": 4430558.681488,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 3,
+          "ns": 4425508.975983,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 4,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 4,
+          "ns": 4423160.552979,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 4,
+          "ns": 4421720.504761,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 5,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 5,
+          "ns": 4422380.924225,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 5,
+          "ns": 4420468.80722,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 6,
+          "ns": 5.602837,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 6,
+          "ns": 4421720.504761,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 6,
+          "ns": 4422080.516815,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/admission",
+          "round": 7,
+          "ns": 5.555153,
+          "bytes": 56.005
+        },
+        {
+          "phase": "tail/end-to-end",
+          "round": 7,
+          "ns": 4447388.648987,
+          "bytes": 63554800.96
+        },
+        {
+          "phase": "tail/evaluation",
+          "round": 7,
+          "ns": 4566628.932953,
+          "bytes": 63554744.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 1,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 1,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 1,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 2,
+          "ns": 5.710125,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 2,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 2,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 3,
+          "ns": 5.90086,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 3,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 3,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 4,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 4,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 4,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 5,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 5,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 5,
+          "ns": 40.531158,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 6,
+          "ns": 5.745888,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 352.96
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 6,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/admission",
+          "round": 7,
+          "ns": 5.710125,
+          "bytes": 56.005
+        },
+        {
+          "phase": "failure/end-to-end",
+          "round": 7,
+          "ns": 50.067902,
+          "bytes": 408.96
+        },
+        {
+          "phase": "failure/evaluation",
+          "round": 7,
+          "ns": 38.146973,
+          "bytes": 352.96
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "failure/admission": {
+      "A": {
+        "ns": {
+          "median": 5.745888,
+          "min": 5.710125,
+          "max": 5.948544
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.495548,
+          "max": 5.65052
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 3.3195043133454782,
+      "allocation_reduction_percent": 0.0
+    },
+    "failure/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 50.067902,
+          "min": 50.067902,
+          "max": 50.067902
+        },
+        "bytes": {
+          "median": 408.96,
+          "min": 408.96,
+          "max": 408.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 50.067902,
+          "min": 38.146973,
+          "max": 50.067902
+        },
+        "bytes": {
+          "median": 408.96,
+          "min": 408.96,
+          "max": 408.96
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "failure/evaluation": {
+      "A": {
+        "ns": {
+          "median": 40.531158,
+          "min": 38.146973,
+          "max": 50.067902
+        },
+        "bytes": {
+          "median": 352.96,
+          "min": 352.96,
+          "max": 352.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 40.531158,
+          "min": 40.531158,
+          "max": 50.067902
+        },
+        "bytes": {
+          "median": 352.96,
+          "min": 352.96,
+          "max": 352.96
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "ordinary/admission": {
+      "A": {
+        "ns": {
+          "median": 5.626678500000001,
+          "min": 5.495548,
+          "max": 5.853176
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.5730345,
+          "min": 5.507469,
+          "max": 5.805492
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 0.9533866205435504,
+      "allocation_reduction_percent": 0.0
+    },
+    "ordinary/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 1508129.835129,
+          "min": 1498708.724976,
+          "max": 1571450.233459
+        },
+        "bytes": {
+          "median": 21414712.96,
+          "min": 21414712.96,
+          "max": 21414712.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 1255899.66774,
+          "min": 1251688.00354,
+          "max": 1287710.666656
+        },
+        "bytes": {
+          "median": 6765208.96,
+          "min": 6765208.96,
+          "max": 6765208.96
+        }
+      },
+      "time_reduction_percent": 16.72469846519714,
+      "allocation_reduction_percent": 68.40859378952891
+    },
+    "ordinary/evaluation": {
+      "A": {
+        "ns": {
+          "median": 1507189.2738339999,
+          "min": 1496391.296387,
+          "max": 1545848.846436
+        },
+        "bytes": {
+          "median": 21414656.96,
+          "min": 21414656.96,
+          "max": 21414656.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 1255394.220352,
+          "min": 1252520.084381,
+          "max": 1275157.928467
+        },
+        "bytes": {
+          "median": 6765152.96,
+          "min": 6765152.96,
+          "max": 6765152.96
+        }
+      },
+      "time_reduction_percent": 16.706266283429795,
+      "allocation_reduction_percent": 68.40877268014852
+    },
+    "singular/admission": {
+      "A": {
+        "ns": {
+          "median": 5.5491925,
+          "min": 5.495548,
+          "max": 5.948544
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.495548,
+          "max": 5.948544
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": -0.10741202436208575,
+      "allocation_reduction_percent": 0.0
+    },
+    "singular/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 657609.7011569999,
+          "min": 655140.87677,
+          "max": 683331.489563
+        },
+        "bytes": {
+          "median": 9679672.96,
+          "min": 9679672.96,
+          "max": 9679672.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 561771.3928225,
+          "min": 560338.497162,
+          "max": 584681.034088
+        },
+        "bytes": {
+          "median": 3385344.96,
+          "min": 3385344.96,
+          "max": 3385344.96
+        }
+      },
+      "time_reduction_percent": 14.573737000211807,
+      "allocation_reduction_percent": 65.02624650657619
+    },
+    "singular/evaluation": {
+      "A": {
+        "ns": {
+          "median": 657225.8472445,
+          "min": 655069.351196,
+          "max": 687620.639801
+        },
+        "bytes": {
+          "median": 9679616.96,
+          "min": 9679616.96,
+          "max": 9679616.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 562345.981598,
+          "min": 560021.400452,
+          "max": 569119.45343
+        },
+        "bytes": {
+          "median": 3385288.96,
+          "min": 3385288.96,
+          "max": 3385288.96
+        }
+      },
+      "time_reduction_percent": 14.436417259652124,
+      "allocation_reduction_percent": 65.02662270635966
+    },
+    "tail/admission": {
+      "A": {
+        "ns": {
+          "median": 5.5968765000000005,
+          "min": 5.543232,
+          "max": 5.948544
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.507469,
+          "max": 5.698204
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 0.745478303836089,
+      "allocation_reduction_percent": 0.0
+    },
+    "tail/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 4443250.8945465,
+          "min": 4417440.891266,
+          "max": 4533882.141113
+        },
+        "bytes": {
+          "median": 63554800.96,
+          "min": 63554800.96,
+          "max": 63554800.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 3482265.4724125,
+          "min": 3473989.963531,
+          "max": 3638770.580292
+        },
+        "bytes": {
+          "median": 16703344.96,
+          "min": 16703344.96,
+          "max": 16703344.96
+        }
+      },
+      "time_reduction_percent": 21.627980164556593,
+      "allocation_reduction_percent": 73.71820113084343
+    },
+    "tail/evaluation": {
+      "A": {
+        "ns": {
+          "median": 4456633.3293915,
+          "min": 4415369.033813,
+          "max": 4610099.79248
+        },
+        "bytes": {
+          "median": 63554744.96,
+          "min": 63554744.96,
+          "max": 63554744.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 3483719.8257445,
+          "min": 3476409.912109,
+          "max": 3593339.920044
+        },
+        "bytes": {
+          "median": 16703288.96,
+          "min": 16703288.96,
+          "max": 16703288.96
+        }
+      },
+      "time_reduction_percent": 21.8306832027359,
+      "allocation_reduction_percent": 73.71826608617076
+    }
+  }
+}

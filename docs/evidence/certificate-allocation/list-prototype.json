@@ -1,0 +1,396 @@
+{
+  "decision": "Rejected as throughput optimization: small allocation improvement, flat/slower exchange timings. Replaced before numerical qualification by private float scratch.",
+  "source_sha256": "209014ba67fcc6ab99d54e2b84ffae23ff9e11599252680f8279de8c0bf18c56",
+  "summary": {
+    "failure/admission": {
+      "A": {
+        "ns": {
+          "median": 5.7756905,
+          "min": 5.495548,
+          "max": 6.091595
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.578995,
+          "min": 5.495548,
+          "max": 5.888939
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 3.4055754891990753,
+      "allocation_reduction_percent": 0.0
+    },
+    "failure/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 50.067902,
+          "min": 40.531158,
+          "max": 61.988831
+        },
+        "bytes": {
+          "median": 408.96,
+          "min": 408.96,
+          "max": 408.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 50.067902,
+          "min": 38.146973,
+          "max": 59.604645
+        },
+        "bytes": {
+          "median": 408.96,
+          "min": 408.96,
+          "max": 408.96
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "failure/evaluation": {
+      "A": {
+        "ns": {
+          "median": 40.531158,
+          "min": 38.146973,
+          "max": 69.141388
+        },
+        "bytes": {
+          "median": 352.96,
+          "min": 352.96,
+          "max": 352.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 40.531158,
+          "min": 40.531158,
+          "max": 50.067902
+        },
+        "bytes": {
+          "median": 352.96,
+          "min": 352.96,
+          "max": 352.96
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "ordinary/admission": {
+      "A": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.447865,
+          "max": 6.043911
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.447865,
+          "max": 5.996227
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "ordinary/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 1521079.5402525,
+          "min": 1500761.508942,
+          "max": 1604070.663452
+        },
+        "bytes": {
+          "median": 21414712.96,
+          "min": 21414712.96,
+          "max": 21414712.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 1542699.3370059999,
+          "min": 1529479.026794,
+          "max": 1592290.401459
+        },
+        "bytes": {
+          "median": 19133584.96,
+          "min": 19133584.96,
+          "max": 19133584.96
+        }
+      },
+      "time_reduction_percent": -1.421345576044697,
+      "allocation_reduction_percent": 10.652153051319724
+    },
+    "ordinary/evaluation": {
+      "A": {
+        "ns": {
+          "median": 1520735.025406,
+          "min": 1495599.746704,
+          "max": 1554729.938507
+        },
+        "bytes": {
+          "median": 21414656.96,
+          "min": 21414656.96,
+          "max": 21414656.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 1554074.2874145,
+          "min": 1533398.628235,
+          "max": 1627149.581909
+        },
+        "bytes": {
+          "median": 19133528.96,
+          "min": 19133528.96,
+          "max": 19133528.96
+        }
+      },
+      "time_reduction_percent": -2.1923123655022803,
+      "allocation_reduction_percent": 10.652180907034248
+    },
+    "singular/admission": {
+      "A": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.495548,
+          "max": 5.793571
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.555153,
+          "min": 5.495548,
+          "max": 6.949902
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": 0.0,
+      "allocation_reduction_percent": 0.0
+    },
+    "singular/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 660645.9617615,
+          "min": 652940.273285,
+          "max": 664920.806885
+        },
+        "bytes": {
+          "median": 9679672.96,
+          "min": 9679672.96,
+          "max": 9679672.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 689190.6261445,
+          "min": 685501.098633,
+          "max": 712089.538574
+        },
+        "bytes": {
+          "median": 8828056.96,
+          "min": 8828056.96,
+          "max": 8828056.96
+        }
+      },
+      "time_reduction_percent": -4.320720330582284,
+      "allocation_reduction_percent": 8.797983191365999
+    },
+    "singular/evaluation": {
+      "A": {
+        "ns": {
+          "median": 661954.8797605,
+          "min": 653200.149536,
+          "max": 684659.481049
+        },
+        "bytes": {
+          "median": 9679616.96,
+          "min": 9679616.96,
+          "max": 9679616.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 687801.837921,
+          "min": 685348.510742,
+          "max": 709769.7258
+        },
+        "bytes": {
+          "median": 8828000.96,
+          "min": 8828000.96,
+          "max": 8828000.96
+        }
+      },
+      "time_reduction_percent": -3.9046404748691588,
+      "allocation_reduction_percent": 8.79803409080353
+    },
+    "tail/admission": {
+      "A": {
+        "ns": {
+          "median": 5.5730345,
+          "min": 5.543232,
+          "max": 5.90086
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 5.590916,
+          "min": 5.495548,
+          "max": 5.793571
+        },
+        "bytes": {
+          "median": 56.005,
+          "min": 56.005,
+          "max": 56.005
+        }
+      },
+      "time_reduction_percent": -0.32085751487811454,
+      "allocation_reduction_percent": 0.0
+    },
+    "tail/end-to-end": {
+      "A": {
+        "ns": {
+          "median": 4485689.401626499,
+          "min": 4409458.637238,
+          "max": 4664630.889893
+        },
+        "bytes": {
+          "median": 63554800.96,
+          "min": 63554800.96,
+          "max": 63554800.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 4481766.2239075005,
+          "min": 4464981.555939,
+          "max": 5376529.693604
+        },
+        "bytes": {
+          "median": 54909128.96,
+          "min": 54909128.96,
+          "max": 54909128.96
+        }
+      },
+      "time_reduction_percent": 0.08745986107678849,
+      "allocation_reduction_percent": 13.60349158428078
+    },
+    "tail/evaluation": {
+      "A": {
+        "ns": {
+          "median": 4476859.5695495,
+          "min": 4411759.376526,
+          "max": 4594371.318817
+        },
+        "bytes": {
+          "median": 63554744.96,
+          "min": 63554744.96,
+          "max": 63554744.96
+        }
+      },
+      "B": {
+        "ns": {
+          "median": 4484905.0045015,
+          "min": 4464738.368988,
+          "max": 4607529.640198
+        },
+        "bytes": {
+          "median": 54909072.96,
+          "min": 54909072.96,
+          "max": 54909072.96
+        }
+      },
+      "time_reduction_percent": -0.179711577435282,
+      "allocation_reduction_percent": 13.603503570726938
+    }
+  },
+  "loads": [
+    {
+      "label": "A1",
+      "before": [
+        5.123046875,
+        5.64208984375,
+        4.40869140625
+      ],
+      "after": [
+        4.64208984375,
+        5.52197265625,
+        4.38037109375
+      ]
+    },
+    {
+      "label": "B1",
+      "before": [
+        4.64208984375,
+        5.52197265625,
+        4.38037109375
+      ],
+      "after": [
+        5.12255859375,
+        5.58837890625,
+        4.41650390625
+      ]
+    },
+    {
+      "label": "B2",
+      "before": [
+        5.12255859375,
+        5.58837890625,
+        4.41650390625
+      ],
+      "after": [
+        4.728515625,
+        5.486328125,
+        4.39404296875
+      ]
+    },
+    {
+      "label": "A2",
+      "before": [
+        4.728515625,
+        5.486328125,
+        4.39404296875
+      ],
+      "after": [
+        5.4169921875,
+        5.60302734375,
+        4.44775390625
+      ]
+    }
+  ]
+}

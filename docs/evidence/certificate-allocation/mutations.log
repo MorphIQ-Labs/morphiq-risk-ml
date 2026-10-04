@@ -1,0 +1,7 @@
+baseline passes (53 s)
+killed    enclosure-product-guard by enclosure_reference
+killed    enclosure-series-tail by enclosure_reference
+killed    enclosure-grow-residual by enclosure_reference
+killed    enclosure-discarded-word by enclosure_reference
+killed    enclosure-fma-underflow by enclosure_reference
+5 of 5 mutants killed as catalogued

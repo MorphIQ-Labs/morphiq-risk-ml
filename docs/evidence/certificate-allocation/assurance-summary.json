@@ -1,0 +1,1710 @@
+{
+  "harness/empty/dispatch_clock": {
+    "A": {
+      "median_ns": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "allocated_words": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "allocated_words": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "time_reduction_percent": null,
+    "allocation_reduction_percent": null
+  },
+  "bsm/atm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1035.0,
+        "min": 1035.0,
+        "max": 1035.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1187.5,
+        "min": 1125.0,
+        "max": 1250.0
+      },
+      "allocated_words": {
+        "median": 1035.0,
+        "min": 1035.0,
+        "max": 1035.0
+      }
+    },
+    "time_reduction_percent": -5.555555555555558,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/atm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1281.0,
+        "min": 1281.0,
+        "max": 1281.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1296.5,
+        "min": 1281.0,
+        "max": 1312.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "time_reduction_percent": -1.2099921935987412,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/atm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 651968.5,
+        "min": 644156.0,
+        "max": 659781.0
+      },
+      "allocated_words": {
+        "median": 1207295.0,
+        "min": 1207295.0,
+        "max": 1207295.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 619547.0,
+        "min": 613000.0,
+        "max": 626094.0
+      },
+      "allocated_words": {
+        "median": 581024.0,
+        "min": 581024.0,
+        "max": 581024.0
+      }
+    },
+    "time_reduction_percent": 4.97286295273468,
+    "allocation_reduction_percent": 51.87389991675606
+  },
+  "bsm/atm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 9250.0,
+        "min": 9250.0,
+        "max": 9250.0
+      },
+      "allocated_words": {
+        "median": 8077.0,
+        "min": 8077.0,
+        "max": 8077.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 9562.5,
+        "min": 9250.0,
+        "max": 9875.0
+      },
+      "allocated_words": {
+        "median": 8077.0,
+        "min": 8077.0,
+        "max": 8077.0
+      }
+    },
+    "time_reduction_percent": -3.378378378378377,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/atm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 665859.5,
+        "min": 657375.0,
+        "max": 674344.0
+      },
+      "allocated_words": {
+        "median": 1217449.0,
+        "min": 1217449.0,
+        "max": 1217449.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 628719.0,
+        "min": 626094.0,
+        "max": 631344.0
+      },
+      "allocated_words": {
+        "median": 591179.0,
+        "min": 591179.0,
+        "max": 591179.0
+      }
+    },
+    "time_reduction_percent": 5.577828355681646,
+    "allocation_reduction_percent": 51.441169198874036
+  },
+  "bsm/otm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1034.0,
+        "min": 1034.0,
+        "max": 1034.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1034.0,
+        "min": 1034.0,
+        "max": 1034.0
+      }
+    },
+    "time_reduction_percent": 0.0,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/otm/price": {
+    "A": {
+      "median_ns": {
+        "median": 203.5,
+        "min": 188.0,
+        "max": 219.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 188.0,
+        "min": 188.0,
+        "max": 188.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "time_reduction_percent": 7.616707616707618,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/otm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 914875.0,
+        "min": 908156.0,
+        "max": 921594.0
+      },
+      "allocated_words": {
+        "median": 1726854.0,
+        "min": 1726854.0,
+        "max": 1726854.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 902312.5,
+        "min": 888469.0,
+        "max": 916156.0
+      },
+      "allocated_words": {
+        "median": 928811.0,
+        "min": 928811.0,
+        "max": 928811.0
+      }
+    },
+    "time_reduction_percent": 1.3731384068861874,
+    "allocation_reduction_percent": 46.21369264570138
+  },
+  "bsm/otm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 9140.5,
+        "min": 8875.0,
+        "max": 9406.0
+      },
+      "allocated_words": {
+        "median": 8424.0,
+        "min": 8424.0,
+        "max": 8424.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 8968.5,
+        "min": 8781.0,
+        "max": 9156.0
+      },
+      "allocated_words": {
+        "median": 8424.0,
+        "min": 8424.0,
+        "max": 8424.0
+      }
+    },
+    "time_reduction_percent": 1.8817351348394462,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/otm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 941343.5,
+        "min": 920406.0,
+        "max": 962281.0
+      },
+      "allocated_words": {
+        "median": 1736393.0,
+        "min": 1736393.0,
+        "max": 1736393.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 911437.5,
+        "min": 897875.0,
+        "max": 925000.0
+      },
+      "allocated_words": {
+        "median": 938349.0,
+        "min": 938349.0,
+        "max": 938349.0
+      }
+    },
+    "time_reduction_percent": 3.176948690887016,
+    "allocation_reduction_percent": 45.95987198750513
+  },
+  "bsm/itm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1140.5,
+        "min": 1125.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1034.0,
+        "min": 1034.0,
+        "max": 1034.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1172.0,
+        "min": 1156.0,
+        "max": 1188.0
+      },
+      "allocated_words": {
+        "median": 1034.0,
+        "min": 1034.0,
+        "max": 1034.0
+      }
+    },
+    "time_reduction_percent": -2.7619465146865307,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/itm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1828.5,
+        "min": 1813.0,
+        "max": 1844.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1890.5,
+        "min": 1875.0,
+        "max": 1906.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "time_reduction_percent": -3.3907574514629557,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/itm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 502562.5,
+        "min": 491625.0,
+        "max": 513500.0
+      },
+      "allocated_words": {
+        "median": 918284.0,
+        "min": 918284.0,
+        "max": 918284.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 476578.5,
+        "min": 469094.0,
+        "max": 484063.0
+      },
+      "allocated_words": {
+        "median": 443346.0,
+        "min": 443346.0,
+        "max": 443346.0
+      }
+    },
+    "time_reduction_percent": 5.170302201218757,
+    "allocation_reduction_percent": 51.720165003419424
+  },
+  "bsm/itm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 12453.0,
+        "min": 12156.0,
+        "max": 12750.0
+      },
+      "allocated_words": {
+        "median": 11317.0,
+        "min": 11317.0,
+        "max": 11317.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 12437.5,
+        "min": 12187.0,
+        "max": 12688.0
+      },
+      "allocated_words": {
+        "median": 11317.0,
+        "min": 11317.0,
+        "max": 11317.0
+      }
+    },
+    "time_reduction_percent": 0.12446799967879008,
+    "allocation_reduction_percent": 0.0
+  },
+  "bsm/itm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 511999.5,
+        "min": 505437.0,
+        "max": 518562.0
+      },
+      "allocated_words": {
+        "median": 932167.0,
+        "min": 932167.0,
+        "max": 932167.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 502422.0,
+        "min": 500000.0,
+        "max": 504844.0
+      },
+      "allocated_words": {
+        "median": 457229.0,
+        "min": 457229.0,
+        "max": 457229.0
+      }
+    },
+    "time_reduction_percent": 1.8706072955149367,
+    "allocation_reduction_percent": 50.94988344363188
+  },
+  "black76/atm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1187.5,
+        "min": 1156.0,
+        "max": 1219.0
+      },
+      "allocated_words": {
+        "median": 1033.0,
+        "min": 1033.0,
+        "max": 1033.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1033.0,
+        "min": 1033.0,
+        "max": 1033.0
+      }
+    },
+    "time_reduction_percent": 5.263157894736848,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/atm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1328.0,
+        "min": 1281.0,
+        "max": 1375.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1281.0,
+        "min": 1281.0,
+        "max": 1281.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "time_reduction_percent": 3.5391566265060237,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/atm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 564250.0,
+        "min": 558406.0,
+        "max": 570094.0
+      },
+      "allocated_words": {
+        "median": 1045250.0,
+        "min": 1045250.0,
+        "max": 1045250.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 545141.0,
+        "min": 543344.0,
+        "max": 546938.0
+      },
+      "allocated_words": {
+        "median": 503520.0,
+        "min": 503520.0,
+        "max": 503520.0
+      }
+    },
+    "time_reduction_percent": 3.3866194062915356,
+    "allocation_reduction_percent": 51.82779239416407
+  },
+  "black76/atm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 9156.5,
+        "min": 9125.0,
+        "max": 9188.0
+      },
+      "allocated_words": {
+        "median": 7993.0,
+        "min": 7993.0,
+        "max": 7993.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 9125.0,
+        "min": 9125.0,
+        "max": 9125.0
+      },
+      "allocated_words": {
+        "median": 7993.0,
+        "min": 7993.0,
+        "max": 7993.0
+      }
+    },
+    "time_reduction_percent": 0.344017910773764,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/atm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 571125.0,
+        "min": 570406.0,
+        "max": 571844.0
+      },
+      "allocated_words": {
+        "median": 1055319.0,
+        "min": 1055319.0,
+        "max": 1055319.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 554828.0,
+        "min": 554219.0,
+        "max": 555437.0
+      },
+      "allocated_words": {
+        "median": 513588.0,
+        "min": 513588.0,
+        "max": 513588.0
+      }
+    },
+    "time_reduction_percent": 2.8534909170496836,
+    "allocation_reduction_percent": 51.33338829301851
+  },
+  "black76/otm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1033.0,
+        "min": 1033.0,
+        "max": 1033.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1156.0,
+        "min": 1156.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1033.0,
+        "min": 1033.0,
+        "max": 1033.0
+      }
+    },
+    "time_reduction_percent": -2.7555555555555555,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/otm/price": {
+    "A": {
+      "median_ns": {
+        "median": 219.0,
+        "min": 219.0,
+        "max": 219.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 203.5,
+        "min": 188.0,
+        "max": 219.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "time_reduction_percent": 7.077625570776258,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/otm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 876562.5,
+        "min": 867562.0,
+        "max": 885563.0
+      },
+      "allocated_words": {
+        "median": 1635012.0,
+        "min": 1635012.0,
+        "max": 1635012.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 848937.5,
+        "min": 832000.0,
+        "max": 865875.0
+      },
+      "allocated_words": {
+        "median": 877955.0,
+        "min": 877955.0,
+        "max": 877955.0
+      }
+    },
+    "time_reduction_percent": 3.1515151515151496,
+    "allocation_reduction_percent": 46.30284059077242
+  },
+  "black76/otm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 8672.0,
+        "min": 8625.0,
+        "max": 8719.0
+      },
+      "allocated_words": {
+        "median": 8340.0,
+        "min": 8340.0,
+        "max": 8340.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 8828.0,
+        "min": 8750.0,
+        "max": 8906.0
+      },
+      "allocated_words": {
+        "median": 8340.0,
+        "min": 8340.0,
+        "max": 8340.0
+      }
+    },
+    "time_reduction_percent": -1.7988929889298788,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/otm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 871672.0,
+        "min": 871469.0,
+        "max": 871875.0
+      },
+      "allocated_words": {
+        "median": 1644465.0,
+        "min": 1644465.0,
+        "max": 1644465.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 844656.0,
+        "min": 839187.0,
+        "max": 850125.0
+      },
+      "allocated_words": {
+        "median": 887407.0,
+        "min": 887407.0,
+        "max": 887407.0
+      }
+    },
+    "time_reduction_percent": 3.099330940996159,
+    "allocation_reduction_percent": 46.036735351618916
+  },
+  "black76/itm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1172.0,
+        "min": 1125.0,
+        "max": 1219.0
+      },
+      "allocated_words": {
+        "median": 1032.0,
+        "min": 1032.0,
+        "max": 1032.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1140.5,
+        "min": 1125.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1032.0,
+        "min": 1032.0,
+        "max": 1032.0
+      }
+    },
+    "time_reduction_percent": 2.6877133105802087,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/itm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1890.5,
+        "min": 1812.0,
+        "max": 1969.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1797.0,
+        "min": 1781.0,
+        "max": 1813.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "time_reduction_percent": 4.945781539275329,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/itm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 483578.0,
+        "min": 478000.0,
+        "max": 489156.0
+      },
+      "allocated_words": {
+        "median": 897055.0,
+        "min": 897055.0,
+        "max": 897055.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 455281.5,
+        "min": 454844.0,
+        "max": 455719.0
+      },
+      "allocated_words": {
+        "median": 433225.0,
+        "min": 433225.0,
+        "max": 433225.0
+      }
+    },
+    "time_reduction_percent": 5.851486213185875,
+    "allocation_reduction_percent": 51.70585972989393
+  },
+  "black76/itm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 12046.5,
+        "min": 12031.0,
+        "max": 12062.0
+      },
+      "allocated_words": {
+        "median": 11233.0,
+        "min": 11233.0,
+        "max": 11233.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 12031.0,
+        "min": 12000.0,
+        "max": 12062.0
+      },
+      "allocated_words": {
+        "median": 11233.0,
+        "min": 11233.0,
+        "max": 11233.0
+      }
+    },
+    "time_reduction_percent": 0.12866807786493517,
+    "allocation_reduction_percent": 0.0
+  },
+  "black76/itm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 495000.0,
+        "min": 494750.0,
+        "max": 495250.0
+      },
+      "allocated_words": {
+        "median": 910852.0,
+        "min": 910852.0,
+        "max": 910852.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 471093.5,
+        "min": 469812.0,
+        "max": 472375.0
+      },
+      "allocated_words": {
+        "median": 447023.0,
+        "min": 447023.0,
+        "max": 447023.0
+      }
+    },
+    "time_reduction_percent": 4.829595959595956,
+    "allocation_reduction_percent": 50.922542849991004
+  },
+  "displaced/atm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1203.5,
+        "min": 1188.0,
+        "max": 1219.0
+      },
+      "allocated_words": {
+        "median": 1052.0,
+        "min": 1052.0,
+        "max": 1052.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1156.0,
+        "min": 1156.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1052.0,
+        "min": 1052.0,
+        "max": 1052.0
+      }
+    },
+    "time_reduction_percent": 3.9468217698379715,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/atm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1359.5,
+        "min": 1344.0,
+        "max": 1375.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1281.0,
+        "min": 1281.0,
+        "max": 1281.0
+      },
+      "allocated_words": {
+        "median": 1044.0,
+        "min": 1044.0,
+        "max": 1044.0
+      }
+    },
+    "time_reduction_percent": 5.774181684442814,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/atm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 598312.5,
+        "min": 586125.0,
+        "max": 610500.0
+      },
+      "allocated_words": {
+        "median": 1095120.0,
+        "min": 1095120.0,
+        "max": 1095120.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 557468.5,
+        "min": 555062.0,
+        "max": 559875.0
+      },
+      "allocated_words": {
+        "median": 526986.0,
+        "min": 526986.0,
+        "max": 526986.0
+      }
+    },
+    "time_reduction_percent": 6.826532957275666,
+    "allocation_reduction_percent": 51.87869822485207
+  },
+  "displaced/atm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 9297.0,
+        "min": 9125.0,
+        "max": 9469.0
+      },
+      "allocated_words": {
+        "median": 7993.0,
+        "min": 7993.0,
+        "max": 7993.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 9156.0,
+        "min": 9156.0,
+        "max": 9156.0
+      },
+      "allocated_words": {
+        "median": 7993.0,
+        "min": 7993.0,
+        "max": 7993.0
+      }
+    },
+    "time_reduction_percent": 1.5166182639561154,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/atm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 608344.0,
+        "min": 597594.0,
+        "max": 619094.0
+      },
+      "allocated_words": {
+        "median": 1105208.0,
+        "min": 1105208.0,
+        "max": 1105208.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 567562.5,
+        "min": 567531.0,
+        "max": 567594.0
+      },
+      "allocated_words": {
+        "median": 537073.0,
+        "min": 537073.0,
+        "max": 537073.0
+      }
+    },
+    "time_reduction_percent": 6.703690675012819,
+    "allocation_reduction_percent": 51.40525584324398
+  },
+  "displaced/otm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1187.5,
+        "min": 1156.0,
+        "max": 1219.0
+      },
+      "allocated_words": {
+        "median": 1052.0,
+        "min": 1052.0,
+        "max": 1052.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1140.5,
+        "min": 1125.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1052.0,
+        "min": 1052.0,
+        "max": 1052.0
+      }
+    },
+    "time_reduction_percent": 3.9578947368421047,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/otm/price": {
+    "A": {
+      "median_ns": {
+        "median": 203.5,
+        "min": 188.0,
+        "max": 219.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 203.5,
+        "min": 188.0,
+        "max": 219.0
+      },
+      "allocated_words": {
+        "median": 81.0,
+        "min": 81.0,
+        "max": 81.0
+      }
+    },
+    "time_reduction_percent": 0.0,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/otm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 949109.5,
+        "min": 940375.0,
+        "max": 957844.0
+      },
+      "allocated_words": {
+        "median": 1762545.0,
+        "min": 1762545.0,
+        "max": 1762545.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 895172.0,
+        "min": 894094.0,
+        "max": 896250.0
+      },
+      "allocated_words": {
+        "median": 948932.0,
+        "min": 948932.0,
+        "max": 948932.0
+      }
+    },
+    "time_reduction_percent": 5.682958604881739,
+    "allocation_reduction_percent": 46.16126113092148
+  },
+  "displaced/otm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 8672.0,
+        "min": 8656.0,
+        "max": 8688.0
+      },
+      "allocated_words": {
+        "median": 8340.0,
+        "min": 8340.0,
+        "max": 8340.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 8656.0,
+        "min": 8656.0,
+        "max": 8656.0
+      },
+      "allocated_words": {
+        "median": 8340.0,
+        "min": 8340.0,
+        "max": 8340.0
+      }
+    },
+    "time_reduction_percent": 0.18450184501844769,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/otm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 948031.5,
+        "min": 943844.0,
+        "max": 952219.0
+      },
+      "allocated_words": {
+        "median": 1772016.0,
+        "min": 1772016.0,
+        "max": 1772016.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 908047.0,
+        "min": 907875.0,
+        "max": 908219.0
+      },
+      "allocated_words": {
+        "median": 958404.0,
+        "min": 958404.0,
+        "max": 958404.0
+      }
+    },
+    "time_reduction_percent": 4.217634118697533,
+    "allocation_reduction_percent": 45.91448384213235
+  },
+  "displaced/itm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 1140.5,
+        "min": 1125.0,
+        "max": 1156.0
+      },
+      "allocated_words": {
+        "median": 1051.0,
+        "min": 1051.0,
+        "max": 1051.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1125.0,
+        "min": 1125.0,
+        "max": 1125.0
+      },
+      "allocated_words": {
+        "median": 1051.0,
+        "min": 1051.0,
+        "max": 1051.0
+      }
+    },
+    "time_reduction_percent": 1.3590530469092532,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/itm/price": {
+    "A": {
+      "median_ns": {
+        "median": 1812.0,
+        "min": 1812.0,
+        "max": 1812.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 1796.5,
+        "min": 1781.0,
+        "max": 1812.0
+      },
+      "allocated_words": {
+        "median": 1533.0,
+        "min": 1533.0,
+        "max": 1533.0
+      }
+    },
+    "time_reduction_percent": 0.8554083885209729,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/itm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 449359.5,
+        "min": 448781.0,
+        "max": 449938.0
+      },
+      "allocated_words": {
+        "median": 841260.0,
+        "min": 841260.0,
+        "max": 841260.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 426937.5,
+        "min": 426844.0,
+        "max": 427031.0
+      },
+      "allocated_words": {
+        "median": 406438.0,
+        "min": 406438.0,
+        "max": 406438.0
+      }
+    },
+    "time_reduction_percent": 4.989768770883895,
+    "allocation_reduction_percent": 51.68699331954449
+  },
+  "displaced/itm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 12109.5,
+        "min": 12094.0,
+        "max": 12125.0
+      },
+      "allocated_words": {
+        "median": 11233.0,
+        "min": 11233.0,
+        "max": 11233.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 12000.0,
+        "min": 12000.0,
+        "max": 12000.0
+      },
+      "allocated_words": {
+        "median": 11233.0,
+        "min": 11233.0,
+        "max": 11233.0
+      }
+    },
+    "time_reduction_percent": 0.9042487303356883,
+    "allocation_reduction_percent": 0.0
+  },
+  "displaced/itm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 466468.5,
+        "min": 465812.0,
+        "max": 467125.0
+      },
+      "allocated_words": {
+        "median": 855077.0,
+        "min": 855077.0,
+        "max": 855077.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 441156.0,
+        "min": 441125.0,
+        "max": 441187.0
+      },
+      "allocated_words": {
+        "median": 420254.0,
+        "min": 420254.0,
+        "max": 420254.0
+      }
+    },
+    "time_reduction_percent": 5.4264114297106865,
+    "allocation_reduction_percent": 50.851911582231764
+  },
+  "bachelier/atm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 78.5,
+        "min": 63.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 94.0,
+        "min": 94.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "time_reduction_percent": -19.7452229299363,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/atm/price": {
+    "A": {
+      "median_ns": {
+        "median": 500.0,
+        "min": 500.0,
+        "max": 500.0
+      },
+      "allocated_words": {
+        "median": 401.0,
+        "min": 401.0,
+        "max": 401.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 500.0,
+        "min": 500.0,
+        "max": 500.0
+      },
+      "allocated_words": {
+        "median": 401.0,
+        "min": 401.0,
+        "max": 401.0
+      }
+    },
+    "time_reduction_percent": 0.0,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/atm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 490766.0,
+        "min": 490563.0,
+        "max": 490969.0
+      },
+      "allocated_words": {
+        "median": 910901.0,
+        "min": 910901.0,
+        "max": 910901.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 464828.0,
+        "min": 462781.0,
+        "max": 466875.0
+      },
+      "allocated_words": {
+        "median": 439124.0,
+        "min": 439124.0,
+        "max": 439124.0
+      }
+    },
+    "time_reduction_percent": 5.28520720669321,
+    "allocation_reduction_percent": 51.79234625936297
+  },
+  "bachelier/atm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 5563.0,
+        "min": 5563.0,
+        "max": 5563.0
+      },
+      "allocated_words": {
+        "median": 4848.0,
+        "min": 4848.0,
+        "max": 4848.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 5594.0,
+        "min": 5594.0,
+        "max": 5594.0
+      },
+      "allocated_words": {
+        "median": 4848.0,
+        "min": 4848.0,
+        "max": 4848.0
+      }
+    },
+    "time_reduction_percent": -0.5572532806039865,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/atm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 496969.0,
+        "min": 496750.0,
+        "max": 497188.0
+      },
+      "allocated_words": {
+        "median": 916226.0,
+        "min": 916226.0,
+        "max": 916226.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 471297.0,
+        "min": 470688.0,
+        "max": 471906.0
+      },
+      "allocated_words": {
+        "median": 444448.0,
+        "min": 444448.0,
+        "max": 444448.0
+      }
+    },
+    "time_reduction_percent": 5.165714561672862,
+    "allocation_reduction_percent": 51.49144425065432
+  },
+  "bachelier/otm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 78.5,
+        "min": 63.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 94.0,
+        "min": 94.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "time_reduction_percent": -19.7452229299363,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/otm/price": {
+    "A": {
+      "median_ns": {
+        "median": 109.5,
+        "min": 94.0,
+        "max": 125.0
+      },
+      "allocated_words": {
+        "median": 57.0,
+        "min": 57.0,
+        "max": 57.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 94.0,
+        "min": 94.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 57.0,
+        "min": 57.0,
+        "max": 57.0
+      }
+    },
+    "time_reduction_percent": 14.155251141552515,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/otm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 577250.0,
+        "min": 569906.0,
+        "max": 584594.0
+      },
+      "allocated_words": {
+        "median": 1074878.0,
+        "min": 1074878.0,
+        "max": 1074878.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 549359.0,
+        "min": 549156.0,
+        "max": 549562.0
+      },
+      "allocated_words": {
+        "median": 572824.0,
+        "min": 572824.0,
+        "max": 572824.0
+      }
+    },
+    "time_reduction_percent": 4.831702035513208,
+    "allocation_reduction_percent": 46.707998489130865
+  },
+  "bachelier/otm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 5875.0,
+        "min": 5875.0,
+        "max": 5875.0
+      },
+      "allocated_words": {
+        "median": 5620.0,
+        "min": 5620.0,
+        "max": 5620.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 5875.0,
+        "min": 5875.0,
+        "max": 5875.0
+      },
+      "allocated_words": {
+        "median": 5620.0,
+        "min": 5620.0,
+        "max": 5620.0
+      }
+    },
+    "time_reduction_percent": 0.0,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/otm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 580281.5,
+        "min": 575875.0,
+        "max": 584688.0
+      },
+      "allocated_words": {
+        "median": 1080631.0,
+        "min": 1080631.0,
+        "max": 1080631.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 555265.5,
+        "min": 554687.0,
+        "max": 555844.0
+      },
+      "allocated_words": {
+        "median": 578577.0,
+        "min": 578577.0,
+        "max": 578577.0
+      }
+    },
+    "time_reduction_percent": 4.311011121326458,
+    "allocation_reduction_percent": 46.45933718355294
+  },
+  "bachelier/itm/admission": {
+    "A": {
+      "median_ns": {
+        "median": 94.0,
+        "min": 94.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 78.5,
+        "min": 63.0,
+        "max": 94.0
+      },
+      "allocated_words": {
+        "median": 77.0,
+        "min": 77.0,
+        "max": 77.0
+      }
+    },
+    "time_reduction_percent": 16.48936170212766,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/itm/price": {
+    "A": {
+      "median_ns": {
+        "median": 781.0,
+        "min": 781.0,
+        "max": 781.0
+      },
+      "allocated_words": {
+        "median": 661.0,
+        "min": 661.0,
+        "max": 661.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 781.0,
+        "min": 781.0,
+        "max": 781.0
+      },
+      "allocated_words": {
+        "median": 661.0,
+        "min": 661.0,
+        "max": 661.0
+      }
+    },
+    "time_reduction_percent": 0.0,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/itm/iv": {
+    "A": {
+      "median_ns": {
+        "median": 346219.0,
+        "min": 343469.0,
+        "max": 348969.0
+      },
+      "allocated_words": {
+        "median": 636966.0,
+        "min": 636966.0,
+        "max": 636966.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 326312.5,
+        "min": 326281.0,
+        "max": 326344.0
+      },
+      "allocated_words": {
+        "median": 308039.0,
+        "min": 308039.0,
+        "max": 308039.0
+      }
+    },
+    "time_reduction_percent": 5.749684448282732,
+    "allocation_reduction_percent": 51.63964795609185
+  },
+  "bachelier/itm/greeks": {
+    "A": {
+      "median_ns": {
+        "median": 7687.5,
+        "min": 7656.0,
+        "max": 7719.0
+      },
+      "allocated_words": {
+        "median": 7150.0,
+        "min": 7150.0,
+        "max": 7150.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 7640.5,
+        "min": 7625.0,
+        "max": 7656.0
+      },
+      "allocated_words": {
+        "median": 7150.0,
+        "min": 7150.0,
+        "max": 7150.0
+      }
+    },
+    "time_reduction_percent": 0.611382113821135,
+    "allocation_reduction_percent": 0.0
+  },
+  "bachelier/itm/end_to_end": {
+    "A": {
+      "median_ns": {
+        "median": 360312.5,
+        "min": 351344.0,
+        "max": 369281.0
+      },
+      "allocated_words": {
+        "median": 644853.0,
+        "min": 644853.0,
+        "max": 644853.0
+      }
+    },
+    "B": {
+      "median_ns": {
+        "median": 334406.5,
+        "min": 333625.0,
+        "max": 335188.0
+      },
+      "allocated_words": {
+        "median": 315926.0,
+        "min": 315926.0,
+        "max": 315926.0
+      }
+    },
+    "time_reduction_percent": 7.189869904596701,
+    "allocation_reduction_percent": 51.00805920108924
+  }
+}
