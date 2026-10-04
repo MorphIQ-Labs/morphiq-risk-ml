@@ -28,14 +28,7 @@ let failures = ref []
 let fail fmt = Printf.ksprintf (fun m -> failures := m :: !failures) fmt
 let sides = [ Side.Call; Side.Put ]
 let side_name = function Side.Call -> "call" | Side.Put -> "put"
-
-let ulps a b =
-  let o x =
-    let b = Int64.bits_of_float x in
-    if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int)
-    else b
-  in
-  Int64.to_float (Int64.abs (Int64.sub (o a) (o b)))
+let ulps = Float_score.ulps
 
 (* 1. Displaced Black and Black-76 on representable sums. Dyadic values keep
    F + d and K + d exact. *)
@@ -73,7 +66,10 @@ let translation () =
               let p1 = Black.Displaced.price dsp side v
               and p2 = Black.Black76.price b76 side v in
               incr n;
-              if Int64.bits_of_float p1 <> Int64.bits_of_float p2 then
+              if
+                (not (Float.is_finite p1 && Float.is_finite p2))
+                || Int64.bits_of_float p1 <> Int64.bits_of_float p2
+              then
                 fail "translation price %s F=%h K=%h d=%h: %h vs %h"
                   (side_name side) f k d p1 p2;
               let g1 = Black.Displaced.greeks dsp side v
@@ -295,7 +291,7 @@ let close name what ~value ~h got want =
   let tolerance =
     (1e-7 *. Float.abs want) +. (256.0 *. epsilon_float *. Float.abs value /. h)
   in
-  if not (Float.abs (got -. want) <= tolerance) then
+  if not (Bounds.within ~error:(Float.abs (got -. want)) ~bound:tolerance) then
     fail "%s %s: analytic %h, difference %h" name what got want
 
 let self_consistency () =
@@ -315,6 +311,11 @@ let self_consistency () =
                   incr n;
                   let p = m.price side sigma in
                   (match m.implied side p with
+                  | Some s'
+                    when not
+                           (Float.is_finite s' && Float.is_finite p
+                           && Float.is_finite (m.price side s')) ->
+                      fail "%s IV consistency received nonfinite values" m.name
                   | Some s' when sigma = 0.0 ->
                       let u = ulps (m.price side s') p in
                       if s' <> 0.0 && u > 2.0 then
@@ -328,8 +329,11 @@ let self_consistency () =
                          (docs/error-analysis.md §6), or repricing the quote. *)
                       let attainable = 4.0 *. m.attainable sigma in
                       if
-                        u > 2.0 && us > 2.0
-                        && Float.abs (s' -. sigma) > attainable *. sigma
+                        not
+                          (u <= 2.0 || us <= 2.0
+                          || Bounds.within
+                               ~error:(Float.abs (s' -. sigma))
+                               ~bound:(attainable *. sigma))
                       then
                         fail
                           "%s %s T=%g σ=%g: IV %h is %.0f ulp from σ and \

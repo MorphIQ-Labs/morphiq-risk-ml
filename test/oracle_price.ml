@@ -5,13 +5,7 @@
 
 open Morphiq_risk
 
-let ordered f =
-  let b = Int64.bits_of_float f in
-  if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int) else b
-
-let ulps a b =
-  if Float.is_nan a || Float.is_nan b then Float.infinity
-  else Int64.to_float (Int64.abs (Int64.sub (ordered a) (ordered b)))
+let ulps = Float_score.ulps
 
 (* FerroRisk SPEC §7.1 (#440): (worst ULP, worst EPSILON * scale). *)
 let ferro_budget family region =
@@ -125,175 +119,167 @@ let () =
   let stats = Hashtbl.create 16 in
   let certificates = ref 0 and domains = Hashtbl.create 8 in
   let failures = ref [] in
-  let ic = open_in path in
-  (try
-     while true do
-       let line = input_line ic in
-       if line <> "" && line.[0] <> '#' then
-         (* This project's oracles carry a family column (grid, cancel,
+  List.iter
+    (fun line ->
+      if line <> "" && line.[0] <> '#' then
+        (* This project's oracles carry a family column (grid, cancel,
             random); FerroRisk's #440 rows do not. *)
-         let line =
-           match String.split_on_char ' ' line with
-           | [ _; _; _; _; _; _; _; _; _; _; _; _ ] as fields -> (
-               match fields with
-               | m :: sd :: rg :: fam :: rest ->
-                   source := fam;
-                   String.concat " " (m :: sd :: rg :: rest)
-               | _ -> line)
-           | _ ->
-               source := "-";
-               line
-         in
-         Scanf.sscanf line "%s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"
-           (fun model side region s k t r q sigma shift reference ->
-             let f = Int64.float_of_bits in
-             let s = f s
-             and k = f k
-             and t = f t
-             and r = f r
-             and q = f q
-             and sigma = f sigma
-             and shift = f shift
-             and reference = f reference in
-             let family =
-               if model = "bachelier" then "bachelier" else "black"
-             in
-             let got =
-               try price model (side_of side) ~s ~k ~t ~r ~q ~sigma ~shift
-               with Failure _ -> Float.nan
-             in
-             Bounds.trace_float line got;
-             let derived =
-               if family = "black" && region = "zero_variance" then
-                 Some
-                   ((0.5 *. (Bounds.ulp got +. Bounds.ulp reference))
-                   +. Bounds.intrinsic_error model ~s ~k ~t ~r ~q ~shift
-                        ~reference)
-               else None
-             in
-             let u = ulps got reference in
-             let sc =
-               Float.abs (got -. reference)
-               /. (epsilon_float *. scale model ~s ~k ~t ~r ~q ~sigma ~shift)
-             in
-             let sc = if Float.is_nan sc then Float.infinity else sc in
-             let _, scale_budget = ferro_budget family region in
-             let ulp_budget = Bounds.price_ulp_budget family region in
-             let key = family ^ " " ^ region in
-             let st =
-               match Hashtbl.find_opt stats key with
-               | Some st -> st
-               | None ->
-                   let st =
-                     {
-                       n = 0;
-                       worst_ulp = 0.0;
-                       worst_scale = 0.0;
-                       fails = 0;
-                       errors = [];
-                       worst_row = "";
-                     }
-                   in
-                   Hashtbl.add stats key st;
-                   st
-             in
-             st.n <- st.n + 1;
-             (try
-                let side = side_of side in
-                let b =
-                  if t = 0.0 || sigma = 0.0 then
-                    Certified.boundary model ~side ~s ~k ~t ~r ~q ~sigma ~shift
-                      "price"
-                  else if model = "bachelier" then
-                    List.assoc "price"
-                      (Certified.bachelier ~only_price:true ~side ~s ~k ~t ~r
-                         ~sigma ())
-                  else
-                    Certified.black model ~side ~s ~k ~t ~r ~q ~sigma ~shift
-                      "price"
-                in
-                if
-                  (not (Certified.replay_matches got b))
-                  || not (Certified.check ~got ~reference b)
-                then (
-                  st.fails <- st.fails + 1;
-                  if List.length !failures < 25 then
-                    failures :=
-                      Printf.sprintf
-                        "derived price certificate: served %h replay %h ref %h \
-                         radius %.4g | %s"
-                        got b.v reference b.e line
-                      :: !failures)
-                else incr certificates
-              with Certified.Unsupported why ->
-                st.fails <- st.fails + 1;
-                if List.length !failures < 25 then
-                  failures :=
-                    ("derived certificate unavailable: " ^ why ^ " | " ^ line)
-                    :: !failures;
-                let n =
-                  Option.value ~default:0 (Hashtbl.find_opt domains why)
-                in
-                if Array.length Sys.argv > 2 && n < 3 then
-                  Printf.printf "domain %s | %s\n" why line;
-                if Array.length Sys.argv > 2 && n = 0 then
-                  Printf.printf "%s\n" (Printexc.get_backtrace ());
-                Hashtbl.replace domains why (1 + n));
-             let fn, ff =
-               Option.value ~default:(0, 0) (Hashtbl.find_opt families !source)
-             in
-             Hashtbl.replace families !source
-               ( fn + 1,
-                 ff
-                 +
-                 match derived with
-                 | Some bound ->
-                     if
-                       Bounds.within
-                         ~error:(Float.abs (got -. reference))
-                         ~bound
-                     then 0
-                     else 1
-                 | None -> if u > ulp_budget || sc > scale_budget then 1 else 0
-               );
-             st.errors <- u :: st.errors;
-             if u > st.worst_ulp then (
-               st.worst_ulp <- u;
-               st.worst_row <- line);
-             if sc > st.worst_scale then st.worst_scale <- sc;
-             (match derived with
-             | Some bound ->
-                 (* The excess over the two half-ULP roundings, as a fraction
-                    of E: how much of the intrinsic's analytical error the
-                    served value uses. *)
-                 let rounding =
-                   0.5 *. (Bounds.ulp got +. Bounds.ulp reference)
-                 in
-                 let e = bound -. rounding in
-                 if e > 0.0 then
-                   derived_worst :=
-                     Float.max !derived_worst
-                       ((Float.abs (got -. reference) -. rounding) /. e)
-             | None -> ());
-             let failed =
-               match derived with
-               | Some bound ->
-                   not
-                     (Bounds.within
-                        ~error:(Float.abs (got -. reference))
-                        ~bound)
-               | None -> u > ulp_budget || sc > scale_budget
-             in
-             if failed then (
+        let line =
+          match String.split_on_char ' ' line with
+          | [ _; _; _; _; _; _; _; _; _; _; _; _ ] as fields -> (
+              match fields with
+              | m :: sd :: rg :: fam :: rest ->
+                  source := fam;
+                  String.concat " " (m :: sd :: rg :: rest)
+              | _ -> line)
+          | _ ->
+              source := "-";
+              line
+        in
+        Scanf.sscanf line "%s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"
+          (fun model side region s k t r q sigma shift reference ->
+            let f = Int64.float_of_bits in
+            let s = f s
+            and k = f k
+            and t = f t
+            and r = f r
+            and q = f q
+            and sigma = f sigma
+            and shift = f shift
+            and reference = f reference in
+            let family = if model = "bachelier" then "bachelier" else "black" in
+            let got =
+              try price model (side_of side) ~s ~k ~t ~r ~q ~sigma ~shift
+              with Failure _ -> Float.nan
+            in
+            Bounds.trace_float line got;
+            let derived =
+              if family = "black" && region = "zero_variance" then
+                Some
+                  ((0.5 *. (Bounds.ulp got +. Bounds.ulp reference))
+                  +. Bounds.intrinsic_error model ~s ~k ~t ~r ~q ~shift
+                       ~reference)
+              else None
+            in
+            let u = ulps got reference in
+            let sc =
+              Float.abs (got -. reference)
+              /. (epsilon_float *. scale model ~s ~k ~t ~r ~q ~sigma ~shift)
+            in
+            let sc = if Float.is_nan sc then Float.infinity else sc in
+            let _, scale_budget = ferro_budget family region in
+            let ulp_budget = Bounds.price_ulp_budget family region in
+            let key = family ^ " " ^ region in
+            let st =
+              match Hashtbl.find_opt stats key with
+              | Some st -> st
+              | None ->
+                  let st =
+                    {
+                      n = 0;
+                      worst_ulp = 0.0;
+                      worst_scale = 0.0;
+                      fails = 0;
+                      errors = [];
+                      worst_row = "";
+                    }
+                  in
+                  Hashtbl.add stats key st;
+                  st
+            in
+            st.n <- st.n + 1;
+            (try
+               let side = side_of side in
+               let b =
+                 if t = 0.0 || sigma = 0.0 then
+                   Certified.boundary model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                     "price"
+                 else if model = "bachelier" then
+                   List.assoc "price"
+                     (Certified.bachelier ~only_price:true ~side ~s ~k ~t ~r
+                        ~sigma ())
+                 else
+                   Certified.black model ~side ~s ~k ~t ~r ~q ~sigma ~shift
+                     "price"
+               in
+               if
+                 (not (Certified.replay_matches got b))
+                 || not (Certified.check ~got ~reference b)
+               then (
+                 st.fails <- st.fails + 1;
+                 if List.length !failures < 25 then
+                   failures :=
+                     Printf.sprintf
+                       "derived price certificate: served %h replay %h ref %h \
+                        radius %.4g | %s"
+                       got b.v reference b.e line
+                     :: !failures)
+               else incr certificates
+             with Certified.Unsupported why ->
                st.fails <- st.fails + 1;
                if List.length !failures < 25 then
                  failures :=
-                   Printf.sprintf
-                     "%s %s %s: got %h ref %h (%.0f ulp, %.2f eps*scale) | %s"
-                     model side region got reference u sc line
-                   :: !failures))
-     done
-   with End_of_file -> close_in ic);
+                   ("derived certificate unavailable: " ^ why ^ " | " ^ line)
+                   :: !failures;
+               let n = Option.value ~default:0 (Hashtbl.find_opt domains why) in
+               if Array.length Sys.argv > 2 && n < 3 then
+                 Printf.printf "domain %s | %s\n" why line;
+               if Array.length Sys.argv > 2 && n = 0 then
+                 Printf.printf "%s\n" (Printexc.get_backtrace ());
+               Hashtbl.replace domains why (1 + n));
+            let fn, ff =
+              Option.value ~default:(0, 0) (Hashtbl.find_opt families !source)
+            in
+            Hashtbl.replace families !source
+              ( fn + 1,
+                ff
+                +
+                match derived with
+                | Some bound ->
+                    if
+                      Bounds.within ~error:(Float.abs (got -. reference)) ~bound
+                    then 0
+                    else 1
+                | None -> if u > ulp_budget || sc > scale_budget then 1 else 0
+              );
+            st.errors <- u :: st.errors;
+            if u > st.worst_ulp then (
+              st.worst_ulp <- u;
+              st.worst_row <- line);
+            if sc > st.worst_scale then st.worst_scale <- sc;
+            (match derived with
+            | Some bound ->
+                (* The excess over the two half-ULP roundings, as a fraction
+                    of E: how much of the intrinsic's analytical error the
+                    served value uses. *)
+                let rounding =
+                  0.5 *. (Bounds.ulp got +. Bounds.ulp reference)
+                in
+                let e = bound -. rounding in
+                if e > 0.0 then
+                  derived_worst :=
+                    Float.max !derived_worst
+                      ((Float.abs (got -. reference) -. rounding) /. e)
+            | None -> ());
+            let failed =
+              match derived with
+              | Some bound ->
+                  not
+                    (Bounds.within ~error:(Float.abs (got -. reference)) ~bound)
+              | None -> u > ulp_budget || sc > scale_budget
+            in
+            if failed then (
+              st.fails <- st.fails + 1;
+              if List.length !failures < 25 then
+                failures :=
+                  Printf.sprintf
+                    "%s %s %s: got %h ref %h (%.0f ulp, %.2f eps*scale) | %s"
+                    model side region got reference u sc line
+                  :: !failures)))
+    (Oracle_fixture.lines ~columns:[ 11; 12 ]
+       ~names:[ "european"; "displaced" ]
+       ~external_reference:(Array.exists (( = ) "--external") Sys.argv)
+       path);
   let median l =
     let a = Array.of_list l in
     Array.sort compare a;

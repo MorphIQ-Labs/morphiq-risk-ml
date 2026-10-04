@@ -32,7 +32,7 @@ let check model side ~s ~t ~r ~shift expected =
   incr count
 
 let () =
-  In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+  Oracle_fixture.lines ~columns:[ 7 ] ~names:[ "boundary_greeks" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then
            Scanf.sscanf line "%s %s %Lx %Lx %Lx %Lx %Lx"

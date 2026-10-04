@@ -7,7 +7,8 @@ assurance tooling: python-flint==0.9.0, no production dependency.
 """
 import argparse
 from collections import Counter
-import gzip
+import io
+from fixture_catalog import verified_text
 import hashlib
 import importlib.metadata
 import json
@@ -72,12 +73,16 @@ def main():
     counts, precisions = Counter(), Counter()
     unresolved = []
     shifted_root_rejected = False
-    with gzip.open(args.fixture, "rt") as stream:
+    total_rows = 0
+    excluded = Counter()
+    with io.StringIO(verified_text(args.fixture, names=('iv',))) as stream:
         for index, line in enumerate(stream, 1):
             if not line.strip() or line.startswith("#"):
                 continue
+            total_rows += 1
             fields = line.split()
             if fields[2] != "root":
+                excluded[fields[2]] += 1
                 continue
             model, side = fields[:2]
             inputs = [word(x) for x in fields[4:12]]
@@ -102,13 +107,15 @@ def main():
         platform=platform.platform(),
         fixture_sha256=hashlib.sha256(args.fixture.read_bytes()).hexdigest(),
         script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        total_rows=total_rows, excluded_nonroot=dict(excluded),
+        input_gate_sha256=hashlib.sha256(Path(__file__).with_name("fixture_catalog.py").read_bytes()).hexdigest(),
         root_rows=dict(counts), working_precision_counts=dict(precisions),
         unresolved=unresolved,
         adjacent_wrong_root_control=shifted_root_rejected,
         scope="Independent interval audit of reference rounding cells, not an independent human review or a proof of all OCaml executions.")
     args.output.write_text(json.dumps(report, indent=2)+"\n")
     print(json.dumps(dict(roots=sum(counts.values()), precisions=dict(precisions), unresolved=len(unresolved))))
-    if not counts or unresolved:
+    if not counts or unresolved or not shifted_root_rejected:
         raise SystemExit(1)
 
 

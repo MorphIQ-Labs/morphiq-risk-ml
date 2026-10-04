@@ -10,14 +10,7 @@
 
 open Morphiq_risk.Internal
 
-let ordered x =
-  let b = Int64.bits_of_float x in
-  if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int) else b
-
-let ulps a b =
-  if Float.is_nan a && Float.is_nan b then 0.0
-  else if Float.is_nan a || Float.is_nan b then Float.infinity
-  else Int64.to_float (Int64.abs (Int64.sub (ordered a) (ordered b)))
+let ulps = Float_score.ulps
 
 let eval = function
   | "exp" -> Elementary.exp
@@ -35,6 +28,7 @@ let direct_log1p x =
 
 type stat = {
   mutable n : int;
+  mutable classified : int;
   mutable worst : float;  (** Integer ULP distance to the reference. *)
   mutable at : float;
   mutable worst_fraction : float;  (** |error| / ulp, against the exact value. *)
@@ -44,65 +38,78 @@ let () =
   let stats = Hashtbl.create 4 and failures = ref [] in
   let reduced_worst = ref 0.0 in
   let fail s = if List.length !failures < 20 then failures := s :: !failures in
-  let ic = open_in Sys.argv.(1) in
-  (try
-     while true do
-       let line = input_line ic in
-       if line <> "" && line.[0] <> '#' then
-         Scanf.sscanf line "%s %Lx %Lx %Lx" (fun fn xb rb eb ->
-             let x = Int64.float_of_bits xb
-             and r = Int64.float_of_bits rb
-             and residual = Int64.float_of_bits eb in
-             let got = eval fn x in
-             let u = ulps got r in
-             let st =
-               match Hashtbl.find_opt stats fn with
-               | Some st -> st
-               | None ->
-                   let st =
-                     { n = 0; worst = 0.0; at = 0.0; worst_fraction = 0.0 }
-                   in
-                   Hashtbl.add stats fn st;
-                   st
-             in
-             st.n <- st.n + 1;
-             if u > st.worst then (
-               st.worst <- u;
-               st.at <- x);
-             (* got - r is exact for neighbours (Sterbenz); the residual
+  List.iter
+    (fun line ->
+      if line <> "" && line.[0] <> '#' then
+        Scanf.sscanf line "%s %Lx %Lx %Lx" (fun fn xb rb eb ->
+            let x = Int64.float_of_bits xb
+            and r = Int64.float_of_bits rb
+            and residual = Int64.float_of_bits eb in
+            let got = eval fn x in
+            let u = ulps got r in
+            let st =
+              match Hashtbl.find_opt stats fn with
+              | Some st -> st
+              | None ->
+                  let st =
+                    {
+                      n = 0;
+                      classified = 0;
+                      worst = 0.0;
+                      at = 0.0;
+                      worst_fraction = 0.0;
+                    }
+                  in
+                  Hashtbl.add stats fn st;
+                  st
+            in
+            st.n <- st.n + 1;
+            if not (Float.is_finite r) then st.classified <- st.classified + 1;
+            if Float.is_finite r && u > st.worst then (
+              st.worst <- u;
+              st.at <- x);
+            (* got - r is exact for neighbours (Sterbenz); the residual
                 then places the exact value. *)
-             let error =
-               if Float.is_finite r && Float.is_finite got then
-                 Float.abs (got -. r -. residual)
-               else Float.infinity
-             in
-             let unit = Bounds.ulp r in
-             if Float.is_finite r && r <> 0.0 then
-               st.worst_fraction <- Float.max st.worst_fraction (error /. unit);
-             if fn = "log1p" && direct_log1p x then (
-               let exact = r +. residual in
-               let bound =
-                 (0.5 *. Bounds.ulp got)
-                 +. (Bounds.log1p_tail *. Bounds.u *. Float.abs exact)
-               in
-               reduced_worst :=
-                 Float.max !reduced_worst (error /. Bounds.ulp got);
-               if not (error <= bound) then
-                 fail
-                   (Printf.sprintf
-                      "log1p(%h) = %h: %.4f ULP from exact, bound %.4f" x got
-                      (error /. unit) (bound /. unit)))
-             else if u > 1.0 then
-               fail
-                 (Printf.sprintf "%s(%h) = %h, reference %h (%.0f ulp)" fn x got
-                    r u))
-     done
-   with End_of_file -> close_in ic);
+            let error =
+              if Float.is_finite r && Float.is_finite got then
+                Float.abs (got -. r -. residual)
+              else Float.infinity
+            in
+            let unit = Bounds.ulp r in
+            if Float.is_finite r && r <> 0.0 then
+              st.worst_fraction <- Float.max st.worst_fraction (error /. unit);
+            if fn = "log1p" && direct_log1p x then (
+              let exact = r +. residual in
+              let bound =
+                (0.5 *. Bounds.ulp got)
+                +. (Bounds.log1p_tail *. Bounds.u *. Float.abs exact)
+              in
+              reduced_worst := Float.max !reduced_worst (error /. Bounds.ulp got);
+              if not (error <= bound) then
+                fail
+                  (Printf.sprintf
+                     "log1p(%h) = %h: %.4f ULP from exact, bound %.4f" x got
+                     (error /. unit) (bound /. unit)))
+            else if
+              not
+                (if Float.is_finite r then Float_score.within ~budget:1.0 got r
+                 else if Float.is_nan r then Float.is_nan got
+                 else Int64.bits_of_float got = Int64.bits_of_float r)
+            then
+              fail
+                (Printf.sprintf "%s(%h) = %h, reference %h (%.0f ulp)" fn x got
+                   r u)))
+    (Oracle_fixture.lines ~columns:[ 4 ] ~names:[ "elementary" ]
+       ~external_reference:(Array.exists (( = ) "--external") Sys.argv)
+       Sys.argv.(1));
   Hashtbl.iter
     (fun fn st ->
       Printf.printf
         "%-6s %7d rows, worst %.0f ulp at %h, worst %.4f ulp from exact\n" fn
-        st.n st.worst st.at st.worst_fraction)
+        st.n st.worst st.at st.worst_fraction;
+      Printf.printf
+        "  %d nonfinite class checks (excluded from ULP statistics)\n"
+        st.classified)
     stats;
   Printf.printf
     "log1p reduced path: worst %.4f ulp from exact (bound 0.5 + 0.14)\n"

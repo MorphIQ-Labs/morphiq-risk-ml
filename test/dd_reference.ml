@@ -24,7 +24,7 @@ let () =
   | exception Certified.Unsupported _ -> ());
   let rows = ref 0 and nonzero_low = ref 0 and failures = ref 0 in
   let worst = Hashtbl.create 5 in
-  In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+  Oracle_fixture.lines ~columns:[ 9 ] ~names:[ "dd" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then
            Scanf.sscanf line "%s %Lx %Lx %Lx %Lx %d %Lx %Lx %Lx"

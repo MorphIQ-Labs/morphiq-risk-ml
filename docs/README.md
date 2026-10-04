@@ -19,6 +19,7 @@ been retired; it remains in Git history.
 ## Numerical methods and verification
 
 - [Error analysis](error-analysis.md): derivations and the current certification scope.
+- [Oracle assurance and reduction](oracle-assurance.md): finite scoring, input failure controls and independently resolved counterexamples.
 - [Oracles](oracles.md), [midpoint rounding](oracle-midpoint-rounding.md), and [mutation policy](mutation-policy.md).
 - [Runtime enclosures](runtime-enclosures.md), [model enclosures](model-enclosures.md), and [Greek enclosures](production-greek-enclosures.md).
 - [Certified IV](certified-iv.md), [adaptive certification](adaptive-certification.md), and [zero-volatility Greeks](zero-volatility-greeks.md).

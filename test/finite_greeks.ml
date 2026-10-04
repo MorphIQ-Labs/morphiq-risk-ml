@@ -8,17 +8,7 @@ let get = function
   | Ok x -> x
   | Error _ -> failwith "unexpected admission refusal"
 
-let ordered x =
-  let b = Int64.bits_of_float x in
-  if b < 0L then Int64.neg (Int64.logand b Int64.max_int) else b
-
-let ulps a b =
-  if not (Float.is_finite a && Float.is_finite b) then Float.infinity
-  else if Float.sign_bit a <> Float.sign_bit b then
-    Float.abs (Int64.to_float (ordered a))
-    +. Float.abs (Int64.to_float (ordered b))
-  else Int64.to_float (Int64.abs (Int64.sub (ordered a) (ordered b)))
-
+let ulps = Float_score.ulps
 let count = ref 0
 let refused = ref 0
 let checked = ref 0
@@ -30,7 +20,7 @@ let () =
   require "ULP scorer rejects NaN" (ulps Float.nan 0. = Float.infinity);
   require "ULP scorer keeps one-word spacing" (ulps 1. (Float.succ 1.) = 1.);
   require "ULP scorer identifies signed zeros" (ulps 0. (-0.) = 0.);
-  In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+  Oracle_fixture.lines ~columns:[ 13 ] ~names:[ "finite_greeks" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then
            Scanf.sscanf line "%s %s %s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"

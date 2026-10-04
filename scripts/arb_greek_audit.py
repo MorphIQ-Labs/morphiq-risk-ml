@@ -7,7 +7,8 @@ Reference uncertainty is the fixture's normalized three-word 2^-158 allowance.
 """
 import argparse
 from collections import Counter
-import gzip
+import io
+from fixture_catalog import verified_text
 import hashlib
 import importlib.metadata
 import json
@@ -83,7 +84,7 @@ def main():
     counts,precisions=Counter(),Counter()
     unresolved=[]
     wrong_control=False
-    with gzip.open(args.fixture,'rt') as stream:
+    with io.StringIO(verified_text(args.fixture, names=('greek_bits',))) as stream:
         for line_number,line in enumerate(stream,1):
             if not line.strip() or line.startswith('#'): continue
             model,side,name,*f=line.split()
@@ -100,7 +101,7 @@ def main():
     report=dict(method='Order-3 Arb formal price series; factorial-aware directional coefficients and polarization for mixed Greeks',
                 documentation='https://python-flint.readthedocs.io/en/stable/arb_series.html',
                 python_flint=importlib.metadata.version('python-flint'),flint=__FLINT_VERSION__,
-                source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [args.fixture,Path(__file__)]},
+                source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [args.fixture,Path(__file__),Path(__file__).with_name('fixture_catalog.py')]},
                 rows=dict(counts),precision_counts=dict(precisions),unresolved=unresolved,
                 wrong_reference_rejected=wrong_control,
                 scope='Independent interval differentiation of price, not an independent human review or a universal OCaml proof.')

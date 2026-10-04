@@ -7,7 +7,8 @@ are reported as excluded from the analytic series scope, not passed.
 """
 import argparse
 from collections import Counter
-import gzip
+import io
+from fixture_catalog import verified_text
 import hashlib
 import importlib.metadata
 import json
@@ -105,16 +106,23 @@ def classify_positive_tail(bracket,reference):
 def controls():
     with ctx.workprec(256):
         midpoint=arb(1)+arb(2)**-53
-        assert classify(midpoint,1.)=='certified'
-        assert classify(midpoint,math.nextafter(1.,math.inf))=='wrong'
-        assert classify(arb(2)**-1075,0.)=='certified'
-        assert classify(arb(2)**-1075,2.**-1074)=='wrong'
-        assert classify(arb(1,arb(2)**-40),1.)=='unresolved'
+        if not (classify(midpoint,1.)=='certified'):
+            raise ArithmeticError('rounding/uncertainty control failed')
+        if not (classify(midpoint,math.nextafter(1.,math.inf))=='wrong'):
+            raise ArithmeticError('rounding/uncertainty control failed')
+        if not (classify(arb(2)**-1075,0.)=='certified'):
+            raise ArithmeticError('rounding/uncertainty control failed')
+        if not (classify(arb(2)**-1075,2.**-1074)=='wrong'):
+            raise ArithmeticError('rounding/uncertainty control failed')
+        if not (classify(arb(1,arb(2)**-40),1.)=='unresolved'):
+            raise ArithmeticError('rounding/uncertainty control failed')
         inputs=[math.nextafter(1.,math.inf),2.**-53,1.,0.,0.,1e-4,0.]
         for model in ('bsm','black76','displaced','bachelier'):
             bracket=positive_tail(model,'call',inputs)
-            assert classify_positive_tail(bracket,1.)=='wrong'
-            assert classify_positive_tail(bracket,math.nextafter(1.,math.inf))=='certified'
+            if not (classify_positive_tail(bracket,1.)=='wrong'):
+                raise ArithmeticError('rounding/uncertainty control failed')
+            if not (classify_positive_tail(bracket,math.nextafter(1.,math.inf))=='certified'):
+                raise ArithmeticError('rounding/uncertainty control failed')
 
 
 def audit(evaluate,reference,tail=None):
@@ -143,7 +151,7 @@ def main():
     started=time.monotonic()
     for path in paths:
         counts,precisions,exclusions=Counter(),Counter(),Counter()
-        with gzip.open(path,'rt') as stream:
+        with io.StringIO(verified_text(path, names=('european', 'displaced', 'greeks'))) as stream:
             for index,line in enumerate(stream,1):
                 if not line.strip() or line.startswith('#'): continue
                 f=line.split();model,side=f[:2]
@@ -173,7 +181,7 @@ def main():
             raise ArithmeticError('incomplete outcome accounting')
         reports[path.name]=dict(counts=counts,precision_counts=precisions,exclusions=exclusions)
         print(path.name,json.dumps(reports[path.name]),flush=True)
-    sources=paths+[Path(__file__),Path('scripts/arb_greek_audit.py'),Path('scripts/arb_iv_audit.py')]
+    sources=paths+[Path(__file__).with_name('fixture_catalog.py'),Path(__file__),Path('scripts/arb_greek_audit.py'),Path('scripts/arb_iv_audit.py')]
     report=dict(method='Independent Arb exact-reference rounding cells; erfc prices and formal price-series Greeks',
                 python_flint=importlib.metadata.version('python-flint'),flint=__FLINT_VERSION__,
                 source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},

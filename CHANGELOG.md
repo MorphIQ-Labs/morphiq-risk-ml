@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Oracle assurance (#55)
+
+- Replace six signed-overflow ULP scorers with a shared exact finite-distance
+  owner; distinguish numeric budgets from NaN/infinity classifications.
+- Verify complete fixture snapshots before scoring; reference-input and worker
+  failures cannot become successful comparisons or numerical mutation kills.
+- Retain an independently resolved, bounded reduction of the historical false
+  precision-agreement witness, including unsuccessful and unresolved attempts.
+- [Evidence and reproduction](docs/oracle-assurance.md). Test/tooling change;
+  runtime arithmetic, numerical allowances and committed fixtures are unchanged.
+
 ### Sound fast Greek outcomes (#62)
 
 - Reject nonfinite results independently in all ten fast Greek fields, including

@@ -143,7 +143,9 @@ let row is_price model side name s k t r q sigma shift exponent h l tail =
 let () =
   List.iteri
     (fun i path ->
-      In_channel.with_open_text path In_channel.input_lines
+      Oracle_fixture.lines ~columns:[ 14 ]
+        ~names:[ "greek_bits"; "model_enclosures" ]
+        path
       |> List.iter (fun line ->
              if line <> "" && line.[0] <> '#' then
                Scanf.sscanf line

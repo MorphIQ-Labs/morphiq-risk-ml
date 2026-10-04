@@ -71,7 +71,7 @@ let () =
     (Black.Displaced.price shifted Side.Call (get (Vol.lognormal 0.0))
     = 0x1p-574);
   let rows = ref 0 in
-  In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+  Oracle_fixture.lines ~columns:[ 7 ] ~names:[ "regressions" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then
            Scanf.sscanf line "%s %Lx %Lx %d %Lx %Lx %Lx"

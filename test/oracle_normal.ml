@@ -4,34 +4,26 @@
 
 open Morphiq_risk
 
-let ordered f =
-  let b = Int64.bits_of_float f in
-  if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int) else b
-
-let ulps a b =
-  if Float.is_nan a && Float.is_nan b then 0L
-  else if Float.is_nan a || Float.is_nan b then Int64.max_int
-  else Int64.abs (Int64.sub (ordered a) (ordered b))
-
+let ulps = Float_score.ulps
 let min_normal = Float.min_float
 
-type budget = { name : string; ulps : int64 }
+type budget = { name : string; ulps : float }
 
 let budget fn x =
   match fn with
-  | "pdf" -> { name = "pdf"; ulps = 4L }
-  | "erfcx" -> { name = "erfcx"; ulps = 4L }
-  | "erf" -> { name = "erf"; ulps = 4L }
-  | "erfc" -> { name = "erfc"; ulps = 4L }
-  | "logcdf" -> { name = "logcdf"; ulps = 4L }
+  | "pdf" -> { name = "pdf"; ulps = 4.0 }
+  | "erfcx" -> { name = "erfcx"; ulps = 4.0 }
+  | "erf" -> { name = "erf"; ulps = 4.0 }
+  | "erfc" -> { name = "erfc"; ulps = 4.0 }
+  | "logcdf" -> { name = "logcdf"; ulps = 4.0 }
   (* FerroRisk allows 6e-14 relative here, the cost of rounding x^2 before
      exp. The exact square split removes that term, so the tail holds the
      body's 6 ULP; a mutant that drops the split measures 484 ULP. *)
-  | "cdf" when x <= -8.0 -> { name = "cdf tail (x <= -8)"; ulps = 6L }
-  | "cdf" -> { name = "cdf body"; ulps = 6L }
+  | "cdf" when x <= -8.0 -> { name = "cdf tail (x <= -8)"; ulps = 6.0 }
+  | "cdf" -> { name = "cdf body"; ulps = 6.0 }
   | "inv" when Float.abs (x -. 0.5) <= 0.425 ->
-      { name = "inv central"; ulps = 4L }
-  | "inv" -> { name = "inv tail"; ulps = 8L }
+      { name = "inv central"; ulps = 4.0 }
+  | "inv" -> { name = "inv tail"; ulps = 8.0 }
   | _ -> invalid_arg fn
 
 (* Conditional composition of the enforced CDF and elementary budgets.
@@ -69,7 +61,8 @@ let eval = function
 
 type stat = {
   mutable n : int;
-  mutable worst : int64;
+  mutable classified : int;
+  mutable worst : float;
   mutable worst_x : float;
   mutable fails : int;
   mutable worst_rel : float;
@@ -77,88 +70,86 @@ type stat = {
 
 let () =
   let path = Sys.argv.(1) in
-  if not (Sys.file_exists path) then (
-    Printf.eprintf "ERROR: %s missing; run oracle/gen_normal.py\n" path;
-    exit 2);
   let trace = Option.map open_out (Sys.getenv_opt "MORPHIQ_ORACLE_TRACE") in
   let inverse_bits = Buffer.create 200000 in
   let inverse_points = ref [] in
   let stats = Hashtbl.create 8 in
   let failures = ref [] in
-  let ic = open_in path in
-  (try
-     while true do
-       let line = input_line ic in
-       if String.length line > 0 && line.[0] <> '#' then
-         Scanf.sscanf line "%s %Lx %Lx" (fun fn xb rb ->
-             let x = Int64.float_of_bits xb and r = Int64.float_of_bits rb in
-             let got = eval fn x in
-             if fn = "inv" then (
-               inverse_points := (x, got) :: !inverse_points;
-               Buffer.add_string inverse_bits
-                 (Printf.sprintf "%016Lx\n" (Int64.bits_of_float got)));
-             Option.iter
-               (fun oc ->
-                 Printf.fprintf oc "%s\t%016Lx\n" line (Int64.bits_of_float got))
-               trace;
-             let b = budget fn x in
-             let d = ulps got r in
-             let rel =
-               if r = 0.0 then Float.abs got else Float.abs ((got -. r) /. r)
-             in
-             let endpoint =
-               (fn = "cdf" && (r = 0.0 || r = 1.0))
-               || (fn = "logcdf" && r = 0.0)
-               || (fn = "erfc" && (r = 0.0 || r = 2.0))
-               || (fn = "erf" && Float.abs r = 1.0)
-             in
-             let ok =
-               (* SPEC bit contract: where the truth rounds to an endpoint,
+  List.iter
+    (fun line ->
+      if String.length line > 0 && line.[0] <> '#' then
+        Scanf.sscanf line "%s %Lx %Lx" (fun fn xb rb ->
+            let x = Int64.float_of_bits xb and r = Int64.float_of_bits rb in
+            let got = eval fn x in
+            if fn = "inv" then (
+              inverse_points := (x, got) :: !inverse_points;
+              Buffer.add_string inverse_bits
+                (Printf.sprintf "%016Lx\n" (Int64.bits_of_float got)));
+            Option.iter
+              (fun oc ->
+                Printf.fprintf oc "%s\t%016Lx\n" line (Int64.bits_of_float got))
+              trace;
+            let b = budget fn x in
+            let d = ulps got r in
+            let rel =
+              if r = 0.0 then Float.abs got else Float.abs ((got -. r) /. r)
+            in
+            let endpoint =
+              (fn = "cdf" && (r = 0.0 || r = 1.0))
+              || (fn = "logcdf" && r = 0.0)
+              || (fn = "erfc" && (r = 0.0 || r = 2.0))
+              || (fn = "erf" && Float.abs r = 1.0)
+            in
+            let ok =
+              (* SPEC bit contract: where the truth rounds to an endpoint,
                   the endpoint is returned exactly. *)
-               if not (Float.is_finite r) then
-                 Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
-               else if not (Float.is_finite got) then false
-               else if endpoint then
-                 Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
-               else
-                 match
-                   if fn = "logcdf" then logcdf_composed x r got else None
-                 with
-                 | Some bound ->
-                     Bounds.within ~error:(Float.abs (got -. r)) ~bound
-                 | None -> d <= b.ulps
-             in
-             let s =
-               match Hashtbl.find_opt stats b.name with
-               | Some s -> s
-               | None ->
-                   let s =
-                     {
-                       n = 0;
-                       worst = 0L;
-                       worst_x = 0.0;
-                       fails = 0;
-                       worst_rel = 0.0;
-                     }
-                   in
-                   Hashtbl.add stats b.name s;
-                   s
-             in
-             s.n <- s.n + 1;
-             if Int64.compare d s.worst > 0 then (
-               s.worst <- d;
-               s.worst_x <- x);
-             if r <> 0.0 && Float.abs r >= min_normal && rel > s.worst_rel then
-               s.worst_rel <- rel;
-             if not ok then (
-               s.fails <- s.fails + 1;
-               if List.length !failures < 20 then
-                 failures :=
-                   Printf.sprintf "%s(%h) = %h, reference %h (%Ld ulp)" fn x got
-                     r d
-                   :: !failures))
-     done
-   with End_of_file -> close_in ic);
+              if not (Float.is_finite r) then
+                Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
+              else if not (Float.is_finite got) then false
+              else if endpoint then
+                Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
+              else
+                match
+                  if fn = "logcdf" then logcdf_composed x r got else None
+                with
+                | Some bound ->
+                    Bounds.within ~error:(Float.abs (got -. r)) ~bound
+                | None -> d <= b.ulps
+            in
+            let s =
+              match Hashtbl.find_opt stats b.name with
+              | Some s -> s
+              | None ->
+                  let s =
+                    {
+                      n = 0;
+                      classified = 0;
+                      worst = 0.0;
+                      worst_x = 0.0;
+                      fails = 0;
+                      worst_rel = 0.0;
+                    }
+                  in
+                  Hashtbl.add stats b.name s;
+                  s
+            in
+            s.n <- s.n + 1;
+            if not (Float.is_finite r) then s.classified <- s.classified + 1;
+            if Float.is_finite r && d > s.worst then (
+              s.worst <- d;
+              s.worst_x <- x);
+            if r <> 0.0 && Float.abs r >= min_normal && rel > s.worst_rel then
+              s.worst_rel <- rel;
+            if not ok then (
+              s.fails <- s.fails + 1;
+              if List.length !failures < 20 then
+                failures :=
+                  Printf.sprintf "%s(%h) = %h, reference %h (%.0f ulp)" fn x got
+                    r d
+                  :: !failures)))
+    (Oracle_fixture.lines ~columns:[ 3 ] ~names:[ "normal" ]
+       ~external_reference:(Array.exists (( = ) "--external") Sys.argv)
+       path);
   let names =
     Hashtbl.fold (fun k _ acc -> k :: acc) stats [] |> List.sort compare
   in
@@ -167,8 +158,11 @@ let () =
   List.iter
     (fun k ->
       let s = Hashtbl.find stats k in
-      Printf.printf "%-20s %7d %10Ld %12.3e %24h %6d\n" k s.n s.worst
-        s.worst_rel s.worst_x s.fails)
+      Printf.printf "%-20s %7d %10.0f %12.3e %24h %6d\n" k s.n s.worst
+        s.worst_rel s.worst_x s.fails;
+      Printf.printf
+        "  %d nonfinite class checks (excluded from ULP statistics)\n"
+        s.classified)
     names;
   let rec monotone = function
     | (p, x) :: ((q, y) :: _ as rest) ->
@@ -183,7 +177,7 @@ let () =
   List.iter print_endline (List.rev !failures);
   Option.iter close_out trace;
   if !failures <> [] then exit 1;
-  if Array.length Sys.argv > 2 then (
+  if Array.length Sys.argv > 2 && Sys.argv.(2) <> "--external" then (
     let digest =
       Digest.BLAKE256.to_hex
         (Digest.BLAKE256.string (Buffer.contents inverse_bits))

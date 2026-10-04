@@ -11,7 +11,7 @@ run() {
   local exe=$1 data=$2
   if [ -f "$data" ]; then
     echo "== $exe on $data"
-    dune exec "test/$exe.exe" -- "$data" | tail -n +1 || status=1
+    dune exec "test/$exe.exe" -- "$data" --external | tail -n +1 || status=1
   else
     echo "-- skipped $exe: $data not present (run oracle/fetch.sh and the convert scripts)"
   fi
