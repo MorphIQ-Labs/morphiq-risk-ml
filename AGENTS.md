@@ -224,7 +224,7 @@ Keep acquisition snapshots unchanged and unavailable papers explicit.
 
 This public project retains its bibliography, source links, version hashes,
 derivations, contracts, tests, fixtures, generators and numerical evidence.
-Builds and CI must not depend on private-library access. Local PDF copies are
+Builds and CI must not depend on private-library access. Inspect compressed archives, source patches and embedded payloads as source material during distribution audits; a switch export can contain third-party code, not just dependency metadata. Local PDF copies are
 optional and ignored; do not commit them without recorded redistribution
 permission. Public availability or a related code license is not such evidence;
 private storage does not itself authorize broader team sharing. Keep publication

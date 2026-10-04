@@ -3,8 +3,10 @@
 The Apache-2.0 license in [LICENSE](LICENSE) covers original contributions to
 this project. It does not replace upstream terms, license research publications,
 or establish that every referenced implementation has been cleared for reuse.
-The source audit was updated on 2026-10-03 against implementation commit
-`9f792d6b2a46b9e49256ec51810b915358d50d18`. The [provenance report](docs/source-provenance.md)
+The original source audit inspected implementation commit
+`9f792d6b2a46b9e49256ec51810b915358d50d18`. The
+[current-source closeout](docs/opensource-closeout.md) supersedes its pending
+replacement status for the current distribution. The [provenance report](docs/source-provenance.md)
 records the actual downloaded sources, development chronology and hashes.
 
 ## Retained notices
@@ -55,12 +57,15 @@ for the exact scope and preserved fingerprints.
    project-derived operation graph; this does not relicense historical versions.
 
 The maintainer selected [replacements with documented provenance](docs/numerical-replacement-plan.md).
-Issue [#64](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/64) stays open
-until that work is qualified. Retaining notices does not establish clearance.
-Numerical replacements require independent references, compatibility evidence,
-updated certificates, and unchanged assurance requirements. The [DD exponential replacement](docs/results-dd-exponential-optimization.md) changes the
-current implementation. The [error-function replacement](docs/results-error-functions.md) replaces CALERF; the [inverse replacement](docs/results-inverse-normal.md) replaces AS241. Final current-source and candidate acceptance remain pending. No release, outreach
-or signing of an upstream agreement is implied.
+The DD, error-function and inverse-normal replacements are merged and qualified
+in the linked reports. The current-source audit also retires the old OxCaml
+portable patch and full 5.2 export, which embedded historical QD and third-party
+patch sources. Installed documentation preserves these historical notices and
+the complete notices for currently retained Let's Be Rational and fdlibm
+material. Exact-candidate installation and validation are recorded separately
+in the [experimental baseline](docs/experimental-baseline.md). Historical rights
+questions remain historical; they do not license old distributions retroactively.
+No upstream agreement signing or author outreach is implied.
 
 ## Research publications and historical evidence
 
@@ -75,7 +80,7 @@ change does not rewrite history.
 Project-generated fixtures and numerical reports retain their provenance in
 `oracle/MANIFEST` and `docs/evidence/`. Restricted third-party inputs downloaded
 for an optional comparison belong in ignored `oracle/data/`, not a release.
-The optional `oracle/canonical_iv.py` comparison can still compile externally
+The optional `scripts/canonical_iv.py` comparison can still compile externally
 acquired `erf_cody.cpp` from the canonical archive; it is not vendored and is
 not required by the build or ordinary CI.
 

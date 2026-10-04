@@ -3,6 +3,9 @@
  (section doc)
  (files
   NOTICE
+  SECURITY.md
+  (docs/opensource-closeout.md as docs/opensource-closeout.md)
+  (docs/experimental-baseline.md as docs/experimental-baseline.md)
   (docs/finite-greek-results.md as docs/finite-greek-results.md)
   (docs/results-inverse-optimization.md
    as

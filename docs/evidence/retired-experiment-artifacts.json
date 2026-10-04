@@ -1,0 +1,18 @@
+{
+  "source_commit": "261a662be6f414f973affc198178a949840d4d1a",
+  "preserved_in": "MorphIQ-Labs/research-library sources/morphiq-risk-ml-closeout",
+  "artifacts": [
+    {
+      "id": "morphiq-risk-ml-closeout-portable-numerics-patch",
+      "sha256": "9c39c13dcf2fc2d2a4a4d178b16f51941947f15ef192068670a79ec13e595385",
+      "bytes": 13438,
+      "source_url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/blob/261a662be6f414f973affc198178a949840d4d1a/experiments/oxcaml/portable-numerics.patch"
+    },
+    {
+      "id": "morphiq-risk-ml-closeout-ox52-export-gz",
+      "sha256": "9d51c31fef9a5429539c4c56f26d6eaa6c48f05bceea8d6f350f88dcfa1af261",
+      "bytes": 379758,
+      "source_url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/blob/261a662be6f414f973affc198178a949840d4d1a/experiments/oxcaml/ox52.export.gz"
+    }
+  ]
+}

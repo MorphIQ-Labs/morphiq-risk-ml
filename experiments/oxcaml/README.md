@@ -11,9 +11,14 @@ mode checked, and this experiment does not certify every foreign/runtime path.
 All experiments use source `f05ec395f3fcaf3f12429c3f9dbbbae7655acf63` on macOS
 ARM64 (Apple M1 Pro). [Provenance](../../docs/evidence/planner-experiment-provenance.json)
 retains compiler/source commits, installed packages and artifact checksums.
-Full opam exports with package definitions/checksums/patches are retained as
-`ox52.export.gz` and `ox54.export.gz`; they are dependency manifests, not compiled
-binaries. The OxCaml repository is pinned to
+The 5.4 metadata export remains `ox54.export.gz`. The 5.2 full export
+embedded third-party source patches, and the portable-numerics patch contained
+the historical QD adaptation. Both unchanged originals are preserved in the
+private research library and removed from the current public distribution.
+[Disposition and hashes](../../docs/evidence/retired-experiment-artifacts.json)
+identify the exact artifacts. Public package selections, repository/compiler
+pins and numerical evidence remain in the provenance record. Existing Git
+history is unchanged; historical reproduction requires its own rights review. The OxCaml repository is pinned to
 `f1bd228dda31430bf6271f0f9adb2e604c6957ca`.
 
 | Environment | Compiler source | Canonical parallel library |
@@ -42,7 +47,7 @@ Adding portable signatures initially failed for real pricing dependencies:
 `Elementary` coefficient arrays, `Dd` reciprocal/factorial tables, and
 `Normalised_black` threshold/function tables were ordinary mutable arrays.
 Read-only usage discipline alone does not satisfy the compiler. The isolated
-[patch](portable-numerics.patch) changes these private tables to immutable arrays
+historical patch changed these private tables to immutable arrays
 and adds checked portable signatures throughout the called numerical modules.
 Constant bits and arithmetic operation order remain unchanged. Initializer
 scratch is local and is copied into immutable storage before sharing.
@@ -164,20 +169,22 @@ experiment has no runtime dependency in the package.
 ## Reproduction
 
 The [pre-scoring protocol](hypothesis.md) records the hypotheses and pins.
-Create a separate opam root, register the pinned OxCaml repository, and install
-the exact compiler and parallel versions above (or import the decompressed full
-switch export). Do not import them over the production switch.
+The recorded portable experiment applies only to its historical source, not the
+current replacement numerics. Its full export and patch are retired as described
+above; `prepare.py --portable` now fails before creating any destination.
+Requalifying a new portable patch is required before renewing that experiment.
+The existing helper can still extract an unchanged source for compiler comparisons:
 
 ```sh
-python3 experiments/oxcaml/prepare.py --source f05ec395f3fcaf3f12429c3f9dbbbae7655acf63 \
-  --destination /tmp/planner-ox52-reproduction --portable --canonical-parallel
-# From that external tree, with the isolated Ox 5.2 switch selected:
-dune build @install bench/ox_worker.exe bench/planner_reference.exe
-dune exec bench/ox_worker.exe
+python3 experiments/oxcaml/prepare.py --source FULL_SOURCE_COMMIT \
+  --destination /tmp/planner-unchanged-reproduction
 ```
 
-For 5.4, omit `--canonical-parallel`. Omit `--portable` for unchanged-source
-comparisons. `check_modes.py --ocamlc /path/to/ox/ocamlc --output /tmp/modes.json`
+Use a separate opam root and the exact compiler/package pins in the public
+provenance record; do not replace the production switch. Historical full-export
+import is not a supported current reproduction route.
+
+`check_modes.py --ocamlc /path/to/ox/ocamlc --output /tmp/modes.json`
 compiles the eight positive/negative controls. `scripts/audit_planner.py` runs
 the independent campaign with the existing pinned optional oracle environment.
 `compare.py --help` documents the manual comparison; `counters.py --help`

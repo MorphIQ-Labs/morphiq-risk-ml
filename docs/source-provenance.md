@@ -145,8 +145,8 @@ installed documentation. The original audit changed no numerical operation,
 coefficient, fixture, dependency pin or tolerance. The subsequent DD replacement
 CALERF and inverse-normal replacements are qualified separately in their linked reports.
 
-Issue #64 stays open until each replacement is qualified and its current-source
-provenance is recorded. Historical provenance and applicable notices remain
+All three replacements are now merged; the [current-source closeout](opensource-closeout.md)
+records the final distribution audit and exact-candidate qualification path. Historical provenance and applicable notices remain
 preserved; replacement does not rewrite Git history or retrospectively grant
 permissions. No author/publisher outreach, agreement signing, or release is
 part of this change.

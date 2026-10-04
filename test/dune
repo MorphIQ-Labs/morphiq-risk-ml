@@ -190,7 +190,10 @@
 
 (rule
  (target kernel_polynomials.ml)
- (deps ../oracle/lift_polynomials.py ../lib/normalised_black.ml)
+ (deps
+  ../oracle/lift_polynomials.py
+  ../lib/normalised_black.ml
+  ../LICENSES/LetsBeRational.txt)
  (action
   (with-stdout-to
    %{target}
@@ -356,3 +359,17 @@
  (name planner_groups)
  (modules planner_groups)
  (libraries morphiq_risk))
+
+(test
+ (name installed_consumer)
+ (modules installed_consumer)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_closeout.py
+  ../scripts/candidate_artifact.py
+  ../scripts/check_experimental.py)
+ (action
+  (run python3 %{dep:../scripts/test_closeout.py})))

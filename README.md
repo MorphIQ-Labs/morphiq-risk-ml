@@ -94,11 +94,10 @@ Greeks require positive maturity and volatility. Requests may fail because of
 unsupported boundaries, unresolved arithmetic, or an unmet accuracy limit.
 
 The fast `Black.*` and `Bachelier` price/Greek APIs have a separate, checked-corpus
-assurance scope. They do not perform runtime output certification. In particular,
-extreme valid inputs can return nonfinite fast Greeks
-([#62](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/62)). Planner
-compilation also has a known scaling issue with many distinct aggregation groups
-([#63](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/63)).
+assurance scope. They do not perform runtime output certification. Each fast Greek now returns a finite value or an explicit numerical failure;
+see [the result contract](docs/finite-greek-results.md). Distinct-group planner
+compilation uses hash-table insertion with checked counts; see the
+[scaling measurements](docs/results-planner-compilation.md).
 
 The project retains independently generated references, analytical error bounds,
 exact-rational checks, negative type tests, mutation witnesses, and a determinism
@@ -111,6 +110,8 @@ over every admitted input. See the
 - [Documentation guide](docs/README.md): current contracts, derivations, and historical evidence.
 - [Public API](lib/morphiq_risk.mli), [model definitions](docs/model-contracts.md), and [production acceptance](docs/production-boundary-design.md).
 - [Scenario contract](docs/scenario-planner.md) and [measured planner results](docs/results-planner.md).
+- [Security reporting](SECURITY.md): privately report vulnerabilities.
+- [Experimental qualification](docs/experimental-baseline.md): scope, evidence and remaining limitations.
 - [Contributing](CONTRIBUTING.md): setup, checks, numerical changes, and pull requests.
 - [Compatibility policy](docs/stability.md) and [changelog](CHANGELOG.md).
 - [Issues](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues): bug reports and proposed work.
@@ -120,9 +121,9 @@ over every admitted input. See the
 Original project contributions are licensed under [Apache-2.0](LICENSE).
 Copyright 2026 Prophetizo LLC, doing business as MorphIQ Labs, and contributors.
 Third-party material retains its own terms; see [NOTICE](NOTICE) and
-[third-party notices and provenance status](THIRD_PARTY_NOTICES.md). The latter
-records unresolved upstream provenance that must be settled before claiming
-complete distribution clearance. A project license does not resolve those items.
+[third-party notices and provenance status](THIRD_PARTY_NOTICES.md). The [current-source audit](docs/opensource-closeout.md) records the AS241,
+CALERF and QD replacements and retained permissive notices. Historical versions
+retain their unresolved terms; replacement does not relicense old commits.
 
 Research papers retain their authors' and publishers' rights and are linked
 from the [bibliography](docs/research/README.md), rather than bundled in the

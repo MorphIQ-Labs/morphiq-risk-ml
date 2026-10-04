@@ -92,3 +92,6 @@ material and its terms separately; do not replace its notices with ours.
 
 Merging a PR does not publish a release. Candidate validation and release
 acceptance follow [the change-control contract](docs/acceptance-and-change-control.md).
+
+For suspected exploitable vulnerabilities, follow [SECURITY.md](SECURITY.md)
+and use private reporting before sharing details in public issues.

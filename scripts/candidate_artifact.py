@@ -24,6 +24,24 @@ def run(args,**kwargs):
         raise RuntimeError(f"command failed ({e.returncode}): {args}\n{e.output}") from e
 
 
+def verify_origin(found,prefix):
+    if Path(found).resolve()!=prefix.resolve()/'lib/morphiq_risk_ml':
+        raise RuntimeError('smoke used an unintended package')
+
+
+def verify_notices(source,prefix):
+    paths=['LICENSE','NOTICE','THIRD_PARTY_NOTICES.md','SECURITY.md']
+    paths += [str(p.relative_to(source)) for p in sorted((source/'LICENSES').glob('*')) if p.is_file()]
+    results={}
+    for name in paths:
+        original=source/name
+        installed=prefix/'doc/morphiq_risk_ml'/name
+        if not installed.is_file() or installed.read_bytes()!=original.read_bytes():
+            raise RuntimeError('missing or changed installed notice: '+name)
+        results[name]=sha(installed)
+    return results
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version',action='version',version='candidate artifact schema 1')
@@ -45,6 +63,8 @@ def main():
     if second!=tar: raise RuntimeError('source archive not reproducible')
     with tarfile.open(archive) as stream: stream.extractall(destination,filter='data')
     source=destination/'source';prefix=destination/'install'
+    if sha(__file__)!=sha(source/'scripts/candidate_artifact.py'):
+        raise RuntimeError('artifact tool differs from candidate source')
     opam=['opam','exec','--switch='+args.switch,'--']
     ocaml=run(opam+['ocamlopt','-version'])
     flambda=run(opam+['ocamlopt','-config-var','flambda'])
@@ -56,28 +76,17 @@ def main():
         if not re.search(r'^version: "'+re.escape(declared)+r'"$',(source/metadata).read_text(),re.M):
             raise RuntimeError('inconsistent package version: '+metadata)
     logs=[]
-    for cmd in [['dune','build','@install'],['dune','install','--prefix',str(prefix)]]:
+    for cmd in [['dune','build','@install','-j','2'],['dune','install','--prefix',str(prefix)]]:
         logs.append(run(opam+cmd,cwd=source))
     # This separate consumer cannot see the source/build library through Dune.
     consumer=destination/'consumer';consumer.mkdir()
     smoke=consumer/'smoke.ml'
-    smoke.write_text('''open Morphiq_risk
-let get = function Ok x -> x | Error _ -> failwith "smoke refusal"
-let () =
-  let a = get (Production.Black76.admit
-    {forward=100.; strike=100.; time_to_expiry=1.; rate=0.02}) in
-  let v = get (Vol.lognormal 0.2) in
-  let c = get (Production.Black76.evaluate a Side.Call v Production.Price ~max_error:1e-10) in
-  if not (c.value > 0. && c.absolute_error <= 1e-10) then failwith "price certificate";
-  (match get (Production.Black76.implied a Side.Call c.value) with
-   | Iv.Root root when Vol.to_float root > 0. -> ()
-   | _ -> failwith "IV contract");
-  print_endline version
-''')
+    smoke.write_bytes((source/'test/installed_consumer.ml').read_bytes())
     env=dict(os.environ,OCAMLPATH=str(prefix/'lib'),CAML_LD_LIBRARY_PATH=str(prefix/'lib/stublibs'))
     consumer_opam=opam+['env','OCAMLPATH='+env['OCAMLPATH'],'CAML_LD_LIBRARY_PATH='+env['CAML_LD_LIBRARY_PATH']]
     found=run(consumer_opam+['ocamlfind','query','morphiq_risk_ml'],cwd=consumer,env=env)
-    if Path(found).resolve()!=prefix/'lib/morphiq_risk_ml': raise RuntimeError('smoke used an unintended package')
+    verify_origin(found,prefix)
+    notice_hashes=verify_notices(source,prefix)
     versions={}
     for compiler,name in [('ocamlopt','native'),('ocamlc','bytecode')]:
         exe=consumer/name
@@ -90,8 +99,10 @@ let () =
     report=dict(commit=commit,tree=run(['git','rev-parse',commit+'^{tree}']),package_version=versions['native'],
                 source_archive_sha256=sha(archive),source_tar_sha256=hashlib.sha256(tar).hexdigest(),
                 archive_bytes=archive.stat().st_size,source_tar_reproduced=True,
-                installed_files_sha256=files,smoke_native=True,smoke_bytecode=True,package_path=str(found),
-                platform=platform.platform(),ocaml=ocaml,flambda=flambda,
+                installed_files_sha256=files,installed_notices_sha256=notice_hashes,consumer_sha256=sha(smoke),consumer_contract='four-model Batch price/Delta/IV; Scenario paired/cartesian; Planner limits, expiry, partial totals, cancellation, sink failure, worker replay',smoke_native=True,smoke_bytecode=True,package_path=str(found),
+                platform=platform.platform(),machine=platform.machine(),ocaml=ocaml,flambda=flambda,
+                ocaml_config=run(opam+['ocamlopt','-config']),
+                installed_packages=run(['opam','list','--switch='+args.switch,'--installed','--columns=name,version','--short']),
                 lock_sha256=sha(source/'morphiq_risk_ml.opam.locked'),tool_sha256=sha(__file__),
                 scope='Candidate artifact validation from pinned source; no release/tag, human acceptance, or cross-platform binary reproducibility claim.')
     (destination/'report.json').write_text(json.dumps(report,indent=2)+'\n')

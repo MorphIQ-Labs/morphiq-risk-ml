@@ -1,10 +1,14 @@
 # Candidate acceptance and change control
 
-The current work establishes engineering evidence toward Epic #27. It does not
+The current package is experimental **0.3.0**, with its separate
+[experimental qualification](experimental-baseline.md). The dated 0.2.0 record
+below remains unchanged and pending for institutional use.
+
+The institutional acceptance process establishes engineering evidence toward Epic #27. It does not
 approve deployment or freeze a release. The authoritative machine-readable
 [acceptance record](acceptance/pending.json) is deliberately pending. No release
 tag, package version change or deployment is authorized by a passing test alone.
-The candidate package declares 0.2.0: the public outcome/type changes require
+The historical candidate package declared 0.2.0: the public outcome/type changes require
 a minor increment under the pre-1.0 policy in [stability](stability.md).
 This selects candidate metadata, without tagging or publishing a release.
 
