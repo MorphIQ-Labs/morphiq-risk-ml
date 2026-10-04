@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a",
+  "package_version": "0.3.0",
+  "decision": "qualified-experimental",
+  "assessor": "Codex, maintainer-directed engineering closeout; no independent human signature",
+  "workflow_url": "https://github.com/MorphIQ-Labs/morphiq-risk-ml/actions/runs/37176687849",
+  "source_archive_sha256": "65a196e90b92722054dafd608a59b4450149c3c19b418e258a33b4ed49b784c3",
+  "retention": "Public logs/reports committed under docs/evidence/experimental-0.3.0; original downloads and source archives also retained in ~/Library/Application Support/MorphIQ Labs/acceptance/morphiq-risk-ml/83b541e02ce3467536a6febc54a5eeb49004bc8a",
+  "limitations": [
+    "Finite-corpus and supported-platform experimental assurance; not a universal proof",
+    "Legacy scorer/oracle and scheduling challenges remain tracked under #53\u201357",
+    "No independent human review, institutional deployment acceptance, release tag, package publication or production SLA"
+  ],
+  "evidence": [
+    {
+      "category": "mutations",
+      "path": "docs/evidence/experimental-0.3.0/full-mutations.log.gz",
+      "sha256": "7e5a523547e6d4afbf15dd5eb3a241ce1abebd4f3cec2f10c8d848abb9fc2efe",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-candidate-artifact.log.gz",
+      "sha256": "55c839185e240a64e1728730929a22f3865666b2c9dcf1f732b6c0ceed28e4a7",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-candidate-replay.json",
+      "sha256": "7dfd2f1c803542a41732050b1704cafd01311dd5628a815e7db1399960386850",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-candidate-replay.log.gz",
+      "sha256": "73e3e63bff2c7cf7fa4ada4377adce1d4dcff2909af3276a7a10c44f785c018f",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/macos-15-candidate-tests.log.gz",
+      "sha256": "32ddbc801429740bee4073b96987808e6e2f62bc7120bdfffa69fabe151795b4",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/experimental-0.3.0/macos-15.json",
+      "sha256": "1653eb60e8486a166a4bb67c5b1782002388fd55718308a13116462d1854a66f",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a",
+      "platform": "macos-15"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-candidate-artifact.log.gz",
+      "sha256": "b1c226e9fecc51f6426d607757382259462a0615984783a71c4472b3b90a20ee",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-candidate-replay.json",
+      "sha256": "41044742cec2a3068e7581b8b18a631868c3cd037a317645f64510a36c75716d",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-candidate-replay.log.gz",
+      "sha256": "e3f1f162c3463cf85b03401bfb404f5c84e8963e3ceadba8814e21d609b9db8f",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm-candidate-tests.log.gz",
+      "sha256": "24b0edf9003b67dcbf50ec60e72a12d047a5951b4aa2a6a383b4a6647dfda579",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-arm.json",
+      "sha256": "1480e0c06dbb0e3b63cec2067d034b52b8f8fd5d362c7d04f196f1da206cc269",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a",
+      "platform": "ubuntu-24.04-arm"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-build.log.gz",
+      "sha256": "87cd1223817fead280ba1aac5298dce68aa76e4bf9c6f3f8e0b35e644d717fa3",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-candidate-artifact.log.gz",
+      "sha256": "b1c226e9fecc51f6426d607757382259462a0615984783a71c4472b3b90a20ee",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-candidate-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-candidate-replay.json",
+      "sha256": "d17eca8baed8b4ce41f10a03d31e79e72194d2bd10138336b0419a376ebcd627",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-candidate-replay.log.gz",
+      "sha256": "df7e012a3f96a96b2cb5748dda3f58d461dbf645aec949254e302eed92bc32e0",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04-candidate-tests.log.gz",
+      "sha256": "d6dfed5055b4e9dad3472a39b79abf74496449fffaaeacf318f87509214c2d01",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "platform",
+      "path": "docs/evidence/experimental-0.3.0/ubuntu-24.04.json",
+      "sha256": "d3457a0c1e3ad3f14f929ea5f7fe8cf587348c869641c435dd6e950d3f68114b",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a",
+      "platform": "ubuntu-24.04"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/workflow.json",
+      "sha256": "99a15cbee213ec3f33b1d7b4bc9e7d82e762037971d4e14e59707b8c6efb335a",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/evidence/experimental-0.3.0/workflow.log.gz",
+      "sha256": "b422e1881f0d7af74edead68c5683f89b9203f12652ba7e86619ad94882dad16",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "scope",
+      "path": "docs/experimental-baseline.md",
+      "sha256": "cae0d00571cb2d4e8e856bc7a6c86477aca1241ce3c13f09790738451c2c28a4",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "scope",
+      "path": "docs/candidate-0.3.0.md",
+      "sha256": "42d805b2e5086fea8731ab69076ac27590dfdc55bda9b65191b122e96cba63a5",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "provenance",
+      "path": "docs/evidence/opensource-settings-2026-10-04.json",
+      "sha256": "ca3cbfd3400709061fc574ccd71832b6e1da153b3dc4f444df026a3883cfd9e4",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "provenance",
+      "path": "docs/opensource-closeout.md",
+      "sha256": "a0894f7ce906b9446fa06d0c1b987aac35430b93f6a0f5929b650254af4c6ffa",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "provenance",
+      "path": "docs/evidence/opensource-source-inventory.json",
+      "sha256": "357b295c127553e1fd1f9d61fd511a21004a77db81533b02a096eab52bd38cf8",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "provenance",
+      "path": "docs/evidence/retired-experiment-artifacts.json",
+      "sha256": "258bf1ed4d0986ff895f70d994047d414e2adab515d55674f02816dfb192ac36",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "planner",
+      "path": "docs/results-planner-compilation.md",
+      "sha256": "9e8c9ad7633a0b116b31a7c8d3953804b31f077333190e4785050c7384260595",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "planner",
+      "path": "docs/results-planner.md",
+      "sha256": "2f52f0c77b9d9518f6a3876b30048ab9a37e945bca85ae06313003eb5bdffcaf",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/results-dd-exponential-optimization.md",
+      "sha256": "ea2648cd1dbda4fe169f787498bea3be293146816f41e18126be4849c5eb68a0",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/results-error-functions.md",
+      "sha256": "01bdbeee3cda16a5235d8b7baaa7f0ce004752b2d0b48e1fed35429e9d74046c",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/results-inverse-normal.md",
+      "sha256": "4cde15f3af35f793ccb57b58dcffa27b0fcf611f6b7babefd7f53a61ed93acf9",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/results-inverse-optimization.md",
+      "sha256": "b09a940ee998d961c0860fbfadd4bc8f32453e7e7cb55cdeb84f278f28ba8ce3",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    },
+    {
+      "category": "numerical",
+      "path": "docs/finite-greek-results.md",
+      "sha256": "5c0504838a7e8f15cab83ee7bc53a0a2e836d3a5685617402cea72f7075f97d0",
+      "candidate_commit": "83b541e02ce3467536a6febc54a5eeb49004bc8a"
+    }
+  ]
+}

@@ -40,6 +40,9 @@ Start with [DD exponential optimization](results-dd-exponential-optimization.md)
 [performance](performance.md), and the original
 [scalar experiment results](results-slice.md).
 
+The [0.3.0 experimental qualification](candidate-0.3.0.md) records the current
+qualified source and retained evidence.
+
 The [0.2.0 candidate dossier](candidate-0.2.0.md), [independent review package](independent-review-package.md),
 and [acceptance controls](acceptance-and-change-control.md) retain the distinction
 between engineering evidence, independent review, and institutional acceptance.

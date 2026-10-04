@@ -10,7 +10,9 @@ an optional comparison implementation; it is not a dependency.
 
 **Status:** pre-1.0, with version 0.3.0 currently unreleased. The supported
 capabilities and numerical limitations below apply independently of release
-status. This project does not claim institutional deployment approval.
+status. The [experimental candidate qualification](docs/candidate-0.3.0.md)
+records the exact tested source and evidence. This project does not claim
+institutional deployment approval.
 
 ## Capabilities
 
