@@ -9,7 +9,9 @@ volatility coordinates, quotes, Greeks or failures.
 
 The supported baseline is OCaml 5.3.0 with Flambda, the locked dependencies,
 the library's `-O3` build, and the three platform jobs in `ci.yml`. Those jobs
-are Linux x86-64, Linux arm64 and macOS arm64. A different compiler, target,
+are Linux x86-64, Linux arm64 and macOS arm64. Both development (opaque
+modules) and release (cross-module optimization) profiles run the ordinary
+suite; benchmark reports must name the profile. A different compiler, target,
 backend or dependency version is a candidate requiring conformance evidence;
 being able to compile the source is insufficient.
 

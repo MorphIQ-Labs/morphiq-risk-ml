@@ -129,7 +129,7 @@ rerun broad assurance after it passes unless new changes or concerns justify it.
 [ci.yml](.github/workflows/ci.yml) runs on pull requests and pushes to `main`:
 
 - `test (ubuntu-24.04)`, `test (ubuntu-24.04-arm)` and `test (macos-15)` build
-  and run the full ordinary suite, including oracle/certificate checks,
+  and run the full ordinary suite in development and release profiles, including oracle/certificate checks,
   properties, type rejection, fixture provenance and the determinism digest.
 - `format` checks the pinned ocamlformat configuration.
 - `mutation` runs **only the seven reviewed core mutants**. The job name does
