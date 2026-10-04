@@ -240,7 +240,7 @@ let live_price_approx side (c : Coordinates.live) sigma =
 (* DD terms can lose the intrinsic before carry cancellation. The dispatch
    threshold is conservative, not an error certificate for the other fast paths.
    Refine the original real model; an unresolved cell must not reuse the DD price. *)
-let live_price side (c : Coordinates.live) sigma =
+let needs_coordinate_refinement (c : Coordinates.live) =
   (* The normal-intermediate coordinate bound has 32u² for log, 9u²
      for assembly, 15u³ for the quotient correction and 5u² for shifted
      low parts. Round these up for dispatch only: 64u², 16u³ and 8u².
@@ -251,11 +251,12 @@ let live_price side (c : Coordinates.live) sigma =
     else 0.0
   in
   let noise = (0x1p-100 *. c.x_terms) +. 0x1p-155 +. low_noise in
-  if
-    Float.is_finite c.x_terms && c.x_terms > 0.0
-    && Float.abs c.x <= 0.5 *. c.x_terms
-    && Float.abs c.x <= noise
-  then
+  Float.is_finite c.x_terms && c.x_terms > 0.0
+  && Float.abs c.x <= 0.5 *. c.x_terms
+  && Float.abs c.x <= noise
+
+let live_price side (c : Coordinates.live) sigma =
+  if needs_coordinate_refinement c then
     try
       let exact_scale original scaled =
         Float.is_finite scaled && Float.ldexp scaled c.exponent = original
@@ -486,11 +487,23 @@ let live_greeks side (c : Coordinates.live) sigma =
     else
       let itm = theta *. c.x > 0.0 in
       let on v = if itm then v else 0.0 in
+      let annual_theta =
+        if not itm then 0.0
+        else
+          let _, cash, intrinsic = precise_legs c in
+          (* q A - r C = q (A-C) + (q-r) C. Preserve the small
+             rate difference and intrinsic before subtracting discount legs. *)
+          Dd.to_float_scaled
+            (Dd.mul_float
+               (Dd.add (Dd.mul_float intrinsic q)
+                  (Dd.mul (Dd.sub (Dd.of_float q) (Dd.of_float r)) cash))
+               theta)
+            e_up
+      in
       {
         Greeks.delta = Ok (on (theta *. dq));
         gamma = Ok 0.0;
-        theta =
-          Greeks.daily (up (on (theta *. ((q *. c.asset) -. (r *. c.cash)))));
+        theta = Greeks.daily annual_theta;
         vega = Ok (Units.per_volatility 0.0);
         rho =
           (if c.tied then rho_forward ()
@@ -612,7 +625,17 @@ let live_greeks side (c : Coordinates.live) sigma =
             (Dd.mul (Dd.mul asset (Normal_dd.pdf d1_dd)) (Dd.of_float sigma))
             (Dd.mul_float rt_dd 2.0)
         in
-        Dd.to_float_scaled (Dd.sub carry_terms diffusion) e_up
+        let value = Dd.sub carry_terms diffusion in
+        (* Absolute CDF/leg errors survive subtraction even with accurate d1.
+           Refuse theta when its result is inside the DD component noise scale;
+           this selector is a capability restriction, not a full error bound. *)
+        let terms = Float.abs (q *. c.asset) +. Float.abs (r *. c.cash) in
+        let noise =
+          (2048.0 +. (16.0 *. (Float.abs (q *. time) +. Float.abs (r *. time))))
+          *. 0x1p-106 *. terms
+        in
+        if terms > 0.0 && Float.abs value.hi <= noise then Float.nan
+        else Dd.to_float_scaled value e_up
       else
         (r *. price)
         +. up (theta *. (q -. r) *. a_part)
@@ -661,7 +684,31 @@ let greeks_coordinates coordinates side sigma =
   | Coordinates.Expiry { spot; strike; rate; yield } ->
       Greeks.expiry ~theta:(Side.sign side) ~spot ~strike ~rate ~yield
   | Coordinates.Live c ->
-      Greeks.ensure_finite (live_greeks side c (Vol.to_float sigma))
+      let exact_atm =
+        c.original_spot = c.original_strike
+        && c.original_spot_low = c.original_strike_low
+        && c.rate = c.yield
+      in
+      (* An unresolved coordinate is neither a smooth approximate derivative
+         nor evidence of a payoff kink. See greek-cancellation-design.md. *)
+      if
+        needs_coordinate_refinement c
+        || (c.x = 0.0 && c.x_low = 0.0 && not exact_atm)
+      then
+        let failure = Error Greeks.Numerical_failure in
+        {
+          Greeks.delta = failure;
+          gamma = failure;
+          theta = failure;
+          vega = failure;
+          rho = failure;
+          vanna = failure;
+          volga = failure;
+          charm = failure;
+          veta = failure;
+          color = failure;
+        }
+      else Greeks.ensure_finite (live_greeks side c (Vol.to_float sigma))
 
 let implied_coordinates coordinates side price =
   if not (Float.is_finite price && price >= 0.0) then
