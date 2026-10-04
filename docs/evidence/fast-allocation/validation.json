@@ -1,0 +1,52 @@
+{
+  "implementation": "75999776291370412dc0ffe3b4504b17e7979e3c",
+  "baseline": "ff602ee21949663025e6cbfbe044fb5a539cccf6",
+  "baseline_tree": "c61821b5925f58321fac420a5d107c61fe320f5d",
+  "main_parent": "8ab5b8ce052a9b0753d10e1d7d5567aec52bd756",
+  "ordinary": [
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- dune build @install @fmt @runtest",
+      "exit_code": 0,
+      "log": "development.log.gz"
+    },
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- dune build --profile release --build-dir _build_release @install @runtest",
+      "exit_code": 0,
+      "log": "release.log.gz"
+    }
+  ],
+  "mutation": {
+    "exit_code": 0,
+    "baseline_passed": true,
+    "killed": 7,
+    "log": "mutations.log",
+    "selection": [
+      "dd-exp-accumulator-low",
+      "dd-log-accumulator-low",
+      "dd-exp-degree",
+      "expm1-tiny",
+      "displaced-exact-sum",
+      "bachelier-distance",
+      "normal-dd-series"
+    ]
+  },
+  "actionlint": {
+    "version": "1.7.12",
+    "command": "actionlint .github/workflows/ci.yml",
+    "exit_code": 0
+  },
+  "protocol_controls": {
+    "command": "python3 docs/evidence/fast-allocation/protocol_controls.py . /path/to/decompressed/abba.json",
+    "exit_code": 0,
+    "log": "protocol-controls.log"
+  },
+  "source_files_sha256": {
+    "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+    "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+    "bench/fast_allocation_profile.ml": "e22618bbb99dd3a3f9ef3a5de1fcd20b14e621532b1560f152da56c2ee7b8f68",
+    "test/dd_word_replay.ml": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+    "scripts/benchmark_fast_allocation.py": "4fd62b22978c44161ff39787c6a97429744b799c61c2fe7eca04901e3fbdc2df",
+    "scripts/compare_dd_words.py": "1cfa94eedd25bac3e91d24a338b5094edf583d91c674264da92ac2c9d8ba5a4f"
+  },
+  "scope": "Local Apple ARM64 validation; no release, deployment acceptance or universal proof."
+}

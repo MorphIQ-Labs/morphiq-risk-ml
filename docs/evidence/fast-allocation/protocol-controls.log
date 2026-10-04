@@ -1,0 +1,16 @@
+fast_batch truncated rejected
+fast_batch duplicate rejected
+fast_batch nonfinite rejected
+fast_batch missing-check rejected
+fast_planner truncated rejected
+fast_planner duplicate rejected
+fast_planner nonfinite rejected
+fast_planner missing-check rejected
+shared_portfolio truncated rejected
+shared_portfolio duplicate rejected
+shared_portfolio nonfinite rejected
+shared_portfolio missing-check rejected
+dd-words missing rejected
+dd-words reordered rejected
+dd-words changed-word rejected
+all protocol controls passed

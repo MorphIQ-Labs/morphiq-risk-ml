@@ -1,0 +1,119 @@
+{
+  "protocol": "dd-words-v1",
+  "driver_sha256": "1cfa94eedd25bac3e91d24a338b5094edf583d91c674264da92ac2c9d8ba5a4f",
+  "runs": [
+    {
+      "variant": "baseline",
+      "profile": "development",
+      "mode": "exe",
+      "rows": 86145,
+      "binary_sha256": "e3d37d927ccc3a4a9bb899203953e96ae8948abc2920631e4b815025e8a48a59",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+        "lib/split.ml": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef"
+      }
+    },
+    {
+      "variant": "baseline",
+      "profile": "development",
+      "mode": "bc",
+      "rows": 86145,
+      "binary_sha256": "fb1262eff39e895b6b57af6f71ce960dbb1d4aaf90af35df6577bf5f09235d30",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+        "lib/split.ml": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef"
+      }
+    },
+    {
+      "variant": "baseline",
+      "profile": "release",
+      "mode": "exe",
+      "rows": 86145,
+      "binary_sha256": "f96368e3c36de4385bad3b596aabfa453e739c2b3ce3180ec91425ed4b0639a6",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+        "lib/split.ml": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef"
+      }
+    },
+    {
+      "variant": "baseline",
+      "profile": "release",
+      "mode": "bc",
+      "rows": 86145,
+      "binary_sha256": "3f847dea043b14dc488fb2c5794a4c9130c324b4b9703821cdad2c059788fd55",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+        "lib/split.ml": "3cf1367e64cfc6c066ecf933b5769e9a9962c6698123aa13fb2e4e885e61d9ef"
+      }
+    },
+    {
+      "variant": "candidate",
+      "profile": "development",
+      "mode": "exe",
+      "rows": 86145,
+      "binary_sha256": "b3ced8d6baacb2bcd1a3abd973f62077b1e80c3f50748a487366b9525036ec57",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b"
+      }
+    },
+    {
+      "variant": "candidate",
+      "profile": "development",
+      "mode": "bc",
+      "rows": 86145,
+      "binary_sha256": "dc8497d60085f67f040e553a714e1cc49852f7f1beade4eed2e558cb57ca4dad",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b"
+      }
+    },
+    {
+      "variant": "candidate",
+      "profile": "release",
+      "mode": "exe",
+      "rows": 86145,
+      "binary_sha256": "0f2240836143e83db0f44d7f62b9ff18b3fb28fe2d9615d8267d99d502a109e3",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b"
+      }
+    },
+    {
+      "variant": "candidate",
+      "profile": "release",
+      "mode": "bc",
+      "rows": 86145,
+      "binary_sha256": "19d2136928fbf8022bab28d1e5c091f0b56585333d06b75a728c5673454ed7b7",
+      "fixture_sha256": "1278d3dec00c1d5528a60134f18fe3d9cc499d82e2d3eb9885ce5886550f1da8",
+      "result_sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "harness_sha256": "0b258a76ecc6a76f16bce48dc45ec6ab63c40e5bd23f5a7920f098cbbfe4c21c",
+      "sources": {
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b"
+      }
+    }
+  ],
+  "complete": true
+}
