@@ -66,3 +66,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Inverse-normal optimization](results-inverse-optimization.md): exact intermediate reuse, numerical replay and measured costs.
 
 - [Finite Greek results](finite-greek-results.md): per-field failures, subnormal rho scaling and independent extreme-input references.
+
+- [Planner compilation scaling](results-planner-compilation.md): distinct-group counting, limit/replay controls and homogeneous/heterogeneous timings.

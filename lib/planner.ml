@@ -216,7 +216,8 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
     let factor_currencies = Hashtbl.create (Array.length market) in
     let ids = Hashtbl.create instruments
     and calculations_per_scenario = ref 0
-    and buckets = ref Buckets.empty in
+    and buckets = ref Buckets.empty
+    and group_count = ref 0 in
     let factor_indices =
       Array.mapi
         (fun _ (p : position) ->
@@ -258,11 +259,18 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
           calculations_per_scenario :=
             sum !calculations_per_scenario (List.length names);
           List.iter
-            (fun name -> buckets := Buckets.add (bucket p name) 0 !buckets)
+            (fun name ->
+              let key = bucket p name in
+              if not (Buckets.mem key !buckets) then (
+                (* The map comparator owns group equality, including signed zero.
+                   Check before incrementing, so max_int is safe as a limit. *)
+                require
+                  (!group_count < limits.max_groups)
+                  "aggregation group limit exceeded";
+                incr group_count;
+                (* Keep the first representative of equivalent input keys. *)
+                buckets := Buckets.add key 0 !buckets))
             names;
-          require
-            (Buckets.cardinal !buckets <= limits.max_groups)
-            "aggregation group limit exceeded";
           fi)
         portfolio
     in

@@ -79,3 +79,11 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk))
+
+(executable
+ (name planner_compile)
+ (modules planner_compile)
+ (ocamlopt_flags
+  (:standard -O3))
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))
