@@ -166,5 +166,6 @@
 
 (executable
  (name fast_allocation_profile)
+ (modes byte exe)
  (modules fast_allocation_profile)
  (libraries morphiq_risk))
