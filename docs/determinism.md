@@ -32,3 +32,9 @@ The normal oracle also hashes all 11,379 inverse outputs in fixture order to
 primitive directly; the financial replay corpus/digest remains unchanged by
 the AS241 replacement. Mutation guards omit this replay comparison and retain
 the numerical and monotonicity witnesses.
+
+The #80 Greek cancellation change updates the public digest to
+`5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199`.
+All 1,013 changed replay words are zero-volatility theta; original-input Arb
+references put each new value within 1 ULP. Other fields and outcome classes
+are unchanged in that replay. See the [qualification](results-greek-cancellation.md).

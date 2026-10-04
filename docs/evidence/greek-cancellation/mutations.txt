@@ -1,0 +1,9 @@
+baseline passes (55 s)
+killed    smooth-theta-cancellation by greek_cancellation
+killed    zero-variance-theta-cancellation by greek_cancellation
+killed    cancelled-greek-coordinate by greek_cancellation
+killed    underflowed-greek-coordinate by greek_cancellation
+killed    cancelled-price-refinement by carry_cancellation
+killed    greek-finite-result by finite_greeks
+killed    zero-variance-veta by boundary_greeks
+7 of 7 mutants killed as catalogued

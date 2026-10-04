@@ -1,0 +1,8 @@
+{
+  "baseline": "7783c6b7b38a10e54ce6855525fdd64f45e365cf",
+  "candidate": "856ef7a",
+  "ordinary_greek_rows": 66400,
+  "ordinary_greek_changed": 0,
+  "baseline_sha256": "6c6ef9f90bc8c964394e890c8075cd08563fad94c85f2b9391f558b557ff91b6",
+  "candidate_sha256": "6c6ef9f90bc8c964394e890c8075cd08563fad94c85f2b9391f558b557ff91b6"
+}
