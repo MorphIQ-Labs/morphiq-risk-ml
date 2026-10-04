@@ -708,7 +708,22 @@ let greeks_coordinates coordinates side sigma =
           veta = failure;
           color = failure;
         }
-      else Greeks.ensure_finite (live_greeks side c (Vol.to_float sigma))
+      else
+        let sigma = Vol.to_float sigma in
+        let result = live_greeks side c sigma in
+        let result =
+          match result.rho with
+          | Ok value when (not c.tied) && Float.abs value <= Float.min_float ->
+              let rho =
+                Black_rho.evaluate ~spot:c.original_spot
+                  ~spot_low:c.original_spot_low ~strike:c.original_strike
+                  ~strike_low:c.original_strike_low ~time:c.time ~rate:c.rate
+                  ~yield:c.yield side sigma
+              in
+              { result with rho }
+          | _ -> result
+        in
+        Greeks.ensure_finite result
 
 let implied_coordinates coordinates side price =
   if not (Float.is_finite price && price >= 0.0) then

@@ -77,7 +77,9 @@ module type MODEL = sig
   (** Severe carry cancellation or a computed zero coordinate unsupported by
       original-input ATM identity yields [Greeks.Numerical_failure] in every
       field. Unresolved cancellation inside smooth theta additionally refuses
-      that field alone. These are capability limits, not payoff kinks. *)
+      that field alone. A zero/subnormal/smallest-normal BSM rho proposal also
+      requires an original-input rounding proof or numerical failure. These are
+      capability limits, not payoff kinks. *)
 
   val coordinates : admitted -> Coordinates.t
 end
