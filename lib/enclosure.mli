@@ -3,9 +3,17 @@
 module type S = sig
   exception Unresolved of string
 
-  type t = private { hi : float; lo : float; tail : float list; error : float }
+  type t = private {
+    hi : float;
+    lo : float;
+    third : float;
+    fourth : float;
+    error : float;
+  }
   (** The real value is within [error] of the unevaluated sum of [words]. All
-      fields are finite and [error] is nonnegative. *)
+      fields are finite and [error] is nonnegative. The zero-eliminated lower
+      words occupy [third] and [fourth]; zero means an absent trailing word.
+      [words] preserves the logical expansion including the first two slots. *)
 
   type sign = Negative | Zero | Positive | Indeterminate
 

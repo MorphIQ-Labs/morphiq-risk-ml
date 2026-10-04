@@ -34,30 +34,71 @@ The executed baseline performs 32,009 exact-rational postcondition checks;
 `scripts/canonical_expansion.py SOURCE --output REPORT` reproduces that campaign.
 The OCaml primitive campaign separately uses exact rationals.
 
-### Allocation-preserving arithmetic order
+### Fixed words and private packing storage
 
-Each `pack` owns a fresh checked float array with capacity equal to its number
-of input terms. It folds those terms in their original order. A grow step
-reads the increasing-magnitude expansion from index zero, performs the same
-exact rounded sum/residual pair for `(carry, term)`, writes each nonzero residual, then appends the final
-nonzero carry. Induction on the terms gives the same ordered residuals and
-carry as the previous list traversal. Signed-zero elimination and every
-intermediate finite check remain unchanged.
+The two supported configurations retain two or four words. An immutable record
+of five floats stores `hi`, `lo`, `third`, `fourth` and `error`; absent trailing
+words use zero. This avoids mixing floats and list pointers in the record and
+allows the supported native compiler to use its packed float representation.
+The first two logical slots always exist, including zero; the third/fourth slots
+exist only when nonzero. Grow eliminates zero residuals and carry, so occupied
+slots are contiguous. Negation may change padding zero signs; both signs still
+mean an absent trailing slot and do not enter the arithmetic. `words` reconstructs
+the original logical list for research/test consumers; production arithmetic
+works directly from the fixed slots. `Internal.Enclosure.S.t` changes layout and
+removes the list-valued `tail` field; stable public APIs are unchanged.
 
-At iteration `j`, at most `j` residuals have been emitted. The next write is
-therefore at or behind the term just read, never ahead into unread storage.
-One insertion grows the expansion by at most one word, so after `k` input
-terms its length is at most `k`; the input count bounds every write. Only
-initialized indices below the current length are read. No scratch escapes
-`pack` or is shared across calls, threads or domains. Indexing remains checked;
-there is no unsafe access, new foreign code or public mutable representation.
+Each packing operation owns a checked float array containing its input terms.
+That same array becomes the growing expansion. Before inserting term `i`, the
+expansion length is at most `i`. The term at `i` is read before the grow step;
+its writes end at or before `i`, so future terms remain intact. Inside grow,
+at most `j` residuals have been emitted when reading slot `j`, so its write
+cannot overwrite an unread expansion word either. Both loops preserve the
+previous increasing-magnitude expansion and insertion order. All accesses stay
+checked. Arrays never escape into an enclosure or cross calls/workers/domains.
 
-The retained-word pass visits the array from its last initialized index down
-to zero, exactly the previous reversed-list order. It retains the same words
-and adds discarded magnitudes to the radius in the same order. Products,
-explicit FMA, underflow allowances, series counts and acceptance limits are
-unchanged. This changes storage and allocation, not the floating operation
-graph or error derivation. Independent exact-rational checks remain required.
+Bounds follow directly from the supported representation: additions insert at
+most eight terms; multiplication inserts at most 32 terms (two words per pair
+of at most four retained words on each side); scaling uses at most four;
+`of_words` uses two; denominator lower parts use at most three. No global pool,
+thread-local cache, borrowed lifetime or shared mutable scratch is introduced.
+
+Addition emits all logical words of its first operand, then its second, including
+the same explicit zero slots as before. Multiplication visits operand pairs in
+the original nested-loop order, computes the same separately rounded product,
+explicit FMA residual and quantum allowance, and accumulates those allowances
+in that order. The old fold prepended each `(product,residual)` pair: the new
+buffer writes that pair backward by pair index, leaving product before residual
+inside each pair. The packing input sequence is therefore identical, including
+zero products. It does not reverse the allowance accumulation or silently skip
+zero insertions.
+
+The largest retained words are copied directly into the immutable record.
+Discarded words are visited from highest remaining index to zero, preserving
+the old outward radius-addition order. Magnitudes iterate over the same logical
+slots from the same initial zero. Radius propagation, precision, series terms,
+finite checks and requested limits remain unchanged. The grow and magnitude
+helpers are explicitly inlined to avoid boxed float arguments/results; inlining
+does not authorize reassociation or implicit multiply-add contraction.
+
+### Allocation-free normal exponent extraction
+
+The product-quantum guard needs only the exponent returned by `frexp`. For a
+finite normal binary64 word with stored exponent field `E`, its value is
+`sign * (1 + fraction/2^52) * 2^(E-1023)`. Moving the significand into `[1/2,1)`
+gives exactly `frexp_exponent = E-1022`, for either sign. The implementation
+extracts bits 52–62 with integer operations. Field zero retains the original
+`Float.frexp` path for zero/subnormals, so their normalization is unchanged.
+Product finiteness and the enclosure construction boundary exclude nonfinite
+operands before this helper is used. The existing `ea+eb >= -968` criterion and
+one-quantum underflow allowance are unchanged; no mantissa tuple is needed for
+normal inputs. Independent rational product checks and a biased-exponent mutant
+exercise this bound, including inputs adjacent to its cutoff.
+
+The ordinary rational/component/model suites, native/bytecode sum guard and
+complete public certificate replays remain required. New packed-word and normal
+exponent mutations complement the existing discarded-word, residual, underflow,
+series and final-acceptance witnesses.
 
 ### Magnitude-ordered exact sums
 

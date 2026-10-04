@@ -27,7 +27,7 @@ def main():
         p.error('rounds must be positive')
     report = dict(protocol='shared-portfolio-abba-v1', platform=platform.platform(),
                   cpu_count=os.cpu_count(), toolchain=subprocess.check_output(['ocamlopt', '-config'], text=True),
-                  flags='Dune release; library -O3; benchmark standard release flags',
+                  flags='Dune default profile; library -O3; benchmark standard flags',
                   warmup='two calls per phase per fresh process; full major GC before each sample outside timing',
                   measured='five two-call samples per phase; ns and bytes per 24-row portfolio invocation; execution workers=1',
                   driver_sha256=sha(Path(__file__)), sources={}, runs=[])

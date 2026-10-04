@@ -4,9 +4,17 @@
 module type S = sig
   exception Unresolved of string
 
-  type t = private { hi : float; lo : float; tail : float list; error : float }
+  type t = private {
+    hi : float;
+    lo : float;
+    third : float;
+    fourth : float;
+    error : float;
+  }
   (** The real value is within [error] of the unevaluated sum of [words]. All
-      fields are finite and [error] is nonnegative. *)
+      fields are finite and [error] is nonnegative. The zero-eliminated lower
+      words occupy [third] and [fourth]; zero means an absent trailing word.
+      [words] preserves the logical expansion including the first two slots. *)
 
   type sign = Negative | Zero | Positive | Indeterminate
 
@@ -46,7 +54,14 @@ end) =
 struct
   exception Unresolved of string
 
-  type t = { hi : float; lo : float; tail : float list; error : float }
+  type t = {
+    hi : float;
+    lo : float;
+    third : float;
+    fourth : float;
+    error : float;
+  }
+
   type sign = Negative | Zero | Positive | Indeterminate
 
   let[@inline always] require condition why =
@@ -75,7 +90,7 @@ struct
   (* Exact grow-expansion in private scratch, in increasing-magnitude order.
      At step j, used <= j: writing a residual cannot overwrite an unread term.
      Each inserted word increases length by at most one. *)
-  let grow expansion length word =
+  let[@inline always] grow expansion length word =
     let carry = ref word and used = ref 0 in
     for j = 0 to length - 1 do
       let sum, residual = two_sum !carry (Float.Array.get expansion j) in
@@ -89,41 +104,88 @@ struct
       incr used);
     !used
 
-  let pack terms error =
+  (* Every supported configuration retains at most four nonzero words.
+     The first two slots remain present even for exact scalars, as before.
+     Zero third/fourth slots encode the absent tail, never discarded values. *)
+  let () =
+    require (Config.words = 2 || Config.words = 4) "unsupported precision"
+
+  let[@inline always] word_count a =
+    if a.fourth <> 0.0 then 4 else if a.third <> 0.0 then 3 else 2
+
+  let[@inline always] word a i =
+    match i with
+    | 0 -> a.hi
+    | 1 -> a.lo
+    | 2 -> a.third
+    | 3 -> a.fourth
+    | _ -> invalid_arg "enclosure word"
+
+  let pack_array expansion error =
     require (Float.is_finite error && error >= 0.0) "invalid enclosure radius";
-    (* No grow can retain more words than have been inserted. Scratch never
-       escapes this call, and all indexing remains checked. *)
-    let expansion = Float.Array.create (List.length terms) in
-    let length = List.fold_left (grow expansion) 0 terms in
-    let rec take n kept error j =
-      if j < 0 then (List.rev kept, error)
-      else
-        let x = Float.Array.get expansion j in
-        if n > 0 then take (n - 1) (x :: kept) error (j - 1)
-        else take 0 kept (error +^ abs x) (j - 1)
+    (* Before insertion i, the expansion length is at most i. Read term i
+       first; grow writes only at or below i, preserving all future terms. *)
+    let length = ref 0 in
+    for i = 0 to Float.Array.length expansion - 1 do
+      let input = Float.Array.get expansion i in
+      length := grow expansion !length input
+    done;
+    let kept = min Config.words !length in
+    let error = ref error in
+    for j = !length - kept - 1 downto 0 do
+      let x = Float.Array.get expansion j in
+      error := !error +^ abs x
+    done;
+    require (Float.is_finite !error) "nonfinite enclosure radius";
+    let retained i =
+      if i < kept then Float.Array.get expansion (!length - i - 1) else 0.0
     in
-    let words, error = take Config.words [] error (length - 1) in
-    require (Float.is_finite error) "nonfinite enclosure radius";
-    match words with
-    | [] -> { hi = 0.0; lo = 0.0; tail = []; error }
-    | [ hi ] -> { hi; lo = 0.0; tail = []; error }
-    | hi :: lo :: tail -> { hi; lo; tail; error }
+    {
+      hi = retained 0;
+      lo = retained 1;
+      third = retained 2;
+      fourth = retained 3;
+      error = !error;
+    }
 
   let exact hi =
     finite hi;
-    { hi; lo = 0.0; tail = []; error = 0.0 }
+    { hi; lo = 0.0; third = 0.0; fourth = 0.0; error = 0.0 }
 
-  let of_words hi lo = pack [ hi; lo ] 0.0
-  let words a = a.hi :: a.lo :: a.tail
+  let of_words hi lo =
+    let terms = Float.Array.create 2 in
+    Float.Array.set terms 0 hi;
+    Float.Array.set terms 1 lo;
+    pack_array terms 0.0
+
+  let words a =
+    let tail =
+      if a.fourth <> 0.0 then [ a.third; a.fourth ]
+      else if a.third <> 0.0 then [ a.third ]
+      else []
+    in
+    a.hi :: a.lo :: tail
+
   let centre a = { a with error = 0.0 }
-  let is_zero a = a.hi = 0.0 && a.lo = 0.0 && a.tail = [] && a.error = 0.0
-  let is_float a x = a.hi = x && a.lo = 0.0 && a.tail = [] && a.error = 0.0
-  let sum_abs terms = List.fold_left (fun total x -> total +^ abs x) 0.0 terms
-  let centre_magnitude a = sum_abs (words a)
+
+  let is_zero a =
+    a.hi = 0.0 && a.lo = 0.0 && a.third = 0.0 && a.fourth = 0.0 && a.error = 0.0
+
+  let is_float a x =
+    a.hi = x && a.lo = 0.0 && a.third = 0.0 && a.fourth = 0.0 && a.error = 0.0
+
+  let[@inline always] magnitude_from a first =
+    let total = ref 0.0 in
+    for i = first to word_count a - 1 do
+      total := !total +^ abs (word a i)
+    done;
+    !total
+
+  let centre_magnitude a = magnitude_from a 0
   let magnitude a = centre_magnitude a +^ a.error
 
   let neg a =
-    { a with hi = -.a.hi; lo = -.a.lo; tail = List.map (fun x -> -.x) a.tail }
+    { a with hi = -.a.hi; lo = -.a.lo; third = -.a.third; fourth = -.a.fourth }
 
   let add_error a e =
     require (Float.is_finite e && e >= 0.0) "invalid added error";
@@ -134,29 +196,35 @@ struct
   let add a b =
     if is_zero a then b
     else if is_zero b then a
-    else pack (words a @ words b) (a.error +^ b.error)
+    else
+      let na = word_count a and nb = word_count b in
+      let terms = Float.Array.create (na + nb) in
+      for i = 0 to na - 1 do
+        Float.Array.set terms i (word a i)
+      done;
+      for i = 0 to nb - 1 do
+        Float.Array.set terms (na + i) (word b i)
+      done;
+      pack_array terms (a.error +^ b.error)
 
   let sub a b = add a (neg b)
+
+  let[@inline always] frexp_exponent x =
+    let field =
+      Int64.(to_int (logand (shift_right_logical (bits_of_float x) 52) 0x7ffL))
+    in
+    (* For finite normal binary64 x, frexp uses exponent field - 1022.
+       Retain the original operation for zero and subnormal inputs. *)
+    if field = 0 then snd (Float.frexp x) else field - 1022
 
   let[@inline always] product_allowance a b =
     (* Both exponents are then at least -484, so their sum is >= -968.
        This exactly implies the existing residual-quantum condition. *)
     if abs a >= 0x1p-485 && abs b >= 0x1p-485 then 0.0
     else
-      let ea = snd (Float.frexp a) and eb = snd (Float.frexp b) in
+      let ea = frexp_exponent a and eb = frexp_exponent b in
       let error = if ea + eb >= -968 then 0.0 else quantum in
       error
-
-  let product a b =
-    let p = a *. b in
-    finite p;
-    if a = 0.0 || b = 0.0 || abs a = 1.0 || abs b = 1.0 then (p, 0.0, 0.0)
-    else
-      let r = Float.fma a b (-.p) in
-      (* Each input is an integer multiple of 2^(frexp_exponent-53).
-       If the product quantum is representable, the p-bit residual is exact.
-       Otherwise only underflow can round it; retain a full quantum. *)
-      (p, r, product_allowance a b)
 
   let mul a b =
     if is_zero a || is_zero b then exact 0.0
@@ -165,18 +233,31 @@ struct
     else if is_float a (-1.0) then neg b
     else if is_float b (-1.0) then neg a
     else
-      let terms, error =
-        List.fold_left
-          (fun state x ->
-            List.fold_left
-              (fun (terms, error) y ->
-                let p, r, e = product x y in
-                (p :: r :: terms, error +^ e))
-              state (words b))
-          ([], 0.0) (words a)
-      in
+      let na = word_count a and nb = word_count b in
+      let count = 2 * na * nb in
+      let terms = Float.Array.create count in
+      let error = ref 0.0 in
+      for i = 0 to na - 1 do
+        let x = word a i in
+        for j = 0 to nb - 1 do
+          let y = word b j in
+          let p = x *. y in
+          finite p;
+          (* The old fold prepended each (p,r) pair. Compute products/errors
+             in the original order and store pairs backward to preserve it. *)
+          let k = count - (2 * ((i * nb) + j)) - 2 in
+          Float.Array.set terms k p;
+          if x = 0.0 || y = 0.0 || abs x = 1.0 || abs y = 1.0 then (
+            Float.Array.set terms (k + 1) 0.0;
+            error := !error +^ 0.0)
+          else
+            let r = Float.fma x y (-.p) in
+            Float.Array.set terms (k + 1) r;
+            error := !error +^ product_allowance x y
+        done
+      done;
       let input = (centre_magnitude a *^ b.error) +^ (magnitude b *^ a.error) in
-      pack terms (error +^ input)
+      pack_array terms (!error +^ input)
 
   let mul_float a b = mul a (exact b)
 
@@ -196,9 +277,14 @@ struct
 
   let div a b =
     require (b.hi <> 0.0) "unresolved denominator";
-    if b.lo = 0.0 && b.tail = [] && b.error = 0.0 then div_float a b.hi
+    if b.lo = 0.0 && b.third = 0.0 && b.fourth = 0.0 && b.error = 0.0 then
+      div_float a b.hi
     else
-      let rho = div_float (pack (b.lo :: b.tail) b.error) b.hi in
+      let terms = Float.Array.create (word_count b - 1) in
+      for i = 1 to word_count b - 1 do
+        Float.Array.set terms (i - 1) (word b i)
+      done;
+      let rho = div_float (pack_array terms b.error) b.hi in
       let r = magnitude rho in
       require (r < 0.5) "denominator uncertainty";
       let quotient = div_float a b.hi in
@@ -218,23 +304,22 @@ struct
     let error =
       ref (if a.error = 0.0 then 0.0 else up (Float.ldexp a.error k))
     in
-    let scaled =
-      List.map
-        (fun input ->
-          let result = Float.ldexp input k in
-          if input <> 0.0 && abs result < Float.min_float then
-            error := !error +^ quantum;
-          result)
-        (words a)
-    in
-    pack scaled !error
+    let scaled = Float.Array.create (word_count a) in
+    for i = 0 to word_count a - 1 do
+      let input = word a i in
+      let result = Float.ldexp input k in
+      if input <> 0.0 && abs result < Float.min_float then
+        error := !error +^ quantum;
+      Float.Array.set scaled i result
+    done;
+    pack_array scaled !error
 
   let sign a =
     if is_zero a then Zero
-    else if a.lo = 0.0 && a.tail = [] && a.error = 0.0 then
+    else if a.lo = 0.0 && a.third = 0.0 && a.fourth = 0.0 && a.error = 0.0 then
       if a.hi > 0.0 then Positive else Negative
     else
-      let rest = sum_abs (a.lo :: a.tail) +^ a.error in
+      let rest = magnitude_from a 1 +^ a.error in
       if down (a.hi -. rest) > 0.0 then Positive
       else if up (a.hi +. rest) < 0.0 then Negative
       else Indeterminate
@@ -251,7 +336,7 @@ struct
       let result = ref (exact (Float.sqrt a.hi)) in
       for _ = 1 to 3 do
         let q = centre !result in
-        let lower = down (q.hi -. sum_abs (q.lo :: q.tail)) in
+        let lower = down (q.hi -. magnitude_from q 1) in
         require (lower > 0.0) "square root proposal not positive";
         let d = sub a (mul q q) in
         let correction = div d (mul_float q 2.0) in

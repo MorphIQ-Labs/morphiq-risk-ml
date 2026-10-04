@@ -1,0 +1,17 @@
+{
+  "README.md": "9de1c3501d691e11308c41de5a62bef2a5e84358e53a0930a936e61ea2706701",
+  "allocation-sites-final.json": "f71df2573ea55e4201d3330cf311c947572d9e9092e26deeebe87d2f78def370",
+  "assurance-abba.json.gz": "19772b95ebae1e9304274a6a25a4efd3b22c315a5719e2e643e86eaa0c9bf3ec",
+  "baseline-instrumentation.patch.gz": "736327e69d3bf88a0ccca6d50da52d274caa618229fbc8375f2da9013dc7c23d",
+  "exchange-abba.json.gz": "30cd6a368a4225411667e55328572b9a0331617620a6839e7f1acedff7522dae",
+  "installed-artifact.json": "cb98050846f5a38fde9e7b1e8faf864a21293bff4bca654fb2e47e4bcdca7a83",
+  "metadata.json": "ac07ee84760ecd04dc7b9f7156c2f5bfdbf0261bdea4a6e07c5ae8206ca1ac49",
+  "mutations.log.gz": "aefb0df3a92170a809bd42247430bb17d0c97c81468ef0712df02b7eaf36f629",
+  "portfolio-abba.json.gz": "86414416b94e353bc271b9df5bd048369ca1c73f1dff72a63dd4bc6e729e001a",
+  "profile-baseline.txt.gz": "c538d198bdac0e46811a89f6afcae14a5a98fb2e137d67399e8dbe30db25a8b3",
+  "profile-candidate.txt.gz": "1e5a87edd5577c21f23173f1e619804ee606e9e52456580d682405374d634522",
+  "replay.json": "7230870e41cc9208c4435bb8ea7eb5abc719f4db2b85f5d432a8505aa9196fac",
+  "scalar-abba.json.gz": "8016f7b433a1c69dd3e27eaa39a4b31b20ddbaac09e0ea955d3c2f77debf49cf",
+  "validation-final.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+  "validation.log.gz": "3c8b7c0d18a45926d66a3d4767fa6000cb9493d4bf4ced55c0ac46e98fb9c922"
+}

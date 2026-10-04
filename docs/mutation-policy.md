@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **88
+seven core mutants. The catalog currently contains **90
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -219,3 +219,11 @@ The optional catalog now has 86 mechanisms; default CI remains the same seven.
 `enclosure-sum-finite` removes overflow refusal. Both use the independent
 exact-rational `enclosure_sum` guard. The optional catalog now contains 88
 mechanisms. The seven default CI selections remain unchanged.
+
+### Fixed-word enclosure allocation
+
+`enclosure-packed-word` removes a retained low word from the fixed representation;
+`enclosure-normal-exponent` biases the normal-input exponent and can omit a needed
+product quantum. The independent rational `enclosure_reference` guard owns both.
+The discarded-word mechanism now targets the same outward allowance in its
+array loop. The optional catalog has 90 entries; default CI still selects seven.
