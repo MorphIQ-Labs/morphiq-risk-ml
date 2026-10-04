@@ -127,6 +127,29 @@ class Controls(unittest.TestCase):
                 run_case(root/'missing', case, config, root/'run')
             self.assertFalse(json.loads((root/'run/run.json').read_text())['complete'])
 
+    def test_changed_completed_request_replay_is_rejected(self):
+        config, case = small()
+        case['sink'] = 'digest'
+        baseline = self.real(config, case)
+        payload = dict(ready=baseline['ready'][0]['result'],
+                       request=baseline['waves'][0]['responses'][0]['result'],
+                       check={'kind':'check', 'digest':'0'*64})
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fake = root/'child'
+            fake.write_text('#!/usr/bin/env python3\nimport json,sys\n' +
+                            'data=json.loads(' + repr(json.dumps(payload)) + ')\n' +
+                            'print(json.dumps(data["ready"]),flush=True)\n' +
+                            'for line in sys.stdin:\n' +
+                            ' if line.strip()=="quit":break\n' +
+                            ' print(json.dumps(data["check" if line.strip()=="check" else "request"]),flush=True)\n')
+            fake.chmod(0o700)
+            with self.assertRaisesRegex(ValueError, 'request/check replay differs'):
+                run_case(fake, case, config, root/'run')
+            result = json.loads((root/'run/run.json').read_text())
+            self.assertFalse(result['complete'])
+            self.assertEqual(len(result['children']), 2)
+
     def test_existing_destination_and_cli(self):
         config, case = small()
         with tempfile.TemporaryDirectory() as tmp:
