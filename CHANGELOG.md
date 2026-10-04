@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Numerical boundary campaign (#54)
+
+- Add deterministic boundary/scale/cancellation and IV-cell challenges with
+  independent rational/Arb references and per-region availability accounting.
+- Gate 2,511 smoke requests and scorer controls in ordinary CI; retain a manual
+  7,095-request campaign with two fast-API findings (#76, #77), explicit
+  uncertainty and no observed contract violations.
+- [Evidence and reproduction](docs/numerical-campaign-results.md). Test/tooling
+  only; runtime arithmetic and existing numerical allowances are unchanged.
+
 ### Oracle assurance (#55)
 
 - Replace six signed-overflow ULP scorers with a shared exact finite-distance

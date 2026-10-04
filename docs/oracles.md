@@ -114,3 +114,12 @@ the fixture row and computed bit pattern (both words for DD), including Greek
 failure classifications. The ordinary tests perform no trace I/O. Compare
 baseline and candidate with identical fixtures and trace instrumentation; the
 [DD replacement report](results-dd-exponential.md) records such a campaign.
+
+## Systematic boundary campaign
+
+The [versioned protocol](numerical-campaign-protocol.md) and
+[results](numerical-campaign-results.md) add deterministic original-word boundary
+challenges with rational/Arb references, uncertainty and availability accounting.
+The committed smoke gate requires no optional Python packages. Strict manual
+scoring retains two fast-API quality findings (#76 and #77); ordinary CI checks
+contracts explicitly without treating those findings as correct expected values.
