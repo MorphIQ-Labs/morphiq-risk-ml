@@ -1,0 +1,2294 @@
+{
+  "schema": 1,
+  "rows": [
+    {
+      "id": "ordinary",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b4p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.901544925913338934803970159547023417853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "ordinary",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b7p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.427525592287412459229461847288914082147e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "ordinary",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b1p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.230615444114090328837402166382960917853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "reverse",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dbda9d04e3bc8p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.137150054213065328370285655736070850218e-15 +/- 4.72e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "reverse",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dbda9d04e3bcbp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.527385204887310368646430347681897899782e-15 +/- 4.72e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "reverse",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dbda9d04e3bcbp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.527385204887310368646430347681897899782e-15 +/- 4.72e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "equal-assets",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece44p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.202777998763997544844214251850581620222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "equal-assets",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43ffp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.979134838164248009522024920795894120222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "equal-assets",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43fep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.755491677564498474199835589741206620222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-3",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24906p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.380894783939773302809825591517056044292e-15 +/- 2.88e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-3",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.709965302140524696843257598352993544292e-15 +/- 2.89e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-3",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905ep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.933608462740274232165446929407681044292e-15 +/- 2.89e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-4",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba249064p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.809894079818728815960444077347199395528e-15 +/- 4.22e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-4",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba249061p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.519176438382022578072987929488738104472e-15 +/- 4.22e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-4",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba249063p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.033537240418478351282633408401886895528e-15 +/- 4.22e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-5",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24906p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.466256290097273559856369249155322812812e-15 +/- 4.15e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-5",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.079532680829802495388980125599126031281e-14 +/- 1.59e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-5",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905ep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.018969968897774489211990587045947812812e-15 +/- 4.15e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-6",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c331p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.064598241133330413608284907076527828696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-6",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c330dp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.400062982032954716591568903658559078696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-6",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c3309p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.473493032324537872359475657679340786956e-16 +/- 7.72e-57]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-7",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be4p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.048085196500557476845056957185706288069e-15 +/- 4.66e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-7",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be3p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.600798875301058406200678295076331288069e-15 +/- 4.66e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-7",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be2p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.153512554101559335556299632966956288069e-15 +/- 4.66e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-8",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24906p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.946750181476773169022879440089836921817e-15 +/- 2.50e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-8",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.275820699677524563056311446925774421817e-15 +/- 2.50e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-8",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905ep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.499463860277274098378500777980461921817e-15 +/- 2.50e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-9",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24906p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.861388675319272937883692467276323652248e-15 +/- 2.07e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-9",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.190459193520024331917124474112261152248e-15 +/- 2.07e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-9",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905ep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[6.414102354119773867239313805166948652248e-15 +/- 2.07e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-10",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24906p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.032111687634273397149583077458615948241e-15 +/- 3.12e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-10",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.036118220583502479118301508429455344824e-14 +/- 6.89e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-10",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fb431ba24905ep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.584825366434774326505204415349240948241e-15 +/- 3.13e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-11",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c331p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.064598241133330413608284907076527828696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-11",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c330dp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.400062982032954716591568903658559078696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-11",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c3309p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.473493032324537872359475657679340786956e-16 +/- 7.72e-57]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-12",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be4p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.329397811049903873742363437712232257379e-16 +/- 3.23e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-12",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be3p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.085653459905491316729857681661848225738e-15 +/- 1.33e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-12",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3bdc38d4f4be2p+4",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.638367138705992246085479019552473225738e-15 +/- 1.33e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-13",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece44p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.202777998763997544844214251850581620222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-13",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43ffp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.979134838164248009522024920795894120222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-13",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43fep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.755491677564498474199835589741206620222e-15 +/- 2.00e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-14",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece44p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.275983513552056118183710870246676446643e-16 +/- 3.67e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-14",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43fbp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.309382548356457935207424431751230144664e-15 +/- 3.37e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-14",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43f9p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.286209622715695886456304576964185514466e-14 +/- 4.34e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-15",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece44p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.977957646172789530583172849087140794869e-15 +/- 4.89e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-15",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43ffp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.754314485573039995260983518032453294869e-15 +/- 4.89e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-15",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.67e19eece43fep+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.530671324973290459938794186977765794869e-15 +/- 4.89e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-16",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c331p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.064598241133330413608284907076527828696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-16",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c330dp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.400062982032954716591568903658559078696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-16",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c3309p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.473493032324537872359475657679340786956e-16 +/- 7.72e-57]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-17",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.c9cf1e9626438p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.898738139206537654469747889448574743928e-15 +/- 8.24e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-17",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.c9cf1e9626438p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.898738139206537654469747889448574743928e-15 +/- 8.24e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-17",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.c9cf1e962643cp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.200416549680753951318099056522982474393e-14 +/- 1.92e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-18",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f2762p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352302372976999713390525923229691958e-8 +/- 1.68e-48]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-18",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f276258b6cc3p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352548603938048167321861539936424552e-8 +/- 3.07e-48]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-18",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f27629b043a4p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352732630234112319848267178335678469e-8 +/- 6.55e-49]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-19",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f2762p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352302372977309085877909447146327632e-8 +/- 2.42e-48]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-19",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f276258b6cc3p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352548603938357539809245063853060226e-8 +/- 3.80e-48]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-19",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.3f27629b043a4p-23",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.972352732630234421692335650702252314143e-8 +/- 1.40e-48]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-20",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-20",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-20",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-21",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c331p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.064598241133330413608284907076527828696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-21",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c330dp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.400062982032954716591568903658559078696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-21",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c3309p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.473493032324537872359475657679340786956e-16 +/- 7.72e-57]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-22",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dap+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.130942100902154533217407119872014757705e-15 +/- 5.10e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-22",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dbap+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.415377355199473487188362228272516492295e-15 +/- 5.12e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-22",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dbp+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.974485256698847325493835555909235242295e-15 +/- 5.10e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-23",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-23",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-23",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-24",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-24",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-24",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-25",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-25",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-25",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "correlation-26",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c331p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.064598241133330413608284907076527828696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-26",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c330dp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[4.400062982032954716591568903658559078696e-15 +/- 4.08e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-26",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fdcbdb70c3309p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.473493032324537872359475657679340786956e-16 +/- 7.72e-57]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-27",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dap+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.232275437964947944130496332826056200613e-16 +/- 2.79e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-27",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dbap+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.206954699989812281481881898142713687006e-14 +/- 1.28e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "correlation-27",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fe6ef53bb5dbp+1",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.628654901397496653124292309063855620061e-15 +/- 2.73e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "expiry-28",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "5.000000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-28",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "5.000000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-28",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "5.000000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-29",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-29",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-29",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-30",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-30",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-30",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-31",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-31",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-31",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-32",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "100.0000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-32",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "100.0000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-32",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "100.0000000000000000000000000000000000000",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-33",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-33",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "expiry-33",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x0p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "QuantLib Instrument marks same-date exercise expired; NPV=0 is not this API expiry payoff"
+    },
+    {
+      "id": "zero-receive",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-receive",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-receive",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "0",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-deliver",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8c051a5ca12a6p+6",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.862315109281072794060977082188280349482e-16 +/- 1.53e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-deliver",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8c051a5ca12a6p+6",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.862315109281072794060977082188280349482e-16 +/- 1.53e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-deliver",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8c051a5ca12a6p+6",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.862315109281072794060977082188280349482e-16 +/- 1.53e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-variance",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.78b6043efd3ap+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.764394871700273606433684503810952567635e-15 +/- 3.32e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-variance",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.78b6043efd3a2p+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.880380323000231417558738348656400676347e-16 +/- 3.14e-56]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-variance",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.78b6043efd39fp+2",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.652573291400398838772589838283608817635e-15 +/- 3.32e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "zero-variance-atm",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "zero-variance-atm",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "zero-variance-atm",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "currency--1000",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p-1003",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.346481986090913288605874172124435659011e-318 +/- 2.21e-358]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency--1000",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p-1003",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.346481986090913288605874172124435659011e-318 +/- 2.21e-358]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency--1000",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff611ap-1003",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.834171800445396074459023813381445278480e-318 +/- 1.30e-358]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency--500",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p-503",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.095434270276362283195491274735070772421e-167 +/- 2.09e-208]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency--500",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p-503",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.095434270276362283195491274735070772421e-167 +/- 2.09e-208]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency--500",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff611ap-503",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[6.003960744845916073705437398146119187049e-168 +/- 3.24e-208]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-500",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p+497",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.173767249207930061893611327840801354781e+134 +/- 4.24e+94]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-500",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p+497",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.173767249207930061893611327840801354781e+134 +/- 4.24e+94]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-500",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff611ap+497",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[6.433295615310871644796981918792099811035e+133 +/- 2.73e+93]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-1000",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p+997",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.842198689413328432180908052520650961126e+284 +/- 1.68e+244]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-1000",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff6118p+997",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.842198689413328432180908052520650961126e+284 +/- 1.68e+244]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "currency-1000",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.10d21f1ff611ap+997",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.105868944497803819011341940078951279399e+284 +/- 2.09e+244]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-42",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-42",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-42",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-43",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-43",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-43",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "interval",
+      "explanation": "input/date mapping unavailable; no accuracy comparison"
+    },
+    {
+      "id": "time-44",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dcf853712b91p+2",
+        "0x1p-1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.572856198042991940930712723584013547038e-15 +/- 4.54e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-44",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dcf853712b90fp+2",
+        "0x1p-1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[6.684677778342866708591807389111357297038e-15 +/- 4.54e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-44",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dcf853712b909p+2",
+        "0x1p-1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.355607260142115314558375382275419797038e-15 +/- 4.54e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-45",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dae4d5fcf2998p+3",
+        "0x1p+1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.430864976310758262127955860347206230698e-15 +/- 1.86e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-45",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dae4d5fcf299dp+3",
+        "0x1p+1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[7.450919220690494061261097484379356269302e-15 +/- 1.87e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "time-45",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.dae4d5fcf2997p+3",
+        "0x1p+1"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.207221815711008726805766529292518730698e-15 +/- 1.86e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-46",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "volatility-46",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "volatility-46",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "volatility-47",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.254057333199117409505536236502341708668e-160 +/- 1.98e-200]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-47",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.254057333199117409505536236502341708668e-160 +/- 1.98e-200]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-47",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.254057333199117409505536236502341708668e-160 +/- 1.98e-200]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-48",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.415836302186225515453933854250748540852e-153 +/- 4.81e-193]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-48",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.415836302186225515453933854250748540852e-153 +/- 4.81e-193]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-48",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x0p+0",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[8.415836302186225515453933854250748540852e-153 +/- 4.81e-193]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "volatility-49",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8ffffffffffffp+6",
+        "0x1p+0"
+      ],
+      "reference_status": "unresolved",
+      "explanation": "independent reference unresolved; no accuracy pass"
+    },
+    {
+      "id": "volatility-49",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8ffffffffffffp+6",
+        "0x1p+0"
+      ],
+      "reference_status": "unresolved",
+      "explanation": "independent reference unresolved; no accuracy pass"
+    },
+    {
+      "id": "volatility-49",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.8ffffffffffffp+6",
+        "0x1p+0"
+      ],
+      "reference_status": "unresolved",
+      "explanation": "independent reference unresolved; no accuracy pass"
+    },
+    {
+      "id": "negative-yield",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.2ba2666d7f31cp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.650381035091287457539467980079663799015e-15 +/- 4.53e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "negative-yield",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.2ba2666d7f31cp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.650381035091287457539467980079663799015e-15 +/- 4.53e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "negative-yield",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.2ba2666d7f31dp+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.142673787449153792221727864902497629901e-14 +/- 4.55e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "discount-overflow",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "discount-overflow",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "discount-overflow",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "carry-cancellation",
+      "common_rate": "0x0p+0",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "carry-cancellation",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "carry-cancellation",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "nonfinite",
+      "detail": [
+        "nan",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "explanation": "canonical engine returned nonfinite; no accuracy comparison"
+    },
+    {
+      "id": "deep-otm",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fc3e969f1a08p-499",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.202769552724205521698224508350651322289e-162 +/- 2.90e-202]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "deep-otm",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fc3e969f1a0b8p-499",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.195172232779676448268488671485468743833e-162 +/- 4.55e-203]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "deep-otm",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.fc3e969f1a07fp-499",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.202905219151786398009469791151815296905e-162 +/- 4.21e-202]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "deep-itm",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.ee88e9cd5abd4p+9",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.555352389353157096419616672937872376562e-14 +/- 4.31e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "deep-itm",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.ee88e9cd5abd2p+9",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[2.829271993367636304429559323543787237656e-13 +/- 1.57e-53]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "deep-itm",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.ee88e9cd5abd4p+9",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[5.555352389353157096419616672937872376562e-14 +/- 4.31e-54]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "exact-only",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b4p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.901544925913338934803970159547023417853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "exact-only",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b7p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.427525592287412459229461847288914082147e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "exact-only",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b1p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.230615444114090328837402166382960917853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "demanding-limit",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b4p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[3.901544925913338934803970159547023417853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "demanding-limit",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b7p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[1.427525592287412459229461847288914082147e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "demanding-limit",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b1p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "interval",
+      "absolute_error_interval": "[9.230615444114090328837402166382960917853e-15 +/- 1.41e-55]",
+      "explanation": "same exact date-mapped inputs; binary64 covariance, discount and CDF arithmetic differ"
+    },
+    {
+      "id": "invalid-57",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-57",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-57",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-58",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-58",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-58",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-59",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-59",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-59",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-60",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-60",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-60",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-61",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-61",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-61",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-62",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-62",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-62",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-63",
+      "common_rate": "0x0p+0",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-63",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-63",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "excluded",
+      "detail": [
+        "input-or-date-mapping"
+      ],
+      "reference_status": "invalid_input",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-64",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b4p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-64",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b7p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-64",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b1p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-65",
+      "common_rate": "0x0p+0",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b4p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-65",
+      "common_rate": "0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b7p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    },
+    {
+      "id": "invalid-65",
+      "common_rate": "-0x1.999999999999ap-5",
+      "comparator_status": "finite",
+      "detail": [
+        "0x1.aa4850a1f07b1p+3",
+        "0x1p+0"
+      ],
+      "reference_status": "invalid_accuracy",
+      "explanation": "typed API control; comparator has no accuracy-limit request and differing admission"
+    }
+  ]
+}

@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Certified scalar exchange prices (#60)
+
+- Add `Exchange`: two typed asset legs, abstract correlation, opaque admission
+  and private currency price/error certificates with a required absolute limit.
+  Expiry and zero covariance retain their exact original-input identities;
+  unresolved arithmetic and insufficient accuracy return explicit failures.
+- Scale covariance before products and carry total-volatility uncertainty into
+  the CDF enclosure. No rounded effective volatility is treated as exact input.
+- Additive minor API change; existing values, error variants and portfolio
+  behavior are unchanged. No release/tag or version bump is implied. No Greeks,
+  inverse parameters or portfolio adapters are included. [Evidence and limits](docs/exchange-prices.md).
+  Broader qualification remains #61; this does not expand institutional approval.
+
 ### First extension selection (#59)
 
 - Select certified scalar European exchange-option prices as the bounded first

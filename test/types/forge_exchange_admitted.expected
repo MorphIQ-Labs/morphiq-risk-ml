@@ -1,0 +1,5 @@
+File "forge_exchange_admitted.ml", line 3, characters 30-32:
+3 | let (_ : Exchange.admitted) = ()
+                                  ^^
+Error: The constructor "()" has type "unit"
+       but an expression was expected of type "Morphiq_risk.Exchange.admitted"

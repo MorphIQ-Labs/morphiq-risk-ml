@@ -1,0 +1,18 @@
+{
+  "cases-v1.json": "b9025d5327fe2c2cc24668f2322b9ad83c3acb1a63d3bd56c23dba59ebf15acb",
+  "fixture-manifest.json": "d60774a01c73513e032c6f19c43a302f5b7370d6a700d87b521143ebed4735ba",
+  "focused-v2.log": "3c177f906103d6f2f8f22e9c7499416b826da4d57438a903159370993cadcc02",
+  "method.md": "a508273f1229db5ff436cbe7edf146ace56940624bc4abd0b744307ee145a52e",
+  "mutations.log": "9cbe42628ae05a55991734b9d752c619cb68152c1cc78538a161a42bfc860f17",
+  "performance-host.txt": "8f81ea8f9e56e4d9e0b97857efd24f1a90ca3d2ece13826c4938faf20b58e5e8",
+  "performance-summary.json": "4cf6eebfeaf3fdaaa57deab5f85d49d061ed1104bdd22835fa7cafa0200a993c",
+  "performance-v1.txt": "c416e24195068bba7efebd81c1dc462f7fae7b8e688828f2918aff9b5903fd67",
+  "protocol.md": "e1c14ef7b6b4a989e07af17d3b975af79e65c8929cc8929ba49499872bd49dc2",
+  "quantlib-build.json": "9b7f40615f3e2c2fe3427879287c29ae0f07fbd011bbfc339a632d3f872d5404",
+  "quantlib-comparison.json": "efd212635ce99898eb7c0f27ae3288aa3af611aabb9b2e8fd782e426e09bc228",
+  "quantlib-v1.tsv": "5885e98e31f5cdd32d509cb2538a178ac9b9f7fa9c33db4d48d0617be6845b0b",
+  "reference-generator-v1.py": "f201efd9f3e3d19732a0bc85e87b9690dd7d0018d10b3381a4478c8eee37e3e0",
+  "references-v1.json": "39a579895b8c794812e87c68cab240d440e891c07314b9d139cb03b576a0b7c1",
+  "references-v2.json": "308ab5ee3d978d9d34e674278b6297df0a5896c53efd236193ecca77e8db20c3",
+  "validation.json": "152e6c37534464f92ce22ad3fd184fa5d99c6e60bb1db60db9c49412684fab03"
+}

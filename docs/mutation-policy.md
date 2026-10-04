@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **77
+seven core mutants. The catalog currently contains **83
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -184,3 +184,12 @@ normal results for both sides and zero/positive volatility. The catalog and
 seven default core selections are unchanged. The [closeout report](adversarial-assurance-closeout.md)
 retains the initial survivors, derivation, original words and affected guard
 rerun rather than treating survival as evidence of universal redundancy.
+
+
+## Certified exchange prices (#60)
+
+Six optional mechanisms cover the correlation cross term, rounded covariance
+misclassification, premature discounted-leg rounding, the deliver leg's yield,
+certificate radius and final absolute-limit enforcement. Each uses
+`exchange_reference`; only resolved independent intervals adjudicate numerical
+accuracy. The catalog now has 83 mechanisms; the default seven are unchanged.

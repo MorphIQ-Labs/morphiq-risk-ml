@@ -1,0 +1,12 @@
+{
+  "source": "f3fc9718c5370e027e62fead7e5985d4096ab82b",
+  "ordinary_suite": "passed",
+  "build": "passed",
+  "format": "passed",
+  "new_optional_mutants": "6/6 killed after clean baseline and successful mutated builds",
+  "core_mutants": 7,
+  "public_digest": "5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199",
+  "full_83_mutant_catalog": "not run",
+  "qualification_61": "open",
+  "ordinary_log_sha256": "ef271be9323949b3c31145fff8ee03de0cf7f34cfc9b6ba15c78d167ce2a1267"
+}

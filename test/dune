@@ -616,3 +616,22 @@
    current-build
    --output
    rho-midpoint-report.json)))
+
+(test
+ (name exchange_reference)
+ (modules exchange_reference)
+ (libraries morphiq_risk zarith)
+ (action
+  (run %{test} %{dep:exchange_reference.tsv})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/exchange_fixture.py
+  ../scripts/exchange_reference.py
+  ../docs/evidence/exchange-implementation/cases-v1.json
+  ../docs/evidence/exchange-implementation/references-v2.json
+  ../docs/evidence/exchange-implementation/fixture-manifest.json
+  exchange_reference.tsv)
+ (action
+  (run python3 %{dep:../scripts/exchange_fixture.py} --check)))

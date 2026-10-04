@@ -1,0 +1,7 @@
+{
+  "scripts/exchange_fixture.py": "52a3605cc3f605ac6fcdfb06b6275831148c7167867183d1fc527499937c499d",
+  "scripts/exchange_reference.py": "3a36e9c0be3b0f6be696d99c91aa03dd23ce6175630aa417ad3b44a959dec5c5",
+  "docs/evidence/exchange-implementation/cases-v1.json": "b9025d5327fe2c2cc24668f2322b9ad83c3acb1a63d3bd56c23dba59ebf15acb",
+  "docs/evidence/exchange-implementation/references-v2.json": "308ab5ee3d978d9d34e674278b6297df0a5896c53efd236193ecca77e8db20c3",
+  "test/exchange_reference.tsv": "874a51600468e463c5d3993d1bb19a8054721f40a465865d04d5b2d6aad487a1"
+}

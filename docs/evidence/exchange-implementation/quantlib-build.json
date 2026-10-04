@@ -1,0 +1,24 @@
+{
+  "revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "cmake": "cmake version 4.4.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+  "flags": [
+    "C++17",
+    "Release",
+    "-O3",
+    "-ffp-contract=off",
+    "jobs=2",
+    "Boost 1.92.0",
+    "shared library",
+    "QL_BUILD_TEST_SUITE=OFF",
+    "QL_BUILD_EXAMPLES=OFF"
+  ],
+  "sha256": {
+    "scripts/exchange_quantlib.cpp": "783edd39decb22ddcfd64d7dc1e3f8c727ed54774da3d5e454870d5e0da9b2f3",
+    "/tmp/morphiq-exchange-ql-build/CMakeCache.txt": "05b68832ac5c51192a0a50659081d90c5a678966da4eba87e37121ded8ffa1a6",
+    "/tmp/morphiq-exchange-ql-build/ql/config.hpp": "578dea77fa21c11b0eb9dc9d7174e3942757b10ca9d26813f3a48ca071c1b932",
+    "/tmp/morphiq-exchange-ql-build/ql/libQuantLib.1.44.0.dylib": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161",
+    "/tmp/morphiq-exchange-ql-runner": "0d0b41764e1c3011920aa94e15d5b41532547e46723d0124e3361c3ae7d191a1",
+    "docs/evidence/exchange-implementation/quantlib-v1.tsv": "5885e98e31f5cdd32d509cb2538a178ac9b9f7fa9c33db4d48d0617be6845b0b"
+  }
+}

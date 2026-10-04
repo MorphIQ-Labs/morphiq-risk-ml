@@ -1,0 +1,4 @@
+File "forge_exchange_certificate.ml", line 3, characters 37-72:
+3 | let (_ : Exchange.certified_price) = { value = 1.; absolute_error = 0. }
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "Morphiq_risk.Exchange.certified_price"

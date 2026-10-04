@@ -7,3 +7,13 @@
  (alias runtest)
  (action
   (run %{exe:scenario_job.exe} --workers 2)))
+
+(executable
+ (name exchange_price)
+ (modules exchange_price)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:exchange_price.exe})))

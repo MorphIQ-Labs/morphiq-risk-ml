@@ -38,6 +38,60 @@ type mutant = {
 let catalog =
   [
     {
+      id = "exchange-correlation-term";
+      file = "lib/exchange.ml";
+      snippet = "E.sub (E.exact 1.) (E.exact a.rho)";
+      replacement = "E.add (E.exact 1.) (E.exact a.rho)";
+      killer = "exchange_reference";
+      mechanism = "correlation must subtract in the covariance cross term";
+    };
+    {
+      id = "exchange-rounded-degeneracy";
+      file = "lib/exchange.ml";
+      snippet =
+        "(sigma1 = 0. && sigma2 = 0.) || (a.rho = 1. && sigma1 = sigma2)";
+      replacement =
+        "(sigma1 *. sigma1 +. sigma2 *. sigma2 -. 2. *. a.rho *. sigma1 *. \
+         sigma2) = 0.";
+      killer = "exchange_reference";
+      mechanism = "rounded covariance must not decide exact degeneracy";
+    };
+    {
+      id = "exchange-discounted-leg-rounding";
+      file = "lib/exchange.ml";
+      snippet = "    let result =";
+      replacement = "    let asset1 = E.exact asset1.hi in\n    let result =";
+      killer = "exchange_reference";
+      mechanism =
+        "discounted legs retain their original-input low words and uncertainty";
+    };
+    {
+      id = "exchange-deliver-yield";
+      file = "lib/exchange.ml";
+      snippet = "and q2 = a.deliver.dividend_yield in";
+      replacement = "and q2 = a.receive.dividend_yield in";
+      killer = "exchange_reference";
+      mechanism = "reverse exchange swaps complete legs including their yields";
+    };
+    {
+      id = "exchange-certificate-radius";
+      file = "lib/exchange.ml";
+      snippet = "let absolute_error = E.error_of_float enclosed value in";
+      replacement = "let absolute_error = 0. in";
+      killer = "exchange_reference";
+      mechanism =
+        "the certificate includes outward restoration and centering error";
+    };
+    {
+      id = "exchange-accuracy-limit";
+      file = "lib/exchange.ml";
+      snippet = "else if absolute_error > max_error then";
+      replacement = "else if false && absolute_error > max_error then";
+      killer = "exchange_reference";
+      mechanism =
+        "the restored currency error must meet the requested absolute limit";
+    };
+    {
       id = "rho-quick-zero-threshold";
       file = "lib/black_rho.ml";
       snippet =
@@ -890,6 +944,7 @@ let replace needle by hay =
    Missing mappings or fixtures fail before any mutant is scored. Native
    executables avoid an ambient bytecode DLL search-path dependency. *)
 let guard_arguments = function
+  | "exchange_reference" -> [ [ "exchange_reference" ] ]
   | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
   | "oracle_iv" | "certified_iv_reference" -> [ [ "iv" ] ]
   | "enclosure_reference" | "dd_reference" -> [ [ "dd" ] ]
@@ -916,7 +971,9 @@ let guard ~cwd name =
   let actions =
     List.map
       (List.map (fun fixture ->
-           "_build/default/oracle/fixtures/" ^ fixture ^ ".txt"))
+           if fixture = "exchange_reference" then
+             "_build/default/test/exchange_reference.tsv"
+           else "_build/default/oracle/fixtures/" ^ fixture ^ ".txt"))
       (guard_arguments name)
   in
   if

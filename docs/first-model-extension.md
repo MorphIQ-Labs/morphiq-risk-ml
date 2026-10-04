@@ -14,8 +14,9 @@ are closed. PR #84 merged as `b10490a09ffa0c0c1f33227b1dc98d8197c3d21e`;
 its [adjudication](adversarial-assurance-closeout.md) retains uncertainty and
 availability limits. This document is the bounded selection/contract gate for
 #58/#59. #60 may implement this scope after this design lands; #61 must qualify
-it before the extension is described as delivered. No runtime change, completed
-canonical execution, new numerical guarantee or human review is claimed here.
+it before the extension is described as delivered. This selection record itself claims no runtime change or completed canonical
+execution. The subsequent [implementation record](exchange-prices.md) owns its
+new API and evidence; #61 qualification and independent human review remain open.
 
 | Candidate | Learning and architecture fit | Mathematical/reference cost | Decision |
 | --- | --- | --- | --- |

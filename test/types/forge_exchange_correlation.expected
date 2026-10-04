@@ -1,0 +1,5 @@
+File "forge_exchange_correlation.ml", line 3, characters 33-36:
+3 | let (_ : Exchange.correlation) = 0.5
+                                     ^^^
+Error: The constant "0.5" has type "float" but an expression was expected of type
+         "Morphiq_risk.Exchange.correlation"

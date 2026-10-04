@@ -42,6 +42,7 @@ module Normal = Normal
 module Batch = Batch
 module Scenario = Scenario
 module Planner = Planner
+module Exchange = Exchange
 
 module Production : module type of Production
 (** Numerical building blocks, exposed for testing and research. They are not

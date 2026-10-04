@@ -1,0 +1,87 @@
+{
+  "source": "f3fc971",
+  "samples": 5,
+  "warmup_calls": 20,
+  "admission_iterations": 20000,
+  "evaluation_iterations": 200,
+  "summary": {
+    "ordinary/admission": {
+      "median_ns": 6.651878,
+      "min_ns": 6.651878,
+      "max_ns": 6.699562,
+      "bytes_per_call": 56.005
+    },
+    "ordinary/evaluation": {
+      "median_ns": 1502300.50087,
+      "min_ns": 1500270.366669,
+      "max_ns": 1504894.49501,
+      "bytes_per_call": 21414656.48
+    },
+    "ordinary/end-to-end": {
+      "median_ns": 1501410.007477,
+      "min_ns": 1498010.158539,
+      "max_ns": 1506564.617157,
+      "bytes_per_call": 21414712.48
+    },
+    "singular/admission": {
+      "median_ns": 5.507469,
+      "min_ns": 5.495548,
+      "max_ns": 5.805492,
+      "bytes_per_call": 56.005
+    },
+    "singular/evaluation": {
+      "median_ns": 653985.738754,
+      "min_ns": 653020.143509,
+      "max_ns": 655555.725098,
+      "bytes_per_call": 9679616.48
+    },
+    "singular/end-to-end": {
+      "median_ns": 654160.97641,
+      "min_ns": 653485.059738,
+      "max_ns": 659334.659576,
+      "bytes_per_call": 9679672.48
+    },
+    "tail/admission": {
+      "median_ns": 5.543232,
+      "min_ns": 5.495548,
+      "max_ns": 5.698204,
+      "bytes_per_call": 56.005
+    },
+    "tail/evaluation": {
+      "median_ns": 4408589.601517,
+      "min_ns": 4404954.910278,
+      "max_ns": 4412184.95369,
+      "bytes_per_call": 63554744.48
+    },
+    "tail/end-to-end": {
+      "median_ns": 4414790.868759,
+      "min_ns": 4407269.954681,
+      "max_ns": 4465069.770813,
+      "bytes_per_call": 63554800.48
+    },
+    "failure/admission": {
+      "median_ns": 5.698204,
+      "min_ns": 5.507469,
+      "max_ns": 5.745888,
+      "bytes_per_call": 56.005
+    },
+    "failure/evaluation": {
+      "median_ns": 45.29953,
+      "min_ns": 40.531158,
+      "max_ns": 45.29953,
+      "bytes_per_call": 352.48
+    },
+    "failure/end-to-end": {
+      "median_ns": 45.29953,
+      "min_ns": 45.29953,
+      "max_ns": 50.067902,
+      "bytes_per_call": 408.48
+    },
+    "control/bsm-certified": {
+      "median_ns": 1282755.13649,
+      "min_ns": 1280294.656754,
+      "max_ns": 1285090.446472,
+      "bytes_per_call": 18038704.48
+    }
+  }
+}
