@@ -113,3 +113,13 @@
  (name exchange_bench)
  (modules exchange_bench)
  (libraries morphiq_risk unix))
+
+(executable
+ (name exchange_campaign)
+ (modules exchange_campaign)
+ (libraries morphiq_risk))
+
+(executable
+ (name exchange_qualification_bench)
+ (modules exchange_qualification_bench)
+ (libraries morphiq_risk unix))

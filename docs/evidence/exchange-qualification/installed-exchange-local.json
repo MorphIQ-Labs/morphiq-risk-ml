@@ -1,0 +1,13 @@
+{
+  "runtime_commit": "6226b8a8cb35c765c83c97c02dd58d8d15bcde40",
+  "consumer_source": "test/installed_consumer.ml",
+  "consumer_sha256": "7d4f0de90c0ddac3495cf9c58c7116cd3fdcf5a3cf48bbc3f2d0618f073d0e97",
+  "package_path": "/tmp/morphiq-exchange-candidate-6226/install/lib/morphiq_risk_ml",
+  "native": "0.3.0",
+  "bytecode": "0.3.0",
+  "scope": "local supplemental Exchange calls against the pinned isolated installation; remote artifacts used their source-bound previous consumer",
+  "campaign_rows": 649,
+  "campaign_output_sha256": "0b9430f73d941565f194a416837294d12de2316883f9a1db2686a2a20827ab0a",
+  "campaign_native_bytecode_identical": true,
+  "campaign_source_sha256": "2f60f5e0e026c3c514833676775728f121263bc53db539417c4a6974f2f9e4a1"
+}

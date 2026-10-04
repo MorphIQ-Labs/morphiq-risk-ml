@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Exchange qualification (#61)
+
+- Retain 649 frozen original-word requests: 625 served certificates contain
+  both full independent expectation intervals, with 15 explicit numerical or
+  accuracy failures and nine invalid controls. All 270 parity pairs and 20
+  currency-scaling checks pass; no runtime change or allowance widening.
+- Resolve reference precision/serialization and sparse-tail limitations through
+  retained, independently bounded payoff formulations. Record three-platform
+  artifact/portfolio compatibility, local installed native/bytecode exchange
+  replay and loaded-host paired cost/allocation measurements.
+  [Dossier and qualification gate status](docs/exchange-qualification.md).
+
 ### Certified scalar exchange prices (#60)
 
 - Add `Exchange`: two typed asset legs, abstract correlation, opaque admission

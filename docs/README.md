@@ -84,3 +84,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Planner compilation scaling](results-planner-compilation.md): distinct-group counting, limit/replay controls and homogeneous/heterogeneous timings.
 
 - [Certified scalar exchange prices](exchange-prices.md): additive API, numerical capability, focused implementation evidence and remaining #61 qualification.
+
+- [Exchange qualification](exchange-qualification.md): frozen 649-case scalar campaign, independent expectation references, package/platform evidence and explicit gate status.

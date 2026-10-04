@@ -1,0 +1,14 @@
+{
+  "scripts/exchange_qualification.py": "7666beff6cd16387fc447fe15f0700ecc9573a80f0141e154dc9fdc61b3074a6",
+  "scripts/exchange_qualification_reference.py": "fbffcdabf7d75a74905dece83b9ec66e9d9e77943a68c5edc0aaff084e0ee056",
+  "scripts/exchange_reference.py": "3a36e9c0be3b0f6be696d99c91aa03dd23ce6175630aa417ad3b44a959dec5c5",
+  "scripts/score_exchange_qualification.py": "fda3f75137e8b1f187d72ebe97975e62a5faf52bf0e87bea1cdbae2da87aef7a",
+  "scripts/exchange_properties.py": "473a31f8d6d4fdbb023d7a7cc07285a64a5334f32e52bdf579d9e352a0bcc58c",
+  "scripts/exchange_tail_adjudication.py": "41364bba1c54c7d2366e507ea1c6d0a32d0608ef53d95155977b0cf884193179",
+  "scripts/exchange_deficit_reference.py": "a5a683ba9a9d575e36f7b57b0eeab2e692befc1da059f197c27cb4ec6090f70c",
+  "scripts/exchange_qualification_canonical.py": "3908a045b46dcdccb69a6b4dcd4fbe272bbff8a1f6ebb272217296a999ce8704",
+  "scripts/test_exchange_qualification.py": "f5a9f424b181399d2cf7341232be838e101e345a0b76f5c0e2e80063392419eb",
+  "bench/exchange_campaign.ml": "2f60f5e0e026c3c514833676775728f121263bc53db539417c4a6974f2f9e4a1",
+  "bench/exchange_qualification_bench.ml": "0163550a3b43adda2024da63b70cba18a48b8ac0404ed686a9da3e690b814e12",
+  "test/installed_consumer.ml": "7d4f0de90c0ddac3495cf9c58c7116cd3fdcf5a3cf48bbc3f2d0618f073d0e97"
+}

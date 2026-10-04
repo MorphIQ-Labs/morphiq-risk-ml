@@ -243,4 +243,36 @@ let () =
   check
     (stopped.stop = P.Sink_failure "closed" && stopped.rows_committed = 0)
     "sink failure";
+  let receive =
+    Exchange.
+      {
+        spot = 100.;
+        dividend_yield = 0.01;
+        volatility = ok (Vol.lognormal 0.2);
+      }
+  and deliver =
+    Exchange.
+      { spot = 95.; dividend_yield = 0.02; volatility = ok (Vol.lognormal 0.3) }
+  in
+  let correlation = ok (Exchange.correlation 0.5) in
+  let exchange =
+    ok (Exchange.admit ~receive ~deliver ~time_to_expiry:1. ~correlation)
+  in
+  let certificate = ok (Exchange.price exchange ~max_error:1e-9) in
+  check
+    (Float.is_finite certificate.value
+    && certificate.value > 13. && certificate.value < 14.
+    && certificate.absolute_error >= 0.
+    && certificate.absolute_error <= 1e-9)
+    "installed exchange certificate";
+  let expiry =
+    ok (Exchange.admit ~receive ~deliver ~time_to_expiry:0. ~correlation)
+  in
+  let exact = ok (Exchange.price expiry ~max_error:0.) in
+  check
+    (exact.value = 5. && exact.absolute_error = 0.)
+    "installed exchange exact expiry";
+  check
+    (Exchange.price exchange ~max_error:(-1.) = Error Exchange.Invalid_accuracy)
+    "installed exchange accuracy refusal";
   print_endline version

@@ -1,0 +1,9 @@
+{
+  "candidate_commit": "6226b8a8cb35c765c83c97c02dd58d8d15bcde40",
+  "campaign_sha256": "94754462aa102240f50d00e7895668cb5bf4fc57545db7a8b7876d3a5fd0d2f9",
+  "worker_sha256": "1cbbd3025b58b0ba15c799cdb0a8ed11fc56031c1db55f7104f2c04a2e774849",
+  "replay_tool_sha256": "301a17f3ac3accccfd907654517b0259b28bd63fb082dbdc35f8e6da3ec4126e",
+  "rows": 720,
+  "matched_price_greek_iv_outcomes": 8640,
+  "scope": "Exact numerical replay of the independently audited captured campaign; timing is not scored."
+}
