@@ -3,6 +3,8 @@
 open Morphiq_risk
 module P = Production
 
+let many = ref false
+
 external monotonic : unit -> float = "morphiq_bench_monotonic"
 
 let word x = Printf.sprintf "%016Lx" (Int64.bits_of_float x)
@@ -49,8 +51,46 @@ let iv = function
   | Iv.Non_convergence -> "non_convergence"
   | Iv.Numerical_failure -> "numerical_failure"
 
+let render name raw = function
+  | Error e -> (name, error e)
+  | Ok c ->
+      (name, "ok\t" ^ word (raw c.P.value) ^ "\t" ^ word (raw c.absolute_error))
+
+let number : type c a. (c, a) P.quantity -> a -> float =
+ fun q x ->
+  match q with
+  | P.Price -> x
+  | P.Delta -> x
+  | P.Gamma -> x
+  | P.Rho -> x
+  | P.Theta -> (x :> float)
+  | P.Vega -> (x :> float)
+  | P.Vanna -> (x :> float)
+  | P.Volga -> (x :> float)
+  | P.Charm -> (x :> float)
+  | P.Veta -> (x :> float)
+  | P.Color -> (x :> float)
+
+let render_outcome : type c. c P.outcome -> string * string =
+ fun (P.Outcome (quantity, result)) ->
+  let name =
+    match quantity with
+    | P.Price -> "price"
+    | P.Delta -> "delta"
+    | P.Gamma -> "gamma"
+    | P.Rho -> "rho"
+    | P.Theta -> "theta"
+    | P.Vega -> "vega"
+    | P.Vanna -> "vanna"
+    | P.Volga -> "volga"
+    | P.Charm -> "charm"
+    | P.Veta -> "veta"
+    | P.Color -> "color"
+  in
+  render name (number quantity) result
+
 module Run (M : sig
-  include P.MODEL
+  include P.MULTI_OUTPUT_MODEL
 
   val vol : float -> (coordinate Vol.t, Refusal.t) result
 end) =
@@ -61,19 +101,27 @@ struct
     | _, Error r -> [ ("admission", error (P.Invalid_input r)) ]
     | Ok admitted, Ok vol ->
         let values =
-          List.map
-            (fun (Request (name, quantity, max_error, raw)) ->
-              let value =
-                match M.evaluate admitted side vol quantity ~max_error with
-                | Error e -> error e
-                | Ok c ->
-                    "ok\t"
-                    ^ word (raw c.value)
-                    ^ "\t"
-                    ^ word (raw c.absolute_error)
-              in
-              (name, value))
-            (requests limit)
+          if !many then
+            let group =
+              List.map
+                (fun (Request (_, q, limit, _)) -> P.Request (q, limit))
+                (requests limit)
+            in
+            List.map render_outcome (M.evaluate_many admitted side vol group)
+          else
+            List.map
+              (fun (Request (name, quantity, max_error, raw)) ->
+                let value =
+                  match M.evaluate admitted side vol quantity ~max_error with
+                  | Error e -> error e
+                  | Ok c ->
+                      "ok\t"
+                      ^ word (raw c.value)
+                      ^ "\t"
+                      ^ word (raw c.absolute_error)
+                in
+                (name, value))
+              (requests limit)
         in
         let root =
           match M.implied admitted side quote with
@@ -163,17 +211,19 @@ let evaluate fields =
   | _ -> failwith "shadow row must have 12 tab-separated fields"
 
 let () =
-  if Array.length Sys.argv <> 1 then (
-    if Array.to_list Sys.argv = [ Sys.argv.(0); "--help" ] then
-      print_endline
-        "shadow: read id/model/side/S/K/T/r/q/sigma/shift/quote/limit \
-         tab-separated binary64-word rows from stdin"
-    else if Array.to_list Sys.argv = [ Sys.argv.(0); "--version" ] then
-      print_endline Morphiq_risk.version
-    else (
-      prerr_endline "shadow: no positional arguments; use --help";
-      exit 2);
-    exit 0);
+  Arg.parse
+    [
+      ("--many", Arg.Set many, "share certified preparation across outputs");
+      ( "--version",
+        Arg.Unit
+          (fun () ->
+            print_endline Morphiq_risk.version;
+            exit 0),
+        "version" );
+    ]
+    (fun _ -> raise (Arg.Bad "no positional arguments"))
+    "shadow: read id/model/side/S/K/T/r/q/sigma/shift/quote/limit \
+     tab-separated binary64 words";
   print_endline "READY";
   flush stdout;
   let rec read acc =

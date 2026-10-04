@@ -11,17 +11,18 @@ original spot/forward/strike and exact displaced low words, maturity, rate and
 yield. It does not depend on requested quantity, side, volatility or error limit.
 Reuse only that exact preparation, with unchanged operations and ordering. Price,
 Greek formulas, final radius calculation and acceptance remain the scalar owner.
-No CDF/Greek-specific expression is hoisted in this change: doing that eagerly
-could introduce failures for outputs that never required it.
+Greek-specific reuse now follows the [shared-intermediate contract](shared-greek-intermediates.md):
+common Greek setup is prepared on demand, and quantity-specific expressions are
+lazy. Unrelated outputs cannot trigger each other's arithmetic failures.
 
 A fresh memo belongs to one synchronous multi-output call and cannot escape.
 The first output that reaches live numerical evaluation prepares the model;
 later outputs reuse its immutable value or the same Enclosure.Unresolved result.
 Invalid accuracy, expiry-Greek and zero-volatility-Greek checks precede access.
-Thus a preparation failure cannot replace those earlier errors. Quantity-specific
-failures and Accuracy_exceeded are not cached. No memo is stored on an admitted
-value or plan; concurrent calls create separate state. The scratch bound is one
-prepared-model result per invocation, independent of output count.
+Thus a preparation failure cannot replace those earlier errors. Deferred Greek intermediates cache their own arithmetic success/failure, but only
+outputs that depend on them observe it. Final Accuracy_exceeded results are not cached. No memo is stored on an admitted
+value or plan; concurrent calls create separate state. The scratch bound is one prepared model and a fixed finite set of Greek
+intermediates per invocation, independent of output count.
 
 Batch delegates admission once for the fixed model/input group, preserving
 Invalid_input on each requested output. Planner invokes the grouped operation

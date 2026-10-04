@@ -344,12 +344,24 @@ let catalog =
       mechanism = "failed items prevent complete portfolio totals";
     };
     {
+      id = "greek-eager-inverse-time";
+      file = "lib/model_enclosure.ml";
+      snippet = "let half_inverse_time = lazy (E.div (E.exact 0.5) t) in";
+      replacement =
+        "let half_inverse_time = lazy (E.div (E.exact 0.5) t) in ignore \
+         (Lazy.force half_inverse_time);";
+      killer = "shared_greeks";
+      mechanism =
+        "unrequested derivative arithmetic cannot reject independent ATM vega";
+    };
+    {
       id = "multi-output-limit";
       file = "lib/production.ml";
       snippet =
-        "evaluate_with prepare_model admitted side sigma quantity ~max_error";
+        "evaluate_with ~greek prepare_model admitted side sigma quantity\n\
+        \              ~max_error";
       replacement =
-        "evaluate_with prepare_model admitted side sigma quantity \
+        "evaluate_with ~greek prepare_model admitted side sigma quantity \
          ~max_error:(label quantity Float.max_float)";
       killer = "production_multi";
       mechanism = "each grouped output retains its own typed acceptance limit";
@@ -973,9 +985,9 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "production_boundary" | "production_multi" | "planner_contract"
-  | "prepared_division" | "carry_cancellation" | "greek_cancellation"
-  | "rho_midpoint" ->
+  | "shared_greeks" | "production_boundary" | "production_multi"
+  | "planner_contract" | "prepared_division" | "carry_cancellation"
+  | "greek_cancellation" | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

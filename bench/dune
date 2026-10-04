@@ -134,3 +134,9 @@
  (modules shared_portfolio)
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name greek_preparation)
+ (modules greek_preparation)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))

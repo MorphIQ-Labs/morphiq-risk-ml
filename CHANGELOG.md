@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Shared Greek intermediates (#8)
+
+- Reuse common smooth-Greek setup and lazily evaluated CDF/derivative terms
+  within each multi-output call. Every output retains its own certificate,
+  accuracy limit and failure; unrelated expressions remain deferred.
+- Public signatures and numerical operation graphs are unchanged. The private
+  evaluator is owned by one caller/worker; no cache persists on admissions or
+  plans. [Dependency and failure contract](docs/shared-greek-intermediates.md).
+
 ### Shared certified model preparation (#8)
 
 - Add typed `evaluate_many` operations to each built-in Production model and

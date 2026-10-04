@@ -181,7 +181,7 @@ module Make (Source : SOURCE) = struct
     | Error e -> Error (Invalid_input e)
     | Ok source -> Ok { source; descriptor = Source.descriptor inputs source }
 
-  let evaluate_with prepare_model (type a) admitted side sigma
+  let evaluate_with ~greek prepare_model (type a) admitted side sigma
       (quantity : (coordinate, a) quantity) ~(max_error : a) =
     let limit = number quantity max_error in
     if not (Float.is_finite limit && limit >= 0.) then Error Invalid_accuracy
@@ -211,8 +211,9 @@ module Make (Source : SOURCE) = struct
                   let model = prepare_model c.model in
                   match requested with
                   | None -> M.price model side sigma
-                  | Some greek ->
-                      M.greek model side sigma ~rho_forward:c.rho_forward greek)
+                  | Some sensitivity ->
+                      greek model side sigma ~rho_forward:c.rho_forward
+                        sensitivity)
             in
             let value = enclosed.hi in
             let absolute_error = E.error_of_float enclosed value in
@@ -232,7 +233,7 @@ module Make (Source : SOURCE) = struct
           with E.Unresolved _ -> Error Numerical_failure)
 
   let evaluate admitted side sigma quantity ~max_error =
-    evaluate_with prepare admitted side sigma quantity ~max_error
+    evaluate_with ~greek:M.greek prepare admitted side sigma quantity ~max_error
 
   let evaluate_many admitted side sigma requests =
     let prepared = ref None in
@@ -251,12 +252,29 @@ module Make (Source : SOURCE) = struct
       | Ok model -> model
       | Error why -> raise (E.Unresolved why)
     in
+    let prepared_greeks = ref None in
+    let greek model side sigma ~rho_forward quantity =
+      let result =
+        match !prepared_greeks with
+        | Some result -> result
+        | None ->
+            let result =
+              try Ok (M.prepare_greeks model side sigma ~rho_forward)
+              with E.Unresolved why -> Error why
+            in
+            prepared_greeks := Some result;
+            result
+      in
+      match result with
+      | Ok evaluate -> evaluate quantity
+      | Error why -> raise (E.Unresolved why)
+    in
     List.map
       (fun (Request (quantity, max_error)) ->
         Outcome
           ( quantity,
-            evaluate_with prepare_model admitted side sigma quantity ~max_error
-          ))
+            evaluate_with ~greek prepare_model admitted side sigma quantity
+              ~max_error ))
       requests
 
   let implied admitted side quote =
