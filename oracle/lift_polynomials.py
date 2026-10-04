@@ -84,11 +84,9 @@ def lift(expression):
         return '('+constructor+' '+m[0]+')'
     return re.sub(r'(?<![\w.])-(?=\(c |\(constant )', '-.', re.sub(NUMBER,literal,expression))
 
-print('''(* Generated from checked moment polynomials by oracle/lift_polynomials.py.
-   Portions derive from Peter Jäckel's LetsBeRational, copyright 2013-2024.
-   Permission to use, copy, modify and distribute is freely granted provided
-   this notice is preserved. Provided as is, without warranty of any kind. *)
-module Make (B : sig
+print('(* Generated from checked moment polynomials by oracle/lift_polynomials.py.\n'
+      + (ROOT/'LICENSES/LetsBeRational.txt').read_text() + '*)')
+print('''module Make (B : sig
   type t
   val c : float -> t
   val constant : float -> t

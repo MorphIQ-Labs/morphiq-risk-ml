@@ -5,6 +5,9 @@ pricing example. The current implementation includes the European scalar family,
 typed batches, and bounded scenario planning. The original slice proposal has
 been retired; it remains in Git history.
 
+- [Experimental baseline](experimental-baseline.md): claim owners, exact-candidate evidence and limitations.
+- [Open-source closeout](opensource-closeout.md): current provenance, packaging and security disposition.
+
 ## Current contracts
 
 - [Model contracts](model-contracts.md): exact input meaning, model definitions, Greek conventions, and IV outcomes.
