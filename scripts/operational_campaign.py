@@ -331,6 +331,7 @@ def collect(config_path, binary, output):
                   binary_sha256=sha(binary), source_commit=capture(['git', 'rev-parse', 'HEAD']),
                   library_tree=capture(['git', 'rev-parse', 'HEAD:lib']),
                   library_diff=capture(['git', 'diff', 'HEAD', '--', 'lib']),
+                  library_status=capture(['git', 'status', '--porcelain', '--untracked-files=all', '--', 'lib']),
                   platform=platform.platform(), logical_cpus=os.cpu_count(),
                   hardware=capture(['sysctl', '-n', 'machdep.cpu.brand_string']) if platform.system() == 'Darwin' else platform.machine(),
                   compiler_config=capture(['opam', 'exec', '--switch=morphiq-risk-ml', '--', 'ocamlopt', '-config']),
@@ -338,7 +339,7 @@ def collect(config_path, binary, output):
     for name in ('bench/planner_load.ml', 'bench/assurance_clock.c', 'scripts/operational_campaign.py'):
         report['source_hashes'][name] = sha(ROOT/name)
     try:
-        require(not report['library_diff'], 'library differs from recorded source commit')
+        require(not report['library_status'], 'library differs from recorded source commit')
         for case in config['cases']:
             runs = []
             for repetition in range(config['repetitions']):
@@ -351,7 +352,7 @@ def collect(config_path, binary, output):
         require(sha(config_path) == report['config_sha256'], 'configuration changed during measurement')
         require(all(sha(ROOT/name) == digest for name,digest in report['source_hashes'].items()),
                 'measurement source changed during collection')
-        require(not capture(['git', 'diff', 'HEAD', '--', 'lib']), 'library changed during measurement')
+        require(not capture(['git', 'status', '--porcelain', '--untracked-files=all', '--', 'lib']), 'library changed during measurement')
         report.pop('active_run', None)
         report['complete'] = True
     except BaseException as error:

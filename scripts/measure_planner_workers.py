@@ -42,7 +42,8 @@ def main():
         'logical_cpus': os.cpu_count(),
         'source_commit': command(['git', 'rev-parse', 'HEAD']),
         'library_tree': command(['git', 'rev-parse', 'HEAD:lib']),
-        'diff': command(['git', 'diff', '--', 'lib']),
+        'diff': command(['git', 'diff', 'HEAD', '--', 'lib']),
+        'library_status': command(['git', 'status', '--porcelain', '--untracked-files=all', '--', 'lib']),
         'harness_sha256': sha('bench/planner_workers.ml'),
         'driver_sha256': sha(__file__),
         'binary_sha256': sha(binary),
@@ -51,7 +52,7 @@ def main():
         'complete': False,
         'runs': [],
     }
-    if data['diff']:
+    if data['library_status']:
         raise RuntimeError('campaign expects an unchanged library')
     digests = {}
     try:
