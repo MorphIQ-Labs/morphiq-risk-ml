@@ -1,0 +1,234 @@
+{
+  "baseline_runtime_source": "b862fe2033af0a7c4a42128d77f66d29c7707b72",
+  "candidate_runtime_source": "fecf7c946ff096317cabe005e25665ec85c09d3b",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "cpu": "Apple M1 Pro",
+  "compiler": "5.3.0",
+  "harness_sha256": "50b4f06e528f599be55cadc5ba851797ad753c8066debfb5efca732e3f65b0f9",
+  "binary_sha256": {
+    "baseline": "b85769ca52cda9c441c7cb15ce98abede32a322c17107793400453830a8ed633",
+    "candidate": "a6ea00b2f046245819ba363bfd2f613da7f89ac604fa713b24ce4c5d90ccd94a"
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "load_before": "9:09  up 7 days, 16:30, 12 users, load averages: 6.29 6.89 6.20",
+      "samples": {
+        "ordinary-positive": [
+          1518.199,
+          1500.671,
+          1510.551,
+          1507.988,
+          1519.961,
+          1522.15,
+          1516.59
+        ],
+        "ordinary-zero": [
+          1276.92,
+          1271.16,
+          1269.851,
+          1281.14,
+          1275.909,
+          1271.601,
+          1270.53
+        ],
+        "cancel-zero": [
+          698.09,
+          700.951,
+          715.494,
+          698.447,
+          700.593,
+          696.421,
+          694.513
+        ],
+        "cancel-positive": [
+          939.012,
+          946.999,
+          934.005,
+          920.534,
+          915.408,
+          916.481,
+          917.554
+        ]
+      }
+    },
+    {
+      "variant": "candidate",
+      "load_before": "9:09  up 7 days, 16:30, 12 users, load averages: 6.29 6.89 6.20",
+      "samples": {
+        "ordinary-positive": [
+          1501.081,
+          1509.368,
+          1508.21,
+          1507.32,
+          1502.151,
+          1510.558,
+          1506.581
+        ],
+        "ordinary-zero": [
+          1277.08,
+          1272.531,
+          1278.601,
+          1278.229,
+          1269.779,
+          1278.98,
+          1279.728
+        ],
+        "cancel-zero": [
+          54743.052,
+          54728.985,
+          54450.035,
+          54418.921,
+          54367.542,
+          54435.968,
+          54280.043
+        ],
+        "cancel-positive": [
+          894505.501,
+          895130.515,
+          891712.546,
+          892074.466,
+          892052.531,
+          891606.927,
+          896017.075
+        ]
+      }
+    },
+    {
+      "variant": "candidate",
+      "load_before": "9:09  up 7 days, 16:30, 12 users, load averages: 4.92 6.54 6.09",
+      "samples": {
+        "ordinary-positive": [
+          1504.481,
+          1499.97,
+          1499.579,
+          1501.52,
+          1498.761,
+          1497.579,
+          1501.951
+        ],
+        "ordinary-zero": [
+          1266.67,
+          1264.41,
+          1277.828,
+          1270.161,
+          1269.36,
+          1266.401,
+          1275.001
+        ],
+        "cancel-zero": [
+          54237.962,
+          54221.511,
+          54173.47,
+          54085.97,
+          54095.507,
+          54339.051,
+          54490.924
+        ],
+        "cancel-positive": [
+          891933.56,
+          896220.446,
+          893684.506,
+          890636.563,
+          893190.98,
+          891005.039,
+          893484.473
+        ]
+      }
+    },
+    {
+      "variant": "baseline",
+      "load_before": "9:10  up 7 days, 16:31, 12 users, load averages: 4.50 6.37 6.04",
+      "samples": {
+        "ordinary-positive": [
+          1496.329,
+          1496.899,
+          1497.421,
+          1497.03,
+          1501.0,
+          1495.55,
+          1502.569
+        ],
+        "ordinary-zero": [
+          1263.449,
+          1259.26,
+          1262.209,
+          1301.861,
+          1348.069,
+          1297.491,
+          1266.191
+        ],
+        "cancel-zero": [
+          697.97,
+          717.998,
+          709.534,
+          720.024,
+          695.467,
+          694.513,
+          704.527
+        ],
+        "cancel-positive": [
+          927.448,
+          920.534,
+          919.461,
+          917.077,
+          916.958,
+          921.965,
+          916.004
+        ]
+      }
+    }
+  ],
+  "flambda": "true",
+  "dune": "3.24.2",
+  "summary": {
+    "ordinary-positive": {
+      "baseline": {
+        "median_ns": 1501.7845,
+        "min_ns": 1495.55,
+        "max_ns": 1522.15
+      },
+      "candidate": {
+        "median_ns": 1502.051,
+        "min_ns": 1497.579,
+        "max_ns": 1510.558
+      }
+    },
+    "ordinary-zero": {
+      "baseline": {
+        "median_ns": 1271.3805000000002,
+        "min_ns": 1259.26,
+        "max_ns": 1348.069
+      },
+      "candidate": {
+        "median_ns": 1273.766,
+        "min_ns": 1264.41,
+        "max_ns": 1279.728
+      }
+    },
+    "cancel-zero": {
+      "baseline": {
+        "median_ns": 699.52,
+        "min_ns": 694.513,
+        "max_ns": 720.024
+      },
+      "candidate": {
+        "median_ns": 54353.2965,
+        "min_ns": 54085.97,
+        "max_ns": 54743.052
+      }
+    },
+    "cancel-positive": {
+      "baseline": {
+        "median_ns": 919.9975,
+        "min_ns": 915.408,
+        "max_ns": 946.999
+      },
+      "candidate": {
+        "median_ns": 892632.723,
+        "min_ns": 890636.563,
+        "max_ns": 896220.446
+      }
+    }
+  }
+}

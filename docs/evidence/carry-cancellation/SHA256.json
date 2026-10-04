@@ -1,0 +1,21 @@
+{
+  "lib/black.ml": "06d7027260b83a5d43dab0c2140dbe19efdba560b0faac555b7a3b45db05845b",
+  "lib/black.mli": "f37cc3638b6e516e5912f7617049d119d2fcd6db2278d6b4079145f141e1c48a",
+  "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+  "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+  "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+  "scripts/check_carry_cancellation.py": "747ac73c93fa6b0974ed8b2262e7d19a83f40d6aee00945525eff038e34161b6",
+  "scripts/carry_cancellation_reference.py": "d6b33df42868ade019b83fdfaf167fed396632c8bd9235d22181cf0dd488f651",
+  "test/carry_cancellation.ml": "e96faa590dd0d628ac8d768d9812e2fc604b36eb71b03c28b91f32be82c0ab66",
+  "bench/carry_cancellation.ml": "50b4f06e528f599be55cadc5ba851797ad753c8066debfb5efca732e3f65b0f9",
+  "bench/dune": "d2cea6129cb5b1bcd0bfcf01a153d728e7036959ae624d176fe104d695a42737",
+  "oracle/challenges/carry-cancellation-v1.json.gz": "a0927865f38d24bcd7d0e426efde04ab1c5f075360a5791ae3b4d93fbe0de6be",
+  "docs/evidence/carry-cancellation/after-outcomes.json.gz": "300c51fe9d338f1ca5dfb5a305b726e058523630aa40893b3947d42d0b1a8ce4",
+  "docs/evidence/carry-cancellation/before-outcomes.json.gz": "0def214a6105eed589d6cf0da23a25700cad80ed85b02d318a92769d041a86ce",
+  "docs/evidence/carry-cancellation/compatibility.json": "39dc10b3f42549bdb4054b65aad158a070ef9a2396a2719a8bc77e7211d73bc5",
+  "docs/evidence/carry-cancellation/mutations.txt": "572b11c602d672efe971827706aea74c2d900b237ef3d0c7b89eef14bc1f0a8a",
+  "docs/evidence/carry-cancellation/numerical-full.json.gz": "23c76e00e717772fc07cf1fcbbd747cd73362d9592e50371bd97f9dd2dea0106",
+  "docs/evidence/carry-cancellation/performance.json": "8f0bb2d06dbded9a2e3534aa3ef4075352cb146d589ffe24fdb7e46fd086fd0e",
+  "scripts/probe_carry_greeks.py": "51b610b1bfdbe6bfe24fb8cfec6831b20824c5736b0b8ec9880e81f2492c1d77",
+  "docs/evidence/carry-cancellation/greek-followup.json.gz": "ac9ca5c3579dc8627f1f28cfc11022bab6e90ef2615b7b66caaaabfa67367e02"
+}

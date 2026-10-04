@@ -5,6 +5,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Severe carry-cancellation price refinement (#76)
+
+- Recompute selected Black-family prices from original-input enclosures when
+  carry cancellation exhausts DD coordinate precision. Zero variance uses a
+  stable `expm1` identity; an unresolved rounding cell returns NaN.
+- The original BSM witness improves from 9,007,199,254,740,994 ULP error to zero.
+  On 2,748 independently referenced neighbors, 185 accuracy excursions become
+  84 checked values and 101 failures; 21 other formerly within-budget values
+  also become failures. All zero-volatility rows remain available.
+- **Major numerical/outcome change** (minor while 0.y.z). Existing 99,088 price
+  and 66,400 Greek trace rows and the determinism digest are unchanged. No
+  accuracy allowance was widened. Ordinary pricing timings are within observed
+  variation; the selected fallback is substantially slower.
+- The sibling search found inaccurate finite outputs in all ten fast Greeks
+  for a tiny-positive-volatility witness; [#80](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/80)
+  owns the separate sensitivity correction. This price fix does not resolve it.
+- [Method, provenance, compatibility, mutation and timing evidence](docs/results-carry-cancellation.md).
+
 ### Planner stress assurance (#56)
 
 - Exercise worker/tile schedules, real-domain failure cleanup, concurrent

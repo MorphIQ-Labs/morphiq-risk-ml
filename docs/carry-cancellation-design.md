@@ -34,8 +34,9 @@ configuration has bounded series/expansion work and explicit domain failures.
 This may reduce fast-price availability for severe cancellation at positive
 volatility: a broad finite enclosure is not a rounding certificate.
 
-The existing rounding-cell check for boundary veta is the shared operation owner;
-shares the implementation with this price path; its default zero exponent retains the existing arithmetic and acceptance. Retain exact-input Arb
+The existing rounding-cell check for boundary veta becomes the shared operation
+owner for both paths; its default zero exponent retains the existing arithmetic
+and acceptance. Retain exact-input Arb
 references, rate/time/scale/call-put neighbors, observed successful/refused counts,
 ordinary-fixture deltas, affected mutation witnesses and before/after timing.
 New values/refusals are a major numerical/outcome change (minor at version 0.y.z),
@@ -70,3 +71,9 @@ returns NaN then, including some values whose old approximation happened to be
 within budget. There is no claim of universal availability. IV retains its own
 existing exact-model certification; this change does not make the DD proposal
 an inverse certificate or certify every fast Greek field.
+
+The sibling audit confirms that all ten fast Greek fields retain inaccurate
+DD coordinates for a tiny-positive-volatility witness.
+[Bug #80](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/80) owns the
+separate sensitivity derivation and outcome review; see the
+[retained witness](results-carry-cancellation.md#known-greek-sibling-80).
