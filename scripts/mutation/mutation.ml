@@ -1002,9 +1002,9 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "shared_greeks" | "production_boundary" | "production_multi"
-  | "planner_contract" | "prepared_division" | "carry_cancellation"
-  | "greek_cancellation" | "rho_midpoint" ->
+  | "enclosure_sum" | "shared_greeks" | "production_boundary"
+  | "production_multi" | "planner_contract" | "prepared_division"
+  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

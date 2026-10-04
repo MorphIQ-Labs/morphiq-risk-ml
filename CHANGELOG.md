@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Certified expansion sums (#8)
+
+- Use explicitly magnitude-ordered FastTwoSum in runtime enclosure growth,
+  with a final residual check enforcing finite arithmetic. Exact residuals,
+  retained words, radius propagation and requested accuracy limits are preserved.
+- Representative certified BSM price time falls from 1.143 to 1.022 ms (10.6%)
+  in paired shared-host measurements. Other measured live scalar prices improve
+  10–13%; allocation is essentially unchanged. Exact-rational guards, complete
+  certificate replays and nine targeted mutations pass.
+  [Derivation, measurements and limits](docs/results-certified-expansion-sums.md).
+
 ### Shared Greek intermediates (#8)
 
 - Reuse common smooth-Greek setup and lazily evaluated CDF/derivative terms

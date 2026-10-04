@@ -27,7 +27,7 @@ def main():
         p.error('rounds must be positive')
     report = dict(protocol='certified-scalar-abba-v1', platform=platform.platform(),
                   cpu_count=os.cpu_count(), toolchain=subprocess.check_output(['ocamlopt', '-config'], text=True),
-                  flags='Dune release; library -O3; benchmark standard release flags',
+                  flags='Dune default profile; library -O3; benchmark standard flags',
                   warmup='five calls per phase per fresh process; full major GC before each sample outside timing',
                   measured='five samples per phase; 1000 admissions or 40 evaluations/end-to-end calls per sample; ns, CPU ns and bytes per request',
                   driver_sha256=sha(Path(__file__)), sources={}, runs=[])

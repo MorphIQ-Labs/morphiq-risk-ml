@@ -1,0 +1,74 @@
+{
+  "protocol": "greek-sharing-replay-v1",
+  "binaries": {
+    "baseline": {
+      "path": "/private/tmp/morphiq-certified-baseline/_build/default/bench/shadow.exe",
+      "sha256": "b903a932136c0d8b7e62cecc4c8b34375dfa4d92c1a2459d60b32781425e4e71"
+    },
+    "candidate": {
+      "path": "/private/tmp/morphiq-certified-scalar/_build/default/bench/shadow.exe",
+      "sha256": "610f8667fac56439d2d5923d0211fd0027cadf73f052bd33402059ccf41ef5b7"
+    }
+  },
+  "corpora": [
+    {
+      "name": "shadow-campaign",
+      "corpus_sha256": "8042822397a3ee111baa9c4d92eed248ca22279d29cd1abc9b11defc9aef1cb2",
+      "inputs": 258,
+      "outputs": 3258,
+      "runs": [
+        {
+          "variant": "baseline",
+          "mode": "scalar",
+          "sha256": "8df59993932de97dd908d7a9a064379bbf5252098e7add548547e1b79077bd9b"
+        },
+        {
+          "variant": "baseline",
+          "mode": "many",
+          "sha256": "8df59993932de97dd908d7a9a064379bbf5252098e7add548547e1b79077bd9b"
+        },
+        {
+          "variant": "candidate",
+          "mode": "scalar",
+          "sha256": "8df59993932de97dd908d7a9a064379bbf5252098e7add548547e1b79077bd9b"
+        },
+        {
+          "variant": "candidate",
+          "mode": "many",
+          "sha256": "8df59993932de97dd908d7a9a064379bbf5252098e7add548547e1b79077bd9b"
+        }
+      ],
+      "truncated_corrupted_reordered_rejected": true
+    },
+    {
+      "name": "canonical-shadow",
+      "corpus_sha256": "94754462aa102240f50d00e7895668cb5bf4fc57545db7a8b7876d3a5fd0d2f9",
+      "inputs": 720,
+      "outputs": 9360,
+      "runs": [
+        {
+          "variant": "baseline",
+          "mode": "scalar",
+          "sha256": "0e1bc48a6d729a30a2db377cd3dce6c80a5b0c788b9097b20b0816f3a19af31f"
+        },
+        {
+          "variant": "baseline",
+          "mode": "many",
+          "sha256": "0e1bc48a6d729a30a2db377cd3dce6c80a5b0c788b9097b20b0816f3a19af31f"
+        },
+        {
+          "variant": "candidate",
+          "mode": "scalar",
+          "sha256": "0e1bc48a6d729a30a2db377cd3dce6c80a5b0c788b9097b20b0816f3a19af31f"
+        },
+        {
+          "variant": "candidate",
+          "mode": "many",
+          "sha256": "0e1bc48a6d729a30a2db377cd3dce6c80a5b0c788b9097b20b0816f3a19af31f"
+        }
+      ],
+      "truncated_corrupted_reordered_rejected": true
+    }
+  ],
+  "scope": "Exact retained certificate/outcome compatibility; independent reference results are separate."
+}
