@@ -422,4 +422,7 @@
    python3
    %{dep:../scripts/test_oracle_assurance.py}
    %{exe:oracle_normal.exe}
-   %{dep:../oracle/fixtures/normal.txt})))
+   %{dep:../oracle/fixtures/normal.txt}
+   %{exe:production_reference.exe}
+   %{dep:../oracle/fixtures/greek_bits.txt}
+   %{dep:../oracle/fixtures/model_enclosures.txt})))

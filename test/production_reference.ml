@@ -141,17 +141,22 @@ let row is_price model side name s k t r q sigma shift exponent h l tail =
   | _ -> invalid_arg model
 
 let () =
+  let fixtures =
+    [
+      Oracle_fixture.lines ~columns:[ 14 ] ~names:[ "greek_bits" ] Sys.argv.(1);
+      Oracle_fixture.lines ~columns:[ 14 ] ~names:[ "model_enclosures" ]
+        Sys.argv.(2);
+    ]
+  in
   List.iteri
-    (fun i path ->
-      Oracle_fixture.lines ~columns:[ 14 ]
-        ~names:[ "greek_bits"; "model_enclosures" ]
-        path
+    (fun i rows ->
+      rows
       |> List.iter (fun line ->
              if line <> "" && line.[0] <> '#' then
                Scanf.sscanf line
                  "%s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %d %Lx %Lx %Lx"
                  (row (i = 1))))
-    [ Sys.argv.(1); Sys.argv.(2) ];
+    fixtures;
   Printf.printf
     "%d public price/Greek certificates; %d exact acceptance-limit controls\n"
     !count !limit_checks;

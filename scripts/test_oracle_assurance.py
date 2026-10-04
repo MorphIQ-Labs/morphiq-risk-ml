@@ -11,6 +11,9 @@ from oracle_challenge import bits, minimize, run_checked
 
 EXE = str(Path(sys.argv.pop(1)).resolve())
 FIXTURE = Path(sys.argv.pop(1)).resolve()
+PRODUCTION_EXE = str(Path(sys.argv.pop(1)).resolve())
+GREEK_FIXTURE = str(Path(sys.argv.pop(1)).resolve())
+MODEL_FIXTURE = str(Path(sys.argv.pop(1)).resolve())
 
 
 class Assurance(unittest.TestCase):
@@ -34,6 +37,15 @@ class Assurance(unittest.TestCase):
             path.unlink()
             result = subprocess.run([EXE, str(path)], capture_output=True, timeout=20)
             self.assertEqual(result.returncode, 3)
+
+    def test_multiple_input_roles_checked_before_evaluation(self):
+        for inputs in [(GREEK_FIXTURE, GREEK_FIXTURE),
+                       (MODEL_FIXTURE, MODEL_FIXTURE),
+                       (MODEL_FIXTURE, GREEK_FIXTURE),
+                       (GREEK_FIXTURE, '/missing/reference/input')]:
+            result = subprocess.run([PRODUCTION_EXE, *inputs], capture_output=True, timeout=10)
+            self.assertEqual(result.returncode, 3, result.stderr)
+            self.assertIn(b'REFERENCE INPUT ERROR', result.stderr)
 
     def test_catalog(self):
         with tempfile.TemporaryDirectory() as directory:

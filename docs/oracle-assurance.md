@@ -51,7 +51,10 @@ for test builds. Each of the 16 OCaml fixture consumers reads one immutable
 snapshot, checks its fingerprint and shape, and only then scores rows. Original
 repeated inputs remain legitimate: the exact snapshot fixes their multiplicity
 and order. A missing, duplicated, reordered, corrupted, empty or truncated file
-fails before evaluation. Five old streaming readers no longer catch parser
+fails before evaluation. The multi-file production checker validates both
+argument roles and complete snapshots before evaluating either one, so a
+duplicate/swapped second dataset cannot hide behind an earlier result.
+Five old streaming readers no longer catch parser
 `End_of_file` as normal completion of a possibly truncated last row.
 
 Input failures exit **3** with `REFERENCE INPUT ERROR`; the mutation harness
