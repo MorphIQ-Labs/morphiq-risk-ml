@@ -351,3 +351,8 @@
 (library
  (name budget_greeks)
  (modules budget_greeks))
+
+(test
+ (name planner_groups)
+ (modules planner_groups)
+ (libraries morphiq_risk))

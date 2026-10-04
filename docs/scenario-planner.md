@@ -89,7 +89,13 @@ side, all coordinates, time, snapshot identity, quantity and numerical policy.
 
 Cardinality arithmetic checks every product and sum before allocation or use.
 Limits cover instruments, scenarios, calculations, logical tile rows, workers,
-buffered result slots and distinct aggregation groups. Raw value/error volume
+buffered result slots and distinct aggregation groups. Compilation counts a group
+only when its key is absent under the aggregation map comparator. The count equals
+the map cardinality; a new key requires count < max_groups before incrementing,
+so even a max_int policy cannot overflow the counter. Repeated equivalent keys
+retain their first representative and do not consume additional groups. Group
+tracking takes O(K log(G + 1)) map work for K requested position/output pairs and
+G groups (excluding key-comparison cost), without a map traversal per position. Raw value/error volume
 is 16 bytes per calculation and is explicitly a **lower bound**, excluding
 object, identity, outcome and encoding overhead. Result-slot bounds also count
 rows with no requested outputs. `explain` supplies these counts, the policy,
