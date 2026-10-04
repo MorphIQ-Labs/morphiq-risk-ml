@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **65
+seven core mutants. The catalog currently contains **66
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -14,7 +14,8 @@ same fixtures as its ordinary Dune action. Every selected direct guard must
 also pass before mutations start. Both price fixture actions are retained.
 This avoids repeating unrelated numerical campaigns for each primitive fault.
 Missing binaries/fixtures, unmapped guards and signal-terminated tests are
-harness failures, never kills. Ordinary tests exercise these failure controls.
+harness failures, never kills. Reference-input errors use exit 3 and are also
+invalid, never numerical kills. Ordinary tests exercise these failure controls.
 
 | Core mutant | Reason for default coverage |
 | --- | --- |
@@ -25,6 +26,9 @@ harness failures, never kills. Ordinary tests exercise these failure controls.
 | `certified-rounding-cell` | A fast proposal must not bypass exact-model root acceptance. |
 | `greeks-theta-dd` | Black Greek cancellation needs double-word arithmetic. |
 | `bachelier-theta-dd` | Bachelier Greek cancellation needs double-word arithmetic. |
+
+The optional `ulp-distance-overflow` mechanism challenges the shared finite
+scorer; [oracle assurance](oracle-assurance.md) records its witness.
 
 This is a small sentinel set, not a proof that all other mechanisms are covered.
 Selection is an engineering workload decision; it does not change error bounds
@@ -145,4 +149,4 @@ Four optional mutants bypass field finiteness, hide an unresolved intrinsic,
 or restore premature maturity multiplication in live/zero-volatility BSM rho.
 Their independent exact-input Greek references reject successful nonfinite
 values, false finite zeros and incorrect subnormal values. The core remains
-seven mechanisms; the complete optional catalog contains 65.
+seven mechanisms; the complete optional catalog contains 66.

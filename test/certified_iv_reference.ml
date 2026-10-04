@@ -70,7 +70,7 @@ struct
       Hashtbl.replace status key
         (1 + Option.value ~default:0 (Hashtbl.find_opt status key))
     in
-    In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+    Oracle_fixture.lines ~columns:[ 16 ] ~names:[ "iv" ] Sys.argv.(1)
     |> List.iter (fun line ->
            if line <> "" && line.[0] <> '#' then
              Scanf.sscanf line

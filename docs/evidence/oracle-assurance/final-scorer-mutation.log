@@ -1,0 +1,3 @@
+baseline passes (64 s)
+killed    ulp-distance-overflow by oracle_assurance
+1 of 1 mutants killed as catalogued

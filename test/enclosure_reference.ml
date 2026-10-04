@@ -149,7 +149,7 @@ struct
     if not (rejected (fun () -> E.exact Float.nan)) then
       failwith "nonfinite enclosure accepted";
     let rows = ref 0 and outside_exp = ref 0 and other_functions = ref 0 in
-    In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+    Oracle_fixture.lines ~columns:[ 9 ] ~names:[ "dd" ] Sys.argv.(1)
     |> List.iter (fun line ->
            if line <> "" && line.[0] <> '#' then
              Scanf.sscanf line "%s %Lx %Lx %Lx %Lx %d %Lx %Lx %Lx"

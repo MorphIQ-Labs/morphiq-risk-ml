@@ -16,12 +16,7 @@
 open Morphiq_risk
 
 let f = Int64.float_of_bits
-
-let ordered x =
-  let b = Int64.bits_of_float x in
-  if Int64.compare b 0L < 0 then Int64.neg (Int64.logand b Int64.max_int) else b
-
-let ulps a b = Int64.to_float (Int64.abs (Int64.sub (ordered a) (ordered b)))
+let ulps = Float_score.ulps
 
 let parameter_name = function
   | Refusal.Spot | Refusal.Forward -> "spot"
@@ -125,161 +120,160 @@ let () =
   let stats = Hashtbl.create 32 in
   let unresolved = Hashtbl.create 8 in
   let failures = ref [] in
-  let ic = open_in Sys.argv.(1) in
-  (try
-     while true do
-       let line = input_line ic in
-       if line <> "" && line.[0] <> '#' then
-         Scanf.sscanf line
-           "%s %s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"
-           (fun
-             model
-             side
-             status
-             param
-             s
-             k
-             t
-             r
-             q
-             _sigma
-             shift
-             target
-             lo
-             hi
-             root
-             ferro
-           ->
-             let s = f s
-             and k = f k
-             and t = f t
-             and r = f r
-             and q = f q
-             and shift = f shift in
-             let target = f target
-             and lo = f lo
-             and hi = f hi
-             and root = f root
-             and ferro = f ferro in
-             let side = if side = "call" then Side.Call else Side.Put in
-             let got = solve model side ~s ~k ~t ~r ~q ~shift ~target in
-             let key = model ^ " " ^ status in
-             let st =
-               match Hashtbl.find_opt stats key with
-               | Some st -> st
-               | None ->
-                   let st =
-                     {
-                       n = 0;
-                       pass = 0;
-                       numerical_failure = 0;
-                       in_cell = 0;
-                       within_4 = 0;
-                       within_ferro = 0;
-                       worst_ulp = 0.0;
-                     }
-                   in
-                   Hashtbl.add stats key st;
-                   st
-             in
-             let record ok =
-               st.n <- st.n + 1;
-               if ok then st.pass <- st.pass + 1
-             in
-             let fail expected =
-               if List.length !failures < 30 then
-                 failures :=
-                   Printf.sprintf "%s %s: expected %s, got %s | %s" model status
-                     expected (show got) line
-                   :: !failures
-             in
-             match status with
-             | "root" -> (
-                 match got with
-                 | Root v ->
-                     let in_cell =
-                       (Float.is_nan lo || v >= lo)
-                       && (Float.is_nan hi || v <= hi)
-                     in
-                     let u = ulps v root in
-                     let within_ferro = Float.abs (v -. root) <= ferro in
-                     if in_cell then st.in_cell <- st.in_cell + 1;
-                     if u <= 4.0 then st.within_4 <- st.within_4 + 1;
-                     if within_ferro then st.within_ferro <- st.within_ferro + 1;
-                     if u > st.worst_ulp then st.worst_ulp <- u;
-                     (* Conditional component bounds; the rounding cell is
+  List.iter
+    (fun line ->
+      if line <> "" && line.[0] <> '#' then
+        Scanf.sscanf line
+          "%s %s %s %s %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx %Lx"
+          (fun
+            model
+            side
+            status
+            param
+            s
+            k
+            t
+            r
+            q
+            _sigma
+            shift
+            target
+            lo
+            hi
+            root
+            ferro
+          ->
+            let s = f s
+            and k = f k
+            and t = f t
+            and r = f r
+            and q = f q
+            and shift = f shift in
+            let target = f target
+            and lo = f lo
+            and hi = f hi
+            and root = f root
+            and ferro = f ferro in
+            let side = if side = "call" then Side.Call else Side.Put in
+            let got = solve model side ~s ~k ~t ~r ~q ~shift ~target in
+            let key = model ^ " " ^ status in
+            let st =
+              match Hashtbl.find_opt stats key with
+              | Some st -> st
+              | None ->
+                  let st =
+                    {
+                      n = 0;
+                      pass = 0;
+                      numerical_failure = 0;
+                      in_cell = 0;
+                      within_4 = 0;
+                      within_ferro = 0;
+                      worst_ulp = 0.0;
+                    }
+                  in
+                  Hashtbl.add stats key st;
+                  st
+            in
+            let record ok =
+              st.n <- st.n + 1;
+              if ok then st.pass <- st.pass + 1
+            in
+            let fail expected =
+              if List.length !failures < 30 then
+                failures :=
+                  Printf.sprintf "%s %s: expected %s, got %s | %s" model status
+                    expected (show got) line
+                  :: !failures
+            in
+            match status with
+            | "root" -> (
+                match got with
+                | Root v ->
+                    let in_cell =
+                      (Float.is_nan lo || v >= lo)
+                      && (Float.is_nan hi || v <= hi)
+                    in
+                    let u = ulps v root in
+                    let within_ferro = Float.abs (v -. root) <= ferro in
+                    if in_cell then st.in_cell <- st.in_cell + 1;
+                    if u <= 4.0 then st.within_4 <- st.within_4 + 1;
+                    if within_ferro then st.within_ferro <- st.within_ferro + 1;
+                    if u > st.worst_ulp then st.worst_ulp <- u;
+                    (* Conditional component bounds; the rounding cell is
                         diagnostic only, for every model. *)
-                     let ok =
-                       if model = "bachelier" then
-                         Bounds.within
-                           ~error:(Float.abs (v -. root))
-                           ~bound:
-                             (Iv_bounds.bachelier_root_bound
-                                ~side_call:(side = Side.Call) ~s ~k ~t ~r
-                                ~quote:target ~root ~candidate:v)
-                       else
-                         Bounds.within
-                           ~error:(Float.abs (v -. root))
-                           ~bound:
-                             (Iv_bounds.black_interval_bound model
-                                ~side_call:(side = Side.Call) ~s ~k ~t ~r ~q
-                                ~shift ~quote:target ~root ~candidate:v)
-                     in
-                     let certified =
-                       try
-                         Bounds.within
-                           ~error:(Float.abs (v -. root))
-                           ~bound:
-                             (Iv_bounds.certified_root_bound model ~side ~s ~k
-                                ~t ~r ~q ~shift ~quote:target ~root ~candidate:v)
-                       with Certified.Unsupported why ->
-                         Printf.eprintf "IV certificate unsupported: %s\n" why;
-                         false
-                     in
-                     let ok = v = root && ok && certified in
-                     record ok;
-                     if not ok then
-                       fail (Printf.sprintf "Root %h in [%h, %h]" root lo hi)
-                 | Numerical_failure ->
-                     record false;
-                     st.numerical_failure <- st.numerical_failure + 1;
-                     Printf.eprintf "IV unresolved: %s\n" line;
-                     fail "certified Root"
-                 | _ ->
-                     record false;
-                     fail (Printf.sprintf "Root %h" root))
-             | "zero_volatility_limit" | "rounded_zero_volatility_bound" ->
-                 let ok = got = Root 0.0 in
-                 record ok;
-                 if not ok then fail "Root 0"
-             | "below_exact_intrinsic" ->
-                 let ok = got = Below in
-                 record ok;
-                 if not ok then fail "Below_intrinsic"
-             | "no_finite_inverse" | "root_outside_binary64" ->
-                 let ok = got = Above in
-                 record ok;
-                 if not ok then fail "Above_maximum"
-             | "expiry_not_identifiable" ->
-                 let ok = got = Expiry in
-                 record ok;
-                 if not ok then fail "Not_identifiable_at_expiry"
-             | "invalid_input" ->
-                 let representable =
-                   not (param = "dividend_yield" && model <> "bsm")
-                 in
-                 let ok = if representable then got = Refused param else true in
-                 record ok;
-                 if not ok then fail ("Refused " ^ param)
-             | _ ->
-                 let k =
-                   status ^ " -> "
-                   ^ match got with Root _ -> "Root" | o -> show o
-                 in
-                 Hashtbl.replace unresolved k
-                   (1 + Option.value ~default:0 (Hashtbl.find_opt unresolved k)))
-     done
-   with End_of_file -> close_in ic);
+                    let ok =
+                      if model = "bachelier" then
+                        Bounds.within
+                          ~error:(Float.abs (v -. root))
+                          ~bound:
+                            (Iv_bounds.bachelier_root_bound
+                               ~side_call:(side = Side.Call) ~s ~k ~t ~r
+                               ~quote:target ~root ~candidate:v)
+                      else
+                        Bounds.within
+                          ~error:(Float.abs (v -. root))
+                          ~bound:
+                            (Iv_bounds.black_interval_bound model
+                               ~side_call:(side = Side.Call) ~s ~k ~t ~r ~q
+                               ~shift ~quote:target ~root ~candidate:v)
+                    in
+                    let certified =
+                      try
+                        Bounds.within
+                          ~error:(Float.abs (v -. root))
+                          ~bound:
+                            (Iv_bounds.certified_root_bound model ~side ~s ~k ~t
+                               ~r ~q ~shift ~quote:target ~root ~candidate:v)
+                      with Certified.Unsupported why ->
+                        Printf.eprintf "IV certificate unsupported: %s\n" why;
+                        false
+                    in
+                    let ok = v = root && ok && certified in
+                    record ok;
+                    if not ok then
+                      fail (Printf.sprintf "Root %h in [%h, %h]" root lo hi)
+                | Numerical_failure ->
+                    record false;
+                    st.numerical_failure <- st.numerical_failure + 1;
+                    Printf.eprintf "IV unresolved: %s\n" line;
+                    fail "certified Root"
+                | _ ->
+                    record false;
+                    fail (Printf.sprintf "Root %h" root))
+            | "zero_volatility_limit" | "rounded_zero_volatility_bound" ->
+                let ok = got = Root 0.0 in
+                record ok;
+                if not ok then fail "Root 0"
+            | "below_exact_intrinsic" ->
+                let ok = got = Below in
+                record ok;
+                if not ok then fail "Below_intrinsic"
+            | "no_finite_inverse" | "root_outside_binary64" ->
+                let ok = got = Above in
+                record ok;
+                if not ok then fail "Above_maximum"
+            | "expiry_not_identifiable" ->
+                let ok = got = Expiry in
+                record ok;
+                if not ok then fail "Not_identifiable_at_expiry"
+            | "invalid_input" ->
+                let representable =
+                  not (param = "dividend_yield" && model <> "bsm")
+                in
+                let ok = if representable then got = Refused param else true in
+                record ok;
+                if not ok then fail ("Refused " ^ param)
+            | _ ->
+                let k =
+                  status ^ " -> "
+                  ^ match got with Root _ -> "Root" | o -> show o
+                in
+                Hashtbl.replace unresolved k
+                  (1 + Option.value ~default:0 (Hashtbl.find_opt unresolved k))))
+    (Oracle_fixture.lines ~columns:[ 16 ] ~names:[ "iv" ]
+       ~external_reference:(Array.exists (( = ) "--external") Sys.argv)
+       Sys.argv.(1));
   Printf.printf "%-44s %5s %5s %8s %6s %8s %10s\n" "model status" "rows" "pass"
     "in cell" "<=4ulp" "<=ferro" "worst ulp";
   Hashtbl.fold (fun k _ acc -> k :: acc) stats []

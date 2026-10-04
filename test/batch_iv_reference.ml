@@ -21,7 +21,7 @@ let check (type i c) (model : (i, c) Batch.model)
 
 let () =
   let count = ref 0 in
-  In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+  Oracle_fixture.lines ~columns:[ 16 ] ~names:[ "iv" ] Sys.argv.(1)
   |> List.iter (fun line ->
          if line <> "" && line.[0] <> '#' then
            Scanf.sscanf line

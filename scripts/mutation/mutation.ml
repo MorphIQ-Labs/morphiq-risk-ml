@@ -393,6 +393,16 @@ let catalog =
         "normalize the two quotient words before DD consumers use them";
     };
     {
+      id = "ulp-distance-overflow";
+      file = "test/float_score.ml";
+      snippet = "Z.abs (Z.sub (rank a) (rank b))";
+      replacement =
+        "Z.of_int64 (Int64.abs (Int64.sub (Z.to_int64 (rank a)) (Z.to_int64 \
+         (rank b))))";
+      killer = "oracle_assurance";
+      mechanism = "finite ULP distances cannot wrap signed 64-bit subtraction";
+    };
+    {
       id = "reference-expansion";
       file = "test/bounds.ml";
       snippet =
@@ -795,7 +805,7 @@ let guard_arguments = function
   | "production_boundary" | "planner_contract" | "prepared_division" -> [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
-  | "iv_termination" | "normal_dd_reference" | "properties"
+  | "oracle_assurance" | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->
       [ [] ]
   | name -> failwith ("no explicit mutation guard action for " ^ name)
@@ -863,6 +873,11 @@ let guard_controls () =
             | Rejected _ -> true
             | _ -> false))
         [ 1; 2 ];
+      script "iv_termination" "exit 3";
+      check "reference input error was called a kill"
+        (match guard ~cwd:work "iv_termination" with
+        | Invalid _ -> true
+        | _ -> false);
       script "iv_termination" "kill -TERM $$";
       check "signalled guard was called a kill"
         (match guard ~cwd:work "iv_termination" with

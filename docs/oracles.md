@@ -4,14 +4,18 @@ This project's own references check accuracy independently of its analytical err
 
 The approach is modelled on FerroRisk's oracle practice: pinned generators, agreement between precisions, provenance hashes, and analytic bounds for values below binary64. FerroRisk's data serves only as an optional second opinion (`scripts/ferro_crosscheck.sh`). It is never ground truth.
 
+See [oracle assurance](oracle-assurance.md) for the exact finite ULP scorer,
+complete-input gates, failure controls and bounded independent counterexample
+reduction. Precision agreement alone never establishes a reference proof.
+
 ## Fixtures
 
 | Fixture | Generator | Content |
 | --- | --- | --- |
 | `elementary` | `gen_elementary.py` | exp, expm1, log, log1p over every binade, the reduction boundaries and a random sample (111k); each reference carries its residual, exact − reference, for fractional-ULP scoring |
-| `normal` | `gen_normal.py` | Φ, φ, ln Φ, erf, erfc, erfcx and Φ⁻¹ over every binade, old/new interval neighbors, underflow and overflow (128,320; all original 82,000 rows retained) |
+| `normal` | `gen_normal.py` | Φ, φ, ln Φ, erf, erfc, erfcx and Φ⁻¹ over every binade, old/new interval neighbors, underflow and overflow (130,394; all original 82,000 rows retained) |
 | `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
-| `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,760); 63% have an unrepresentable F + d or K + d |
+| `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,768); 63% have an unrepresentable F + d or K + d |
 | `iv` | `gen_iv.py` | implied-volatility outcomes, exact roots and rounding cells for all four models, on a grid and a random sample |
 | `dd` | `gen_dd.py` | 86,145 three-word/exponent references, including 47,719 nonzero low words, every exponential reduction boundary and subnormals |
 | `regressions` | `gen_regressions.py` | five exact near-maximum ATM roots, 2,000 near-unit log-coordinate references and two rescued-tail regressions |

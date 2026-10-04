@@ -1,0 +1,72 @@
+{
+  "source_commit": "cd69c00365eb8a35f0924087f5a361e983aaee9c",
+  "base_commit": "72f38911d82292f384e3dd524cee9c81168ec649",
+  "platform": "macOS arm64 / Apple M1 Pro",
+  "ocaml": "5.3.0 Flambda",
+  "dune": "3.24.2",
+  "ocamlformat": "0.27.0",
+  "python": "3.14.8",
+  "jobs": 2,
+  "ordinary_command": "opam exec --switch=morphiq-risk-ml -- dune build @install @fmt @runtest -j 2",
+  "ordinary_result": "PASS; unchanged Dune actions cached; final production mutation also establishes a fresh copied ordinary baseline",
+  "affected_mutations": {
+    "count": 15,
+    "result": "15 killed",
+    "source_scope": "Initial working-tree campaign before final additive conversion controls, consistency finite-bound checks and two-file input-role hardening; the modified scorer witness and production guard were subsequently requalified in the source-bound reruns below."
+  },
+  "final_scorer_recheck": {
+    "commit": "a2ced9f",
+    "result": "1/1 killed after clean copied ordinary baseline",
+    "command": "DUNE_JOBS=2 opam exec --switch=morphiq-risk-ml -- dune exec scripts/mutation/mutation.exe -- ulp-distance-overflow"
+  },
+  "final_production_recheck": {
+    "commit": "cd69c00365eb8a35f0924087f5a361e983aaee9c",
+    "result": "1/1 killed after clean copied ordinary baseline",
+    "command": "DUNE_JOBS=2 opam exec --switch=morphiq-risk-ml -- dune exec scripts/mutation/mutation.exe -- production-certificate-radius"
+  },
+  "scope": "Test/tooling assurance only. Runtime, fixture and generator bytes unchanged; no full 66-mutant claim, release, global minimality or human-review signoff.",
+  "source_sha256": {
+    "scripts/arb_greek_audit.py": "b0c203906555c46fe1b4042964f9c0d6e5e5c3fbe532929d01b86284bd32b17a",
+    "scripts/arb_iv_audit.py": "c05e6d47b64e92894e3e8ccfd210535ba4a5a6a29c1622d279a7fc127be4e338",
+    "scripts/arb_reference_campaign.py": "fcc6cf13e255234c4cc5f8e3102945b9545cb23cb0563ab1bf9f3a14eb333b06",
+    "scripts/ferro_crosscheck.sh": "c558fc8bdaad9c92ffa70c7c3c7b2adad02a5605549d95960c27204317223e64",
+    "scripts/fixture_catalog.py": "d0cb8753fe061eadfb3344a62e91cb9bdabc5cde94424fc70bf62ff21c455f77",
+    "scripts/mutation/mutation.ml": "331c2407f4a0769031ce172d994378f3cf206ff6c7be1d5a89e2b9dd7816a1e5",
+    "scripts/mutation/test_selection.py": "4ef78e6c98cb48eb9de5f882d4b988caaf9da11b295997d52edbb46b5aaec1bd",
+    "scripts/oracle_challenge.py": "008ab8ba54af6172b62b13362889bf037dea439e1c4bc4c943e7b6bbccca5b86",
+    "scripts/test_oracle_assurance.py": "60821205254beb5300ee629e87b6db38f068c082825750319d895cc9f9e05df5",
+    "test/batch_iv_reference.ml": "07f672a2e676b4666ea4230ec2db355cbfb0ab4267b57ef11bc9b0e9873816af",
+    "test/boundary_greeks.ml": "916cbe5cda6dc07b7740875e38114bdc765c01eb57db5c42669a692f30a4bc8e",
+    "test/certified_iv_reference.ml": "e2efa263821f8cee58331fed60c8c3adf328b07c2f1312e9a4acb2d4dfbb7c0b",
+    "test/consistency.ml": "270d4cc13bafc47b359f61f3eb046603f458ee48078da1378d1af0bdf132c5d4",
+    "test/dd_reference.ml": "4830a930c99c242a321e439ddf8d9e97bad8001a106b5f082c192920465fa479",
+    "test/dune": "31a3ec1410d846f064c2b29f10d29237a1aec8e8fe16ff4c2a877be5c9c4fad6",
+    "test/enclosure_reference.ml": "64bf2035fbfbbe961aa41aacba5a9519d5903d54f852c562a39eb3f432d58ec4",
+    "test/finite_greeks.ml": "fd975dab205b1e7fa7977cba0640c863852dee730ade589828ad3ce195e6c30c",
+    "test/float_score.ml": "c460c646e9b98ddaaac08799b5ad89af6000c90a86c4cfd51ac3792aaaafb2bb",
+    "test/float_score.mli": "1e943acc59436e7e6147839d2363f2ffb8e338800ae2b5b2b8515f961128f464",
+    "test/greek_reference.ml": "a31f3edee79e42a47b53f3bbfb0e89efb57bb9a8e890841a9df725c578824ad9",
+    "test/model_enclosure_reference.ml": "f004596a098d2d2d5339c2cd5985612375cf1833d5d6bb89440c191b2f5fe919",
+    "test/numerical_regressions.ml": "6376823fae40811ae9f8738c2a120485b9c63e349e6d1364df3be08ad067d35c",
+    "test/oracle_assurance.ml": "ffb427cca975e079d8e0af64925547f75806b36865da176306cb141e36779d9b",
+    "test/oracle_elementary.ml": "17a592ebb9cc2efb7266f4942e1c2a5dd4a0cb39e396b551cacdfba3c473a513",
+    "test/oracle_fixture.ml": "8ec94ba5121bb0acc86f60a72cde5901a5cbf837b2d208360d138ea52b0fab2d",
+    "test/oracle_fixture.mli": "77723503293079b0cc212a835542057a49f431a2a87b48f520bd7e3016f8bba2",
+    "test/oracle_greeks.ml": "26f05e009f1a524a4225cf2c69bbca83993389583f9153a68a47d4abfb39a88e",
+    "test/oracle_iv.ml": "c21b1e80ba355e510d6ac39564fb940d4f684ccdbabee1ecbf7864aa535eab4d",
+    "test/oracle_normal.ml": "f338681dac210a52bfe5cb2d637a5de55968a6cdc7b9163ad07a479500184217",
+    "test/oracle_price.ml": "33ad884bd2bf4b9e892d9b95ae54556c16d2be863c62ec8d3dfe72ad42632aed",
+    "test/production_greek_reference.ml": "d08cc7b9a1e83c779d501d823856849fc91b9d013dd6666541121779d23c5354",
+    "test/production_reference.ml": "d0574f0c20a9e0035026c22665b92feca62cc97e77a72525463da1e5a7badf6a"
+  },
+  "artifact_sha256": {
+    "affected-mutations.log": "323d58303f7c9a506cb89c63fa6349b281191e4ca5029b76d422f47185670ec8",
+    "arb-greeks.json": "6140e8e64f0749d8744f94baefdfbe229c9ca2eb3bc975da1d1fe50b8b81a69b",
+    "arb-iv.json": "c74fe2a8c9227345ec3078f85580620a0e3283a1ed1f17c5c965124765e2b542",
+    "arb-references.json": "0e71277746f6c7d100fc8153938f8a39c8cc378ea5196a0da8fa536d29844afb",
+    "final-production-mutation.log": "bc6863acde7a18d812ce86590c6ba085d14dfcec566df6c4738957eba56bbb8a",
+    "final-scorer-mutation.log": "46fb618af5c3052a0af3783727552fd03ad7f47ce5150af347be715cb3e0fd90",
+    "final-tests.log": "8752cc7bb0156433f8cd5cb1b4f552b8c07bf5d09d0fb3bdec75195d0a5276a1",
+    "oracle-challenge.json": "89c04cfdc376454e0d2372e353bcbb1049ca3678a34ff4e7cc292ead4c612c39"
+  }
+}

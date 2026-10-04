@@ -12,7 +12,7 @@
 (test
  (name certified_iv_reference)
  (modules certified_iv_reference)
- (libraries morphiq_risk)
+ (libraries oracle_fixture morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -24,14 +24,14 @@
 (test
  (name enclosure_reference)
  (modules enclosure_reference)
- (libraries morphiq_risk zarith)
+ (libraries oracle_fixture morphiq_risk zarith)
  (action
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
  (name model_enclosure_reference)
  (modules model_enclosure_reference)
- (libraries morphiq_risk zarith)
+ (libraries oracle_fixture morphiq_risk zarith)
  (action
   (run %{test} %{dep:../oracle/fixtures/model_enclosures.txt})))
 
@@ -51,7 +51,7 @@
  (name oracle_normal)
  (package morphiq_risk_ml)
  (modules oracle_normal)
- (libraries morphiq_risk bounds)
+ (libraries float_score oracle_fixture morphiq_risk bounds)
  (action
   (run
    %{test}
@@ -66,7 +66,7 @@
  (name oracle_price)
  (package morphiq_risk_ml)
  (modules oracle_price)
- (libraries morphiq_risk bounds certified)
+ (libraries float_score oracle_fixture morphiq_risk bounds certified)
  (action
   (progn
    (run %{test} %{dep:../oracle/fixtures/european.txt})
@@ -82,7 +82,7 @@
  (name oracle_iv)
  (package morphiq_risk_ml)
  (modules oracle_iv)
- (libraries morphiq_risk bounds iv_bounds)
+ (libraries float_score oracle_fixture morphiq_risk bounds iv_bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -90,7 +90,14 @@
  (name oracle_greeks)
  (package morphiq_risk_ml)
  (modules oracle_greeks)
- (libraries morphiq_risk bounds certified greek_values budget_greeks)
+ (libraries
+  float_score
+  oracle_fixture
+  morphiq_risk
+  bounds
+  certified
+  greek_values
+  budget_greeks)
  (action
   (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
@@ -104,13 +111,13 @@
  (name consistency)
  (package morphiq_risk_ml)
  (modules consistency)
- (libraries morphiq_risk))
+ (libraries float_score morphiq_risk bounds))
 
 (test
  (name oracle_elementary)
  (package morphiq_risk_ml)
  (modules oracle_elementary)
- (libraries morphiq_risk bounds)
+ (libraries float_score oracle_fixture morphiq_risk bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/elementary.txt})))
 
@@ -136,7 +143,7 @@
  (name dd_reference)
  (package morphiq_risk_ml)
  (modules dd_reference)
- (libraries morphiq_risk bounds certified)
+ (libraries oracle_fixture morphiq_risk bounds certified)
  (action
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
@@ -184,7 +191,7 @@
 (test
  (name greek_reference)
  (modules greek_reference)
- (libraries morphiq_risk bounds certified greek_values)
+ (libraries oracle_fixture morphiq_risk bounds certified greek_values)
  (action
   (run %{test} %{dep:../oracle/fixtures/greek_bits.txt})))
 
@@ -202,7 +209,7 @@
 (test
  (name numerical_regressions)
  (modules numerical_regressions)
- (libraries morphiq_risk bounds iv_bounds)
+ (libraries oracle_fixture morphiq_risk bounds iv_bounds)
  (action
   (run %{test} %{dep:../oracle/fixtures/regressions.txt})))
 
@@ -260,21 +267,21 @@
 (test
  (name boundary_greeks)
  (modules boundary_greeks)
- (libraries morphiq_risk greek_values)
+ (libraries oracle_fixture morphiq_risk greek_values)
  (action
   (run %{test} %{dep:../oracle/fixtures/boundary_greeks.txt})))
 
 (test
  (name production_greek_reference)
  (modules production_greek_reference)
- (libraries morphiq_risk zarith)
+ (libraries oracle_fixture morphiq_risk zarith)
  (action
   (run %{test} %{dep:../oracle/fixtures/greek_bits.txt})))
 
 (test
  (name production_reference)
  (modules production_reference)
- (libraries morphiq_risk zarith)
+ (libraries oracle_fixture morphiq_risk zarith)
  (action
   (run
    %{test}
@@ -326,7 +333,7 @@
 (test
  (name batch_iv_reference)
  (modules batch_iv_reference)
- (libraries morphiq_risk)
+ (libraries oracle_fixture morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
 
@@ -347,7 +354,12 @@
 (test
  (name finite_greeks)
  (modules finite_greeks)
- (libraries morphiq_risk greek_values budget_greeks)
+ (libraries
+  float_score
+  oracle_fixture
+  morphiq_risk
+  greek_values
+  budget_greeks)
  (action
   (run %{test} %{dep:../oracle/fixtures/finite_greeks.txt})))
 
@@ -373,3 +385,44 @@
   ../scripts/check_experimental.py)
  (action
   (run python3 %{dep:../scripts/test_closeout.py})))
+
+(library
+ (name float_score)
+ (modules float_score)
+ (libraries zarith))
+
+(library
+ (name oracle_fixture)
+ (modules oracle_fixture fixture_catalog))
+
+(rule
+ (target fixture_catalog.ml)
+ (deps
+  ../scripts/fixture_catalog.py
+  ../oracle/MANIFEST
+  (glob_files ../oracle/fixtures/*.txt.gz))
+ (action
+  (with-stdout-to
+   %{target}
+   (run python3 %{dep:../scripts/fixture_catalog.py} ../oracle))))
+
+(test
+ (name oracle_assurance)
+ (modules oracle_assurance)
+ (libraries float_score oracle_fixture zarith))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_oracle_assurance.py
+  ../scripts/fixture_catalog.py
+  ../scripts/oracle_challenge.py)
+ (action
+  (run
+   python3
+   %{dep:../scripts/test_oracle_assurance.py}
+   %{exe:oracle_normal.exe}
+   %{dep:../oracle/fixtures/normal.txt}
+   %{exe:production_reference.exe}
+   %{dep:../oracle/fixtures/greek_bits.txt}
+   %{dep:../oracle/fixtures/model_enclosures.txt})))

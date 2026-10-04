@@ -1,0 +1,17 @@
+baseline passes (57 s)
+killed    greek-finite-result by finite_greeks
+killed    production-certificate-radius by production_reference
+killed    production-rho-coordinate by production_greek_reference
+killed    zero-variance-veta by boundary_greeks
+killed    enclosure-product-guard by enclosure_reference
+killed    iv-certification-refinement by oracle_iv
+killed    certified-rounding-cell by certified_iv_reference
+killed    ulp-distance-overflow by oracle_assurance
+killed    reference-expansion by numerical_regressions
+killed    dd-reference-nan by dd_reference
+killed    intrinsic-expm1 by oracle_price
+killed    gaussian-split by oracle_normal
+killed    log1p-remainder by oracle_elementary
+killed    greeks-theta-dd by oracle_greeks
+killed    bachelier-theta-dd by oracle_greeks
+15 of 15 mutants killed as catalogued

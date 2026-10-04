@@ -21,7 +21,8 @@ struct
 
   let run () =
     let rows = ref 0 in
-    In_channel.with_open_text Sys.argv.(1) In_channel.input_lines
+    Oracle_fixture.lines ~columns:[ 14 ] ~names:[ "model_enclosures" ]
+      Sys.argv.(1)
     |> List.iter (fun line ->
            if line <> "" && line.[0] <> '#' then
              Scanf.sscanf line
