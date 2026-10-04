@@ -148,7 +148,19 @@ minimized failure alone:
 
 Expect `status: failure`, with both independent cell decisions in the output.
 The result is retained in [oracle-challenge.json](evidence/oracle-assurance/oracle-challenge.json).
-Validation results are recorded alongside it. Optional Arb and mutation campaigns
+The [validation record](evidence/oracle-assurance/validation.json) binds source
+and artifact hashes and distinguishes the initial affected campaign from the
+final source-bound scorer/input-role rechecks. Build, format and the ordinary
+suite passed; all 15 selected mutants were killed. The changed final guards
+also passed fresh copied baselines and rejected their designated mutants.
+
+The independent audits retained here certified [99,088 prices and 59,200 smooth
+Greeks](evidence/oracle-assurance/arb-references.json), with 7,200 boundary Greek
+rows explicitly excluded, [5,579 IV roots](evidence/oracle-assurance/arb-iv.json),
+with 2,751 non-root rows excluded, and [2,506 extra-precision Greek
+references](evidence/oracle-assurance/arb-greeks.json). None had wrong or
+unresolved references in its stated scope. These are local macOS arm64 results.
+Optional Arb and mutation campaigns
 remain manual; default PR CI retains ordinary correctness checks and the same
 seven core mutants. The full catalog gains one mechanism (66 total).
 
