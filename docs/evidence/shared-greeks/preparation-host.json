@@ -1,0 +1,15 @@
+{
+  "started": "2026-10-04T18:49:28.705012+00:00",
+  "load_before": [
+    3.6533203125,
+    10.25048828125,
+    22.9130859375
+  ],
+  "source": "c5126db391b42529867e3716b5b9ef0b10ed43f6",
+  "scope": "phase diagnostic; no concurrent task-owned computation",
+  "load_after": [
+    3.6533203125,
+    10.25048828125,
+    22.9130859375
+  ]
+}

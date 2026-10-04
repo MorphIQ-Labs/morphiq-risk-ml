@@ -13,6 +13,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - Public signatures and numerical operation graphs are unchanged. The private
   evaluator is owned by one caller/worker; no cache persists on admissions or
   plans. [Dependency and failure contract](docs/shared-greek-intermediates.md).
+- Eleven-output portfolios measure another 1.88× faster execution and 46.3% less
+  allocation relative to PR #91. Independent certificates and captured results
+  are unchanged. [Full evidence and limits](docs/results-shared-greeks.md).
 
 ### Shared certified model preparation (#8)
 

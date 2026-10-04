@@ -1,0 +1,26 @@
+{
+  "method": "Original-input Arb price and order-three formal series derivatives; fixed 1e-10 typed scalar limits",
+  "certificates": 2376,
+  "scenarios": 27,
+  "instruments": 8,
+  "workers": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "identical": true,
+  "corrupt_certificate_rejected": true,
+  "truncated_output_rejected": true,
+  "binary_sha256": "18c8ef29ce1a3dd40851d19c5b86f99db6074663734e1f1d67cf7273b8207889",
+  "audit_context_commit": "e9572101db6e8b6a982937aa19b0c30102cceff3",
+  "audit_sources": {
+    "audit_planner.py": "e8541e7d1e2bd5fa7f59bc84e03b5dfdb25f0eda9e9a4175ef83dd0abed32efc",
+    "shadow_campaign.py": "33c593223416fe48846b07fadb6cc25b93534017b8fd4eece47cc7b8761461db",
+    "arb_reference_campaign.py": "fcc6cf13e255234c4cc5f8e3102945b9545cb23cb0563ab1bf9f3a14eb333b06",
+    "arb_greek_audit.py": "b0c203906555c46fe1b4042964f9c0d6e5e5c3fbe532929d01b86284bd32b17a"
+  },
+  "output_sha256": "f3f24cbb32e0a6c151ab34038b6adb5428700cc0c9a14d814f1f11e049610fd6",
+  "python_flint": "0.9.0",
+  "flint": "3.6.0"
+}

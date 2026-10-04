@@ -1,6 +1,6 @@
 # Shared Greek intermediates (#8)
 
-This round extends call-local reuse below `Production.evaluate_many`. Public
+This round extends call-local reuse below `Production.evaluate_many`. Production, Batch and Planner
 signatures, exact input meaning, formulas, arithmetic ordering and per-output
 acceptance limits remain unchanged. Each request still has its own certificate
 or error. The baseline is PR #91, `c5126db391b42529867e3716b5b9ef0b10ed43f6`.
@@ -24,6 +24,10 @@ Greek needs them: signed CDFs, delta, gamma, vega, the Black maturity derivative
 half-inverse maturity and the existing price used by forward rho/normal theta.
 Each memo holds the identical enclosure or exception produced by the old
 expression; no radius, low word, arithmetic operation or guard is discarded.
+Enclosure arithmetic retains its existing outward error propagation at every
+use, including repeated uses of the same interval. It makes no statistical
+independence assumption and has no physical-identity shortcut that could change
+rounding or radius when an immutable object is reused.
 If a deferred expression fails, only outputs depending on it fail. In particular,
 a failed half-inverse maturity cannot poison a later vega, and a failed accuracy
 limit is never stored as an intermediate result. Reuse changes the number of
@@ -59,3 +63,6 @@ calls, planner aggregation and worker replay. Native and bytecode must agree.
 Affected mutation witnesses must build and reject the intended numerical or
 precondition defect after a clean baseline. No tolerance, reference, default CI
 lane or numerical expectation may be widened to make the optimization pass.
+
+[Qualification and paired measurements](results-shared-greeks.md) retain exact
+sources, independent references, failure controls, replay and timing limitations.
