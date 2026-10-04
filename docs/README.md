@@ -94,3 +94,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Installed Exchange validation](installed-exchange-validation.md): full qualified native/bytecode replay through the isolated public package in the optional candidate lane.
 
 - [Optimized Exchange candidate](candidate-exchange-optimized.md): exact-source three-platform installation, six full Exchange replays and 84-mutant closeout.
+
+- [Certified expansion sum optimization](results-certified-expansion-sums.md): magnitude-ordered exact residuals, finite guards, scalar/portfolio/Exchange/IV measurements and complete certificate replay.

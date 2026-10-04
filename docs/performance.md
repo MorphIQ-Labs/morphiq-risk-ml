@@ -179,3 +179,13 @@ the paired shared-host exchange runs reduce allocation 65–74% and evaluation
 time 14–22%. The four-model IV workload allocates 46–52% less; its smaller
 observed timing differences are not deployment guarantees. Full samples,
 reference replay, failure outcomes and limits are retained in that report.
+
+## Certified scalar sum optimization
+
+The [measured exact-sum optimization](results-certified-expansion-sums.md) records
+price-only, admission and end-to-end costs for all four models, plus portfolio,
+Exchange and IV consumer comparisons. The representative BSM price-only median
+is 1.022 ms on the recorded shared M1 Pro host; it is a runtime-certified price,
+not the fast scalar API or a network request. Bounds and failure contracts are
+unchanged. The remaining multi-MB allocation and roughly millisecond cost stay
+explicit; #8 still owns target-environment qualification.

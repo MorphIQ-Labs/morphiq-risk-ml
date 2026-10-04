@@ -1,0 +1,15 @@
+{
+  "implementation": "0a2c8723e9d1c293b9f21f8da9833eb7aa1751dd",
+  "baseline": "9d535fbfc3c984b35d200bcf267a8ffde8fdc570",
+  "final_build_format_ordinary_exit": 0,
+  "named_mutants_killed": 9,
+  "full_catalog_run": false,
+  "new_primitive_cases_per_configuration_and_mode": 30784,
+  "initial_harness_failures": [
+    "bytecode guard overwrote the Zarith DLL search path; fixed by preserving the existing path",
+    "mutation runner needed an explicit no-argument mapping for the new guard; added and rerun",
+    "formatting corrections; final build/format/ordinary invocation passed"
+  ],
+  "numerical_changes_after_full_ordinary_run": false,
+  "performance_scope": "shared M1 Pro workstation; batch means, not isolated-host latency guarantees"
+}

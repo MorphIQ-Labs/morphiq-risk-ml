@@ -461,6 +461,23 @@ let catalog =
       mechanism = "a proposal cannot bypass exact-model rounding acceptance";
     };
     {
+      id = "enclosure-sum-order";
+      file = "lib/enclosure.ml";
+      snippet = "if abs a >= abs b then b -. (s -. a) else a -. (s -. b)";
+      replacement = "b -. (s -. a)";
+      killer = "enclosure_sum";
+      mechanism = "FastTwoSum requires the larger-magnitude operand first";
+    };
+    {
+      id = "enclosure-sum-finite";
+      file = "lib/enclosure.ml";
+      snippet = "finite low;";
+      replacement = "();";
+      killer = "enclosure_sum";
+      mechanism =
+        "an overflowing sum must refuse rather than return an enclosure";
+    };
+    {
       id = "enclosure-grow-residual";
       file = "lib/enclosure.ml";
       snippet = "if residual <> 0.0 then (";
@@ -985,9 +1002,9 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "shared_greeks" | "production_boundary" | "production_multi"
-  | "planner_contract" | "prepared_division" | "carry_cancellation"
-  | "greek_cancellation" | "rho_midpoint" ->
+  | "enclosure_sum" | "shared_greeks" | "production_boundary"
+  | "production_multi" | "planner_contract" | "prepared_division"
+  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
