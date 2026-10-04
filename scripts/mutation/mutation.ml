@@ -438,10 +438,18 @@ let catalog =
       mechanism = "a proposal cannot bypass exact-model rounding acceptance";
     };
     {
+      id = "enclosure-grow-residual";
+      file = "lib/enclosure.ml";
+      snippet = "if residual <> 0.0 then (";
+      replacement = "if false && residual <> 0.0 then (";
+      killer = "enclosure_reference";
+      mechanism = "grow-expansion retains every nonzero TwoSum residual";
+    };
+    {
       id = "enclosure-discarded-word";
       file = "lib/enclosure.ml";
-      snippet = "else take 0 kept (error +^ abs x) rest";
-      replacement = "else take 0 kept error rest";
+      snippet = "else take 0 kept (error +^ abs x) (j - 1)";
+      replacement = "else take 0 kept error (j - 1)";
       killer = "enclosure_reference";
       mechanism = "discarded expansion words remain in the absolute radius";
     };

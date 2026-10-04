@@ -33,6 +33,31 @@ The executed baseline performs 32,009 exact-rational postcondition checks;
 `scripts/canonical_expansion.py SOURCE --output REPORT` reproduces that campaign.
 The OCaml primitive campaign separately uses exact rationals.
 
+### Allocation-preserving arithmetic order
+
+Each `pack` owns a fresh checked float array with capacity equal to its number
+of input terms. It folds those terms in their original order. A grow step
+reads the increasing-magnitude expansion from index zero, performs the same
+`TwoSum(carry, term)`, writes each nonzero residual, then appends the final
+nonzero carry. Induction on the terms gives the same ordered residuals and
+carry as the previous list traversal. Signed-zero elimination and every
+intermediate finite check remain unchanged.
+
+At iteration `j`, at most `j` residuals have been emitted. The next write is
+therefore at or behind the term just read, never ahead into unread storage.
+One insertion grows the expansion by at most one word, so after `k` input
+terms its length is at most `k`; the input count bounds every write. Only
+initialized indices below the current length are read. No scratch escapes
+`pack` or is shared across calls, threads or domains. Indexing remains checked;
+there is no unsafe access, new foreign code or public mutable representation.
+
+The retained-word pass visits the array from its last initialized index down
+to zero, exactly the previous reversed-list order. It retains the same words
+and adds discarded magnitudes to the radius in the same order. Products,
+explicit FMA, underflow allowances, series counts and acceptance limits are
+unchanged. This changes storage and allocation, not the floating operation
+graph or error derivation. Independent exact-rational checks remain required.
+
 ## Products and division
 
 For binary64 operands a,b, let `p=RN(a*b)` and `r=fma(a,b,-p)`. The exact product
