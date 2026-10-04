@@ -139,9 +139,9 @@ QD's Newton log has absolute error near zero. Its relative error is unbounded as
 
 ## 2. The normal distribution
 
-- **Φ(x) outside Cody's first interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses Cody's rationals; §8 certifies the coefficients actually stored here. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
-- **Why that matters in the tail.** The naive form's relative error grows like ε·x², which is 5.7e-14 at x = −38, the FerroRisk budget. Here the remaining error is the rounding of erfcx, exp and two products: ≤ 4 ULP measured over the whole range, tails included.
-- **Φ⁻¹ is AS241.** The central branch evaluates only polynomials, so it is reproducible. The tails add one `log`: ≤ 4 ULP measured.
+- **Φ(x) outside the small-erf interval** is `½·erfcx(|x|/√2)·exp(−x²/2)`. erfcx uses project-generated local and asymptotic polynomials; §8 certifies their stored coefficients and evaluation. The half-square is split exactly (`x² = hi + lo` by fma), so the exponential's argument carries no rounding.
+- **Why that matters in the tail.** The naive form's relative error grows like ε·x², which is 5.7e-14 at x = −38, the FerroRisk budget. Here the remaining error is the rounding of erfcx, exp and two products: ≤ 5 ULP measured on the expanded corpus, with the existing 6-ULP gate unchanged.
+- **Φ⁻¹ is AS241.** The central branch evaluates only polynomials, so it is reproducible. The tails add one `log`: maxima 4 ULP central and 6 ULP in the tails on the current corpus.
 - **ln Φ composed from Φ.** The enforced CDF envelope is 6 ULP to a rounded reference, hence 6.5 spacings to the real value. The scorer evaluates the actual inner CDF and uses the largest spacing in its neighbourhood, including binade crossings. With this error E, the mean-value denominator is `1−Q−E` or `Φ−E`, not the central value. The outer evaluator and oracle rounding contribute `2 ulp(got)+ulp(reference)/2`. This is conditional on the measured CDF and elementary envelopes. A nonpositive denominator is unresolved and fails; it is never accepted as an infinite bound.
 - **The double-double Φ and φ** (`Normal_dd`, |d.hi| ≤ 6 with a normalized low word) now have analytical bounds: **200u² relative for φ and 512u² absolute for Φ**. The absolute CDF bound survives cancellation at negative d; it does not assert uniform relative accuracy in the tail. Section 8.3 derives the series, stopping and arithmetic contributions. Both the original pinned cases and the generated two-word corpus enforce these constants.
 
@@ -163,7 +163,7 @@ The absolute error depends on the component bounds and |ln(S/K)|+|(r−q)T|. The
 
 The kernel uses Jäckel's three regions (η = −13, τ = 2ε^(1/16)):
 - **Regions I and II.** b = vega·(b/vega). The scaled function comes from Jäckel's asymptotic or small-t expansion. Section 8.4 bounds each truncation remainder and the actual rounded polynomial evaluation separately. The vega, `exp(−(h² + t²)/2)/√(2π)`, is evaluated with h = x/s in DD (including x's and s's low parts) and the exponent assembled from split products and DD corrections. §8 includes their remaining arithmetic error. Applying the exponential last with its prefactor folded in avoids premature underflow before final exponent restoration. A direct mpmath probe of Region I measures about 1 ULP.
-- **Region III** is `½·exp(−(h² + t²)/2)·(erfcx(q1) − erfcx(q2))` with Cody's erfcx, or the erfc forms.
+- **Region III** is `½·exp(−(h² + t²)/2)·(erfcx(q1) − erfcx(q2))` with the generated erfcx, or the erfc forms.
 
 **Cancellation.** Region III subtracts positive terms. Its observed cancellation and ULP maxima are regression evidence, not premises of the certificate. The new evaluator propagates absolute errors through this subtraction; it assumes no fixed upper cancellation factor.
 
@@ -349,23 +349,40 @@ E_price includes the price reference's rounding and the largest spacing in the p
 
 ## 8. Rounded kernels and complete price/Greek expressions
 
-### 8.1 Rational approximation and floating evaluation are separate errors
+### 8.1 Approximation and floating evaluation are separate errors
 
-The coefficient provenance is [Cody's CALERF reference implementation](https://netlib.org/specfun/erf) and Jäckel's `LetsBeRational` implementation (the version and license are retained in `lib/normalised_black.ml`). The bounds here are derived for the **binary64 coefficients actually stored in this repository**. A reference implementation's stated approximation accuracy alone does not bound our rounded evaluation.
+The error functions use project-generated coefficients from Gaussian integral
+identities. [The construction](error-function-replacement.md) derives 48 local
+degree-16 erfcx polynomials, a degree-12 asymptotic tail, and the small-erf
+series. `oracle/erf_coefficients.py` encloses each coefficient with exact
+rationals, including the second word of each local leading coefficient.
+Both enclosure endpoints must round to the stored word.
 
-`oracle/kernel_certificates.py` uses exact rational arithmetic. It encloses π with Machin's identity and alternating arctangent remainders, then 1/√π with integer square roots. For a polynomial on [a,b], its Bernstein coefficients bound its entire range. Subdividing into 128 intervals (64 for the small erf interval) improves the enclosure without turning it into sampling. Rational denominators have nonnegative coefficients and are bounded below by Q(a).
+`oracle/erf_certificates.py` bounds Taylor remainders, coefficient error,
+argument rounding and coefficient-weighted explicit-FMA evaluation. It uses
+Machin's identity and integer square roots to enclose 1/√π. The resulting
+relative majorants in units of u are:
 
-For f(x)=erfcx(x), f′−2xf+2/√π=0. The residual of a rational R gives
+| Path | Approximation including stored constants | Complete normal-intermediate bound |
+| --- | ---: | ---: |
+| local erfcx, [0,12) | 0.075294 | 3.037720 |
+| asymptotic polynomial, [12,2^27) | 0.123177 | 3.144418 |
+| leading asymptote, [2^27,infinity) | — | 1.372415 |
+| small erf, |x|<=1/2 | — | 3.366957 |
 
-    R(x)−f(x) = −exp(x²) ∫_x^∞ exp(−t²) residual(t) dt.
+The existing certificate ceilings remain **40u for erfcx** and **26u for small
+erf**. These are analytical majorants, separate from scalar ULP regression
+gates. Absolute allowances cover subnormal operations; the relative bounds
+do not extend through overflow. Positive erfc now uses an exact split square
+and the qualified scaled exponential. Its cutoff at 28 is below half a
+subnormal quantum; the replay requires its uncertain argument to remain at
+least 27.5 and proves that stronger cutoff condition separately.
 
-Dividing by f makes this a weighted average of residual/(2/√π), so its absolute supremum bounds relative approximation error. On finite pieces, the boundary mismatch is transported with relative weight at most one. The tail uses w=1/x² and R=(c−wP/Q)/x, giving the polynomial residual numerator
-
-    −cwQ² + (2w+3w²)PQ + 2w³(P′Q−PQ′) + 2(1/√π−c)Q².
-
-The middle interval uses P′Q−PQ′−2xPQ+2Q²/√π. Below 15/32, integrating the derivative defect of xP(x²)/Q(x²), with a degree-20 alternating enclosure of exp(−x²), bounds erf error. The resulting erfcx approximation bounds are below 0.199u (tail), 1.105u (middle) and 1.022u (small interval).
-
-Normal-intermediate Horner analysis then includes coefficient condition, products, division and argument squaring. For example the middle interval's multiplicative factor is (1+u)^17/(1−u)^15. The tail correction is less than 1/30 of the result. The large-argument asymptote includes its omitted 1/(2x²) term. The complete bound is below 33.105u; the certificate uses **40u relative**. Small erf is separately bounded by **26u relative**, from 22u evaluation error plus its derivative defect divided by erf(x) ≥ 2x(1−x²)/√π.
+Jäckel's Y′ rationals retain their upstream coefficient provenance and notice
+in `lib/normalised_black.ml`. `oracle/kernel_certificates.py` still bounds
+these coefficients' differential residuals with exact Bernstein enclosures
+on 128 subintervals. Rational denominators have nonnegative coefficients and
+are bounded below by their left endpoint.
 
 For G(a)=Y′(−a), a≥0, the defining equation is aG′−(1+a²)G+1=0. Its positive integral solution similarly bounds relative approximation error by the differential residual. For tail G=wC/B, C=B+wA, the residual numerator is
 
@@ -373,7 +390,7 @@ For G(a)=Y′(−a), a≥0, the defining equation is aG′−(1+a²)G+1=0. Its p
 
 The middle interval uses a(P′Q−PQ′)−(1+a²)PQ+Q², including the boundary mismatch at a=4. Approximation bounds are below 21.605u and 60.012u respectively. The only negative middle numerator coefficient has absolute coefficient condition below 1.001. Its evaluation allowance is 1.001[(1+u)^15/(1−u)^14−1]. The small branch G=1−a Mills(a) has amplification a Mills(a)/G < 1.5 on [0,15/32]. Including all factors gives less than 89.041u; the certificate uses **96u relative**.
 
-These relative bounds require normal intermediates and the stated argument signs. The replay checks its finite domain (including |h|≤2^400 where squaring is needed), and adds absolute underflow allowances separately. It does not extrapolate relative guarantees through an overflow or a flushed tail. Cody's deliberate erfc cutoff is enclosed by two minimum-normal units, using Mills' inequality at 26.54.
+These relative bounds require normal intermediates and the stated argument signs. The replay checks its finite domain (including |h|≤2^400 where squaring is needed), and adds absolute underflow allowances separately. It does not extrapolate relative guarantees through an overflow or a flushed tail. The error-function replay transports its split-square uncertainty through the scaled exponential instead of flushing a normal tail.
 
 ### 8.2 Exponent scaling and split inputs
 
@@ -484,7 +501,7 @@ The source comparison uses the original algorithm boxes and later corrections, n
 | [Jäckel, Let's Be Rational source archive](http://www.jaeckel.org/LetsBeRational.7z) | downloaded 2026-10-02; `da2f6870b213e04ef35b4d309269ee5ce12be5830d9733e5f29542bf7b652470` | Kernel region formulas and thresholds were compared with the author's C++. Our scaling changes and solver modifications need their own analysis. |
 | [Jäckel, Let's Be Rational paper](http://www.jaeckel.org/LetsBeRational.pdf) | downloaded 2026-10-02; `351a9e2cc603f8817be74a9719e5269bd61784fc7a3d36e2d7131fa25b1a104d` | The paper's reported accuracy does not prove convergence of every modified finite-exponent path here. |
 | [QD 2.3.24](https://github.com/BL-highprecision/QD/blob/v2.3.24/src/dd_real.cpp) | release tag v2.3.24 | Historical reference for the removed exponential adaptation; see the source-provenance record and replacement report. |
-| [Cody CALERF](https://netlib.org/specfun/erf) | canonical Netlib source | Reference rational structure; §8 checks the actual stored coefficients and their differential residuals. |
+| [Cody CALERF](https://netlib.org/specfun/erf) | canonical Netlib source | Historical implementation reference, replaced by the generated error functions; see the replacement derivation and provenance record. |
 
 The non-ATM live-price and kernel replays now require the moneyness sign to be resolved by its interval; the ATM branch uses the full call/put derivative bound |∂b/∂x|≤exp(|x|/2)<2 on |x|<0.01, covering either sign of a true moneyness hidden by the rounded zero. This enforces the nonnegative tail-coordinate premise of the moment remainder rather than assuming it from the rounded center.
 

@@ -10,7 +10,7 @@ let scaled_gaussian scale u =
 let norm_pdf x =
   if Float.is_nan x then x else scaled_gaussian inv_sqrt_2pi (Float.abs x)
 
-(* |x| at or below which Cody's erf interval applies to x / sqrt 2. *)
+(* |x| at or below which the generated small-erf interval applies to x / sqrt 2. *)
 let erf_region = Cody.thresh /. inv_sqrt_2
 
 (* Q(u) = 1 - Phi(u) for u above the erf region. *)

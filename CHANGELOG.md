@@ -5,6 +5,34 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Project-generated error functions
+
+- Replace CALERF's implementation and tables with polynomials derived from
+  Gaussian integrals, exact-rational generated coefficients and explicit error
+  bounds. Preserve historical provenance; AS241 remains open under #64.
+- Extend normal references to 128,320 rows, retaining all 82,000 old records.
+  Restore Internal erfc subnormal tails and finite negative erfcx near overflow.
+  All existing numerical budgets remain unchanged.
+- Minor numerical change: 4,810 price records, 1,528 ordinary Greek records,
+  76 extra-bit Greek records and 9,354 scalar records change. No financial or
+  public-normal sign/class/refusal changes are observed. Combined Black price
+  maxima improve OTM 22→10, extreme-scale 18→7 and ITM 8→7 ULP; other price
+  regions keep their maxima. Bachelier delta improves 4→3 and Black rho 23→8
+  (the forward-rho allowance composes price error). Other Greek maxima stay
+  unchanged. CDF body improves 6→3; CDF tail changes 4→5 within budget 6.
+  Logcdf improves 5→4. Inverse normal and fixed-quote IV roots are unchanged.
+- The [qualification report](docs/results-error-functions.md) retains complete
+  regional tables, generator/fixture provenance, 220/440-digit refinement of
+  every changed scalar/financial reference row, replay changes and performance.
+  After this audit the 6,069,960-byte replay digest becomes
+  `e2fae65de27c7f4add63b5a476c833fcc91f1efdafde9a73950ba34db3382593`.
+  The 741 changed replay IV words arise from changed served input quotes.
+  Shared-host release measurements show complete workflows between −2.1% and
+  +5.5%; direct CDF is +8.5%, while Internal negative erfcx is 6.3× slower
+  because it now uses the qualified DD exponential. Allocation and timing
+  limitations are explicit in the report. No release, acceptance signature
+  or version bump is implied.
+
 ### Independently derived DD exponential
 
 - Replace QD-derived `Dd.exp`/`Dd.expm1` with a direct degree-22 polynomial

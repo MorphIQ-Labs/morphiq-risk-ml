@@ -99,48 +99,9 @@ def inverse_sqrt_pi():
 def approximation_bounds():
     lo, hi = inverse_sqrt_pi()
     c = (lo+hi)/2
-    source = (ROOT/'lib/cody.ml').read_text()
-    coefficients = {m[0]: F(float(m[1])) for m in
-                    re.findall(r'let ([abcdpq][0-9]|sqrpi) = ([0-9.eE+\-]+)', source)}
-    assert len(coefficients) == 38
+    import erf_certificates
+    error_functions = erf_certificates.verify()
     w = [F(0), F(1)]
-    cs = coefficients['sqrpi']
-    p = [coefficients['p'+str(i)] for i in [4, 3, 2, 1, 0, 5]]
-    q = [coefficients['q'+str(i)] for i in [4, 3, 2, 1, 0]]+[F(1)]
-    q2, pq = mul(q, q), mul(p, q)
-    # R(x)=(cs-w P(w)/Q(w))/x, w=1/x². R'-2xR+2c has this numerator.
-    numerator = add(scale(mul(w, q2), -cs), add(mul([0, 2, 3], pq),
-        scale(mul([0, 0, 0, 1], sub(mul(deriv(p), q), mul(p, deriv(q)))), 2)))
-    tail = (rational_bound(numerator, q2, F(0), F(1, 16))
-            + 2*(abs(c-cs)+(hi-c)))/(2*lo)
-    r_tail_at_4 = (cs-F(1, 16)*val(p, F(1, 16))/val(q, F(1, 16)))/4
-    correction = rational_bound(mul(w, p), q, F(0), F(1, 16))
-    assert correction/(cs-correction) < F(1, 30)
-
-    p = [coefficients['c'+str(i)] for i in [7, 6, 5, 4, 3, 2, 1, 0, 8]]
-    q = [coefficients['d'+str(i)] for i in [7, 6, 5, 4, 3, 2, 1, 0]]+[F(1)]
-    q2 = mul(q, q)
-    numerator = add(sub(mul(deriv(p), q), mul(p, deriv(q))),
-                    add(scale(mul(w, mul(p, q)), -2), scale(q2, 2*c)))
-    defect = (rational_bound(numerator, q2, F(15, 32), F(4))+2*(hi-c))/(2*lo)
-    jump = abs(val(p, F(4))/val(q, F(4))-r_tail_at_4)*(1+tail)/r_tail_at_4
-    middle = max(defect, tail+jump)
-
-    # erf(x)=x P(x²)/Q(x²). Bound R'-2c exp(-x²) with a degree-20
-    # alternating Taylor enclosure; integrating bounds erf's error by x*defect.
-    p = [coefficients['a'+str(i)] for i in [3, 2, 1, 0, 4]]
-    q = [coefficients['b'+str(i)] for i in [3, 2, 1, 0]]+[F(1)]
-    q2 = mul(q, q)
-    derivative = add(mul(p, q), scale(mul(w, sub(mul(deriv(p), q), mul(p, deriv(q)))), 2))
-    exponential = [F((-1)**k, factorial(k)) for k in range(21)]
-    numerator = sub(derivative, scale(mul(exponential, q2), 2*c))
-    v = F(225, 1024)
-    defect = (rational_bound(numerator, q2, F(0), v, 64)
-              + 2*(hi-c)+2*hi*v**21/F(factorial(21)))
-    small = F(15, 32)*defect/(1-2*hi*F(15, 32))
-    # Dropping x² below xsmall costs at most x² relative in this rational.
-    assert val(deriv(p), v)/p[0]+val(deriv(q), v)/q[0] < 1
-    assert 2*hi*F(15, 32)/(1-2*hi*F(15, 32)) < F(9, 8)
 
     source = (ROOT/'lib/normalised_black.ml').read_text()
     y = source.split('let y_prime h =', 1)[1].split('(* Region II:', 1)[0]
@@ -175,26 +136,14 @@ def approximation_bounds():
     # coefficient condition is below 1.001 on this interval. The standard
     # absolute Horner bound handles cancellation in its inner stages.
     assert 2*abs(p[-1])*4**7/p[0] < F(1, 1000)
-    return {'cody_tail': tail, 'cody_middle': middle, 'cody_small': small,
-            'erf_derivative': defect, 'yprime_tail': yp_tail, 'yprime_middle': yp_middle}
+    return {**error_functions, 'yprime_tail': yp_tail, 'yprime_middle': yp_middle}
 
 
 def rounding_bounds(approximation):
-    # Normal intermediates, round-to-nearest, explicit unfused Horner in Cody.
-    # These are upper bounds, including products of rounding factors.
-    middle = ((1+U)**17/(1-U)**15-1)*(1+approximation['cody_middle'])+approximation['cody_middle']
-    erf = (1+U)**10/(1-U)**12-1+2*U*U
-    small = ((1+4*U)*(1+F(9, 8)*erf)*(1+U)**2/(1-F(225, 1024)*U)-1
-             + approximation['cody_small'])*H
-    tail = ((1+U)**2*(1+((1+U)**24/(1-U)**21-1)/30)-1
-            + approximation['cody_tail'])*H
-    lo, hi = inverse_sqrt_pi()
-    cs = F(float('5.6418958354775628695e-1'))
-    constant = max(abs(cs-lo), abs(cs-hi))/lo
-    remainder = F(1, 2*67100000**2)
-    asymptote = (constant+U*(1+constant)+remainder)/(1-remainder)
-    cody = max(middle, small, tail, asymptote)
-    assert cody < 40*U
+    # Generated error functions carry their own rational/FMA certificates.
+    error_functions = max(approximation[k] for k in
+        ('erfcx_local_total','erfcx_tail_total','erfcx_asymptote_total'))
+    assert error_functions < 40*U
 
     yp_middle = (approximation['yprime_middle']
                  + F(1001, 1000)*((1+U)**15/(1-U)**14-1))*H
@@ -207,7 +156,7 @@ def rounding_bounds(approximation):
     assert F(1254,1000)*F(15,32)/(1-F(1254,1000)*F(15,32)) < F(3,2)
     yprime = max(yp_middle, yp_tail, yp_small)
     assert yprime < 96*U
-    return {'erfcx_nonnegative': cody, 'yprime': yprime}
+    return {'erfcx_nonnegative': error_functions, 'yprime': yprime}
 
 
 def verify():

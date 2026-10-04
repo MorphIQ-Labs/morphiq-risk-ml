@@ -1,0 +1,8 @@
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               13270          5    7.426e-16     -0x1.45d0ce0b51d6p+2      0
+cdf tail (x <= -8)      5829          4    5.590e-16    -0x1.e38ea4327d7b6p+4      0
+erfcx                  15398          4    6.167e-16                0x1.d8p-1      0
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 19099          5    6.124e-16      0x1.c02fa2fc1c7fp+1      0
+pdf                    19099          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0

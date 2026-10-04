@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **51
+seven core mutants. The catalog currently contains **56
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -114,3 +114,12 @@ no longer the same fault, since the shared reduced helper owns that handling.
 The optimized degree-22 loop uses the same degree-truncation witness.
 The catalog still contains 51 mechanisms, with the same seven default core
 witnesses. Historical mutation logs retain their original names.
+
+## Generated error-function replacement
+
+Five optional witnesses cover local erfcx degree, tail degree, small-erf degree,
+the exact square in the erfc tail, and the leading-coefficient residual needed
+by a cancelling BSM theta. These bring the catalog to 56 mechanisms. The first
+four use the independent normal/error-function oracle; the leading-residual
+witness uses the existing Greek oracle and its unchanged 8-ULP theta gate.
+The seven default core mechanisms are unchanged.

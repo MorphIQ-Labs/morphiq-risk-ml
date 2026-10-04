@@ -51,6 +51,14 @@ AS241-derived inverse implementation under the numerical change process.
 
 ## CALERF: source-informed adaptation
 
+**Current-tree update:** the implementation and coefficient tables described
+below have been replaced by [project-derived Gaussian-integral polynomials](error-function-replacement.md).
+Exact-rational generators provide their coefficient provenance. The historical
+`Cody` module name remains for Internal consumers. This follows source
+inspection and is not a clean-room claim. The [qualification report](results-error-functions.md)
+records compatibility and numerical evidence; the original rights findings
+below remain historical facts.
+
 - Actual source: [Netlib SPECFUN `erf`](https://netlib.org/specfun/erf),
   W. J. Cody, March 19, 1990 revision, 13,926 bytes.
 - Downloaded alongside AS241, read at 10:48:07 UTC, followed by the write of
@@ -127,7 +135,7 @@ project licensing remains Apache-2.0; it does not supersede upstream rights.
 All retained notices, this report, and the source-fingerprint record accompany
 installed documentation. The original audit changed no numerical operation,
 coefficient, fixture, dependency pin or tolerance. The subsequent DD replacement
-is qualified separately in its linked report; AS241 and CALERF remain unchanged.
+and CALERF replacements are qualified separately in their linked reports; AS241 remains unchanged.
 
 Issue #64 stays open until each replacement is qualified and its current-source
 provenance is recorded. Historical provenance and applicable notices remain

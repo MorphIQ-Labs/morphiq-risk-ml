@@ -1,0 +1,9 @@
+baseline passes (3615 s)
+killed    erfcx-leading-residual by oracle_greeks
+killed    erfcx-local-degree by oracle_normal
+killed    erfcx-tail-degree by oracle_normal
+killed    erf-series-degree by oracle_normal
+killed    erfc-square-split by oracle_normal
+killed    scaled-exp-prefactor by numerical_regressions
+killed    gaussian-split by oracle_normal
+7 of 7 mutants killed as catalogued

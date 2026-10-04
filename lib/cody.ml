@@ -1,124 +1,56 @@
-(* W. J. Cody, "Rational Chebyshev approximations for the error function",
-   Math. Comp. 23 (1969) 631-637; netlib specfun CALERF (March 19, 1990).
-   Adapted after direct consultation of the Netlib source, including its
-   double-precision coefficients. Source identity and unresolved distribution
-   terms are recorded in docs/source-provenance.md and THIRD_PARTY_NOTICES.md. *)
+(* Historical module name retained for Internal consumers. The implementation
+   is project-derived from Gaussian integrals; no CALERF coefficients or
+   machine constants remain. See docs/error-function-replacement.md and
+   oracle/erf_coefficients.py for construction and rational certificates. *)
 
-let thresh = 0.46875
-let sqrpi = 5.6418958354775628695e-1 (* 1/sqrt(pi) *)
+let thresh = 0.5
 
-(* IEEE double-precision machine constants from CALERF. CALERF's XMAX
-   (2.53e307), which flushes erfcx to zero, is not used: past it the
-   asymptote sqrt(1/pi)/y is a subnormal that one division rounds correctly. *)
-let xneg = -26.628
-let xsmall = 1.11e-16
-let xbig = 26.543
-let xhuge = 6.71e7
-let a0 = 3.16112374387056560e00
-let a1 = 1.13864154151050156e02
-let a2 = 3.77485237685302021e02
-let a3 = 3.20937758913846947e03
-let a4 = 1.85777706184603153e-1
-let b0 = 2.36012909523441209e01
-let b1 = 2.44024637934444173e02
-let b2 = 1.28261652607737228e03
-let b3 = 2.84423683343917062e03
-let c0 = 5.64188496988670089e-1
-let c1 = 8.88314979438837594e0
-let c2 = 6.61191906371416295e01
-let c3 = 2.98635138197400131e02
-let c4 = 8.81952221241769090e02
-let c5 = 1.71204761263407058e03
-let c6 = 2.05107837782607147e03
-let c7 = 1.23033935479799725e03
-let c8 = 2.15311535474403846e-8
-let d0 = 1.57449261107098347e01
-let d1 = 1.17693950891312499e02
-let d2 = 5.37181101862009858e02
-let d3 = 1.62138957456669019e03
-let d4 = 3.29079923573345963e03
-let d5 = 4.36261909014324716e03
-let d6 = 3.43936767414372164e03
-let d7 = 1.23033935480374942e03
-let p0 = 3.05326634961232344e-1
-let p1 = 3.60344899949804439e-1
-let p2 = 1.25781726111229246e-1
-let p3 = 1.60837851487422766e-2
-let p4 = 6.58749161529837803e-4
-let p5 = 1.63153871373020978e-2
-let q0 = 2.56852019228982242e00
-let q1 = 1.87295284992346047e00
-let q2 = 5.27905102951428412e-1
-let q3 = 6.05183413124413191e-2
-let q4 = 2.33520497626869185e-3
+let horner coefficients x =
+  let result = ref coefficients.(Array.length coefficients - 1) in
+  for i = Array.length coefficients - 2 downto 0 do
+    result := Float.fma !result x coefficients.(i)
+  done;
+  !result
 
-(* erf(x) for |x| <= thresh. *)
-let erf_small x =
-  let y = Float.abs x in
-  let ysq = if y > xsmall then y *. y else 0.0 in
-  let num = ((((((a4 *. ysq) +. a0) *. ysq) +. a1) *. ysq) +. a2) *. ysq in
-  let den = (((((ysq +. b0) *. ysq) +. b1) *. ysq) +. b2) *. ysq in
-  x *. (num +. a3) /. (den +. b3)
+(* Integrate the Taylor series of exp(-t²), preserving the leading x. *)
+let erf_small x = x *. horner Erf_coefficients.small (x *. x)
 
-(* exp(y^2) * erfc(y) for thresh < y <= 4. *)
-let erfcx_mid y =
-  let num =
-    ((((((((((((c8 *. y) +. c0) *. y) +. c1) *. y) +. c2) *. y) +. c3) *. y)
-      +. c4)
-      *. y
-     +. c5)
-     *. y
-    +. c6)
-    *. y
-  in
-  let den =
-    (((((((((((y +. d0) *. y) +. d1) *. y) +. d2) *. y) +. d3) *. y) +. d4)
-      *. y
-     +. d5)
-     *. y
-    +. d6)
-    *. y
-  in
-  (num +. c7) /. (den +. d7)
-
-(* exp(y^2) * erfc(y) for 4 < y < xhuge. *)
-let erfcx_tail y =
-  let ysq = 1.0 /. (y *. y) in
-  let num =
-    (((((((p5 *. ysq) +. p0) *. ysq) +. p1) *. ysq) +. p2) *. ysq) +. p3
-  in
-  let den =
-    (((((((ysq +. q0) *. ysq) +. q1) *. ysq) +. q2) *. ysq) +. q3) *. ysq
-  in
-  let r = ysq *. ((num *. ysq) +. p4) /. (den +. q4) in
-  (sqrpi -. r) /. y
-
-(* exp(-y^2) with the argument split at a multiple of 1/16, so the leading
-   square is exact (Cody's device). *)
-let exp_neg_square y =
-  let ysq = Float.trunc (y *. 16.0) /. 16.0 in
-  let del = (y -. ysq) *. (y +. ysq) in
-  Elementary.exp (-.ysq *. ysq) *. Elementary.exp (-.del)
-
-let exp_square y =
-  let ysq = Float.trunc (y *. 16.0) /. 16.0 in
-  let del = (y -. ysq) *. (y +. ysq) in
-  Elementary.exp (ysq *. ysq) *. Elementary.exp del
-
-(* exp(y^2) * erfc(y) for y >= 0. *)
-let erfcx_nonnegative y =
-  if y <= thresh then Elementary.exp (y *. y) *. (1.0 -. erf_small y)
-  else if y <= 4.0 then erfcx_mid y
-  else if y >= xhuge then sqrpi /. y
-  else erfcx_tail y
+let erfcx_nonnegative x =
+  if x = 0.0 then 1.0
+  else if x >= 0x1p27 then Erf_coefficients.inv_sqrt_pi /. x
+  else if x >= 12.0 then
+    let inverse = 1.0 /. x in
+    Erf_coefficients.inv_sqrt_pi
+    *. horner Erf_coefficients.tail (inverse *. inverse)
+    /. x
+  else
+    let index = int_of_float (x *. 4.0) in
+    let center = (float index +. 0.5) *. 0.25 in
+    let offset = x -. center in
+    let coefficients = Erf_coefficients.local.(index) in
+    let tail = ref coefficients.(Array.length coefficients - 1) in
+    for i = Array.length coefficients - 2 downto 1 do
+      tail := Float.fma !tail offset coefficients.(i)
+    done;
+    coefficients.(0)
+    +. Float.fma !tail offset Erf_coefficients.local_low.(index)
 
 let erfcx x =
   if Float.is_nan x then x
   else if x >= 0.0 then erfcx_nonnegative x
-  else if x < xneg then Float.infinity
+  else if x <= -27.0 then Float.infinity
   else
-    let e = exp_square x in
-    e +. e -. erfcx_nonnegative (-.x)
+    let hi, lo = Split.square x in
+    let ex = Dd.to_float (Dd.exp { hi; lo }) in
+    Float.ldexp ex 1 -. erfcx_nonnegative (-.x)
+
+(* 28² > 1075 ln(2): the positive tail rounds to zero beyond this cut.
+   Scaling the prefactor with the split square preserves subnormal results. *)
+let erfc_positive x =
+  if x >= 28.0 then 0.0
+  else
+    let hi, lo = Split.square x in
+    Split.scaled_exp_neg (erfcx_nonnegative x) hi lo
 
 let erf x =
   if Float.is_nan x then x
@@ -126,11 +58,8 @@ let erf x =
     let y = Float.abs x in
     if y <= thresh then erf_small x
     else
-      let erfc_y =
-        if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y
-      in
-      let r = 0.5 -. erfc_y +. 0.5 in
-      if x < 0.0 then -.r else r
+      let value = 1.0 -. erfc_positive y in
+      if x < 0.0 then -.value else value
 
 let erfc x =
   if Float.is_nan x then x
@@ -138,7 +67,5 @@ let erfc x =
     let y = Float.abs x in
     if y <= thresh then 1.0 -. erf_small x
     else
-      let r =
-        if y >= xbig then 0.0 else exp_neg_square y *. erfcx_nonnegative y
-      in
-      if x < 0.0 then 2.0 -. r else r
+      let value = erfc_positive y in
+      if x < 0.0 then 2.0 -. value else value

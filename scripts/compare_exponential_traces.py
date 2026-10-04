@@ -27,10 +27,10 @@ def ordered(word):
     return -(n & ((1 << 63)-1)) if n >> 63 else n
 
 
-def main(before, after, output):
+def main(before, after, output, include_normal=False):
     summary = {'fixtures': {}, 'regions': {}, 'trace_sha256': {}}
     changes = []
-    for fixture in FIXTURES:
+    for fixture in FIXTURES + (('normal',) if include_normal else ()):
         paths = [Path(f'{prefix}-{fixture}.tsv') for prefix in (before, after)]
         data = [p.read_text().splitlines() for p in paths]
         assert len(data[0]) == len(data[1]) and data[0], (fixture, 'row mismatch')
@@ -40,7 +40,11 @@ def main(before, after, output):
             new_row, new = new.split('\t')
             assert row == new_row, (fixture, row_number, 'different inputs')
             fields = row.split()
-            if fixture == 'dd':
+            if fixture == 'normal':
+                region = 'normal '+fields[0]
+                if fields[0]=='cdf': region += ' tail' if floating(fields[1])<=-8 else ' body'
+                if fields[0]=='inv': region += ' central' if abs(floating(fields[1])-0.5)<=0.425 else ' tail'
+            elif fixture == 'dd':
                 region = 'dd '+fields[0]
             elif fixture in ('european', 'displaced'):
                 region = ('bachelier' if fields[0] == 'bachelier' else 'black')+' price '+fields[2]
@@ -59,10 +63,11 @@ def main(before, after, output):
                     v = floating(s)
                     return 'nan' if math.isnan(v) else 'infinite' if math.isinf(v) else 'zero' if v == 0 else 'finite'
                 classes += classify(old) != classify(new)
+                if len(old)==len(new)==16:
+                    signs += (int(old,16)>>63) != (int(new,16)>>63)
                 if classify(old) == classify(new) == 'finite':
                     delta = abs(ordered(old)-ordered(new))
                     max_delta = max(max_delta, delta)
-                    signs += (ordered(old) < 0) != (ordered(new) < 0)
                     stats['max_ulp_movement'] = max(stats.get('max_ulp_movement', 0), delta)
                 # Scalar fixtures carry the correctly-rounded reference. The
                 # extra-bit Greek fixture is scored separately by its existing
@@ -74,6 +79,19 @@ def main(before, after, output):
                             if classify(value) in ('finite','zero'):
                                 key = 'worst_'+label+'_ulp'
                                 stats[key] = max(stats.get(key, 0), abs(ordered(value)-ordered(ref)))
+        if fixture == 'normal':
+            monotonicity = {}
+            for fn, direction in [('cdf',1),('erf',1),('erfc',-1),('erfcx',-1)]:
+                points=[]
+                for line in data[1]:
+                    row,value=line.split('\t');fields=row.split()
+                    if fields[0]==fn:points.append((floating(fields[1]),floating(value)))
+                points.sort()
+                violations=sum((b[1]<a[1] if direction>0 else b[1]>a[1])
+                               for a,b in zip(points,points[1:]))
+                monotonicity[fn]={'sampled_points':len(points),'violations':violations}
+                assert violations==0,(fn,'sampled monotonicity violation')
+            summary['normal_monotonicity']=monotonicity
         summary['fixtures'][fixture] = {'rows': len(data[0]), 'changed': count}
         if fixture != 'dd':
             summary['fixtures'][fixture].update(class_changes=classes, sign_changes=signs, max_ulp_movement=max_delta)
@@ -89,8 +107,9 @@ def main(before, after, output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', action='version', version='compare_exponential_traces 1')
+    parser.add_argument('--normal', action='store_true', help='Also compare normal/scalar error-function traces')
     parser.add_argument('baseline_prefix')
     parser.add_argument('candidate_prefix')
     parser.add_argument('output_prefix')
     args = parser.parse_args()
-    main(args.baseline_prefix, args.candidate_prefix, args.output_prefix)
+    main(args.baseline_prefix, args.candidate_prefix, args.output_prefix, args.normal)

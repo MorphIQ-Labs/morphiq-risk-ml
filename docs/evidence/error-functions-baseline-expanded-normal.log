@@ -1,0 +1,30 @@
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               14278          6    7.993e-16    -0x1.c48c6001f0abdp+1      0
+cdf tail (x <= -8)      6177          4    5.590e-16    -0x1.e38ea4327d7b6p+4      0
+erf                    20455          3    4.224e-16   -0x1.9179037ac3adep-26      0
+erfc                   20455 4565860915532636    1.000e+00     0x1.a8b020c49ba5ep+4    102
+erfcx                  16740 346092961155123          inf    -0x1.aa0c49ba5e355p+4      8
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 20455          5    6.660e-16      0x1.c02fa2fc1c7fp+1      0
+pdf                    20455          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+erfcx(-0x1.aa0f4d2e063cep+4) = infinity, reference 0x1.ffffffffffeaep+1023 (338 ulp)
+erfcx(-0x1.aa0f4d2e063cdp+4) = infinity, reference 0x1.ffffffffff806p+1023 (2042 ulp)
+erfcx(-0x1.aa0f4d2e063ccp+4) = infinity, reference 0x1.ffffffffff15ep+1023 (3746 ulp)
+erfcx(-0x1.aa0f4d2e063cbp+4) = infinity, reference 0x1.fffffffffeab6p+1023 (5450 ulp)
+erfcx(-0x1.aa0c49ba5e357p+4) = infinity, reference 0x1.ec53af3fdc49ap+1023 (346092961151846 ulp)
+erfcx(-0x1.aa0c49ba5e356p+4) = infinity, reference 0x1.ec53af3fdbe33p+1023 (346092961153485 ulp)
+erfcx(-0x1.aa0c49ba5e355p+4) = infinity, reference 0x1.ec53af3fdb7cdp+1023 (346092961155123 ulp)
+erfcx(0x1.3fffffffffffep+1) = 0x1.afbb3f3b73438p-3, reference 0x1.afbb3f3b7343dp-3 (5 ulp)
+erfc(0x1.a8b020c49ba5ep+4) = 0x0p+0, reference 0x1.038a055f6d35cp-1022 (4565860915532636 ulp)
+erfc(0x1.a8b020c49ba5fp+4) = 0x0p+0, reference 0x1.038a055f6cfffp-1022 (4565860915531775 ulp)
+erfc(0x1.a8b020c49ba6p+4) = 0x0p+0, reference 0x1.038a055f6cca1p-1022 (4565860915530913 ulp)
+erfc(0x1.a8b020c49ba61p+4) = 0x0p+0, reference 0x1.038a055f6c943p-1022 (4565860915530051 ulp)
+erfc(0x1.a8cp+4) = 0x0p+0, reference 0x0.d33fcbd817013p-1022 (3716335301390355 ulp)
+erfc(0x1.a8c0d2bba562cp+4) = 0x0p+0, reference 0x0.d10169158ad7fp-1022 (3676863811071359 ulp)
+erfc(0x1.a9p+4) = 0x0p+0, reference 0x0.5c138483995bfp-1022 (1619822357616063 ulp)
+erfc(0x1.a92423eebae5p+4) = 0x0p+0, reference 0x0.3998cba6d681bp-1022 (1013254632335387 ulp)
+erfc(0x1.a94p+4) = 0x0p+0, reference 0x0.281cffe3190aap-1022 (705680276295850 ulp)
+erfc(0x1.a961ccc8c4d54p+4) = 0x0p+0, reference 0x0.19dc17d5554cbp-1022 (454929333703883 ulp)
+erfc(0x1.a98p+4) = 0x0p+0, reference 0x0.11778970df448p-1022 (307281674499144 ulp)
+erfc(0x1.a980c32b5bafcp+4) = 0x0p+0, reference 0x0.114b75166418p-1022 (304252553937280 ulp)

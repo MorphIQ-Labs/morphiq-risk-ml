@@ -6,9 +6,9 @@ val norm_pdf : float -> float
 (** Density [phi(x)]. Symmetric bit for bit: [norm_pdf x = norm_pdf (-.x)]. *)
 
 val norm_cdf : float -> float
-(** Distribution [Phi(x)], built on Cody's [calerf]. The tail's [exp(-x^2/2)]
-    uses an exactly split square, so the rounding of the argument does not grow
-    with [x^2]. *)
+(** Distribution [Phi(x)], built on project-generated error functions. The
+    tail's [exp(-x^2/2)] uses an exactly split square, so the rounding of the
+    argument does not grow with [x^2]. *)
 
 val log_norm_cdf : float -> float
 (** [ln Phi(x)]. Returns [-0.0] or [neg_infinity] where the value is not

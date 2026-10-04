@@ -38,6 +38,50 @@ type mutant = {
 let catalog =
   [
     {
+      id = "erfcx-leading-residual";
+      file = "lib/cody.ml";
+      snippet =
+        "coefficients.(0)\n\
+        \    +. Float.fma !tail offset Erf_coefficients.local_low.(index)";
+      replacement = "Float.fma !tail offset coefficients.(0)";
+      killer = "oracle_greeks";
+      mechanism = "leading coefficient residual in cancelling BSM theta";
+    };
+    {
+      id = "erfcx-local-degree";
+      file = "lib/cody.ml";
+      snippet = "let coefficients = Erf_coefficients.local.(index) in";
+      replacement =
+        "let coefficients = Array.sub Erf_coefficients.local.(index) 0 7 in";
+      killer = "oracle_normal";
+      mechanism = "generated local erfcx Taylor remainder";
+    };
+    {
+      id = "erfcx-tail-degree";
+      file = "lib/cody.ml";
+      snippet = "horner Erf_coefficients.tail (inverse *. inverse)";
+      replacement =
+        "horner (Array.sub Erf_coefficients.tail 0 4) (inverse *. inverse)";
+      killer = "oracle_normal";
+      mechanism = "Gaussian-integral asymptotic remainder";
+    };
+    {
+      id = "erf-series-degree";
+      file = "lib/cody.ml";
+      snippet = "horner Erf_coefficients.small (x *. x)";
+      replacement = "horner (Array.sub Erf_coefficients.small 0 5) (x *. x)";
+      killer = "oracle_normal";
+      mechanism = "odd small-erf series remainder";
+    };
+    {
+      id = "erfc-square-split";
+      file = "lib/cody.ml";
+      snippet = "Split.scaled_exp_neg (erfcx_nonnegative x) hi lo";
+      replacement = "Split.scaled_exp_neg (erfcx_nonnegative x) hi 0.0";
+      killer = "oracle_normal";
+      mechanism = "erfc tail retains the exact square residual";
+    };
+    {
       id = "planner-snapshot-copy";
       file = "lib/planner.ml";
       snippet =

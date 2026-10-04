@@ -91,3 +91,14 @@ including the user-supplied Cody and Tang papers and PDF parser warnings.
 
 Removing tracked copies does not remove them from prior Git history, existing
 clones, or old archives. No history rewrite is part of this cleanup.
+
+## Generated error-function mathematics
+
+The replacement derives its coefficients from the defining Gaussian integral,
+its moment recurrence and the erfcx differential equation. Consulted online
+2026-10-03: NIST DLMF version 1.2.8 (2026-09-15), sections
+[7.7](https://dlmf.nist.gov/7.7), [7.9](https://dlmf.nist.gov/7.9),
+[7.10](https://dlmf.nist.gov/7.10), and [7.12](https://dlmf.nist.gov/7.12).
+No implementation or coefficient table was imported. No PDF was acquired for
+this step. The [derivation](../error-function-replacement.md) and exact-rational
+generator are public, reproducible project artifacts.

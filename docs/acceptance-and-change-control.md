@@ -105,7 +105,7 @@ rows versus QD, development/release validation and shared-host performance.
 The public replay digest is unchanged, but that does not make the delta
 bit-identical on all inputs or extend earlier acceptance to this candidate.
 Independent delta review and final artifact qualification remain pending;
-AS241/CALERF provenance work under #64 remains a release blocker. No acceptance
+AS241 provenance work under #64 remains a release blocker; the CALERF replacement has its own delta evidence below. No acceptance
 record or owner decision is changed by this engineering evidence.
 
 | Change | Required analysis and refreshed evidence |
@@ -170,3 +170,11 @@ its exact main commit passes all supported-platform checks, native/bytecode
 artifact installation, canonical replay and the full 47-mutant catalog. The
 [current acceptance check](evidence/candidate-0.2.0-acceptance-check.json) still
 rejects the outstanding independent-review and final decision requirements.
+
+## Error-function replacement delta
+
+The [CALERF replacement evidence](results-error-functions.md) is a numerical
+delta from the reviewed baseline. It requires its own candidate-specific delta
+review; the earlier owner record is unchanged. AS241 remains an unresolved
+current implementation under #64 and a release blocker. This work does not
+approve a new release, operational use or unrestricted historical distribution.

@@ -1,0 +1,266 @@
+{
+  "fields": {
+    "bsm price": {
+      "rows": 10080,
+      "changed": 388,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 14
+    },
+    "bsm iv": {
+      "rows": 10080,
+      "changed": 308,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 6
+    },
+    "bsm delta": {
+      "rows": 10080,
+      "changed": 951,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 6
+    },
+    "bsm gamma": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm theta": {
+      "rows": 10080,
+      "changed": 4,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 2
+    },
+    "bsm vega": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm rho": {
+      "rows": 10080,
+      "changed": 945,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 5
+    },
+    "bsm vanna": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm volga": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm charm": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm veta": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bsm color": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced price": {
+      "rows": 10080,
+      "changed": 440,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 16
+    },
+    "displaced iv": {
+      "rows": 10080,
+      "changed": 380,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 12
+    },
+    "displaced delta": {
+      "rows": 10080,
+      "changed": 940,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 6
+    },
+    "displaced gamma": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced theta": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced vega": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced rho": {
+      "rows": 10080,
+      "changed": 430,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 16
+    },
+    "displaced vanna": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced volga": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced charm": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced veta": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "displaced color": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier price": {
+      "rows": 10080,
+      "changed": 63,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 2
+    },
+    "bachelier iv": {
+      "rows": 10080,
+      "changed": 53,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 4
+    },
+    "bachelier delta": {
+      "rows": 10080,
+      "changed": 764,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 5
+    },
+    "bachelier gamma": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier theta": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier vega": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier rho": {
+      "rows": 10080,
+      "changed": 57,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 3
+    },
+    "bachelier vanna": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier volga": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier charm": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier veta": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    },
+    "bachelier color": {
+      "rows": 10080,
+      "changed": 0,
+      "class_changes": 0,
+      "sign_changes": 0,
+      "max_ulp_movement": 0
+    }
+  },
+  "records": 30240,
+  "changed": 5723,
+  "bytes": [
+    6069960,
+    6069960
+  ],
+  "sha256": {
+    "baseline": "b5ffbc52bea0308ce1406594866d373ab51f342eca669a4f8fe3c49769e40f41",
+    "final": "d28538a2e52be7aaede7de45f5d84e1fd25d41bc60dc329251d1f5e8d1a32f8f"
+  }
+}

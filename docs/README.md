@@ -57,3 +57,6 @@ it is not the supported compiler or a prerequisite for ordinary builds.
 
 Removing a file from the current tree does not remove it from existing Git
 history, clones, or older archives. This cleanup does not rewrite history.
+
+- [Generated error functions](error-function-replacement.md): construction and rational bounds replacing CALERF.
+- [Error-function qualification](results-error-functions.md): compatibility, boundary references and performance.

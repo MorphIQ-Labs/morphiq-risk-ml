@@ -1,0 +1,422 @@
+Error-function replacement local validation
+Compiler: OCaml 5.3.0 Flambda, -O3; job cap 2.
+Development: dune build -j 2 @install @fmt @runtest bench/error_functions.exe bench/assurance.exe; exit 0.
+Release: dune build -j 2 --profile release --build-dir _build-release @install @runtest bench/error_functions.exe bench/assurance.exe; exit 0.
+Affected mutation campaign: seven killed after passing mutation-profile baseline.
+The first full development run had expected old-digest rejection plus formatting and catalog-count failures, subsequently corrected. The initial numerical candidate failed theta; its independent failure log is retained separately.
+
+
+Final development
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.092s
+
+OK
+1 instruments x 9 scenarios; 9 calculations; at most 4 buffered results
+plan 6acf42096d7bd8e6aab84cc028cecc2d3caeab4e57fa14ba96a29846c4245583
+scenario 0: 729.235984997 USD, numerical error <= 4.911e-14
+scenario 1: 4069.80587951 USD, numerical error <= 1.615e-13
+scenario 2: 11110.7350735 USD, numerical error <= 6.879e-13
+scenario 3: 642.012449235 USD, numerical error <= 4.5e-14
+scenario 4: 3904.8053328 USD, numerical error <= 6.477e-14
+scenario 5: 10997.8419659 USD, numerical error <= 1.411e-12
+scenario 6: 365.014482814 USD, numerical error <= 4.126e-14
+scenario 7: 3308.76482264 USD, numerical error <= 1.625e-13
+scenario 8: 10627.4992909 USD, numerical error <= 1.075e-12
+committed 9 rows; complete=true
+IV termination, failed proposals, exponent range and arithmetic failures passed
+qcheck random seed: 688072012
+Testing `morphiq_risk'.
+This run has ID `AYS1M88Z'.
+
+  [OK]          normal: exact points          0   values.
+  [OK]          normal: exact points          1   error-function finite limits.
+  [OK]          dd: scaled rounding           0   single rounding into the su...
+  [OK]          normal: properties            0   phi(x) = phi(-x) bit for bit.
+  [OK]          normal: properties            1   Phi is nondecreasing.
+  [OK]          normal: properties            2   Phi(-x) ~ 1 - Phi(x).
+  [OK]          normal: properties            3   Phi^-1(Phi(x)) ~ x on [-8, 8].
+
+Full test results in `/private/tmp/morphiq-calerf-replacement/_build/default/test/_build/_tests/morphiq_risk'.
+Test Successful in 0.016s. 7 tests run.
+Volatility admission and mixed Greek unit boundaries passed
+cases 121, worst 1.00 x attainable at x=-0.01 s=0.5, over 8x: 0
+translation cases 32, self-consistency cases 96, failures 0
+2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass
+planner adversarial: subnormal multiplication, cancellation, overflow and output transactions passed
+4176 public price/Greek certificates; 3932 exact acceptance-limit controls
+planner: exact scalar/batch, rational aggregate enclosures, scenario coverage, isolation, failures and 1/2/3/4-worker replay passed
+8330 batch IV fixture outcomes equal scalar; served roots equal independent reference
+532 nearest-even boundary veta references; exact-zero, kink, adjacent and numerical-failure controls pass
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               14278          3    4.366e-16               -0x1.aap+2      0
+cdf tail (x <= -8)      6177          5    6.055e-16    -0x1.a7563d16a682ep+4      0
+erf                    20455          1    2.220e-16               -0x1.6cp+0      0
+erfc                   20455          4    5.067e-16      0x1.8ace5f53462fp+3      0
+erfcx                  16740          2    4.441e-16    -0x1.53249a1a6af7fp-2      0
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 20455          4    5.790e-16     0x1.4b73f8356cf3cp+4      0
+pdf                    20455          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384          7      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          7      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         10      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+determinism digest e2fae65de27c7f4add63b5a476c833fcc91f1efdafde9a73950ba34db3382593 over 6069960 bytes
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.0534342 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          6      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120          8      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            3        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415            8        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+generated error fail pass / total     time test name
+
+[✓] 3000    0    0 3000 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+
+[✓] 3000    0    0 3000 / 3000     0.0s call - put = A - C
+
+[✓] 3000    0    0 3000 / 3000     0.0s price is nondecreasing in σ
+
+[✓] 3000    0    0 3000 / 3000     0.0s delta within its bounds; gamma, vega >= 0
+
+[✓] 3000    0    0 3000 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+
+[✓] 3117    0    0 3000 / 3000     0.1s displaced = Black-76 on representable sums, bit for bit
+
+[✓] 3200    0    0 2989 / 3000     7.8s IV round trip composes forward and inverse error
+
+[✓] 1200    0    0  796 / 1000     0.0s delta, vega, theta match differences of the price
+================================================================================
+success (ran 8 tests)
+2007 generated regressions and boundary controls passed
+model status                                  rows  pass  in cell <=4ulp  <=ferro  worst ulp
+bachelier expiry_not_identifiable               70    70
+bachelier invalid_input                         15    15
+bachelier root                                 859   859      859    859        0          0
+bachelier rounded_zero_volatility_bound        420   420
+bachelier zero_volatility_limit                645   645
+black76 expiry_not_identifiable                 84    84
+black76 invalid_input                           15    15
+black76 no_finite_inverse                        4     4
+black76 root                                  1802  1802     1802   1802        0          0
+black76 rounded_zero_volatility_bound           56    56
+black76 zero_volatility_limit                  146   146
+bsm expiry_not_identifiable                     84    84
+bsm invalid_input                               15    15
+bsm no_finite_inverse                            4     4
+bsm root                                      1754  1754     1754   1754        0          0
+bsm rounded_zero_volatility_bound               90    90
+bsm zero_volatility_limit                      160   160
+displaced expiry_not_identifiable               84    84
+displaced invalid_input                         15    15
+displaced no_finite_inverse                      2     2
+displaced root                                1164  1164     1164   1164        0          0
+displaced rounded_zero_volatility_bound        345   345
+displaced zero_volatility_limit                497   497
+unresolved reference rows (no expectation):
+bsm runtime certification: 1754 roots, 0 numerical failures
+black76 runtime certification: 1802 roots, 0 numerical failures
+displaced runtime certification: 1164 roots, 0 numerical failures
+bachelier runtime certification: 859 roots, 0 numerical failures
+
+
+Final release
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.036s
+
+OK
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.010s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.121s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.142s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+11 fixtures checked, 0 problems
+1 instruments x 9 scenarios; 9 calculations; at most 4 buffered results
+plan 6acf42096d7bd8e6aab84cc028cecc2d3caeab4e57fa14ba96a29846c4245583
+scenario 0: 729.235984997 USD, numerical error <= 4.911e-14
+scenario 1: 4069.80587951 USD, numerical error <= 1.615e-13
+scenario 2: 11110.7350735 USD, numerical error <= 6.879e-13
+scenario 3: 642.012449235 USD, numerical error <= 4.5e-14
+scenario 4: 3904.8053328 USD, numerical error <= 6.477e-14
+scenario 5: 10997.8419659 USD, numerical error <= 1.411e-12
+scenario 6: 365.014482814 USD, numerical error <= 4.126e-14
+scenario 7: 3308.76482264 USD, numerical error <= 1.625e-13
+scenario 8: 10627.4992909 USD, numerical error <= 1.075e-12
+committed 9 rows; complete=true
+qcheck random seed: 139284908
+Testing `morphiq_risk'.
+This run has ID `FTHO3FIE'.
+
+  [OK]          normal: exact points          0   values.
+  [OK]          normal: exact points          1   error-function finite limits.
+  [OK]          dd: scaled rounding           0   single rounding into the su...
+  [OK]          normal: properties            0   phi(x) = phi(-x) bit for bit.
+  [OK]          normal: properties            1   Phi is nondecreasing.
+  [OK]          normal: properties            2   Phi(-x) ~ 1 - Phi(x).
+  [OK]          normal: properties            3   Phi^-1(Phi(x)) ~ x on [-8, 8].
+
+Full test results in `/private/tmp/morphiq-calerf-replacement/_build-release/default/test/_build/_tests/morphiq_risk'.
+Test Successful in 0.015s. 7 tests run.
+IV termination, failed proposals, exponent range and arithmetic failures passed
+Volatility admission and mixed Greek unit boundaries passed
+Full inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 23
+black76 unresolved: 1
+bsm certified: 27
+displaced certified: 15
+displaced unresolved: 3
+74/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+First inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 22
+black76 unresolved: 2
+bsm certified: 25
+bsm unresolved: 2
+displaced certified: 12
+displaced unresolved: 6
+68/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+Full model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+First model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+cases 121, worst 1.00 x attainable at x=-0.01 s=0.5, over 8x: 0
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               14278          3    4.366e-16               -0x1.aap+2      0
+cdf tail (x <= -8)      6177          5    6.055e-16    -0x1.a7563d16a682ep+4      0
+erf                    20455          1    2.220e-16               -0x1.6cp+0      0
+erfc                   20455          4    5.067e-16      0x1.8ace5f53462fp+3      0
+erfcx                  16740          2    4.441e-16    -0x1.53249a1a6af7fp-2      0
+inv central             5163          4    5.809e-16      0x1.6b60bafb4e86p-3      0
+inv tail                4142          6    7.561e-16               0x1.8p-580      0
+logcdf                 20455          4    5.790e-16     0x1.4b73f8356cf3cp+4      0
+pdf                    20455          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+normal_dd: all cases within budget
+log1p    27651 rows, worst 1 ulp at -0x1.f410eaa8a61f6p-1, worst 0.9334 ulp from exact
+log      21515 rows, worst 1 ulp at 0x1.ce283c2d11eaep-908, worst 0.9563 ulp from exact
+exp      31152 rows, worst 1 ulp at -0x1.63422c73c63f2p+9, worst 1.0321 ulp from exact
+expm1    31152 rows, worst 1 ulp at -0x1.2b708872320e1p+5, worst 1.3553 ulp from exact
+log1p reduced path: worst 0.5205 ulp from exact (bound 0.5 + 0.14)
+translation cases 32, self-consistency cases 96, failures 0
+Full enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+First enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+2506 enclosed extra-bit Greek references, 0 explicit capability failures
+2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass
+planner adversarial: subnormal multiplication, cancellation, overflow and output transactions passed
+planner: exact scalar/batch, rational aggregate enclosures, scenario coverage, isolation, failures and 1/2/3/4-worker replay passed
+4176 public price/Greek certificates; 3932 exact acceptance-limit controls
+8330 batch IV fixture outcomes equal scalar; served roots equal independent reference
+532 nearest-even boundary veta references; exact-zero, kink, adjacent and numerical-failure controls pass
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384          7      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          7      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         10      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+determinism digest e2fae65de27c7f4add63b5a476c833fcc91f1efdafde9a73950ba34db3382593 over 6069960 bytes
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.0534342 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          6      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120          8      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+model status                                  rows  pass  in cell <=4ulp  <=ferro  worst ulp
+bachelier expiry_not_identifiable               70    70
+bachelier invalid_input                         15    15
+bachelier root                                 859   859      859    859        0          0
+bachelier rounded_zero_volatility_bound        420   420
+bachelier zero_volatility_limit                645   645
+black76 expiry_not_identifiable                 84    84
+black76 invalid_input                           15    15
+black76 no_finite_inverse                        4     4
+black76 root                                  1802  1802     1802   1802        0          0
+black76 rounded_zero_volatility_bound           56    56
+black76 zero_volatility_limit                  146   146
+bsm expiry_not_identifiable                     84    84
+bsm invalid_input                               15    15
+bsm no_finite_inverse                            4     4
+bsm root                                      1754  1754     1754   1754        0          0
+bsm rounded_zero_volatility_bound               90    90
+bsm zero_volatility_limit                      160   160
+displaced expiry_not_identifiable               84    84
+displaced invalid_input                         15    15
+displaced no_finite_inverse                      2     2
+displaced root                                1164  1164     1164   1164        0          0
+displaced rounded_zero_volatility_bound        345   345
+displaced zero_volatility_limit                497   497
+unresolved reference rows (no expectation):
+bsm runtime certification: 1754 roots, 0 numerical failures
+black76 runtime certification: 1802 roots, 0 numerical failures
+displaced runtime certification: 1164 roots, 0 numerical failures
+bachelier runtime certification: 859 roots, 0 numerical failures
+2007 generated regressions and boundary controls passed
+generated error fail pass / total     time test name
+
+[✓] 3000    0    0 3000 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+
+[✓] 3000    0    0 3000 / 3000     0.0s call - put = A - C
+
+[✓] 3000    0    0 3000 / 3000     0.0s price is nondecreasing in σ
+
+[✓] 3000    0    0 3000 / 3000     0.0s delta within its bounds; gamma, vega >= 0
+
+[✓] 3000    0    0 3000 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+
+[✓] 3117    0    0 3000 / 3000     0.0s displaced = Black-76 on representable sums, bit for bit
+
+[✓] 3200    0    0 2989 / 3000     7.9s IV round trip composes forward and inverse error
+
+[✓] 1200    0    0  796 / 1000     0.0s delta, vega, theta match differences of the price
+================================================================================
+success (ran 8 tests)
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            3        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415            8        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+
+
+Affected mutations
+baseline passes (3615 s)
+killed    erfcx-leading-residual by oracle_greeks
+killed    erfcx-local-degree by oracle_normal
+killed    erfcx-tail-degree by oracle_normal
+killed    erf-series-degree by oracle_normal
+killed    erfc-square-split by oracle_normal
+killed    scaled-exp-prefactor by numerical_regressions
+killed    gaussian-split by oracle_normal
+7 of 7 mutants killed as catalogued

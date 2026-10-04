@@ -9,7 +9,7 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 | Fixture | Generator | Content |
 | --- | --- | --- |
 | `elementary` | `gen_elementary.py` | exp, expm1, log, log1p over every binade, the reduction boundaries and a random sample (111k); each reference carries its residual, exact − reference, for fractional-ULP scoring |
-| `normal` | `gen_normal.py` | Φ, φ, ln Φ, erfcx and Φ⁻¹ over every binade, Cody's interval cuts and the tails (82k) |
+| `normal` | `gen_normal.py` | Φ, φ, ln Φ, erf, erfc, erfcx and Φ⁻¹ over every binade, old/new interval neighbors, underflow and overflow (128,320; all original 82,000 rows retained) |
 | `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
 | `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,760); 63% have an unrepresentable F + d or K + d |
 | `iv` | `gen_iv.py` | implied-volatility outcomes, exact roots and rounding cells for all four models, on a grid and a random sample |
@@ -44,6 +44,16 @@ corpus; precision agreement alone is not promoted to a universal proof.
 Unresolved European/displaced/IV rows now fail regeneration instead of being
 dropped. The generators' transitive helper provenance is in `MANIFEST`.
 
+The expanded normal fixture agrees at 80/160 decimal digits, escalating to
+320/640 when needed. Large positive erfcx references use mpmath's independent
+Tricomi-U formulation instead of an unjustified fixed 30-term asymptotic sum.
+All 82,000 original records remain unchanged. Direct erf/erfc gates are 4 ULP;
+existing gates are unchanged. The scalar scorer checks finite/infinite and
+endpoint classes explicitly, so adjacent finite/infinite words cannot pass an
+ULP-only comparison. `MORPHIQ_ORACLE_TRACE` emits fixture-aligned result words;
+`scripts/compare_exponential_traces.py --normal` and
+`scripts/audit_error_function_changes.py` retain and refine changed rows.
+
 ## Provenance
 
 - **Building fixtures.** `oracle/build.sh [name…]` regenerates fixtures. Each is compressed with `gzip -n -9`, so the bytes are reproducible.
@@ -73,7 +83,7 @@ The near-maximum regression fixture evaluates the ATM inverse through `erfinv`, 
 
 The ten committed fixtures include extra-bit component, Greek and model-price references. The Greek-bit generator uses 110/220-digit closed forms and checks the zero-neighborhood cases against independent differentiation. Large erfcx and Y′ references use Tricomi U identities to avoid cancellation, with additional precision to resolve sparse low words. These checks establish agreement of independent calculations, not interval proofs of the oracle itself.
 
-`kernel_certificates.py` separately encloses differential residuals of the actual rounded Cody/Jäckel coefficients using exact Bernstein bounds. `lift_polynomials.py` checks the Black expansion coefficients against integral/moment identities and lifts their actual operation grouping into the test algebra. `Certified` propagates these component bounds through every committed price and finite Greek; no measured ULP envelope is a premise of those certificates. See [the derivations](error-analysis.md#8-rounded-kernels-and-complete-pricegreek-expressions).
+`erf_coefficients.py` generates Gaussian-integral coefficients with rational rounding witnesses; `erf_certificates.py` bounds their remainder and evaluation error. `kernel_certificates.py` includes those checks and separately encloses the rounded Jäckel coefficients’ differential residuals using exact Bernstein bounds. `lift_polynomials.py` checks the Black expansion coefficients against integral/moment identities and lifts their actual operation grouping into the test algebra. `Certified` propagates these component bounds through every committed price and finite Greek; no measured ULP envelope is a premise of those certificates. See [the derivations](error-analysis.md#8-rounded-kernels-and-complete-pricegreek-expressions).
 
 The curated mutation mechanisms run with replay bit-identity assertions disabled, so numerical error must trigger the designated guard. Ordinary CI runs seven core mechanisms; the full catalog runs manually or weekly under the [mutation execution policy](mutation-policy.md). The separate `--probe intrinsic-terms` run still survives and exits 1; it is deliberately excluded provisionally, not classified as equivalent. Ordinary accuracy tests retain replay identity to detect drift between the arithmetic model and implementation.
 
