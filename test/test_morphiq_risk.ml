@@ -17,14 +17,45 @@ let exact_points () =
     "Phi^-1 outside [0,1] is NaN" true
     (Float.is_nan (Normal.norm_inv 1.5));
   Alcotest.(check bool)
-    "erfcx below XNEG is +inf" true
+    "erfcx(-27) overflows" true
     (Internal.Cody.erfcx (-27.0) = Float.infinity);
   List.iter
     (fun f ->
       Alcotest.(check bool) "NaN propagates" true (Float.is_nan (f Float.nan)))
     [
-      Normal.norm_pdf; Normal.norm_cdf; Normal.log_norm_cdf; Internal.Cody.erfcx;
+      Normal.norm_pdf;
+      Normal.norm_cdf;
+      Normal.log_norm_cdf;
+      Internal.Cody.erfcx;
+      Internal.Cody.erf;
+      Internal.Cody.erfc;
     ]
+
+let error_function_edges () =
+  let module E = Internal.Cody in
+  Alcotest.(check int64)
+    "erf preserves negative zero" (bits (-0.0))
+    (bits (E.erf (-0.0)));
+  List.iter
+    (fun (name, expected, got) ->
+      Alcotest.(check (float 0.0)) name expected got)
+    [
+      ("erf(+inf)", 1.0, E.erf Float.infinity);
+      ("erf(-inf)", -1.0, E.erf Float.neg_infinity);
+      ("erfc(+inf)", 0.0, E.erfc Float.infinity);
+      ("erfc(-inf)", 2.0, E.erfc Float.neg_infinity);
+      ("erfcx(+inf)", 0.0, E.erfcx Float.infinity);
+      ("erfcx(-inf)", Float.infinity, E.erfcx Float.neg_infinity);
+    ];
+  Alcotest.(check bool)
+    "erfc(27) retains its subnormal tail" true
+    (E.erfc 27.0 > 0.0 && E.erfc 27.0 < Float.min_float);
+  Alcotest.(check bool)
+    "negative erfcx does not overflow prematurely" true
+    (Float.is_finite (E.erfcx (-26.6281)));
+  Alcotest.(check bool)
+    "large positive erfcx remains subnormal" true
+    (E.erfcx Float.max_float > 0.0 && E.erfcx Float.max_float < Float.min_float)
 
 (* 2^-1075 (1 + δ) sits at the midpoint of the first subnormal interval.
    ldexp of the rounded sum rounds the tie to even (0) and loses δ's sign;
@@ -75,7 +106,11 @@ let () =
   Alcotest.run "morphiq_risk"
     [
       ( "normal: exact points",
-        [ Alcotest.test_case "values" `Quick exact_points ] );
+        [
+          Alcotest.test_case "values" `Quick exact_points;
+          Alcotest.test_case "error-function finite limits" `Quick
+            error_function_edges;
+        ] );
       ( "dd: scaled rounding",
         [
           Alcotest.test_case "single rounding into the subnormals" `Quick

@@ -1,0 +1,13 @@
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.0534342 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures

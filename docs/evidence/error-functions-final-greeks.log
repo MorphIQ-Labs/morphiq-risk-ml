@@ -1,0 +1,25 @@
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            3        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415            8        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420

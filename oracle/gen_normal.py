@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Independent references for the standard normal primitives.
 
-mpmath at 80 significant digits evaluates the exact binary64 argument. Each
+mpmath at 80/160 digits (with escalation) evaluates the exact binary64 argument. Each
 row stores the reference rounded to nearest binary64. The corpus covers:
 - every finite binade of both signs
 - signed zero
-- Cody's interval cuts and their representable neighbours
+- historical cuts and every generated-polynomial boundary and its neighbours
 - a dense body/tail grid
 - probabilities across the full open unit interval for the inverse
 
@@ -20,7 +20,6 @@ import mpmath as mp
 from mpmath.libmp import to_float
 
 mp.mp.dps = 80
-SQRT2 = mp.sqrt(2)
 
 
 def bits(x):
@@ -57,12 +56,9 @@ SATURATED = 64
 def erfcx(x):
     x = mp.mpf(x)
     if x > 45:
-        # Asymptotic series; the 30th term is below 1e-80 for x > 45.
-        t, total = mp.mpf(1), mp.mpf(1)
-        for k in range(1, 30):
-            t *= -(2 * k - 1) / (2 * x * x)
-            total += t
-        return total / (x * mp.sqrt(mp.pi))
+        # Independent Tricomi-U identity; no production polynomial/continued
+        # fraction or fixed-length asymptotic oracle is used.
+        return mp.hyperu(mp.mpf('.5'),mp.mpf('.5'),x*x)/mp.sqrt(mp.pi)
     return mp.erfc(x) * mp.exp(x * x)
 
 
@@ -85,7 +81,7 @@ def logcdf(x):
     if x > 0:
         return mp.log1p(-mp.ncdf(-x))
     if x < -20:
-        z = -x / SQRT2
+        z = -x / mp.sqrt(2)
         return mp.log(erfcx(z) / 2) - z * z
     return mp.log(mp.ncdf(x))
 
@@ -103,7 +99,7 @@ def inv(p):
     def f(x):
         return (logcdf(x) if side < 0 else logcdf(-x)) - target
 
-    return mp.findroot(f, x0, tol=mp.mpf(10) ** -70)
+    return mp.findroot(f, x0, tol=mp.mpf(10) ** (-(mp.mp.dps-10)))
 
 
 def arguments():
@@ -118,7 +114,11 @@ def arguments():
         for _ in range(16):
             x = rng.uniform(1, 2) * 2.0**e
             xs.update((x, -x))
-    cuts = [0.46875, 4.0, 26.543, 26.628, 6.71e7]
+    cuts = [0.46875, 4.0, 26.543, 26.628, 6.71e7] # retain historical cuts
+    cuts += [i/4 for i in range(1,49)] + [2.0**27,27.0,28.0]
+    with mp.workdps(160):
+        cuts += [float(mp.sqrt(mp.log(mp.mpf(sys.float_info.max)/2))),
+                 float(mp.findroot(lambda x: mp.log(mp.erfc(x))+1075*mp.log(2),27))]
     for c in cuts:
         for v in neighbours(c):
             xs.update((v, -v))
@@ -151,20 +151,42 @@ def probabilities():
     return sorted(p for p in ps if 0 < p < 1)
 
 
+def agreed(function, x):
+    last = None
+    for precision in (80,160,320,640):
+        with mp.workdps(precision):
+            value = to_double(function(mp.mpf(x)))
+        if last is not None and bits(value)==bits(last):return value
+        last=value
+    raise ArithmeticError(f'unresolved reference for {x.hex()}')
+
+
+def erf(x):
+    if abs(x)>SATURATED:return mp.sign(x)
+    return mp.erf(x)
+
+
+def erfc(x):
+    if x>SATURATED:return mp.mpf(0)
+    if x<-SATURATED:return mp.mpf(2)
+    return mp.erfc(x)
+
+
 def main(out):
     with open(out, "w") as f:
-        f.write(f"# mpmath {mp.__version__} dps {mp.mp.dps}\n")
+        f.write(f"# mpmath {mp.__version__}; 80/160 digits with escalation\n")
         for x in arguments():
-            X = mp.mpf(x)
-            f.write(f"pdf {bits(x)} {bits(to_double(phi(X)))}\n")
-            f.write(f"cdf {bits(x)} {bits(to_double(cdf(X)))}\n")
-            if x != 0.0 or bits(x) == bits(0.0):
-                ref = to_double(logcdf(X))
-                f.write(f"logcdf {bits(x)} {bits(ref)}\n")
-            if x > -26.628:
-                f.write(f"erfcx {bits(x)} {bits(to_double(erfcx(X)))}\n")
+            for name,fn in [('pdf',phi),('cdf',cdf),('logcdf',logcdf),
+                            ('erf',erf),('erfc',erfc)]:
+                ref=agreed(fn,x)
+                if x==0 and name=='erf':ref=x
+                f.write(f"{name} {bits(x)} {bits(ref)}\n")
+            if x > -27:
+                ref=agreed(erfcx,x)
+                f.write(f"erfcx {bits(x)} {bits(ref)}\n")
         for p in probabilities():
-            f.write(f"inv {bits(p)} {bits(to_double(inv(p)))}\n")
+            ref=agreed(inv,p)
+            f.write(f"inv {bits(p)} {bits(ref)}\n")
 
 
 if __name__ == "__main__":

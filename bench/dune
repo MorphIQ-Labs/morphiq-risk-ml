@@ -58,3 +58,10 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk unix))
+
+(executable
+ (name error_functions)
+ (modules error_functions)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))

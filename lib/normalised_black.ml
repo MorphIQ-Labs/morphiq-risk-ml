@@ -25,7 +25,7 @@
 
    - Region I: an asymptotic expansion of the scaled function b / vega.
    - Region II: a small-t expansion of the same.
-   - Region III: Cody's erfc/erfcx.
+   - Region III: generated erfc/erfcx.
 
    The departure from the reference: in regions I and II the normalised vega
    exp(-(h² + t²)/2) is evaluated with its exponent as an exact unevaluated
@@ -532,7 +532,7 @@ let vega_exponent hh hl t tl =
   let s, sl = Split.two_sum h2 t2 in
   (0.5 *. s, 0.5 *. (sl +. h2l +. t2l +. (2.0 *. hh *. hl) +. (2.0 *. t *. tl)))
 
-(* Region III with Cody's functions, choosing per term between erfc and
+(* Region III with the generated error functions, choosing per term between erfc and
    erfcx to minimise exponentials (reference, 2017-02-18). *)
 let with_cody x xl s sl =
   let hh, hl = Split.quotient_dd x xl s sl in

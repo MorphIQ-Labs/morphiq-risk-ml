@@ -3,6 +3,8 @@
  (section doc)
  (files
   NOTICE
+  (docs/error-function-replacement.md as docs/error-function-replacement.md)
+  (docs/results-error-functions.md as docs/results-error-functions.md)
   THIRD_PARTY_NOTICES.md
   (LICENSES/AS241-StatLib.txt as LICENSES/AS241-StatLib.txt)
   (LICENSES/LetsBeRational.txt as LICENSES/LetsBeRational.txt)

@@ -1,0 +1,10 @@
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          6      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120          8      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E

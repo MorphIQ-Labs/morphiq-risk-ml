@@ -519,7 +519,7 @@ let elementary_exp a =
   ball v (er +^ ((abs v +^ er) *^ a.e /^ down (1.0 -. a.e)) +^ quantum)
 
 let erf_small a =
-  require (abs a.v <= 0.46875 && a.e < 0.01) "small erf domain";
+  require (abs a.v <= Cody.thresh && a.e < 0.01) "small erf domain";
   let v = Cody.erf_small a.v in
   let rel = 26.0 *. Bounds.u in
   ball v ((abs v *^ rel /^ down (1.0 -. rel)) +^ (1.129 *^ a.e) +^ quantum)
@@ -534,29 +534,24 @@ let erfcx a =
   ball v (er +^ ((abs v +^ er) *^ rho /^ down (1.0 -. rho)) +^ quantum)
 
 let cody_tail y =
-  if y.v >= 26.543 then (
-    (* CALERF deliberately flushes this tail. Mills' inequality at xbig
-       bounds erfc(x) below 2^-1021 for x >= 26.54, including input error. *)
-    require (down (y.v -. y.e) >= 26.54) "Cody cutoff interval";
-    ball 0.0 (2.0 *. Float.min_float))
+  if y.v >= 28.0 then (
+    require (down (y.v -. y.e) >= 27.5) "erfc zero-rounding interval";
+    ball 0.0 quantum)
   else
-    let ys = Float.trunc (y.v *. 16.0) /. 16.0 in
-    let del = mul (sub y (c ys)) (add y (c ys)) in
-    let ex =
-      mul (elementary_exp (mul (c (-.ys)) (c ys))) (elementary_exp (neg del))
-    in
-    mul ex (erfcx y)
+    let hi, lo = Split.square y.v in
+    let exponent_error = (2.0 *^ abs y.v *^ y.e) +^ (y.e *^ y.e) +^ quantum in
+    scaled_exp (erfcx y) hi lo exponent_error
 
 let erf a =
   let y = if a.v < 0.0 then neg a else a in
-  if y.v <= 0.46875 then erf_small a
+  if y.v <= Cody.thresh then erf_small a
   else
-    let r = add (sub (c 0.5) (cody_tail y)) (c 0.5) in
+    let r = sub (c 1.0) (cody_tail y) in
     if a.v < 0.0 then neg r else r
 
 let erfc a =
   let y = if a.v < 0.0 then neg a else a in
-  if y.v <= 0.46875 then sub (c 1.0) (erf_small a)
+  if y.v <= Cody.thresh then sub (c 1.0) (erf_small a)
   else
     let r = cody_tail y in
     if a.v < 0.0 then sub (c 2.0) r else r
@@ -630,13 +625,13 @@ let black_kernel ?(k = 0) m (x : D.t) (sd : D.t) =
         let q1 = mul (neg (constant Normal.inv_sqrt_2)) (add hf t_hi)
         and q2 = mul (neg (constant Normal.inv_sqrt_2)) (sub hf t_hi) in
         let two_b =
-          if q1.v < 0.46875 then
-            if q2.v < 0.46875 then
+          if q1.v < Cody.thresh then
+            if q2.v < Cody.thresh then
               sub
                 (mul (half_exp 1.0) (erfc q1))
                 (mul (half_exp (-1.0)) (erfc q2))
             else sub (mul (half_exp 1.0) (erfc q1)) (mul (g (c 1.0)) (erfcx q2))
-          else if q2.v < 0.46875 then
+          else if q2.v < Cody.thresh then
             sub (mul (g (c 1.0)) (erfcx q1)) (mul (half_exp (-1.0)) (erfc q2))
           else mul (g (c 1.0)) (sub (erfcx q1) (erfcx q2))
         in

@@ -1,0 +1,28 @@
+{
+  "package": "/tmp/calerf-installed-package/lib/morphiq_risk_ml",
+  "outputs": {
+    "native": "0.3.0\n3c00a7afbb1ee67c\n0000000000019e0f\n7feeef4b124c0038\n",
+    "bytecode": "0.3.0\n3c00a7afbb1ee67c\n0000000000019e0f\n7feeef4b124c0038\n"
+  },
+  "consumer_source": "open Morphiq_risk\nlet get = function Ok x -> x | Error _ -> failwith \"smoke refusal\"\nlet () =\n  let a = get (Production.Black76.admit\n    {forward=100.; strike=100.; time_to_expiry=1.; rate=0.02}) in\n  let v = get (Vol.lognormal 0.2) in\n  let c = get (Production.Black76.evaluate a Side.Call v Production.Price ~max_error:1e-10) in\n  if not (c.value > 0. && c.absolute_error <= 1e-10) then failwith \"price certificate\";\n  (match get (Production.Black76.implied a Side.Call c.value) with\n   | Iv.Root root when Vol.to_float root > 0. -> ()\n   | _ -> failwith \"IV contract\");\n  print_endline version\n\nlet () = List.iter (fun x -> Printf.printf \"%016Lx\\n\" (Int64.bits_of_float x))\n [Normal.norm_cdf (-9.); Internal.Cody.erfc 27.; Internal.Cody.erfcx (-26.6281)]\n",
+  "installed_document_sha256": {
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "CHANGELOG.md": "472d85cdd29e78260bfcc54b2b49d287599c78effb07034b26a3c9f596d2810c",
+    "THIRD_PARTY_NOTICES.md": "d7dbb9e732d58cfa77aa90bfff1ec5cb8f536233e04f3b4e80b7be3bef103da4",
+    "NOTICE": "6eb7ed11d53816bae7de91c047ff0184a23950bfc6eb4648bd0f5661f1b109eb",
+    "README.md": "743d50ea8b26fe894f0e35b09611d90996f91d30a81aad327575a4f3d79fc120",
+    "LICENSES/LetsBeRational.txt": "1fadfecb5dda197418025e68175587e63120de6c241a16e7a3416744c860901b",
+    "LICENSES/QD-BSD-LBNL-License.doc": "9c394dd15f8f0d39f410c683ade967140fcf7ad63bc49cf3ecfec941717d2c77",
+    "LICENSES/AS241-StatLib.txt": "cf6e4c7f3f4d1371666743b39b301aa1d7aaefcb8bb688905a15e772db367d15",
+    "LICENSES/Sun-fdlibm.txt": "b010adcefa10bbced885f54291172d9ff42c566670826685e11f65cf0a0cfa8b",
+    "LICENSES/QD-BSD-LBNL-License.txt": "02d5990094979c66ec03b8667a0f050e03feb0baf652b21552d4bb0040937181",
+    "LICENSES/QD-COPYING.txt": "64b7db02cf5600cb70ff2f6dabd06b115a5ad07a95920cfd3ab09ffa6533f716",
+    "docs/results-dd-exponential-optimization.md": "ea2648cd1dbda4fe169f787498bea3be293146816f41e18126be4849c5eb68a0",
+    "docs/results-dd-exponential.md": "b83a19a0bd50108014243fd4c18efd4d5d1026a23d5fed84c879569f7854449a",
+    "docs/error-function-replacement.md": "254ee8082f16cbf3888024ad03353d3975eeb7eaf0ceff2e84fa43fb2f41c655",
+    "docs/numerical-replacement-plan.md": "67f347d5f506edce5487152e4f691983f3174ee605220c4ca85ad2962c41dd15",
+    "docs/results-error-functions.md": "01bdbeee3cda16a5235d8b7baaa7f0ce004752b2d0b48e1fed35429e9d74046c",
+    "docs/source-provenance.md": "7374e977715a2d2e49e3dc4d4224ba3aab6ea0a501aa6c7102315a976953c922",
+    "docs/evidence/source-provenance-2026-10-03.json": "7fb2795dffabaa6aedd834e4fd6e8c822ba3fdd2e0fb547cea9f1aef736c2cd0"
+  }
+}

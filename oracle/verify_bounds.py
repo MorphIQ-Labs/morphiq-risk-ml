@@ -118,12 +118,9 @@ assert elementary_exp < 4*u
 
 approximation, kernel_rounding = kernel_certificates.verify()
 
-# erf_small: positive Horner evaluation contributes <22u (including the
-# squared argument's logarithmic sensitivity <1); integrate the residual and
-# divide by erf(x)>=2c*x*(1-x²). This remains relative as x tends to zero.
+# Generated odd series: coefficient, remainder and weighted FMA analysis.
 c_lo,c_hi = kernel_certificates.inverse_sqrt_pi()
-erf_small = (((1+u)**10/(1-u)**12-1+2*u2)
-             + approximation['erf_derivative']/(2*c_lo*(1-F(225,1024))))*inflate
+erf_small = approximation['erf_small_total']
 assert erf_small < 26*u
 
 # Split.scaled_exp_neg: |n|<6000, reduced |r|<.7. Two reduction roundings
@@ -139,9 +136,11 @@ for lo_squared in [F(0),F(1,10**6)]:
     error = split_factor*(1+lo_squared/(2*(1-F(1,1000))))-1
     assert error < 12*u+lo_squared
 # The inequality is affine in lo², so endpoint checks cover |lo|<=.001.
-# Also certify the deliberately flushed Cody tail, without measuring erfc.
-assert F(2654,100)**2 > 1016*upper
-assert c_hi/F(2654,100) < F(1,32) # erfc(26.54)<2^-1021
+# Positive erfc rounds to zero at 28; the replay includes input error.
+assert F(55,2)**2 > 1075*upper
+assert c_hi/F(55,2) < 1
+# Negative erfcx overflows at -27, by 2 exp(x²)-erfcx(-x).
+assert F(27)**2 > 1025*upper
 assert F(99,100)*4096 > (1025+2048+1075)*upper
 # Derivative bounds across a small interval straddling zero.
 assert F(2,100)+2*c_hi < 2

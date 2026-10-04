@@ -21,6 +21,8 @@ let budget fn x =
   match fn with
   | "pdf" -> { name = "pdf"; ulps = 4L }
   | "erfcx" -> { name = "erfcx"; ulps = 4L }
+  | "erf" -> { name = "erf"; ulps = 4L }
+  | "erfc" -> { name = "erfc"; ulps = 4L }
   | "logcdf" -> { name = "logcdf"; ulps = 4L }
   (* FerroRisk allows 6e-14 relative here, the cost of rounding x^2 before
      exp. The exact square split removes that term, so the tail holds the
@@ -60,6 +62,8 @@ let eval = function
   | "cdf" -> Normal.norm_cdf
   | "logcdf" -> Normal.log_norm_cdf
   | "erfcx" -> Internal.Cody.erfcx
+  | "erf" -> Internal.Cody.erf
+  | "erfc" -> Internal.Cody.erfc
   | "inv" -> Normal.norm_inv
   | fn -> invalid_arg fn
 
@@ -76,6 +80,7 @@ let () =
   if not (Sys.file_exists path) then (
     Printf.eprintf "ERROR: %s missing; run oracle/gen_normal.py\n" path;
     exit 2);
+  let trace = Option.map open_out (Sys.getenv_opt "MORPHIQ_ORACLE_TRACE") in
   let stats = Hashtbl.create 8 in
   let failures = ref [] in
   let ic = open_in path in
@@ -86,18 +91,28 @@ let () =
          Scanf.sscanf line "%s %Lx %Lx" (fun fn xb rb ->
              let x = Int64.float_of_bits xb and r = Int64.float_of_bits rb in
              let got = eval fn x in
+             Option.iter
+               (fun oc ->
+                 Printf.fprintf oc "%s\t%016Lx\n" line (Int64.bits_of_float got))
+               trace;
              let b = budget fn x in
              let d = ulps got r in
              let rel =
                if r = 0.0 then Float.abs got else Float.abs ((got -. r) /. r)
              in
              let endpoint =
-               (fn = "cdf" && (r = 0.0 || r = 1.0)) || (fn = "logcdf" && r = 0.0)
+               (fn = "cdf" && (r = 0.0 || r = 1.0))
+               || (fn = "logcdf" && r = 0.0)
+               || (fn = "erfc" && (r = 0.0 || r = 2.0))
+               || (fn = "erf" && Float.abs r = 1.0)
              in
              let ok =
                (* SPEC bit contract: where the truth rounds to an endpoint,
                   the endpoint is returned exactly. *)
-               if endpoint then
+               if not (Float.is_finite r) then
+                 Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
+               else if not (Float.is_finite got) then false
+               else if endpoint then
                  Int64.equal (Int64.bits_of_float got) (Int64.bits_of_float r)
                else
                  match
@@ -150,4 +165,5 @@ let () =
         s.worst_rel s.worst_x s.fails)
     names;
   List.iter print_endline (List.rev !failures);
+  Option.iter close_out trace;
   if !failures <> [] then exit 1
