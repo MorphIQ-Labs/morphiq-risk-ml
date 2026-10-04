@@ -6,8 +6,8 @@ against 649 frozen original-word requests. **All 625 served certificates
 contain both complete independent reference intervals and meet their original
 currency error limits.** Fifteen requests fail explicitly and nine reject
 invalid inputs/accuracy. No runtime operation, requested limit or error allowance
-changed during this qualification. The full remote mutation lane is pending;
-this report does not yet close the qualification gate.
+changed during this qualification. The candidate's complete 83-mutant lane also passed; the retained receipts
+complete this experimental qualification gate.
 
 This is finite experimental engineering evidence, not institutional approval,
 a release, a universal numerical proof or independent human review. The
@@ -128,7 +128,10 @@ the pinned candidate. The full local ordinary suite and format/build pass,
 and the old public digest remains
 `5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199`.
 Default PR CI still selects seven core mutants. The candidate's complete
-83-mutant lane is pending; its final receipt is required before closing #61.
+[83-mutant catalog](evidence/exchange-qualification/full-mutations.log) passed
+after a clean baseline and successful mutated builds. The
+[qualification receipt](evidence/exchange-qualification/qualification-receipt.json)
+pins the runtime source, workflow and exercised scope.
 
 ## Costs and remaining limits
 
