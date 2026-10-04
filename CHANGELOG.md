@@ -5,6 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Packed certification storage (#8)
+
+- Replace boxed enclosure lists/tuples with immutable all-float records and
+  private checked buffers; extract normal product exponents without mantissa
+  tuples. Retained words, arithmetic order, bounds and acceptance are unchanged.
+- Representative certified BSM allocation falls 77.1% (5.71 to 1.31 MB/price)
+  and paired elapsed time falls 11.4% (1.005 to 0.890 ms). IV allocation also
+  falls 69–72%, with mixed timing including modest regressions. Ordinary fast
+  pricing is unchanged; its severe-cancellation enclosure fallback also benefits.
+- Stable public APIs remain unchanged. Unstable `Internal.Enclosure.S.t`
+  replaces the list-valued `tail` with `third`/`fourth` fields. Exact certificate
+  replays, the full ordinary suite and eleven targeted mutations pass.
+  [Measurements, compatibility and remaining costs](docs/results-certification-allocation.md).
+
 ### Certified expansion sums (#8)
 
 - Use explicitly magnitude-ordered FastTwoSum in runtime enclosure growth,

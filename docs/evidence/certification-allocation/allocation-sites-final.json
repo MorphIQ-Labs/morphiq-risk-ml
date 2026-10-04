@@ -1,0 +1,456 @@
+{
+  "baseline": {
+    "unprofiled_bytes_per_call": 5709577.1,
+    "estimated_bytes_by_top_frame": [
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack in file \"lib/enclosure.ml\", line 96, characters 20-58",
+        436000.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.rev_append in file \"list.ml\" (inlined), line 58, characters 27-36",
+        317040.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product in file \"lib/enclosure.ml\", line 159, characters 6-35",
+        290240.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\" (inlined), line 174, characters 17-32",
+        281920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\" (inlined), line 174, characters 22-32",
+        278640.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\", lines 172-174, characters 14-46",
+        278560.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\", lines 98-103, characters 17-49",
+        247920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product in file \"lib/enclosure.ml\", line 151, characters 12-18",
+        236720.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\", line 102, characters 35-46",
+        208400.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product in file \"lib/enclosure.ml\", line 153, characters 61-74",
+        192320.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack in file \"lib/enclosure.ml\", line 110, characters 26-49",
+        190240.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product_allowance in file \"lib/enclosure.ml\" (inlined), line 146, characters 48-63",
+        180800.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.up in file \"lib/enclosure.ml\" (inlined), line 59, characters 13-46",
+        180720.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product_allowance in file \"lib/enclosure.ml\" (inlined), line 146, characters 19-34",
+        177360.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.words in file \"lib/enclosure.ml\" (inlined), line 117, characters 24-38",
+        164880.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exact in file \"lib/enclosure.ml\", line 114, characters 4-44",
+        156560.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\" (inlined), line 102, characters 35-46",
+        150960.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.product in file \"lib/enclosure.ml\", line 155, characters 14-33",
+        146160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\", line 99, characters 20-42",
+        144560.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\" (inlined), line 174, characters 16-45",
+        139520.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\", line 101, characters 16-43",
+        136720.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\", lines 170-175, characters 10-30",
+        113440.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\" (inlined), line 101, characters 16-43",
+        95360.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.words in file \"lib/enclosure.ml\" (inlined), line 117, characters 16-38",
+        91680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.abs in file \"lib/enclosure.ml\" (inlined), line 61, characters 12-21",
+        86640.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\", line 174, characters 17-32",
+        83200.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\", line 174, characters 22-32",
+        82560.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul.(fun) in file \"lib/enclosure.ml\", line 174, characters 16-45",
+        80080.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.neg in file \"lib/enclosure.ml\", line 126, characters 4-78",
+        75040.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack in file \"lib/enclosure.ml\", line 109, characters 16-50",
+        50960.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\" (inlined), line 303, characters 40-55",
+        47600.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\" (inlined), line 302, characters 28-36",
+        45520.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\" (inlined), line 302, characters 22-36",
+        45440.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\" (inlined), line 303, characters 28-55",
+        42400.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\" (inlined), line 303, characters 34-55",
+        39920.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.rev_append in file \"list.ml\", line 58, characters 27-36",
+        38960.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.div_float in file \"lib/enclosure.ml\", line 191, characters 22-42",
+        33200.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.neg in file \"lib/enclosure.ml\", line 126, characters 18-24",
+        29920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.neg in file \"lib/enclosure.ml\", line 126, characters 31-37",
+        29040.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib.(@) in file \"stdlib.ml\", line 301, characters 16-24",
+        21680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add_error in file \"lib/enclosure.ml\", line 132, characters 4-20",
+        20400.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.series_cdf in file \"lib/model_enclosure.ml\", line 133, characters 14-64",
+        3840.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.series_cdf in file \"lib/model_enclosure.ml\", line 133, characters 43-64",
+        3760.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\", line 272, characters 16-49",
+        3520.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\", line 272, characters 40-49",
+        2480.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.twice_atanh in file \"lib/enclosure.ml\", line 295, characters 22-61",
+        1680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.twice_atanh in file \"lib/enclosure.ml\", line 295, characters 39-60",
+        1600.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack in file \"lib/enclosure.ml\", line 108, characters 12-52",
+        1440.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack.take in file \"lib/enclosure.ml\" (inlined), line 99, characters 20-42",
+        1440.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.scale.(fun) in file \"lib/enclosure.ml\" (inlined), line 224, characters 23-42",
+        640.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.map in file \"list.ml\" (inlined), line 88, characters 6-21",
+        560.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.scale.(fun) in file \"lib/enclosure.ml\", lines 223-227, characters 8-17",
+        480.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.neg.(fun) in file \"lib/enclosure.ml\" (inlined), line 126, characters 65-68",
+        320.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.map in file \"list.ml\" (inlined), line 88, characters 10-21",
+        320.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.black in file \"lib/model_enclosure.ml\", line 213, characters 20-41",
+        240.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.map in file \"list.ml\", line 88, characters 6-21",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.centre in file \"lib/enclosure.ml\" (inlined), line 118, characters 17-39",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.log in file \"lib/enclosure.ml\", line 309, characters 23-41",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.div_float in file \"lib/enclosure.ml\" (inlined), line 191, characters 22-42",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.scale in file \"lib/enclosure.ml\", line 219, characters 6-69",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.pdf in file \"lib/model_enclosure.ml\", line 126, characters 28-68",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__Float.succ in file \"float.ml\" (inlined), line 121, characters 13-34",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.black in file \"lib/model_enclosure.ml\", line 196, characters 13-31",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.scale.(fun) in file \"lib/enclosure.ml\", line 224, characters 23-42",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.price_enclosed in file \"lib/model_enclosure.ml\", line 251, characters 18-29",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack in file \"lib/enclosure.ml\" (inlined), line 109, characters 16-50",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Stdlib__List.map in file \"list.ml\", line 88, characters 10-21",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.sqrt in file \"lib/enclosure.ml\", line 249, characters 26-44",
+        80.0
+      ]
+    ]
+  },
+  "candidate": {
+    "unprofiled_bytes_per_call": 1309113.1,
+    "estimated_bytes_by_top_frame": [
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack_array in file \"lib/enclosure.ml\", lines 143-149, characters 4-5",
+        293040.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul in file \"lib/enclosure.ml\", line 238, characters 18-42",
+        255920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exact in file \"lib/enclosure.ml\", line 153, characters 4-60",
+        183920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\", line 201, characters 18-46",
+        176400.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.neg in file \"lib/enclosure.ml\", line 188, characters 4-79",
+        97200.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\", line 208, characters 35-42",
+        57840.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.magnitude in file \"lib/enclosure.ml\", line 185, characters 20-38",
+        45520.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul in file \"lib/enclosure.ml\", line 259, characters 19-37",
+        40480.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.div_float in file \"lib/enclosure.ml\", line 272, characters 22-42",
+        31680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul_float in file \"lib/enclosure.ml\" (inlined), line 262, characters 22-37",
+        29040.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.up in file \"lib/enclosure.ml\" (inlined), line 74, characters 13-46",
+        27520.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add_error in file \"lib/enclosure.ml\", line 194, characters 4-20",
+        21280.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.frexp_exponent in file \"lib/enclosure.ml\" (inlined), line 218, characters 26-41",
+        7600.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.series_cdf in file \"lib/model_enclosure.ml\", line 133, characters 26-42",
+        4720.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 357, characters 26-39",
+        3920.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.word in file \"lib/enclosure.ml\" (inlined), line 121, characters 11-19",
+        3840.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.series_cdf in file \"lib/model_enclosure.ml\", line 133, characters 14-64",
+        3520.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 357, characters 40-49",
+        3200.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.series_cdf in file \"lib/model_enclosure.ml\", line 133, characters 43-64",
+        2720.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 357, characters 16-49",
+        2160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.twice_atanh in file \"lib/enclosure.ml\", line 381, characters 14-26",
+        2000.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.twice_atanh in file \"lib/enclosure.ml\", line 380, characters 39-60",
+        1680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.twice_atanh in file \"lib/enclosure.ml\", line 380, characters 22-61",
+        1680.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.magnitude in file \"lib/enclosure.ml\", line 185, characters 42-49",
+        800.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 367, characters 15-34",
+        400.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.centre in file \"lib/enclosure.ml\" (inlined), line 169, characters 17-39",
+        320.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.pdf in file \"lib/model_enclosure.ml\", line 126, characters 49-60",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.log in file \"lib/enclosure.ml\", line 394, characters 23-41",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.log in file \"lib/enclosure.ml\", line 396, characters 12-55",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\" (inlined), line 201, characters 18-46",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 360, characters 44-74",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.scale in file \"lib/enclosure.ml\", line 307, characters 17-50",
+        160.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Model_enclosure.Make.black in file \"lib/model_enclosure.ml\", line 213, characters 20-41",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.log in file \"lib/enclosure.ml\", line 395, characters 12-31",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 353, characters 14-27",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.div in file \"lib/enclosure.ml\", line 283, characters 18-55",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.sqrt in file \"lib/enclosure.ml\", line 334, characters 39-43",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.div in file \"lib/enclosure.ml\", line 290, characters 33-37",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 360, characters 30-43",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.magnitude in file \"lib/enclosure.ml\" (inlined), line 185, characters 20-38",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exponential in file \"lib/enclosure.ml\" (inlined), line 360, characters 20-74",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Production.Make.evaluate_with in file \"lib/production.ml\", line 218, characters 24-35",
+        80.0
+      ],
+      [
+        "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\" (inlined), line 208, characters 24-31",
+        80.0
+      ]
+    ]
+  }
+}

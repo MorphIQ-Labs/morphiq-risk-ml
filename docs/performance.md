@@ -187,5 +187,18 @@ price-only, admission and end-to-end costs for all four models, plus portfolio,
 Exchange and IV consumer comparisons. The representative BSM price-only median
 is 1.022 ms on the recorded shared M1 Pro host; it is a runtime-certified price,
 not the fast scalar API or a network request. Bounds and failure contracts are
-unchanged. The remaining multi-MB allocation and roughly millisecond cost stay
-explicit; #8 still owns target-environment qualification.
+unchanged. The measurements retain that revision's multi-MB allocation and
+roughly millisecond cost; #8 still owns target-environment qualification.
+
+## Packed certification storage
+
+The [allocation optimization](results-certification-allocation.md) reduces
+representative certified BSM allocation from 5.71 to 1.31 MB per price and
+paired time from 1.005 to 0.890 ms. Minor collections fall from 108 to 24 per
+forty-price batch. Other live scalar prices, portfolios and Exchange also
+allocate substantially less. IV allocation falls 69–72%, but timing is mixed,
+including modest regressions; the report retains this tradeoff and all samples.
+Ordinary fast pricing is unchanged, while the existing Black-family fallback
+for severe coordinate cancellation uses the optimized enclosure implementation.
+Remaining allocation consists mainly of immutable intermediate records and
+bounded private buffers. These shared-host results are not an operational SLA.
