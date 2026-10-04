@@ -202,3 +202,11 @@ Ordinary fast pricing is unchanged, while the existing Black-family fallback
 for severe coordinate cancellation uses the optimized enclosure implementation.
 Remaining allocation consists mainly of immutable intermediate records and
 bounded private buffers. These shared-host results are not an operational SLA.
+
+## Planner worker and tile crossover
+
+The [worker/tile campaign](results-planner-workers.md) measures the existing
+scheduler across fast and certified prices, 1/2/4 workers, portfolio sizes and
+tile sizes. It establishes workload-specific scaling with larger tiles, retains
+small-job regressions, and reports first-output and buffer tradeoffs. Use the
+[caller tuning guide](planner-worker-tuning.md) before selecting worker counts.

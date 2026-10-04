@@ -228,3 +228,6 @@ Run with `--workers 1` or `4` to change only physical execution. The source in
 [examples/scenario_job.ml](../examples/scenario_job.ml) shows the public API,
 including explicit rate-factor identity and numerical limits. The printed
 values are scenario valuations, not economic P&L.
+
+For workload-specific worker/tile selection, use the [tuning guide](planner-worker-tuning.md)
+and its retained crossover measurements.

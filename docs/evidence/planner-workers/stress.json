@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "command": "check",
+  "complete": true,
+  "source_commit": "97d203f3c89be11e6b06a88fe1c6f4acbf721b05",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.8",
+  "runner_sha256": "639fe25b403fa4ff237046a8590fb5f5cf264a4bceb7c38cd469afd13c7e9db4",
+  "results": [
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78",
+      "ocaml": "5.3.0"
+    },
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "55883e2935a8b5e5eb59294b4bf80c5eb853fdb385dc716a2fe878c2a89b8d78",
+      "ocaml": "5.3.0"
+    }
+  ]
+}

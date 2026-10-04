@@ -1,0 +1,93 @@
+{
+  "cli_and_collector_controls": [
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--help"
+      ],
+      "returncode": 0,
+      "expected_success": true
+    },
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--version"
+      ],
+      "returncode": 0,
+      "expected_success": true
+    },
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--mode",
+        "bad"
+      ],
+      "returncode": 2,
+      "expected_success": false
+    },
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--size",
+        "0"
+      ],
+      "returncode": 2,
+      "expected_success": false
+    },
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--warmups",
+        "-1"
+      ],
+      "returncode": 2,
+      "expected_success": false
+    },
+    {
+      "control": "benchmark CLI",
+      "arguments": [
+        "--",
+        "unexpected"
+      ],
+      "returncode": 2,
+      "expected_success": false
+    },
+    {
+      "control": "failed-child",
+      "rejected": true,
+      "retained_incomplete": true,
+      "runs_retained": 1
+    },
+    {
+      "control": "truncated",
+      "rejected": true,
+      "retained_incomplete": true,
+      "runs_retained": 1
+    },
+    {
+      "control": "changed-replay",
+      "rejected": true,
+      "retained_incomplete": true,
+      "runs_retained": 2
+    },
+    {
+      "control": "existing-output",
+      "rejected": true,
+      "original_bytes_preserved": true
+    }
+  ],
+  "source_sha256": {
+    "harness": "d3f0f10bbab812c3bfadf31705ae2ce79e406b2e44819ef836f3f974cda8d943",
+    "collector": "1fc7b97855d2439de1c7bb8e1071f1a7ab18b9f91669a69c48e35acae76ebff4"
+  },
+  "builds": [
+    "release @install and benchmark; dev @install and benchmark; @fmt"
+  ],
+  "focused_tests": [
+    "release fast_planner native and bytecode",
+    "release planner_stress three subprocess repetitions",
+    "release fast_planner_metrics --check",
+    "development benchmark smoke, fast and certified, 1/2/4-worker replay"
+  ],
+  "ordinary_full_suite": "not rerun locally: no library change; required CI runs both profiles on three platforms"
+}

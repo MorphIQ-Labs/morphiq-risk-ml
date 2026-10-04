@@ -125,3 +125,6 @@ numerical kernel or guarantees a benefit from multiple workers on small jobs.
 
 See [integrated qualification](fast-integration-qualification.md) for retained
 fixture coverage, concurrency, memory measurements and platform evidence.
+
+For workload-specific worker/tile selection, use the [tuning guide](planner-worker-tuning.md)
+and its retained crossover measurements.
