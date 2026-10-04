@@ -105,7 +105,7 @@ rows versus QD, development/release validation and shared-host performance.
 The public replay digest is unchanged, but that does not make the delta
 bit-identical on all inputs or extend earlier acceptance to this candidate.
 Independent delta review and final artifact qualification remain pending;
-AS241 provenance work under #64 remains a release blocker; the CALERF replacement has its own delta evidence below. No acceptance
+The AS241 implementation has since been replaced with its own [delta evidence](results-inverse-normal.md); final current-source provenance and exact-candidate acceptance under #64 remain release blockers. The CALERF replacement has its own delta evidence below. No acceptance
 record or owner decision is changed by this engineering evidence.
 
 | Change | Required analysis and refreshed evidence |
@@ -175,6 +175,16 @@ rejects the outstanding independent-review and final decision requirements.
 
 The [CALERF replacement evidence](results-error-functions.md) is a numerical
 delta from the reviewed baseline. It requires its own candidate-specific delta
-review; the earlier owner record is unchanged. AS241 remains an unresolved
-current implementation under #64 and a release blocker. This work does not
+review; the earlier owner record is unchanged. Final current-source provenance
+and candidate-specific acceptance remain unresolved under #64 and block release. This work does not
 approve a new release, operational use or unrestricted historical distribution.
+
+## Inverse-normal replacement delta
+
+The [AS241 replacement report](results-inverse-normal.md) records the changed
+public inverse values, independent refinements, IV consumer behavior and costs.
+It is a numerical minor change under the existing stability policy, with no
+version bump or release in this PR. The earlier owner acceptance does not
+implicitly accept this later implementation. Historical rights findings and
+notices remain; #64 needs a final source/artifact audit and exact-main-candidate
+qualification after the stacked changes land.

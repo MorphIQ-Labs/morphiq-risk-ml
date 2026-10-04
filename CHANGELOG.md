@@ -5,6 +5,28 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Project-derived inverse normal
+
+- Replace AS241's tables and regional reductions with bounded Gaussian-integral
+  inversion and a double-word refinement. Historical attribution/notices remain;
+  final current-source provenance and exact-candidate acceptance under #64 remain.
+- Minor numerical change: 7,269 of 11,379 inverse outputs change, with no sign
+  or classification changes. Central worst error improves 4→0 ULP and tail 6→2,
+  within unchanged 4/8-ULP gates. Sampled monotonicity violations improve 3→0.
+  The expanded 130,394-row corpus preserves all 128,320 earlier records; two
+  independent high-precision formulations support the new inverse evidence.
+- All 8,330 fixed-quote IV outputs and measured iteration counts are unchanged;
+  the financial replay digest is unchanged. A separate direct-inverse digest
+  now covers the complete inverse fixture on each CI platform.
+- Direct inverse calls are 24–115× slower in release (about 1.6–4.3 µs in the
+  measured regimes); LBR proposals are 5.2× slower. The final shared-host campaign
+  is too contended to establish a reliable end-to-end regression estimate.
+  These costs and allocation increases are explicit tradeoffs; no accuracy
+  gate is relaxed.
+- [Qualification and reproduction](docs/results-inverse-normal.md) retain
+  per-case changes, reference refinements, counts, timings, source provenance
+  and limitations. No release or version change is made here.
+
 ### Project-generated error functions
 
 - Replace CALERF's implementation and tables with polynomials derived from

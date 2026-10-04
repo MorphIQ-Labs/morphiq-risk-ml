@@ -102,3 +102,10 @@ its moment recurrence and the erfcx differential equation. Consulted online
 No implementation or coefficient table was imported. No PDF was acquired for
 this step. The [derivation](../error-function-replacement.md) and exact-rational
 generator are public, reproducible project artifacts.
+
+### Gaussian inversion mathematical references
+
+NIST DLMF version 1.2.8, [§7.17](https://dlmf.nist.gov/7.17) and
+[§7.8](https://dlmf.nist.gov/7.8), consulted 2026-10-03: inverse definitions and
+Mills inequalities used in the [construction](../inverse-normal-replacement.md).
+No implementation/coefficient table or PDF was acquired for this stage.

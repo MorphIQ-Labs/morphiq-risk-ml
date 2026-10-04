@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **56
+seven core mutants. The catalog currently contains **58
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -123,3 +123,10 @@ by a cancelling BSM theta. These bring the catalog to 56 mechanisms. The first
 four use the independent normal/error-function oracle; the leading-residual
 witness uses the existing Greek oracle and its unchanged 8-ULP theta gate.
 The seven default core mechanisms are unchanged.
+
+### Inverse-normal replacement witnesses
+
+Two optional mechanisms check the six-step iteration budget and the double-word
+final correction. The iteration mutant must fail the numerical inverse oracle;
+the correction mutant must fail its adjacent-input monotonicity guard. Neither
+uses a changed replay digest as a kill. The seven core selections are unchanged.

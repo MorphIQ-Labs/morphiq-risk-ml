@@ -53,7 +53,10 @@
  (modules oracle_normal)
  (libraries morphiq_risk bounds)
  (action
-  (run %{test} %{dep:../oracle/fixtures/normal.txt})))
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/normal.txt}
+   %{dep:inverse_normal.digest})))
 
 (library
  (name bounds)
@@ -323,3 +326,12 @@
  (libraries morphiq_risk)
  (action
   (run %{test} %{dep:../oracle/fixtures/iv.txt})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../oracle/inverse_normal_bounds.py
+  ../oracle/kernel_certificates.py
+  ../lib/normal.ml)
+ (action
+  (run python3 %{dep:../oracle/inverse_normal_bounds.py})))

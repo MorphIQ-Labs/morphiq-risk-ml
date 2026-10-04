@@ -6,7 +6,7 @@ under Epic #47. See the [source audit](source-provenance.md).
 
 This records the staged plan, not a claim of legal clearance. Stage 1 now
 has a [DD exponential implementation and qualification report](results-dd-exponential-optimization.md).
-Stage 2 has a [generated error-function construction](error-function-replacement.md) and [qualification report](results-error-functions.md). AS241 remains unchanged pending stage 3. Do not rename functions, rearrange an adapted operation graph, or
+Stage 2 has a [generated error-function construction](error-function-replacement.md) and [qualification report](results-error-functions.md). Stage 3 has a [Gaussian inversion construction](inverse-normal-replacement.md) and [qualification report](results-inverse-normal.md). Do not rename functions, rearrange an adapted operation graph, or
 recite a paper citation and describe that as a new provenance chain. Since the
 existing sources have been inspected, do not claim a clean-room process.
 
@@ -74,6 +74,10 @@ positive erfcx arguments and negative overflow. Match existing regional
 accuracy requirements and record availability/served-value changes.
 
 ## 3. Replace AS241's inverse normal
+
+The current tree implements this stage; see its [construction](inverse-normal-replacement.md)
+and [qualification](results-inverse-normal.md). Integration and release gates
+below remain separate from implementation completion.
 
 After the forward normal functions are qualified, develop a safeguarded inverse
 solver with mathematically derived initial estimates and a maintained bracket.

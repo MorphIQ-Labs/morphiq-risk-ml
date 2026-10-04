@@ -1,0 +1,30 @@
+{
+  "package": "/tmp/as241-installed-package/lib/morphiq_risk_ml",
+  "outputs": {
+    "native": "0.3.0\n3c00a7afbb1ee67c\n0000000000019e0f\n7feeef4b124c0038\n91bedc0a4352538aa60ae7c831f27bcaf16be0058a45daa3d6c33f2501344c19\n",
+    "bytecode": "0.3.0\n3c00a7afbb1ee67c\n0000000000019e0f\n7feeef4b124c0038\n91bedc0a4352538aa60ae7c831f27bcaf16be0058a45daa3d6c33f2501344c19\n"
+  },
+  "consumer_source": "open Morphiq_risk\nlet get = function Ok x -> x | Error _ -> failwith \"smoke refusal\"\nlet () =\n  let a = get (Production.Black76.admit\n    {forward=100.; strike=100.; time_to_expiry=1.; rate=0.02}) in\n  let v = get (Vol.lognormal 0.2) in\n  let c = get (Production.Black76.evaluate a Side.Call v Production.Price ~max_error:1e-10) in\n  if not (c.value > 0. && c.absolute_error <= 1e-10) then failwith \"price certificate\";\n  (match get (Production.Black76.implied a Side.Call c.value) with\n   | Iv.Root root when Vol.to_float root > 0. -> ()\n   | _ -> failwith \"IV contract\");\n  print_endline version\n\nlet () = List.iter (fun x -> Printf.printf \"%016Lx\\n\" (Int64.bits_of_float x))\n [Normal.norm_cdf (-9.); Internal.Cody.erfc 27.; Internal.Cody.erfcx (-26.6281)]\n\nlet () =\n  List.iter (fun x -> if not (Float.is_nan (Normal.norm_inv x)) then failwith \"invalid probability\")\n    [Float.nan; Float.neg_infinity; Float.infinity; -0.1; 1.1];\n  if Normal.norm_inv 0. <> Float.neg_infinity || Normal.norm_inv (-0.) <> Float.neg_infinity\n     || Normal.norm_inv 1. <> Float.infinity || Int64.bits_of_float (Normal.norm_inv 0.5) <> 0L\n  then failwith \"inverse endpoint\";\n  List.iter (fun p -> if not (Float.is_finite (Normal.norm_inv p)) then failwith \"finite inverse\")\n    [0x1p-1074; Float.pred 1.];\n  let buffer = Buffer.create 200000 in\n  In_channel.with_open_text Sys.argv.(1) (fun ic ->\n    try while true do\n      let line = input_line ic in\n      if String.starts_with ~prefix:\"inv \" line then\n        Scanf.sscanf line \"%s %Lx %Lx\" (fun _ p _ ->\n          Buffer.add_string buffer (Printf.sprintf \"%016Lx\\n\"\n            (Int64.bits_of_float (Normal.norm_inv (Int64.float_of_bits p)))))\n    done with End_of_file -> ());\n  let digest = Digest.BLAKE256.to_hex (Digest.BLAKE256.string (Buffer.contents buffer)) in\n  let expected = String.trim (In_channel.with_open_text Sys.argv.(2) In_channel.input_all) in\n  if digest <> expected then failwith \"installed inverse replay\";\n  print_endline digest\n",
+  "installed_document_sha256": {
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "CHANGELOG.md": "01435d092a7c416b9b02b8b54fadd5ce0aa00bd295111ebe53b19a989b9980ca",
+    "THIRD_PARTY_NOTICES.md": "804b793279b5aeb7d3ae32cfed2e8908fb98bc9e0958e9dc4e21cd9e817e1924",
+    "NOTICE": "1b09f027d70b502a230c0c34f9dd55e30dc7ae2cac3d2b03a1a56d7c6e6709f0",
+    "README.md": "743d50ea8b26fe894f0e35b09611d90996f91d30a81aad327575a4f3d79fc120",
+    "LICENSES/LetsBeRational.txt": "1fadfecb5dda197418025e68175587e63120de6c241a16e7a3416744c860901b",
+    "LICENSES/QD-BSD-LBNL-License.doc": "9c394dd15f8f0d39f410c683ade967140fcf7ad63bc49cf3ecfec941717d2c77",
+    "LICENSES/AS241-StatLib.txt": "cf6e4c7f3f4d1371666743b39b301aa1d7aaefcb8bb688905a15e772db367d15",
+    "LICENSES/Sun-fdlibm.txt": "b010adcefa10bbced885f54291172d9ff42c566670826685e11f65cf0a0cfa8b",
+    "LICENSES/QD-BSD-LBNL-License.txt": "02d5990094979c66ec03b8667a0f050e03feb0baf652b21552d4bb0040937181",
+    "LICENSES/QD-COPYING.txt": "64b7db02cf5600cb70ff2f6dabd06b115a5ad07a95920cfd3ab09ffa6533f716",
+    "docs/results-dd-exponential-optimization.md": "ea2648cd1dbda4fe169f787498bea3be293146816f41e18126be4849c5eb68a0",
+    "docs/results-dd-exponential.md": "b83a19a0bd50108014243fd4c18efd4d5d1026a23d5fed84c879569f7854449a",
+    "docs/error-function-replacement.md": "254ee8082f16cbf3888024ad03353d3975eeb7eaf0ceff2e84fa43fb2f41c655",
+    "docs/numerical-replacement-plan.md": "3bd1ff6bec01e428e63e0b4b2a1dee17aad2d9d3449ed3b6363b6b07d32fca3d",
+    "docs/results-error-functions.md": "01bdbeee3cda16a5235d8b7baaa7f0ce004752b2d0b48e1fed35429e9d74046c",
+    "docs/source-provenance.md": "6524851117022d4dbd3fad5a679204756bebee412376a2650056edfe56952567",
+    "docs/inverse-normal-replacement.md": "fa0b92f208493aea0ef8f34f5e1b353c8b064297f925448f7fb332b12e955b7c",
+    "docs/results-inverse-normal.md": "8273d9d179c4535f1056263aacfc11fc24d1fbb2855ee025f0d7e7a8584e56f3",
+    "docs/evidence/source-provenance-2026-10-03.json": "7fb2795dffabaa6aedd834e4fd6e8c822ba3fdd2e0fb547cea9f1aef736c2cd0"
+  }
+}
