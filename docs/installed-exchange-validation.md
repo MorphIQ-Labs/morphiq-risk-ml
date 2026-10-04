@@ -57,3 +57,23 @@ The [review handoff](independent-review-package.md) identifies the Exchange and
 shared-enclosure deltas awaiting independent human assessment. A source-bound
 artifact report records only the platform actually executed; installing this
 gate alone is not evidence of a completed three-platform campaign.
+
+
+## Executed local rehearsal
+
+Source `310b39c1b8aacf1aec72b085f2e2d347be8268bd` passes the complete artifact
+procedure on macOS ARM64 with OCaml 5.3.0 Flambda. The
+[retained report](evidence/installed-exchange/local-310b39c.json) records all
+installed file/notice hashes and package origin. Both modes reproduce all 649
+rows, with output SHA-256
+`0b9430f73d941565f194a416837294d12de2316883f9a1db2686a2a20827ab0a`, identical to
+the qualified reference. The reproducible source archive has SHA-256
+`d7690f4cdcea3f8aeaec5220739a74125f78ea0f6105dd8293eb087551ee37e6`.
+
+The original archive, build log and report are also preserved locally under
+`~/Library/Application Support/MorphIQ Labs/acceptance/morphiq-risk-ml/310b39c1b8aacf1aec72b085f2e2d347be8268bd/`.
+This is not a public build dependency. Build/install, formatting, the four
+closeout control tests and `actionlint` pass. The library and campaign consumer
+are unchanged from main `7fb59a3`; this rehearsal changes no numerical evidence
+or output expectation. Three-platform execution remains a separate post-merge
+manual candidate run; this local receipt does not claim its result.
