@@ -554,3 +554,51 @@
  (alias runtest)
  (action
   (diff fast_batch_certificate.expected fast_batch_certificate.out)))
+
+(rule
+ (deps fast_planner_mode.ml ../../lib/morphiq_risk.cma)
+ (targets fast_planner_mode.out)
+ (action
+  (with-stderr-to
+   fast_planner_mode.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     fast_planner_mode.cmo
+     fast_planner_mode.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff fast_planner_mode.expected fast_planner_mode.out)))
+
+(rule
+ (deps fast_planner_tile.ml ../../lib/morphiq_risk.cma)
+ (targets fast_planner_tile.out)
+ (action
+  (with-stderr-to
+   fast_planner_tile.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     fast_planner_tile.cmo
+     fast_planner_tile.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff fast_planner_tile.expected fast_planner_tile.out)))

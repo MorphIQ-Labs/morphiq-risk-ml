@@ -72,7 +72,10 @@ module Buckets = Map.Make (struct
   let compare = compare
 end)
 
+type assurance = Certified | Fast_price
+
 type t = {
+  assurance : assurance;
   portfolio : position array;
   market : factor array;
   factor_indices : int array;
@@ -146,8 +149,14 @@ let sum a b =
 let convention =
   "planner-v1;frozen-market;roll-fixed-expiry;indexed-fma-v1;ordered-enclosure-v1"
 
-let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
-    ~lognormal_outputs ~normal_outputs ~output_mode ~limits =
+let compile_common ~assurance ~snapshot_id ~base_day ~day_count ~portfolio
+    ~market ~scenarios ~lognormal_outputs ~normal_outputs ~output_mode ~limits =
+  let fast = assurance = Fast_price in
+  let convention =
+    if fast then
+      "planner-fast-v1;frozen-market;roll-fixed-expiry;indexed-fma-v1;unweighted-price-stream"
+    else convention
+  in
   try
     require
       (snapshot_id <> "" && base_day >= -1000000000 && base_day <= 1000000000)
@@ -248,13 +257,17 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
             | _ -> false)
             "model/factor coordinate mismatch";
           let names =
-            match p.model with
-            | Bachelier ->
-                List.map (fun (Output (q, _)) -> quantity_name q) normal_outputs
-            | _ ->
-                List.map
-                  (fun (Output (q, _)) -> quantity_name q)
-                  lognormal_outputs
+            if fast then [ "price" ]
+            else
+              match p.model with
+              | Bachelier ->
+                  List.map
+                    (fun (Output (q, _)) -> quantity_name q)
+                    normal_outputs
+              | _ ->
+                  List.map
+                    (fun (Output (q, _)) -> quantity_name q)
+                    lognormal_outputs
           in
           calculations_per_scenario :=
             sum !calculations_per_scenario (List.length names);
@@ -270,7 +283,7 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
                 incr group_count;
                 (* Keep the first representative of equivalent input keys. *)
                 buckets := Buckets.add key 0 !buckets))
-            names;
+            (if fast then [] else names);
           fi)
         portfolio
     in
@@ -294,7 +307,7 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
     require
       (buffered_results <= limits.max_buffered_results)
       "in-flight result limit exceeded";
-    let raw_value_error_bytes = product calculations 16 in
+    let raw_value_error_bytes = product calculations (if fast then 8 else 16) in
     let bucket_keys =
       Array.of_list (List.map fst (Buckets.bindings !buckets))
     in
@@ -381,13 +394,16 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
           float (number q v))
         xs
     in
-    outputs lognormal_outputs;
-    outputs normal_outputs;
+    if fast then token "fast-approximate-price"
+    else (
+      outputs lognormal_outputs;
+      outputs normal_outputs);
     let plan_id =
       Digest.BLAKE256.to_hex (Digest.BLAKE256.string (Buffer.contents b))
     in
     Ok
       {
+        assurance;
         portfolio;
         market;
         factor_indices;
@@ -402,13 +418,22 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
           {
             snapshot_id;
             kernels =
-              Array.to_list bucket_keys
-              |> List.map (fun b ->
-                     match b.model with
-                     | Bsm _ -> "Production.Bsm"
-                     | Black76 -> "Production.Black76"
-                     | Displaced _ -> "Production.Displaced"
-                     | Bachelier -> "Production.Bachelier")
+              (if fast then
+                 Array.to_list portfolio
+                 |> List.map (fun (p : position) ->
+                        match p.model with
+                        | Bsm _ -> "Black.Bsm.price"
+                        | Black76 -> "Black.Black76.price"
+                        | Displaced _ -> "Black.Displaced.price"
+                        | Bachelier -> "Bachelier.price")
+               else
+                 Array.to_list bucket_keys
+                 |> List.map (fun b ->
+                        match b.model with
+                        | Bsm _ -> "Production.Bsm"
+                        | Black76 -> "Production.Black76"
+                        | Displaced _ -> "Production.Displaced"
+                        | Bachelier -> "Production.Bachelier"))
               |> List.sort_uniq String.compare;
             limits;
             output_mode;
@@ -430,6 +455,7 @@ let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
       }
   with Plan_error s -> Error s
 
+let compile = compile_common ~assurance:Certified
 let explain t = t.explanation
 
 let manifest t =
@@ -481,7 +507,13 @@ type row = {
   outcomes : outcome list;
 }
 
-let evaluate_position t scenario_id point index =
+type prepared =
+  | Expired
+  | Prepared :
+      ('i, 'c) Batch.model * 'i * ('c Vol.t, Refusal.t) result
+      -> prepared
+
+let prepare_position t point index =
   let p = t.portfolio.(index) in
   let m = t.market.(t.factor_indices.(index)).market in
   let days =
@@ -502,35 +534,11 @@ let evaluate_position t scenario_id point index =
         else value)
       base point.shocks
   in
-  let evaluate : type i c.
-      (i, c) Batch.model ->
-      i ->
-      (c Vol.t, Refusal.t) result ->
-      c output list ->
-      outcome list =
-   fun model inputs vol outputs ->
-    let failure e =
-      List.map (fun (Output (q, _)) -> Outcome (q, Error e)) outputs
-    in
-    if days < 0L then failure Post_expiry
-    else
-      match vol with
-      | Error e -> failure (Scalar (Production.Invalid_input e))
-      | Ok sigma ->
-          let requests =
-            List.map
-              (fun (Output (q, limit)) -> Production.Request (q, limit))
-              outputs
-          in
-          List.map
-            (fun (Production.Outcome (q, result)) ->
-              Outcome (q, Result.map_error (fun e -> Scalar e) result))
-            (Batch.evaluate_many model inputs p.side sigma requests)
-  in
-  let outcomes =
+  let prepare model inputs vol = Prepared (model, inputs, vol) in
+  let prepared =
     match (p.model, m) with
     | Bsm b, Spot_market m ->
-        evaluate Batch.Bsm
+        prepare Batch.Bsm
           {
             Black.Bsm_carry.spot = shock Scenario.Spot m.spot;
             strike = p.strike;
@@ -540,9 +548,8 @@ let evaluate_position t scenario_id point index =
           }
           (Vol.lognormal
              (shock Scenario.Lognormal_volatility (Vol.to_float m.volatility)))
-          t.lognormal_outputs
     | Black76, Forward_market m ->
-        evaluate Batch.Black76
+        prepare Batch.Black76
           {
             Black.Black76_carry.forward = shock Scenario.Forward m.forward;
             strike = p.strike;
@@ -551,9 +558,8 @@ let evaluate_position t scenario_id point index =
           }
           (Vol.lognormal
              (shock Scenario.Lognormal_volatility (Vol.to_float m.volatility)))
-          t.lognormal_outputs
     | Displaced displacement, Forward_market m ->
-        evaluate Batch.Displaced
+        prepare Batch.Displaced
           {
             Black.Displaced_carry.forward = shock Scenario.Forward m.forward;
             strike = p.strike;
@@ -563,9 +569,8 @@ let evaluate_position t scenario_id point index =
           }
           (Vol.lognormal
              (shock Scenario.Lognormal_volatility (Vol.to_float m.volatility)))
-          t.lognormal_outputs
     | Bachelier, Normal_market m ->
-        evaluate Batch.Bachelier
+        prepare Batch.Bachelier
           {
             Bachelier.forward = shock Scenario.Forward m.forward;
             strike = p.strike;
@@ -574,8 +579,41 @@ let evaluate_position t scenario_id point index =
           }
           (Vol.normal
              (shock Scenario.Normal_volatility (Vol.to_float m.volatility)))
-          t.normal_outputs
     | _ -> assert false
+  in
+  if days < 0L then Expired else prepared
+
+let evaluate_position t scenario_id point index =
+  let p = t.portfolio.(index) in
+  let outputs : type i c. (i, c) Batch.model -> c output list = function
+    | Batch.Bachelier -> t.normal_outputs
+    | Batch.Bsm -> t.lognormal_outputs
+    | Batch.Black76 -> t.lognormal_outputs
+    | Batch.Displaced -> t.lognormal_outputs
+  in
+  let failure outputs e =
+    List.map (fun (Output (q, _)) -> Outcome (q, Error e)) outputs
+  in
+  let outcomes =
+    match prepare_position t point index with
+    | Expired -> (
+        match p.model with
+        | Bachelier -> failure t.normal_outputs Post_expiry
+        | _ -> failure t.lognormal_outputs Post_expiry)
+    | Prepared (model, inputs, vol) -> (
+        let outputs = outputs model in
+        match vol with
+        | Error e -> failure outputs (Scalar (Production.Invalid_input e))
+        | Ok sigma ->
+            let requests =
+              List.map
+                (fun (Output (q, limit)) -> Production.Request (q, limit))
+                outputs
+            in
+            List.map
+              (fun (Production.Outcome (q, result)) ->
+                Outcome (q, Result.map_error (fun e -> Scalar e) result))
+              (Batch.evaluate_many model inputs p.side sigma requests))
   in
   {
     scenario_id;
@@ -636,6 +674,56 @@ type accumulator = {
 
 exception Stop of stop
 
+let emit_to sink e =
+  try
+    match sink e with Ok () -> () | Error s -> raise (Stop (Sink_failure s))
+  with
+  | Stop _ as e -> raise e
+  | e -> raise (Stop (Sink_failure (Printexc.to_string e)))
+
+let run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =
+  try
+    if workers <= 0 || workers > max_workers then
+      raise (Stop (Worker_failure "worker limit violated"));
+    check_cancel ();
+    let next = ref 0 in
+    while !next < tiles do
+      check_cancel ();
+      let n = min workers (tiles - !next) in
+      (* Spawned domains own their results. Joining every handle, even on an
+         exception, is mandatory before returning or invoking a user sink. *)
+      let handles = ref [] in
+      let failure = ref None in
+      for k = 1 to n - 1 do
+        if Option.is_none !failure then
+          try
+            let id = !next + k in
+            handles := Domain.spawn (fun () -> run_tile id) :: !handles
+          with e -> failure := Some (Printexc.to_string e)
+      done;
+      let first =
+        if Option.is_none !failure then run_tile !next else Error "spawn failed"
+      in
+      let rest =
+        List.map
+          (fun d -> try Domain.join d with e -> Error (Printexc.to_string e))
+          (List.rev !handles)
+      in
+      (match !failure with
+      | Some s -> raise (Stop (Worker_failure s))
+      | None -> ());
+      List.iter
+        (function
+          | Error s -> raise (Stop (Worker_failure s))
+          | Ok rows -> Array.iter accept rows)
+        (first :: rest);
+      next := !next + n
+    done;
+    Complete
+  with
+  | Stop stop -> stop
+  | e -> Worker_failure (Printexc.to_string e)
+
 let execute t ~workers ~cancellation ~sink =
   let committed = ref 0 and calculations = ref 0 in
   let result stop =
@@ -645,13 +733,7 @@ let execute t ~workers ~cancellation ~sink =
       calculations_committed = !calculations;
     }
   in
-  let emit e =
-    try
-      match sink e with Ok () -> () | Error s -> raise (Stop (Sink_failure s))
-    with
-    | Stop _ as e -> raise e
-    | e -> raise (Stop (Sink_failure (Printexc.to_string e)))
-  in
+  let emit = emit_to sink in
   let check_cancel () =
     if Atomic.get cancellation then raise (Stop Cancelled)
   in
@@ -732,49 +814,8 @@ let execute t ~workers ~cancellation ~sink =
     try evaluate_tile t (tile t id) with e -> Error (Printexc.to_string e)
   in
   let stop =
-    try
-      if workers <= 0 || workers > t.limits.max_workers then
-        raise (Stop (Worker_failure "worker limit violated"));
-      check_cancel ();
-      let next = ref 0 in
-      while !next < t.explanation.tiles do
-        check_cancel ();
-        let n = min workers (t.explanation.tiles - !next) in
-        (* Spawned domains own their results. Joining every handle, even on an
-         exception, is mandatory before returning or invoking a user sink. *)
-        let handles = ref [] in
-        let failure = ref None in
-        for k = 1 to n - 1 do
-          if Option.is_none !failure then
-            try
-              let id = !next + k in
-              handles := Domain.spawn (fun () -> run_tile id) :: !handles
-            with e -> failure := Some (Printexc.to_string e)
-        done;
-        let first =
-          if Option.is_none !failure then run_tile !next
-          else Error "spawn failed"
-        in
-        let rest =
-          List.map
-            (fun d ->
-              try Domain.join d with e -> Error (Printexc.to_string e))
-            (List.rev !handles)
-        in
-        (match !failure with
-        | Some s -> raise (Stop (Worker_failure s))
-        | None -> ());
-        List.iter
-          (function
-            | Error s -> raise (Stop (Worker_failure s))
-            | Ok rows -> Array.iter accept rows)
-          (first :: rest);
-        next := !next + n
-      done;
-      Complete
-    with
-    | Stop stop -> stop
-    | e -> Worker_failure (Printexc.to_string e)
+    run_waves ~max_workers:t.limits.max_workers ~tiles:t.explanation.tiles
+      ~workers ~check_cancel ~run_tile ~accept
   in
   let completion = result stop in
   match stop with
@@ -784,3 +825,192 @@ let execute t ~workers ~cancellation ~sink =
         emit (Finished completion);
         completion
       with Stop stop -> result stop)
+
+type plan = t
+type plan_limits = limits
+
+let plan_tile = tile
+
+module Fast = struct
+  type limits = {
+    max_instruments : int;
+    max_scenarios : int;
+    max_calculations : int;
+    tile_rows : int;
+    max_workers : int;
+    max_buffered_results : int;
+  }
+
+  type t = Plan of plan
+
+  type explanation = {
+    snapshot_id : string;
+    kernels : string list;
+    limits : limits;
+    instruments : int;
+    scenarios : int;
+    calculations : int;
+    tiles : int;
+    raw_value_bytes : int;
+    buffered_results : int;
+    plan_id : string;
+    convention : string;
+  }
+
+  let compile ~snapshot_id ~base_day ~day_count ~portfolio ~market ~scenarios
+      ~(limits : limits) =
+    let limits : plan_limits =
+      {
+        max_instruments = limits.max_instruments;
+        max_scenarios = limits.max_scenarios;
+        max_calculations = limits.max_calculations;
+        tile_rows = limits.tile_rows;
+        max_workers = limits.max_workers;
+        max_buffered_results = limits.max_buffered_results;
+        max_groups = 0;
+      }
+    in
+    Result.map
+      (fun p -> Plan p)
+      (compile_common ~assurance:Fast_price ~snapshot_id ~base_day ~day_count
+         ~portfolio ~market ~scenarios ~lognormal_outputs:[] ~normal_outputs:[]
+         ~output_mode:Stream ~limits)
+
+  let explain (Plan p) =
+    let e = p.explanation in
+    {
+      snapshot_id = e.snapshot_id;
+      kernels = e.kernels;
+      limits =
+        {
+          max_instruments = p.limits.max_instruments;
+          max_scenarios = p.limits.max_scenarios;
+          max_calculations = p.limits.max_calculations;
+          tile_rows = p.limits.tile_rows;
+          max_workers = p.limits.max_workers;
+          max_buffered_results = p.limits.max_buffered_results;
+        };
+      instruments = e.instruments;
+      scenarios = e.scenarios;
+      calculations = e.calculations;
+      tiles = e.tiles;
+      raw_value_bytes = e.raw_value_error_bytes;
+      buffered_results = e.buffered_results;
+      plan_id = e.plan_id;
+      convention = e.convention;
+    }
+
+  let manifest (Plan p) =
+    assert (p.assurance = Fast_price);
+    Printf.sprintf
+      "planner-fast-replay-v1\n\
+       plan=%s\n\
+       convention=%s\n\
+       ocaml=%s\n\
+       word-size=%d\n\
+       snapshot=%S\n\
+       assurance=fast-approximate\n\
+       output=unweighted-price-stream\n\
+       numerical-mode=IEEE-binary64-explicit-fma-gradual-underflow\n"
+      p.explanation.plan_id p.explanation.convention Sys.ocaml_version
+      Sys.word_size p.explanation.snapshot_id
+
+  type tile = {
+    id : int;
+    scenario : int;
+    first : int;
+    length : int;
+    plan_id : string;
+  }
+
+  let tile (Plan p) id =
+    let t = plan_tile p id in
+    {
+      id = t.id;
+      scenario = t.scenario;
+      first = t.first;
+      length = t.length;
+      plan_id = t.plan_id;
+    }
+
+  type error = Post_expiry | Scalar of Batch.Fast.error
+
+  type row = {
+    scenario_id : int;
+    instrument_index : int;
+    instrument_id : string;
+    factor_id : string;
+    currency : string;
+    coordinate : coordinate;
+    quantity : float;
+    price : (float, error) result;
+  }
+
+  let evaluate_position p scenario_id point index =
+    let position = p.portfolio.(index) in
+    let price =
+      match prepare_position p point index with
+      | Expired -> Error Post_expiry
+      | Prepared (model, inputs, vol) -> (
+          match vol with
+          | Error e -> Error (Scalar (Batch.Fast.Invalid_input e))
+          | Ok sigma ->
+              Result.map_error
+                (fun e -> Scalar e)
+                (Batch.Fast.evaluate
+                   (Batch.Fast.Price (model, inputs, position.side, sigma))))
+    in
+    {
+      scenario_id;
+      instrument_index = index;
+      instrument_id = position.id;
+      factor_id = position.factor;
+      currency = position.currency;
+      coordinate = coordinate position.model;
+      quantity = position.quantity;
+      price;
+    }
+
+  let evaluate_tile (Plan p as plan) work =
+    if
+      work.id < 0 || work.id >= p.explanation.tiles || work <> tile plan work.id
+    then Error "tile does not belong to fast plan"
+    else
+      let point = Scenario.point p.scenarios work.scenario in
+      Ok
+        (Array.init work.length (fun i ->
+             evaluate_position p work.scenario point (work.first + i)))
+
+  type event = Row of row | Finished of completion
+
+  let execute (Plan p as plan) ~workers ~cancellation ~sink =
+    let committed = ref 0 in
+    let result stop =
+      { stop; rows_committed = !committed; calculations_committed = !committed }
+    in
+    let emit = emit_to sink in
+    let check_cancel () =
+      if Atomic.get cancellation then raise (Stop Cancelled)
+    in
+    let accept row =
+      check_cancel ();
+      emit (Row row);
+      incr committed
+    in
+    let run_tile id =
+      try evaluate_tile plan (tile plan id)
+      with e -> Error (Printexc.to_string e)
+    in
+    let stop =
+      run_waves ~max_workers:p.limits.max_workers ~tiles:p.explanation.tiles
+        ~workers ~check_cancel ~run_tile ~accept
+    in
+    let completion = result stop in
+    match stop with
+    | Sink_failure _ -> completion
+    | _ -> (
+        try
+          emit (Finished completion);
+          completion
+        with Stop stop -> result stop)
+end

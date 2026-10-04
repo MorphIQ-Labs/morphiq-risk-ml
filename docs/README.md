@@ -10,6 +10,8 @@ been retired; it remains in Git history.
 
 ## Current contracts
 
+- [Fast scenario streaming](fast-planner.md): shared structural/scheduler contracts, distinct approximate prices and bounded output.
+
 - [Compiled fast price batches](fast-batch.md): frozen admission reuse, explicit failures and separation from runtime certificates.
 
 - [First model extension design](first-model-extension.md): selected certified scalar exchange prices, original-input contract, references and implementation gate; [implementation evidence](exchange-prices.md) is separate and broader qualification remains open.

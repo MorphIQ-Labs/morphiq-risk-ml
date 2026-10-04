@@ -38,6 +38,23 @@ type mutant = {
 let catalog =
   [
     {
+      id = "fast-planner-tile";
+      file = "lib/planner.ml";
+      snippet = "work <> tile plan work.id";
+      replacement = "false";
+      killer = "fast_planner";
+      mechanism =
+        "foreign fast tile identities cannot select another frozen plan";
+    };
+    {
+      id = "fast-planner-side";
+      file = "lib/planner.ml";
+      snippet = "Batch.Fast.Price (model, inputs, position.side, sigma)";
+      replacement = "Batch.Fast.Price (model, inputs, Side.Put, sigma)";
+      killer = "fast_planner";
+      mechanism = "scenario fast price retains original call/put side";
+    };
+    {
       id = "fast-batch-finite";
       file = "lib/batch.ml";
       snippet = "if Float.is_finite value && value >= 0.0 then Ok value";
@@ -341,8 +358,8 @@ let catalog =
     {
       id = "planner-post-expiry";
       file = "lib/planner.ml";
-      snippet = "if days < 0L then failure Post_expiry";
-      replacement = "if false then failure Post_expiry";
+      snippet = "if days < 0L then Expired else prepared";
+      replacement = "if false then Expired else prepared";
       killer = "planner_contract";
       mechanism = "post-expiry valuation has an explicit settlement exclusion";
     };
@@ -1038,9 +1055,10 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "fast_batch" | "enclosure_sum" | "shared_greeks" | "production_boundary"
-  | "production_multi" | "planner_contract" | "prepared_division"
-  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
+  | "fast_planner" | "fast_batch" | "enclosure_sum" | "shared_greeks"
+  | "production_boundary" | "production_multi" | "planner_contract"
+  | "prepared_division" | "carry_cancellation" | "greek_cancellation"
+  | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

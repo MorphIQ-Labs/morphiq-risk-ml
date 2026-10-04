@@ -4,6 +4,10 @@ Epic #23 supplies the scenario planner. This feature extends orchestration of
 the existing European scalar contract; it does not change prices, Greeks, IV
 acceptance, or institutional deployment approval.
 
+`Planner.Fast` adds a separate [price-only fast streaming API](fast-planner.md).
+The certified quantities and weighted enclosures described below retain their
+existing contract; fast rows carry no runtime error radius or aggregate total.
+
 ## Financial meaning (#24)
 
 The first convention is the Epic's recommended **forward valuation-date roll
