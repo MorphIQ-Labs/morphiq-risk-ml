@@ -175,3 +175,22 @@
  (modules planner_workers)
  (libraries morphiq_risk)
  (foreign_archives assurance_clock))
+
+(executable
+ (name planner_load)
+ (modules planner_load)
+ (libraries morphiq_risk unix)
+ (foreign_archives assurance_clock))
+
+(rule
+ (alias runtest)
+ (deps
+  operational-local.json
+  ../scripts/operational_campaign.py
+  ../scripts/test_operational_campaign.py)
+ (action
+  (run
+   python3
+   %{dep:../scripts/test_operational_campaign.py}
+   %{exe:planner_load.exe}
+   %{dep:operational-local.json})))

@@ -1,0 +1,198 @@
+{
+  "schema": "planner-operational-v1",
+  "scope": "Local engineering diagnostic. Synthetic four-model book; deployment workload, target host and operational requirements undecided. Zero ordinary failures is a diagnostic criterion, not an owner-approved failure policy.",
+  "repetitions": 3,
+  "warmups": 2,
+  "requests": 10,
+  "timeout_seconds": 30,
+  "cases": [
+    {
+      "name": "fast-reuse-one-client",
+      "positions": 1024,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "fast",
+      "outputs": "price",
+      "allowance": 1e-08,
+      "workers": 4,
+      "tile_rows": 256,
+      "buffer_slots": 1024,
+      "concurrency": 1,
+      "policy": "reuse",
+      "sink": "count",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": 0,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "fast-reuse-two-clients",
+      "positions": 1024,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "fast",
+      "outputs": "price",
+      "allowance": 1e-08,
+      "workers": 4,
+      "tile_rows": 256,
+      "buffer_slots": 1024,
+      "concurrency": 2,
+      "policy": "reuse",
+      "sink": "count",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": 0,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "fast-recompile-digest",
+      "positions": 1024,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "fast",
+      "outputs": "price",
+      "allowance": 1e-08,
+      "workers": 4,
+      "tile_rows": 256,
+      "buffer_slots": 1024,
+      "concurrency": 2,
+      "policy": "recompile",
+      "sink": "digest",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": 0,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "certified-price",
+      "positions": 32,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "certified",
+      "outputs": "price",
+      "allowance": 1e-08,
+      "workers": 4,
+      "tile_rows": 8,
+      "buffer_slots": 32,
+      "concurrency": 2,
+      "policy": "reuse",
+      "sink": "count",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": 0,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "certified-all",
+      "positions": 8,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "certified",
+      "outputs": "all",
+      "allowance": 1e-08,
+      "workers": 2,
+      "tile_rows": 2,
+      "buffer_slots": 44,
+      "concurrency": 2,
+      "policy": "reuse",
+      "sink": "digest",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": 0,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "fast-cancellation",
+      "positions": 16384,
+      "days": [
+        0,
+        7,
+        30,
+        90
+      ],
+      "mode": "fast",
+      "outputs": "price",
+      "allowance": 1e-08,
+      "workers": 4,
+      "tile_rows": 256,
+      "buffer_slots": 1024,
+      "concurrency": 2,
+      "policy": "reuse",
+      "sink": "count",
+      "cancel_after_ms": 2,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": null,
+        "max_cancel_observation_ms": null
+      }
+    },
+    {
+      "name": "certified-boundaries",
+      "positions": 8,
+      "days": [
+        0,
+        365,
+        366
+      ],
+      "mode": "certified",
+      "outputs": "all",
+      "allowance": 1e-08,
+      "workers": 2,
+      "tile_rows": 2,
+      "buffer_slots": 44,
+      "concurrency": 1,
+      "policy": "reuse",
+      "sink": "digest",
+      "cancel_after_ms": null,
+      "requirements": {
+        "warm_p95_ms": null,
+        "min_requests_per_second": null,
+        "max_process_rss_bytes": null,
+        "max_failure_fraction": null,
+        "max_cancel_observation_ms": null
+      }
+    }
+  ]
+}

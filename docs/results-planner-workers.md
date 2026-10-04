@@ -19,7 +19,7 @@ It does not close #8's target-workload/operational acceptance requirements.
   library tree: `0da7e7fda5ef50b4bd7696580829fd9a3adea598`.
 - New harness: [`bench/planner_workers.ml`](../bench/planner_workers.ml), SHA-256
   `d3f0f10bbab812c3bfadf31705ae2ce79e406b2e44819ef836f3f974cda8d943`.
-- Collector: [`scripts/measure_planner_workers.py`](../scripts/measure_planner_workers.py), SHA-256
+- Collector: [`scripts/measure_planner_workers.py` at the measured revision](https://github.com/MorphIQ-Labs/morphiq-risk-ml/blob/8b374bf0c599393e23a6042f4bc55946e7364d5d/scripts/measure_planner_workers.py), SHA-256
   `1fc7b97855d2439de1c7bb8e1071f1a7ab18b9f91669a69c48e35acae76ebff4`.
 - Native binary SHA-256: `30e6aeac8d8a47cff1098d397f1269cb87c61fe08da38af67473fb5d4e16139b`.
   Compiler: OCaml 5.3.0 Flambda, Dune release profile, unchanged library `-O3`
