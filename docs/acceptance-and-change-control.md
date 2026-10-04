@@ -1,12 +1,14 @@
 # Candidate acceptance and change control
 
 The current package is experimental **0.3.0**, with its separate
-[experimental qualification](experimental-baseline.md). The dated 0.2.0 record
+[integrated candidate qualification](candidate-fast-optimized.md). The dated 0.2.0 record
 below remains unchanged and pending for institutional use.
 
 The institutional acceptance process establishes engineering evidence toward Epic #27. It does not
 approve deployment or freeze a release. The authoritative machine-readable
-[acceptance record](acceptance/pending.json) is deliberately pending. No release
+[current acceptance record](acceptance/pending-fast-candidate.json) is deliberately pending
+for `f703546ea736d456f64e74be6ef9d2da2c10ef88`. The historical
+[0.2.0 pending record](acceptance/pending.json) remains unchanged. No release
 tag, package version change or deployment is authorized by a passing test alone.
 The historical candidate package declared 0.2.0: the public outcome/type changes require
 a minor increment under the pre-1.0 policy in [stability](stability.md).
@@ -48,7 +50,7 @@ hash/commit fields relative to the separately supplied artifact directory.
 Run the read-only integrity check before a release decision is acted on:
 
 ```sh
-python3 scripts/check_acceptance.py docs/acceptance/pending.json \
+python3 scripts/check_acceptance.py docs/acceptance/pending-fast-candidate.json \
   --artifact-root /path/to/candidate-artifacts
 ```
 
@@ -101,16 +103,17 @@ gh workflow run candidate.yml --ref main -f commit=FULL_CANDIDATE_SHA
 
 ## Change-impact matrix
 
-The pending DD exponential replacement and optimization in
-[PR #67](https://github.com/MorphIQ-Labs/morphiq-risk-ml/pull/67) is a numerical
-delta after the reviewed baseline. Its [qualification](results-dd-exponential-optimization.md)
-records the degree-22 derivation, unchanged budgets, 29 changed served oracle
-rows versus QD, development/release validation and shared-host performance.
-The public replay digest is unchanged, but that does not make the delta
-bit-identical on all inputs or extend earlier acceptance to this candidate.
-Independent delta review and final artifact qualification remain pending;
-The AS241 implementation has since been replaced with its own [delta evidence](results-inverse-normal.md); final current-source provenance and exact-candidate acceptance under #64 remain release blockers. The CALERF replacement has its own delta evidence below. No acceptance
-record or owner decision is changed by this engineering evidence.
+The DD exponential, error-function and inverse-normal replacements were
+numerical deltas after the owner-reviewed baseline. Their historical reports
+retain derivations, changed outcomes and unchanged accuracy budgets. The
+[current-source provenance closeout](opensource-closeout.md) resolved #64 for
+the replacement source distribution; historical rights findings remain separate.
+
+The [current candidate map](candidate-fast-optimized.md) also covers later
+Exchange, shared certification, storage and Fast API changes. Exact-candidate
+artifact qualification does not supply the independent numerical delta review
+or owner acceptance required by #15–17. A stable public replay digest does not
+make every source revision bit-identical over all admitted inputs.
 
 | Change | Required analysis and refreshed evidence |
 | --- | --- |
@@ -179,9 +182,10 @@ rejects the outstanding independent-review and final decision requirements.
 
 The [CALERF replacement evidence](results-error-functions.md) is a numerical
 delta from the reviewed baseline. It requires its own candidate-specific delta
-review; the earlier owner record is unchanged. Final current-source provenance
-and candidate-specific acceptance remain unresolved under #64 and block release. This work does not
-approve a new release, operational use or unrestricted historical distribution.
+review; the earlier owner record is unchanged. Current replacement-source provenance is recorded in the
+[open-source closeout](opensource-closeout.md); #64 is closed. Candidate-specific
+review and acceptance remain under #15–17. This does not approve a release,
+operational use or unrestricted historical distribution.
 
 ## Inverse-normal replacement delta
 
@@ -190,8 +194,9 @@ public inverse values, independent refinements, IV consumer behavior and costs.
 It is a numerical minor change under the existing stability policy, with no
 version bump or release in this PR. The earlier owner acceptance does not
 implicitly accept this later implementation. Historical rights findings and
-notices remain; #64 needs a final source/artifact audit and exact-main-candidate
-qualification after the stacked changes land.
+notices remain. The completed [current-source audit](opensource-closeout.md)
+and [latest candidate qualification](candidate-fast-optimized.md) are separate
+from the still-pending independent review and exact-candidate owner decisions.
 
 
 ## Certificate allocation delta

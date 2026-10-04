@@ -60,8 +60,9 @@ Start with [DD exponential optimization](results-dd-exponential-optimization.md)
 [performance](performance.md), and the original
 [scalar experiment results](results-slice.md).
 
-The [0.3.0 experimental qualification](candidate-0.3.0.md) records the current
-qualified source and retained evidence.
+The [integrated fast/certified candidate](candidate-fast-optimized.md) records the
+current qualified source and retained evidence. The [initial 0.3.0 dossier](candidate-0.3.0.md)
+remains a historical source-bound record.
 
 The [0.2.0 candidate dossier](candidate-0.2.0.md), [independent review package](independent-review-package.md),
 and [acceptance controls](acceptance-and-change-control.md) retain the distinction

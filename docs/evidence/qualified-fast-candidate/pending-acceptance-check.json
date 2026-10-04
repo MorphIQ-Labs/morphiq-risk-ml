@@ -1,0 +1,13 @@
+{
+  "accepted": false,
+  "errors": [
+    "acceptance decision is pending",
+    "unresolved blockers remain",
+    "incomplete or unknown evidence categories",
+    "designated owner decisions missing"
+  ],
+  "candidate_commit": "f703546ea736d456f64e74be6ef9d2da2c10ef88",
+  "expected_rejection": true,
+  "missing_evidence_category": "independent_review",
+  "scope": "Supplied evidence/artifact identity and hashes pass; institutional review/operational/owner decisions are incomplete."
+}

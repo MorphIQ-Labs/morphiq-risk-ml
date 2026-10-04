@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Integrated candidate qualification (#17)
+
+- Retain the exact-source qualification of `f703546`: three-platform package
+  installation and native/bytecode consumers, canonical and Exchange replay,
+  development/release ordinary CI, and the complete 96-mutant manual campaign.
+- Refresh the review handoff and record pending institutional decisions against
+  this candidate. Historical approvals/qualifications keep their original scope.
+  No runtime, package version, release or deployment decision changes. See
+  [the candidate dossier](docs/candidate-fast-optimized.md).
+
 ### Fast pricing allocation (#8)
 
 - Keep DD Horner loop words in scalar accumulators and inline the existing

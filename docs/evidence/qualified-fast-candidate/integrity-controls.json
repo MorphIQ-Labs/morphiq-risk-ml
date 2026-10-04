@@ -1,0 +1,82 @@
+{
+  "baseline_passed": true,
+  "controls": [
+    {
+      "control": "wrong candidate",
+      "rejected": true,
+      "errors": [
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/README.md",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ci-workflow.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ci.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/collect.py",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/full-mutations.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-artifact.json",
+        "artifact identity mismatch: docs/evidence/qualified-fast-candidate/macos-15-artifact.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-candidate-artifact.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-candidate-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-candidate-replay.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-candidate-tests.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-canonical.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-exchange-bytecode.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/macos-15-exchange-native.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/pending-acceptance-check.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/receipt.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/source-deltas.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-artifact.json",
+        "artifact identity mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-artifact.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-artifact.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-replay.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-candidate-tests.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-canonical.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-exchange-bytecode.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-arm-exchange-native.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-artifact.json",
+        "artifact identity mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-artifact.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-artifact.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-build.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-replay.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-candidate-tests.log.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-canonical.json",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-exchange-bytecode.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/ubuntu-24.04-exchange-native.txt.gz",
+        "candidate mismatch: docs/evidence/qualified-fast-candidate/workflow.json",
+        "candidate mismatch: docs/candidate-fast-optimized.md",
+        "candidate mismatch: docs/experimental-baseline.md",
+        "candidate mismatch: docs/independent-review-package.md",
+        "candidate mismatch: docs/acceptance/pending-fast-candidate.json"
+      ]
+    },
+    {
+      "control": "missing platform",
+      "rejected": true,
+      "errors": [
+        "incomplete platform coverage"
+      ]
+    },
+    {
+      "control": "changed evidence hash",
+      "rejected": true,
+      "errors": [
+        "changed evidence: docs/evidence/qualified-fast-candidate/README.md"
+      ]
+    },
+    {
+      "control": "path escape",
+      "rejected": true,
+      "errors": [
+        "missing/outside evidence: ../outside"
+      ]
+    },
+    {
+      "control": "missing evidence",
+      "rejected": true,
+      "errors": [
+        "missing/outside evidence: docs/evidence/absent-fast-candidate.json"
+      ]
+    }
+  ]
+}
