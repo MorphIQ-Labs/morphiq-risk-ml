@@ -22,6 +22,7 @@ else:
         'mul': ('a b', 'Exact_dyadic.binary "mul" Q.mul Exact_dyadic.mul_eps a b z'),
         'mul_float': ('a y', 'Exact_dyadic.binary "mul_float" Q.mul Exact_dyadic.float_eps a (of_float y) z'),
         'div': ('a b', 'Exact_dyadic.binary "div" Q.div Exact_dyadic.div_eps a b z'),
+        'div_prepared': ('a b', 'Exact_dyadic.binary "div_prepared" Q.div Exact_dyadic.div_eps a (prepared_divisor_value b) z'),
         'sqrt': ('a', 'Exact_dyadic.sqrt a z'),
         'two_prod': ('a b', 'Exact_dyadic.product a b z'),
     }

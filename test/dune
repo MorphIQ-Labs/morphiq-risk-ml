@@ -335,3 +335,8 @@
   ../lib/normal.ml)
  (action
   (run python3 %{dep:../oracle/inverse_normal_bounds.py})))
+
+(test
+ (name prepared_division)
+ (modules prepared_division)
+ (libraries morphiq_risk certified))

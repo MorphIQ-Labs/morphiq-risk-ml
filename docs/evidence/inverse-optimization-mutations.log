@@ -1,0 +1,9 @@
+baseline passes (124 s)
+killed    prepared-quotient-exponent by prepared_division
+killed    prepared-reciprocal-residual by prepared_division
+killed    prepared-numerator-scale by prepared_division
+killed    inverse-iteration-count by oracle_normal
+killed    inverse-dd-refinement by oracle_normal
+killed    division-numerator-scale by dd_reference
+killed    normal-dd-series by normal_dd_reference
+7 of 7 mutants killed as catalogued

@@ -57,11 +57,16 @@ let () =
         let x = Internal.Dd.of_float d in
         let ec = rel (Internal.Normal_dd.cdf x) cdf
         and ep = rel (Internal.Normal_dd.pdf x) pdf in
+        let paired_cdf, paired_pdf = Internal.Normal_dd.cdf_and_pdf x in
+        let paired_ec = rel paired_cdf cdf and paired_ep = rel paired_pdf pdf in
         let cdf_budget = Bounds.normal_cdf_absolute /. fst cdf in
         if
           not
             (Float.is_finite ec && Float.is_finite ep && ec <= cdf_budget
-            && ep <= Bounds.normal_pdf_relative)
+            && ep <= Bounds.normal_pdf_relative
+            && Float.is_finite paired_ec && Float.is_finite paired_ep
+            && paired_ec <= cdf_budget
+            && paired_ep <= Bounds.normal_pdf_relative)
         then Some (Printf.sprintf "d=%h cdf %.1e pdf %.1e" d ec ep)
         else None)
       cases

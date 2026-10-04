@@ -1,0 +1,33 @@
+{
+  "baseline": "e673a3d9534f8dd64b1cee835a51c71bd9e4dd58",
+  "source_sha256": {
+    "lib/dd.ml": "0a7ebe82bb8e4bc4219ce1054a14fe73ec5dfd1e253218d36d965c848eb7350c",
+    "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+    "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511"
+  },
+  "fixed_quote_iv": {
+    "rows": 8330,
+    "outputs_identical": true,
+    "counts_identical": true,
+    "counts": {
+      "lbr_iterated_calls": 4540,
+      "lbr_steps": 9068,
+      "certified_calls": 8948,
+      "certified_steps": 4373
+    }
+  },
+  "traces": {
+    "dd": {
+      "rows": 86145,
+      "bytes": 14039588,
+      "sha256": "f842432546c488aa22659619ffc433873eb490bfcb9b60912bc8c45cb87b62bc",
+      "identical": true
+    },
+    "normal": {
+      "rows": 130394,
+      "bytes": 7286970,
+      "sha256": "85ccad87820a810ba943f39588c4df529c2a84af99afb41da25a4171ee7432f1",
+      "identical": true
+    }
+  }
+}

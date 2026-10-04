@@ -36,7 +36,7 @@ def main(args):
               'harness_sha256':next(iter(hashes.values())), 'sources':{}, 'runs':[]}
     for label,root in roots.items():
         report['sources'][label]={'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
-                                 'source_sha256':{f:digest(root/f) for f in ['lib/cody.ml','lib/dd.ml','lib/split.ml','lib/normal.ml','lib/normalised_black.ml','lib/erf_coefficients.ml'] if (root/f).exists()}}
+                                 'source_sha256':{f:digest(root/f) for f in ['lib/cody.ml','lib/dd.ml','lib/split.ml','lib/normal.ml','lib/normal_dd.ml','lib/normalised_black.ml','lib/erf_coefficients.ml'] if (root/f).exists()}}
     names = list(roots)
     for profile, directory, benches in [('dev','_build',['inverse_normal']),
                                          ('release','_build-release',['inverse_normal','assurance'])]:

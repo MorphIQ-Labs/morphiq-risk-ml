@@ -62,3 +62,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Error-function qualification](results-error-functions.md): compatibility, boundary references and performance.
 
 - [Inverse-normal construction](inverse-normal-replacement.md) and [qualification](results-inverse-normal.md): AS241 replacement, independent references and IV consumer costs.
+
+- [Inverse-normal optimization](results-inverse-optimization.md): exact intermediate reuse, numerical replay and measured costs.

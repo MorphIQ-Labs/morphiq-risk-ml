@@ -90,6 +90,36 @@ let div a b =
     let m = add_float d th in
     scale (mul a m) (ka - kb)
 
+(* Cache only the divisor-dependent half of [div]. Keeping its original
+   words permits the independent replay to check the exact same quotient. *)
+type prepared_divisor = { divisor : t; exponent : int; reciprocal : t }
+
+let prepared_divisor_value b = b.divisor
+
+let prepare_divisor divisor =
+  if divisor.hi = 0.0 || not (Float.is_finite divisor.hi) then None
+  else
+    let exponent = snd (Float.frexp divisor.hi) - 1 in
+    let b = scale divisor (-exponent) in
+    let th = 1.0 /. b.hi in
+    let rh = Float.fma (-.b.hi) th 1.0 in
+    let rl = -.(b.lo *. th) in
+    let e = renormalise rh rl in
+    let d = mul_float e th in
+    let reciprocal = add_float d th in
+    Some { divisor; exponent; reciprocal }
+
+let div_prepared numerator divisor =
+  let exponent =
+    if Float.abs numerator.hi >= 0x1p-400 && Float.abs numerator.hi <= 0x1p400
+    then 0
+    else snd (Float.frexp numerator.hi) - 1
+  in
+  let numerator =
+    if exponent = 0 then numerator else scale numerator (-exponent)
+  in
+  scale (mul numerator divisor.reciprocal) (exponent - divisor.exponent)
+
 let to_float a = a.hi +. a.lo
 
 (* ln 2 = ln2_hi + ln2_lo to 106 bits. *)

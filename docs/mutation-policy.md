@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **58
+seven core mutants. The catalog currently contains **61
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -130,3 +130,11 @@ Two optional mechanisms check the six-step iteration budget and the double-word
 final correction. The iteration mutant must fail the numerical inverse oracle;
 the correction mutant must fail its adjacent-input monotonicity guard. Neither
 uses a changed replay digest as a kill. The seven core selections are unchanged.
+
+### Prepared divisor reuse
+
+Three optional numerical witnesses cover the prepared reciprocal's low word,
+divisor exponent restoration and extreme-dividend normalization. They use
+canonical-word comparison plus independent exact-rational quotient checks.
+The existing seven core mechanisms remain unchanged; the full optional catalog
+now contains 61 mechanisms.

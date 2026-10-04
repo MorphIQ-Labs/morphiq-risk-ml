@@ -5,3 +5,7 @@ val limit : float
 
 val pdf : Dd.t -> Dd.t
 val cdf : Dd.t -> Dd.t
+
+val cdf_and_pdf : Dd.t -> Dd.t * Dd.t
+(** [(cdf d, pdf d)] sharing the same rounded square and density. The domain and
+    error bounds are those of {!cdf} and {!pdf}. *)

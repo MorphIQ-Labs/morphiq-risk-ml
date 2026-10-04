@@ -3,6 +3,9 @@
  (section doc)
  (files
   NOTICE
+  (docs/results-inverse-optimization.md
+   as
+   docs/results-inverse-optimization.md)
   (docs/inverse-normal-replacement.md as docs/inverse-normal-replacement.md)
   (docs/results-inverse-normal.md as docs/results-inverse-normal.md)
   (docs/error-function-replacement.md as docs/error-function-replacement.md)
