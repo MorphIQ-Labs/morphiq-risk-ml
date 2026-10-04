@@ -120,3 +120,5 @@ NIST DLMF version 1.2.8, [§7.17](https://dlmf.nist.gov/7.17) and
 [§7.8](https://dlmf.nist.gov/7.8), consulted 2026-10-03: inverse definitions and
 Mills inequalities used in the [construction](../inverse-normal-replacement.md).
 No implementation/coefficient table or PDF was acquired for this stage.
+
+- Kornerup, Lefèvre, Louvet and Muller, *On the Computation of Correctly-Rounded Sums*, [author-hosted manuscript](https://perso.ens-lyon.fr/jean-michel.muller/TC-2010-04-0248.R1.pdf), Theorem 1 and Algorithms 1–3, pp. 2–3. Inspected via the public source on 2026-10-04 for magnitude-ordered enclosure sums. No PDF or source implementation is distributed by this project; [the local derivation](../runtime-enclosures.md#magnitude-ordered-exact-sums) records the preconditions and adaptations.

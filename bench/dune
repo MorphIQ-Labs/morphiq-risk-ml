@@ -140,3 +140,9 @@
  (modules greek_preparation)
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name certified_scalar)
+ (modules certified_scalar)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))

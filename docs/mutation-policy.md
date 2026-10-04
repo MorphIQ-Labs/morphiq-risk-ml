@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **86
+seven core mutants. The catalog currently contains **88
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -212,3 +212,10 @@ has 85 mechanisms; the default seven-mutant CI selection is unchanged.
 Shared Greek intermediates add `greek-eager-inverse-time`: ATM normal vega
 must remain available when unrelated inverse-maturity arithmetic overflows.
 The optional catalog now has 86 mechanisms; default CI remains the same seven.
+
+### Enclosure summation optimization
+
+`enclosure-sum-order` removes the enforced magnitude ordering for FastTwoSum;
+`enclosure-sum-finite` removes overflow refusal. Both use the independent
+exact-rational `enclosure_sum` guard. The optional catalog now contains 88
+mechanisms. The seven default CI selections remain unchanged.

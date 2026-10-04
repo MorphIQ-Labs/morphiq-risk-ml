@@ -65,15 +65,10 @@ struct
 
   let[@inline always] two_sum a b =
     let s = a +. b in
-    let bb = s -. a in
-    let aa = s -. bb in
-    let da = a -. aa and db = b -. bb in
-    let low = da +. db in
-    finite s;
-    finite bb;
-    finite aa;
-    finite da;
-    finite db;
+    (* FastTwoSum requires the larger-magnitude operand first. Both branches
+       recover the exact residual of the same rounded sum. A nonfinite input
+       or intermediate propagates to low, so this check covers the whole graph. *)
+    let low = if abs a >= abs b then b -. (s -. a) else a -. (s -. b) in
     finite low;
     (s, low)
 

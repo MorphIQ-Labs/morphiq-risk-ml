@@ -659,3 +659,15 @@
    CAML_LD_LIBRARY_PATH
    ../lib/fp
    (run %{test}))))
+
+(test
+ (name enclosure_sum)
+ (modules enclosure_sum)
+ (modes byte exe)
+ (libraries morphiq_risk zarith)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))

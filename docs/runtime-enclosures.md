@@ -17,8 +17,9 @@ round outward with successor/predecessor; nonfinite intermediates fail.
 Overflow is never a usable infinite certificate. Four words provide additional
 working precision; the radius, not a nominal bit count, determines each decision.
 
-Knuth's TwoSum preserves the exact sum when its intermediates do not overflow;
-every intermediate is checked. Gradual underflow does not round a subnormal
+Magnitude-ordered FastTwoSum preserves the exact sum when the sum does not
+overflow; the residual finiteness check enforces every intermediate's finiteness
+as derived below. Gradual underflow does not round a subnormal
 addition/difference: both operands are integer multiples of the least subnormal,
 and so is their exact sum. Repeated TwoSum implements Shewchuk's Grow-Expansion,
 Theorem 10, with zero elimination. See the [author report](https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf).
@@ -38,7 +39,7 @@ The OCaml primitive campaign separately uses exact rationals.
 Each `pack` owns a fresh checked float array with capacity equal to its number
 of input terms. It folds those terms in their original order. A grow step
 reads the increasing-magnitude expansion from index zero, performs the same
-`TwoSum(carry, term)`, writes each nonzero residual, then appends the final
+exact rounded sum/residual pair for `(carry, term)`, writes each nonzero residual, then appends the final
 nonzero carry. Induction on the terms gives the same ordered residuals and
 carry as the previous list traversal. Signed-zero elimination and every
 intermediate finite check remain unchanged.
@@ -57,6 +58,43 @@ and adds discarded magnitudes to the radius in the same order. Products,
 explicit FMA, underflow allowances, series counts and acceptance limits are
 unchanged. This changes storage and allocation, not the floating operation
 graph or error derivation. Independent exact-rational checks remain required.
+
+### Magnitude-ordered exact sums
+
+The grow loop now selects the larger-magnitude operand at each addition. It
+computes `s = RN(a+b)` and then `b - RN(s-a)` if `|a| >= |b|`, otherwise
+`a - RN(s-b)`. Each subtraction rounds separately. The magnitude comparison
+establishes the exponent ordering required by FastTwoSum; it is not inferred
+from the expansion's current storage order.
+
+[Kornerup, Lefèvre, Louvet and Muller, *On the Computation of Correctly-Rounded
+Sums*, Theorem 1 and Algorithms 1–3, pp. 2–3](https://perso.ens-lyon.fr/jean-michel.muller/TC-2010-04-0248.R1.pdf)
+establish the exact residual in binary arithmetic with nearest rounding and
+gradual underflow, provided the initial sum does not overflow. Their magnitude
+ordering satisfies the theorem's exponent premise. Zero operands give the same
+identity directly; the theorem's nonzero premise is therefore not an exclusion.
+
+This is an algorithm substitution, not reassociation authorized by a real-number
+identity. Both it and the previous Knuth TwoSum compute the same rounded sum
+and exactly representable residual on their finite domain. Nonzero residuals
+therefore have identical words. Any signed-zero residual difference disappears
+at grow's existing zero-elimination branch. Carry, retained words, discarded-word
+radius order, and all downstream numerical formulas remain unchanged.
+
+The final residual check enforces finiteness of the whole selected graph:
+a finite floating addition/subtraction requires finite operands. Walking backward
+from `low = small - (s - large)` reaches the subtraction, both inputs and `s`.
+Thus overflow or a nonfinite input cannot pass this check. The original six
+checks followed all the arithmetic; their common exception message is retained.
+No multiplication, FMA, finite-exponent allowance or array access is changed.
+
+`test/enclosure_sum.ml` checks exact rational addition over both operand orders,
+signs, cancellation, ties, subnormals, exponent extremes and seeded raw-word
+inputs in both enclosure configurations and native/bytecode execution. It also
+requires explicit overflow refusal. Two named mutations remove magnitude
+ordering and finiteness respectively. The wider primitive, model, IV and public
+certificate suites remain independent obligations; finite tests do not prove
+the theorem or compiler semantics.
 
 ## Products and division
 

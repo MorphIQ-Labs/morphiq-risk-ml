@@ -461,6 +461,23 @@ let catalog =
       mechanism = "a proposal cannot bypass exact-model rounding acceptance";
     };
     {
+      id = "enclosure-sum-order";
+      file = "lib/enclosure.ml";
+      snippet = "if abs a >= abs b then b -. (s -. a) else a -. (s -. b)";
+      replacement = "b -. (s -. a)";
+      killer = "enclosure_sum";
+      mechanism = "FastTwoSum requires the larger-magnitude operand first";
+    };
+    {
+      id = "enclosure-sum-finite";
+      file = "lib/enclosure.ml";
+      snippet = "finite low;";
+      replacement = "();";
+      killer = "enclosure_sum";
+      mechanism =
+        "an overflowing sum must refuse rather than return an enclosure";
+    };
+    {
       id = "enclosure-grow-residual";
       file = "lib/enclosure.ml";
       snippet = "if residual <> 0.0 then (";
