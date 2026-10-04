@@ -91,6 +91,7 @@ jobs:
             ${{ runner.temp }}/candidate/source.tar.gz
             ${{ runner.temp }}/candidate/report.json
             ${{ runner.temp }}/candidate/build.log
+            ${{ runner.temp }}/candidate/consumer/exchange-*.txt
 
   full-mutations:
     needs: identity

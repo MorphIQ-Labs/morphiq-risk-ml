@@ -88,3 +88,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Exchange qualification](exchange-qualification.md): frozen 649-case scalar campaign, independent expectation references, package/platform evidence and explicit gate status.
 
 - [Certificate allocation optimization](results-certificate-allocation.md): identical-arithmetic private scratch, reference replay and paired exchange/IV measurements.
+
+- [Installed Exchange validation](installed-exchange-validation.md): full qualified native/bytecode replay through the isolated public package in the optional candidate lane.

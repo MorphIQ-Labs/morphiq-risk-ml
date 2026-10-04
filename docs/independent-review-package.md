@@ -12,9 +12,32 @@ its compatibility with that baseline, canonical generated qualification and
 platform artifacts. This owner approval is retained without substituting it
 for the independent reviewer deliverables below.
 
-## Current engineering handoff (2026-10-04, #57)
+## Current engineering delta (2026-10-04, after #88)
 
-The current campaign source is `76128fd99b9649d92f5a473fa4fcc3de44e04cd2`,
+Runtime source `7fb59a3ae282fad60709bbbb123b2e4414772c1e` adds certified scalar
+Exchange and the private-buffer enclosure optimization to the earlier handoff
+below. Review the [exchange model and boundaries](first-model-extension.md),
+[649-case independent qualification](exchange-qualification.md), and
+[allocation change](results-certificate-allocation.md). Exchange has no Greeks,
+IV or portfolio adapter; its correlation/covariance, discount scaling, exact
+boundaries and caller-selected currency limits need their own review.
+
+The shared enclosure storage change preserves the ordered arithmetic, with a
+[capacity and read/write argument](runtime-enclosures.md#allocation-preserving-arithmetic-order).
+Review that argument and mutable-scratch lifetime across both configurations
+and all consumers. Native/bytecode replay, finite corpus agreement and observed
+allocation reductions do not replace independent review of this delta.
+
+The [installed-package campaign](installed-exchange-validation.md) now makes
+all 649 Exchange outcomes a required native/bytecode replay in the optional
+candidate artifact lane. A successful run must retain source-bound reports;
+adding the gate does not assert that a new three-platform run has completed.
+No reviewer has been appointed or contacted, and no earlier owner decision is
+transferred to these later numerical/API changes.
+
+## Earlier engineering handoff (2026-10-04, #57)
+
+The earlier campaign source is `76128fd99b9649d92f5a473fa4fcc3de44e04cd2`,
 covering scalar BSM/Black-76/displaced Black/Bachelier prices, certified IV,
 ten Greek fields, typed Batch, Scenario and Planner. The [adjudication
 report](adversarial-assurance-closeout.md) retains exact inputs, independent
