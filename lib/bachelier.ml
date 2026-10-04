@@ -232,7 +232,7 @@ let mills z = sqrt_pi_over_2 *. Cody.erfcx_nonnegative (z *. Normal.inv_sqrt_2)
    veta = vega (r - (1 + d²)/(2T)), color = Γ (r + (1 - d²)/(2T)).
    As in the Black family, each is an ordinary part plus P exp(-d²/2) with
    the exponential applied last, and Φ(θ d) enters through the Mills ratio. *)
-let greeks a side sigma =
+let greeks_unchecked a side sigma =
   let theta = Side.sign side in
   let sigma_f = Vol.to_float sigma in
   match a with
@@ -390,3 +390,5 @@ let greeks a side sigma =
             Ok (Units.volatility_time_rate (g (base *. veta_bracket *. day)));
           color = Ok (Units.time_rate (g (base /. s *. color_bracket *. day)));
         }
+
+let greeks a side sigma = Greeks.ensure_finite (greeks_unchecked a side sigma)

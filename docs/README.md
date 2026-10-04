@@ -64,3 +64,5 @@ history, clones, or older archives. This cleanup does not rewrite history.
 - [Inverse-normal construction](inverse-normal-replacement.md) and [qualification](results-inverse-normal.md): AS241 replacement, independent references and IV consumer costs.
 
 - [Inverse-normal optimization](results-inverse-optimization.md): exact intermediate reuse, numerical replay and measured costs.
+
+- [Finite Greek results](finite-greek-results.md): per-field failures, subnormal rho scaling and independent extreme-input references.

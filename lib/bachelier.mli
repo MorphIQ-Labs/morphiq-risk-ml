@@ -1,4 +1,8 @@
-(** European options under the normal (Bachelier) model. *)
+(** European options under the normal (Bachelier) model.
+
+    Fast Greek results are checked per field for finiteness in their output
+    units. Unresolved arithmetic returns [Greeks.Numerical_failure]; a finite
+    result retains the documented checked-input accuracy scope. *)
 
 type inputs = {
   forward : float;

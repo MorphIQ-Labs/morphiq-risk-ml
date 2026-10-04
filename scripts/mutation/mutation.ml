@@ -38,6 +38,41 @@ type mutant = {
 let catalog =
   [
     {
+      id = "greek-finite-result";
+      file = "lib/greeks.ml";
+      snippet = "not (Float.is_finite (number value))";
+      replacement = "false && not (Float.is_finite (number value))";
+      killer = "finite_greeks";
+      mechanism = "nonfinite Greek payloads cannot be successful results";
+    };
+    {
+      id = "intrinsic-nonfinite-price";
+      file = "lib/black.ml";
+      snippet = "not (Float.is_finite i.hi && Float.is_finite i.lo)";
+      replacement =
+        "false && not (Float.is_finite i.hi && Float.is_finite i.lo)";
+      killer = "finite_greeks";
+      mechanism = "unresolved intrinsic cannot become a zero price and rho";
+    };
+    {
+      id = "greek-live-rho-scale";
+      file = "lib/black.ml";
+      snippet = "Split.product_ldexp [ theta; time; c_part ] e_up";
+      replacement = "up (theta *. time *. c_part)";
+      killer = "finite_greeks";
+      mechanism =
+        "live BSM rho retains subnormal maturity until currency scaling";
+    };
+    {
+      id = "greek-zero-rho-scale";
+      file = "lib/black.ml";
+      snippet = "Split.product_ldexp [ theta; c.cash; time ] e_up";
+      replacement = "up (theta *. c.cash *. time)";
+      killer = "finite_greeks";
+      mechanism =
+        "zero-volatility BSM rho retains maturity until currency scaling";
+    };
+    {
       id = "prepared-quotient-exponent";
       file = "lib/dd.ml";
       snippet =
@@ -758,6 +793,7 @@ let guard_arguments = function
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
   | "production_boundary" | "planner_contract" | "prepared_division" -> [ [] ]
+  | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "iv_termination" | "normal_dd_reference" | "properties"
   | "test_morphiq_risk" ->

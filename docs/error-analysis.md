@@ -519,3 +519,13 @@ The audit corrected the negative-argument expm1 tail normalization (the majorant
 The direct DD generator previously sampled low words symmetrically using ulp(hi), which can violate nonoverlap on the smaller-spacing side of a power of two. It now forms the exact rational sum and renormalizes both input words before evaluating the independent reference. The checker enforces the precondition instead of relying on that sampling assumption. It then exposed a production scaling defect: rounding a low word to the subnormal grid can create a halfway overlap with an odd high significand. DD scaling and the final split-quotient scaling now renormalize in this case; the extra Fast2Sum/TwoSum preserves the scaled pair’s sum exactly. Dedicated mutations remove the DD scaling repair and the split-root normalization. The latter was also exposed by enforcing nonoverlap on every component result; Split.sqrt now uses Algorithm 8’s final Fast2Sum.
 
 Fixture provenance now pins transitive local generator imports. A partial rebuild preserves unselected records and refuses to rewrite the manifest if any unselected fixture is stale. Missing and duplicate records fail; deleting an imported dependency from a record also fails. The extra-bit Greek fixture was regenerated to record its `gen_greeks.py` dependency.
+
+## Fast Greek result finiteness and retained maturity scaling
+
+The [#62 derivation and qualification](finite-greek-results.md) distinguishes
+finite-output validation from numerical accuracy. All ten model Greek fields
+reject nonfinite payloads after unit conversion. A nonfinite intrinsic cannot
+establish a zero payoff. BSM rho retains the maturity exponent until final
+currency scaling, with the existing multiplication/exponential allowances and
+matching certificate replay; no budget is widened. Independent exact-input
+references also check finite results, including the corrected subnormal rho.

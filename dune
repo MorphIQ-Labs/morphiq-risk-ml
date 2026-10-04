@@ -3,6 +3,7 @@
  (section doc)
  (files
   NOTICE
+  (docs/finite-greek-results.md as docs/finite-greek-results.md)
   (docs/results-inverse-optimization.md
    as
    docs/results-inverse-optimization.md)
