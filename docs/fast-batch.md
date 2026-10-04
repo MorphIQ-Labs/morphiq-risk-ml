@@ -73,7 +73,7 @@ interface. Bounded fast scenario execution is tracked separately in #97.
 
 A compiled batch removes repeated admission; it does not make the numerical
 kernel itself faster. Account for request construction, compilation and output
-extraction when evaluating one-shot use. The measurement report separates those
+extraction when evaluating one-shot use. The [measurement report](results-fast-batch.md) separates those
 costs from reusable execution and pre-admitted scalar dispatch.
 
 ## Integration sequence

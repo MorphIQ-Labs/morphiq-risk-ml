@@ -15,7 +15,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   failures. Existing scalar and certified APIs remain unchanged. Coordinate
   and certificate separation are checked by compile-failure witnesses.
 - Additive public API; no version bump or release. See the
-  [contract and ownership](docs/fast-batch.md).
+  [contract and ownership](docs/fast-batch.md) and
+  [qualification and measured costs](docs/results-fast-batch.md).
 
 ### Packed certification storage (#8)
 
