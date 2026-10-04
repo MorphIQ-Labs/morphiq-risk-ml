@@ -208,7 +208,11 @@ let live_price side (c : Coordinates.live) sigma =
         Dd.to_float_scaled product (c.exponent + se + de + re)
     else
       let i = intrinsic () in
-      if i.hi > 0.0 then Dd.to_float_scaled i c.exponent else 0.0
+      (* An unresolved intrinsic cannot establish an out-of-the-money payoff.
+         In particular NaN > 0 is false; do not turn that into a zero price. *)
+      if not (Float.is_finite i.hi && Float.is_finite i.lo) then Float.nan
+      else if i.hi > 0.0 then Dd.to_float_scaled i c.exponent
+      else 0.0
   in
   let m () = Float.sqrt c.asset *. Float.sqrt c.cash in
   if sigma = 0.0 then zero_variance ()
@@ -413,7 +417,10 @@ let live_greeks side (c : Coordinates.live) sigma =
         vega = Ok (Units.per_volatility 0.0);
         rho =
           (if c.tied then rho_forward ()
-           else Ok (up (on (theta *. c.cash *. time))));
+           else
+             Ok
+               (if itm then Split.product_ldexp [ theta; c.cash; time ] e_up
+                else 0.0));
         vanna = Ok (Units.per_volatility 0.0);
         volga = Ok (Units.per_volatility_squared 0.0);
         charm = Greeks.daily (on (theta *. q *. dq));
@@ -543,9 +550,13 @@ let live_greeks side (c : Coordinates.live) sigma =
     let rho =
       if c.tied then rho_forward ()
       else
+        (* Keep T's exponent until the final currency scaling; T times a
+           normalized leg can underflow even when the final rho is nonzero. *)
+        let time_mantissa, time_exponent = Float.frexp time in
         Ok
-          (up (theta *. time *. c_part)
-          +. g ~k:e_up (theta *. time *. base *. c_mills))
+          (Split.product_ldexp [ theta; time; c_part ] e_up
+          +. g ~k:(e_up + time_exponent)
+               (theta *. time_mantissa *. base *. c_mills))
     in
     {
       Greeks.delta = Ok delta;
@@ -572,7 +583,8 @@ let greeks_coordinates coordinates side sigma =
   match coordinates with
   | Coordinates.Expiry { spot; strike; rate; yield } ->
       Greeks.expiry ~theta:(Side.sign side) ~spot ~strike ~rate ~yield
-  | Coordinates.Live c -> live_greeks side c (Vol.to_float sigma)
+  | Coordinates.Live c ->
+      Greeks.ensure_finite (live_greeks side c (Vol.to_float sigma))
 
 let implied_coordinates coordinates side price =
   if not (Float.is_finite price && price >= 0.0) then

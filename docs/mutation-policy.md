@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **61
+seven core mutants. The catalog currently contains **65
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -138,3 +138,11 @@ divisor exponent restoration and extreme-dividend normalization. They use
 canonical-word comparison plus independent exact-rational quotient checks.
 The existing seven core mechanisms remain unchanged; the full optional catalog
 now contains 61 mechanisms.
+
+### Finite Greek outcomes and rho scaling
+
+Four optional mutants bypass field finiteness, hide an unresolved intrinsic,
+or restore premature maturity multiplication in live/zero-volatility BSM rho.
+Their independent exact-input Greek references reject successful nonfinite
+values, false finite zeros and incorrect subnormal values. The core remains
+seven mechanisms; the complete optional catalog contains 65.

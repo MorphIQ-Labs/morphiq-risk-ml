@@ -89,8 +89,8 @@
 (test
  (name oracle_greeks)
  (package morphiq_risk_ml)
- (modules oracle_greeks budget_greeks)
- (libraries morphiq_risk bounds certified greek_values)
+ (modules oracle_greeks)
+ (libraries morphiq_risk bounds certified greek_values budget_greeks)
  (action
   (run %{test} %{dep:../oracle/fixtures/greeks.txt})))
 
@@ -340,3 +340,14 @@
  (name prepared_division)
  (modules prepared_division)
  (libraries morphiq_risk certified))
+
+(test
+ (name finite_greeks)
+ (modules finite_greeks)
+ (libraries morphiq_risk greek_values budget_greeks)
+ (action
+  (run %{test} %{dep:../oracle/fixtures/finite_greeks.txt})))
+
+(library
+ (name budget_greeks)
+ (modules budget_greeks))

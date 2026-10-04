@@ -1,0 +1,37 @@
+{
+  "package": "/tmp/finite-greeks-installed-package/lib/morphiq_risk_ml",
+  "outputs": {
+    "native": "880 outcomes: 582 independently checked finite values, 200 explicit failures, 98 kinks\n",
+    "byte": "880 outcomes: 582 independently checked finite values, 200 explicit failures, 98 kinks\n"
+  },
+  "consumer_source_sha256": {
+    "test/greek_values.ml": "6177a4c0551cf6217b6265b9de51a5d7ccf7287cb518dea6bd4aeb36b110a048",
+    "test/budget_greeks.ml": "c04f740802df3b9b4e1b38031b1bb447f9679405855a7d9851835b84596825da",
+    "test/finite_greeks.ml": "8de7f4a249e050dc557c2653fce46d5c8615b472bd1fdbc35e3d67a373ac45f5"
+  },
+  "fixture_sha256": "898becef7ddd522afcc68ae87adb447ab36c3d9563ffa203e4331fe22a425385",
+  "installed_document_sha256": {
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "CHANGELOG.md": "4f5eb72b1244e76298afa46c19abed86cb9cbfb5d3693dd533efd23577d118d8",
+    "THIRD_PARTY_NOTICES.md": "804b793279b5aeb7d3ae32cfed2e8908fb98bc9e0958e9dc4e21cd9e817e1924",
+    "NOTICE": "1b09f027d70b502a230c0c34f9dd55e30dc7ae2cac3d2b03a1a56d7c6e6709f0",
+    "README.md": "743d50ea8b26fe894f0e35b09611d90996f91d30a81aad327575a4f3d79fc120",
+    "LICENSES/LetsBeRational.txt": "1fadfecb5dda197418025e68175587e63120de6c241a16e7a3416744c860901b",
+    "LICENSES/QD-BSD-LBNL-License.doc": "9c394dd15f8f0d39f410c683ade967140fcf7ad63bc49cf3ecfec941717d2c77",
+    "LICENSES/AS241-StatLib.txt": "cf6e4c7f3f4d1371666743b39b301aa1d7aaefcb8bb688905a15e772db367d15",
+    "LICENSES/Sun-fdlibm.txt": "b010adcefa10bbced885f54291172d9ff42c566670826685e11f65cf0a0cfa8b",
+    "LICENSES/QD-BSD-LBNL-License.txt": "02d5990094979c66ec03b8667a0f050e03feb0baf652b21552d4bb0040937181",
+    "LICENSES/QD-COPYING.txt": "64b7db02cf5600cb70ff2f6dabd06b115a5ad07a95920cfd3ab09ffa6533f716",
+    "docs/results-dd-exponential-optimization.md": "ea2648cd1dbda4fe169f787498bea3be293146816f41e18126be4849c5eb68a0",
+    "docs/results-inverse-optimization.md": "b09a940ee998d961c0860fbfadd4bc8f32453e7e7cb55cdeb84f278f28ba8ce3",
+    "docs/results-dd-exponential.md": "b83a19a0bd50108014243fd4c18efd4d5d1026a23d5fed84c879569f7854449a",
+    "docs/error-function-replacement.md": "254ee8082f16cbf3888024ad03353d3975eeb7eaf0ceff2e84fa43fb2f41c655",
+    "docs/numerical-replacement-plan.md": "3bd1ff6bec01e428e63e0b4b2a1dee17aad2d9d3449ed3b6363b6b07d32fca3d",
+    "docs/results-error-functions.md": "01bdbeee3cda16a5235d8b7baaa7f0ce004752b2d0b48e1fed35429e9d74046c",
+    "docs/finite-greek-results.md": "5c0504838a7e8f15cab83ee7bc53a0a2e836d3a5685617402cea72f7075f97d0",
+    "docs/source-provenance.md": "6524851117022d4dbd3fad5a679204756bebee412376a2650056edfe56952567",
+    "docs/inverse-normal-replacement.md": "fa0b92f208493aea0ef8f34f5e1b353c8b064297f925448f7fb332b12e955b7c",
+    "docs/results-inverse-normal.md": "4cde15f3af35f793ccb57b58dcffa27b0fcf611f6b7babefd7f53a61ed93acf9",
+    "docs/evidence/source-provenance-2026-10-03.json": "7fb2795dffabaa6aedd834e4fd6e8c822ba3fdd2e0fb547cea9f1aef736c2cd0"
+  }
+}

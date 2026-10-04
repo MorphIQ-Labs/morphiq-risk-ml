@@ -4,7 +4,11 @@
     A carry only maps the model's inputs to Black coordinates. The built-in
     models have distinct abstract [admitted] types, so a contract admitted by
     one cannot be used by another. Reusing the same carry module with this
-    applicative functor can share its admitted type. *)
+    applicative functor can share its admitted type.
+
+    Fast Greek results are checked per field for finiteness in their output
+    units. Unresolved arithmetic returns [Greeks.Numerical_failure]; a finite
+    result retains the documented checked-input accuracy scope. *)
 
 module Coordinates : sig
   type live = private {

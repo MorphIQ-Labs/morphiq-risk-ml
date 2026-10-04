@@ -14,6 +14,44 @@ type 'coordinate t = {
   color : Units.per_calendar_day Units.time_rate value;
 }
 
+(* Finiteness is checked after unit conversion, independently for each field.
+   This rejects unresolved arithmetic without changing finite words or kinks. *)
+let finite_value number = function
+  | Ok value when not (Float.is_finite (number value)) ->
+      Error Numerical_failure
+  | value -> value
+
+let ensure_finite g =
+  {
+    delta = finite_value Fun.id g.delta;
+    gamma = finite_value Fun.id g.gamma;
+    theta =
+      finite_value
+        (fun x -> (x : Units.per_calendar_day Units.time_rate :> float))
+        g.theta;
+    vega = finite_value (fun x -> (x : _ Units.per_volatility :> float)) g.vega;
+    rho = finite_value Fun.id g.rho;
+    vanna =
+      finite_value (fun x -> (x : _ Units.per_volatility :> float)) g.vanna;
+    volga =
+      finite_value
+        (fun x -> (x : _ Units.per_volatility_squared :> float))
+        g.volga;
+    charm =
+      finite_value
+        (fun x -> (x : Units.per_calendar_day Units.time_rate :> float))
+        g.charm;
+    veta =
+      finite_value
+        (fun x ->
+          (x : (Units.per_calendar_day, _) Units.volatility_time_rate :> float))
+        g.veta;
+    color =
+      finite_value
+        (fun x -> (x : Units.per_calendar_day Units.time_rate :> float))
+        g.color;
+  }
+
 let kink = Error Payoff_kink
 let daily annual = Ok (Units.per_calendar_day annual)
 
@@ -24,7 +62,7 @@ let daily_volatility annual =
    payoff's own (slope θ or 0), and the time Greeks are right limits in
    remaining maturity (FerroRisk SPEC §8.1). At the strike the payoff has a
    kink, and the spot and time derivatives do not exist. *)
-let expiry ~theta ~spot ~strike ~rate ~yield =
+let expiry_unchecked ~theta ~spot ~strike ~rate ~yield =
   let zero = Ok 0.0 in
   if spot = strike then
     {
@@ -61,3 +99,6 @@ let expiry ~theta ~spot ~strike ~rate ~yield =
       veta = daily_volatility 0.0;
       color = daily 0.0;
     }
+
+let expiry ~theta ~spot ~strike ~rate ~yield =
+  ensure_finite (expiry_unchecked ~theta ~spot ~strike ~rate ~yield)

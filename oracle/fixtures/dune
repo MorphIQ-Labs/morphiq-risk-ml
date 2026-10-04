@@ -87,3 +87,10 @@
   (with-stdout-to
    %{target}
    (run gunzip -c %{deps}))))
+
+(rule
+ (deps finite_greeks.txt.gz)
+ (action
+  (with-stdout-to
+   finite_greeks.txt
+   (run gzip -dc %{deps}))))

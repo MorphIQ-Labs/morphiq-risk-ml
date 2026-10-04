@@ -873,9 +873,12 @@ let black model ~side ~s:spot_input ~k:strike_input ~t:time ~r:rate ~q:yield
       | "volga" ->
           g ~k:coord.exponent (mul (mul (mul base rt_full) d1) d2_over_sigma)
       | "rho" when not coord.tied ->
+          let time_mantissa, time_exponent = Float.frexp time in
           add
-            (up (mulf (mulf c_part theta) time))
-            (g ~k:coord.exponent (mul (mulf (mulf base theta) time) c_mills))
+            (product_ldexp [ c theta; c time; c_part ] coord.exponent)
+            (g
+               ~k:(coord.exponent + time_exponent)
+               (mul (mulf (mulf base theta) time_mantissa) c_mills))
       | "rho" -> mulf (price ()) (-.time)
       | "charm" ->
           let d1_dd = d1_dd () and w_dd = w_dd () in
@@ -1036,7 +1039,7 @@ let boundary model ~side ~s ~k ~t ~r ~q ~sigma ~shift greek =
             365.0
       | "rho" ->
           if coord.tied then mulf (price ()) (-.t)
-          else if itm then up (mulf (mulf cash theta) t)
+          else if itm then product_ldexp [ c theta; cash; c t ] coord.exponent
           else c 0.0
       | "charm" -> divf (if itm then mul (mulf (c q) theta) dq else c 0.0) 365.0
       | "vega" when coord.x = 0.0 ->

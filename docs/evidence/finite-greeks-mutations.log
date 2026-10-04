@@ -1,0 +1,9 @@
+baseline passes (110 s)
+killed    greek-finite-result by finite_greeks
+killed    intrinsic-nonfinite-price by finite_greeks
+killed    greek-live-rho-scale by finite_greeks
+killed    greek-zero-rho-scale by finite_greeks
+killed    intrinsic-coordinate-scale by numerical_regressions
+killed    intrinsic-tiny-carry by numerical_regressions
+killed    intrinsic-expm1 by oracle_price
+7 of 7 mutants killed as catalogued

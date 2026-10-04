@@ -1,0 +1,26 @@
+{
+  "baseline": "e8ed54219a473c72a18a318b90381ed0d91ff80a",
+  "candidate_source_sha256": {
+    "lib/black.ml": "7eeb3d99d531e00bdc879d7d7799e2175e00e3045a0c4dfe233c63e0f366cb37",
+    "lib/bachelier.ml": "08e8991365c043ec09706ca7e0b492751563a5d0a7252828c4fd50d93d866cdb",
+    "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf"
+  },
+  "challenge": {
+    "rows": 880,
+    "changes": {
+      "nonfinite_to_failure": 188,
+      "finite_to_finite": 2,
+      "finite_to_failure": 4
+    },
+    "checked_finite": 582,
+    "numerical_failures": 200,
+    "kinks": 98
+  },
+  "ordinary_greeks": {
+    "rows": 66400,
+    "identical": true,
+    "sha256": "6c6ef9f90bc8c964394e890c8075cd08563fad94c85f2b9391f558b557ff91b6"
+  },
+  "financial_digest": "e2fae65de27c7f4add63b5a476c833fcc91f1efdafde9a73950ba34db3382593",
+  "inverse_digest": "91bedc0a4352538aa60ae7c831f27bcaf16be0058a45daa3d6c33f2501344c19"
+}

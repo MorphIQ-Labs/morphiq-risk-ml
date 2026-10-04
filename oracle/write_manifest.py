@@ -13,7 +13,7 @@ from pathlib import Path
 import sys
 
 ORACLE = Path(__file__).resolve().parent
-FIXTURES = ("elementary", "normal", "european", "displaced", "iv", "greeks", "dd", "regressions", "greek_bits", "model_enclosures", "boundary_greeks")
+FIXTURES = ("elementary", "normal", "european", "displaced", "iv", "greeks", "dd", "regressions", "greek_bits", "model_enclosures", "boundary_greeks", "finite_greeks")
 HEADER = "# name generator generator_blake2b256 common_blake2b256 mpmath python rows fixture_blake2b256 [dependency:blake2b256 ...]"
 
 

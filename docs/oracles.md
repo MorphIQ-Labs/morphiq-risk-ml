@@ -17,6 +17,7 @@ The approach is modelled on FerroRisk's oracle practice: pinned generators, agre
 | `regressions` | `gen_regressions.py` | five exact near-maximum ATM roots, 2,000 near-unit log-coordinate references and two rescued-tail regressions |
 | `greek_bits` | `gen_greek_bits.py` | 2,506 three-word/exponent Greek references, including 51 contracts at or adjacent to zeros of cancelling Greeks |
 | `model_enclosures` | `gen_model_enclosures.py` | 1,670 three-word/exponent original-input model prices, including sparse shifts, tiny carry/variance and tails; 110/220 or 400/800 digits |
+| `finite_greeks` | `gen_finite_greeks.py` | 880 exact-input Greek value/refusal challenges at 1280/2560 digits, 80 price-differentiation cross-checks and an analytical tail-gamma witness |
 | `boundary_greeks` | `gen_boundary_greeks.py` | 532 positive-maturity zero-volatility ATM veta references from nested price differentiation at 400/800 digits, cross-checked with the analytical derivative |
 | `greeks` | `gen_greeks.py` | the ten Greeks for all four models, including the defined limits at expiry |
 
@@ -81,7 +82,7 @@ These were found by this project's own oracles and property tests, not FerroRisk
 
 The near-maximum regression fixture evaluates the ATM inverse through `erfinv`, independently of the library's iteration and the general oracle's root solver. Quotient-remainder mutation is checked at the coordinate level, where extra reference bits distinguish errors hidden by final price rounding.
 
-The ten committed fixtures include extra-bit component, Greek and model-price references. The Greek-bit generator uses 110/220-digit closed forms and checks the zero-neighborhood cases against independent differentiation. Large erfcx and Y′ references use Tricomi U identities to avoid cancellation, with additional precision to resolve sparse low words. These checks establish agreement of independent calculations, not interval proofs of the oracle itself.
+The twelve committed fixtures include extra-bit component, Greek and model-price references. The Greek-bit generator uses 110/220-digit closed forms and checks the zero-neighborhood cases against independent differentiation. Large erfcx and Y′ references use Tricomi U identities to avoid cancellation, with additional precision to resolve sparse low words. These checks establish agreement of independent calculations, not interval proofs of the oracle itself.
 
 `erf_coefficients.py` generates Gaussian-integral coefficients with rational rounding witnesses; `erf_certificates.py` bounds their remainder and evaluation error. `kernel_certificates.py` includes those checks and separately encloses the rounded Jäckel coefficients’ differential residuals using exact Bernstein bounds. `lift_polynomials.py` checks the Black expansion coefficients against integral/moment identities and lifts their actual operation grouping into the test algebra. `Certified` propagates these component bounds through every committed price and finite Greek; no measured ULP envelope is a premise of those certificates. See [the derivations](error-analysis.md#8-rounded-kernels-and-complete-pricegreek-expressions).
 

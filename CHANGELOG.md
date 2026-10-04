@@ -5,6 +5,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Sound fast Greek outcomes (#62)
+
+- Reject nonfinite results independently in all ten fast Greek fields, including
+  zero-variance and expiry paths. `Greeks.Numerical_failure` now covers these
+  arithmetic failures; finite acceptance alone remains no accuracy certificate.
+- Correct BSM rho when a subnormal maturity underflows before currency scaling:
+  two exact-input witnesses improve from 27 ULP error to correctly rounded values,
+  against the unchanged 16-ULP gate. A nonfinite intrinsic now propagates NaN
+  through the float-returning fast price instead of becoming a false zero; the
+  Greek API reports an explicit failure for dependent unresolved values.
+- **Major outcome/numerical change** under the stability policy (minor while
+  0.y.z): some successful nonfinite/finite-zero results become refusals, and the
+  rho correction exceeds its old error budget. No variant or version changes.
+- [Derivation and qualification](docs/finite-greek-results.md) retain independent
+  exact-input references, per-case changes, fixed allowances, mutation controls,
+  package checks and measured overhead. Correctness takes priority over baseline
+  compatibility and availability.
+
 ### Inverse-normal operation reuse
 
 - Reuse identical density/square values in inverse refinement and prepare the

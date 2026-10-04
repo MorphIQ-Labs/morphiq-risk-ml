@@ -10,10 +10,11 @@ type why =
   | Payoff_kink
   | Numerical_failure
       (** [Payoff_kink] means the requested derivative is undefined.
-          [Numerical_failure] means the zero-volatility ATM veta enclosure could
-          not establish a finite rounded result. It is not a usable approximate
-          value. Other fast Greeks retain their documented checked-input
-          assurance scope. *)
+          [Numerical_failure] means arithmetic could not produce a finite result
+          in that field's output units, or its required boundary enclosure could
+          not establish a rounded result. It is not a usable approximate value.
+          A finite fast Greek retains its documented checked-input assurance;
+          finite acceptance alone is not an accuracy certificate. *)
 
 type 'a value = ('a, why) result
 
@@ -29,6 +30,11 @@ type 'coordinate t = {
   veta : (Units.per_calendar_day, 'coordinate) Units.volatility_time_rate value;
   color : Units.per_calendar_day Units.time_rate value;
 }
+
+val ensure_finite : 'coordinate t -> 'coordinate t
+(** Replace each nonfinite [Ok] payload with [Error Numerical_failure]. Preserve
+    finite payload bits, units, coordinates and existing errors. This is output
+    validation, not model admission or an accuracy certificate. *)
 
 val kink : 'a value
 val daily : float -> Units.per_calendar_day Units.time_rate value
