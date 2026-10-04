@@ -124,6 +124,17 @@ def inverse(row,v):
     if quote==intrinsic or (quote<intrinsic and float(intrinsic)==v['quote']):
         return dict(status='root',word=bits(0.),precision=0,method='exact intrinsic/rounded-bound convention')
     if quote<intrinsic: return dict(status='class',expected='below_intrinsic',method='exact intrinsic comparison')
+    if row['model']=='bachelier':
+        inputs=[v[k] for k in ('s','k','t','r','q','sigma','shift')]
+        for precision in PRECISIONS:
+            with ctx.workprec(precision):
+                inputs[5]=2.**-1074
+                if price(row['model'],row['side'],inputs)>arb(v['quote']):
+                    return dict(status='class',expected='below_smallest',precision=precision,method='independent smallest-volatility price comparison')
+                inputs[5]=float.fromhex('0x1.fffffffffffffp+1023')
+                if price(row['model'],row['side'],inputs)<arb(v['quote']):
+                    return dict(status='class',expected='above_maximum',precision=precision,method='independent largest-volatility price comparison')
+                break
     c=Contract(row['model'],th>0,v['s'],v['k'],v['t'],v['r'],v['q'],v['shift'])
     root=root_word(c,v['quote'],0)
     if root is None or not math.isfinite(root) or root<=0:

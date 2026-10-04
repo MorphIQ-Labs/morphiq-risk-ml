@@ -101,6 +101,13 @@ def load_reference(path):
         if actual['region'].startswith('iv_cell_'):
             structural=dict(structural,inputs=dict(structural['inputs'],quote=original['inputs']['quote']))
         if structural!=original: raise ValueError('reference original inputs changed: '+original['id'])
+    if set(report['source_sha256'])!=set(SOURCE_NAMES): raise ValueError('incomplete reference provenance')
+    if dict(Counter(r['reference']['status'] for r in rows))!=report['counts']:
+        raise ValueError('inconsistent reference accounting')
+    for row in rows:
+        ref=row['reference']
+        if ref['status'] not in ('interval','root','class','unresolved'): raise ValueError('invalid reference outcome')
+        if ref['status']=='interval' and F(ref['lower'])>F(ref['upper']): raise ValueError('inverted reference interval')
     for name,digest in report['source_sha256'].items():
         if sha(ROOT/name)!=digest: raise ValueError('stale reference source: '+name)
     if report['counts'].get('reference_error',0): raise ValueError('reference generation incomplete')
@@ -215,7 +222,7 @@ def check(path,runner,output,contracts_only=False):
                 outcomes=outcomes,contract_violations=violations,quality_excursions=totals['quality_excursion'],
                 contract_gate_passed=violations==0,clean_accuracy_campaign=violations==0 and totals['quality_excursion']==0,
                 contracts_only=contracts_only,elapsed_seconds=time.monotonic()-started,
-                scope='Failures/uncertainty are availability/reference outcomes, never successful accuracy checks. Fast quality budgets remain empirical.')
+                scope='Failures/uncertainty are availability/reference outcomes, never successful accuracy checks. Fast Greek budgets and family-maximum price diagnostics remain empirical; existing regional/derived price gates remain unchanged.')
     save(output,answer);print(json.dumps(dict(rows=len(rows),totals=totals,contract_violations=violations)))
     if violations or (totals['quality_excursion'] and not contracts_only): raise SystemExit(1)
 

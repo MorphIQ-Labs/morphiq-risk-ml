@@ -71,8 +71,9 @@ def cases(lane):
     maximum = float.fromhex('0x1.fffffffffffffp+1023')
     add('shift_overflow', 'displaced', dict(s=maximum,k=maximum,shift=maximum), ('price','delta'))
     add('distance_overflow', 'bachelier', dict(s=maximum,k=-maximum), ('price','gamma','rho'))
-    for s in neighbours(1.):
-        add('carry_cancellation', 'bsm', dict(s=s, k=1., r=-math.log(s),sigma=0.), ('price','rho','theta'))
+    carry_rates=map(float.fromhex,('0x1p-53','-0x0p+0','-0x1.fffffffffffffp-53'))
+    for s,r in zip(neighbours(1.),carry_rates):
+        add('carry_cancellation', 'bsm', dict(s=s, k=1., r=r,sigma=0.), ('price','rho','theta'))
     # Arbitrary overlapping low words belong to the enclosure owner. They are
     # not fed to DD primitives whose input contract requires normalization.
     rng = random.Random(SEED)
@@ -85,6 +86,32 @@ def cases(lane):
         add('arbitrary_low_words','primitive',dict(s=hi,k=lo),('sum',),modes=('enclosure',),sides=('call',))
     for lower in (1., math.nextafter(1.,math.inf), 2.**-1022):
         add('iv_exact_tie','primitive',dict(s=lower,k=math.nextafter(lower,math.inf)),('iv',),modes=('iv_tie',),sides=('call',))
+    # Explicit branch-neighbor coverage, using original financial inputs.
+    # Frozen binary64 anchors for .5*sqrt(2), 12*sqrt(2), 27*sqrt(2),
+    # and 6. Do not regenerate membership through host libm functions.
+    for threshold in map(float.fromhex,('0x1.6a09e667f3bcdp-1','0x1.0f876ccdf6cdap+4','0x1.31785a67b5a75p+5','0x1.8p+2')):
+        for sign in (-1.,1.):
+            for s in neighbours(sign*threshold):
+                add('normal_threshold','bachelier',dict(s=s,k=0.,sigma=1.),
+                    ('price','delta','gamma','theta'),sides=('call',))
+    # exp(x) anchors for x=eta*sigma and x=eta*sigma*(sigma-2*tau),
+    # eta=-13, tau=2*epsilon^(1/16); only negative normalized x is relevant.
+    kernel_anchors=((.25,('0x1.3da368521902dp-5',)),
+                    (1.,('0x1.2f6053b981d98p-19','0x1.183bc5a80b37bp-11')),
+                    (4.,('0x1.f8e6c24b5592ep-76','0x1.608245eb7d069p-269')))
+    for model in ('bsm','black76','displaced'):
+        for sigma,anchors in kernel_anchors:
+            for anchor in anchors:
+                for s in neighbours(float.fromhex(anchor)):
+                    add('kernel_threshold',model,dict(s=s,k=1.,sigma=sigma),
+                        ('price','delta','gamma'),sides=('call',))
+        # exp(.25*(d1-.125)), d1 = -6 and +6.
+        for anchor in ('0x1.bae93b5663055p-3','0x1.1600da13a93bep+2'):
+            for s in neighbours(float.fromhex(anchor)):
+                add('normal_dd_threshold',model,dict(s=s,k=1.),
+                    ('theta','vanna','color'),sides=('call',))
+    add('iv_representability','bachelier',dict(t=16.,quote=2.**-1074),('iv',),modes=('iv',),sides=('call',))
+    add('iv_representability','bachelier',dict(t=2.**-1074,quote=maximum),('iv',),modes=('iv',),sides=('call',))
     if lane=='full':
         for model in MODELS:
             for _ in range(48):

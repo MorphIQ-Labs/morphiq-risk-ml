@@ -1,5 +1,4 @@
 """Failure controls for independent reference scoring and complete result rows."""
-import copy
 from fractions import Fraction as F
 import unittest
 from numerical_cases import bits, cases, fingerprint

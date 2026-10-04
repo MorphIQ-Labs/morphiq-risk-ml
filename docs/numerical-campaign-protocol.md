@@ -36,7 +36,12 @@ Smoke and full memberships are chosen by a versioned deterministic generator,
 not by observed pass/fail results. Full mode adds exponent/mantissa combinations
 and a fixed-seed sample. The smoke subset includes each region and all models;
 its independently generated references are committed for offline ordinary CI.
-The full campaign is manual. Neither lane changes the seven core CI mutants.
+The full campaign is manual and strict: a quality excursion returns nonzero.
+Ordinary CI explicitly uses `--contracts-only`: it enforces certificate, input,
+class and central-availability contracts and still emits all quality excursions
+as findings. It never asserts the observed faulty words as expected outputs.
+A green contract gate is not a clean accuracy campaign. Neither lane changes
+the seven core CI mutants.
 
 ## Reference and scoring rules
 
@@ -61,8 +66,11 @@ The full campaign is manual. Neither lane changes the seven core CI mutants.
    or an exact tie decision, not repricing equality. Mathematical outcome classes
    require independent boundary evidence. `Numerical_failure`/`Non_convergence`
    remain availability outcomes and do not prove a mathematical classification.
-6. Fast finite values are compared with independently resolved rounding cells and
-   the existing quantity-specific quality allowances, with errors retained.
+6. Fast finite values are compared with independently resolved rounding cells.
+   Greek allowances come from `Budget_greeks`; additional price diagnostics use
+   `Bounds.price_ulp_budget_max` (32 ULP for Black, 8 for Bachelier). The original
+   corpus retains all its stronger region-specific and derived price gates.
+   These new diagnostics do not replace or widen those gates; errors are retained.
    The empirical envelopes do not become universal guarantees for new extreme
    inputs. Excursions are findings, not silently expanded budgets. Nonfinite
    fast price results and explicit Greek failures are reported separately;
