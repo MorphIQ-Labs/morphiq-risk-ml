@@ -6,7 +6,7 @@ module Q = Planner_probe
 let ok = function Ok x -> x | Error _ -> failwith "metrics refusal"
 let check b s = if not b then failwith s
 
-let run scenarios workers =
+let run ?(failure = false) scenarios workers =
   let sigma = ok (Vol.lognormal 0.2) in
   let portfolio =
     Array.init 8 (fun i ->
@@ -62,6 +62,7 @@ let run scenarios workers =
            })
   in
   Q.reset ();
+  if failure then Q.fail_tile := 1;
   Gc.full_major ();
   let before_live = (Gc.stat ()).live_words in
   let peak_live = ref before_live and rows = ref 0 in
@@ -78,7 +79,14 @@ let run scenarios workers =
       | F.Finished _ -> Ok ())
   in
   let bytes = Q.allocated_bytes () - before + Atomic.get Q.worker_bytes in
-  check (result.stop = P.Complete && !rows = scenarios * 8) "metrics coverage";
+  check (result.rows_committed = !rows) "metrics committed prefix";
+  if failure then (
+    check
+      (match result.stop with P.Worker_failure _ -> true | _ -> false)
+      "missing worker failure";
+    check (!rows = 4) "rows after failed tile escaped")
+  else
+    check (result.stop = P.Complete && !rows = scenarios * 8) "metrics coverage";
   check
     (Atomic.get Q.spawned = Atomic.get Q.joined && Atomic.get Q.active = 0)
     "unjoined worker";
@@ -87,9 +95,9 @@ let run scenarios workers =
     && Atomic.get Q.retained_slots = 0)
     "unbounded wave";
   Printf.printf
-    "{\"scenarios\":%d,\"workers\":%d,\"rows\":%d,\"peak_slots\":%d,\"bound\":%d,\"live_before\":%d,\"peak_live_sample\":%d,\"all_domain_bytes\":%d,\"source_sha256\":%S}\n\
+    "{\"injected_failure\":%b,\"scenarios\":%d,\"workers\":%d,\"rows\":%d,\"peak_slots\":%d,\"bound\":%d,\"live_before\":%d,\"peak_live_sample\":%d,\"all_domain_bytes\":%d,\"source_sha256\":%S}\n\
      %!"
-    scenarios workers !rows (Atomic.get Q.peak_slots)
+    failure scenarios workers !rows (Atomic.get Q.peak_slots)
     (F.explain plan).buffered_results before_live !peak_live bytes
     P.instrumented_source_sha256
 
@@ -111,5 +119,7 @@ let () =
     "Fast planner allocation/memory probes";
   if !count < 1 || !count > 1000000 || !workers < 1 || !workers > 4 then
     failwith "metrics argument outside supported range";
-  if !checking then List.iter (fun n -> List.iter (run n) [ 1; 4 ]) [ 8; 80 ]
+  if !checking then (
+    List.iter (fun n -> List.iter (run n) [ 1; 4 ]) [ 8; 80 ];
+    List.iter (run ~failure:true 8) [ 1; 4 ])
   else run !count !workers
