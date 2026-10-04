@@ -1,0 +1,8 @@
+File "multi_time_unit.ml", line 3, characters 52-56:
+3 | let request = Production.Request (Production.Theta, 1e-8)
+                                                        ^^^^
+Error: The constant "1e-8" has type "float"
+       but an expression was expected of type
+         "Morphiq_risk__.Units.per_calendar_day Morphiq_risk__.Units.time_rate"
+           =
+           "Morphiq_risk__.Units.per_calendar_day Morphiq_risk.Units.time_rate"

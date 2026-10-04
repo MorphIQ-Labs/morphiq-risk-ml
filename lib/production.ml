@@ -30,6 +30,16 @@ type ('coordinate, 'value) quantity =
       ('c, (Units.per_calendar_day, 'c) Units.volatility_time_rate) quantity
   | Color : ('c, Units.per_calendar_day Units.time_rate) quantity
 
+type 'c request =
+  | Request : ('c, 'a) quantity * 'a -> 'c request
+      (** One requested quantity with its absolute error limit in the same
+          units. *)
+
+type 'c outcome =
+  | Outcome : ('c, 'a) quantity * ('a certified, error) result -> 'c outcome
+      (** One typed result for each request, in order, including
+          duplicates/errors. *)
+
 module type MODEL = sig
   type inputs
   type coordinate
@@ -56,6 +66,21 @@ module type MODEL = sig
   (** Preserve the public certified-IV contract and all mathematical and
       computational outcomes. Positive roots require nearest-even rounding; no
       caller-specified weaker tolerance is substituted. *)
+end
+
+module type MULTI_OUTPUT_MODEL = sig
+  include MODEL
+
+  val evaluate_many :
+    admitted ->
+    Side.t ->
+    coordinate Vol.t ->
+    coordinate request list ->
+    coordinate outcome list
+  (** Equivalent to ordered scalar evaluations with a separate limit and result
+      per entry. Reuses immutable model preparation within this call only. Empty
+      lists return empty lists. A failure never suppresses later outputs;
+      concurrent calls on the same admitted model share no mutable scratch. *)
 end
 
 module E = Enclosure
@@ -156,7 +181,7 @@ module Make (Source : SOURCE) = struct
     | Error e -> Error (Invalid_input e)
     | Ok source -> Ok { source; descriptor = Source.descriptor inputs source }
 
-  let evaluate (type a) admitted side sigma
+  let evaluate_with prepare_model (type a) admitted side sigma
       (quantity : (coordinate, a) quantity) ~(max_error : a) =
     let limit = number quantity max_error in
     if not (Float.is_finite limit && limit >= 0.) then Error Invalid_accuracy
@@ -183,7 +208,7 @@ module Make (Source : SOURCE) = struct
                   | E.Indeterminate -> raise (E.Unresolved "expiry payoff sign")
                   )
               | Live c -> (
-                  let model = prepare c.model in
+                  let model = prepare_model c.model in
                   match requested with
                   | None -> M.price model side sigma
                   | Some greek ->
@@ -205,6 +230,34 @@ module Make (Source : SOURCE) = struct
                   absolute_error = label quantity absolute_error;
                 }
           with E.Unresolved _ -> Error Numerical_failure)
+
+  let evaluate admitted side sigma quantity ~max_error =
+    evaluate_with prepare admitted side sigma quantity ~max_error
+
+  let evaluate_many admitted side sigma requests =
+    let prepared = ref None in
+    let prepare_model model =
+      let result =
+        match !prepared with
+        | Some result -> result
+        | None ->
+            let result =
+              try Ok (prepare model) with E.Unresolved why -> Error why
+            in
+            prepared := Some result;
+            result
+      in
+      match result with
+      | Ok model -> model
+      | Error why -> raise (E.Unresolved why)
+    in
+    List.map
+      (fun (Request (quantity, max_error)) ->
+        Outcome
+          ( quantity,
+            evaluate_with prepare_model admitted side sigma quantity ~max_error
+          ))
+      requests
 
   let implied admitted side quote =
     Result.map_error

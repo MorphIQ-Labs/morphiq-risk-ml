@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **84
+seven core mutants. The catalog currently contains **85
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -204,3 +204,7 @@ series-tail and FMA-underflow mechanisms remain applicable; the discarded-word
 locator follows the equivalent reverse array traversal. The current catalog
 has 84 mechanisms, with the same seven in default CI. See the
 [optimization evidence](results-certificate-allocation.md).
+
+Shared model preparation adds `multi-output-limit`, witnessed by explicit zero,
+invalid and finite per-output limits in `production_multi`. The full catalog now
+has 85 mechanisms; the default seven-mutant CI selection is unchanged.

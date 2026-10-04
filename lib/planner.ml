@@ -509,22 +509,23 @@ let evaluate_position t scenario_id point index =
       c output list ->
       outcome list =
    fun model inputs vol outputs ->
-    List.map
-      (fun (Output (q, limit)) ->
-        let result =
-          if days < 0L then Error Post_expiry
-          else
-            match vol with
-            | Error e -> Error (Scalar (Production.Invalid_input e))
-            | Ok sigma ->
-                Result.map_error
-                  (fun e -> Scalar e)
-                  (Batch.evaluate
-                     (Batch.Request
-                        (model, inputs, p.side, Batch.Evaluate (sigma, q, limit))))
-        in
-        Outcome (q, result))
-      outputs
+    let failure e =
+      List.map (fun (Output (q, _)) -> Outcome (q, Error e)) outputs
+    in
+    if days < 0L then failure Post_expiry
+    else
+      match vol with
+      | Error e -> failure (Scalar (Production.Invalid_input e))
+      | Ok sigma ->
+          let requests =
+            List.map
+              (fun (Output (q, limit)) -> Production.Request (q, limit))
+              outputs
+          in
+          List.map
+            (fun (Production.Outcome (q, result)) ->
+              Outcome (q, Result.map_error (fun e -> Scalar e) result))
+            (Batch.evaluate_many model inputs p.side sigma requests)
   in
   let outcomes =
     match (p.model, m) with

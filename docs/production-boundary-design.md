@@ -195,3 +195,18 @@ These shared-host ranges show no material regression on the exercised legacy
 workload. They do not measure the new adapter's additional per-request work or
 establish operational acceptance; that belongs to the portfolio/performance
 campaign. No local test/profile ran concurrently with this comparison.
+
+## Multiple outputs from one admitted model
+
+`Production.Bsm.evaluate_many` and its Black76/Displaced/Bachelier counterparts
+accept ordered typed `Production.Request (quantity, max_error)` values and return
+`Production.Outcome (quantity, result)` for every entry. `Batch.evaluate_many`
+adds model dispatch and one admission for the fixed inputs. Limits and result
+units remain checked by the quantity GADT. Empty lists and duplicate quantities
+are supported; a failed output does not suppress later results.
+
+Only immutable original-model preparation is shared within a call. Scalar
+acceptance and error precedence remain the owner; no mutable cache escapes to
+an admitted value or plan. See [shared certification](shared-certification.md)
+for dependencies, boundaries and compatibility evidence. The existing `MODEL`
+module type remains source-compatible; `MULTI_OUTPUT_MODEL` extends it.

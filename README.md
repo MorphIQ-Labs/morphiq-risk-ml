@@ -23,7 +23,7 @@ institutional deployment approval.
 | Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
 | Numerical acceptance | `Production` requires caller-selected absolute error limits and returns private value/error certificates or explicit failures |
 | Exchange prices | Certified scalar two-asset European prices with typed correlation and an explicit currency error limit; [scope and limits](docs/exchange-prices.md) |
-| Batch evaluation | Typed scalar-equivalent price, Greek, and externally supplied IV requests |
+| Batch evaluation | Typed price, Greek, and IV requests; [shared preparation for multiple certified outputs](docs/shared-certification.md) |
 | Scenario planning | Frozen portfolios and market inputs, paired or Cartesian shocks, bounded parallel execution, streamed outcomes, and deterministic weighted enclosures |
 
 The planner rolls valuation dates forward with fixed expiries and frozen

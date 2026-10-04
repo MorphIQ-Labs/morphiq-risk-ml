@@ -13,7 +13,7 @@ let get = function
   | Error _ -> failwith "unexpected production refusal"
 
 module Check (A : sig
-  include P.MODEL
+  include P.MULTI_OUTPUT_MODEL
 
   val vol : float -> coordinate Vol.t
 end) =
@@ -44,6 +44,29 @@ struct
           <> Error P.Accuracy_exceeded
         then failwith "accuracy limit not enforced";
         incr limit_checks);
+      let requests =
+        [
+          P.Request (quantity, wrap Float.max_float);
+          P.Request (quantity, wrap bound);
+          P.Request
+            (quantity, wrap (if bound > 0. then Float.pred bound else 0.));
+        ]
+      in
+      let expected =
+        [
+          P.Outcome (quantity, Ok result);
+          P.Outcome (quantity, Ok result);
+          P.Outcome
+            ( quantity,
+              if bound > 0. then Error P.Accuracy_exceeded else Ok result );
+        ]
+      in
+      if
+        Marshal.to_string
+          (A.evaluate_many admitted side sigma requests)
+          [ Marshal.No_sharing ]
+        <> Marshal.to_string expected [ Marshal.No_sharing ]
+      then failwith "shared certificate/reference acceptance differs";
       incr count
     in
     match name with

@@ -70,22 +70,22 @@ mutation is outside OCaml's typed contract. No caller array alias is retained.
 Plans can be independently executed more than once with new output destinations.
 
 Compilation is structural, not a numerical certificate of all stressed cells.
-Each cell uses `Batch.evaluate`, which delegates to the existing Production
-model admission and typed evaluation. There is no second admission owner,
-fast-price fallback, fitted tolerance, cache or algebraic rewrite. The caller
-sets each output's typed absolute limit. Requests preserve model identity,
-volatility coordinate, side and input words; each output preserves its quantity
-GADT and typed certificate or explicit error. Homogeneous batch arrays return
-fresh arrays of exactly the same length, including zero. No output-buffer API
-or aliasing contract is hidden in this version.
+Each position/scenario row uses `Batch.evaluate_many`, which delegates once to
+the existing Production model admission and shares immutable model preparation
+among that row's requested quantities. There is no second admission owner,
+fast-price fallback, fitted tolerance or algebraic rewrite. Each output retains
+its own typed absolute limit, quantity, certificate or explicit error. Empty lists
+and duplicate requests preserve their ordered results. See the
+[dependency and failure contract](shared-certification.md).
 
-The initial layout is an array of immutable position records, a copied factor
-array, and an instrument-to-factor index. This admits heterogeneous instruments
-and outcomes without storing a full cube or inventing vectorized kernels.
-There is no shared mutable cache. Reuse is limited to frozen specifications,
-factor bindings, output lists and bucket keys; each scalar calculation includes
-all its own original inputs. Any future cache key must include model/terms,
-side, all coordinates, time, snapshot identity, quantity and numerical policy.
+The layout is an array of immutable position records, a copied factor array,
+and an instrument-to-factor index. This admits heterogeneous instruments without
+storing a full cube or inventing vectorized kernels. Preparation is private to
+one synchronous row evaluation; no mutable cache is stored on a plan or shared
+between workers. It retains the original input words, including displaced low
+words. Price/Greek evaluation, failure precedence and aggregation are unchanged.
+There is no reuse across positions, scenarios or executions. Homogeneous
+`Batch.run` arrays still return fresh arrays with one result per request.
 
 Cardinality arithmetic checks every product and sum before allocation or use.
 Limits cover instruments, scenarios, calculations, logical tile rows, workers,

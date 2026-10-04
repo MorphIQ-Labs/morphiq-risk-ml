@@ -1,0 +1,11 @@
+File "multi_coordinate.ml", line 6, characters 58-64:
+6 | let lognormal : Vol.lognormal Production.request list = [ normal ]
+                                                              ^^^^^^
+Error: The value "normal" has type
+         "Morphiq_risk.Vol.normal Morphiq_risk.Production.request" =
+           "Morphiq_risk.Vol.normal Morphiq_risk__Production.request"
+       but an expression was expected of type
+         "Morphiq_risk.Vol.lognormal Morphiq_risk.Production.request" =
+           "Morphiq_risk.Vol.lognormal Morphiq_risk__Production.request"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk.Vol.lognormal"

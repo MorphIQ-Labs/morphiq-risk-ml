@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Shared certified model preparation (#8)
+
+- Add typed `Production.evaluate_many` operations to each built-in model and
+  `Batch.evaluate_many` dispatch. Each output keeps its own accuracy limit and
+  certificate or error; existing scalar APIs and the `MODEL` signature remain.
+- Planner admits and prepares one fixed model per position/scenario row, then
+  reuses that immutable preparation across requested outputs. No arithmetic,
+  reference, error bound or acceptance threshold changes. Caches remain private
+  to one invocation. [Contract and validation](docs/shared-certification.md).
+- Additive minor API change; no version bump, release or deployment approval.
+
 ### Certificate allocation (#8)
 
 - Replace temporary expansion lists with private checked float scratch while

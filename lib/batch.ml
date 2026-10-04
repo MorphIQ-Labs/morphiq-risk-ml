@@ -34,3 +34,26 @@ let evaluate : type a. a request -> (a, Production.error) result =
   | Bachelier -> execute (module Production.Bachelier) inputs side operation
 
 let run requests = Array.map evaluate requests
+
+let evaluate_many (type i c) (model : (i, c) model) (inputs : i) side
+    (sigma : c Vol.t) (requests : c Production.request list) =
+  let run
+      (module M : Production.MULTI_OUTPUT_MODEL
+        with type inputs = i
+         and type coordinate = c) =
+    match requests with
+    | [] -> []
+    | _ -> (
+        match M.admit inputs with
+        | Error e ->
+            List.map
+              (fun (Production.Request (q, _)) ->
+                Production.Outcome (q, Error e))
+              requests
+        | Ok admitted -> M.evaluate_many admitted side sigma requests)
+  in
+  match model with
+  | Bsm -> run (module Production.Bsm)
+  | Black76 -> run (module Production.Black76)
+  | Displaced -> run (module Production.Displaced)
+  | Bachelier -> run (module Production.Bachelier)

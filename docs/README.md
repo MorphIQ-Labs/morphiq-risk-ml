@@ -13,6 +13,7 @@ been retired; it remains in Git history.
 - [First model extension design](first-model-extension.md): selected certified scalar exchange prices, original-input contract, references and implementation gate; [implementation evidence](exchange-prices.md) is separate and broader qualification remains open.
 - [Model contracts](model-contracts.md): exact input meaning, model definitions, Greek conventions, and IV outcomes.
 - [Production boundary](production-boundary-design.md): per-request numerical acceptance and explicit capability exclusions.
+- [Shared certified preparation](shared-certification.md): typed multi-output requests, per-output limits and call-local reuse.
 - [Scenario planner](scenario-planner.md): shocks, date rolls, resource limits, aggregation, and execution failures.
 - [Planner stress evidence](planner-stress-results.md): forced failure schedules, bounded output accounting and separate process-memory observations.
 - [Public interface](../lib/morphiq_risk.mli) and [type audit](type-boundary-audit.md).

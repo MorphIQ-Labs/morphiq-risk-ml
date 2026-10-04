@@ -635,3 +635,15 @@
   exchange_reference.tsv)
  (action
   (run python3 %{dep:../scripts/exchange_fixture.py} --check)))
+
+(test
+ (name production_multi)
+ (modules production_multi)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib/fp
+   (run %{test}))))

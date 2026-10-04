@@ -322,8 +322,8 @@ let catalog =
     {
       id = "planner-post-expiry";
       file = "lib/planner.ml";
-      snippet = "if days < 0L then Error Post_expiry";
-      replacement = "if false then Error Post_expiry";
+      snippet = "if days < 0L then failure Post_expiry";
+      replacement = "if false then failure Post_expiry";
       killer = "planner_contract";
       mechanism = "post-expiry valuation has an explicit settlement exclusion";
     };
@@ -342,6 +342,17 @@ let catalog =
       replacement = "complete = Option.is_some successful_subset;";
       killer = "planner_contract";
       mechanism = "failed items prevent complete portfolio totals";
+    };
+    {
+      id = "multi-output-limit";
+      file = "lib/production.ml";
+      snippet =
+        "evaluate_with prepare_model admitted side sigma quantity ~max_error";
+      replacement =
+        "evaluate_with prepare_model admitted side sigma quantity \
+         ~max_error:(label quantity Float.max_float)";
+      killer = "production_multi";
+      mechanism = "each grouped output retains its own typed acceptance limit";
     };
     {
       id = "production-accuracy-limit";
@@ -962,8 +973,9 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "production_boundary" | "planner_contract" | "prepared_division"
-  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint" ->
+  | "production_boundary" | "production_multi" | "planner_contract"
+  | "prepared_division" | "carry_cancellation" | "greek_cancellation"
+  | "rho_midpoint" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
