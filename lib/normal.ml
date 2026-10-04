@@ -44,112 +44,78 @@ let log_norm_cdf x =
         Elementary.log (0.5 *. Cody.erfcx_nonnegative (u *. inv_sqrt_2))
         -. h -. l
 
-(* M. J. Wichura, Algorithm AS 241 (PPND16), Appl. Statist. 37 (1988) 477-484.
-   Adapted after reading the StatLib source; Royal Statistical Society
-   copyright. See LICENSES/AS241-StatLib.txt and docs/source-provenance.md
-   for the distribution notice and unresolved permission scope. *)
-module As241 = struct
-  let split1 = 0.425
-  let split2 = 5.0
-  let const1 = 0.180625
-  let const2 = 1.6
+(* Project-derived safeguarded inversion of the Gaussian integral.
+   No AS241 table or reduction survives. See docs/inverse-normal-replacement.md. *)
+let inverse_steps = 6
+let twice_inv_sqrt_pi = 2.0 *. Erf_coefficients.inv_sqrt_pi
 
-  let central q =
-    let r = const1 -. (q *. q) in
-    q
-    *. (((((((((2.5090809287301226727e3 *. r) +. 3.3430575583588128105e4) *. r)
-            +. 6.7265770927008700853e4)
-            *. r
-           +. 4.5921953931549871457e4)
-           *. r
-          +. 1.3731693765509461125e4)
-          *. r
-         +. 1.9715909503065514427e3)
-         *. r
-        +. 1.3314166789178437745e2)
-        *. r
-       +. 3.3871328727963666080e0)
-    /. (((((((((5.2264952788528545610e3 *. r) +. 2.8729085735721942674e4) *. r)
-            +. 3.9307895800092710610e4)
-            *. r
-           +. 2.1213794301586595867e4)
-           *. r
-          +. 5.3941960214247511077e3)
-          *. r
-         +. 6.8718700749205790830e2)
-         *. r
-        +. 4.2313330701600911252e1)
-        *. r
-       +. 1.0)
+let inverse_central t =
+  let rec solve remaining lower upper y =
+    if remaining = 0 then y
+    else
+      let value = Cody.erf_small y in
+      let residual = value -. t in
+      let uncertainty = Float.next_after (0x1p-48 *. value) Float.infinity in
+      let lower, upper =
+        if residual > uncertainty then (lower, y)
+        else if residual < -.uncertainty then (y, upper)
+        else (lower, upper)
+      in
+      let derivative = twice_inv_sqrt_pi *. Elementary.exp (-.(y *. y)) in
+      let proposed = y -. (residual /. derivative) in
+      let next = Float.max lower (Float.min upper proposed) in
+      solve (remaining - 1) lower upper next
+  in
+  solve inverse_steps (0.5 *. t) t t
 
-  let intermediate r =
-    let r = r -. const2 in
-    (((((((((7.74545014278341407640e-4 *. r) +. 2.27238449892691845833e-2) *. r)
-         +. 2.41780725177450611770e-1)
-         *. r
-        +. 1.27045825245236838258e0)
-        *. r
-       +. 3.64784832476320460504e0)
-       *. r
-      +. 5.76949722146069140550e0)
-      *. r
-     +. 4.63033784615654529590e0)
-     *. r
-    +. 1.42343711074968357734e0)
-    /. ((((((((1.05075007164441684324e-9 *. r) +. 5.47593808499534494600e-4)
-             *. r
-            +. 1.51986665636164571966e-2)
-            *. r
-           +. 1.48103976427480074590e-1)
-           *. r
-          +. 6.89767334985100004550e-1)
-          *. r
-         +. 1.67638483018380384940e0)
-         *. r
-        +. 2.05319162663775882187e0)
-        *. r
-       +. 1.0)
-
-  let far r =
-    let r = r -. split2 in
-    (((((((((2.01033439929228813265e-7 *. r) +. 2.71155556874348757815e-5) *. r)
-         +. 1.24266094738807843860e-3)
-         *. r
-        +. 2.65321895265761230930e-2)
-        *. r
-       +. 2.96560571828504891230e-1)
-       *. r
-      +. 1.78482653991729133580e0)
-      *. r
-     +. 5.46378491116411436990e0)
-     *. r
-    +. 6.65790464350110377720e0)
-    /. ((((((((2.04426310338993978564e-15 *. r) +. 1.42151175831644588870e-7)
-             *. r
-            +. 1.84631831751005468180e-5)
-            *. r
-           +. 7.86869131145613259100e-4)
-           *. r
-          +. 1.48753612908506148525e-2)
-          *. r
-         +. 1.36929880922735805310e-1)
-         *. r
-        +. 5.99832206555887937690e-1)
-        *. r
-       +. 1.0)
-end
+let inverse_tail probability =
+  let target = Dd.neg (Dd.log_float (2.0 *. probability)) in
+  let rec solve remaining lower upper y =
+    if remaining = 0 then y
+    else
+      let scaled = Cody.erfcx_nonnegative y in
+      let logarithm = Elementary.log scaled in
+      let residual = Float.fma y y (-.target.hi) -. target.lo -. logarithm in
+      let uncertainty =
+        Float.next_after
+          (0x1p-46 *. (1.0 +. Float.abs logarithm))
+          Float.infinity
+      in
+      let lower, upper =
+        if residual > uncertainty then (lower, y)
+        else if residual < -.uncertainty then (y, upper)
+        else (lower, upper)
+      in
+      let proposed = y -. (residual *. (scaled /. twice_inv_sqrt_pi)) in
+      let next = Float.max lower (Float.min upper proposed) in
+      solve (remaining - 1) lower upper next
+  in
+  solve inverse_steps 0.0 28.0 (Float.sqrt target.hi)
 
 let norm_inv p =
   if Float.is_nan p || p < 0.0 || p > 1.0 then Float.nan
   else if p = 0.0 then Float.neg_infinity
   else if p = 1.0 then Float.infinity
+  else if p = 0.5 then 0.0
   else
     let q = p -. 0.5 in
-    if Float.abs q <= As241.split1 then As241.central q
-    else
-      let r = Float.sqrt (-.Elementary.log (if q < 0.0 then p else 1.0 -. p)) in
-      let z = if r <= As241.split2 then As241.intermediate r else As241.far r in
-      if q < 0.0 then -.z else z
+    let y =
+      if Float.abs q <= 0.25 then inverse_central (2.0 *. Float.abs q)
+      else inverse_tail (if p < 0.5 then p else 1.0 -. p)
+    in
+    let x = y /. inv_sqrt_2 in
+    let x =
+      if x <= Normal_dd.limit then
+        let negative = Dd.of_float (-.x) in
+        let probability = if p < 0.5 then p else 1.0 -. p in
+        let residual =
+          Dd.sub (Normal_dd.cdf negative) (Dd.of_float probability)
+        in
+        -.Dd.to_float
+            (Dd.sub negative (Dd.div residual (Normal_dd.pdf negative)))
+      else x
+    in
+    if p < 0.5 then -.x else x
 
 (* Phi(hi + lo) for |lo| <= ulp(hi), to first order in lo. Phi(hi) is exact
    in its argument, so a double-double argument keeps the tail's relative

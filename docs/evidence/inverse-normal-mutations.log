@@ -1,0 +1,4 @@
+baseline passes (132 s)
+killed    inverse-iteration-count by oracle_normal
+killed    inverse-dd-refinement by oracle_normal
+2 of 2 mutants killed as catalogued
