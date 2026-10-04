@@ -6,11 +6,36 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from candidate_artifact import verify_notices, verify_origin
+from candidate_artifact import (verify_notices, verify_origin, EXCHANGE_FIELDS,
+                                exchange_input, verify_exchange_replay)
 from check_experimental import check, CATEGORIES, PLATFORMS
 
 
 class Controls(unittest.TestCase):
+    def test_exchange_replay_controls(self):
+        rows=[dict(id=name,inputs={k:'0000000000000000' for k in EXCHANGE_FIELDS})
+              for name in ['a','b']]
+        expected='a served 0x0p+0 0x0p+0\nb numerical_failure\n'
+        self.assertEqual(len(exchange_input(rows,expected).splitlines()),2)
+        self.assertEqual(verify_exchange_replay(expected,expected),
+                         {'served':1,'numerical_failure':1})
+        for observed in ['',expected.splitlines()[0],expected+expected,
+                         '\n'.join(reversed(expected.splitlines())),
+                         expected.replace('served 0x0p+0','served 0x1p+0'),
+                         expected.replace('0x0p+0\n','0x1p-52\n'),
+                         expected.replace('numerical_failure','accuracy_exceeded')]:
+            with self.subTest(observed=observed),self.assertRaisesRegex(RuntimeError,'replay differs'):
+                verify_exchange_replay(expected,observed)
+        for bad in [[],rows[:1],list(reversed(rows)),[rows[0],rows[0]]]:
+            with self.assertRaisesRegex(RuntimeError,'membership/order'):
+                exchange_input(bad,expected)
+        for key,value in [('id','a b'),('inputs',dict(rows[0]['inputs'],rho='nan'))]:
+            bad=copy.deepcopy(rows);bad[0][key]=value
+            with self.assertRaisesRegex(RuntimeError,'invalid exchange'):
+                exchange_input(bad,expected)
+        with self.assertRaisesRegex(RuntimeError,'reference outcome'):
+            exchange_input(rows,expected.replace('served 0x0p+0 0x0p+0','unknown'))
+
     def test_notice_integrity(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp); source=root/'source'; prefix=root/'install'
