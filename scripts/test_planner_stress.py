@@ -37,6 +37,22 @@ class Controls(unittest.TestCase):
                 self.assertEqual(result.stdout, '')
                 self.assertIn('planner instrumentation site missing/ambiguous: ' + site, result.stderr)
 
+    def test_native_route_wrapper_refuses_missing_or_ambiguous_gate(self):
+        generator = Path(__file__).with_name('instrument_planner.py')
+        hint = 'Bachelier.Fast_middle.may_prepare'
+        gate = 'Bachelier_native.default_enabled && work.length >= 32'
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'planner.ml'
+            for text in [hint, hint + '\n' + gate + '\n' + gate]:
+                source.write_text(text)
+                result = subprocess.run([sys.executable, str(generator), str(source),
+                                         '--force-native-routing'], capture_output=True,
+                                        text=True, timeout=5)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertEqual(result.stdout, '')
+                self.assertIn('planner instrumentation site missing/ambiguous: ' + gate,
+                              result.stderr)
+
 
 if __name__ == '__main__':
     unittest.main()

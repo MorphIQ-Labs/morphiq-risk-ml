@@ -12,6 +12,13 @@ more work per row and can amortize startup with smaller tiles. Hard numerical
 cases, multiple certified outputs, heterogeneous costs and slow sinks can move
 the crossover; the ordinary price-only corpus does not cover those workloads.
 
+On ARM64, eligible homogeneous Bachelier Fast tiles now use native batching for
+`execute ~workers:1`. Multiworker execution retains scalar pricing until separate
+performance qualification supports adoption. The [native planner comparison](results-native-planner.md)
+includes preparation, packing, rows and a minimal sink; reused fixed-batch kernel
+throughput is not a scenario-throughput estimate. Re-establish the one-worker
+reference when choosing workers for this backend.
+
 ## What a tile changes
 
 For `N` instruments and `S` scenarios, the planner creates
@@ -46,6 +53,12 @@ Plans include their resource policy in their identity. Changing tile size means
 compiling another plan; retain its manifest with the source/toolchain identity.
 Reuse a plan for comparable executions and measure compilation separately when
 assessing amortization.
+
+Native Bachelier preparation internally caps chunks at 256 rows. That cap does
+not change the caller's logical tiles, wave count, callback timing or cancellation
+granularity. The logical tile's output array still uses the caller-selected row
+limit. Private packing/SoA scratch is additional to the explained value bytes;
+neither the chunk cap nor the output-slot bound is a heap/RSS guarantee.
 
 ## Reproduce the sweep
 

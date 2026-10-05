@@ -19,6 +19,15 @@ def replace_once(text, old, new):
 
 source = replace_once(source, 'Bachelier.Fast_middle.may_prepare',
                       'Bachelier_fast.may_prepare')
+if len(sys.argv) == 3 and sys.argv[2] == '--force-native-routing':
+    # Exercise packing/chunk restoration on platforms whose public batch owner
+    # chooses scalar execution. This copy never enters the installed library.
+    source = replace_once(source,
+                          'Bachelier_native.default_enabled && work.length >= 32',
+                          'work.length >= 32')
+    print('open Morphiq_risk\nopen Morphiq_risk.Internal')
+    print(source)
+    raise SystemExit(0)
 source = replace_once(source, 'let execute t ~workers ~cancellation ~sink =', '''let evaluate_tile_original = evaluate_tile
 let evaluate_tile t work =
   Planner_probe.evaluate work.id (fun () ->

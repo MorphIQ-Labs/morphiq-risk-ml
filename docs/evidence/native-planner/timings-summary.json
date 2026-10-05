@@ -1,0 +1,7927 @@
+{
+  "complete": true,
+  "samples": 3600,
+  "summary": [
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 81406.25140000001,
+        "process_medians": [
+          81593.7492,
+          81312.5007,
+          81500.0021,
+          81156.2495
+        ]
+      },
+      "cpu_ns": {
+        "median": 81437.5,
+        "process_medians": [
+          81562.5,
+          81343.75,
+          81531.25,
+          81156.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 230867.5,
+        "process_medians": [
+          230867.5,
+          230867.5,
+          230867.5,
+          230867.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 60765.62385,
+        "process_medians": [
+          60812.5083,
+          60718.7394,
+          60968.7559,
+          60656.2535
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 26656.24925,
+        "process_medians": [
+          26624.999,
+          26968.748,
+          26687.4995,
+          26624.999
+        ]
+      },
+      "cpu_ns": {
+        "median": 26703.125,
+        "process_medians": [
+          26625.0,
+          27000.0,
+          26750.0,
+          26656.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 166219.5,
+        "process_medians": [
+          166219.5,
+          166219.5,
+          166219.5,
+          166219.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 6593.752915,
+        "process_medians": [
+          6718.75023,
+          6656.25339,
+          6531.25244,
+          6531.25244
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 400718.751,
+        "process_medians": [
+          464000.001,
+          535624.997,
+          295156.249,
+          337437.501
+        ]
+      },
+      "cpu_ns": {
+        "median": 479281.25,
+        "process_medians": [
+          511718.75,
+          538062.5,
+          376875.0,
+          446843.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 148947.5,
+        "process_medians": [
+          148947.5,
+          148947.5,
+          148947.5,
+          148947.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 232046.8665,
+        "process_medians": [
+          270343.735,
+          278843.741,
+          171593.743,
+          193749.998
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 273453.12450000003,
+        "process_medians": [
+          372406.252,
+          283218.749,
+          232531.253,
+          263687.5
+        ]
+      },
+      "cpu_ns": {
+        "median": 389703.125,
+        "process_medians": [
+          429875.0,
+          403781.25,
+          308718.75,
+          375625.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 84299.5,
+        "process_medians": [
+          84299.5,
+          84299.5,
+          84299.5,
+          84299.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 135515.622,
+        "process_medians": [
+          181312.498,
+          140031.247,
+          118000.004,
+          130999.997
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 550062.4975,
+        "process_medians": [
+          639374.997,
+          916031.247,
+          434999.998,
+          460749.998
+        ]
+      },
+      "cpu_ns": {
+        "median": 751359.375,
+        "process_medians": [
+          826812.5,
+          841656.25,
+          618281.25,
+          675906.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 107987.5,
+        "process_medians": [
+          107987.5,
+          107987.5,
+          107987.5,
+          107987.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 546796.871,
+        "process_medians": [
+          634031.25,
+          914531.251,
+          434250.003,
+          459562.492
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 602078.1255000001,
+        "process_medians": [
+          797062.501,
+          876218.75,
+          407093.75,
+          402250.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 885062.5,
+        "process_medians": [
+          1176187.5,
+          1117375.0,
+          624312.5,
+          652750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 43339.5,
+        "process_medians": [
+          43339.5,
+          43339.5,
+          43339.5,
+          43339.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 598453.1235,
+        "process_medians": [
+          790750.0,
+          865187.496,
+          406156.247,
+          401312.507
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 595250.0064999999,
+        "process_medians": [
+          594500.016,
+          595249.992,
+          600500.003,
+          595250.021
+        ]
+      },
+      "cpu_ns": {
+        "median": 595625.0,
+        "process_medians": [
+          594500.0,
+          595750.0,
+          597250.0,
+          595500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1802644.0,
+        "process_medians": [
+          1802644.0,
+          1802644.0,
+          1802644.0,
+          1802644.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 389124.99450000003,
+        "process_medians": [
+          386499.974,
+          387749.984,
+          394000.032,
+          390500.005
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 213125.0075,
+        "process_medians": [
+          212250.015,
+          211999.984,
+          214500.003,
+          214000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 213625.0,
+        "process_medians": [
+          212500.0,
+          212000.0,
+          214750.0,
+          214750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1327908.0,
+        "process_medians": [
+          1327908.0,
+          1327908.0,
+          1327908.0,
+          1327908.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6499.99129,
+        "process_medians": [
+          6499.99129,
+          6750.0514,
+          6499.99129,
+          6499.99129
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 3207374.99,
+        "process_medians": [
+          3925500.0,
+          4688749.99,
+          2324750.01,
+          2489249.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 3674000.0,
+        "process_medians": [
+          4506750.0,
+          4158750.0,
+          2959250.0,
+          3189250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1147284.0,
+        "process_medians": [
+          1147284.0,
+          1147284.0,
+          1147284.0,
+          1147284.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 536499.996,
+        "process_medians": [
+          566500.006,
+          773000.007,
+          498749.985,
+          506499.986
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 2184624.99,
+        "process_medians": [
+          3139999.99,
+          2206249.98,
+          1970999.99,
+          2163000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 3118500.0,
+        "process_medians": [
+          3774250.0,
+          3187750.0,
+          2788000.0,
+          3049250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 672548.0,
+        "process_medians": [
+          672548.0,
+          672548.0,
+          672548.0,
+          672548.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 144124.9915,
+        "process_medians": [
+          207999.983,
+          135999.959,
+          152250.024,
+          131250.01
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 8505624.995000001,
+        "process_medians": [
+          7440499.99,
+          11157000.0,
+          3395500.01,
+          9570750.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 11901750.0,
+        "process_medians": [
+          10010750.0,
+          13792750.0,
+          4651500.0,
+          14928500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 819604.0,
+        "process_medians": [
+          819604.0,
+          819604.0,
+          819604.0,
+          819604.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1512500.0205,
+        "process_medians": [
+          889500.021,
+          2135500.02,
+          754749.984,
+          2490250.04
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 5093875.02,
+        "process_medians": [
+          5793250.02,
+          4394500.02,
+          3265000.01,
+          11391500.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 7028625.0,
+        "process_medians": [
+          8556000.0,
+          5501250.0,
+          4963000.0,
+          17884000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 344868.0,
+        "process_medians": [
+          344868.0,
+          344868.0,
+          344868.0,
+          344868.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 463124.9755,
+        "process_medians": [
+          500249.967,
+          425999.984,
+          371500.006,
+          998750.009
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 594375.0,
+        "process_medians": [
+          593750.01,
+          600250.001,
+          594999.99,
+          592249.999
+        ]
+      },
+      "cpu_ns": {
+        "median": 594375.0,
+        "process_medians": [
+          593750.0,
+          600500.0,
+          595000.0,
+          592750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1795028.0,
+        "process_medians": [
+          1795028.0,
+          1795028.0,
+          1795028.0,
+          1795028.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 434374.99,
+        "process_medians": [
+          433999.987,
+          439750.031,
+          434749.993,
+          432500.034
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 213000.0065,
+        "process_medians": [
+          212749.99,
+          213499.996,
+          213250.023,
+          212000.014
+        ]
+      },
+      "cpu_ns": {
+        "median": 213375.0,
+        "process_medians": [
+          213250.0,
+          213750.0,
+          213500.0,
+          212000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1320292.0,
+        "process_medians": [
+          1320292.0,
+          1320292.0,
+          1320292.0,
+          1320292.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 54125.00465,
+        "process_medians": [
+          54000.0328,
+          54000.0328,
+          54249.9765,
+          54249.9765
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1111249.991,
+        "process_medians": [
+          1413249.99,
+          1423499.98,
+          809249.992,
+          809249.992
+        ]
+      },
+      "cpu_ns": {
+        "median": 1266875.0,
+        "process_medians": [
+          1432000.0,
+          1404500.0,
+          1124000.0,
+          1129250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1136084.0,
+        "process_medians": [
+          1136084.0,
+          1136084.0,
+          1136084.0,
+          1136084.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 721749.9805000001,
+        "process_medians": [
+          856499.973,
+          942999.992,
+          586999.988,
+          585750.007
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 582749.9845,
+        "process_medians": [
+          682249.985,
+          845250.004,
+          445750.018,
+          483249.984
+        ]
+      },
+      "cpu_ns": {
+        "median": 855875.0,
+        "process_medians": [
+          948000.0,
+          999250.0,
+          756500.0,
+          763750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 661348.0,
+        "process_medians": [
+          661348.0,
+          661348.0,
+          661348.0,
+          661348.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 271875.018,
+        "process_medians": [
+          311750.016,
+          352749.979,
+          222500.006,
+          232000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1026000.015,
+        "process_medians": [
+          1451249.99,
+          995249.982,
+          1035750.0,
+          1016250.03
+        ]
+      },
+      "cpu_ns": {
+        "median": 1582500.0,
+        "process_medians": [
+          1688500.0,
+          1509500.0,
+          1605000.0,
+          1560000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 806612.0,
+        "process_medians": [
+          806612.0,
+          806612.0,
+          806612.0,
+          806612.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1020500.015,
+        "process_medians": [
+          1446499.98,
+          982749.974,
+          1030999.99,
+          1010000.04
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 768500.0164999999,
+        "process_medians": [
+          766250.014,
+          1037499.98,
+          770750.019,
+          632499.985
+        ]
+      },
+      "cpu_ns": {
+        "median": 1233250.0,
+        "process_medians": [
+          1275250.0,
+          1358250.0,
+          1191250.0,
+          1161500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 331876.0,
+        "process_medians": [
+          331876.0,
+          331876.0,
+          331876.0,
+          331876.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 756375.0115,
+        "process_medians": [
+          746999.984,
+          1031249.97,
+          765750.039,
+          627499.976
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 9507999.985,
+        "process_medians": [
+          9510000.0,
+          9630999.99,
+          9460999.98,
+          9505999.97
+        ]
+      },
+      "cpu_ns": {
+        "median": 9509000.0,
+        "process_medians": [
+          9511000.0,
+          9627000.0,
+          9463000.0,
+          9507000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 28627488.0,
+        "process_medians": [
+          28627488.0,
+          28627488.0,
+          28627488.0,
+          28627488.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6133000.015000001,
+        "process_medians": [
+          6125000.07,
+          6251999.99,
+          6112999.98,
+          6140999.96
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 3437500.04,
+        "process_medians": [
+          3437999.99,
+          3443999.91,
+          3419000.07,
+          3437000.09
+        ]
+      },
+      "cpu_ns": {
+        "median": 3438500.0,
+        "process_medians": [
+          3439000.0,
+          3444000.0,
+          3419000.0,
+          3438000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21120376.0,
+        "process_medians": [
+          21120376.0,
+          21120376.0,
+          21120376.0,
+          21120376.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 52000.0467,
+        "process_medians": [
+          52000.0467,
+          53000.0543,
+          51999.9303,
+          52000.0467
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 15675000.0,
+        "process_medians": [
+          17808000.0,
+          18860000.1,
+          13524000.1,
+          13542000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 19473000.0,
+        "process_medians": [
+          20922000.0,
+          20329000.0,
+          18617000.0,
+          18598000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18084384.0,
+        "process_medians": [
+          18084384.0,
+          18084384.0,
+          18084384.0,
+          18084384.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6450999.995,
+        "process_medians": [
+          6479999.98,
+          6348000.02,
+          6422000.01,
+          6485000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 7528999.995,
+        "process_medians": [
+          12133000.1,
+          7755999.92,
+          7217000.01,
+          7302000.07
+        ]
+      },
+      "cpu_ns": {
+        "median": 12626500.0,
+        "process_medians": [
+          15354000.0,
+          12836000.0,
+          12417000.0,
+          12214000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10577272.0,
+        "process_medians": [
+          10577272.0,
+          10577272.0,
+          10577272.0,
+          10577272.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 220499.991,
+        "process_medians": [
+          251999.94,
+          231999.904,
+          203000.032,
+          209000.078
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 17147000.0,
+        "process_medians": [
+          21510000.0,
+          16308000.0,
+          17083000.0,
+          17211000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 25434000.0,
+        "process_medians": [
+          29253000.0,
+          25108000.0,
+          24978000.0,
+          25760000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12812832.0,
+        "process_medians": [
+          12812832.0,
+          12812832.0,
+          12812832.0,
+          12812832.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6927500.01,
+        "process_medians": [
+          7065000.01,
+          6895000.0,
+          6897000.01,
+          6958000.01
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 12443000.0,
+        "process_medians": [
+          14611000.0,
+          13524000.0,
+          10627000.0,
+          11362000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 20568500.0,
+        "process_medians": [
+          21462000.0,
+          21966000.0,
+          19158000.0,
+          19675000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5305720.0,
+        "process_medians": [
+          5305720.0,
+          5305720.0,
+          5305720.0,
+          5305720.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 778499.9905,
+        "process_medians": [
+          967999.92,
+          927999.965,
+          629000.016,
+          628000.009
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 9971000.02,
+        "process_medians": [
+          9937000.0,
+          9977999.96,
+          10142000.0,
+          9964000.08
+        ]
+      },
+      "cpu_ns": {
+        "median": 9972000.0,
+        "process_medians": [
+          9938000.0,
+          9979000.0,
+          10144000.0,
+          9965000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 28614432.0,
+        "process_medians": [
+          28614432.0,
+          28614432.0,
+          28614432.0,
+          28614432.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6290999.995,
+        "process_medians": [
+          6288000.03,
+          6293999.96,
+          6294999.97,
+          6286000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 3876499.95,
+        "process_medians": [
+          3873999.93,
+          3878999.97,
+          3884000.01,
+          3850999.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 3874000.0,
+        "process_medians": [
+          3874000.0,
+          3874000.0,
+          3886000.0,
+          3853000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21107320.0,
+        "process_medians": [
+          21107320.0,
+          21107320.0,
+          21107320.0,
+          21107320.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 211999.98450000002,
+        "process_medians": [
+          214000.0,
+          210000.086,
+          212999.992,
+          210999.977
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12414000.0,
+        "process_medians": [
+          12971000.0,
+          12704000.0,
+          11812000.0,
+          12124000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 15437500.0,
+        "process_medians": [
+          15848000.0,
+          15866000.0,
+          14808000.0,
+          15027000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18065184.0,
+        "process_medians": [
+          18065184.0,
+          18065184.0,
+          18065184.0,
+          18065184.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6907499.98,
+        "process_medians": [
+          6827000.06,
+          6905999.97,
+          6922999.98,
+          6908999.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 6039000.0,
+        "process_medians": [
+          6123999.95,
+          8238999.99,
+          5860000.03,
+          5954000.05
+        ]
+      },
+      "cpu_ns": {
+        "median": 8983000.0,
+        "process_medians": [
+          9052000.0,
+          10154000.0,
+          8728000.0,
+          8914000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10558072.0,
+        "process_medians": [
+          10558072.0,
+          10558072.0,
+          10558072.0,
+          10558072.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 811000.0055,
+        "process_medians": [
+          667999.964,
+          808999.99,
+          816999.935,
+          813000.021
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12902500.05,
+        "process_medians": [
+          13671000.0,
+          14340000.0,
+          12134000.1,
+          12066000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 20220000.0,
+        "process_medians": [
+          20889000.0,
+          21597000.0,
+          19551000.0,
+          19312000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12790560.0,
+        "process_medians": [
+          12790560.0,
+          12790560.0,
+          12790560.0,
+          12790560.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7674000.05,
+        "process_medians": [
+          7809000.09,
+          7817000.03,
+          7539000.01,
+          7523000.01
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 7122999.99,
+        "process_medians": [
+          7591999.95,
+          8338999.93,
+          6654000.03,
+          6560000.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 14277500.0,
+        "process_medians": [
+          16907000.0,
+          14150000.0,
+          14405000.0,
+          13764000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5283448.0,
+        "process_medians": [
+          5283448.0,
+          5283448.0,
+          5283448.0,
+          5283448.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1830499.97,
+        "process_medians": [
+          1826999.94,
+          2106999.98,
+          1834000.0,
+          1490999.94
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 97468.75,
+        "process_medians": [
+          96843.7489,
+          97562.5007,
+          97781.2488,
+          97374.9993
+        ]
+      },
+      "cpu_ns": {
+        "median": 97359.375,
+        "process_medians": [
+          96843.75,
+          97593.75,
+          97343.75,
+          97375.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 232915.5,
+        "process_medians": [
+          232915.5,
+          232915.5,
+          232915.5,
+          232915.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 65078.123949999994,
+        "process_medians": [
+          64656.2439,
+          65375.0067,
+          64968.7536,
+          65187.4943
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 42796.87525,
+        "process_medians": [
+          42812.5022,
+          42781.2483,
+          42968.7498,
+          42562.4967
+        ]
+      },
+      "cpu_ns": {
+        "median": 42812.5,
+        "process_medians": [
+          42812.5,
+          42812.5,
+          43031.25,
+          42625.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 168267.5,
+        "process_medians": [
+          168267.5,
+          168267.5,
+          168267.5,
+          168267.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 10562.502199999999,
+        "process_medians": [
+          10531.2538,
+          10499.9963,
+          10593.7506,
+          10593.7579
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 338406.251,
+        "process_medians": [
+          466218.749,
+          340656.25,
+          322812.502,
+          336156.252
+        ]
+      },
+      "cpu_ns": {
+        "median": 453890.625,
+        "process_medians": [
+          529750.0,
+          471781.25,
+          414062.5,
+          436000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 149971.5,
+        "process_medians": [
+          149971.5,
+          149971.5,
+          149971.5,
+          149971.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 196624.9985,
+        "process_medians": [
+          269968.747,
+          197124.999,
+          185593.752,
+          196124.998
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 330812.5015,
+        "process_medians": [
+          376625.001,
+          456843.747,
+          285000.002,
+          236156.251
+        ]
+      },
+      "cpu_ns": {
+        "median": 437515.625,
+        "process_medians": [
+          473343.75,
+          460656.25,
+          414375.0,
+          326250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 85323.5,
+        "process_medians": [
+          85323.5,
+          85323.5,
+          85323.5,
+          85323.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 163375.00550000003,
+        "process_medians": [
+          186343.765,
+          226593.744,
+          140406.246,
+          117124.997
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 690593.7495,
+        "process_medians": [
+          900874.998,
+          965562.5,
+          469187.5,
+          480312.501
+        ]
+      },
+      "cpu_ns": {
+        "median": 1013843.75,
+        "process_medians": [
+          1313375.0,
+          1292312.5,
+          735375.0,
+          679218.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 108499.5,
+        "process_medians": [
+          108499.5,
+          108499.5,
+          108499.5,
+          108499.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 689374.9975,
+        "process_medians": [
+          899187.5,
+          963718.761,
+          466281.25,
+          479562.495
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 572203.1275,
+        "process_medians": [
+          489093.753,
+          655312.502,
+          830093.752,
+          374406.249
+        ]
+      },
+      "cpu_ns": {
+        "median": 858781.25,
+        "process_medians": [
+          716843.75,
+          1000718.75,
+          1348125.0,
+          577343.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 43851.5,
+        "process_medians": [
+          43851.5,
+          43851.5,
+          43851.5,
+          43851.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 569078.127,
+        "process_medians": [
+          485062.497,
+          653093.757,
+          827812.499,
+          372781.265
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 725499.9945,
+        "process_medians": [
+          725999.998,
+          726250.0,
+          723750.01,
+          724999.991
+        ]
+      },
+      "cpu_ns": {
+        "median": 725500.0,
+        "process_medians": [
+          726500.0,
+          726500.0,
+          724250.0,
+          724500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1819028.0,
+        "process_medians": [
+          1819028.0,
+          1819028.0,
+          1819028.0,
+          1819028.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 392374.99,
+        "process_medians": [
+          392749.993,
+          394000.002,
+          391999.987,
+          391749.956
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 342125.015,
+        "process_medians": [
+          342250.016,
+          374499.999,
+          342000.014,
+          341749.983
+        ]
+      },
+      "cpu_ns": {
+        "median": 342500.0,
+        "process_medians": [
+          342750.0,
+          356250.0,
+          342000.0,
+          342250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1344292.0,
+        "process_medians": [
+          1344292.0,
+          1344292.0,
+          1344292.0,
+          1344292.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 10749.9654,
+        "process_medians": [
+          10749.9654,
+          11500.0003,
+          10500.0217,
+          10749.9654
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2955000.005,
+        "process_medians": [
+          4573999.99,
+          3350250.02,
+          2559749.99,
+          2334499.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 3832625.0,
+        "process_medians": [
+          5396000.0,
+          4118000.0,
+          3547250.0,
+          3078500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1155476.0,
+        "process_medians": [
+          1155476.0,
+          1155476.0,
+          1155476.0,
+          1155476.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 568125.004,
+        "process_medians": [
+          647499.983,
+          619749.975,
+          516500.033,
+          509750.011
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 2786625.0,
+        "process_medians": [
+          3276000.0,
+          3337750.01,
+          2297250.0,
+          1909000.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 3460625.0,
+        "process_medians": [
+          3756000.0,
+          3714500.0,
+          3206750.0,
+          2579000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 680740.0,
+        "process_medians": [
+          680740.0,
+          680740.0,
+          680740.0,
+          680740.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 146999.984,
+        "process_medians": [
+          163749.966,
+          149500.003,
+          144499.965,
+          129750.028
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 7507874.995,
+        "process_medians": [
+          8393000.0,
+          6622749.99,
+          9880250.0,
+          3658999.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 9578125.0,
+        "process_medians": [
+          11864250.0,
+          7292000.0,
+          15867250.0,
+          5338250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 823700.0,
+        "process_medians": [
+          823700.0,
+          823700.0,
+          823700.0,
+          823700.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1233750.01,
+        "process_medians": [
+          1482500.0,
+          1237750.0,
+          1229750.02,
+          783249.998
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 3661874.9850000003,
+        "process_medians": [
+          4078250.0,
+          4689750.0,
+          2882250.0,
+          3245499.97
+        ]
+      },
+      "cpu_ns": {
+        "median": 5625250.0,
+        "process_medians": [
+          5814500.0,
+          5813500.0,
+          4688000.0,
+          5437000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 348964.0,
+        "process_medians": [
+          348964.0,
+          348964.0,
+          348964.0,
+          348964.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 460749.98699999996,
+        "process_medians": [
+          508749.945,
+          521750.015,
+          379500.008,
+          412750.029
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 725374.9935,
+        "process_medians": [
+          721499.993,
+          725999.998,
+          730500.004,
+          724749.989
+        ]
+      },
+      "cpu_ns": {
+        "median": 725625.0,
+        "process_medians": [
+          721750.0,
+          726250.0,
+          727750.0,
+          725000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1811412.0,
+        "process_medians": [
+          1811412.0,
+          1811412.0,
+          1811412.0,
+          1811412.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 467125.006,
+        "process_medians": [
+          465000.019,
+          468000.042,
+          470500.032,
+          466249.97
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 343125.008,
+        "process_medians": [
+          338999.991,
+          352500.007,
+          345000.008,
+          341250.008
+        ]
+      },
+      "cpu_ns": {
+        "median": 343500.0,
+        "process_medians": [
+          339500.0,
+          349250.0,
+          345500.0,
+          341500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1336676.0,
+        "process_medians": [
+          1336676.0,
+          1336676.0,
+          1336676.0,
+          1336676.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 86500.03295,
+        "process_medians": [
+          86250.0165,
+          89250.0102,
+          86750.0494,
+          85750.0127
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 946875.0064999999,
+        "process_medians": [
+          976500.014,
+          1293499.98,
+          917249.999,
+          910250.004
+        ]
+      },
+      "cpu_ns": {
+        "median": 1302250.0,
+        "process_medians": [
+          1333500.0,
+          1487750.0,
+          1183250.0,
+          1271000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1144276.0,
+        "process_medians": [
+          1144276.0,
+          1144276.0,
+          1144276.0,
+          1144276.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 675500.0064999999,
+        "process_medians": [
+          706999.999,
+          800250.011,
+          644000.014,
+          638999.976
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 552500.0015,
+        "process_medians": [
+          586749.986,
+          815750.012,
+          499749.993,
+          518250.017
+        ]
+      },
+      "cpu_ns": {
+        "median": 910500.0,
+        "process_medians": [
+          929250.0,
+          1053500.0,
+          772750.0,
+          891750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 669540.0,
+        "process_medians": [
+          669540.0,
+          669540.0,
+          669540.0,
+          669540.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 269500.015,
+        "process_medians": [
+          289499.993,
+          333500.007,
+          242000.009,
+          249500.037
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1106750.0,
+        "process_medians": [
+          1160999.99,
+          1599999.99,
+          1030999.99,
+          1052500.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 1779250.0,
+        "process_medians": [
+          1789250.0,
+          2010500.0,
+          1607750.0,
+          1769250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 810708.0,
+        "process_medians": [
+          810708.0,
+          810708.0,
+          810708.0,
+          810708.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1102125.025,
+        "process_medians": [
+          1154750.03,
+          1573250.05,
+          1026000.01,
+          1049500.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 672125.0105000001,
+        "process_medians": [
+          682250.015,
+          989000.022,
+          614000.019,
+          662000.006
+        ]
+      },
+      "cpu_ns": {
+        "median": 1355125.0,
+        "process_medians": [
+          1319750.0,
+          1437000.0,
+          1212000.0,
+          1390500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 335972.0,
+        "process_medians": [
+          335972.0,
+          335972.0,
+          335972.0,
+          335972.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 663875.0055,
+        "process_medians": [
+          677750.009,
+          982500.002,
+          592500.0,
+          650000.002
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 11577500.0,
+        "process_medians": [
+          11645000.0,
+          11561999.9,
+          11593000.0,
+          11562000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 11563500.0,
+        "process_medians": [
+          11638000.0,
+          11564000.0,
+          11563000.0,
+          11562000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 28889632.0,
+        "process_medians": [
+          28889632.0,
+          28889632.0,
+          28889632.0,
+          28889632.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6165499.975,
+        "process_medians": [
+          6178999.9,
+          6159999.99,
+          6158999.98,
+          6170999.96
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 5468500.025,
+        "process_medians": [
+          5474000.01,
+          5454999.98,
+          5475000.01,
+          5463000.04
+        ]
+      },
+      "cpu_ns": {
+        "median": 5470000.0,
+        "process_medians": [
+          5476000.0,
+          5455000.0,
+          5477000.0,
+          5464000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21382520.0,
+        "process_medians": [
+          21382520.0,
+          21382520.0,
+          21382520.0,
+          21382520.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 83999.9993,
+        "process_medians": [
+          84999.9487,
+          83999.9411,
+          84000.0575,
+          83000.0499
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 15291000.0,
+        "process_medians": [
+          17994000.0,
+          16159000.0,
+          13795999.9,
+          14423000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 21279500.0,
+        "process_medians": [
+          22020000.0,
+          22912000.0,
+          18435000.0,
+          20539000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18215456.0,
+        "process_medians": [
+          18215456.0,
+          18215456.0,
+          18215456.0,
+          18215456.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6362000.07,
+        "process_medians": [
+          6379000.03,
+          6375000.11,
+          6323999.96,
+          6349000.03
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 8444500.04,
+        "process_medians": [
+          8324000.05,
+          10237000.0,
+          7451000.04,
+          8565000.03
+        ]
+      },
+      "cpu_ns": {
+        "median": 14437000.0,
+        "process_medians": [
+          14353000.0,
+          17520000.0,
+          12242000.0,
+          14521000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10708344.0,
+        "process_medians": [
+          10708344.0,
+          10708344.0,
+          10708344.0,
+          10708344.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 250499.987,
+        "process_medians": [
+          246000.011,
+          245000.003,
+          265000.039,
+          254999.963
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 16870500.0,
+        "process_medians": [
+          20237000.1,
+          16843000.0,
+          15137000.0,
+          16898000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 27822500.0,
+        "process_medians": [
+          29472000.0,
+          27820000.0,
+          25961000.0,
+          27825000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12878368.0,
+        "process_medians": [
+          12878368.0,
+          12878368.0,
+          12878368.0,
+          12878368.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6852999.970000001,
+        "process_medians": [
+          6905999.97,
+          6819000.0,
+          6773000.0,
+          6886999.94
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 11467499.95,
+        "process_medians": [
+          13196000.0,
+          10999999.9,
+          11935000.0,
+          10764000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 21461000.0,
+        "process_medians": [
+          22214000.0,
+          21969000.0,
+          18319000.0,
+          20953000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5371256.0,
+        "process_medians": [
+          5371256.0,
+          5371256.0,
+          5371256.0,
+          5371256.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 779999.944,
+        "process_medians": [
+          863999.943,
+          696999.952,
+          862999.936,
+          652999.966
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12027000.0,
+        "process_medians": [
+          12036000.0,
+          12041000.0,
+          12015000.0,
+          12018000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 12027500.0,
+        "process_medians": [
+          12035000.0,
+          12041000.0,
+          12016000.0,
+          12020000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 28876576.0,
+        "process_medians": [
+          28876576.0,
+          28876576.0,
+          28876576.0,
+          28876576.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6434999.99,
+        "process_medians": [
+          6439999.91,
+          6434999.99,
+          6434999.99,
+          6417999.98
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 5948499.95,
+        "process_medians": [
+          5944999.98,
+          5951999.92,
+          6037999.99,
+          5924000.06
+        ]
+      },
+      "cpu_ns": {
+        "median": 5948500.0,
+        "process_medians": [
+          5945000.0,
+          5952000.0,
+          6040000.0,
+          5929000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21369464.0,
+        "process_medians": [
+          21369464.0,
+          21369464.0,
+          21369464.0,
+          21369464.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 338499.95849999995,
+        "process_medians": [
+          337000.005,
+          338999.904,
+          342999.934,
+          338000.013
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 13586500.0,
+        "process_medians": [
+          15540999.9,
+          13522000.1,
+          13537000.0,
+          13636000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 17626000.0,
+        "process_medians": [
+          19075000.0,
+          17379000.0,
+          17652000.0,
+          17600000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18196256.0,
+        "process_medians": [
+          18196256.0,
+          18196256.0,
+          18196256.0,
+          18196256.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7182499.975,
+        "process_medians": [
+          7248000.01,
+          7128000.03,
+          7201000.0,
+          7163999.95
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 7490999.9399999995,
+        "process_medians": [
+          7500999.96,
+          7387000.02,
+          7728000.06,
+          7480999.92
+        ]
+      },
+      "cpu_ns": {
+        "median": 11592000.0,
+        "process_medians": [
+          11899000.0,
+          11310000.0,
+          11874000.0,
+          11131000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10689144.0,
+        "process_medians": [
+          10689144.0,
+          10689144.0,
+          10689144.0,
+          10689144.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1065500.08,
+        "process_medians": [
+          1057000.02,
+          1063000.06,
+          1082999.98,
+          1068000.1
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 13418000.05,
+        "process_medians": [
+          13755000.1,
+          13831000.0,
+          12654000.0,
+          13081000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 22116500.0,
+        "process_medians": [
+          23018000.0,
+          22232000.0,
+          21904000.0,
+          22001000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12856096.0,
+        "process_medians": [
+          12856096.0,
+          12856096.0,
+          12856096.0,
+          12856096.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7910999.995,
+        "process_medians": [
+          7919000.0,
+          8135999.9,
+          7736000.0,
+          7902999.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 7067999.975,
+        "process_medians": [
+          7647000.02,
+          6782999.96,
+          6796000.06,
+          7339999.89
+        ]
+      },
+      "cpu_ns": {
+        "median": 16028500.0,
+        "process_medians": [
+          16812000.0,
+          16061000.0,
+          15933000.0,
+          15996000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5348984.0,
+        "process_medians": [
+          5348984.0,
+          5348984.0,
+          5348984.0,
+          5348984.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1690000.005,
+        "process_medians": [
+          1749000.05,
+          1639000.02,
+          1562000.02,
+          1740999.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 259375.0015,
+        "process_medians": [
+          260187.498,
+          258906.25,
+          259500.001,
+          259250.002
+        ]
+      },
+      "cpu_ns": {
+        "median": 259390.625,
+        "process_medians": [
+          260062.5,
+          258937.5,
+          259500.0,
+          259281.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 407083.5,
+        "process_medians": [
+          407083.5,
+          407083.5,
+          407083.5,
+          407083.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 108765.622,
+        "process_medians": [
+          109437.5,
+          108437.5,
+          108718.741,
+          108812.503
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 201296.8745,
+        "process_medians": [
+          201249.997,
+          202343.752,
+          200562.499,
+          201343.752
+        ]
+      },
+      "cpu_ns": {
+        "median": 201203.125,
+        "process_medians": [
+          201062.5,
+          202062.5,
+          200562.5,
+          201343.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 334667.5,
+        "process_medians": [
+          334667.5,
+          334667.5,
+          334667.5,
+          334667.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 49968.7394,
+        "process_medians": [
+          50562.4994,
+          49875.0233,
+          49968.7121,
+          49968.7667
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 443671.87549999997,
+        "process_medians": [
+          595093.748,
+          436000.002,
+          416343.752,
+          451343.749
+        ]
+      },
+      "cpu_ns": {
+        "median": 681937.5,
+        "process_medians": [
+          731562.5,
+          662156.25,
+          654062.5,
+          701718.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 240939.5,
+        "process_medians": [
+          240939.5,
+          240939.5,
+          240939.5,
+          240939.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 238249.9845,
+        "process_medians": [
+          321093.754,
+          241999.984,
+          234499.985,
+          231906.248
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 469000.00049999997,
+        "process_medians": [
+          527468.75,
+          560968.751,
+          359093.752,
+          410531.251
+        ]
+      },
+      "cpu_ns": {
+        "median": 668781.25,
+        "process_medians": [
+          668437.5,
+          670687.5,
+          598250.0,
+          669125.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 168523.5,
+        "process_medians": [
+          168523.5,
+          168523.5,
+          168523.5,
+          168523.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 227046.874,
+        "process_medians": [
+          257468.753,
+          299187.515,
+          175187.492,
+          196624.995
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 858703.1240000001,
+        "process_medians": [
+          1020125.0,
+          1026062.5,
+          580906.253,
+          697281.248
+        ]
+      },
+      "cpu_ns": {
+        "median": 1047734.375,
+        "process_medians": [
+          1047406.25,
+          1228031.25,
+          1009468.75,
+          1048062.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 157867.5,
+        "process_medians": [
+          157867.5,
+          157867.5,
+          157867.5,
+          157867.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 857687.498,
+        "process_medians": [
+          1019250.0,
+          1024843.75,
+          579968.753,
+          696124.996
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 590640.6245,
+        "process_medians": [
+          733468.747,
+          602624.998,
+          503406.252,
+          578656.251
+        ]
+      },
+      "cpu_ns": {
+        "median": 957468.75,
+        "process_medians": [
+          1076906.25,
+          945187.5,
+          930875.0,
+          969750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 85451.5,
+        "process_medians": [
+          85451.5,
+          85451.5,
+          85451.5,
+          85451.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 588984.3744999999,
+        "process_medians": [
+          731999.997,
+          601031.254,
+          502281.258,
+          576937.495
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2025624.995,
+        "process_medians": [
+          2030000.0,
+          2035499.99,
+          2021249.99,
+          2020750.02
+        ]
+      },
+      "cpu_ns": {
+        "median": 2025750.0,
+        "process_medians": [
+          2030250.0,
+          2035500.0,
+          2021250.0,
+          2021000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3212540.0,
+        "process_medians": [
+          3212540.0,
+          3212540.0,
+          3212540.0,
+          3212540.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 467750.011,
+        "process_medians": [
+          469250.022,
+          469499.966,
+          466250.0,
+          465749.967
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 1601749.9849999999,
+        "process_medians": [
+          1600749.99,
+          1612500.0,
+          1602749.98,
+          1596749.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 1602000.0,
+        "process_medians": [
+          1601000.0,
+          1608000.0,
+          1603000.0,
+          1597000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 2675492.0,
+        "process_medians": [
+          2675492.0,
+          2675492.0,
+          2675492.0,
+          2675492.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 49875.001449999996,
+        "process_medians": [
+          50249.9752,
+          50000.0024,
+          49749.9714,
+          49750.0005
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 3257375.01,
+        "process_medians": [
+          4491500.0,
+          3205250.02,
+          3309500.0,
+          3200999.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 5158500.0,
+        "process_medians": [
+          5801250.0,
+          5114000.0,
+          5203000.0,
+          5087000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1883388.0,
+        "process_medians": [
+          1883388.0,
+          1883388.0,
+          1883388.0,
+          1883388.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 588374.9985,
+        "process_medians": [
+          707499.974,
+          585500.035,
+          586999.988,
+          589750.009
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 3510875.0,
+        "process_medians": [
+          3993499.99,
+          3028250.01,
+          4614250.01,
+          2804499.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 5038250.0,
+        "process_medians": [
+          5272500.0,
+          4781000.0,
+          7509750.0,
+          4804000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1346340.0,
+        "process_medians": [
+          1346340.0,
+          1346340.0,
+          1346340.0,
+          1346340.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 227124.998,
+        "process_medians": [
+          284500.013,
+          169749.983,
+          302749.948,
+          167250.022
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 6217625.005,
+        "process_medians": [
+          7248250.01,
+          6755000.01,
+          4250749.97,
+          5680250.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 9580875.0,
+        "process_medians": [
+          10059500.0,
+          9288250.0,
+          7620000.0,
+          9873500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1218812.0,
+        "process_medians": [
+          1218812.0,
+          1218812.0,
+          1218812.0,
+          1218812.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1071000.005,
+        "process_medians": [
+          1137999.99,
+          1721499.98,
+          859000.022,
+          1004000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 5139250.005,
+        "process_medians": [
+          6074750.01,
+          5651750.02,
+          4536249.99,
+          4626749.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 8425625.0,
+        "process_medians": [
+          8312250.0,
+          9200000.0,
+          8179250.0,
+          8539000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 681764.0,
+        "process_medians": [
+          681764.0,
+          681764.0,
+          681764.0,
+          681764.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 550500.0155,
+        "process_medians": [
+          754500.012,
+          631000.003,
+          436999.981,
+          470000.028
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2028625.005,
+        "process_medians": [
+          2020499.99,
+          2034000.0,
+          2026250.0,
+          2031000.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 2028000.0,
+        "process_medians": [
+          2020250.0,
+          2034000.0,
+          2025000.0,
+          2031000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3204924.0,
+        "process_medians": [
+          3204924.0,
+          3204924.0,
+          3204924.0,
+          3204924.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 821624.9990000001,
+        "process_medians": [
+          818750.006,
+          824499.992,
+          819000.008,
+          824249.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 1615374.99,
+        "process_medians": [
+          1613249.97,
+          1623249.99,
+          1607249.99,
+          1617500.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 1614750.0,
+        "process_medians": [
+          1613000.0,
+          1623500.0,
+          1607250.0,
+          1616500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 2667876.0,
+        "process_medians": [
+          2667876.0,
+          2667876.0,
+          2667876.0,
+          2667876.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 402374.993,
+        "process_medians": [
+          401249.999,
+          403499.987,
+          401249.999,
+          404249.993
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1989999.99,
+        "process_medians": [
+          2140750.0,
+          2121999.98,
+          1560749.98,
+          1858000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 2933625.0,
+        "process_medians": [
+          3158500.0,
+          2987750.0,
+          2469750.0,
+          2879500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1872188.0,
+        "process_medians": [
+          1872188.0,
+          1872188.0,
+          1872188.0,
+          1872188.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1201999.9849999999,
+        "process_medians": [
+          1311999.98,
+          1283499.99,
+          991999.957,
+          1120499.98
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 1401875.005,
+        "process_medians": [
+          1692499.99,
+          1385250.01,
+          1377750.01,
+          1418500.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 2442000.0,
+        "process_medians": [
+          2755750.0,
+          2433750.0,
+          2386250.0,
+          2450250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1335140.0,
+        "process_medians": [
+          1335140.0,
+          1335140.0,
+          1335140.0,
+          1335140.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 714375.0115,
+        "process_medians": [
+          857749.983,
+          701750.017,
+          714249.996,
+          714500.027
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1800625.0,
+        "process_medians": [
+          1886250.01,
+          2077250.01,
+          1691000.01,
+          1714999.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 3662875.0,
+        "process_medians": [
+          3739500.0,
+          3686500.0,
+          3639250.0,
+          3542500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1205820.0,
+        "process_medians": [
+          1205820.0,
+          1205820.0,
+          1205820.0,
+          1205820.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1785124.97,
+        "process_medians": [
+          1861749.97,
+          2072500.01,
+          1686249.98,
+          1708499.97
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 1347749.9849999999,
+        "process_medians": [
+          1497499.99,
+          1366249.98,
+          1275250.02,
+          1329249.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 3049000.0,
+        "process_medians": [
+          3148250.0,
+          2995250.0,
+          3007250.0,
+          3090750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 668772.0,
+        "process_medians": [
+          668772.0,
+          668772.0,
+          668772.0,
+          668772.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1343000.0,
+        "process_medians": [
+          1475000.0,
+          1361500.01,
+          1268750.03,
+          1324499.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 32441000.0,
+        "process_medians": [
+          32469000.0,
+          32500000.0,
+          32413000.0,
+          32309000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 32406000.0,
+        "process_medians": [
+          32397000.0,
+          32500000.0,
+          32415000.0,
+          32309000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 51186184.0,
+        "process_medians": [
+          51186184.0,
+          51186184.0,
+          51186184.0,
+          51186184.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7073000.015000001,
+        "process_medians": [
+          7101999.95,
+          7099000.04,
+          7046999.99,
+          7015999.99
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 25809499.95,
+        "process_medians": [
+          25747000.0,
+          25962000.0,
+          25813999.9,
+          25805000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 25810500.0,
+        "process_medians": [
+          25745000.0,
+          25920000.0,
+          25815000.0,
+          25806000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 42681720.0,
+        "process_medians": [
+          42681720.0,
+          42681720.0,
+          42681720.0,
+          42681720.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 400500.023,
+        "process_medians": [
+          399000.011,
+          401000.027,
+          400000.019,
+          401000.027
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 31851500.0,
+        "process_medians": [
+          33592999.9,
+          33543000.0,
+          29393000.1,
+          30160000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 47660000.0,
+        "process_medians": [
+          48244000.0,
+          48753000.0,
+          45866000.0,
+          47076000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29862408.0,
+        "process_medians": [
+          29862408.0,
+          29862408.0,
+          29862408.0,
+          29862408.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7471999.91,
+        "process_medians": [
+          7572000.03,
+          7512999.93,
+          7430999.89,
+          7430000.0
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 25199000.0,
+        "process_medians": [
+          27577000.0,
+          27593000.0,
+          22474000.0,
+          22821000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 40387000.0,
+        "process_medians": [
+          42361000.0,
+          41126000.0,
+          38908000.0,
+          39648000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21357944.0,
+        "process_medians": [
+          21357944.0,
+          21357944.0,
+          21357944.0,
+          21357944.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 739499.9845,
+        "process_medians": [
+          745999.976,
+          812000.013,
+          732999.993,
+          680000.056
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 28745999.95,
+        "process_medians": [
+          29111999.9,
+          33255999.9,
+          27531000.0,
+          28380000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 56305500.0,
+        "process_medians": [
+          56972000.0,
+          56607000.0,
+          55502000.0,
+          56004000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19200520.0,
+        "process_medians": [
+          19200520.0,
+          19200520.0,
+          19200520.0,
+          19200520.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 8075999.97,
+        "process_medians": [
+          8236999.97,
+          8106000.02,
+          7970000.04,
+          8045999.92
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 22190000.05,
+        "process_medians": [
+          23704000.1,
+          24707000.0,
+          20676000.0,
+          20422000.1
+        ]
+      },
+      "cpu_ns": {
+        "median": 49109000.0,
+        "process_medians": [
+          50115000.0,
+          48468000.0,
+          48474000.0,
+          49744000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10696056.0,
+        "process_medians": [
+          10696056.0,
+          10696056.0,
+          10696056.0,
+          10696056.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1369000.005,
+        "process_medians": [
+          1666000.0,
+          1452000.0,
+          1286000.01,
+          1213000.04
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 32741500.0,
+        "process_medians": [
+          32745000.0,
+          32851000.1,
+          32725000.1,
+          32738000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 32741500.0,
+        "process_medians": [
+          32745000.0,
+          32852000.0,
+          32726000.0,
+          32738000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 51173128.0,
+        "process_medians": [
+          51173128.0,
+          51173128.0,
+          51173128.0,
+          51173128.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 8281999.965,
+        "process_medians": [
+          8279999.95,
+          8268000.09,
+          8283999.98,
+          8287000.0
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 26118500.0,
+        "process_medians": [
+          26115000.0,
+          26122000.0,
+          26242999.9,
+          26037000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 26118500.0,
+        "process_medians": [
+          26116000.0,
+          26121000.0,
+          26138000.0,
+          26038000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 42668664.0,
+        "process_medians": [
+          42668664.0,
+          42668664.0,
+          42668664.0,
+          42668664.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1623999.97,
+        "process_medians": [
+          1624999.92,
+          1623999.91,
+          1624000.03,
+          1623000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 27378000.0,
+        "process_medians": [
+          27200000.0,
+          28499999.9,
+          26201000.0,
+          27556000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 41996000.0,
+        "process_medians": [
+          41508000.0,
+          42426000.0,
+          41566000.0,
+          43009000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29843208.0,
+        "process_medians": [
+          29843208.0,
+          29843208.0,
+          29843208.0,
+          29843208.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 9517500.0,
+        "process_medians": [
+          9090999.96,
+          9399999.98,
+          9675999.99,
+          9635000.02
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 20706999.95,
+        "process_medians": [
+          20207000.0,
+          21206999.9,
+          21773000.0,
+          20192000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 35217500.0,
+        "process_medians": [
+          35484000.0,
+          34951000.0,
+          37623000.0,
+          34671000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21338744.0,
+        "process_medians": [
+          21338744.0,
+          21338744.0,
+          21338744.0,
+          21338744.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 2719499.9299999997,
+        "process_medians": [
+          2590999.94,
+          2847999.92,
+          2568000.0,
+          2957000.05
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 22328500.0,
+        "process_medians": [
+          22421000.1,
+          24254999.9,
+          22235999.9,
+          21898000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 49800000.0,
+        "process_medians": [
+          49763000.0,
+          50380000.0,
+          49338000.0,
+          49837000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19178248.0,
+        "process_medians": [
+          19178248.0,
+          19178248.0,
+          19178248.0,
+          19178248.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 10612500.0,
+        "process_medians": [
+          10564000.0,
+          10661000.0,
+          10372000.0,
+          10684000.0
+        ]
+      }
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 16499999.95,
+        "process_medians": [
+          17068000.0,
+          17711000.1,
+          15409000.0,
+          15931999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 43109500.0,
+        "process_medians": [
+          43382000.0,
+          42837000.0,
+          43935000.0,
+          42452000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10673784.0,
+        "process_medians": [
+          10673784.0,
+          10673784.0,
+          10673784.0,
+          10673784.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 4015499.96,
+        "process_medians": [
+          4646999.99,
+          4342000.0,
+          3657000.02,
+          3688999.92
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 74999.9981,
+        "process_medians": [
+          75281.2484,
+          74843.7487,
+          75156.2475,
+          74218.7476
+        ]
+      },
+      "cpu_ns": {
+        "median": 75000.0,
+        "process_medians": [
+          75281.25,
+          74843.75,
+          75156.25,
+          74218.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 217787.5,
+        "process_medians": [
+          217787.5,
+          217787.5,
+          217787.5,
+          217787.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 59812.4989,
+        "process_medians": [
+          60062.499,
+          59718.75,
+          59906.2478,
+          59156.2493
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 20109.3735,
+        "process_medians": [
+          20281.248,
+          20062.5,
+          20124.9968,
+          20093.7502
+        ]
+      },
+      "cpu_ns": {
+        "median": 20109.375,
+        "process_medians": [
+          20281.25,
+          20093.75,
+          20093.75,
+          20125.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 153139.5,
+        "process_medians": [
+          153139.5,
+          153139.5,
+          153139.5,
+          153139.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 4890.62586,
+        "process_medians": [
+          4906.25462,
+          4843.7505,
+          4937.49758,
+          4874.9971
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 357093.74950000003,
+        "process_medians": [
+          391031.248,
+          377968.75,
+          336218.749,
+          330781.248
+        ]
+      },
+      "cpu_ns": {
+        "median": 447671.875,
+        "process_medians": [
+          435343.75,
+          507718.75,
+          447281.25,
+          448062.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 148955.5,
+        "process_medians": [
+          148955.5,
+          148955.5,
+          148955.5,
+          148955.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 194937.502,
+        "process_medians": [
+          207624.988,
+          195656.241,
+          194218.763,
+          190749.997
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 287874.9985,
+        "process_medians": [
+          290937.5,
+          376062.5,
+          284812.497,
+          268968.754
+        ]
+      },
+      "cpu_ns": {
+        "median": 398281.25,
+        "process_medians": [
+          392312.5,
+          449437.5,
+          404250.0,
+          375187.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 84307.5,
+        "process_medians": [
+          84307.5,
+          84307.5,
+          84307.5,
+          84307.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 144171.874,
+        "process_medians": [
+          146187.507,
+          175343.739,
+          142156.241,
+          133124.991
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 713031.2515,
+        "process_medians": [
+          1392906.25,
+          943593.75,
+          482468.753,
+          452000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 956500.0,
+        "process_medians": [
+          1997437.5,
+          1202968.75,
+          710031.25,
+          671062.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 107995.5,
+        "process_medians": [
+          107995.5,
+          107995.5,
+          107995.5,
+          107995.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 711499.999,
+        "process_medians": [
+          1391031.25,
+          941531.242,
+          481468.756,
+          450781.252
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 856718.7485,
+        "process_medians": [
+          1372281.25,
+          1306718.75,
+          396937.503,
+          406718.747
+        ]
+      },
+      "cpu_ns": {
+        "median": 1243734.375,
+        "process_medians": [
+          2090031.25,
+          1834906.25,
+          618906.25,
+          652562.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 43347.5,
+        "process_medians": [
+          43347.5,
+          43347.5,
+          43347.5,
+          43347.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 848062.4995,
+        "process_medians": [
+          1370750.0,
+          1290593.75,
+          395624.993,
+          405531.249
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 546249.998,
+        "process_medians": [
+          555250.008,
+          545999.996,
+          546249.998,
+          546249.998
+        ]
+      },
+      "cpu_ns": {
+        "median": 546250.0,
+        "process_medians": [
+          555500.0,
+          546000.0,
+          546250.0,
+          546250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1697948.0,
+        "process_medians": [
+          1697948.0,
+          1697948.0,
+          1697948.0,
+          1697948.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 387250.009,
+        "process_medians": [
+          395500.014,
+          387250.009,
+          387250.009,
+          387000.007
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 161749.9945,
+        "process_medians": [
+          161500.007,
+          238500.012,
+          161500.007,
+          161999.982
+        ]
+      },
+      "cpu_ns": {
+        "median": 162125.0,
+        "process_medians": [
+          161500.0,
+          189500.0,
+          162250.0,
+          162000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1223212.0,
+        "process_medians": [
+          1223212.0,
+          1223212.0,
+          1223212.0,
+          1223212.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 5000.02352,
+        "process_medians": [
+          5000.00897,
+          5500.01278,
+          5000.03807,
+          4999.97986
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2383999.98,
+        "process_medians": [
+          2527249.98,
+          4204000.0,
+          2240749.98,
+          2168500.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 3181125.0,
+        "process_medians": [
+          3413250.0,
+          3992750.0,
+          2949000.0,
+          2877000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1147292.0,
+        "process_medians": [
+          1147292.0,
+          1147292.0,
+          1147292.0,
+          1147292.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 525000.0105000001,
+        "process_medians": [
+          532999.984,
+          847750.023,
+          517000.037,
+          497000.001
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 2253124.9850000003,
+        "process_medians": [
+          2366999.98,
+          4267499.99,
+          2139249.99,
+          1940000.02
+        ]
+      },
+      "cpu_ns": {
+        "median": 3066875.0,
+        "process_medians": [
+          3165500.0,
+          4914500.0,
+          2968250.0,
+          2651500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 672556.0,
+        "process_medians": [
+          672556.0,
+          672556.0,
+          672556.0,
+          672556.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 136874.9945,
+        "process_medians": [
+          135999.988,
+          141750.003,
+          137750.001,
+          118999.975
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 8563125.01,
+        "process_medians": [
+          9140000.01,
+          9618999.99,
+          3528750.01,
+          7986250.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 11528750.0,
+        "process_medians": [
+          13144500.0,
+          10813750.0,
+          4917750.0,
+          12243750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 819612.0,
+        "process_medians": [
+          819612.0,
+          819612.0,
+          819612.0,
+          819612.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1171375.0150000001,
+        "process_medians": [
+          1225500.02,
+          1117250.01,
+          766500.045,
+          1461500.01
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 7563875.01,
+        "process_medians": [
+          6299500.0,
+          10755750.0,
+          2994250.01,
+          8828250.02
+        ]
+      },
+      "cpu_ns": {
+        "median": 9726125.0,
+        "process_medians": [
+          6223750.0,
+          13228500.0,
+          4357750.0,
+          14289250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 344876.0,
+        "process_medians": [
+          344876.0,
+          344876.0,
+          344876.0,
+          344876.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 694249.9750000001,
+        "process_medians": [
+          709999.993,
+          678499.957,
+          360000.005,
+          990250.002
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 539750.0065,
+        "process_medians": [
+          537000.014,
+          546249.998,
+          541499.991,
+          538000.022
+        ]
+      },
+      "cpu_ns": {
+        "median": 540000.0,
+        "process_medians": [
+          537250.0,
+          543250.0,
+          542000.0,
+          538000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1674428.0,
+        "process_medians": [
+          1674428.0,
+          1674428.0,
+          1674428.0,
+          1674428.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 424124.999,
+        "process_medians": [
+          421250.006,
+          429499.982,
+          425500.009,
+          422749.989
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 155250.0035,
+        "process_medians": [
+          155999.995,
+          153999.979,
+          154500.012,
+          156499.998
+        ]
+      },
+      "cpu_ns": {
+        "median": 155625.0,
+        "process_medians": [
+          156500.0,
+          154250.0,
+          154750.0,
+          156750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1199692.0,
+        "process_medians": [
+          1199692.0,
+          1199692.0,
+          1199692.0,
+          1199692.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 36625.016950000005,
+        "process_medians": [
+          36749.9888,
+          36499.9869,
+          36500.0451,
+          38000.0565
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1083124.994,
+        "process_medians": [
+          1201999.98,
+          1503250.01,
+          964250.008,
+          833750.004
+        ]
+      },
+      "cpu_ns": {
+        "median": 1245875.0,
+        "process_medians": [
+          1240750.0,
+          1650000.0,
+          1251000.0,
+          1129750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1136092.0,
+        "process_medians": [
+          1136092.0,
+          1136092.0,
+          1136092.0,
+          1136092.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 727749.9824999999,
+        "process_medians": [
+          766999.961,
+          1021000.0,
+          688500.004,
+          600500.032
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 439875.0025,
+        "process_medians": [
+          440250.005,
+          439500.0,
+          688750.006,
+          432500.005
+        ]
+      },
+      "cpu_ns": {
+        "median": 762250.0,
+        "process_medians": [
+          757750.0,
+          760250.0,
+          1013500.0,
+          764250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 661356.0,
+        "process_medians": [
+          661356.0,
+          661356.0,
+          661356.0,
+          661356.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 219124.9805,
+        "process_medians": [
+          216499.99,
+          221749.971,
+          337499.98,
+          210250.0
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1049250.0,
+        "process_medians": [
+          992999.994,
+          1082000.0,
+          1271750.02,
+          1016500.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 1610875.0,
+        "process_medians": [
+          1508500.0,
+          1679250.0,
+          1614750.0,
+          1607000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 806620.0,
+        "process_medians": [
+          806620.0,
+          806620.0,
+          806620.0,
+          806620.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1045375.0,
+        "process_medians": [
+          980250.014,
+          1077250.02,
+          1268500.0,
+          1013499.98
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 776999.994,
+        "process_medians": [
+          868250.005,
+          849000.004,
+          704999.984,
+          566249.975
+        ]
+      },
+      "cpu_ns": {
+        "median": 1179500.0,
+        "process_medians": [
+          1176500.0,
+          1475250.0,
+          1182500.0,
+          1094000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 331884.0,
+        "process_medians": [
+          331884.0,
+          331884.0,
+          331884.0,
+          331884.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 768999.9909999999,
+        "process_medians": [
+          836249.994,
+          842500.012,
+          701749.988,
+          561749.97
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 8610499.965,
+        "process_medians": [
+          8604999.98,
+          8673999.92,
+          8615999.95,
+          8532999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 8610500.0,
+        "process_medians": [
+          8605000.0,
+          8678000.0,
+          8616000.0,
+          8534000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 26697768.0,
+        "process_medians": [
+          26697768.0,
+          26697768.0,
+          26697768.0,
+          26697768.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6142499.975,
+        "process_medians": [
+          6138999.95,
+          6187999.97,
+          6146000.0,
+          6075999.93
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 2505999.99,
+        "process_medians": [
+          2518999.97,
+          2507000.0,
+          2504999.98,
+          2504999.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 2507000.0,
+        "process_medians": [
+          2519000.0,
+          2508000.0,
+          2506000.0,
+          2505000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19190656.0,
+        "process_medians": [
+          19190656.0,
+          19190656.0,
+          19190656.0,
+          19190656.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 37999.9401,
+        "process_medians": [
+          37999.9401,
+          37999.9401,
+          37999.9401,
+          37000.0489
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 13779000.05,
+        "process_medians": [
+          13829000.1,
+          13893000.1,
+          13530000.0,
+          13729000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 18717000.0,
+        "process_medians": [
+          18797000.0,
+          19443000.0,
+          18637000.0,
+          18573000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18084392.0,
+        "process_medians": [
+          18084392.0,
+          18084392.0,
+          18084392.0,
+          18084392.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6368000.0,
+        "process_medians": [
+          6402000.09,
+          6362000.01,
+          6373999.99,
+          6300000.01
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 7440499.96,
+        "process_medians": [
+          7592999.96,
+          11079000.0,
+          7287999.96,
+          7286999.96
+        ]
+      },
+      "cpu_ns": {
+        "median": 12435000.0,
+        "process_medians": [
+          12384000.0,
+          12961000.0,
+          12362000.0,
+          12486000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10577280.0,
+        "process_medians": [
+          10577280.0,
+          10577280.0,
+          10577280.0,
+          10577280.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 213499.99550000002,
+        "process_medians": [
+          215000.007,
+          222000.061,
+          204000.04,
+          211999.984
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 19052499.95,
+        "process_medians": [
+          22565000.0,
+          18613999.9,
+          19491000.0,
+          17412000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 28864500.0,
+        "process_medians": [
+          29825000.0,
+          27904000.0,
+          29994000.0,
+          26864000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12812840.0,
+        "process_medians": [
+          12812840.0,
+          12812840.0,
+          12812840.0,
+          12812840.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6964500.005,
+        "process_medians": [
+          7196999.97,
+          7280000.02,
+          6595999.93,
+          6732000.04
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 10157499.965,
+        "process_medians": [
+          9825000.07,
+          15718000.0,
+          9834000.03,
+          10480999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 19080000.0,
+        "process_medians": [
+          18473000.0,
+          19824000.0,
+          18565000.0,
+          19595000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5305728.0,
+        "process_medians": [
+          5305728.0,
+          5305728.0,
+          5305728.0,
+          5305728.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 695499.9990000001,
+        "process_medians": [
+          677000.033,
+          870999.997,
+          634999.946,
+          713999.965
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 9316500.045,
+        "process_medians": [
+          9373000.01,
+          9390999.91,
+          9260000.08,
+          9232999.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 9315500.0,
+        "process_medians": [
+          9372000.0,
+          9381000.0,
+          9259000.0,
+          9236000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 26817448.0,
+        "process_medians": [
+          26817448.0,
+          26817448.0,
+          26817448.0,
+          26817448.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6253500.0,
+        "process_medians": [
+          6251999.99,
+          6262999.96,
+          6255000.01,
+          6201999.96
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 2953500.0199999996,
+        "process_medians": [
+          2968000.02,
+          2952000.01,
+          2952000.01,
+          2955000.03
+        ]
+      },
+      "cpu_ns": {
+        "median": 2956000.0,
+        "process_medians": [
+          2969000.0,
+          2955000.0,
+          2953000.0,
+          2957000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19310336.0,
+        "process_medians": [
+          19310336.0,
+          19310336.0,
+          19310336.0,
+          19310336.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 166000.0415,
+        "process_medians": [
+          166999.991,
+          164999.976,
+          166000.1,
+          165999.983
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12360500.0,
+        "process_medians": [
+          12612000.0,
+          13074000.0,
+          12109000.0,
+          12038999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 15282500.0,
+        "process_medians": [
+          15866000.0,
+          15670000.0,
+          14895000.0,
+          14792000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18065192.0,
+        "process_medians": [
+          18065192.0,
+          18065192.0,
+          18065192.0,
+          18065192.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6983000.03,
+        "process_medians": [
+          7117000.06,
+          6968999.98,
+          6997000.08,
+          6926999.89
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 6039500.0600000005,
+        "process_medians": [
+          5939000.05,
+          5876000.04,
+          6140000.07,
+          8164000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 9106500.0,
+        "process_medians": [
+          9179000.0,
+          9034000.0,
+          8940000.0,
+          11446000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10558080.0,
+        "process_medians": [
+          10558080.0,
+          10558080.0,
+          10558080.0,
+          10558080.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 818500.0045,
+        "process_medians": [
+          809999.998,
+          780000.002,
+          827000.011,
+          1198000.04
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12495000.0,
+        "process_medians": [
+          14175000.0,
+          12526000.0,
+          12058000.0,
+          12464000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 19620000.0,
+        "process_medians": [
+          21233000.0,
+          19420000.0,
+          19202000.0,
+          19820000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12790568.0,
+        "process_medians": [
+          12790568.0,
+          12790568.0,
+          12790568.0,
+          12790568.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7798000.0600000005,
+        "process_medians": [
+          8020999.96,
+          7993000.09,
+          7603000.03,
+          7553000.0
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 5873000.015000001,
+        "process_medians": [
+          5989000.08,
+          5756999.95,
+          5705000.02,
+          6457000.04
+        ]
+      },
+      "cpu_ns": {
+        "median": 12854500.0,
+        "process_medians": [
+          13032000.0,
+          12931000.0,
+          12694000.0,
+          12778000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5283456.0,
+        "process_medians": [
+          5283456.0,
+          5283456.0,
+          5283456.0,
+          5283456.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1336500.045,
+        "process_medians": [
+          1294000.07,
+          1288999.92,
+          1379000.02,
+          1430000.06
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 97593.75095,
+        "process_medians": [
+          98062.5009,
+          97125.001,
+          97093.7472,
+          99968.7509
+        ]
+      },
+      "cpu_ns": {
+        "median": 97609.375,
+        "process_medians": [
+          98093.75,
+          97062.5,
+          97125.0,
+          99656.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 236731.5,
+        "process_medians": [
+          236731.5,
+          236731.5,
+          236731.5,
+          236731.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 65187.4943,
+        "process_medians": [
+          65343.7382,
+          64750.0055,
+          65031.2504,
+          66937.504
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 42937.499500000005,
+        "process_medians": [
+          43031.2502,
+          42843.7488,
+          42375.0025,
+          43062.4968
+        ]
+      },
+      "cpu_ns": {
+        "median": 42968.75,
+        "process_medians": [
+          43062.5,
+          42875.0,
+          42406.25,
+          43062.5
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 172083.5,
+        "process_medians": [
+          172083.5,
+          172083.5,
+          172083.5,
+          172083.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 10874.9955,
+        "process_medians": [
+          10906.2457,
+          10906.253,
+          10749.9982,
+          10843.7453
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 368890.625,
+        "process_medians": [
+          367312.499,
+          370468.751,
+          334218.752,
+          447406.248
+        ]
+      },
+      "cpu_ns": {
+        "median": 478031.25,
+        "process_medians": [
+          479218.75,
+          476843.75,
+          448312.5,
+          551531.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 149979.5,
+        "process_medians": [
+          149979.5,
+          149979.5,
+          149979.5,
+          149979.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 210421.8745,
+        "process_medians": [
+          209000.005,
+          211843.744,
+          193999.993,
+          266812.509
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 327437.501,
+        "process_medians": [
+          287187.5,
+          404625.0,
+          285812.497,
+          367687.502
+        ]
+      },
+      "cpu_ns": {
+        "median": 438750.0,
+        "process_medians": [
+          408750.0,
+          469000.0,
+          405281.25,
+          468750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 85331.5,
+        "process_medians": [
+          85331.5,
+          85331.5,
+          85331.5,
+          85331.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 154921.8725,
+        "process_medians": [
+          138281.241,
+          166968.752,
+          142874.993,
+          184656.274
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 938218.751,
+        "process_medians": [
+          993875.001,
+          882562.501,
+          1289875.0,
+          621468.753
+        ]
+      },
+      "cpu_ns": {
+        "median": 1045750.0,
+        "process_medians": [
+          1068812.5,
+          1022687.5,
+          2028343.75,
+          854593.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 108507.5,
+        "process_medians": [
+          108507.5,
+          108507.5,
+          108507.5,
+          108507.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 928671.8759999999,
+        "process_medians": [
+          976031.25,
+          881312.502,
+          1288750.0,
+          620062.499
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 679109.373,
+        "process_medians": [
+          768468.748,
+          899281.251,
+          589749.998,
+          538374.999
+        ]
+      },
+      "cpu_ns": {
+        "median": 1040812.5,
+        "process_medians": [
+          1084468.75,
+          1101875.0,
+          997156.25,
+          772718.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 43859.5,
+        "process_medians": [
+          43859.5,
+          43859.5,
+          43859.5,
+          43859.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 677421.873,
+        "process_medians": [
+          767250.0,
+          882250.002,
+          587593.746,
+          536781.245
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 729499.996,
+        "process_medians": [
+          731500.011,
+          727499.981,
+          725249.993,
+          819749.985
+        ]
+      },
+      "cpu_ns": {
+        "median": 729500.0,
+        "process_medians": [
+          731500.0,
+          727500.0,
+          725500.0,
+          785000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1849500.0,
+        "process_medians": [
+          1849500.0,
+          1849500.0,
+          1849500.0,
+          1849500.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 395999.97400000005,
+        "process_medians": [
+          396749.965,
+          395249.983,
+          394750.037,
+          421749.981
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 343249.99450000003,
+        "process_medians": [
+          344500.004,
+          338499.987,
+          341999.985,
+          357749.988
+        ]
+      },
+      "cpu_ns": {
+        "median": 343500.0,
+        "process_medians": [
+          344750.0,
+          338500.0,
+          342250.0,
+          356750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1374764.0,
+        "process_medians": [
+          1374764.0,
+          1374764.0,
+          1374764.0,
+          1374764.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 10625.022649999999,
+        "process_medians": [
+          10499.9926,
+          10500.0217,
+          10750.0236,
+          10999.9964
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 3253749.995,
+        "process_medians": [
+          3087750.0,
+          4527999.99,
+          2608750.02,
+          3419749.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 4076750.0,
+        "process_medians": [
+          4025500.0,
+          4825250.0,
+          3612750.0,
+          4128000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1155484.0,
+        "process_medians": [
+          1155484.0,
+          1155484.0,
+          1155484.0,
+          1155484.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 635874.996,
+        "process_medians": [
+          604499.975,
+          667250.017,
+          524249.976,
+          717500.021
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 2790375.005,
+        "process_medians": [
+          2420250.01,
+          4312250.01,
+          2421750.02,
+          3158999.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 3621750.0,
+        "process_medians": [
+          3391500.0,
+          5049250.0,
+          3359250.0,
+          3852000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 680748.0,
+        "process_medians": [
+          680748.0,
+          680748.0,
+          680748.0,
+          680748.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 162999.975,
+        "process_medians": [
+          146750.011,
+          179249.939,
+          142250.006,
+          203750.009
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 7199000.0,
+        "process_medians": [
+          9381000.01,
+          5097749.99,
+          7590500.0,
+          6807500.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 10462625.0,
+        "process_medians": [
+          13001750.0,
+          6320000.0,
+          12151250.0,
+          8774000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 823708.0,
+        "process_medians": [
+          823708.0,
+          823708.0,
+          823708.0,
+          823708.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1154874.99,
+        "process_medians": [
+          1270000.01,
+          1083249.98,
+          1226500.0,
+          1065249.96
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 5303625.0,
+        "process_medians": [
+          3303250.01,
+          6736499.98,
+          6799500.0,
+          3870750.02
+        ]
+      },
+      "cpu_ns": {
+        "median": 7715500.0,
+        "process_medians": [
+          5584500.0,
+          9792750.0,
+          10936000.0,
+          5638250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 348972.0,
+        "process_medians": [
+          348972.0,
+          348972.0,
+          348972.0,
+          348972.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 471125.0075,
+        "process_medians": [
+          386000.0,
+          794749.998,
+          430750.02,
+          511499.995
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 734624.9909999999,
+        "process_medians": [
+          740499.992,
+          728749.99,
+          727000.006,
+          751499.989
+        ]
+      },
+      "cpu_ns": {
+        "median": 734250.0,
+        "process_medians": [
+          739750.0,
+          728750.0,
+          727250.0,
+          751500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1836732.0,
+        "process_medians": [
+          1836732.0,
+          1836732.0,
+          1836732.0,
+          1836732.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 477750.0,
+        "process_medians": [
+          482250.034,
+          473249.966,
+          472000.043,
+          488249.963
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 339624.996,
+        "process_medians": [
+          339749.997,
+          339499.995,
+          338250.014,
+          341500.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 339625.0,
+        "process_medians": [
+          339750.0,
+          339500.0,
+          338250.0,
+          341500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1361996.0,
+        "process_medians": [
+          1361996.0,
+          1361996.0,
+          1361996.0,
+          1361996.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 85500.02535000001,
+        "process_medians": [
+          85500.0108,
+          85749.9836,
+          85499.9817,
+          85500.0399
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 929000.0015,
+        "process_medians": [
+          925250.002,
+          919749.989,
+          932750.001,
+          1362749.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 1329000.0,
+        "process_medians": [
+          1274750.0,
+          1315500.0,
+          1342500.0,
+          1583750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1144284.0,
+        "process_medians": [
+          1144284.0,
+          1144284.0,
+          1144284.0,
+          1144284.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 652000.0025,
+        "process_medians": [
+          659500.016,
+          639000.005,
+          644499.989,
+          909499.999
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 652624.993,
+        "process_medians": [
+          526499.993,
+          833499.973,
+          526250.02,
+          778749.993
+        ]
+      },
+      "cpu_ns": {
+        "median": 939500.0,
+        "process_medians": [
+          899250.0,
+          976000.0,
+          903000.0,
+          1096250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 669548.0,
+        "process_medians": [
+          669548.0,
+          669548.0,
+          669548.0,
+          669548.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 321249.9865,
+        "process_medians": [
+          268250.005,
+          440750.009,
+          256250.001,
+          374249.968
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1275375.02,
+        "process_medians": [
+          1000249.99,
+          1643500.0,
+          1053500.02,
+          1497250.02
+        ]
+      },
+      "cpu_ns": {
+        "median": 1788625.0,
+        "process_medians": [
+          1677000.0,
+          2081750.0,
+          1755250.0,
+          1822000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 810716.0,
+        "process_medians": [
+          810716.0,
+          810716.0,
+          810716.0,
+          810716.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1267124.9849999999,
+        "process_medians": [
+          996999.966,
+          1634749.99,
+          1045749.99,
+          1488499.98
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 787000.0115,
+        "process_medians": [
+          677750.009,
+          922750.012,
+          676750.002,
+          896250.014
+        ]
+      },
+      "cpu_ns": {
+        "median": 1410250.0,
+        "process_medians": [
+          1320500.0,
+          1414250.0,
+          1406250.0,
+          1577250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 335980.0,
+        "process_medians": [
+          335980.0,
+          335980.0,
+          335980.0,
+          335980.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 758124.9955,
+        "process_medians": [
+          673250.033,
+          842500.012,
+          673749.979,
+          870249.991
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 11822500.05,
+        "process_medians": [
+          12266000.0,
+          11625000.0,
+          11682000.0,
+          11963000.1
+        ]
+      },
+      "cpu_ns": {
+        "median": 11770500.0,
+        "process_medians": [
+          11859000.0,
+          11625000.0,
+          11682000.0,
+          11906000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29294632.0,
+        "process_medians": [
+          29294632.0,
+          29294632.0,
+          29294632.0,
+          29294632.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6259500.05,
+        "process_medians": [
+          6274000.04,
+          6217999.97,
+          6245000.06,
+          6322999.95
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 5597999.960000001,
+        "process_medians": [
+          5495999.94,
+          5592999.98,
+          5602999.94,
+          5634999.95
+        ]
+      },
+      "cpu_ns": {
+        "median": 5598000.0,
+        "process_medians": [
+          5497000.0,
+          5594000.0,
+          5602000.0,
+          5635000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21787520.0,
+        "process_medians": [
+          21787520.0,
+          21787520.0,
+          21787520.0,
+          21787520.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 83999.9411,
+        "process_medians": [
+          83000.0499,
+          83999.9411,
+          84999.9487,
+          83999.9411
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 17914999.95,
+        "process_medians": [
+          15689999.9,
+          20140000.0,
+          14858000.0,
+          21437000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 22453000.0,
+        "process_medians": [
+          21235000.0,
+          23542000.0,
+          21364000.0,
+          24003000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18215464.0,
+        "process_medians": [
+          18215464.0,
+          18215464.0,
+          18215464.0,
+          18215464.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6410500.035,
+        "process_medians": [
+          6401000.08,
+          6642999.94,
+          6368999.95,
+          6419999.99
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 11541499.969999999,
+        "process_medians": [
+          8734999.92,
+          13398000.0,
+          9684999.94,
+          15017000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 16633000.0,
+        "process_medians": [
+          14462000.0,
+          16987000.0,
+          16279000.0,
+          18292000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10708352.0,
+        "process_medians": [
+          10708352.0,
+          10708352.0,
+          10708352.0,
+          10708352.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 309500.0285,
+        "process_medians": [
+          249999.925,
+          369000.016,
+          250000.041,
+          449000.043
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 18727999.95,
+        "process_medians": [
+          16931000.0,
+          20524999.9,
+          16490000.1,
+          21662000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 28785500.0,
+        "process_medians": [
+          27452000.0,
+          29447000.0,
+          28124000.0,
+          31026000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12878376.0,
+        "process_medians": [
+          12878376.0,
+          12878376.0,
+          12878376.0,
+          12878376.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6983000.029999999,
+        "process_medians": [
+          6857000.06,
+          7109000.0,
+          6843999.96,
+          7797000.0
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 13877999.95,
+        "process_medians": [
+          13579999.9,
+          15797000.0,
+          10693999.9,
+          14176000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 22526000.0,
+        "process_medians": [
+          21958000.0,
+          22914000.0,
+          22138000.0,
+          23821000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5371264.0,
+        "process_medians": [
+          5371264.0,
+          5371264.0,
+          5371264.0,
+          5371264.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 820000.0155,
+        "process_medians": [
+          751000.014,
+          1216999.95,
+          823999.988,
+          816000.043
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 12101000.0,
+        "process_medians": [
+          12109000.0,
+          12093000.0,
+          12069000.0,
+          12483999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 12101000.0,
+        "process_medians": [
+          12108000.0,
+          12094000.0,
+          12072000.0,
+          12292000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29414312.0,
+        "process_medians": [
+          29414312.0,
+          29414312.0,
+          29414312.0,
+          29414312.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 6465000.045,
+        "process_medians": [
+          6456000.03,
+          6466000.11,
+          6463999.98,
+          6615000.08
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 6007000.045,
+        "process_medians": [
+          6121000.04,
+          5981000.02,
+          5966000.03,
+          6033000.07
+        ]
+      },
+      "cpu_ns": {
+        "median": 6008500.0,
+        "process_medians": [
+          6047000.0,
+          5984000.0,
+          5967000.0,
+          6033000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21907200.0,
+        "process_medians": [
+          21907200.0,
+          21907200.0,
+          21907200.0,
+          21907200.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 353000.0105,
+        "process_medians": [
+          360000.064,
+          350999.995,
+          350999.995,
+          355000.026
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 14092500.05,
+        "process_medians": [
+          14913000.1,
+          14440000.1,
+          13695000.1,
+          13745000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 18238000.0,
+        "process_medians": [
+          18571000.0,
+          18515000.0,
+          17799000.0,
+          17961000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 18196264.0,
+        "process_medians": [
+          18196264.0,
+          18196264.0,
+          18196264.0,
+          18196264.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7186499.949999999,
+        "process_medians": [
+          7406000.05,
+          7217000.01,
+          7155999.89,
+          7147999.95
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 8063999.995000001,
+        "process_medians": [
+          7556000.03,
+          9740000.01,
+          7186000.0,
+          8571999.96
+        ]
+      },
+      "cpu_ns": {
+        "median": 12290500.0,
+        "process_medians": [
+          11482000.0,
+          13099000.0,
+          11420000.0,
+          13221000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10689152.0,
+        "process_medians": [
+          10689152.0,
+          10689152.0,
+          10689152.0,
+          10689152.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 994000.061,
+        "process_medians": [
+          946000.102,
+          1113999.98,
+          1042000.02,
+          905000.023
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 15355500.0,
+        "process_medians": [
+          15623000.0,
+          15088000.0,
+          13998000.0,
+          15877999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 23889000.0,
+        "process_medians": [
+          22843000.0,
+          24935000.0,
+          22517000.0,
+          25360000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 12856104.0,
+        "process_medians": [
+          12856104.0,
+          12856104.0,
+          12856104.0,
+          12856104.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 8305499.97,
+        "process_medians": [
+          8401999.95,
+          8208999.99,
+          7877000.03,
+          8497999.98
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 7824500.035,
+        "process_medians": [
+          9662000.0,
+          8735000.04,
+          6823999.92,
+          6914000.03
+        ]
+      },
+      "cpu_ns": {
+        "median": 16562500.0,
+        "process_medians": [
+          16736000.0,
+          17194000.0,
+          16389000.0,
+          16200000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 5348992.0,
+        "process_medians": [
+          5348992.0,
+          5348992.0,
+          5348992.0,
+          5348992.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1953499.9749999999,
+        "process_medians": [
+          3142999.95,
+          2187000.01,
+          1669000.02,
+          1719999.94
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 260078.1265,
+        "process_medians": [
+          259593.751,
+          260468.751,
+          259687.502,
+          260468.751
+        ]
+      },
+      "cpu_ns": {
+        "median": 260078.125,
+        "process_medians": [
+          259593.75,
+          260500.0,
+          259687.5,
+          260468.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 407251.5,
+        "process_medians": [
+          407251.5,
+          407251.5,
+          407251.5,
+          407251.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 109499.9955,
+        "process_medians": [
+          109250.006,
+          109781.253,
+          109468.747,
+          109531.244
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 201109.3765,
+        "process_medians": [
+          201781.251,
+          201468.752,
+          200625.0,
+          200750.001
+        ]
+      },
+      "cpu_ns": {
+        "median": 201171.875,
+        "process_medians": [
+          201781.25,
+          201562.5,
+          200656.25,
+          200781.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 334835.5,
+        "process_medians": [
+          334835.5,
+          334835.5,
+          334835.5,
+          334835.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 50171.8805,
+        "process_medians": [
+          50281.2545,
+          50281.2763,
+          50062.5065,
+          50000.0097
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 441656.2515,
+        "process_medians": [
+          466375.001,
+          687781.252,
+          416937.502,
+          407375.002
+        ]
+      },
+      "cpu_ns": {
+        "median": 657750.0,
+        "process_medians": [
+          669843.75,
+          782875.0,
+          645656.25,
+          635093.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 240947.5,
+        "process_medians": [
+          240947.5,
+          240947.5,
+          240947.5,
+          240947.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 245812.495,
+        "process_medians": [
+          256187.494,
+          361156.246,
+          235437.496,
+          232374.998
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 457921.875,
+        "process_medians": [
+          555500.003,
+          604249.999,
+          360343.747,
+          356406.25
+        ]
+      },
+      "cpu_ns": {
+        "median": 625015.625,
+        "process_medians": [
+          686562.5,
+          661968.75,
+          588062.5,
+          582375.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 168531.5,
+        "process_medians": [
+          168531.5,
+          168531.5,
+          168531.5,
+          168531.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 231078.12,
+        "process_medians": [
+          277625.0,
+          328937.498,
+          179218.75,
+          184531.24
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 684875.0,
+        "process_medians": [
+          702875.001,
+          1006312.5,
+          666874.999,
+          580750.002
+        ]
+      },
+      "cpu_ns": {
+        "median": 1071828.125,
+        "process_medians": [
+          973437.5,
+          1157593.75,
+          1112125.0,
+          1031531.25
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 157875.5,
+        "process_medians": [
+          157875.5,
+          157875.5,
+          157875.5,
+          157875.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 683843.7509999999,
+        "process_medians": [
+          701937.504,
+          971781.25,
+          665749.998,
+          579781.252
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 603953.1255000001,
+        "process_medians": [
+          670875.001,
+          925812.503,
+          537031.25,
+          533312.497
+        ]
+      },
+      "cpu_ns": {
+        "median": 1007125.0,
+        "process_medians": [
+          1001968.75,
+          1127375.0,
+          1012281.25,
+          966968.75
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 85459.5,
+        "process_medians": [
+          85459.5,
+          85459.5,
+          85459.5,
+          85459.5
+        ]
+      },
+      "first_output_ns": {
+        "median": 601484.3765,
+        "process_medians": [
+          669406.25,
+          921312.494,
+          533562.503,
+          532593.753
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2022750.005,
+        "process_medians": [
+          2024749.99,
+          2026250.0,
+          2020750.02,
+          2020249.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 2022500.0,
+        "process_medians": [
+          2024500.0,
+          2026000.0,
+          2020500.0,
+          2020500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3213828.0,
+        "process_medians": [
+          3213828.0,
+          3213828.0,
+          3213828.0,
+          3213828.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 469499.995,
+        "process_medians": [
+          473499.997,
+          469249.964,
+          469750.026,
+          464250.013
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 1602750.01,
+        "process_medians": [
+          1599500.01,
+          1620750.0,
+          1598000.0,
+          1606000.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 1602875.0,
+        "process_medians": [
+          1599750.0,
+          1615750.0,
+          1598250.0,
+          1606000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 2676780.0,
+        "process_medians": [
+          2676780.0,
+          2676780.0,
+          2676780.0,
+          2676780.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 50000.01695,
+        "process_medians": [
+          50000.0315,
+          50000.0024,
+          49750.0005,
+          50500.0353
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 3340250.01,
+        "process_medians": [
+          3286249.99,
+          5288749.99,
+          3335500.02,
+          3345000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 5096750.0,
+        "process_medians": [
+          4986500.0,
+          5976750.0,
+          5132750.0,
+          5060750.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1883396.0,
+        "process_medians": [
+          1883396.0,
+          1883396.0,
+          1883396.0,
+          1883396.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 601750.027,
+        "process_medians": [
+          603250.024,
+          769750.011,
+          600250.03,
+          596250.0
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 3582375.005,
+        "process_medians": [
+          4254500.0,
+          5703249.98,
+          2910250.01,
+          2874000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 4922875.0,
+        "process_medians": [
+          5122000.0,
+          5482750.0,
+          4723750.0,
+          4687250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1346348.0,
+        "process_medians": [
+          1346348.0,
+          1346348.0,
+          1346348.0,
+          1346348.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 231249.9855,
+        "process_medians": [
+          278249.965,
+          284250.011,
+          165500.038,
+          184250.006
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 5701125.0,
+        "process_medians": [
+          5990750.01,
+          7790500.01,
+          5411499.99,
+          4866499.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 8663250.0,
+        "process_medians": [
+          8709000.0,
+          8617500.0,
+          9208250.0,
+          7914250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1218820.0,
+        "process_medians": [
+          1218820.0,
+          1218820.0,
+          1218820.0,
+          1218820.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1176000.02,
+        "process_medians": [
+          1289250.01,
+          1248250.05,
+          1103749.99,
+          937000.004
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 32,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 5034875.01,
+        "process_medians": [
+          5237500.01,
+          7838499.99,
+          4832250.01,
+          4136250.01
+        ]
+      },
+      "cpu_ns": {
+        "median": 8131750.0,
+        "process_medians": [
+          8094500.0,
+          8982000.0,
+          8169000.0,
+          7179250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 681772.0,
+        "process_medians": [
+          681772.0,
+          681772.0,
+          681772.0,
+          681772.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 552000.012,
+        "process_medians": [
+          556500.017,
+          900999.963,
+          547500.007,
+          483750.016
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2027749.9849999999,
+        "process_medians": [
+          2030999.98,
+          2033000.0,
+          2024499.99,
+          2021750.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 2027750.0,
+        "process_medians": [
+          2031000.0,
+          2033250.0,
+          2024500.0,
+          2022250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3205092.0,
+        "process_medians": [
+          3205092.0,
+          3205092.0,
+          3205092.0,
+          3205092.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 823874.9865,
+        "process_medians": [
+          825249.997,
+          828250.02,
+          822499.976,
+          819749.985
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 1611624.99,
+        "process_medians": [
+          1611499.99,
+          1616750.0,
+          1611749.99,
+          1607499.99
+        ]
+      },
+      "cpu_ns": {
+        "median": 1611625.0,
+        "process_medians": [
+          1611750.0,
+          1614250.0,
+          1611500.0,
+          1607500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 2668044.0,
+        "process_medians": [
+          2668044.0,
+          2668044.0,
+          2668044.0,
+          2668044.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 402124.9915,
+        "process_medians": [
+          401250.029,
+          402000.005,
+          402250.007,
+          402249.978
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 2032624.995,
+        "process_medians": [
+          2323250.0,
+          2218749.99,
+          1832749.99,
+          1846500.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 2960125.0,
+        "process_medians": [
+          3030500.0,
+          3016750.0,
+          2891250.0,
+          2903500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1872196.0,
+        "process_medians": [
+          1872196.0,
+          1872196.0,
+          1872196.0,
+          1872196.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1222874.9849999999,
+        "process_medians": [
+          1391000.0,
+          1299250.0,
+          1146499.97,
+          1139000.0
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 1525999.99,
+        "process_medians": [
+          1581249.99,
+          1691250.01,
+          1470749.99,
+          1391750.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 2501500.0,
+        "process_medians": [
+          2553500.0,
+          2579750.0,
+          2449500.0,
+          2440500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1335148.0,
+        "process_medians": [
+          1335148.0,
+          1335148.0,
+          1335148.0,
+          1335148.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 735874.9715,
+        "process_medians": [
+          830500.008,
+          772499.974,
+          697249.983,
+          699249.969
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 1866625.0,
+        "process_medians": [
+          1970500.02,
+          1995750.0,
+          1678750.01,
+          1762749.98
+        ]
+      },
+      "cpu_ns": {
+        "median": 3573750.0,
+        "process_medians": [
+          3579250.0,
+          3544250.0,
+          3568250.0,
+          3610250.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1205828.0,
+        "process_medians": [
+          1205828.0,
+          1205828.0,
+          1205828.0,
+          1205828.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1830874.9849999999,
+        "process_medians": [
+          1905750.02,
+          1985999.99,
+          1666500.03,
+          1755999.95
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 1317999.995,
+        "process_medians": [
+          1248250.02,
+          1852250.02,
+          1305999.99,
+          1330000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 3065625.0,
+        "process_medians": [
+          3060750.0,
+          3295500.0,
+          3053000.0,
+          3070500.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 668780.0,
+        "process_medians": [
+          668780.0,
+          668780.0,
+          668780.0,
+          668780.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1312625.0150000001,
+        "process_medians": [
+          1243500.01,
+          1846500.03,
+          1301499.99,
+          1323750.04
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 32523499.95,
+        "process_medians": [
+          32640000.0,
+          32633999.9,
+          32345000.1,
+          32413000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 32416500.0,
+        "process_medians": [
+          32419000.0,
+          32594000.0,
+          32346000.0,
+          32414000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 51188752.0,
+        "process_medians": [
+          51188752.0,
+          51188752.0,
+          51188752.0,
+          51188752.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7097000.02,
+        "process_medians": [
+          7120999.97,
+          7143000.02,
+          7073000.07,
+          7010999.95
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 25775500.0,
+        "process_medians": [
+          25732000.0,
+          26018000.0,
+          25669000.0,
+          25819000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 25777000.0,
+        "process_medians": [
+          25730000.0,
+          26012000.0,
+          25669000.0,
+          25824000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 42684288.0,
+        "process_medians": [
+          42684288.0,
+          42684288.0,
+          42684288.0,
+          42684288.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 399000.011,
+        "process_medians": [
+          399000.011,
+          405999.948,
+          398000.004,
+          399000.011
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 29773500.05,
+        "process_medians": [
+          30056000.1,
+          36406000.0,
+          29491000.0,
+          29263000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 46173500.0,
+        "process_medians": [
+          46345000.0,
+          49418000.0,
+          45858000.0,
+          46002000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29862416.0,
+        "process_medians": [
+          29862416.0,
+          29862416.0,
+          29862416.0,
+          29862416.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 7465499.975,
+        "process_medians": [
+          7461000.0,
+          7509000.02,
+          7469999.95,
+          7257999.97
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 24410999.95,
+        "process_medians": [
+          26195999.9,
+          27614000.0,
+          22437000.1,
+          22626000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 40209500.0,
+        "process_medians": [
+          41082000.0,
+          41663000.0,
+          39238000.0,
+          39337000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21357952.0,
+        "process_medians": [
+          21357952.0,
+          21357952.0,
+          21357952.0,
+          21357952.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 741500.0,
+        "process_medians": [
+          722999.917,
+          822000.089,
+          737000.024,
+          745999.976
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 29073500.0,
+        "process_medians": [
+          31285000.0,
+          30767000.0,
+          26711000.0,
+          27380000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 55242500.0,
+        "process_medians": [
+          58498000.0,
+          54725000.0,
+          55760000.0,
+          54417000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19200528.0,
+        "process_medians": [
+          19200528.0,
+          19200528.0,
+          19200528.0,
+          19200528.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 8050500.01,
+        "process_medians": [
+          8307000.04,
+          8062000.04,
+          8038999.98,
+          7878000.03
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 256,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 21810500.0,
+        "process_medians": [
+          23176000.0,
+          25794000.0,
+          19914000.1,
+          20445000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 49183000.0,
+        "process_medians": [
+          50203000.0,
+          49436000.0,
+          48930000.0,
+          48296000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10696064.0,
+        "process_medians": [
+          10696064.0,
+          10696064.0,
+          10696064.0,
+          10696064.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1307000.0550000002,
+        "process_medians": [
+          1306000.05,
+          1792999.92,
+          1308000.06,
+          1188999.97
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 32763000.0,
+        "process_medians": [
+          33031999.9,
+          32850000.0,
+          32664000.1,
+          32676000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 32741500.0,
+        "process_medians": [
+          32806000.0,
+          32846000.0,
+          32664000.0,
+          32677000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 51173776.0,
+        "process_medians": [
+          51173776.0,
+          51173776.0,
+          51173776.0,
+          51173776.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 8320999.970000001,
+        "process_medians": [
+          8339999.94,
+          8365000.02,
+          8302000.0,
+          8221000.08
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 1,
+      "phase": "execute",
+      "ns": {
+        "median": 26057000.05,
+        "process_medians": [
+          26008000.0,
+          26577000.0,
+          25992000.0,
+          26106000.1
+        ]
+      },
+      "cpu_ns": {
+        "median": 26048500.0,
+        "process_medians": [
+          26006000.0,
+          26091000.0,
+          25993000.0,
+          26108000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 42669312.0,
+        "process_medians": [
+          42669312.0,
+          42669312.0,
+          42669312.0,
+          42669312.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 1620500.0,
+        "process_medians": [
+          1618000.1,
+          1618999.99,
+          1623000.02,
+          1622000.01
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 28010500.0,
+        "process_medians": [
+          28380000.0,
+          28321000.0,
+          27676000.0,
+          27700000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 42680000.0,
+        "process_medians": [
+          43149000.0,
+          42576000.0,
+          42784000.0,
+          42254000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29843216.0,
+        "process_medians": [
+          29843216.0,
+          29843216.0,
+          29843216.0,
+          29843216.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 9404000.010000002,
+        "process_medians": [
+          9489999.97,
+          9095999.99,
+          9709000.01,
+          9318000.05
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 2,
+      "phase": "execute",
+      "ns": {
+        "median": 20752999.95,
+        "process_medians": [
+          20386000.0,
+          22291000.0,
+          20103000.0,
+          21119999.9
+        ]
+      },
+      "cpu_ns": {
+        "median": 35746500.0,
+        "process_medians": [
+          35108000.0,
+          36238000.0,
+          35279000.0,
+          36214000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 21338752.0,
+        "process_medians": [
+          21338752.0,
+          21338752.0,
+          21338752.0,
+          21338752.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 2727999.99,
+        "process_medians": [
+          2741000.03,
+          2714999.95,
+          2663999.91,
+          2971000.04
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "compile-execute",
+      "ns": {
+        "median": 23957499.95,
+        "process_medians": [
+          25111999.9,
+          23202000.0,
+          24712999.9,
+          22501000.1
+        ]
+      },
+      "cpu_ns": {
+        "median": 49293500.0,
+        "process_medians": [
+          49431000.0,
+          47168000.0,
+          51423000.0,
+          49156000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 19178256.0,
+        "process_medians": [
+          19178256.0,
+          19178256.0,
+          19178256.0,
+          19178256.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 10692500.05,
+        "process_medians": [
+          11312000.0,
+          10869000.0,
+          10506000.0,
+          10516000.1
+        ]
+      }
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "tile": 1024,
+      "workers": 4,
+      "phase": "execute",
+      "ns": {
+        "median": 15871000.0,
+        "process_medians": [
+          15870000.0,
+          17044000.0,
+          15005000.1,
+          15872000.0
+        ]
+      },
+      "cpu_ns": {
+        "median": 43195000.0,
+        "process_medians": [
+          43176000.0,
+          43214000.0,
+          42042000.0,
+          44025000.0
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 10673792.0,
+        "process_medians": [
+          10673792.0,
+          10673792.0,
+          10673792.0,
+          10673792.0
+        ]
+      },
+      "first_output_ns": {
+        "median": 3764999.9699999997,
+        "process_medians": [
+          3779000.02,
+          3750999.92,
+          3555000.06,
+          4005000.0
+        ]
+      }
+    }
+  ],
+  "scope": "Whole four-scenario jobs. Coordinator allocation excludes worker allocations. First output is a sample mean, not a tail guarantee. Shared host."
+}

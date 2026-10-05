@@ -788,9 +788,14 @@
 
 (test
  (name native_fast_planner)
- (modules native_fast_planner)
+ (modules
+  native_fast_planner
+  planner_native_routing
+  native_planner_signature)
  (modes byte exe)
- (libraries morphiq_risk)
+ (libraries morphiq_risk morphiq_fp)
+ (flags
+  (:standard -open Morphiq_fp))
  (deps
   ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
   ../lib/dllmorphiq_risk_stubs%{ext_dll})
@@ -799,6 +804,30 @@
    CAML_LD_LIBRARY_PATH
    ../lib:../lib/fp
    (run %{test}))))
+
+(rule
+ (target planner_native_routing.ml)
+ (deps ../lib/planner.ml ../scripts/instrument_planner.py)
+ (action
+  (with-stdout-to
+   %{target}
+   (run
+    python3
+    %{dep:../scripts/instrument_planner.py}
+    %{dep:../lib/planner.ml}
+    --force-native-routing))))
+
+(rule
+ (target native_planner_signature.ml)
+ (deps ../lib/planner.mli ../scripts/instrument_planner.py)
+ (action
+  (with-stdout-to
+   %{target}
+   (run
+    python3
+    %{dep:../scripts/instrument_planner.py}
+    --signature
+    %{dep:../lib/planner.mli}))))
 
 (rule
  (alias runtest)
