@@ -3,12 +3,16 @@ open Morphiq_risk
 let get = function Ok x -> x | Error _ -> failwith "profile request failed"
 let calls = ref 1
 let mode = ref "cash"
+let phase = ref "price"
+let measure = ref false
 
 let () =
   Arg.parse
     [
       ("--calls", Arg.Set_int calls, "Number of American price calls");
       ("--mode", Arg.Set_string mode, "none, zero, cash, multiple");
+      ("--phase", Arg.Set_string phase, "admission, price, diagnostics");
+      ("--measure", Arg.Set measure, "Measure without allocation profiling");
       ( "--version",
         Arg.Unit
           (fun () ->
@@ -34,9 +38,9 @@ let () =
         volatility = get (Vol.lognormal 0.2);
       }
   in
-  let admitted =
+  let admission =
     match !mode with
-    | "none" -> get (A.admit inputs)
+    | "none" -> fun () -> get (A.admit (Sys.opaque_identity inputs))
     | "zero" | "cash" | "multiple" ->
         let dividends =
           if !mode = "multiple" then
@@ -44,16 +48,22 @@ let () =
           else
             [| A.{ time = 0.5; amount = (if !mode = "zero" then 0. else 5.) } |]
         in
-        get
-          (A.admit_cash inputs
-             {
-               valuation_side = Regular;
-               opening_side = Regular;
-               expiry_side = Regular;
-               dividends;
-             })
+        let cash : A.cash_specification =
+          {
+            valuation_side = Regular;
+            opening_side = Regular;
+            expiry_side = Regular;
+            dividends;
+          }
+        in
+        fun () ->
+          get
+            (A.admit_cash
+               (Sys.opaque_identity inputs)
+               (Sys.opaque_identity cash))
     | _ -> invalid_arg "mode"
   in
+  let admitted = admission () in
   let cfg =
     get
       (A.configure ~tolerance:1. ~space_cells:128 ~time_steps:128
@@ -68,21 +78,45 @@ let () =
              policy_iterations = 64;
            })
   in
-  let price () = get (A.price cfg admitted Side.Put) in
-  for _ = 1 to 1 do
-    ignore (Sys.opaque_identity (price ()))
-  done;
-  let words () =
-    let a, b, c = Gc.counters () in
-    a +. c -. b
+  let operation =
+    match !phase with
+    | "admission" -> fun () -> ignore (Sys.opaque_identity (admission ()))
+    | "price" | "diagnostics" ->
+        fun () ->
+          ignore
+            (Sys.opaque_identity
+               (get
+                  (A.price ~premium:(!phase = "diagnostics")
+                     ~exercise_regions:(!phase = "diagnostics") cfg admitted
+                     Side.Put)))
+    | _ -> invalid_arg "phase"
   in
+  operation ();
   Gc.full_major ();
-  let before = words () in
+  let before = Gc.quick_stat () and start = Unix.gettimeofday () in
   for _ = 1 to !calls do
-    ignore (Sys.opaque_identity (price ()))
+    operation ()
   done;
-  Printf.printf "UNPROFILED_BYTES_PER_CALL %.1f\n%!"
-    (8. *. (words () -. before) /. float !calls);
+  let elapsed = Unix.gettimeofday () -. start and after = Gc.quick_stat () in
+  let allocated =
+    8.
+    *. (after.minor_words +. after.major_words -. after.promoted_words
+       -. (before.minor_words +. before.major_words -. before.promoted_words))
+    /. float !calls
+  in
+  if !measure then (
+    Gc.full_major ();
+    let live = Gc.stat () in
+    Printf.printf
+      "{\"mode\":%S,\"phase\":%S,\"calls\":%d,\"seconds_per_call\":%.17g,\"allocated_bytes_per_call\":%.17g,\"minor_collections\":%d,\"major_collections\":%d,\"heap_words_after\":%d,\"live_words_after\":%d}\n"
+      !mode !phase !calls
+      (elapsed /. float !calls)
+      allocated
+      (after.minor_collections - before.minor_collections)
+      (after.major_collections - before.major_collections)
+      live.heap_words live.live_words;
+    exit 0);
+  Printf.printf "UNPROFILED_BYTES_PER_CALL %.1f\n%!" allocated;
   let sites = Hashtbl.create 100 in
   let alloc (a : Gc.Memprof.allocation) =
     let key = Printexc.raw_backtrace_to_string a.callstack in
@@ -95,7 +129,7 @@ let () =
       { Gc.Memprof.null_tracker with alloc_minor = alloc; alloc_major = alloc }
   in
   for _ = 1 to !calls do
-    ignore (Sys.opaque_identity (price ()))
+    operation ()
   done;
   Gc.Memprof.stop ();
   Gc.Memprof.discard profile;

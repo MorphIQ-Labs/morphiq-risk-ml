@@ -196,6 +196,13 @@ let controls () =
   expect "caller exception propagates" callback_raised;
   Printf.printf "American public controls passed\n%!"
 
+let snapshot outcome =
+  if Sys.getenv_opt "MORPHIQ_AMERICAN_SNAPSHOT" = Some "1" then
+    ":snapshot="
+    ^ Digest.to_hex
+        (Digest.string (Marshal.to_string outcome [ Marshal.No_sharing ]))
+  else ""
+
 let decode s = Int64.float_of_bits (Int64.of_string ("0x" ^ s))
 
 let corpus path refined =
@@ -233,18 +240,20 @@ let corpus path refined =
                   ~vol:(decode vol) ~t:(decode t) ~opens:(decode opens) ()
               in
               let cfg = config ~limits:lim ~cells ~steps (decode epsilon) in
-              match A.price cfg (unwrap (A.admit p)) side with
+              let outcome = A.price cfg (unwrap (A.admit p)) side in
+              match outcome with
               | Error e ->
-                  Printf.printf "%s\tunavailable\t-\t%s\n%!" id (failure e)
+                  Printf.printf "%s\tunavailable\t-\t%s\n%!" id
+                    (failure e ^ snapshot outcome)
               | Ok v ->
                   Printf.printf
-                    "%s\testimated\t%h\t%s:steps=%d:policies=%d:rows=%d:roundoff=%h:grid=%d:upper=%h:time=%d:domains=%d:switched=%d\n\
+                    "%s\testimated\t%h\t%s:steps=%d:policies=%d:rows=%d:roundoff=%h:grid=%d:upper=%h:time=%d:domains=%d:switched=%d%s\n\
                      %!"
                     id v.value v.method_name v.work.steps v.work.policy_solves
                     v.work.row_visits v.maximum_roundoff_indicator
                     v.work.final_nodes v.work.final_upper_stock
                     v.work.finest_steps_per_slab v.work.domain_expansions
-                    v.work.switched_rows)
+                    v.work.switched_rows (snapshot outcome))
           | _ -> failwith "input protocol"
         done
       with End_of_file -> ())
