@@ -68,33 +68,51 @@ let () =
                                reference,
                                scale,
                                Bachelier.price a side vol,
+                               Batch.Fast.Price
+                                 ( Batch.Bachelier,
+                                   {
+                                     forward = f;
+                                     strike = k;
+                                     time_to_expiry = t;
+                                     rate = r;
+                                   },
+                                   side,
+                                   vol ),
                                line )
                              :: !cases))))
     (List.rev !paths);
   let cases = Array.of_list (List.rev !cases) in
   if Array.length cases = 0 then failwith "empty native reference coverage";
-  let plan = N.compile (Array.map (fun (p, _, _, _, _) -> p) cases) in
-  List.iter
-    (fun scalar ->
-      let output = N.execute ~scalar plan in
-      Array.iteri
-        (fun i got ->
-          let _, reference, scale, baseline, line = cases.(i) in
-          let norm = Float.abs (got -. reference) /. (Float.epsilon *. scale) in
-          (* Check independent accuracy before replay, including in mutation runs. *)
-          if
-            not
-              (Float_score.within ~budget:8. got reference
-              && Float.is_finite norm && norm <= 4.3)
-          then
-            failwith
-              (Printf.sprintf "native independent reference failure at %d: %s" i
-                 line);
-          Certified.require_replay
-            (Int64.bits_of_float got = Int64.bits_of_float baseline)
-            (Printf.sprintf "native bit compatibility failure at %d" i))
-        output)
-    [ true; false ];
+  let plan = N.compile (Array.map (fun (p, _, _, _, _, _) -> p) cases) in
+  let check output =
+    Array.iteri
+      (fun i got ->
+        let _, reference, scale, baseline, _, line = cases.(i) in
+        let norm = Float.abs (got -. reference) /. (Float.epsilon *. scale) in
+        (* Check independent accuracy before replay, including in mutation runs. *)
+        if
+          not
+            (Float_score.within ~budget:8. got reference
+            && Float.is_finite norm && norm <= 4.3)
+        then
+          failwith
+            (Printf.sprintf "native independent reference failure at %d: %s" i
+               line);
+        Certified.require_replay
+          (Int64.bits_of_float got = Int64.bits_of_float baseline)
+          (Printf.sprintf "native bit compatibility failure at %d" i))
+      output
+  in
+  List.iter (fun scalar -> check (N.execute ~scalar plan)) [ true; false ];
+  let public =
+    Batch.Fast.compile
+      (Array.map (fun (_, _, _, _, request, _) -> request) cases)
+  in
+  check
+    (Array.map
+       (function
+         | Ok v -> v | Error _ -> failwith "public selected batch failure")
+       (Batch.Fast.execute public));
   Printf.printf
     "Native Bachelier: %d selected of %d input rows; independent \
      8-ULP/4.3-epsilon gates and exact replay pass\n"
