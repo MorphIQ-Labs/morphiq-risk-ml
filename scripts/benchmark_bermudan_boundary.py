@@ -46,9 +46,10 @@ def main():
             for family,mode,phase in workloads:
                 for variant in (('baseline','candidate') if round_%2==0 else ('candidate','baseline')):
                     b=builds[variant]
-                    command=([b['binaries']['bermudan']['path'],'--bench',mode] if family=='bermudan' else [b['binaries']['bench']['path'],'--measure','--mode',mode,'--phase',phase,'--calls','3'])
+                    calls=100000 if phase=='admission' else 3
+                    command=([b['binaries']['bermudan']['path'],'--bench',mode] if family=='bermudan' else [b['binaries']['bench']['path'],'--measure','--mode',mode,'--phase',phase,'--calls',str(calls)])
                     load=os.getloadavg();raw,resources=sample(command,a.output/f'{round_}-{variant}-{family}-{mode}-{phase}')
-                    result['runs'].append(dict(round=round_,variant=variant,family=family,load=load,sample=decode(raw,mode,phase,3),resources=resources));save()
+                    result['runs'].append(dict(round=round_,variant=variant,family=family,load=load,sample=decode(raw,mode,phase,calls),resources=resources));save()
         result['summary']=[]
         for family,mode,phase in workloads:
             row=dict(family=family,mode=mode,phase=phase)
