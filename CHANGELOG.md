@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Native compiled Bachelier Fast batches (#8)
+
+- Reuse private admitted Bachelier coordinates and pack sufficiently dense,
+  bounded OTM batches for an operation-preserving ARM64 kernel. Other models,
+  unsupported targets and one-shot `run`/`evaluate` retain scalar execution.
+- Preserve selected scalar words and existing accuracy gates; retain independent
+  references, foreign-boundary controls, native/bytecode packaging and paired
+  performance evidence. Compilation cost and reused throughput are separate.
+  See [qualification](docs/results-native-bachelier-batches.md). SLEEF remains
+  optional research; certified APIs and release acceptance are unchanged.
+
 ### Integrated candidate qualification (#17)
 
 - Retain the exact-source qualification of `f703546`: three-platform package

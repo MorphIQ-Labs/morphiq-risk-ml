@@ -35,6 +35,10 @@ The [first-stage evidence](results-bachelier-preparation.md) records exact
 
 ## Native Fast-batch boundary
 
+The [stage-2 evidence](results-native-bachelier-batches.md) records independent
+reference scoring, ownership/packaging controls, affected mutations and paired
+compilation/execution costs.
+
 `Bachelier_native` owns the foreign boundary. Its input is an array of private
 `Fast_middle.t` values, so ordinary typed code cannot supply unadmitted raw
 coordinates. Compilation copies them into a private SoA array with four
