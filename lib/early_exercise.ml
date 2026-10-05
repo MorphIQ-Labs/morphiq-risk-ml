@@ -204,14 +204,23 @@ module Bsm = struct
 
   let fail s = raise (Stop (Arithmetic_unresolved s))
 
-  let finite s x =
+  let[@inline always] finite s x =
     if not (Float.is_finite x) then fail s;
     x
 
-  let nonnegative s x =
+  let[@inline always] nonnegative s x =
     let x = finite s x in
     if x < 0. then fail s;
     x
+
+  (* Match Stdlib's operand selection (including equal signed zeros and NaN),
+     with float-specific comparisons so hot row loops need no boxed operands.
+     Finite-value checks remain at their original call sites. *)
+  let[@inline always] float_max (a : float) (b : float) =
+    if a >= b then a else b
+
+  let[@inline always] float_min (a : float) (b : float) =
+    if a <= b then a else b
 
   let eta = Float.next_after 0. infinity
 
@@ -280,7 +289,7 @@ module Bsm = struct
       let add t =
         let v, e = enclosed (terminal p side t) in
         let bv, be = !best in
-        best := (max bv v, max be e)
+        best := (float_max bv v, float_max be e)
       in
       add (exact t);
       (if
@@ -352,7 +361,7 @@ module Bsm = struct
                (exp_product (-.p.rate) time)
                (payoff_e side state (exact p.strike)))
         in
-        best := (max value (fst !best), max error (snd !best))
+        best := (float_max value (fst !best), float_max error (snd !best))
       in
       let segment time =
         tick ();
@@ -365,7 +374,7 @@ module Bsm = struct
                     (E.sub (exact p.rate) (exact p.dividend_yield))
                     (E.sub t (exact start))))
           in
-          let lo = max start p.opens_at in
+          let lo = float_max start p.opens_at in
           (* Open intervals have the same supremum at a limiting endpoint.
              A zero-length interval confers no additional exercise right. *)
           if lo < time then (
@@ -461,7 +470,7 @@ module Bsm = struct
 
   let boundary c x =
     let v, e = enclosed x in
-    c.boundary_error <- max c.boundary_error e;
+    c.boundary_error <- float_max c.boundary_error e;
     if e > c.local then fail "boundary arithmetic resolution";
     nonnegative "boundary value" v
 
@@ -489,7 +498,7 @@ module Bsm = struct
       x.(!n) <- v;
       incr n
     in
-    let upper = finite "initial domain" (4. *. max p.spot p.strike) in
+    let upper = finite "initial domain" (4. *. float_max p.spot p.strike) in
     let cells = c.cfg.space_cells in
     for i = 0 to cells do
       append (upper *. (float i /. float cells))
@@ -549,7 +558,7 @@ module Bsm = struct
       while x.(!n - 1) < target do
         let last = x.(!n - 1) in
         let width = x.(!n - 1) -. x.(!n - 2) in
-        append (min target (last +. (2. *. width)))
+        append (float_min target (last +. (2. *. width)))
       done;
       balance ()
     done;
@@ -627,7 +636,10 @@ module Bsm = struct
         in
         let e = v.(i) -. g.(i) in
         let r =
-          if obstacle then max (abs_float (min pvalue e)) (max (-.pvalue) (-.e))
+          if obstacle then
+            float_max
+              (abs_float (float_min pvalue e))
+              (float_max (-.pvalue) (-.e))
           else abs_float pvalue
         in
         ignore (finite "original residual" r);
@@ -646,9 +658,9 @@ module Bsm = struct
           finite "residual roundoff screen"
             ((0x1p-48 *. magnitude) +. (32. *. eta))
         in
-        indicator := max !indicator screen
+        indicator := float_max !indicator screen
       done;
-      c.roundoff <- max c.roundoff !indicator;
+      c.roundoff <- float_max c.roundoff !indicator;
       if !indicator > c.local /. 4. then fail "residual roundoff resolution";
       (!worst, !worst_row)
     in
@@ -658,7 +670,8 @@ module Bsm = struct
         let h_e = E.div_float width (float time_steps) in
         let h = finite "time increment" (centre h_e) in
         if h <= 0. then fail "collapsed time step";
-        if h *. max (-.p.rate) 0. > 0.5 then fail "negative-rate matrix margin";
+        if h *. float_max (-.p.rate) 0. > 0.5 then
+          fail "negative-rate matrix margin";
         for j = 1 to time_steps do
           step c;
           let t_e =
@@ -690,7 +703,7 @@ module Bsm = struct
                 (E.mul
                    (exact (if side = Side.Call then x.(n - 1) else p.strike))
                    (exp_product
-                      (max
+                      (float_max
                          (if side = Side.Call then -.p.dividend_yield
                           else -.p.rate)
                          0.)
@@ -770,7 +783,7 @@ module Bsm = struct
             let r, row = residual obstacle in
             (if r <= c.local then (
                accepted := true;
-               c.residual <- max c.residual r)
+               c.residual <- float_max c.residual r)
              else
                let repeated = ref ((not !changed) && !iteration > 1) in
                for k = 0 to !iteration - 2 do
@@ -816,8 +829,8 @@ module Bsm = struct
                    (E.mul weight (exact values.(!high))))
             in
             c.mapping_width <-
-              max c.mapping_width (nodes.(!high) -. nodes.(!low));
-            c.mapping_error <- max c.mapping_error error;
+              float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
+            c.mapping_error <- float_max c.mapping_error error;
             if error > c.local then
               fail "cash interpolation arithmetic resolution";
             nonnegative "cash interpolated value" value
@@ -826,7 +839,7 @@ module Bsm = struct
           if eligible p spec time phase then
             for i = 0 to n - 1 do
               tick c;
-              v.(i) <- max v.(i) g.(i)
+              v.(i) <- float_max v.(i) g.(i)
             done
         in
         let later = ref p.time_to_expiry in
@@ -928,7 +941,7 @@ module Bsm = struct
           refinement;
           mapping;
           maximum_residual = residual;
-          maximum_roundoff_indicator = max arithmetic roundoff;
+          maximum_roundoff_indicator = float_max arithmetic roundoff;
           boundary_arithmetic_indicator = boundary_error;
           work;
           exercise_regions = regions;
@@ -1089,7 +1102,7 @@ module Bsm = struct
           in
           let small (a, b) =
             Float.is_finite a && Float.is_finite b
-            && max a b <= cfg.tolerance /. 8.
+            && float_max a b <= cfg.tolerance /. 8.
           in
           if
             (not
@@ -1105,7 +1118,7 @@ module Bsm = struct
               (E.mul
                  (exact (if side = Side.Call then p.spot else p.strike))
                  (exp_product
-                    (max
+                    (float_max
                        (if side = Side.Call then -.p.dividend_yield
                         else -.p.rate)
                        0.)
