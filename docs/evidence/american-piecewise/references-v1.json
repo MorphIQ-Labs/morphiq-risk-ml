@@ -1,0 +1,2105 @@
+{
+  "schema": 1,
+  "rows": [
+    {
+      "id": "constant-american",
+      "value": "0x1.aa9d08f57333ep+2",
+      "radius": "0x1.7d07d1df40800p-6",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.ab52202c96034p+2",
+          "upper": "0x1.ab52202c96034p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.aaf2de38e6332p+2",
+          "upper": "0x1.aaf2de38e6332p+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.aa9d08f57333ep+2",
+          "upper": "0x1.aa9d08f57333ep+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "constant-american",
+          "128",
+          "finite",
+          "0x1.a9e0f045473c1p+2",
+          "0x1.a9f76102ffa8bp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-american",
+          "256",
+          "finite",
+          "0x1.aa1f40249c58bp+2",
+          "0x1.aa25577d10993p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-american",
+          "512",
+          "finite",
+          "0x1.aa36fb51539a3p+2",
+          "0x1.aa388cab1ae58p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "6.877053692589385791435926089354470389707508678623589932527114449923657400239996815862509170455686430120039261875735752466735237309907201403433873459282359678279"
+    },
+    {
+      "id": "constant-redundant-splits",
+      "value": "0x1.abcb1a8d8549ap+2",
+      "radius": "0x1.032fda6899780p-2",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": false,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.b1c93b8b9f630p+2",
+          "upper": "0x1.b1c93b8b9f630p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.adbc7c22c4fd2p+2",
+          "upper": "0x1.adbc7c22c4fd2p+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.abcb1a8d8549ap+2",
+          "upper": "0x1.abcb1a8d8549ap+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "constant-redundant-splits",
+          "128",
+          "finite",
+          "0x1.a9e153785051dp+2",
+          "0x1.a9f76102ffa7ep+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-redundant-splits",
+          "256",
+          "finite",
+          "0x1.aa1f5be08dad1p+2",
+          "0x1.aa25577d1098ap+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-redundant-splits",
+          "512",
+          "finite",
+          "0x1.aa3703c6fb0b1p+2",
+          "0x1.aa388cab1ae57p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "8.771470967336854681297995265906941408658897079141833555091915205049646966251645218220555849149700916198599708449053664672273898818908847721829935141614073446436"
+    },
+    {
+      "id": "constant-bermudan",
+      "value": "0x1.a005be9e90e93p+2",
+      "radius": "0x1.e302234ff5000p-5",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.a15ebf9ce6432p+2",
+          "upper": "0x1.a15ebf9ce6432p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.a06d3e8c0648ap+2",
+          "upper": "0x1.a06d3e8c0648ap+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.a005be9e90e93p+2",
+          "upper": "0x1.a005be9e90e93p+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "constant-bermudan",
+          "128",
+          "finite",
+          "0x1.9f5176ab5691cp+2",
+          "0x1.9f594a1b2cfafp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-bermudan",
+          "256",
+          "finite",
+          "0x1.9f5509052c0b1p+2",
+          "0x1.9f56a2547fa54p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "constant-bermudan",
+          "512",
+          "finite",
+          "0x1.9f55dd202272cp+2",
+          "0x1.9f55f28c66a8bp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.076759002595577641478681087499918935765752989381909434092486056014498146931229772383031179635590226725069172184846355740978372791148202802070235514069186578931"
+    },
+    {
+      "id": "expiry-call",
+      "value": "0x1.4000000000000p+3",
+      "radius": "0x1.4000000000000p-47",
+      "method": "expiry",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "expiry-call",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "expiry-call",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "expiry-call",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "10.0",
+      "discrete_digits": null
+    },
+    {
+      "id": "terminal-integrated-call",
+      "value": "0x1.a8c5430e078c4p+3",
+      "radius": "0x1.a8c5430e078c4p-47",
+      "method": "integrated European",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.aa689c47cd932p+3",
+          "upper": "0x1.aa689c47cd932p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.a998a621a39a8p+3",
+          "upper": "0x1.a998a621a39a8p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.a931f5ccbf1ccp+3",
+          "upper": "0x1.a931f5ccbf1ccp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "terminal-integrated-call",
+          "128",
+          "finite",
+          "0x1.a8cfad1975a13p+3",
+          "0x1.a8eca72b68d64p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-integrated-call",
+          "256",
+          "finite",
+          "0x1.a8c7d47c90c28p+3",
+          "0x1.a8cf0162ae5e1p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-integrated-call",
+          "512",
+          "finite",
+          "0x1.a8c5e6a2b8cc3p+3",
+          "0x1.a8c7af589e0a9p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": "13.27407982578405015480748374041161008364125669890318221894954269877786010193261040431027019708445987212608253817613780439453809130102888616579655287882574269956",
+      "discrete_digits": "14.31778101533510742875552299939086390881245726044553239327561747167478513713115499525151544474832606947895347797666332395743102651680374829526273286222682970496"
+    },
+    {
+      "id": "terminal-integrated-put",
+      "value": "0x1.1d24efff25c9ep+3",
+      "radius": "0x1.1d24efff25c9ep-47",
+      "method": "integrated European",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.2038ca62e339fp+3",
+          "upper": "0x1.2038ca62e339fp+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.1e7db3bdbb04ap+3",
+          "upper": "0x1.1e7db3bdbb04ap+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.1dd94a4628e56p+3",
+          "upper": "0x1.1dd94a4628e56p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "terminal-integrated-put",
+          "128",
+          "finite",
+          "0x1.1d1f4b0ec9bb6p+3",
+          "0x1.1d3466481cfacp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-integrated-put",
+          "256",
+          "finite",
+          "0x1.1d23997cd3c28p+3",
+          "0x1.1d28c6f7567f3p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-integrated-put",
+          "512",
+          "finite",
+          "0x1.1d249ca969acap+3",
+          "0x1.1d25e524b5ecep+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": "8.910758970580271754300576683666055354275693157652862704521166242202453424904193069156123310363232759054192254743248991959615626949212454776089423994542626431225",
+      "discrete_digits": "10.53630475006833392235402676323851025090693258721671823857105177709393847590823385311471985736909287411793020960482445767054709809741153301358152317719488345564"
+    },
+    {
+      "id": "terminal-vol-early",
+      "value": "0x1.96655839209dbp+3",
+      "radius": "0x1.96655839209dbp-47",
+      "method": "integrated European",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.976eb12d16a29p+3",
+          "upper": "0x1.976eb12d16a29p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.96e9595a858fep+3",
+          "upper": "0x1.96e9595a858fep+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.9689e502d9e99p+3",
+          "upper": "0x1.9689e502d9e99p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "terminal-vol-early",
+          "128",
+          "finite",
+          "0x1.9674effd33d8dp+3",
+          "0x1.968f105ea6c3fp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-vol-early",
+          "256",
+          "finite",
+          "0x1.966939b732022p+3",
+          "0x1.966fb1f444c73p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-vol-early",
+          "512",
+          "finite",
+          "0x1.96664fcbf9505p+3",
+          "0x1.9667ec1f4f0cep+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": "12.69987116964050850207976760480665368853499580589366066698492540004682106047976177941306320018996700804829721974305332731553724287061866673655174476080402404197",
+      "discrete_digits": "13.18908109127095653316222394519186371273991178087080525046433688479966353152967872586195683044541996596533981342355798530748574976941509933619903304671037654791"
+    },
+    {
+      "id": "terminal-vol-late",
+      "value": "0x1.96655839209dbp+3",
+      "radius": "0x1.96655839209dbp-47",
+      "method": "integrated European",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.976ec601e8f2fp+3",
+          "upper": "0x1.976ec601e8f2fp+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.96e9505833bd7p+3",
+          "upper": "0x1.96e9505833bd7p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.9689e736a71c0p+3",
+          "upper": "0x1.9689e736a71c0p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "terminal-vol-late",
+          "128",
+          "finite",
+          "0x1.966fc7b9cdf1ap+3",
+          "0x1.968a2530ea511p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-vol-late",
+          "256",
+          "finite",
+          "0x1.9667e8e067ef4p+3",
+          "0x1.966e701f072a3p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-vol-late",
+          "512",
+          "finite",
+          "0x1.9665fab688205p+3",
+          "0x1.96679ac2808a9p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": "12.69987116964050850207976760480665368853499580589366066698492540004682106047976177941306320018996700804829721974305332731553724287061866673655174476080402404197",
+      "discrete_digits": "13.19103665642255985405761770366976508995770530588021048855742578485559043290800010427946831506421540953985277379945358048913926022068282823201552201097615421689"
+    },
+    {
+      "id": "absorbing-interior-rate-optimum",
+      "value": "0x1.9a2044b20ab02p+6",
+      "radius": "0x1.9a2044b20ab02p-44",
+      "method": "discount optimum",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "absorbing-interior-rate-optimum",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-interior-rate-optimum",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-interior-rate-optimum",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "102.5315120524428842100931597842478909570342666600703044419703550950925842754660668592832207022778362615227131254202245983471764626540766678623051404093639012117",
+      "discrete_digits": null
+    },
+    {
+      "id": "absorbing-delayed-opening",
+      "value": "0x1.861fbc286a87cp+6",
+      "radius": "0x1.861fbc286a87cp-44",
+      "method": "discount optimum",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "absorbing-delayed-opening",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-delayed-opening",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-delayed-opening",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "97.53099120283326672734720232140677034124803022021420219001457084256357644313008170085556565947062779451379481621910119325907259485123683461221995622019522137917",
+      "discrete_digits": null
+    },
+    {
+      "id": "absorbing-finite-rights",
+      "value": "0x1.861fbc286a87cp+6",
+      "radius": "0x1.861fbc286a87cp-44",
+      "method": "discount optimum",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "absorbing-finite-rights",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-finite-rights",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-finite-rights",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "97.53099120283326672734720232140677034124803022021420219001457084256357644313008170085556565947062779451379481621910119325907259485123683461221995622019522137917",
+      "discrete_digits": null
+    },
+    {
+      "id": "zero-strike-yield-optimum",
+      "value": "0x1.9a2044b20ab02p+6",
+      "radius": "0x1.9a2044b20ab02p-44",
+      "method": "discount optimum",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "zero-strike-yield-optimum",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-yield-optimum",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-yield-optimum",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "102.5315120524428842100931597842478909570342666600703044419703550950925842754660668592832207022778362615227131254202245983471764626540766678623051404093639012117",
+      "discrete_digits": null
+    },
+    {
+      "id": "zero-strike-finite-rights",
+      "value": "0x1.861fbc286a87cp+6",
+      "radius": "0x1.861fbc286a87cp-44",
+      "method": "discount optimum",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "zero-strike-finite-rights",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-finite-rights",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-finite-rights",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "97.53099120283326672734720232140677034124803022021420219001457084256357644313008170085556565947062779451379481621910119325907259485123683461221995622019522137917",
+      "discrete_digits": null
+    },
+    {
+      "id": "deterministic-stationary",
+      "value": "0x1.bc71c71c71c72p+4",
+      "radius": "0x1.bc71c71c71c72p-46",
+      "method": "deterministic trajectory",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "deterministic-stationary",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-stationary",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-stationary",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "27.77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777778",
+      "discrete_digits": null
+    },
+    {
+      "id": "deterministic-finite-rights",
+      "value": "0x1.a4ccb3aa6fa39p+4",
+      "radius": "0x1.a4ccb3aa6fa39p-46",
+      "method": "deterministic trajectory",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "deterministic-finite-rights",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-finite-rights",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-finite-rights",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "26.29997603012654841716856862100700786643579624766178380963561998902153848152356151563834441760722399145710484033381779161457299928445797642362507765866377713904",
+      "discrete_digits": null
+    },
+    {
+      "id": "deterministic-cash-knot",
+      "value": "0x1.f0730c5e52e2bp+4",
+      "radius": "0x1.f0730c5e52e2bp-46",
+      "method": "deterministic trajectory",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "deterministic-cash-knot",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-cash-knot",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-cash-knot",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "31.02808796735022634952477245085901191427605391440085996684521033561475510808730580631048302877861942459989487569998532913717758300866750423359999194588559611554",
+      "discrete_digits": null
+    },
+    {
+      "id": "deterministic-cash-both",
+      "value": "0x1.e68b0624841dcp+3",
+      "radius": "0x1.e68b0624841dcp-47",
+      "method": "deterministic trajectory",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [],
+      "quantlib": [
+        [
+          "deterministic-cash-both",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-cash-both",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-cash-both",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "analytical_digits": "15.20447070247694625242648341380065584003342044152687228861341950630428070369930418253364553605646138584308799903895091460584648192549077961852642591048433201152",
+      "discrete_digits": null
+    },
+    {
+      "id": "american-staggered",
+      "value": "0x1.3e687e7cab616p+3",
+      "radius": "0x1.04b28b8b63900p-3",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": false,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.3fd834fe1c389p+3",
+          "upper": "0x1.3fd834fe1c389p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.3ed38272f4d50p+3",
+          "upper": "0x1.3ed38272f4d50p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.3e687e7cab616p+3",
+          "upper": "0x1.3e687e7cab616p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "american-staggered",
+          "128",
+          "finite",
+          "0x1.3e006c52293ap+3",
+          "0x1.3e0f690a5ffb4p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "american-staggered",
+          "256",
+          "finite",
+          "0x1.3e025c85314dep+3",
+          "0x1.3e06134cb6236p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "american-staggered",
+          "512",
+          "finite",
+          "0x1.3e02dd1595167p+3",
+          "0x1.3e03c709afdeap+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "11.36324059483587763795787941553363026851068707720629769731323504609215222885457247999590041202692444795201617546804774807245136689182703923285084278965221239935"
+    },
+    {
+      "id": "bermudan-staggered",
+      "value": "0x1.3e786d0f62382p+3",
+      "radius": "0x1.e9e58a047fe00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.4046d383f8313p+3",
+          "upper": "0x1.4046d383f8313p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.3f51e0bf59f14p+3",
+          "upper": "0x1.3f51e0bf59f14p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.3e786d0f62382p+3",
+          "upper": "0x1.3e786d0f62382p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "bermudan-staggered",
+          "128",
+          "finite",
+          "0x1.3dff6288f71d9p+3",
+          "0x1.3e0e8b81badf3p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "bermudan-staggered",
+          "256",
+          "finite",
+          "0x1.3e01767c7572dp+3",
+          "0x1.3e0539bbee1f8p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "bermudan-staggered",
+          "512",
+          "finite",
+          "0x1.3e01fd383a0ebp+3",
+          "0x1.3e02ead4b3589p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "12.04201917680087849026521607826102200669257559064738243578524505566462866490418011519266769331067090847454151523360885186899945355572005990461598915308818960347"
+    },
+    {
+      "id": "rate-positive-then-negative",
+      "value": "0x1.963605616495cp+2",
+      "radius": "0x1.75638f6066d00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.985551584f317p+2",
+          "upper": "0x1.985551584f317p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.96dfedc9b6caap+2",
+          "upper": "0x1.96dfedc9b6caap+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.963605616495cp+2",
+          "upper": "0x1.963605616495cp+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "rate-positive-then-negative",
+          "128",
+          "finite",
+          "0x1.954516ec2badep+2",
+          "0x1.95530ab514973p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "rate-positive-then-negative",
+          "256",
+          "finite",
+          "0x1.954299600fa04p+2",
+          "0x1.95460498affd1p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "rate-positive-then-negative",
+          "512",
+          "finite",
+          "0x1.95424e9fdfd23p+2",
+          "0x1.9543273f15878p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.318841643216670874734177937631972731062232461631512639476835276177129066891792902755554913103073525003098915784518032350439886459313657783428572267467764286075"
+    },
+    {
+      "id": "rate-negative-then-positive",
+      "value": "0x1.123ab12020d0dp+3",
+      "radius": "0x1.5089a80057200p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.132f2792c0c2ap+3",
+          "upper": "0x1.132f2792c0c2ap+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.1286e2bf24971p+3",
+          "upper": "0x1.1286e2bf24971p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.123ab12020d0dp+3",
+          "upper": "0x1.123ab12020d0dp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "rate-negative-then-positive",
+          "128",
+          "finite",
+          "0x1.11591643491a4p+3",
+          "0x1.117da927b0ca5p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "rate-negative-then-positive",
+          "256",
+          "finite",
+          "0x1.11a056658c425p+3",
+          "0x1.11a9efe9706fp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "rate-negative-then-positive",
+          "512",
+          "finite",
+          "0x1.11b94acbebfd3p+3",
+          "0x1.11bbfd5d8a307p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "9.378059937538522573665978084496002390430382062718725327276127906896219647127631349210211415818895127596461987853172434906590552227427426771285125830116890760593"
+    },
+    {
+      "id": "yield-sign-changing-call",
+      "value": "0x1.31841645328a5p+3",
+      "radius": "0x1.4aa0c0fdf4400p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.32742ae0ea26dp+3",
+          "upper": "0x1.32742ae0ea26dp+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.31ceda80cf2cbp+3",
+          "upper": "0x1.31ceda80cf2cbp+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.31841645328a5p+3",
+          "upper": "0x1.31841645328a5p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "yield-sign-changing-call",
+          "128",
+          "finite",
+          "0x1.30b0f667d2db7p+3",
+          "0x1.30d1eb4b532dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "yield-sign-changing-call",
+          "256",
+          "finite",
+          "0x1.30efdcb50ebe8p+3",
+          "0x1.30f88ae5d8dacp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "yield-sign-changing-call",
+          "512",
+          "finite",
+          "0x1.3106b9c3e792p+3",
+          "0x1.3108eb595a06dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "10.3876630820776475300906036377444043592884101133030328691631149667448419112724126202006331750520035210576754319699253309622564165847154688608470541795923576605"
+    },
+    {
+      "id": "volatility-early",
+      "value": "0x1.5590a1bcd9566p+3",
+      "radius": "0x1.c413c91a95c00p-5",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.56564ea3bb47fp+3",
+          "upper": "0x1.56564ea3bb47fp+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.55e549b1d8a28p+3",
+          "upper": "0x1.55e549b1d8a28p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.5590a1bcd9566p+3",
+          "upper": "0x1.5590a1bcd9566p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "volatility-early",
+          "128",
+          "finite",
+          "0x1.5524223fac42ep+3",
+          "0x1.55463566f709dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "volatility-early",
+          "256",
+          "finite",
+          "0x1.5558bb15f973ap+3",
+          "0x1.5562169ea3eafp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "volatility-early",
+          "512",
+          "finite",
+          "0x1.556a3a900a37ap+3",
+          "0x1.556cbf89b0f6ap+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "11.04757542994258389268338156896116909909616004860827428496234767972178929497106191739635346316909763142811188972118917909570581076539269096413172395380581810163"
+    },
+    {
+      "id": "volatility-late",
+      "value": "0x1.3e83c7da76a55p+3",
+      "radius": "0x1.089242812fe00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.3f6715be08d3ep+3",
+          "upper": "0x1.3f6715be08d3ep+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.3ee2cc9d2c3bfp+3",
+          "upper": "0x1.3ee2cc9d2c3bfp+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.3e83c7da76a55p+3",
+          "upper": "0x1.3e83c7da76a55p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "volatility-late",
+          "128",
+          "finite",
+          "0x1.3e22e58454cdap+3",
+          "0x1.3e27eb2aa5eacp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "volatility-late",
+          "256",
+          "finite",
+          "0x1.3e46d4fade99p+3",
+          "0x1.3e4810ca112b5p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "volatility-late",
+          "512",
+          "finite",
+          "0x1.3e550fae6e00bp+3",
+          "0x1.3e556fb503acfp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "10.42346524731144229017712982083302558951676195034123549901727306274616589949521927503280316036898803202879734706473396815830953532748883906467977113721083129111"
+    },
+    {
+      "id": "zero-volatility-first",
+      "value": "0x1.baec24fa487a2p+2",
+      "radius": "0x1.0df7ab4c3b000p-5",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.bb801349c3f27p+2",
+          "upper": "0x1.bb801349c3f27p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.baf91774e5d4fp+2",
+          "upper": "0x1.baf91774e5d4fp+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.baec24fa487a2p+2",
+          "upper": "0x1.baec24fa487a2p+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "zero-volatility-first",
+          "128",
+          "finite",
+          "0x1.ba2da0e827b2p+2",
+          "0x1.ba36e267ef527p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-first",
+          "256",
+          "finite",
+          "0x1.ba6a95e92acb9p+2",
+          "0x1.ba6d0129e4537p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-first",
+          "512",
+          "finite",
+          "0x1.ba8335c6f24b3p+2",
+          "0x1.ba83e5b5280bdp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.191966536279659906407892579769358514536734602368398384745722268534585020996999721294973847999584291671697066114713170432611170603587368077209611564439659120733"
+    },
+    {
+      "id": "zero-volatility-last",
+      "value": "0x1.eef82cd58347ep+2",
+      "radius": "0x1.8cf62d3877800p-6",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.ef57639045ddep+2",
+          "upper": "0x1.ef57639045ddep+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.eef42605bfc00p+2",
+          "upper": "0x1.eef42605bfc00p+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.eef82cd58347ep+2",
+          "upper": "0x1.eef82cd58347ep+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "zero-volatility-last",
+          "128",
+          "finite",
+          "0x1.ee515bac0a14cp+2",
+          "0x1.ee649e008ce54p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-last",
+          "256",
+          "finite",
+          "0x1.ee7f4f49e8406p+2",
+          "0x1.ee92cae871ec6p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-last",
+          "512",
+          "finite",
+          "0x1.eea30517469b4p+2",
+          "0x1.eea43467c1e3cp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.890724202051409069917068990548958688799104404766220471528583284207599994793451316630097862007385488591316163697987543964292498027927938828621768106347546079553"
+    },
+    {
+      "id": "zero-volatility-middle",
+      "value": "0x1.cb95861b2f03ap+2",
+      "radius": "0x1.cf6eaf8a0b000p-6",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.cc0c7859316fep+2",
+          "upper": "0x1.cc0c7859316fep+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.cc0961c649866p+2",
+          "upper": "0x1.cc0961c649866p+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.cb95861b2f03ap+2",
+          "upper": "0x1.cb95861b2f03ap+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "zero-volatility-middle",
+          "128",
+          "finite",
+          "0x1.cadec9e4f58p+2",
+          "0x1.cae1de9692bfbp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-middle",
+          "256",
+          "finite",
+          "0x1.cb1ca5bd3ddc1p+2",
+          "0x1.cb1cd974f6176p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-volatility-middle",
+          "512",
+          "finite",
+          "0x1.cb348447e250ap+2",
+          "0x1.cb34cc6fc4c4bp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.740770795783293056828738213632593917660879476313771426114133015446883997594858918043955197465065007358670968692582025448344633532948347867531591593094245017919"
+    },
+    {
+      "id": "cash-coefficient-american",
+      "value": "0x1.f61ecd91321a9p+3",
+      "radius": "0x1.1bced96332e00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.f6e0088a7b051p+3",
+          "upper": "0x1.f6e0088a7b051p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.f652211e2d6bap+3",
+          "upper": "0x1.f652211e2d6bap+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.f61ecd91321a9p+3",
+          "upper": "0x1.f61ecd91321a9p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-coefficient-american",
+          "128",
+          "finite",
+          "0x1.f5f3df5f852c2p+3",
+          "0x1.f5f522cbb5199p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-american",
+          "256",
+          "finite",
+          "0x1.f5dd9cb4992eap+3",
+          "0x1.f5db306c2e8f1p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-american",
+          "512",
+          "finite",
+          "0x1.f5d59201a9db1p+3",
+          "0x1.f5d5071f8584ap+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "16.47822680176536825693703463328613694704987041960115936531416054207636968645157938322786082433448838109619849104269602574955164398825719208014916523090812812595"
+    },
+    {
+      "id": "cash-coefficient-before",
+      "value": "0x1.ef98ceda66f7ap+2",
+      "radius": "0x1.e5c2294f0b400p-5",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.f0e7a915470d9p+2",
+          "upper": "0x1.f0e7a915470d9p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.eff4c8016787fp+2",
+          "upper": "0x1.eff4c8016787fp+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.ef98ceda66f7ap+2",
+          "upper": "0x1.ef98ceda66f7ap+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-coefficient-before",
+          "128",
+          "finite",
+          "0x1.ef09f1cdc166cp+2",
+          "0x1.ef08cbdb9321fp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-before",
+          "256",
+          "finite",
+          "0x1.eee655f340c73p+2",
+          "0x1.eeffd00be1303p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-before",
+          "512",
+          "finite",
+          "0x1.ef088425485c9p+2",
+          "0x1.ef056a7a54a15p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "8.320658004899862864497969867994658480798107972359016698934878293227773805980151416113093133530176415837830044091198796598709159564261455192338976361231662441306"
+    },
+    {
+      "id": "cash-coefficient-after",
+      "value": "0x1.9a5eadb196678p+2",
+      "radius": "0x1.01176c0270c00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.9bb9f2ab0a3d8p+2",
+          "upper": "0x1.9bb9f2ab0a3d8p+2"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.9ab8db3fcfcccp+2",
+          "upper": "0x1.9ab8db3fcfcccp+2"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.9a5eadb196678p+2",
+          "upper": "0x1.9a5eadb196678p+2"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-coefficient-after",
+          "128",
+          "finite",
+          "0x1.9a4067c85b605p+2",
+          "0x1.ef08cbdb9321fp+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-after",
+          "256",
+          "finite",
+          "0x1.99ed6a50c5508p+2",
+          "0x1.eeffd00be1303p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-after",
+          "512",
+          "finite",
+          "0x1.99d98aa2706c5p+2",
+          "0x1.ef056a7a54a15p+2",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "7.079696140528117954095486001486731816191369651528274369917005841614962826285835470909144230386823461030286595285982517719586337821315868215144398704447910506081"
+    },
+    {
+      "id": "cash-coefficient-both",
+      "value": "0x1.c5f5721a17ccbp+3",
+      "radius": "0x1.105386e2d5e00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.c6acb06a3b519p+3",
+          "upper": "0x1.c6acb06a3b519p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.c62486a72de6ap+3",
+          "upper": "0x1.c62486a72de6ap+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.c5f5721a17ccbp+3",
+          "upper": "0x1.c5f5721a17ccbp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-coefficient-both",
+          "128",
+          "finite",
+          "0x1.c5d33fb1acaf6p+3",
+          "0x1.c5ce2fdf8329dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-both",
+          "256",
+          "finite",
+          "0x1.c5b8f07c61101p+3",
+          "0x1.c5b439cd6e21dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-coefficient-both",
+          "512",
+          "finite",
+          "0x1.c5afb6648c78cp+3",
+          "0x1.c5ae8ebf073bdp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "14.9354448399804405101565069282174372648005837135009552296423743682245974517460298388655613740434921338680945883290844099416516953517861197000205218196839559747"
+    },
+    {
+      "id": "cash-between-rights",
+      "value": "0x1.c6162a56e8f58p+3",
+      "radius": "0x1.47f5f99904200p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.c733b8d1a6ad8p+3",
+          "upper": "0x1.c733b8d1a6ad8p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.c68fbdd53e2b7p+3",
+          "upper": "0x1.c68fbdd53e2b7p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.c6162a56e8f58p+3",
+          "upper": "0x1.c6162a56e8f58p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-between-rights",
+          "128",
+          "finite",
+          "0x1.c5d33ee5ed82cp+3",
+          "0x1.c5ce2f141ec5ap+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-between-rights",
+          "256",
+          "finite",
+          "0x1.c5b8f0626211ep+3",
+          "0x1.c5b439b36d961p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-between-rights",
+          "512",
+          "finite",
+          "0x1.c5afb66142e61p+3",
+          "0x1.c5ae8ebbbd8p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "15.27339480639688142448744649281666731049789939433277304021566734810017244504819246178058876830584404535475387530395710978789008899756281038482315964689077293028"
+    },
+    {
+      "id": "joint-cash-knot",
+      "value": "0x1.6379f122a5339p+3",
+      "radius": "0x1.1bcff91052c00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.6446202d77654p+3",
+          "upper": "0x1.6446202d77654p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.63b83831533bep+3",
+          "upper": "0x1.63b83831533bep+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.6379f122a5339p+3",
+          "upper": "0x1.6379f122a5339p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "joint-cash-knot",
+          "128",
+          "finite",
+          "0x1.633c6049d0ac6p+3",
+          "0x1.2ca363c2f3becp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "joint-cash-knot",
+          "256",
+          "finite",
+          "0x1.6320eda716a35p+3",
+          "0x1.2c8f0253b028ep+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "joint-cash-knot",
+          "512",
+          "finite",
+          "0x1.631a3ee9b8cbep+3",
+          "0x1.2c8a69c2ef47p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "11.99155860500722045237042015046096742736992096409004119362770159756345277557772135797461477844485761743770951459655574329389372519252866568289156181645180516741"
+    },
+    {
+      "id": "cash-at-valuation",
+      "value": "0x1.5ec7c4e5779dcp+3",
+      "radius": "0x1.156205a8b6000p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.5f8f98ea9aed8p+3",
+          "upper": "0x1.5f8f98ea9aed8p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.5f04e7e82a928p+3",
+          "upper": "0x1.5f04e7e82a928p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.5ec7c4e5779dcp+3",
+          "upper": "0x1.5ec7c4e5779dcp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-at-valuation",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-valuation",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-valuation",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "11.74429974915498969915370710623338072795619321826552186778547767884474033981033389127214308419886365046428183760474479167210658049874553271296750128562715125666"
+    },
+    {
+      "id": "cash-at-expiry-before",
+      "value": "0x1.0b94edef7d9ffp+3",
+      "radius": "0x1.27d4619474a00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.0c6a08f5ca3b5p+3",
+          "upper": "0x1.0c6a08f5ca3b5p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.0bd61ec564010p+3",
+          "upper": "0x1.0bd61ec564010p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.0b94edef7d9ffp+3",
+          "upper": "0x1.0b94edef7d9ffp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-at-expiry-before",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-expiry-before",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-expiry-before",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "9.110815196318463493346981848583738582170707025045375232281397743264372283905871073946993526379451166261354353026211271472876989314946911836269695888657590091358"
+    },
+    {
+      "id": "cash-at-expiry-after",
+      "value": "0x1.6bc7270e5f188p+3",
+      "radius": "0x1.25d469d277800p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.6c9ac2f7d8937p+3",
+          "upper": "0x1.6c9ac2f7d8937p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.6c07d8c35357bp+3",
+          "upper": "0x1.6c07d8c35357bp+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.6bc7270e5f188p+3",
+          "upper": "0x1.6bc7270e5f188p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "cash-at-expiry-after",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-expiry-after",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "cash-at-expiry-after",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "12.15070968018894985713024022787623150414620176004816851156609066731098067341176244292265300742411958734528510482230162954344907131602474782154030613498174221875"
+    },
+    {
+      "id": "zero-payment-knot",
+      "value": "0x1.0b94edef7d9ffp+3",
+      "radius": "0x1.27d4619474a00p-4",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.0c6a08f5ca3b5p+3",
+          "upper": "0x1.0c6a08f5ca3b5p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.0bd61ec564010p+3",
+          "upper": "0x1.0bd61ec564010p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.0b94edef7d9ffp+3",
+          "upper": "0x1.0b94edef7d9ffp+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "zero-payment-knot",
+          "128",
+          "finite",
+          "0x1.0b2b411994d7ap+3",
+          "0x1.0b3a84796318dp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-payment-knot",
+          "256",
+          "finite",
+          "0x1.0b2d9f13fcde4p+3",
+          "0x1.0b3159cf9fa18p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "zero-payment-knot",
+          "512",
+          "finite",
+          "0x1.0b2e2995d2fcp+3",
+          "0x1.0b2f1550b78bbp+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "9.110815196318463493346981848583738582170707025045375232281397743264372283905871073946993526379451166261354353026211271472876989314946911836269695888657590091358"
+    },
+    {
+      "id": "near-zero-stock-changing-rate",
+      "value": "0x1.9a2044725c5a5p+6",
+      "radius": "0x1.916c000000000p-29",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": true,
+      "loose_resolved": true,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.9a2044725c5ffp+6",
+          "upper": "0x1.9a2044725c5ffp+6"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.9a2044725c65bp+6",
+          "upper": "0x1.9a2044725c65bp+6"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.9a2044725c5a5p+6",
+          "upper": "0x1.9a2044725c5a5p+6"
+        }
+      ],
+      "quantlib": [
+        [
+          "near-zero-stock-changing-rate",
+          "128",
+          "finite",
+          "0x1.9a20447abf0cp+6",
+          "0x1.99f7e4c420472p+6",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "near-zero-stock-changing-rate",
+          "256",
+          "finite",
+          "0x1.9a20447480946p+6",
+          "0x1.9a0bec0a7b65p+6",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "near-zero-stock-changing-rate",
+          "512",
+          "finite",
+          "0x1.9a204472e6eefp+6",
+          "0x1.9a160dfb8709fp+6",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "102.5315111035250684025534100642830713755434198247283724534679970887222714128407940086825241385994625163222308640880822263173901778450098217365923568630860723785"
+    },
+    {
+      "id": "dense-bermudan-knots",
+      "value": "0x1.15ffc4e09c301p+3",
+      "radius": "0x1.77babda1a8780p-2",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": false,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.1987d43014f34p+3",
+          "upper": "0x1.1987d43014f34p+3"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.16985eb535a25p+3",
+          "upper": "0x1.16985eb535a25p+3"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.15ffc4e09c301p+3",
+          "upper": "0x1.15ffc4e09c301p+3"
+        }
+      ],
+      "quantlib": [
+        [
+          "dense-bermudan-knots",
+          "128",
+          "finite",
+          "0x1.154edf5d3334bp+3",
+          "0x1.1558858f31362p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "dense-bermudan-knots",
+          "256",
+          "finite",
+          "0x1.154eeafe583d3p+3",
+          "0x1.1550c1433ddc9p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "dense-bermudan-knots",
+          "512",
+          "finite",
+          "0x1.154e79ce54f1p+3",
+          "0x1.154ef38ab0f36p+3",
+          "-",
+          "piecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "11.22140822072335166865880987155204964993517152653423647262308736893091165934435834567498927566250940376276804451725659245826790076150820621557129624950839658202"
+    },
+    {
+      "id": "short-irregular",
+      "value": "0x1.111908be72af3p+1",
+      "radius": "0x1.e3a563dbf3cd0p-1",
+      "method": "positive quadrature empirical refinement",
+      "primary_resolved": false,
+      "loose_resolved": false,
+      "quadrature": [
+        {
+          "n": 256,
+          "lower": "0x1.3913980b1330ep+1",
+          "upper": "0x1.3913980b1330ep+1"
+        },
+        {
+          "n": 512,
+          "lower": "0x1.1ad941cee3f41p+1",
+          "upper": "0x1.1ad941cee3f41p+1"
+        },
+        {
+          "n": 1024,
+          "lower": "0x1.111908be72af3p+1",
+          "upper": "0x1.111908be72af3p+1"
+        }
+      ],
+      "quantlib": [
+        [
+          "short-irregular",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ],
+        [
+          "short-irregular",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ],
+        [
+          "short-irregular",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ]
+      ],
+      "analytical_digits": null,
+      "discrete_digits": "3.569085895142805573696423947475202493703049354128043103681757767724784946316617394018174751390945788574199751084196498515712456523475719406216719266784777991955"
+    }
+  ],
+  "sources": {
+    "analytic-160.jsonl": "5eda1cf49fe2498eda635b1c5463439b48fc7bfab8b2ea96cbda2abf411ebfd5",
+    "analytic-80.jsonl": "7f7f76034d690f411786a8ff35ad490bd7c3db6fe32af7244957bdff0a9a20f5",
+    "discrete-160.jsonl": "26f9536704cd0e357ddaaad1b392c8ce3c3fa6373aeba73c7b12db862c9d9d15",
+    "discrete-80.jsonl": "ab800180cdbfbfd31da034bfe40584ddfc67cad66b8a5fa5f92540ec30628971",
+    "quadrature-1024.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quadrature-1024.tsv": "21054b0d13b105359d838556597d2a029185bc12c3be88629b159982736e36c9",
+    "quadrature-256.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quadrature-256.tsv": "13c89825273a3a88d11ad291922e03c7cd02ebfcbeac33797543c122906aa1ad",
+    "quadrature-512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quadrature-512.tsv": "dafab20cf8433dae331326e1e7f275445741363081e98df003903fd24a513a6c",
+    "quadrature-8.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quadrature-8.tsv": "d5fd5f70b5956091aa93c157156c96116cd630e67a41235d2806bce9acda0c19",
+    "quantlib-128.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quantlib-128.tsv": "74ce6e052b31ef8b799271197b6a93615738fa5f41fe2267442b634103beba53",
+    "quantlib-256.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quantlib-256.tsv": "7da39142984d6592db40a71b662bdbcb7c06094544e1e9b5b1dbf737c18c0582",
+    "quantlib-512.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quantlib-512.tsv": "0542db3bb22a9c751331525e8f8327bc9cb87a042d3a7e39dcc015bf6dc0a835"
+  }
+}
