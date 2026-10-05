@@ -32,7 +32,7 @@ def collect(roots, binaries, destination):
     out.mkdir(exist_ok=False)
     before = [snapshot(root, binary) for root, binary in zip(roots, binaries)]
     campaign.write(out / 'before.json', before)
-    inputs = [subprocess.check_output([str(binary), '--dump-inputs']) for binary in binaries]
+    inputs = [subprocess.check_output([str(binary), '--dump-inputs'], timeout=campaign.RUN_TIMEOUT_SECONDS) for binary in binaries]
     assert inputs[0] == inputs[1], 'different benchmark requests'
     (out / 'timed-inputs.txt').write_bytes(inputs[0])
     rows = []
@@ -46,7 +46,7 @@ def collect(roots, binaries, destination):
         command = [str(binaries[revision]), '--bench']
         if index % 4 in [1,2]: command.append('--reverse')
         with (out / f'run-{index}.jsonl').open('w') as stdout, (out / f'run-{index}.stderr').open('w') as stderr:
-            subprocess.run(command, stdout=stdout, stderr=stderr, timeout=180, check=True)
+            subprocess.run(command, stdout=stdout, stderr=stderr, timeout=campaign.RUN_TIMEOUT_SECONDS, check=True)
         run = [json.loads(line) for line in (out / f'run-{index}.jsonl').read_text().splitlines()]
         seen = set()
         for row in run:

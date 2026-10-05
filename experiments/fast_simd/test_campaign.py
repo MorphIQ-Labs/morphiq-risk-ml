@@ -13,6 +13,7 @@ import unittest
 from unittest import mock
 
 import campaign
+import compare
 
 class ScorerControls(unittest.TestCase):
     def setUp(self):
@@ -68,7 +69,7 @@ class CollectorControls(unittest.TestCase):
         self.root=Path(self.directory.name)
         self.binary=self.root/'fake-runner'
         self.destination=self.root/'evidence'
-        self.state={'binary_sha256':'control','source':'control','source_status':'','experiment_files':{}}
+        self.state={'binary_sha256':'control','source':'control','source_status':'','experiment_files':{},'library_tree':'control'}
         patch=mock.patch.object(campaign,'metadata',return_value=self.state)
         patch.start();self.addCleanup(patch.stop)
 
@@ -124,6 +125,49 @@ for family in ['eligible','fallback-heavy','mixed']:
     def test_changed_source_rejected(self):
         self.valid_output()
         with mock.patch.object(campaign,'metadata',side_effect=[self.state]*9+[self.state|{'source_status':'changed'}]):
+            with self.assertRaises(AssertionError): self.collect()
+        self.assertTrue((self.destination/'after.json').exists())
+        self.assertFalse((self.destination/'summary.json').exists())
+
+class PairedCollectorControls(CollectorControls):
+    def test_different_inputs_rejected(self):
+        self.valid_output()
+        with mock.patch.object(compare,'snapshot',return_value=self.state):
+            with mock.patch.object(compare.subprocess,'check_output',side_effect=[b'first',b'second']):
+                with self.assertRaisesRegex(AssertionError,'different benchmark requests'):
+                    self.collect()
+        self.assertFalse((self.destination/'run-0.jsonl').exists())
+
+    def collect(self):
+        with mock.patch.object(compare,'snapshot',side_effect=lambda *_: campaign.metadata(self.binary)):
+            with contextlib.redirect_stdout(io.StringIO()):
+                compare.collect([self.root,self.root],[self.binary,self.binary],self.destination)
+
+    def test_complete(self):
+        self.valid_output();self.collect()
+        report=json.loads((self.destination/'summary.json').read_text())
+        self.assertTrue(report['complete'])
+        self.assertEqual(report['samples'],7200)
+        self.assertTrue(all(len(r['process_medians_ns'])==4 for r in report['summary']))
+
+    def test_failed_process_and_partial_evidence(self):
+        self.program('import sys\nif "--dump-inputs" in sys.argv: print("same")\nelse:\n print("partial",flush=True)\n raise SystemExit(7)')
+        with self.assertRaises(subprocess.CalledProcessError) as error: self.collect()
+        self.assertEqual(error.exception.returncode,7)
+        self.assertEqual((self.destination/'run-0.jsonl').read_text(),'partial\n')
+
+    def test_timeout_reaps_child_and_retains_output(self):
+        self.program('import sys,os,time\nif "--dump-inputs" in sys.argv: print("same")\nelse:\n print(os.getpid(),flush=True)\n time.sleep(30)')
+        with mock.patch.object(campaign,'RUN_TIMEOUT_SECONDS',2.):
+            with self.assertRaises(subprocess.TimeoutExpired): self.collect()
+        pid=int((self.destination/'run-0.jsonl').read_text())
+        with self.assertRaises(ProcessLookupError): os.kill(pid,0)
+        self.assertFalse((self.destination/'summary.json').exists())
+
+    def test_changed_source_rejected(self):
+        self.valid_output()
+        # Two initial snapshots, two per process, two final snapshots.
+        with mock.patch.object(campaign,'metadata',side_effect=[self.state]*19+[self.state|{'source':'changed'}]):
             with self.assertRaises(AssertionError): self.collect()
         self.assertTrue((self.destination/'after.json').exists())
         self.assertFalse((self.destination/'summary.json').exists())
