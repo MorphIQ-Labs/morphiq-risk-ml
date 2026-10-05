@@ -275,8 +275,24 @@ let controls () =
              else expected = Error (A.Arithmetic_unresolved "global price cap"));
           List.iter
             (fun extra ->
-              expect "boundary reuse dependency identity"
-                (run extra (fun () -> false) = expected);
+              let actual = run extra (fun () -> false) in
+              (match actual with
+              | Ok x when r >= 0. ->
+                  (* Exercising at the first listed date is a feasible strategy:
+                     E[(K-S_t)+] >= K-E[S_t], also before the cash event. *)
+                  let lower =
+                    (p.strike *. exp (-.r *. p.opens_at))
+                    -. (p.spot *. exp (-.p.dividend_yield *. p.opens_at))
+                  in
+                  let arithmetic =
+                    x.boundary_arithmetic_indicator
+                    +. float x.work.steps
+                       *. (x.maximum_residual +. x.maximum_roundoff_indicator)
+                  in
+                  expect "cached irregular feasible stopping lower"
+                    (x.value >= lower -. error x -. arithmetic)
+              | _ -> ());
+              expect "boundary reuse dependency identity" (actual = expected);
               List.iter
                 (fun stop ->
                   let cancelled extra =
