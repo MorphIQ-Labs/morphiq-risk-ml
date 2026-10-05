@@ -44,6 +44,10 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
+[Optional Fast-batch SIMD experiment](results-fast-simd.md) compares bounded
+Bachelier preparation, native scalar, SIMD and SLEEF, including one-shot
+regressions and the decision to retain the current production backend.
+
 [Fast allocation optimization](results-fast-allocation.md) records native gains,
 bytecode tradeoffs, exact word compatibility and paired workload measurements.
 

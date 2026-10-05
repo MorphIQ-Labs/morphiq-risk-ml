@@ -1,0 +1,31 @@
+(executable
+ (name runner)
+ (modules runner)
+ (enabled_if
+  (= %{env:MORPHIQ_SIMD_EXPERIMENT=false} true))
+ (libraries morphiq_risk morphiq_fp unix)
+ (flags
+  (:standard -open Morphiq_fp))
+ (foreign_stubs
+  (language c)
+  (names kernels)
+  (flags
+   (:standard
+    -O3
+    -ffp-contract=off
+    -fno-fast-math
+    -fno-vectorize
+    -fno-slp-vectorize
+    -I%{env:MORPHIQ_SLEEF_PREFIX=/nonexistent}/include)))
+ (link_flags
+  (:standard
+   -cclib
+   -L%{env:MORPHIQ_SLEEF_PREFIX=/nonexistent}/lib
+   -cclib
+   -lsleef)))
+
+(rule
+ (alias runtest)
+ (deps campaign.py test_campaign.py)
+ (action
+  (run python3 %{dep:test_campaign.py})))

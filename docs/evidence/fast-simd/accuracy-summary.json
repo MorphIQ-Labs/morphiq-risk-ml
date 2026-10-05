@@ -1,0 +1,67 @@
+{
+  "total_rows": 110632,
+  "eligible": 8220,
+  "fallback": 102412,
+  "fallback_failures": 5,
+  "backends": {
+    "batch-fast": {
+      "rows": 8220,
+      "changed": 0,
+      "max_ulp": 7,
+      "max_normwise": 0.5476892033073275,
+      "gate_failures": 0,
+      "exact_mismatches": 0
+    },
+    "prepared-ocaml": {
+      "rows": 8220,
+      "changed": 0,
+      "max_ulp": 7,
+      "max_normwise": 0.5476892033073275,
+      "gate_failures": 0,
+      "exact_mismatches": 0
+    },
+    "native-scalar": {
+      "rows": 8220,
+      "changed": 0,
+      "max_ulp": 7,
+      "max_normwise": 0.5476892033073275,
+      "gate_failures": 0,
+      "exact_mismatches": 0
+    },
+    "native-simd": {
+      "rows": 8220,
+      "changed": 0,
+      "max_ulp": 7,
+      "max_normwise": 0.5476892033073275,
+      "gate_failures": 0,
+      "exact_mismatches": 0
+    },
+    "sleef-simd": {
+      "rows": 8220,
+      "changed": 580,
+      "max_ulp": 7,
+      "max_normwise": 0.5476892033073275,
+      "gate_failures": 0,
+      "exact_mismatches": 0
+    }
+  },
+  "regional_max_ulp": {
+    "otm": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ]
+  },
+  "input_sha256": "a9794c2c9e8234854f3d0c1e0e7f760a03b73d72f38dc7e2488b7ba775367339",
+  "trace_sha256": "763e17def204e70ddbf4b6b15ff3aef6cb263c792570452e005a0c9e4fa1c237",
+  "operation_preserving_pass": true,
+  "sleef_quality_pass": true,
+  "sleef_no_regional_regression": true,
+  "universal_bound": false,
+  "adjudication_counts": {
+    "improved": 263,
+    "worsened": 317
+  }
+}
