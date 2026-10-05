@@ -39,7 +39,7 @@
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib:../lib/fp
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
    (run %{test}))))
 
 (test
