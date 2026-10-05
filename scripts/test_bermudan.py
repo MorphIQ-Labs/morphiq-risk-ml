@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Cash campaign protocol, scoring, corpus and provenance controls (stdlib)."""
-import hashlib, json, pathlib, unittest
+import copy, hashlib, json, pathlib, unittest
+from benchmark_bermudan_boundary import acceptance
 from check_bermudan import BASE, classify
 from freeze_bermudan import corpus
 
@@ -9,6 +10,18 @@ class Controls(unittest.TestCase):
         self.case={'id':'witness','epsilon':'3f50624dd2f1a9fc'}
         self.ref={'id':'witness','value':1.,'radius':0.,'reference_kind':'empirical-quadrature'}
     def score(self,text,ref=None):return classify(text,[self.case],[ref or self.ref],'primary')[0]['comparison']['status']
+    def test_cost_criteria(self):
+        rows=[]
+        for family in ('american','bermudan'):
+            for mode in ('none','cash'):
+                for phase in (('admission','price','diagnostics') if family=='american' else ('price',)):
+                    metrics=lambda a,t: {'allocated_bytes_per_call':{'median':a},'seconds_per_call':{'median':t}}
+                    rows.append(dict(family=family,mode=mode,phase=phase,baseline=metrics(100,1),candidate=metrics(30,0.5) if family=='bermudan' else metrics(100,1)))
+        acceptance(rows)
+        for key,value,reason in [('allocated_bytes_per_call',41,'allocation'),('seconds_per_call',0.81,'latency')]:
+            bad=copy.deepcopy(rows);bad[-1]['candidate'][key]['median']=value
+            with self.assertRaisesRegex(ValueError,reason):acceptance(bad)
+        with self.assertRaisesRegex(ValueError,'incomplete'):acceptance(rows[:-1]+[rows[0]])
     def test_wrong_value(self):self.assertEqual(self.score('witness\testimated\t0x1p+1\tmethod'),'fail')
     def test_absent_reference(self):self.assertEqual(self.score('witness\testimated\t0x1p+0\tmethod',{'id':'witness'}),'unresolved_reference')
     def test_wide_reference(self):self.assertEqual(self.score('witness\testimated\t0x1p+0\tmethod',{**self.ref,'radius':1.}),'reference_too_wide')

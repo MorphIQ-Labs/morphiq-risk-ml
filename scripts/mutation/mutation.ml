@@ -73,6 +73,17 @@ let catalog =
       mechanism = "a listed valuation right enforces its immediate payoff";
     };
     {
+      id = "bermudan-boundary-slab-key";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "Int64.bits_of_float earlier,\n\
+        \          Int64.bits_of_float later,\n\
+        \          Option.map Int64.bits_of_float next_exercise,";
+      replacement = "Int64.zero, Int64.zero, None,";
+      killer = "bermudan";
+      mechanism = "boundary reuse must retain the original slab and next right";
+    };
+    {
       id = "bermudan-next-right-boundary";
       file = "lib/early_exercise.ml";
       snippet = "| Some date -> E.sub (exact date) t_e";

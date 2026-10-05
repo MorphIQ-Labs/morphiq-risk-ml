@@ -245,6 +245,55 @@ let controls () =
   expect "next-right feasible stopping lower"
     (future.value
     >= cap -. (low_spot *. exp (-0.02 *. 0.5)) -. error future -. arithmetic);
+  (* The minimum existing workspace leaves no room for optional preparation.
+     Equal complete outcomes establish that reuse adds no required capacity. *)
+  List.iter
+    (fun r ->
+      List.iter
+        (fun cash ->
+          let p = model ~s:0x1p-30 ~vol:0.4 ~r ~opens:0.2 () in
+          let ds = regular [ 0.2; 0.55; 1. ] in
+          let cash = if cash then Some (spec [ (0.4, 5.) ]) else None in
+          let a = unwrap (A.admit_bermudan ?cash p ds) in
+          let reserved =
+            (512 * limits.max_nodes)
+            + (32 * limits.policy_iterations)
+            + 65536
+            + (1024 * Array.length ds)
+            + if cash = None then 0 else (48 * limits.max_nodes) + 1024
+          in
+          let run extra cancel =
+            A.price ~cancel
+              (config
+                 ~lim:{ limits with max_workspace_bytes = reserved + extra }
+                 1.)
+              a Side.Put
+          in
+          let expected = run 0 (fun () -> false) in
+          expect "boundary fallback outcome"
+            (if r >= 0. then Result.is_ok expected
+             else expected = Error (A.Arithmetic_unresolved "global price cap"));
+          List.iter
+            (fun extra ->
+              expect "boundary reuse dependency identity"
+                (run extra (fun () -> false) = expected);
+              List.iter
+                (fun stop ->
+                  let cancelled extra =
+                    let calls = ref 0 in
+                    let outcome =
+                      run extra (fun () ->
+                          incr calls;
+                          !calls = stop)
+                    in
+                    (outcome, !calls)
+                  in
+                  expect "boundary reuse cancellation identity"
+                    (cancelled extra = cancelled 0))
+                [ 1; 50; 500 ])
+            [ 128; 4096; 1048576 ])
+        [ false; true ])
+    [ 0.05; -0.05 ];
   let run () = A.price cfg admitted Side.Put in
   let expected = run () in
   let workers = Array.init 2 (fun _ -> Domain.spawn run) in

@@ -978,6 +978,7 @@
  (deps
   ../scripts/check_bermudan.py
   ../scripts/benchmark_bermudan.py
+  ../scripts/benchmark_bermudan_boundary.py
   ../scripts/benchmark_american_allocation.py
   ../scripts/test_bermudan.py
   ../scripts/freeze_bermudan.py
