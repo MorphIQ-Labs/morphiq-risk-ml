@@ -89,7 +89,9 @@ least half the requests. At least 32 rows and half the batch must then satisfy
 the fixed numerical gate: live OTM, positive normal volatility, absolute
 distance/discount/standard-deviation high word in [2^-100,2^100], and corrected
 standardized distance in [0.46875,4]. Other entries use their scalar path.
-Small, sparse, unselected and non-ARM64 batches keep the scalar layout.
+Small, sparse, unselected and non-ARM64 batches keep scalar execution.
+If a dense Bachelier batch yields too few native rows, selected rows retain
+their prepared coordinates for the identical OCaml scalar graph.
 These size/density limits control packing cost, not financial validity or
 numerical tolerances. The unchanged `run` and `evaluate` operations remain
 scalar, avoiding packing overhead for one-shot/single requests.

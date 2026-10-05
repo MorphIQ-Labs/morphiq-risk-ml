@@ -68,6 +68,7 @@ module Fast = struct
     | Black76_price of Black.Black76.admitted * Side.t * Vol.lognormal Vol.t
     | Displaced_price of Black.Displaced.admitted * Side.t * Vol.lognormal Vol.t
     | Bachelier_price of Bachelier.admitted * Side.t * Vol.normal Vol.t
+    | Middle_price of Bachelier.Fast_middle.t
     | Invalid of Refusal.t
 
   type slot = Scalar of prepared | Native of int
@@ -100,6 +101,7 @@ module Fast = struct
     else Error Numerical_failure
 
   let price = function
+    | Middle_price p -> finish (Bachelier.Fast_middle.price p)
     | Invalid e -> Error (Invalid_input e)
     | Bsm_price (a, side, sigma) -> finish (Black.Bsm.price a side sigma)
     | Black76_price (a, side, sigma) ->
@@ -112,56 +114,57 @@ module Fast = struct
   let run requests = Array.map evaluate requests
 
   let compile requests =
-    let entries = Array.map prepare requests in
-    let n = Array.length entries in
-    (* Performance dispatch is separate from numerical selection: #121
-       demonstrated throughput at >=32 rows. Sparse mixed books retain the
-       scalar layout. This does not alter the fixed middle-branch domain. *)
+    let n = Array.length requests in
+    (* Performance dispatch is separate from numerical selection. Count model
+       identities before admission, so selected rows can discard admitted
+       temporaries immediately instead of retaining them through packing. *)
     let bachelier_count =
       if n >= 32 && Bachelier_native.default_enabled then
         Array.fold_left
-          (fun n -> function Bachelier_price _ -> n + 1 | _ -> n)
-          0 entries
+          (fun n (Price (model, _, _, _)) ->
+            match model with Bachelier -> n + 1 | _ -> n)
+          0 requests
       else 0
     in
     if bachelier_count < 32 || bachelier_count < n - bachelier_count then
-      Scalar_batch entries
+      Scalar_batch (Array.map prepare requests)
     else
-      let selected =
+      let entries =
         Array.map
-          (function
-            | Bachelier_price (a, side, sigma) ->
-                Bachelier.Fast_middle.prepare a side sigma
-            | _ -> None)
-          entries
+          (fun request ->
+            match prepare request with
+            | Bachelier_price (a, side, sigma) as entry -> (
+                match Bachelier.Fast_middle.prepare a side sigma with
+                | Some p -> Middle_price p
+                | None -> entry)
+            | entry -> entry)
+          requests
       in
       let count =
         Array.fold_left
-          (fun n -> function Some _ -> n + 1 | None -> n)
-          0 selected
+          (fun n -> function Middle_price _ -> n + 1 | _ -> n)
+          0 entries
       in
+      (* Even if there are too few native rows, keep their typed preparation
+         for scalar evaluation: do not throw away work or cache prices. *)
       if count < 32 || count < n - count then Scalar_batch entries
       else
         let cursor = ref 0 in
-        let values =
-          Array.init count (fun _ ->
-              while selected.(!cursor) = None do
-                incr cursor
-              done;
-              let value = Option.get selected.(!cursor) in
-              incr cursor;
-              value)
+        let rec next_value () =
+          let entry = entries.(!cursor) in
+          incr cursor;
+          match entry with Middle_price p -> p | _ -> next_value ()
         in
+        let values = Array.init count (fun _ -> next_value ()) in
         let next = ref 0 in
         let slots =
-          Array.mapi
-            (fun i entry ->
-              match selected.(i) with
-              | None -> Scalar entry
-              | Some _ ->
+          Array.map
+            (function
+              | Middle_price _ ->
                   let slot = Native !next in
                   incr next;
-                  slot)
+                  slot
+              | entry -> Scalar entry)
             entries
         in
         Native_batch { slots; kernel = Bachelier_native.compile values }

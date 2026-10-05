@@ -93,7 +93,11 @@ unselected entries retain scalar behavior. It only packs batches with at least
 32 selected rows and selected density at least one half, after an inexpensive
 Bachelier-count check; size/density dispatch cannot change admission or numerical
 quality gates. `run` and `evaluate` remain scalar. No price is cached at compile
-time, and fallback-heavy batches retain their original scalar execution layout.
+time. Selected admitted temporaries are discarded as soon as their private
+coordinates are prepared, avoiding a second live copy through packing. If too few
+rows select the native path, their prepared coordinates still feed the identical
+OCaml scalar graph rather than being discarded. Unselected rows retain their
+original scalar pricing path.
 
 ## Integration obligations
 
