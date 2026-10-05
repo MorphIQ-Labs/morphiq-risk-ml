@@ -280,19 +280,20 @@ let controls () =
               let actual = run extra (fun () -> false) in
               (match actual with
               | Ok x when r >= 0. ->
-                  (* Exercising at the first listed date is a feasible strategy:
-                     E[(K-S_t)+] >= K-E[S_t], also before the cash event. *)
-                  let lower =
-                    (p.strike *. exp (-.r *. p.opens_at))
-                    -. (p.spot *. exp (-.p.dividend_yield *. p.opens_at))
-                  in
+                  (* Before the first right/cash event, C(t)-S with
+                     C(t)=K exp(-r*(opening-t)) is a discrete subsolution:
+                     exp(-r*h)*(1+r*h) <= 1 and the -S row contributes
+                     -h*q*S <= 0. Payoff and exterior values dominate it.
+                     Allow accumulated residual/arithmetic screens, not an
+                     observed refinement difference that can mask this fault. *)
+                  let lower = (p.strike *. exp (-.r *. p.opens_at)) -. p.spot in
                   let arithmetic =
                     x.boundary_arithmetic_indicator
                     +. float x.work.steps
                        *. (x.maximum_residual +. x.maximum_roundoff_indicator)
                   in
                   expect "cached irregular feasible stopping lower"
-                    (x.value >= lower -. error x -. arithmetic)
+                    (x.value >= lower -. arithmetic)
               | Error e when r >= 0. ->
                   failwith
                     ("cached irregular feasible stopping availability: "
