@@ -1,0 +1,8 @@
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+American public controls passed
+{"complete": true, "configuration": "initial", "counts": {"pass": 18, "runtime_unavailable": 22, "unresolved_reference": 1}, "mode": "primary", "schema": "american-runtime-campaign-v1"}
+American public controls passed

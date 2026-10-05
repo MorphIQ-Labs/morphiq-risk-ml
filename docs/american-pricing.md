@@ -175,3 +175,45 @@ negative type tests and scorer failure controls. The larger campaigns and scalar
 measurements are explicit local evidence. Two affected American mutations are
 added to the optional catalog; the seven-mutant default lane is unchanged.
 No existing European helper, served value or replay digest is changed.
+
+## Initial scalar performance
+
+The [complete samples](evidence/american-implementation/performance.json) cover
+one admitted ATM put, S=K=100, r=.05, q=.02, sigma=.2, T=1, with the refined
+**loose tolerance=1** configuration. Each price includes all boundary/refinement
+solves (11,776 accepted substeps), not a single unvalidated grid solve.
+
+On this shared Apple M1 Pro, 16 GiB, macOS 27, OCaml 5.3.0 Flambda, installed
+release library and external `-O3` consumer:
+
+| Operation | Median per request | Range of process means | Allocated bytes/request |
+| --- | ---: | ---: | ---: |
+| Financial admission alone | 22.3 ns | 21.7–22.9 ns | 440 |
+| Estimated price, admitted inputs/configuration reused | 565 ms | 544–593 ms | 1,181,699,416 |
+| Price plus optional region/premium diagnostics | 555 ms | 528–603 ms | 1,182,270,936 |
+
+Five fresh processes per mode alternate order, with one warmup and a full major
+collection before each measurement. Each price process averages three requests;
+admission averages 100,000. Ranges are variation of those means, not single-call
+tail percentiles. Inner elapsed time uses the wall clock; the enclosing process
+also has monotonic elapsed observations. Load averages were 13.6–14.1 during the
+campaign. All task-owned builds/tests had finished, but the host was not isolated.
+The overlapping timings do not establish a diagnostics speed advantage.
+
+**About 1.18 GB is cumulative OCaml allocation per general pricing request**, not
+RSS or the live workspace cap. This is a substantial initial implementation cost,
+not an optimized path or acceptable portfolio throughput claim. Profile allocation
+and arithmetic under #119 before selecting optimizations or a native backend.
+No previous American runtime exists for a before/after speedup comparison.
+The preliminary admission measurements were invalidated by constant folding;
+[their raw observations](evidence/american-implementation/performance-preliminary.json)
+are retained and explicitly excluded. The final driver makes the input opaque
+before admission/pricing.
+
+[The numerical source record](evidence/american-implementation/numerical-source.json)
+pins the six-campaign implementation and executable. The later benchmark-only
+change did not alter the runtime library. The installed native/bytecode example
+produced identical output; its [commands and results](evidence/american-implementation/installed-consumer.json)
+retain package-path verification. Source-artifact qualification across all
+platforms, broader performance work and independent institutional acceptance
+remain separate #120/#119/#27 obligations.

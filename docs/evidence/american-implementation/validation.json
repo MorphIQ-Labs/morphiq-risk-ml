@@ -1,0 +1,35 @@
+{
+  "source_commit": "21741aa323ec25dd5354885a90389d659e5718bd",
+  "local_checks": [
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- dune build @install @fmt",
+      "exit": 0
+    },
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- dune test",
+      "exit": 0
+    },
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- dune build --profile release --build-dir _build_release @install @runtest",
+      "exit": 0
+    },
+    {
+      "command": "opam exec --switch=morphiq-risk-ml -- _build/default/scripts/mutation/mutation.exe american-stationary-stopping american-delayed-opening",
+      "exit": 0
+    }
+  ],
+  "validation_scope": "Full ordinary development/release suites, with final affected rechecks after benchmark-only change; default Dune caching retained. Two named mutants compiled and were rejected by intended financial witnesses after a clean isolated full baseline. No full 102-mutant run claimed.",
+  "preserved_european_digest": "5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199",
+  "installation": "Local installed release package, separate native/bytecode consumer; matching printed price/premium. Source-artifact and cross-platform candidate qualification remains #120.",
+  "preliminary_failures": [
+    "Initial formatting and extended output format compilation were corrected before final checks.",
+    "The first isolated mutation baseline failed to load the bytecode multiplication DLL. Explicit test dependencies/search path were added; no failed baseline was scored as a mutation kill.",
+    "The preliminary admission benchmark constant-folded a fixed input. Final benchmark makes inputs opaque; preliminary samples are retained and excluded."
+  ],
+  "remaining": [
+    "Eight original reference gaps have no new accuracy claim.",
+    "Strict-target availability is limited, including common ATM requests. Refinement screens and row arithmetic failures remain explicit.",
+    "General scalar pricing allocates about 1.18 GB/request in this initial workload; #119 owns profiling and optimization.",
+    "CI on this PR, broader qualification, release and deployment acceptance remain distinct."
+  ]
+}

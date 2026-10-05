@@ -1,0 +1,378 @@
+{
+  "schema": "american-scalar-performance-v1",
+  "source_commit": "21741aa323ec25dd5354885a90389d659e5718bd",
+  "source_hashes": {
+    "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+    "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+    "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+    "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+    "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+    "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+    "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+    "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+    "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+    "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+    "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+    "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+    "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+    "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+    "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+    "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+    "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+    "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+    "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+    "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+    "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+    "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+    "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+    "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+    "lib/early_exercise.ml": "dfaa769f2e3d2d8d4fdcc328ffbb3fcf789fad55c796c9200d782fc112e637f1",
+    "lib/early_exercise.mli": "71834dca2ebbf606ad73200542049c2a8063f98ef84e232279102b7d90cdd401",
+    "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+    "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+    "lib/enclosure.ml": "f871a544ff6fd88b668809896cbfa005ae01dd46eab2765bd499e4ec9440f7fb",
+    "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+    "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+    "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+    "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+    "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+    "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+    "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+    "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+    "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+    "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+    "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+    "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+    "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+    "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+    "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+    "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+    "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+    "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+    "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+    "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+    "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+    "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+    "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+    "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+    "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+    "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+    "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+    "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+    "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+    "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+    "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+    "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+    "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+    "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+    "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+    "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+    "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+    "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+    "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+    "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+    "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+    "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+    "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+    "test/american_pricing.ml": "a160830a9d7233c593d73004673ac5fe173e2f25a7cbc7516dc9cb85654d8376"
+  },
+  "executable_sha256": "09d9ef41a8c2c54fa1adbfc5db21afee4d33d6164658d1b5c745729d0a6dc6af",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "cpu": "Apple M1 Pro",
+  "memory_bytes": 17179869184,
+  "compiler": "5.3.0",
+  "flambda": "true",
+  "build": "installed release library -O3 (runtime matches fdbe16e); standalone native public consumer -O3, benchmark-only opacity correction 21741aa",
+  "scope": "admission separately; reused admitted contract/configuration, scalar put S=K=100,r=.05,q=.02,T=1,sigma=.2; refined loose tolerance=1. No batch amortization or deployment acceptance.",
+  "measurement": "one warmup per fresh process, full major collection before measurement; 3 prices or 100000 admissions; inner wall-clock elapsed and GC allocated bytes; outer process elapsed uses monotonic clock and includes startup/warmup. Five alternating-order processes per mode; shared host. Task-owned builds/tests completed before timings.",
+  "samples": [
+    {
+      "repetition": 0,
+      "mode": "admission",
+      "started_utc": "2026-10-05T15:04:49.857125+00:00",
+      "load_before": [
+        14.0576171875,
+        20.4853515625,
+        23.4287109375
+      ],
+      "load_after": [
+        14.0576171875,
+        20.4853515625,
+        23.4287109375
+      ],
+      "process_elapsed_seconds": 0.13258275005500764,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"admission\",\"iterations\":100000,\"seconds_per_request\":2.1741390228271483e-08,\"allocated_bytes_per_request\":440.00096000000002}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 0,
+      "mode": "price",
+      "started_utc": "2026-10-05T15:04:49.991133+00:00",
+      "load_before": [
+        14.0576171875,
+        20.4853515625,
+        23.4287109375
+      ],
+      "load_after": [
+        14.0576171875,
+        20.4853515625,
+        23.4287109375
+      ],
+      "process_elapsed_seconds": 2.327963124960661,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"price\",\"iterations\":3,\"seconds_per_request\":0.57223232587178552,\"allocated_bytes_per_request\":1181699416}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 0,
+      "mode": "diagnostics",
+      "started_utc": "2026-10-05T15:04:52.319682+00:00",
+      "load_before": [
+        14.0576171875,
+        20.4853515625,
+        23.4287109375
+      ],
+      "load_after": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "process_elapsed_seconds": 2.415455541922711,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"diagnostics\",\"iterations\":3,\"seconds_per_request\":0.60268394152323401,\"allocated_bytes_per_request\":1182270936}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 1,
+      "mode": "diagnostics",
+      "started_utc": "2026-10-05T15:04:54.735920+00:00",
+      "load_before": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "load_after": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "process_elapsed_seconds": 2.257191583979875,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"diagnostics\",\"iterations\":3,\"seconds_per_request\":0.55493267377217614,\"allocated_bytes_per_request\":1182270936}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 1,
+      "mode": "price",
+      "started_utc": "2026-10-05T15:04:56.993618+00:00",
+      "load_before": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "load_after": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "process_elapsed_seconds": 2.1690411659656093,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"price\",\"iterations\":3,\"seconds_per_request\":0.54367764790852868,\"allocated_bytes_per_request\":1181699416}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 1,
+      "mode": "admission",
+      "started_utc": "2026-10-05T15:04:59.163206+00:00",
+      "load_before": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "load_after": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "process_elapsed_seconds": 0.010506167076528072,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"admission\",\"iterations\":100000,\"seconds_per_request\":2.2740364074707033e-08,\"allocated_bytes_per_request\":440.00096000000002}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 2,
+      "mode": "admission",
+      "started_utc": "2026-10-05T15:04:59.174154+00:00",
+      "load_before": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "load_after": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "process_elapsed_seconds": 0.00926245900336653,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"admission\",\"iterations\":100000,\"seconds_per_request\":2.2859573364257814e-08,\"allocated_bytes_per_request\":440.00096000000002}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 2,
+      "mode": "price",
+      "started_utc": "2026-10-05T15:04:59.183911+00:00",
+      "load_before": [
+        13.97265625,
+        20.36083984375,
+        23.3671875
+      ],
+      "load_after": [
+        13.974609375,
+        20.2548828125,
+        23.31201171875
+      ],
+      "process_elapsed_seconds": 2.2622134170960635,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"price\",\"iterations\":3,\"seconds_per_request\":0.56509701410929358,\"allocated_bytes_per_request\":1181699416}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 2,
+      "mode": "diagnostics",
+      "started_utc": "2026-10-05T15:05:01.446696+00:00",
+      "load_before": [
+        13.974609375,
+        20.2548828125,
+        23.31201171875
+      ],
+      "load_after": [
+        13.974609375,
+        20.2548828125,
+        23.31201171875
+      ],
+      "process_elapsed_seconds": 2.122817291994579,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"diagnostics\",\"iterations\":3,\"seconds_per_request\":0.52848569552103675,\"allocated_bytes_per_request\":1182270936}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 3,
+      "mode": "diagnostics",
+      "started_utc": "2026-10-05T15:05:03.570085+00:00",
+      "load_before": [
+        13.974609375,
+        20.2548828125,
+        23.31201171875
+      ],
+      "load_after": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "process_elapsed_seconds": 2.3355365419993177,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"diagnostics\",\"iterations\":3,\"seconds_per_request\":0.59652264912923181,\"allocated_bytes_per_request\":1182270936}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 3,
+      "mode": "price",
+      "started_utc": "2026-10-05T15:05:05.908042+00:00",
+      "load_before": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "load_after": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "process_elapsed_seconds": 2.216745625017211,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"price\",\"iterations\":3,\"seconds_per_request\":0.55574965476989746,\"allocated_bytes_per_request\":1181699416}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 3,
+      "mode": "admission",
+      "started_utc": "2026-10-05T15:05:08.125443+00:00",
+      "load_before": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "load_after": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "process_elapsed_seconds": 0.009038000018335879,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"admission\",\"iterations\":100000,\"seconds_per_request\":2.2058486938476564e-08,\"allocated_bytes_per_request\":440.00096000000002}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 4,
+      "mode": "admission",
+      "started_utc": "2026-10-05T15:05:08.134978+00:00",
+      "load_before": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "load_after": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "process_elapsed_seconds": 0.009447499993257225,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"admission\",\"iterations\":100000,\"seconds_per_request\":2.2330284118652342e-08,\"allocated_bytes_per_request\":440.00096000000002}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 4,
+      "mode": "price",
+      "started_utc": "2026-10-05T15:05:08.144906+00:00",
+      "load_before": [
+        13.576171875,
+        20.06787109375,
+        23.22802734375
+      ],
+      "load_after": [
+        13.60986328125,
+        19.966796875,
+        23.173828125
+      ],
+      "process_elapsed_seconds": 2.306496665929444,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"price\",\"iterations\":3,\"seconds_per_request\":0.59262871742248535,\"allocated_bytes_per_request\":1181699416}\n",
+      "stderr": ""
+    },
+    {
+      "repetition": 4,
+      "mode": "diagnostics",
+      "started_utc": "2026-10-05T15:05:10.452247+00:00",
+      "load_before": [
+        13.60986328125,
+        19.966796875,
+        23.173828125
+      ],
+      "load_after": [
+        13.60986328125,
+        19.966796875,
+        23.173828125
+      ],
+      "process_elapsed_seconds": 2.1802702500717714,
+      "returncode": 0,
+      "stdout": "{\"mode\":\"diagnostics\",\"iterations\":3,\"seconds_per_request\":0.54738426208496094,\"allocated_bytes_per_request\":1182270936}\n",
+      "stderr": ""
+    }
+  ],
+  "complete": true,
+  "accepted": true
+}

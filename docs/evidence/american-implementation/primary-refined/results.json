@@ -1,0 +1,522 @@
+{
+  "schema": "american-runtime-campaign-v1",
+  "complete": true,
+  "mode": "primary",
+  "configuration": "refined",
+  "counts": {
+    "runtime_unavailable": 23,
+    "pass": 17,
+    "unresolved_reference": 1
+  },
+  "rows": [
+    {
+      "id": "call-80",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-100",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-120",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-short",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.f2e6317d1ec1cp-4,0x1.8cb6b877e202cp-4:time=0x1.210fef0dc58p-13,0x1.212ed8802ap-14:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-long-high-vol",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:policies=0:rows=0:roundoff=0x1.7895068b7fce1p-55:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.fdcbdb70c3308p+2",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/1125899906842624",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/1125899906842624",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-negative-rate",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-negative-yield",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-low-vol",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.bb566376fbcp-9,0x1.e44163a3c2ep-8:time=0x1.6cc7b1f3ecp-13,0x1.6ca8e28dfp-14:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-delayed",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-expiry",
+      "outcome": "estimated",
+      "detail": "expiry:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+2",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-spot",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-strike",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:policies=0:rows=0:roundoff=0x1.194cbcd360c51p-48:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.c54266cede01p+6",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/70368744177664",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/70368744177664",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-scale",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-80",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.9c74974aaep-9,0x1.b02d11d468p-11:time=0x1.5f63da164p-12,0x1.67b3aa9a8p-13:domain=0x1.ap-44,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-100",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.4c33021e07bp-6,0x1.4bd89d4c8f4p-8:time=0x1.74bf2de31b8p-9,0x1.7c0490c613p-10:domain=0x1.a12acp-32,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-120",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.8f14abb971b8p-7,0x1.9cf1a0adc02p-9:time=0x1.d6ce7fc7c6p-11,0x1.e8aaa0a5c4p-12:domain=0x1.a12ap-32,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-short",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.f2ca7d4096f02p-4,0x1.8cfccabf2d2e4p-4:time=0x1.263661652ep-13,0x1.26abd6abc9p-14:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-long-high-vol",
+      "outcome": "unavailable",
+      "detail": "nonconvergence:1:96:0x1.bfbeaf76d6a5p-2",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "outcome": "unavailable",
+      "detail": "nonconvergence:1:118:0x1.0eb6fbacp-26",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-negative-rate",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.3e968081a34p-6,0x1.3d390180058p-8:time=0x1.6a5045018ep-10,0x1.6a5e01318p-11:domain=0x1.a17p-37,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-negative-yield",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6a26cfa2f0ep-6,0x1.6d3dc304e18p-8:time=0x1.2ea426e768p-9,0x1.3216a295e3p-10:domain=0x1.1a6b38p-29,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-low-vol",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.2a6fceb092bc8p-7,0x1.0a86125d192a8p-8:time=0x1.79a95ba2d7p-17,0x1.786a3ea60cp-18:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-delayed",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.530acb987d1p-6,0x1.59af3260a94p-8:time=0x1.9a0f3f9d8cp-10,0x1.9f559f09dep-11:domain=0x1.6f678p-32,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-expiry",
+      "outcome": "estimated",
+      "detail": "expiry:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-spot",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x1.92161cd58af33p-54:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.00ce19f10d531p+7",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/35184372088832",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/35184372088832",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-strike",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-scale",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-no-early",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:policies=0:rows=0:roundoff=0x1.f511bbf93eb4cp-51:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4e6b2e3d54dc2p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-dividend-yield",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-deep-exercise",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=11776:policies=12084:rows=32862183:roundoff=0x1.065678644dd1p-35:grid=601:upper=0x1.9p+10:time=1024:domains=2:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.9p+5",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-60",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=11776:policies=11922:rows=33597697:roundoff=0x1.e8d892c25d6cdp-38:grid=621:upper=0x1.9p+10:time=1024:domains=2:switched=42",
+      "reference_status": "resolved",
+      "value": "0x1.4p+5",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-90",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=11776:policies=12014:rows=33850085:roundoff=0x1.e8d892c25d6cdp-38:grid=621:upper=0x1.9p+10:time=1024:domains=2:switched=42",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-100",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.a60aac6d54dcp-5,0x1.9fb43808a71p-7:time=0x1.348aa04e758p-10,0x1.3791b051c8p-11:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "negative-boundaries-140",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=11776:policies=12024:rows=34111348:roundoff=0x1.e8d892c25d6cdp-38:grid=625:upper=0x1.18p+11:time=1024:domains=2:switched=42",
+      "reference_status": "resolved",
+      "value": "0x1.32f0eb97775ep-14",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1028148016814323/147573952589676412928",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1028148016814323/147573952589676412928",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "probability-stress",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=11776:policies=11776:rows=32041759:roundoff=0x1.8d01280000554p-40:grid=601:upper=0x1.9p+10:time=1024:domains=2:switched=6622",
+      "reference_status": "unresolved",
+      "value": "0x1.95464cd8d32b5p-25",
+      "primary_comparison": {
+        "status": "unresolved_reference"
+      },
+      "comparison": {
+        "status": "unresolved_reference"
+      }
+    },
+    {
+      "id": "deterministic-interior",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x1.c71c71c71ea63p-51:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.bc71c71c71c72p+4",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/281474976710656",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/281474976710656",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "deterministic-negative-call",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "deterministic-put",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x1.81b60d9da48d4p-55:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-scaled--20",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.4c33021e07bp-26,0x1.4bd89d4c8f4p-28:time=0x1.74bf2de31b8p-29,0x1.7c0490c613p-30:domain=0x1.a12acp-52,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-scaled-20",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.4c33021e07bp+14,0x1.4bd89d4c8f4p+12:time=0x1.74bf2de31b8p+11,0x1.7c0490c613p+10:domain=0x1.a12acp-12,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    }
+  ]
+}
