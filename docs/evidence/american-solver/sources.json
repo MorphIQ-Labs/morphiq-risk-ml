@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "issue": 109,
+  "contract_commit": "1f6acd274d53f149938e4a0c0b470354e976dec9",
+  "reviewed_on": "2026-10-05",
+  "scope": "Solver and assurance design. Original exact-rational algebra experiment; no runtime pricing change, external solver execution, benchmark or imported third-party implementation.",
+  "sources": [
+    {
+      "file": "policy-iteration.pdf",
+      "url": "https://arxiv.org/pdf/1012.4976v4",
+      "sha256": "ce3a8d3aba1d8792da1dd63dc15c3917bc749ab24c11727d0db8d6d43b4e0283",
+      "bytes": 467971,
+      "acquired_at_utc": "2026-10-05T13:02:57.846558+00:00",
+      "archive_id": "2011-reisinger-policy-iteration-american-arxiv-v4",
+      "archive_path": "papers/2011-reisinger-policy-iteration-american-arxiv-v4.pdf",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "version": "arXiv:1012.4976v4, 2011-09-17",
+      "inspection": "Versioned HTML section 2, including algorithm 2.1, theorem 2.2 and corollary 2.3; downloaded original PDF title/version checked by text extraction.",
+      "terms": "arXiv perpetual non-exclusive distribution notice; not a general redistribution or implementation license. Public redistribution not cleared. Retained privately for existing maintainer research; broader access not authorized."
+    },
+    {
+      "file": "dgtsv.f",
+      "url": "https://raw.githubusercontent.com/Reference-LAPACK/lapack/6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca/SRC/dgtsv.f",
+      "sha256": "7fa899040fa5b02bb4906856c2488d31011ce1607c51efbd1375bfc20709aa38",
+      "bytes": 9659,
+      "acquired_at_utc": "2026-10-05T13:02:58.033203+00:00",
+      "archive_id": "morphiq-risk-ml-109-dgtsv-f",
+      "archive_path": "sources/morphiq-risk-ml-109/dgtsv.f",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "commit": "6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca",
+      "terms": "Upstream BSD-style license inspected at this revision; retain copyright, conditions and disclaimer and comply with non-endorsement condition if redistributed.",
+      "inspection": "DGTSV argument/storage contract, pivot logic, INFO and license."
+    },
+    {
+      "file": "LAPACK-LICENSE",
+      "url": "https://raw.githubusercontent.com/Reference-LAPACK/lapack/6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca/LICENSE",
+      "sha256": "978539245c405775bf347b1256c36df4daf8b69a64b099e94b1d53742201621e",
+      "bytes": 2266,
+      "acquired_at_utc": "2026-10-05T13:02:58.162379+00:00",
+      "archive_id": "morphiq-risk-ml-109-lapack-license",
+      "archive_path": "sources/morphiq-risk-ml-109/LAPACK-LICENSE",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "commit": "6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca",
+      "terms": "Upstream BSD-style license inspected at this revision; retain copyright, conditions and disclaimer and comply with non-endorsement condition if redistributed.",
+      "inspection": "DGTSV argument/storage contract, pivot logic, INFO and license."
+    },
+    {
+      "file": "fdblackscholesvanillaengine.cpp",
+      "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/ql/pricingengines/vanilla/fdblackscholesvanillaengine.cpp",
+      "sha256": "4d049de6c97e299575ab78eae8c56598e53d0233edd561e0797d36253a40a877",
+      "bytes": 11536,
+      "acquired_at_utc": "2026-10-05T13:02:58.281776+00:00",
+      "archive_id": "morphiq-risk-ml-109-fdblackscholesvanillaengine-cpp",
+      "archive_path": "sources/morphiq-risk-ml-109/fdblackscholesvanillaengine.cpp",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "commit": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+      "terms": "Upstream BSD-style license inspected at this revision; retain copyright, conditions and disclaimer and comply with non-endorsement condition if redistributed.",
+      "inspection": "Engine dividend convention, mesher and step-condition wiring; rollback scheme and implicit damping configuration; license."
+    },
+    {
+      "file": "fdmbackwardsolver.cpp",
+      "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/ql/methods/finitedifferences/solvers/fdmbackwardsolver.cpp",
+      "sha256": "4663c02b1fd89424c266559b17cf23837acbeee7c10a86ed04c6a95b22abd503",
+      "bytes": 8778,
+      "acquired_at_utc": "2026-10-05T13:02:58.394258+00:00",
+      "archive_id": "morphiq-risk-ml-109-fdmbackwardsolver-cpp",
+      "archive_path": "sources/morphiq-risk-ml-109/fdmbackwardsolver.cpp",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "commit": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+      "terms": "Upstream BSD-style license inspected at this revision; retain copyright, conditions and disclaimer and comply with non-endorsement condition if redistributed.",
+      "inspection": "Engine dividend convention, mesher and step-condition wiring; rollback scheme and implicit damping configuration; license."
+    },
+    {
+      "file": "QUANTLIB-LICENSE",
+      "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/LICENSE.TXT",
+      "sha256": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+      "bytes": 8758,
+      "acquired_at_utc": "2026-10-05T13:02:58.483309+00:00",
+      "archive_id": "morphiq-risk-ml-109-quantlib-license",
+      "archive_path": "sources/morphiq-risk-ml-109/QUANTLIB-LICENSE",
+      "reuse": "Inspection only; no source or paper bytes in public repository.",
+      "commit": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+      "terms": "Upstream BSD-style license inspected at this revision; retain copyright, conditions and disclaimer and comply with non-endorsement condition if redistributed.",
+      "inspection": "Engine dividend convention, mesher and step-condition wiring; rollback scheme and implicit damping configuration; license."
+    }
+  ],
+  "archive_repository": "https://github.com/MorphIQ-Labs/research-library",
+  "archive_branch": "feature/american-solver-research",
+  "archive_status": "Preserved in signed commit on isolated archive branch; PR #18 open, archive-integrity green. All destination byte hashes and offline verification passed.",
+  "reuse_disposition": "Published mathematical policy algorithm attributed; project discretization, stopping-bound derivations and research probe are original. No translation or reuse of LAPACK/QuantLib implementation.",
+  "not_executed": [
+    "QuantLib American comparator: #110",
+    "LAPACK backend and end-to-end timings: #119",
+    "Binary64 American runtime/rounding qualification: #111",
+    "Useful rigorous full-price enclosure: #116"
+  ],
+  "prior_sources": "../american-contract/sources.json",
+  "archive_commit": "48fae1289b98463e68fc5a16a1d1f32cb420e6e3",
+  "archive_pr": "https://github.com/MorphIQ-Labs/research-library/pull/18"
+}

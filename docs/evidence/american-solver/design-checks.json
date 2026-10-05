@@ -1,0 +1,34 @@
+{
+  "clipping_counterexample": {
+    "projected": [
+      "1",
+      "0"
+    ],
+    "projected_residual": "1",
+    "solution": [
+      "1",
+      "1/2"
+    ]
+  },
+  "coarse_atm_put_bound": {
+    "lower": "0",
+    "midpoint_radius": "50",
+    "requested_estimate": "25/16384",
+    "upper": "100"
+  },
+  "exact_lcp_crosscheck": "all exercise policies via dense pivoted elimination",
+  "lcp_cases": 1296,
+  "maximum_grid_case_policy_solves": 1,
+  "policy_change_witness_solves": 3,
+  "policy_masks_per_case": 8,
+  "rejection_controls": [
+    "positive offdiagonal",
+    "negative-rate step guard",
+    "explicit-side positivity"
+  ],
+  "schema": 1,
+  "scope": "Exact discrete algebra only; no continuum prices, binary64 qualification, LAPACK execution or timings.",
+  "script_sha256": "a2605e78c8329039fc555f9b63dc6fb6c55c7439834d16725154081377f563e7",
+  "status": "pass",
+  "upwind_rows": 408
+}

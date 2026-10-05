@@ -46,6 +46,24 @@ inspection scope, pinned QuantLib file hashes and absence of numerical execution
 It does not amend the historical acquisition manifest or assert new archived
 paper holdings. Future acquired originals follow the preservation policy below.
 
+## American solver design references
+
+The [#109 solver design](../american-solver-design.md) uses Reisinger and Witte,
+*On the Use of Policy Iteration as an Easy Way of Pricing American Options*,
+[arXiv:1012.4976v4](https://arxiv.org/abs/1012.4976v4), 17 September 2011, §2.
+Its original PDF was acquired directly from arXiv on 2026-10-05 and preserved
+under `2011-reisinger-policy-iteration-american-arxiv-v4` in the private library's
+`feature/american-solver-research` branch. The arXiv distribution notice does not
+clear broader redistribution; the public project contains no paper bytes.
+
+[The #109 inventory](../evidence/american-solver/sources.json) records the PDF
+hash/byte count, actual acquisition route, and pinned LAPACK 3.12.1 and QuantLib
+source/license hashes. Those unchanged implementation inspection files are also
+preserved privately. No external American solver or LAPACK benchmark was executed;
+the [public probe](../../scripts/check_american_solver_design.py) is original
+exact-rational algebra evidence and has no private archive dependency.
+This is a new acquisition record, not a rewrite of the historical manifest.
+
 ## Unavailable reference
 
 **Fischer Black (1976), The pricing of commodity contracts.** [Publisher](https://www.sciencedirect.com/science/article/pii/0304405X76900246).

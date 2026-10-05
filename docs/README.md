@@ -33,6 +33,11 @@ been retired; it remains in Git history.
   limited-liability cash dividends and piecewise coefficients. This is the
   foundation for Epic #107; it does not add an implemented pricing capability.
 
+- [American solver and assurance design](american-solver-design.md): the #109
+  monotone finite-difference/policy-iteration architecture, explicit estimated-only
+  results, frozen acceptance rules, tridiagonal backend boundary and certification
+  obligations. Includes executable discrete-algebra evidence, not a runtime pricer.
+
 ## Numerical methods and verification
 
 - [Adversarial assurance closeout](adversarial-assurance-closeout.md): current source, finding dispositions, retained uncertainty and review obligations.

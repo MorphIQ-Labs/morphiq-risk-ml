@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American solver and assurance design (#109)
+
+- Define the American solver architecture and estimated-only assurance contract
+  for #109, including monotonicity/time-step guards, bounded policy solves,
+  tridiagonal backend ownership, frozen refinement/reference acceptance and the
+  #116 certification gate. Add reproducible exact-rational design witnesses;
+  no American runtime API or existing European numerical behavior changes.
+
 ### American/Bermudan contract design (#108)
 
 - Define the planned BSM stopping model, immediate settlement, explicit exercise
