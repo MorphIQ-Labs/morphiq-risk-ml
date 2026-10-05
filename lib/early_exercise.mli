@@ -165,4 +165,96 @@ module Bsm : sig
       requests never return a usable partial price. Optional diagnostics report
       their own availability. Finite-input admission does not imply that the
       requested resolution is achievable. *)
+
+  module Piecewise : sig
+    (** Complete right-continuous partitions of [0,horizon]. The initial level
+        starts at zero; changes are strictly increasing interior knots. Expiry
+        uses the final left limit. No extrapolation, averaging, or sorting.
+        Getters copy arrays and retain redundant original knots. *)
+    module Rate : sig
+      type t
+
+      val create :
+        horizon:float ->
+        initial:float ->
+        changes:(float * float) array ->
+        (t, input_error) result
+
+      val horizon : t -> float
+      val initial : t -> float
+      val changes : t -> (float * float) array
+    end
+
+    module Yield : sig
+      type t
+
+      val create :
+        horizon:float ->
+        initial:float ->
+        changes:(float * float) array ->
+        (t, input_error) result
+
+      val horizon : t -> float
+      val initial : t -> float
+      val changes : t -> (float * float) array
+    end
+
+    module Volatility : sig
+      type t
+
+      val create :
+        horizon:float ->
+        initial:Vol.lognormal Vol.t ->
+        changes:(float * Vol.lognormal Vol.t) array ->
+        (t, input_error) result
+
+      val horizon : t -> float
+      val initial : t -> Vol.lognormal Vol.t
+      val changes : t -> (float * Vol.lognormal Vol.t) array
+    end
+
+    type inputs = {
+      spot : float;
+      strike : float;
+      rate : Rate.t;
+      dividend_yield : Yield.t;
+      time_to_expiry : float;
+      opens_at : float;
+      volatility : Volatility.t;
+    }
+
+    type admitted
+
+    val admit : inputs -> (admitted, input_error) result
+
+    val admit_cash :
+      inputs -> cash_specification -> (admitted, input_error) result
+
+    val admit_bermudan :
+      ?cash:cash_specification ->
+      inputs ->
+      exercise_instant array ->
+      (admitted, input_error) result
+    (** Each curve's declared horizon must equal expiry exactly. Cash/exercise
+        admission retains the constant API's event-side and ownership rules.
+        Coefficient knots confer no additional finite exercise rights. *)
+
+    val inputs : admitted -> inputs
+    val cash_specification : admitted -> cash_specification option
+    val exercise_schedule : admitted -> exercise_instant array option
+
+    val price :
+      ?cancel:(unit -> bool) ->
+      ?exercise_regions:bool ->
+      ?premium:bool ->
+      configuration ->
+      admitted ->
+      Side.t ->
+      (estimated_price, failure) result
+    (** Estimated-only, bounded request-owned execution. Constant or redundantly
+        split constant curves delegate to constant pricing. A parallel rate or
+        yield perturbation shifts every annual continuous level; a segment
+        perturbation changes one original level. Volatility perturbations use
+        annual lognormal units. This API does not yet implement those Greeks. *)
+  end
 end

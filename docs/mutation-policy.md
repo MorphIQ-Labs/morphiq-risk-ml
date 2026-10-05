@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **113
+seven core mutants. The catalog currently contains **117
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -278,7 +278,7 @@ Three optional mechanisms cover transported scalar input radii, stale packing
 scratch slots and the orientation of a reused American stencil. The scalar
 witness checks exact-rational containment before compatibility fingerprints;
 changed replay bits alone are not a kill. The American witness requires the
-existing independently checked price capability. The full catalog now contains 113
+existing independently checked price capability. The full catalog at #135 contains 113
 mechanisms; default CI still selects the same seven core mutants.
 
 The optional `american-spatial-grid-key` fault omits domain expansion from the
@@ -289,4 +289,13 @@ remains seven.
 
 Boundary reuse adds `bermudan-boundary-slab-key`: deliberately dropping slab
 and next-right identity must fail a numerical boundary or dependency witness.
-The current catalog has 113 entries; the seven-mutant core is unchanged.
+The catalog at #135 has 113 entries; the seven-mutant core is unchanged.
+
+### Piecewise coefficient schedules (#114)
+
+Four optional faults use `american_piecewise`: replacing the profile by its
+average, selecting a knot's left coefficient, omitting interior future discount
+optima, and keeping stale spatial coefficients across a knot. Their witnesses
+use distinct equal-integral exercise profiles, original-input analytical
+stationary/discount extrema and the independently refined volatility-profile
+reference. The catalog contains 117 mechanisms; the core remains seven.

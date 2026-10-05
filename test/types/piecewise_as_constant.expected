@@ -1,0 +1,8 @@
+File "piecewise_as_constant.ml", line 4, characters 55-56:
+4 | let price cfg (p : A.Piecewise.admitted) = A.price cfg p Side.Put
+                                                           ^
+Error: The value "p" has type
+         "A.Piecewise.admitted" =
+           "Morphiq_risk.Early_exercise.Bsm.Piecewise.admitted"
+       but an expression was expected of type
+         "A.admitted" = "Morphiq_risk.Early_exercise.Bsm.admitted"

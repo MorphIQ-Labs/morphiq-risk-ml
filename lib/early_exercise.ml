@@ -583,6 +583,262 @@ module Bsm = struct
         timeline;
       Some ("Bermudan-deterministic-stopping", !best)
 
+  (* Curves keep the declared partition for getters and a validated coalesced
+     partition for execution. Coalescing never repairs invalid input. *)
+  type curve = {
+    horizon : float;
+    initial : float;
+    changes : (float * float) array;
+    segments : (float * float) array;
+  }
+
+  type coefficient_curves = {
+    rates : curve;
+    yields : curve;
+    vols : curve;
+    knots : float list;
+  }
+
+  let make_curve ~horizon ~initial ~changes =
+    let previous = ref 0. in
+    let valid =
+      ref (Float.is_finite horizon && horizon >= 0. && Float.is_finite initial)
+    in
+    Array.iter
+      (fun (time, value) ->
+        if
+          (not (Float.is_finite time && Float.is_finite value))
+          || time <= !previous || time >= horizon
+        then valid := false;
+        previous := time)
+      changes;
+    if not !valid then
+      Error (Invalid_input "coefficient horizon, level or partition")
+    else
+      let levels = ref [ (0., initial) ] and last = ref initial in
+      Array.iter
+        (fun (t, v) ->
+          if v <> !last then (
+            levels := (t, v) :: !levels;
+            last := v))
+        changes;
+      Ok
+        {
+          horizon;
+          initial;
+          changes = Array.copy changes;
+          segments = Array.of_list (List.rev !levels);
+        }
+
+  let curve_index curve t =
+    let lo = ref 0 and hi = ref (Array.length curve.segments) in
+    while !hi - !lo > 1 do
+      let m = !lo + ((!hi - !lo) / 2) in
+      if fst curve.segments.(m) <= t then lo := m else hi := m
+    done;
+    !lo
+
+  let curve_level curve t = snd curve.segments.(curve_index curve t)
+
+  let curve_integral tick curve a b transform =
+    let result = ref (exact 0.) and previous = ref a in
+    let i = ref (curve_index curve a) in
+    while !previous < b do
+      tick ();
+      let next =
+        if !i + 1 < Array.length curve.segments then
+          float_min b (fst curve.segments.(!i + 1))
+        else b
+      in
+      result :=
+        E.add !result
+          (E.mul
+             (transform (snd curve.segments.(!i)))
+             (E.sub (exact next) (exact !previous)));
+      previous := next;
+      incr i
+    done;
+    !result
+
+  let maximum_enclosure a b =
+    match E.sign (E.sub a b) with
+    | E.Positive | E.Zero -> a
+    | E.Negative -> b
+    | E.Indeterminate ->
+        let av, ae = enclosed a and bv, be = enclosed b in
+        E.add_error (exact (float_max av bv)) (float_max ae be)
+
+  (* Discount optimality depends on all future permitted times, never just
+     the sign of the current segment. Piecewise linear integrals attain
+     their extrema at window endpoints/knots, or listed finite rights. *)
+  let discount_optimum tick curve dates p from =
+    let best = ref None in
+    let add t =
+      tick ();
+      if t >= from && t >= p.opens_at then
+        let value = E.neg (curve_integral tick curve from t exact) in
+        best :=
+          Some
+            (match !best with
+            | None -> value
+            | Some b -> maximum_enclosure b value)
+    in
+    (match dates with
+    | Some ds -> Array.iter (fun (e : exercise_instant) -> add e.time) ds
+    | None ->
+        add (float_max from p.opens_at);
+        add p.time_to_expiry;
+        Array.iter (fun (t, _) -> add t) curve.segments);
+    match !best with
+    | Some x -> x
+    | None -> fail "missing future exercise instant"
+
+  let piecewise_european tick curves p side =
+    let integral curve f = curve_integral tick curve 0. p.time_to_expiry f in
+    let x = E.mul (exact p.spot) (E.exp (E.neg (integral curves.yields exact)))
+    and y = E.mul (exact p.strike) (E.exp (E.neg (integral curves.rates exact)))
+    and variance = integral curves.vols (fun v -> E.mul (exact v) (exact v)) in
+    if p.spot = 0. || p.strike = 0. || E.sign variance = E.Zero then
+      enclosed (payoff_e side x y)
+    else
+      let root = E.sqrt variance in
+      let d1 =
+        E.div
+          (E.add (E.sub (E.log x) (E.log y)) (E.mul_float variance 0.5))
+          root
+      in
+      let d2 = E.sub d1 root and cdf = Model_enclosure.Fast.cdf in
+      enclosed
+        (positive_part
+           (match side with
+           | Side.Call -> E.sub (E.mul x (cdf d1)) (E.mul y (cdf d2))
+           | Side.Put ->
+               E.sub (E.mul y (cdf (E.neg d2))) (E.mul x (cdf (E.neg d1)))))
+
+  let piecewise_analytic tick curves p cash events dates side =
+    if p.spot = 0. || (p.strike = 0. && side = Side.Put) then
+      Some
+        ( "piecewise-absorbing-stock",
+          if side = Side.Call || p.strike = 0. then (0., 0.)
+          else
+            enclosed
+              (E.mul (exact p.strike)
+                 (E.exp (discount_optimum tick curves.rates dates p 0.))) )
+    else if p.strike = 0. && cash = None then
+      Some
+        ( "piecewise-zero-strike",
+          enclosed
+            (E.mul (exact p.spot)
+               (E.exp (discount_optimum tick curves.yields dates p 0.))) )
+    else if
+      p.time_to_expiry = 0.
+      || Array.for_all (fun (_, v) -> v = 0.) curves.vols.segments
+    then (
+      let permitted t phase =
+        match dates with
+        | Some ds ->
+            Array.exists
+              (fun (e : exercise_instant) ->
+                tick ();
+                e.time = t && e.side = phase)
+              ds
+        | None -> (
+            match cash with
+            | None -> t >= p.opens_at
+            | Some spec -> eligible p spec t phase)
+      in
+      let times =
+        List.sort_uniq Float.compare
+          ((0. :: p.opens_at :: p.time_to_expiry :: curves.knots)
+          @ List.map fst events
+          @
+          match dates with
+          | None -> []
+          | Some ds ->
+              Array.to_list
+                (Array.map (fun (e : exercise_instant) -> e.time) ds))
+      in
+      let stock = ref (exact p.spot)
+      and discount = ref (exact 1.)
+      and previous = ref 0. in
+      let best = ref (exact 0.) in
+      let add d s =
+        tick ();
+        best :=
+          maximum_enclosure !best (E.mul d (payoff_e side s (exact p.strike)))
+      in
+      let pending = ref events in
+      List.iter
+        (fun t ->
+          tick ();
+          let a = !previous in
+          if a < t then (
+            let r = curve_level curves.rates a
+            and q = curve_level curves.yields a in
+            let drift = E.sub (exact r) (exact q) in
+            let at elapsed = E.mul !stock (E.exp (E.mul drift elapsed)) in
+            let disc elapsed = E.mul !discount (exp_product (-.r) elapsed) in
+            let width = E.sub (exact t) (exact a) in
+            if dates = None && a >= p.opens_at then (
+              add !discount !stock;
+              add (disc width) (at width);
+              if
+                r <> 0. && q <> 0.
+                && r > 0. = (q > 0.)
+                && r <> q && p.strike > 0.
+              then
+                match E.sign !stock with
+                | E.Zero -> ()
+                | E.Positive -> (
+                    let ratio =
+                      E.sub
+                        (E.add
+                           (E.log (exact (abs_float r)))
+                           (E.log (exact p.strike)))
+                        (E.add (E.log (exact (abs_float q))) (E.log !stock))
+                    in
+                    let root = E.div ratio drift in
+                    match (E.sign root, E.sign (E.sub root width)) with
+                    | E.Positive, E.Negative -> add (disc root) (at root)
+                    | E.Indeterminate, _ | _, E.Indeterminate ->
+                        fail "piecewise stationary endpoint unresolved"
+                    | _ -> ())
+                | _ -> fail "piecewise deterministic stock sign");
+            stock := at width;
+            discount := disc width);
+          let event =
+            match !pending with
+            | (u, amount) :: tail when u = t ->
+                pending := tail;
+                Some amount
+            | _ -> None
+          in
+          let phase =
+            match (event, cash) with
+            | Some _, Some spec when t = 0. -> spec.valuation_side
+            | Some _, _ -> Before_cash
+            | None, _ -> Regular
+          in
+          if permitted t phase then add !discount !stock;
+          (match (event, cash) with
+          | Some amount, Some spec when active_jump p spec t ->
+              stock := positive_part (E.sub !stock amount);
+              if permitted t After_cash then add !discount !stock
+          | _ -> ());
+          previous := t)
+        times;
+      Some ("piecewise-deterministic-stopping", enclosed !best))
+    else if
+      cash = None
+      && (p.opens_at = p.time_to_expiry
+         || side = Side.Call
+            && Array.for_all (fun (_, v) -> v = 0.) curves.yields.segments
+            && Array.for_all (fun (_, v) -> v >= 0.) curves.rates.segments)
+    then
+      Some
+        ("piecewise-European-reduction", piecewise_european tick curves p side)
+    else None
+
   type context = {
     cfg : configuration;
     cancel : unit -> bool;
@@ -756,22 +1012,23 @@ module Bsm = struct
   (* The price request owns preparation for one stock-grid key. Payoff and
      spatial bands depend only on that grid, the fixed model and option side;
      time steps, boundary choice and cash interpolation do not alter them. *)
-  let solver_pair ?cash ?bermudan ~prepared ~boundary_cache c p side x
-      time_steps capture =
+  let solver_pair ?curves ?dates ?cash ?bermudan ~prepared ~boundary_cache c p
+      side x time_steps capture =
    fun upper_boundary ->
     check c;
-    let n = Array.length x and sigma = Vol.to_float p.volatility in
+    let n = Array.length x in
+    let key p = (p.rate, p.dividend_yield, Vol.to_float p.volatility) in
     let arr () = Array.make n 0. in
     let left, right, g, reused, switched =
       match !prepared with
       | None -> (arr (), arr (), arr (), false, 0)
-      | Some (left, right, g, switched) ->
+      | Some (previous_key, left, right, g, switched) ->
           if
             Array.length left <> n
             || Array.length right <> n
             || Array.length g <> n
           then fail "prepared spatial grid mismatch";
-          (left, right, g, true, switched)
+          (left, right, g, previous_key = key p, switched)
     in
     let v = arr () in
     let lo = arr () and diag = arr () and hi = arr () and rhs = arr () in
@@ -784,55 +1041,61 @@ module Bsm = struct
         g.(i) <- boundary c (payoff_e side (exact x.(i)) (exact p.strike));
       v.(i) <- g.(i)
     done;
-    (if reused then (
-       (* A logical stencil-row visit remains a visit when loading a prepared
+    let prepare p reused switched =
+      let sigma = Vol.to_float p.volatility in
+      if reused then (
+        (* A logical stencil-row visit remains a visit when loading a prepared
          coefficient. Retain limits/cancellation and switched-row diagnostics. *)
-       for _ = 1 to n - 2 do
-         tick c
-       done;
-       c.switched <- c.switched + switched)
-     else
-       let switched_before = c.switched in
-       let drift = E.sub (exact p.rate) (exact p.dividend_yield) in
-       let coefficient label value =
-         let v, _ = enclosed value in
-         if v < 0. || (v = 0. && E.sign value <> E.Zero) then fail label;
-         v
-       in
-       for i = 1 to n - 2 do
-         tick c;
-         let hm = E.sub (exact x.(i)) (exact x.(i - 1))
-         and hp = E.sub (exact x.(i + 1)) (exact x.(i)) in
-         let sx = E.mul (exact sigma) (exact x.(i)) in
-         let a2 = E.mul sx sx and b = E.mul drift (exact x.(i)) in
-         let sum = E.add hm hp in
-         let numerator_m = E.sub a2 (E.mul b hp)
-         and numerator_p = E.add a2 (E.mul b hm) in
-         let positive = function
-           | E.Positive | E.Zero -> true
-           | E.Negative -> false
-           | E.Indeterminate -> fail "unresolved central stencil sign"
-         in
-         let central_m = positive (E.sign numerator_m)
-         and central_p = positive (E.sign numerator_p) in
-         let lm, lp =
-           if central_m && central_p then
-             (E.div numerator_m (E.mul hm sum), E.div numerator_p (E.mul hp sum))
-           else (
-             c.switched <- c.switched + 1;
-             let diffusion_m = E.div a2 (E.mul hm sum)
-             and diffusion_p = E.div a2 (E.mul hp sum) in
-             match E.sign b with
-             | E.Positive -> (diffusion_m, E.add diffusion_p (E.div b hp))
-             | E.Negative ->
-                 (E.add diffusion_m (E.div (E.neg b) hm), diffusion_p)
-             | E.Zero -> (diffusion_m, diffusion_p)
-             | E.Indeterminate -> fail "unresolved upwind direction")
-         in
-         left.(i) <- coefficient "left spatial coefficient resolution" lm;
-         right.(i) <- coefficient "right spatial coefficient resolution" lp
-       done;
-       prepared := Some (left, right, g, c.switched - switched_before));
+        for _ = 1 to n - 2 do
+          tick c
+        done;
+        c.switched <- c.switched + switched)
+      else
+        let switched_before = c.switched in
+        let drift = E.sub (exact p.rate) (exact p.dividend_yield) in
+        let coefficient label value =
+          let v, _ = enclosed value in
+          if v < 0. || (v = 0. && E.sign value <> E.Zero) then fail label;
+          v
+        in
+        for i = 1 to n - 2 do
+          tick c;
+          let hm = E.sub (exact x.(i)) (exact x.(i - 1))
+          and hp = E.sub (exact x.(i + 1)) (exact x.(i)) in
+          let sx = E.mul (exact sigma) (exact x.(i)) in
+          let a2 = E.mul sx sx and b = E.mul drift (exact x.(i)) in
+          let sum = E.add hm hp in
+          let numerator_m = E.sub a2 (E.mul b hp)
+          and numerator_p = E.add a2 (E.mul b hm) in
+          let positive = function
+            | E.Positive | E.Zero -> true
+            | E.Negative -> false
+            | E.Indeterminate -> fail "unresolved central stencil sign"
+          in
+          let central_m = positive (E.sign numerator_m)
+          and central_p = positive (E.sign numerator_p) in
+          let lm, lp =
+            if central_m && central_p then
+              ( E.div numerator_m (E.mul hm sum),
+                E.div numerator_p (E.mul hp sum) )
+            else (
+              c.switched <- c.switched + 1;
+              let diffusion_m = E.div a2 (E.mul hm sum)
+              and diffusion_p = E.div a2 (E.mul hp sum) in
+              match E.sign b with
+              | E.Positive -> (diffusion_m, E.add diffusion_p (E.div b hp))
+              | E.Negative ->
+                  (E.add diffusion_m (E.div (E.neg b) hm), diffusion_p)
+              | E.Zero -> (diffusion_m, diffusion_p)
+              | E.Indeterminate -> fail "unresolved upwind direction")
+          in
+          left.(i) <- coefficient "left spatial coefficient resolution" lm;
+          right.(i) <- coefficient "right spatial coefficient resolution" lp
+        done;
+        prepared := Some (key p, left, right, g, c.switched - switched_before)
+    in
+    prepare p reused switched;
+    let current_key = ref (key p) in
     let residual obstacle =
       let worst = ref 0. and worst_row = ref 0 and indicator = ref 0. in
       for i = 1 to n - 2 do
@@ -874,8 +1137,28 @@ module Bsm = struct
       if !indicator > c.local /. 4. then fail "residual roundoff resolution";
       (!worst, !worst_row)
     in
-    let slab ?next_exercise earlier later obstacle =
+    let slab_constant ?next_exercise p earlier later obstacle =
       if earlier < later then (
+        if key p <> !current_key then (
+          prepare p false 0;
+          current_key := key p);
+        let piecewise_bounds =
+          Option.map
+            (fun cs ->
+              let tick () = tick c in
+              let optimum =
+                if side = Side.Call then exact 0.
+                else discount_optimum tick cs.rates dates p later
+              in
+              let future_cap =
+                curve_integral tick
+                  (if side = Side.Call then cs.yields else cs.rates)
+                  later p.time_to_expiry
+                  (fun v -> exact (float_max (-.v) 0.))
+              in
+              (optimum, future_cap))
+            curves
+        in
         let width = E.sub (exact later) (exact earlier) in
         let h_e = E.div_float width (float time_steps) in
         let h = finite "time increment" (centre h_e) in
@@ -914,10 +1197,22 @@ module Bsm = struct
               if not (Float.is_nan cached) then cached
               else
                 let value =
-                  boundary c
-                    (E.mul (exact p.strike)
-                       (exp_product (-.p.rate)
-                          (if p.rate < 0. then remaining else wait)))
+                  match piecewise_bounds with
+                  | Some (optimum, _) ->
+                      let exponent =
+                        E.sub optimum
+                          (E.mul (exact p.rate) (E.sub (exact later) t_e))
+                      in
+                      let exponent =
+                        if obstacle then maximum_enclosure (exact 0.) exponent
+                        else exponent
+                      in
+                      boundary c (E.mul (exact p.strike) (E.exp exponent))
+                  | None ->
+                      boundary c
+                        (E.mul (exact p.strike)
+                           (exp_product (-.p.rate)
+                              (if p.rate < 0. then remaining else wait)))
                 in
                 (match zero_values with
                 | None -> ()
@@ -926,15 +1221,30 @@ module Bsm = struct
           in
           let top =
             if upper_boundary then
-              boundary c
-                (E.mul
-                   (exact (if side = Side.Call then x.(n - 1) else p.strike))
-                   (exp_product
+              let factor =
+                match piecewise_bounds with
+                | Some (_, future_cap) ->
+                    E.exp
+                      (E.add future_cap
+                         (E.mul
+                            (exact
+                               (float_max
+                                  (if side = Side.Call then -.p.dividend_yield
+                                   else -.p.rate)
+                                  0.))
+                            (E.sub (exact later) t_e)))
+                | None ->
+                    exp_product
                       (float_max
                          (if side = Side.Call then -.p.dividend_yield
                           else -.p.rate)
                          0.)
-                      remaining))
+                      remaining
+              in
+              boundary c
+                (E.mul
+                   (exact (if side = Side.Call then x.(n - 1) else p.strike))
+                   factor)
             else if obstacle then g.(n - 1)
             else 0.
           in
@@ -1023,6 +1333,36 @@ module Bsm = struct
             history.(!iteration - 1) <- !fingerprint
           done
         done)
+    in
+    let slab ?next_exercise earlier later obstacle =
+      match curves with
+      | None -> slab_constant ?next_exercise p earlier later obstacle
+      | Some cs ->
+          let run a b =
+            if a < b then
+              let volatility =
+                match Vol.lognormal (curve_level cs.vols a) with
+                | Ok v -> v
+                | Error _ -> fail "admitted volatility invariant"
+              in
+              slab_constant ?next_exercise
+                {
+                  p with
+                  rate = curve_level cs.rates a;
+                  dividend_yield = curve_level cs.yields a;
+                  volatility;
+                }
+                a b obstacle
+          in
+          let previous = ref later in
+          List.iter
+            (fun t ->
+              tick c;
+              if t > earlier && t < !previous then (
+                run t !previous;
+                previous := t))
+            (List.rev cs.knots);
+          run earlier !previous
     in
     let project () =
       for i = 0 to n - 1 do
@@ -1130,8 +1470,8 @@ module Bsm = struct
     let value = nonnegative "spot price" v.(!spot_index) in
     (value, if capture then Some v else None)
 
-  let price ?(cancel = fun () -> false) ?(exercise_regions = false)
-      ?(premium = false) cfg admitted side =
+  let price_with_curves ?curves ?(cancel = fun () -> false)
+      ?(exercise_regions = false) ?(premium = false) cfg admitted side =
     let p = inputs admitted in
     let cash =
       match admitted with
@@ -1144,6 +1484,37 @@ module Bsm = struct
       if cfg.limits.max_workspace_bytes < 65536 then
         raise (Stop (Resource_limit "analytic workspace bytes"));
       let cash_visits = ref 0 in
+      let active_context = ref None in
+      let model_tick () =
+        match !active_context with
+        | Some c -> tick c
+        | None ->
+            if cancel () then raise (Stop Cancelled);
+            incr cash_visits;
+            if !cash_visits > cfg.limits.max_row_visits then
+              raise (Stop (Resource_limit "coefficient visits"))
+      in
+      let curve_count =
+        match curves with
+        | None -> 0
+        | Some cs ->
+            List.fold_left
+              (fun n curve ->
+                let count = Array.length curve.changes + 1 in
+                let budget =
+                  max 0 (cfg.limits.max_workspace_bytes - 65536) / 1024
+                in
+                if count > budget - n then
+                  raise (Stop (Resource_limit "coefficient metadata"));
+                n + count)
+              0
+              [ cs.rates; cs.yields; cs.vols ]
+      in
+      let model_european () =
+        match curves with
+        | None -> european p side
+        | Some cs -> piecewise_european model_tick cs p side
+      in
       let events =
         match cash with
         | None -> []
@@ -1155,6 +1526,12 @@ module Bsm = struct
       let cash_count =
         match cash with None -> 0 | Some c -> Array.length c.dividends
       in
+      if
+        curves <> None
+        && curve_count + cash_count
+           + Option.fold ~none:0 ~some:Array.length dates
+           > max 0 (cfg.limits.max_workspace_bytes - 65536) / 1024
+      then raise (Stop (Resource_limit "coefficient and event metadata"));
       let bermudan =
         Option.map
           (fun dates ->
@@ -1181,7 +1558,7 @@ module Bsm = struct
           else
             try
               if cancel () then raise (Stop Cancelled);
-              let ev, ee = european p side in
+              let ev, ee = model_european () in
               if ee > allowance then
                 Unavailable "European comparison arithmetic resolution"
               else
@@ -1210,18 +1587,31 @@ module Bsm = struct
           maximum_residual = residual;
           maximum_roundoff_indicator = float_max arithmetic roundoff;
           boundary_arithmetic_indicator = boundary_error;
-          work;
+          work =
+            (match curves with
+            | None -> work
+            | Some _ ->
+                {
+                  work with
+                  row_visits =
+                    (match !active_context with
+                    | None -> !cash_visits
+                    | Some c -> c.visits);
+                });
           exercise_regions = regions;
           early_exercise_premium = premium_result;
         }
       in
       let analytical =
-        match (bermudan, cash) with
-        | Some timeline, _ ->
-            bermudan_analytic cfg cancel cash_visits p cash timeline side
-        | None, None -> analytic p side
-        | None, Some spec ->
-            cash_analytic cfg cancel cash_visits p spec events side
+        match curves with
+        | Some cs -> piecewise_analytic model_tick cs p cash events dates side
+        | None -> (
+            match (bermudan, cash) with
+            | Some timeline, _ ->
+                bermudan_analytic cfg cancel cash_visits p cash timeline side
+            | None, None -> analytic p side
+            | None, Some spec ->
+                cash_analytic cfg cancel cash_visits p spec events side)
       in
       match analytical with
       | Some (method_name, (value, error)) ->
@@ -1247,17 +1637,31 @@ module Bsm = struct
                None)
       | None ->
           let gamma =
-            if p.rate >= 0. then 1.
-            else
-              let gv, ge =
-                enclosed
-                  (E.exp
-                     (E.mul_float
-                        (E.mul (exact (-.p.rate)) (exact p.time_to_expiry))
-                        2.))
-              in
-              finite "negative-rate stability"
-                (Float.next_after (gv +. ge) infinity)
+            match curves with
+            | Some cs ->
+                let gv, ge =
+                  enclosed
+                    (E.exp
+                       (E.mul_float
+                          (curve_integral model_tick cs.rates 0.
+                             p.time_to_expiry (fun r ->
+                               exact (float_max (-.r) 0.)))
+                          2.))
+                in
+                finite "piecewise stability"
+                  (Float.next_after (gv +. ge) infinity)
+            | None ->
+                if p.rate >= 0. then 1.
+                else
+                  let gv, ge =
+                    enclosed
+                      (E.exp
+                         (E.mul_float
+                            (E.mul (exact (-.p.rate)) (exact p.time_to_expiry))
+                            2.))
+                  in
+                  finite "negative-rate stability"
+                    (Float.next_after (gv +. ge) infinity)
           in
           let local =
             cfg.tolerance /. (64. *. float cfg.limits.max_steps *. gamma)
@@ -1282,7 +1686,24 @@ module Bsm = struct
               local;
             }
           in
+          active_context := Some c;
           check_workspace c;
+          (if curve_count > 0 then
+             let metadata =
+               cash_count + Option.fold ~none:0 ~some:Array.length dates
+             in
+             let reserved =
+               (512 * cfg.limits.max_nodes)
+               + (32 * cfg.limits.policy_iterations)
+               + 65536
+               + if cash = None then 0 else 48 * cfg.limits.max_nodes
+             in
+             if
+               curve_count + metadata
+               > max 0 (cfg.limits.max_workspace_bytes - reserved) / 1024
+             then
+               raise
+                 (Stop (Resource_limit "coefficient solver workspace bytes")));
           (match dates with
           | None -> ()
           | Some ds ->
@@ -1316,7 +1737,8 @@ module Bsm = struct
              products are formed. Reuse is optional: insufficient surplus keeps
              the original evaluator, including its original resource outcomes. *)
           let metadata =
-            cash_count + Option.fold ~none:0 ~some:Array.length dates
+            curve_count + cash_count
+            + Option.fold ~none:0 ~some:Array.length dates
           in
           let reserved =
             (512 * cfg.limits.max_nodes)
@@ -1327,7 +1749,8 @@ module Bsm = struct
           let cache_bytes =
             if
               side = Side.Call
-              || (dates = None && p.rate >= 0. && p.opens_at = 0.)
+              || curves = None && dates = None && p.rate >= 0.
+                 && p.opens_at = 0.
             then 0
             else max 0 (cfg.limits.max_workspace_bytes - reserved - 128)
           in
@@ -1357,8 +1780,8 @@ module Bsm = struct
                 cash
             in
             let solve =
-              solver_pair ?cash ?bermudan ~prepared ~boundary_cache c p side x
-                time capture
+              solver_pair ?curves ?dates ?cash ?bermudan ~prepared
+                ~boundary_cache c p side x time capture
             in
             let low, vl = solve false in
             let high, vh = solve true in
@@ -1432,15 +1855,27 @@ module Bsm = struct
           (* Independent global financial inequalities, allowing only the recorded
              arithmetic uncertainty, never clipping a value to fit. *)
           let cap =
-            boundary c
-              (E.mul
-                 (exact (if side = Side.Call then p.spot else p.strike))
-                 (exp_product
-                    (float_max
-                       (if side = Side.Call then -.p.dividend_yield
-                        else -.p.rate)
-                       0.)
-                    (exact p.time_to_expiry)))
+            match curves with
+            | Some cs ->
+                boundary c
+                  (E.mul
+                     (exact (if side = Side.Call then p.spot else p.strike))
+                     (E.exp
+                        (curve_integral
+                           (fun () -> tick c)
+                           (if side = Side.Call then cs.yields else cs.rates)
+                           0. p.time_to_expiry
+                           (fun v -> exact (float_max (-.v) 0.)))))
+            | None ->
+                boundary c
+                  (E.mul
+                     (exact (if side = Side.Call then p.spot else p.strike))
+                     (exp_product
+                        (float_max
+                           (if side = Side.Call then -.p.dividend_yield
+                            else -.p.rate)
+                           0.)
+                        (exact p.time_to_expiry)))
           in
           if value > cap +. c.boundary_error then fail "global price cap";
           (if immediate then
@@ -1450,7 +1885,7 @@ module Bsm = struct
              if value < intrinsic -. c.boundary_error then
                fail "immediate exercise lower bound");
           (if cash = None then
-             let ev, ee = european p side in
+             let ev, ee = model_european () in
              if value +. sum +. c.boundary_error < ev -. ee then
                fail
                  "matching European lower bound beyond refinement diagnostics");
@@ -1536,4 +1971,123 @@ module Bsm = struct
     with
     | Stop failure -> Error failure
     | E.Unresolved message -> Error (Arithmetic_unresolved message)
+
+  let price ?cancel ?exercise_regions ?premium cfg admitted side =
+    price_with_curves ?cancel ?exercise_regions ?premium cfg admitted side
+
+  module Piecewise = struct
+    module Rate = struct
+      type t = curve
+
+      let create = make_curve
+      let horizon c = c.horizon
+      let initial c = c.initial
+      let changes c = Array.copy c.changes
+    end
+
+    module Yield = struct
+      type t = curve
+
+      let create = make_curve
+      let horizon c = c.horizon
+      let initial c = c.initial
+      let changes c = Array.copy c.changes
+    end
+
+    module Volatility = struct
+      type t = curve
+
+      let create ~horizon ~initial ~changes =
+        make_curve ~horizon ~initial:(Vol.to_float initial)
+          ~changes:(Array.map (fun (t, v) -> (t, Vol.to_float v)) changes)
+
+      let horizon c = c.horizon
+
+      let typed v =
+        match Vol.lognormal v with Ok v -> v | Error _ -> assert false
+
+      let initial c = typed c.initial
+      let changes c = Array.map (fun (t, v) -> (t, typed v)) c.changes
+    end
+
+    type constant_inputs = inputs
+
+    type inputs = {
+      spot : float;
+      strike : float;
+      rate : Rate.t;
+      dividend_yield : Yield.t;
+      time_to_expiry : float;
+      opens_at : float;
+      volatility : Volatility.t;
+    }
+
+    type constant_admitted = admitted
+
+    type admitted = {
+      original : inputs;
+      base : constant_admitted;
+      curves : coefficient_curves option;
+    }
+
+    let admit_base admit (p : inputs) =
+      if
+        p.rate.horizon <> p.time_to_expiry
+        || p.dividend_yield.horizon <> p.time_to_expiry
+        || p.volatility.horizon <> p.time_to_expiry
+      then Error (Invalid_input "coefficient coverage differs from expiry")
+      else
+        let constant : constant_inputs =
+          {
+            spot = p.spot;
+            strike = p.strike;
+            rate = p.rate.initial;
+            dividend_yield = p.dividend_yield.initial;
+            time_to_expiry = p.time_to_expiry;
+            opens_at = p.opens_at;
+            volatility = Volatility.initial p.volatility;
+          }
+        in
+        match admit constant with
+        | Error e -> Error e
+        | Ok base ->
+            let cs = [ p.rate; p.dividend_yield; p.volatility ] in
+            let curves =
+              if List.for_all (fun c -> Array.length c.segments = 1) cs then
+                None
+              else
+                let knots =
+                  List.sort_uniq Float.compare
+                    (List.concat_map
+                       (fun c ->
+                         Array.to_list
+                           (Array.sub c.segments 1
+                              (Array.length c.segments - 1))
+                         |> List.map fst)
+                       cs)
+                in
+                Some
+                  {
+                    rates = p.rate;
+                    yields = p.dividend_yield;
+                    vols = p.volatility;
+                    knots;
+                  }
+            in
+            Ok { original = p; base; curves }
+
+    let admit p = admit_base admit p
+    let admit_cash p cash = admit_base (fun q -> admit_cash q cash) p
+
+    let admit_bermudan ?cash p dates =
+      admit_base (fun q -> admit_bermudan ?cash q dates) p
+
+    let inputs p = p.original
+    let cash_specification p = cash_specification p.base
+    let exercise_schedule p = exercise_schedule p.base
+
+    let price ?cancel ?exercise_regions ?premium cfg p side =
+      price_with_curves ?curves:p.curves ?cancel ?exercise_regions ?premium cfg
+        p.base side
+  end
 end

@@ -1,0 +1,7 @@
+File "piecewise_rate_as_yield.ml", line 4, characters 44-48:
+4 | let confuse (rate : P.Rate.t) : P.Yield.t = rate
+                                                ^^^^
+Error: The value "rate" has type
+         "P.Rate.t" = "Morphiq_risk.Early_exercise.Bsm.Piecewise.Rate.t"
+       but an expression was expected of type
+         "P.Yield.t" = "Morphiq_risk.Early_exercise.Bsm.Piecewise.Yield.t"
