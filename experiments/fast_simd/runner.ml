@@ -131,7 +131,7 @@ let modes =
 
 let request family i =
   let side = if i mod 2 = 0 then Side.Call else Side.Put in
-  let q = 0.5 +. (float (i mod 43) *. (3.5 /. 42.)) in
+  let q = 0.5 +. (float (i mod 43) *. (3.4 /. 42.)) in
   let sigma = 0.75 +. (float (i mod 17) /. 8.) in
   let t = 0.25 +. (float (i mod 11) /. 4.) in
   let rate = -0.02 +. (float (i mod 7) /. 100.) in
@@ -146,7 +146,7 @@ let request family i =
   in
   if family = "eligible" then make q side
   else if family = "fallback-heavy" then
-    if i mod 4 = 0 then make q side else make 0.2 side
+    if i mod 4 = 3 then make q side else make 0.2 side
   else if family = "mixed" then
     match i mod 4 with
     | 0 -> make q side
@@ -355,6 +355,56 @@ let controls () =
   rejects (fun () -> kernel 1 (Array.make 4 0.) [| 0. |]);
   print_endline "CONTROLS PASS"
 
+let dump_inputs () =
+  List.iter
+    (fun family ->
+      for i = 0 to 4095 do
+        let (F.Price (model, inputs, side, vol)) = request family i in
+        let name, s, k, t, r, q, shift =
+          match model with
+          | Batch.Bsm ->
+              ( "bsm",
+                inputs.spot,
+                inputs.strike,
+                inputs.time_to_expiry,
+                inputs.rate,
+                inputs.dividend_yield,
+                0. )
+          | Batch.Black76 ->
+              ( "black76",
+                inputs.forward,
+                inputs.strike,
+                inputs.time_to_expiry,
+                inputs.rate,
+                0.,
+                0. )
+          | Batch.Displaced ->
+              ( "displaced",
+                inputs.forward,
+                inputs.strike,
+                inputs.time_to_expiry,
+                inputs.rate,
+                0.,
+                inputs.displacement )
+          | Batch.Bachelier ->
+              ( "bachelier",
+                inputs.forward,
+                inputs.strike,
+                inputs.time_to_expiry,
+                inputs.rate,
+                0.,
+                0. )
+        in
+        Printf.printf "%s %s benchmark %s %s 0000000000000000\n" name
+          (if side = Side.Call then "call" else "put")
+          ("timed-" ^ family)
+          (String.concat " "
+             (List.map
+                (fun x -> Printf.sprintf "%016Lx" (Int64.bits_of_float x))
+                [ s; k; t; r; q; Vol.to_float vol; shift ]))
+      done)
+    [ "eligible"; "fallback-heavy"; "mixed" ]
+
 let () =
   let command = ref ""
   and path = ref ""
@@ -370,6 +420,9 @@ let () =
             path := s),
         "Input oracle-format file" );
       ("--bench", Arg.Unit (fun () -> command := "bench"), "Run timed campaign");
+      ( "--dump-inputs",
+        Arg.Unit (fun () -> command := "dump"),
+        "Emit exact benchmark requests" );
       ( "--controls",
         Arg.Unit (fun () -> command := "controls"),
         "Exercise wrapper controls" );
@@ -389,6 +442,7 @@ let () =
     (fun _ -> raise (Arg.Bad "unexpected argument"))
     "Optional SIMD experiment";
   match !command with
+  | "dump" -> dump_inputs ()
   | "controls" -> controls ()
   | "validate" -> validate !path
   | "bench" ->
