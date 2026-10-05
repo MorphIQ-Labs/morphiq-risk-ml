@@ -5,6 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American enclosure allocation follow-up (#119)
+
+- Fuse scalar enclosure operations and reuse private quotient packing storage;
+  share immutable payoff/stencil setup within each American boundary pair and
+  reuse the previous evaluated time coordinate. Public APIs, finite checks,
+  arithmetic, refinement policy and work-limit behavior remain unchanged.
+  Paired cash allocation falls 57% (115.8 → 49.7 MB), and no-cash allocation
+  falls 65% (48.3 → 16.7 MB), with broadly unchanged American latency.
+- Retain identical complete outcomes for all 284 American reference cases and
+  both-precision scalar enclosure replays, with exact-rational checks and
+  European certified regression measurements. See the
+  [qualification report](docs/results-american-enclosure-allocation.md).
+  American outputs remain estimated-only with unchanged strict-target limits.
+
 ### American scalar allocation (#119)
 
 - Specialize float comparisons and inline finite/nonnegative checks in

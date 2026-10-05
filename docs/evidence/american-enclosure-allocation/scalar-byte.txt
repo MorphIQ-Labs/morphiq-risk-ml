@@ -1,0 +1,2 @@
+full scalar checks=5200 rational=19306 refused=745 replay=f30666f99b132e8031ee9267f8d058a3
+fast scalar checks=5200 rational=19310 refused=743 replay=a7810e024cea5c4b8d43ff5c96eb3e04

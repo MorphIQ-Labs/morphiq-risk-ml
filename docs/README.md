@@ -66,9 +66,11 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
-[American scalar allocation optimization](results-american-allocation.md)
-records the measured removal of boxed row-loop temporaries, complete numerical
-compatibility and the remaining enclosure/batch work under #119.
+[American enclosure allocation optimization](results-american-enclosure-allocation.md)
+records scalar fusion, private quotient scratch and shared boundary-pair setup,
+including European regression checks. It follows the
+[first boxing pass](results-american-allocation.md); broader performance work
+remains under #119.
 
 [Fast-batch SIMD integration](fast-simd-integration.md) records the staged
 preparation, native batch and planner ownership contracts.

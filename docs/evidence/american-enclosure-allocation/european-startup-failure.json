@@ -1,0 +1,1344 @@
+{
+  "schema": "enclosure-consumers-v1",
+  "complete": false,
+  "builds": {
+    "baseline": {
+      "revision": "1b0481dfdb14bdb8726ca45830fb8112230dcb2e",
+      "status": "",
+      "source_sha256": {
+        "bench/american_allocation.ml": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f",
+        "bench/dune": "86522b1ef63f45ae1ff33c0ac1113e0de9d90be4578472c6d242e4b51e287120",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "f64242a59027b805c1076d28c987fdfed3645ca5285b7a1fb172b762aacaf246",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "f871a544ff6fd88b668809896cbfa005ae01dd46eab2765bd499e4ec9440f7fb",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1",
+        "bench/certified_scalar.ml": "86927033a3a7476144ad7e04c3a17757009d8964471968359c236fa396f1681b",
+        "bench/assurance_clock.c": "0cd7b94d611cf6864a019aba5b49ba8f3f4be3071d93f5009f924daadf18013c"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/bench-baseline",
+          "sha256": "13bf9da431cfabc81df466bfe5b759aa52db8e1ba598fd5968b823350e426eb3"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/cash-baseline",
+          "sha256": "ecc0b3578729855262ebf099b55557fa6a5236274ba25001f9d4f57ad1eecc81"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/plain-baseline",
+          "sha256": "991f1ba234556ef98bddff4885732cb8c6c94cd7081b06b32603953300f835e5"
+        },
+        "certified": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/certified-baseline",
+          "sha256": "8b9cba4163b177e1e4897aad02c52fd0f5bce7a05c21c254dbfea801bb36fa56"
+        }
+      }
+    },
+    "candidate": {
+      "revision": "812b1f63c198a003cda894ea15d68beab1d42757",
+      "status": "",
+      "source_sha256": {
+        "bench/american_allocation.ml": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f",
+        "bench/assurance_clock.c": "0cd7b94d611cf6864a019aba5b49ba8f3f4be3071d93f5009f924daadf18013c",
+        "bench/certified_scalar.ml": "86927033a3a7476144ad7e04c3a17757009d8964471968359c236fa396f1681b",
+        "bench/dune": "86522b1ef63f45ae1ff33c0ac1113e0de9d90be4578472c6d242e4b51e287120",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "eeb0056e5af48551fd7327619226e31129ab6f7840d255275f9019a50339edef",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "20ae690ec32af1ed8fefc262d60e54597cab9d150cfbdb885188000a8aabb97b",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/bench-candidate",
+          "sha256": "85152c54b75bfe183a339a5f730ef1d53b1df2ac660d471c071575b681c9331f"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/cash-candidate",
+          "sha256": "63b41fc52afdc40f879504d80e2eca26fd1d8f58ce8b79f7b323c1cf4ca94dc5"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/plain-candidate",
+          "sha256": "d7ece978c2d61fb443cc26b7bddc1b8b5cb3bed3af9e4faeaf58fd3a2fc84849"
+        },
+        "certified": {
+          "path": "/tmp/morphiq-american-enclosure-evidence/certified-candidate",
+          "sha256": "1ec9ff6f62a57950cd1494062b485a213ca935c559312443cbd093ffeb5e4f16"
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-enclosure-evidence/certified-baseline"
+      ],
+      "sample": {
+        "checks": {
+          "bsm-ordinary": "served:0x1.5e67b3e331f1p+3:0x1.a969fb5536501p-52",
+          "bsm-tail": "served:0x1.4a72777b99555p-23:0x1.61019347226bcp-77",
+          "bsm-short": "served:0x1.a252ec8d304ebp-11:0x1.8b8f4f4c42e6fp-67",
+          "bsm-expiry": "served:0x1.4p+2:0x0p+0",
+          "bsm-accuracy-failure": "accuracy-exceeded",
+          "black76": "served:0x1.5a417be9419cp+2:0x1.a9c2d5dc45eacp-55",
+          "displaced": "served:0x1.75580a6af602cp-6:0x1.c3e3d95006735p-62",
+          "normal": "served:0x1.5e32878ffd8f3p+0:0x1.2e2154b4e683ep-61"
+        },
+        "samples": [
+          {
+            "key": "bsm-ordinary/admission",
+            "index": 1,
+            "ns": 1127.0,
+            "cpu_ns": 1104.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/admission",
+            "index": 2,
+            "ns": 851.0,
+            "cpu_ns": 852.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/admission",
+            "index": 3,
+            "ns": 857.0,
+            "cpu_ns": 854.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/admission",
+            "index": 4,
+            "ns": 870.0,
+            "cpu_ns": 871.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/admission",
+            "index": 5,
+            "ns": 930.0,
+            "cpu_ns": 925.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/price",
+            "index": 1,
+            "ns": 965225.001,
+            "cpu_ns": 961000.0,
+            "allocation": 1308251.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/price",
+            "index": 2,
+            "ns": 892225.001,
+            "cpu_ns": 885825.0,
+            "allocation": 1308251.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/price",
+            "index": 3,
+            "ns": 901000.001,
+            "cpu_ns": 894500.0,
+            "allocation": 1308251.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/price",
+            "index": 4,
+            "ns": 886875.001,
+            "cpu_ns": 883475.0,
+            "allocation": 1308251.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/price",
+            "index": 5,
+            "ns": 884374.999,
+            "cpu_ns": 883625.0,
+            "allocation": 1308251.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/end-to-end",
+            "index": 1,
+            "ns": 900300.001,
+            "cpu_ns": 893650.0,
+            "allocation": 1310171.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/end-to-end",
+            "index": 2,
+            "ns": 922300.0,
+            "cpu_ns": 916075.0,
+            "allocation": 1310171.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/end-to-end",
+            "index": 3,
+            "ns": 878725.0,
+            "cpu_ns": 876900.0,
+            "allocation": 1310171.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/end-to-end",
+            "index": 4,
+            "ns": 891975.002,
+            "cpu_ns": 887600.0,
+            "allocation": 1310171.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-ordinary/end-to-end",
+            "index": 5,
+            "ns": 887875.0,
+            "cpu_ns": 883550.0,
+            "allocation": 1310171.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/admission",
+            "index": 1,
+            "ns": 825.0,
+            "cpu_ns": 829.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/admission",
+            "index": 2,
+            "ns": 890.0,
+            "cpu_ns": 850.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/admission",
+            "index": 3,
+            "ns": 825.0,
+            "cpu_ns": 826.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/admission",
+            "index": 4,
+            "ns": 840.0,
+            "cpu_ns": 841.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/admission",
+            "index": 5,
+            "ns": 836.0,
+            "cpu_ns": 837.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/price",
+            "index": 1,
+            "ns": 3230075.0,
+            "cpu_ns": 3203250.0,
+            "allocation": 4181011.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/price",
+            "index": 2,
+            "ns": 3231025.001,
+            "cpu_ns": 3207975.0,
+            "allocation": 4181011.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/price",
+            "index": 3,
+            "ns": 3215049.999,
+            "cpu_ns": 3202800.0,
+            "allocation": 4181011.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/price",
+            "index": 4,
+            "ns": 3182424.998,
+            "cpu_ns": 3172350.0,
+            "allocation": 4181011.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/price",
+            "index": 5,
+            "ns": 3212399.999,
+            "cpu_ns": 3197650.0,
+            "allocation": 4181011.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/end-to-end",
+            "index": 1,
+            "ns": 3290399.999,
+            "cpu_ns": 3247250.0,
+            "allocation": 4182931.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/end-to-end",
+            "index": 2,
+            "ns": 3251150.0,
+            "cpu_ns": 3217750.0,
+            "allocation": 4182931.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/end-to-end",
+            "index": 3,
+            "ns": 3226099.999,
+            "cpu_ns": 3208475.0,
+            "allocation": 4182931.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/end-to-end",
+            "index": 4,
+            "ns": 3183625.001,
+            "cpu_ns": 3174200.0,
+            "allocation": 4182931.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-tail/end-to-end",
+            "index": 5,
+            "ns": 3192399.998,
+            "cpu_ns": 3176500.0,
+            "allocation": 4182931.2,
+            "minor": 79,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/admission",
+            "index": 1,
+            "ns": 861.0,
+            "cpu_ns": 862.0,
+            "allocation": 2080.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/admission",
+            "index": 2,
+            "ns": 857.0,
+            "cpu_ns": 858.0,
+            "allocation": 2080.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/admission",
+            "index": 3,
+            "ns": 858.0,
+            "cpu_ns": 858.0,
+            "allocation": 2080.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/admission",
+            "index": 4,
+            "ns": 858.0,
+            "cpu_ns": 858.0,
+            "allocation": 2080.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/admission",
+            "index": 5,
+            "ns": 877.0,
+            "cpu_ns": 866.0,
+            "allocation": 2080.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/price",
+            "index": 1,
+            "ns": 329650.001,
+            "cpu_ns": 329025.0,
+            "allocation": 673099.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/price",
+            "index": 2,
+            "ns": 329599.998,
+            "cpu_ns": 327375.0,
+            "allocation": 673099.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/price",
+            "index": 3,
+            "ns": 329399.999,
+            "cpu_ns": 328075.0,
+            "allocation": 673099.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/price",
+            "index": 4,
+            "ns": 328224.999,
+            "cpu_ns": 327750.0,
+            "allocation": 673099.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/price",
+            "index": 5,
+            "ns": 321825.0,
+            "cpu_ns": 320700.0,
+            "allocation": 673099.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/end-to-end",
+            "index": 1,
+            "ns": 324375.002,
+            "cpu_ns": 323125.0,
+            "allocation": 675179.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/end-to-end",
+            "index": 2,
+            "ns": 340049.999,
+            "cpu_ns": 337550.0,
+            "allocation": 675179.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/end-to-end",
+            "index": 3,
+            "ns": 322625.0,
+            "cpu_ns": 322125.0,
+            "allocation": 675179.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/end-to-end",
+            "index": 4,
+            "ns": 325899.999,
+            "cpu_ns": 323600.0,
+            "allocation": 675179.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-short/end-to-end",
+            "index": 5,
+            "ns": 331625.002,
+            "cpu_ns": 329850.0,
+            "allocation": 675179.2,
+            "minor": 12,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/admission",
+            "index": 1,
+            "ns": 9.0,
+            "cpu_ns": 10.0,
+            "allocation": 248.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/admission",
+            "index": 2,
+            "ns": 9.0,
+            "cpu_ns": 10.0,
+            "allocation": 248.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/admission",
+            "index": 3,
+            "ns": 9.0,
+            "cpu_ns": 10.0,
+            "allocation": 248.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/admission",
+            "index": 4,
+            "ns": 9.0,
+            "cpu_ns": 11.0,
+            "allocation": 248.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/admission",
+            "index": 5,
+            "ns": 9.0,
+            "cpu_ns": 9.0,
+            "allocation": 248.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/price",
+            "index": 1,
+            "ns": 125.001,
+            "cpu_ns": 100.0,
+            "allocation": 603.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/price",
+            "index": 2,
+            "ns": 124.998,
+            "cpu_ns": 100.0,
+            "allocation": 603.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/price",
+            "index": 3,
+            "ns": 99.998,
+            "cpu_ns": 150.0,
+            "allocation": 603.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/price",
+            "index": 4,
+            "ns": 150.001,
+            "cpu_ns": 175.0,
+            "allocation": 603.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/price",
+            "index": 5,
+            "ns": 124.998,
+            "cpu_ns": 100.0,
+            "allocation": 603.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/end-to-end",
+            "index": 1,
+            "ns": 125.001,
+            "cpu_ns": 125.0,
+            "allocation": 851.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/end-to-end",
+            "index": 2,
+            "ns": 125.001,
+            "cpu_ns": 125.0,
+            "allocation": 851.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/end-to-end",
+            "index": 3,
+            "ns": 100.001,
+            "cpu_ns": 125.0,
+            "allocation": 851.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/end-to-end",
+            "index": 4,
+            "ns": 124.998,
+            "cpu_ns": 150.0,
+            "allocation": 851.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-expiry/end-to-end",
+            "index": 5,
+            "ns": 124.998,
+            "cpu_ns": 125.0,
+            "allocation": 851.2,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/admission",
+            "index": 1,
+            "ns": 856.0,
+            "cpu_ns": 857.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/admission",
+            "index": 2,
+            "ns": 842.0,
+            "cpu_ns": 843.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/admission",
+            "index": 3,
+            "ns": 837.0,
+            "cpu_ns": 838.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/admission",
+            "index": 4,
+            "ns": 847.0,
+            "cpu_ns": 847.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/admission",
+            "index": 5,
+            "ns": 842.0,
+            "cpu_ns": 842.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/price",
+            "index": 1,
+            "ns": 893800.001,
+            "cpu_ns": 890550.0,
+            "allocation": 1308195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/price",
+            "index": 2,
+            "ns": 886300.002,
+            "cpu_ns": 884000.0,
+            "allocation": 1308195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/price",
+            "index": 3,
+            "ns": 878724.997,
+            "cpu_ns": 877000.0,
+            "allocation": 1308195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/price",
+            "index": 4,
+            "ns": 889125.001,
+            "cpu_ns": 885025.0,
+            "allocation": 1308195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/price",
+            "index": 5,
+            "ns": 904450.001,
+            "cpu_ns": 898050.0,
+            "allocation": 1308195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/end-to-end",
+            "index": 1,
+            "ns": 888400.001,
+            "cpu_ns": 884025.0,
+            "allocation": 1310115.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/end-to-end",
+            "index": 2,
+            "ns": 890550.0,
+            "cpu_ns": 886975.0,
+            "allocation": 1310115.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/end-to-end",
+            "index": 3,
+            "ns": 878249.999,
+            "cpu_ns": 876150.0,
+            "allocation": 1310115.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/end-to-end",
+            "index": 4,
+            "ns": 879624.998,
+            "cpu_ns": 877650.0,
+            "allocation": 1310115.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "bsm-accuracy-failure/end-to-end",
+            "index": 5,
+            "ns": 886274.999,
+            "cpu_ns": 882675.0,
+            "allocation": 1310115.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/admission",
+            "index": 1,
+            "ns": 860.0,
+            "cpu_ns": 850.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "black76/admission",
+            "index": 2,
+            "ns": 858.0,
+            "cpu_ns": 858.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "black76/admission",
+            "index": 3,
+            "ns": 847.0,
+            "cpu_ns": 847.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "black76/admission",
+            "index": 4,
+            "ns": 829.0,
+            "cpu_ns": 829.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "black76/admission",
+            "index": 5,
+            "ns": 867.0,
+            "cpu_ns": 852.0,
+            "allocation": 1920.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "black76/price",
+            "index": 1,
+            "ns": 836899.999,
+            "cpu_ns": 833675.0,
+            "allocation": 1296483.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/price",
+            "index": 2,
+            "ns": 837574.998,
+            "cpu_ns": 831825.0,
+            "allocation": 1296483.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/price",
+            "index": 3,
+            "ns": 837599.998,
+            "cpu_ns": 834925.0,
+            "allocation": 1296483.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/price",
+            "index": 4,
+            "ns": 824050.0,
+            "cpu_ns": 819650.0,
+            "allocation": 1296483.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/price",
+            "index": 5,
+            "ns": 838225.0,
+            "cpu_ns": 835950.0,
+            "allocation": 1296483.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/end-to-end",
+            "index": 1,
+            "ns": 832900.0,
+            "cpu_ns": 829675.0,
+            "allocation": 1298403.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/end-to-end",
+            "index": 2,
+            "ns": 838299.998,
+            "cpu_ns": 834450.0,
+            "allocation": 1298403.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/end-to-end",
+            "index": 3,
+            "ns": 827075.003,
+            "cpu_ns": 824650.0,
+            "allocation": 1298403.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/end-to-end",
+            "index": 4,
+            "ns": 840950.001,
+            "cpu_ns": 836900.0,
+            "allocation": 1298403.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "black76/end-to-end",
+            "index": 5,
+            "ns": 829900.001,
+            "cpu_ns": 826275.0,
+            "allocation": 1298403.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/admission",
+            "index": 1,
+            "ns": 856.0,
+            "cpu_ns": 857.0,
+            "allocation": 2016.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "displaced/admission",
+            "index": 2,
+            "ns": 858.0,
+            "cpu_ns": 859.0,
+            "allocation": 2016.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "displaced/admission",
+            "index": 3,
+            "ns": 876.0,
+            "cpu_ns": 879.0,
+            "allocation": 2016.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "displaced/admission",
+            "index": 4,
+            "ns": 867.0,
+            "cpu_ns": 868.0,
+            "allocation": 2016.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "displaced/admission",
+            "index": 5,
+            "ns": 874.0,
+            "cpu_ns": 875.0,
+            "allocation": 2016.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "displaced/price",
+            "index": 1,
+            "ns": 854424.998,
+            "cpu_ns": 851075.0,
+            "allocation": 1295195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/price",
+            "index": 2,
+            "ns": 839575.002,
+            "cpu_ns": 836475.0,
+            "allocation": 1295195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/price",
+            "index": 3,
+            "ns": 839300.0,
+            "cpu_ns": 836825.0,
+            "allocation": 1295195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/price",
+            "index": 4,
+            "ns": 850000.0,
+            "cpu_ns": 846325.0,
+            "allocation": 1295195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/price",
+            "index": 5,
+            "ns": 828749.998,
+            "cpu_ns": 825800.0,
+            "allocation": 1295195.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/end-to-end",
+            "index": 1,
+            "ns": 835575.0,
+            "cpu_ns": 833725.0,
+            "allocation": 1297211.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/end-to-end",
+            "index": 2,
+            "ns": 839375.0,
+            "cpu_ns": 835475.0,
+            "allocation": 1297211.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/end-to-end",
+            "index": 3,
+            "ns": 840324.999,
+            "cpu_ns": 837125.0,
+            "allocation": 1297211.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/end-to-end",
+            "index": 4,
+            "ns": 853299.999,
+            "cpu_ns": 851700.0,
+            "allocation": 1297211.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "displaced/end-to-end",
+            "index": 5,
+            "ns": 839325.0,
+            "cpu_ns": 837475.0,
+            "allocation": 1297211.2,
+            "minor": 24,
+            "major": 0
+          },
+          {
+            "key": "normal/admission",
+            "index": 1,
+            "ns": 68.0,
+            "cpu_ns": 70.0,
+            "allocation": 584.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "normal/admission",
+            "index": 2,
+            "ns": 68.0,
+            "cpu_ns": 69.0,
+            "allocation": 584.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "normal/admission",
+            "index": 3,
+            "ns": 69.0,
+            "cpu_ns": 72.0,
+            "allocation": 584.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "normal/admission",
+            "index": 4,
+            "ns": 69.0,
+            "cpu_ns": 69.0,
+            "allocation": 584.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "normal/admission",
+            "index": 5,
+            "ns": 68.0,
+            "cpu_ns": 69.0,
+            "allocation": 584.128,
+            "minor": 0,
+            "major": 0
+          },
+          {
+            "key": "normal/price",
+            "index": 1,
+            "ns": 306425.002,
+            "cpu_ns": 306450.0,
+            "allocation": 628035.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/price",
+            "index": 2,
+            "ns": 305800.0,
+            "cpu_ns": 305500.0,
+            "allocation": 628035.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/price",
+            "index": 3,
+            "ns": 316550.001,
+            "cpu_ns": 313475.0,
+            "allocation": 628035.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/price",
+            "index": 4,
+            "ns": 306125.0,
+            "cpu_ns": 305575.0,
+            "allocation": 628035.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/price",
+            "index": 5,
+            "ns": 472199.998,
+            "cpu_ns": 373450.0,
+            "allocation": 628035.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/end-to-end",
+            "index": 1,
+            "ns": 890150.0,
+            "cpu_ns": 414325.0,
+            "allocation": 628619.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/end-to-end",
+            "index": 2,
+            "ns": 502550.0,
+            "cpu_ns": 375150.0,
+            "allocation": 628619.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/end-to-end",
+            "index": 3,
+            "ns": 326625.002,
+            "cpu_ns": 323175.0,
+            "allocation": 628619.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/end-to-end",
+            "index": 4,
+            "ns": 312024.998,
+            "cpu_ns": 309900.0,
+            "allocation": 628619.2,
+            "minor": 11,
+            "major": 0
+          },
+          {
+            "key": "normal/end-to-end",
+            "index": 5,
+            "ns": 318025.0,
+            "cpu_ns": 315850.0,
+            "allocation": 628619.2,
+            "minor": 11,
+            "major": 0
+          }
+        ]
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6225920,
+        "user_seconds": 3.034085,
+        "system_seconds": 0.02989
+      },
+      "load_before": [
+        9.552734375,
+        24.25048828125,
+        25.49267578125
+      ],
+      "load_after": [
+        9.18798828125,
+        23.9306640625,
+        25.37255859375
+      ],
+      "completed_utc": "2026-10-05T18:59:40Z"
+    }
+  ],
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "cpu_count": 10,
+  "collector_sha256": "b845d521f0d4015abbf962048b6cb31de464501cf48b9519b7a97bae3b573d44",
+  "criteria": "<=10% median latency/allocation regression per price/end-to-end case",
+  "aggregation": "median of five process means, each retaining five inner samples of 40 calls",
+  "hardware": "Apple M1 Pro",
+  "failure": "benchmark failed to start"
+}

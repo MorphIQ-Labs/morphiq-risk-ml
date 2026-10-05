@@ -188,7 +188,7 @@ No existing European helper, served value or replay digest is changed.
 ## Initial scalar performance
 
 These are historical #111 measurements. See the
-[matched allocation optimization](results-american-allocation.md) for the
+[matched allocation optimization](results-american-enclosure-allocation.md) for the
 current native scalar result and unchanged numerical/availability evidence.
 
 The [complete samples](evidence/american-implementation/performance.json) cover

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "runtime_commit": "f7d0030",
+  "checks": {
+    "development_ordinary": "pass",
+    "release_ordinary": "pass",
+    "install": "pass",
+    "format": "pass",
+    "collector_controls": "6 groups pass",
+    "american_complete_outcomes": "284 unchanged, independent scoring unchanged",
+    "scalar_differential": "10400 cases, same baseline/candidate/native/bytecode replay",
+    "exact_rational": "38616 containment checks",
+    "affected_mutants": "17 distinct valid kills; scratch-length uses the qualified rerun and direct rational witness"
+  },
+  "logs_sha256": {
+    "test-dev-loader-failure.log": "a9f55f730526ed9d430f4b0510a04449d8baf467e9f68621d81121dea2b131e6",
+    "test-dev.log": "acefb0d60c173daf83ae5af397fad7d40e6f6baa7f6161cb942efcee9dde2ac9",
+    "test-release.log": "dcda991df4a65d24cea5e8709fdba18c969f2633ad321b185e6d0924f649a32f",
+    "test-dev-final.log": "45b651004eda37062160d82c91e25434cbc480dd2b6b1ea37deffc68c1ac3b19",
+    "test-release-final.log": "5f2c2be37dc003723c7692c0e8185076c787a33cd64f1a3b485d8568224bd52c",
+    "mutations.log": "4ed97fe377a2f7f280d10e9e14f820f0418cf0efa7e5489496c3ac05371d19e5",
+    "mutation-scratch-qualified.log": "fcd1ed361593fe6f3ab39649117e54a6497547318c2e85cb0b419849cc9d23b5"
+  },
+  "notes": [
+    "Initial bytecode action omitted the inherited Zarith stub path; loader failure was corrected and both profiles pass with native/bytecode replays matching.",
+    "Initial scratch-length injection failed during module initialization. That result is excluded as a designated-witness kill. The final injection preserves startup, then fails scalar quotient exact-rational containment; the named harness rerun passes its clean baseline and kills the corrected fault.",
+    "First European campaign stopped after one baseline process because a copied candidate binary lacked execute permission. Preserve it as incomplete startup evidence, excluded from qualified timing. Only file mode changed; binary bytes and source hashes did not. The fresh complete campaign passes."
+  ]
+}

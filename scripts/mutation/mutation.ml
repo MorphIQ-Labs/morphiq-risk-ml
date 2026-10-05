@@ -38,6 +38,33 @@ type mutant = {
 let catalog =
   [
     {
+      id = "enclosure-scalar-radius";
+      file = "lib/enclosure.ml";
+      snippet =
+        "let input = (centre_magnitude a *^ 0.0) +^ (abs b *^ a.error) in";
+      replacement = "let input = 0.0 in";
+      killer = "enclosure_scalar";
+      mechanism = "scalar multiplication transports the input enclosure radius";
+    };
+    {
+      id = "enclosure-scratch-length";
+      file = "lib/enclosure.ml";
+      snippet = "pack_array terms (na + 2) (a.error +^ 0.0)";
+      replacement =
+        "pack_array terms (if a.hi > 2.0 then Float.Array.length terms else na \
+         + 2) (a.error +^ 0.0)";
+      killer = "enclosure_scalar";
+      mechanism = "packing must not consume stale scalar-quotient scratch slots";
+    };
+    {
+      id = "american-prepared-stencil";
+      file = "lib/early_exercise.ml";
+      snippet = "(left, right, g, true, switched)";
+      replacement = "(right, left, g, true, switched)";
+      killer = "american_pricing";
+      mechanism = "both boundary solves use the same correctly oriented stencil";
+    };
+    {
       id = "american-cash-opening-side";
       file = "lib/early_exercise.ml";
       snippet = "rank side >= rank cash.opening_side";
@@ -1154,10 +1181,11 @@ let guard_arguments = function
   | "boundary_greeks" -> [ [ "boundary_greeks" ] ]
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
-  | "fast_planner" | "fast_batch" | "enclosure_sum" | "shared_greeks"
-  | "production_boundary" | "production_multi" | "planner_contract"
-  | "prepared_division" | "carry_cancellation" | "greek_cancellation"
-  | "rho_midpoint" | "american_pricing" | "american_cash" ->
+  | "fast_planner" | "fast_batch" | "enclosure_sum" | "enclosure_scalar"
+  | "shared_greeks" | "production_boundary" | "production_multi"
+  | "planner_contract" | "prepared_division" | "carry_cancellation"
+  | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
+    ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

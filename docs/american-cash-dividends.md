@@ -182,7 +182,7 @@ artifact qualification or institutional acceptance.
 ## Scalar cost comparison
 
 These are historical #112 measurements. The subsequent
-[matched allocation optimization](results-american-allocation.md) removes the
+[matched allocation optimization](results-american-enclosure-allocation.md) removes the
 dominant boxed-float allocation while retaining the outcomes and work counts.
 
 The [complete samples](evidence/american-cash/performance.json) cover an admitted

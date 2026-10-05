@@ -29,6 +29,20 @@
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
+ (name enclosure_scalar)
+ (modules enclosure_scalar)
+ (modes byte exe)
+ (libraries morphiq_risk zarith)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))
+
+(test
  (name model_enclosure_reference)
  (modules model_enclosure_reference)
  (libraries oracle_fixture morphiq_risk zarith)
@@ -883,9 +897,13 @@
  (alias runtest)
  (deps
   ../scripts/benchmark_american_allocation.py
-  ../scripts/test_benchmark_american_allocation.py)
+  ../scripts/test_benchmark_american_allocation.py
+  ../scripts/benchmark_enclosure_consumers.py
+  ../scripts/test_benchmark_enclosure_consumers.py)
  (action
-  (run python3 %{dep:../scripts/test_benchmark_american_allocation.py})))
+  (progn
+   (run python3 %{dep:../scripts/test_benchmark_american_allocation.py})
+   (run python3 %{dep:../scripts/test_benchmark_enclosure_consumers.py}))))
 
 (rule
  (alias runtest)

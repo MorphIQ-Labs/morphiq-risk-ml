@@ -1,0 +1,20 @@
+[
+  {
+    "probe": "scalar-radius",
+    "build_exit": 0,
+    "witness_exit": 2,
+    "output": "Fatal error: exception Failure(\"scalar product exact-rational enclosure failure\")\n"
+  },
+  {
+    "probe": "scratch-length",
+    "build_exit": 0,
+    "witness_exit": 2,
+    "output": "Fatal error: exception Failure(\"scalar quotient exact-rational enclosure failure\")\n"
+  },
+  {
+    "probe": "prepared-stencil",
+    "build_exit": 0,
+    "witness_exit": 2,
+    "output": "Fatal error: exception Failure(\"accuracy:space=0x1.4457dcdc1p-10,0x1.314f99b9dp-11:time=0x1.f67d0e43p-13,0x1.f29b81a7p-14:domain=0x0p+0,0x0p+0:spread=0x1.78ab1e6be77p-1\")\n"
+  }
+]
