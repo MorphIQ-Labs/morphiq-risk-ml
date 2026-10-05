@@ -182,8 +182,8 @@ artifact qualification or institutional acceptance.
 ## Scalar cost comparison
 
 These are historical #112 measurements. The subsequent
-[matched allocation optimization](results-american-enclosure-allocation.md) removes the
-dominant boxed-float allocation while retaining the outcomes and work counts.
+[allocation reports](results-american-spatial-reuse.md) retain the successive
+boxing, enclosure and spatial-reuse gains with unchanged outcomes and work counts.
 
 The [complete samples](evidence/american-cash/performance.json) cover an admitted
 ATM put, S=K=100, r=.05, q=.02, sigma=.2, T=1. All three modes use the same refined

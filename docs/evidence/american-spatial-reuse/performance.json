@@ -1,0 +1,5982 @@
+{
+  "schema": "american-allocation-v1",
+  "complete": true,
+  "builds": {
+    "baseline": {
+      "revision": "aa65f19e69cbd5aa9e00eeadd77a8a937bdbe46a",
+      "status": "",
+      "source_sha256": {
+        "bench/american_allocation.ml": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f",
+        "bench/assurance_clock.c": "0cd7b94d611cf6864a019aba5b49ba8f3f4be3071d93f5009f924daadf18013c",
+        "bench/certified_scalar.ml": "86927033a3a7476144ad7e04c3a17757009d8964471968359c236fa396f1681b",
+        "bench/dune": "86522b1ef63f45ae1ff33c0ac1113e0de9d90be4578472c6d242e4b51e287120",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "eeb0056e5af48551fd7327619226e31129ab6f7840d255275f9019a50339edef",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "20ae690ec32af1ed8fefc262d60e54597cab9d150cfbdb885188000a8aabb97b",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+          "sha256": "d1130f7485b9c8a746dff116157e9bb01b0f425a18d9bd6344ca0760602bf187"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-spatial-evidence/cash-baseline",
+          "sha256": "88ff66c81aade65d8225d0a89564f08159dfbefee529a8215f3c6bdb84510e0a"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-spatial-evidence/plain-baseline",
+          "sha256": "c1096ceacd4d3ae3102c05be56c8fed6a5dace9569d2c5f198c7a5fbfb25c774"
+        }
+      }
+    },
+    "candidate": {
+      "revision": "a0b93a7b241166eaa1dfa961ae699740d07a2db4",
+      "status": "",
+      "source_sha256": {
+        "bench/american_allocation.ml": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f",
+        "bench/assurance_clock.c": "0cd7b94d611cf6864a019aba5b49ba8f3f4be3071d93f5009f924daadf18013c",
+        "bench/certified_scalar.ml": "86927033a3a7476144ad7e04c3a17757009d8964471968359c236fa396f1681b",
+        "bench/dune": "86522b1ef63f45ae1ff33c0ac1113e0de9d90be4578472c6d242e4b51e287120",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "4bf678f0b081c14db9b32cda143ebce1c8b2bf7e3354a65b3a529274624dabc4",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "20ae690ec32af1ed8fefc262d60e54597cab9d150cfbdb885188000a8aabb97b",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+          "sha256": "970c49a6bea6da30ec69e4683e3e8aa08d691b47a4faacfdafb2c5b89d46c1a8"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-spatial-evidence/cash-candidate",
+          "sha256": "a1e7066105b95395c9eb4a488edbf678691e3e0d1081ee28836740bdaf4cbd54"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-spatial-evidence/plain-candidate",
+          "sha256": "17aae76657a75203afa7dc32709ae46a3fe3e8fc4003f17b418cefbc97cd743a"
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:20:55Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.431154251098633e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5963776,
+        "user_seconds": 0.004527,
+        "system_seconds": 0.0028109999999999997
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:20:55Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.287864685058594e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.0045179999999999994,
+        "system_seconds": 0.0024449999999999997
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:55Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.13952167828877768,
+        "allocated_bytes_per_call": 16693968,
+        "minor_collections": 26,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 0.560068,
+        "system_seconds": 0.003146
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:56Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.13813471794128418,
+        "allocated_bytes_per_call": 12897176,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7782400,
+        "user_seconds": 0.5532969999999999,
+        "system_seconds": 0.0033109999999999997
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:56Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.14036266009012857,
+        "allocated_bytes_per_call": 16997896,
+        "minor_collections": 27,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7684096,
+        "user_seconds": 0.561869,
+        "system_seconds": 0.00341
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:57Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.13912097613016763,
+        "allocated_bytes_per_call": 13201104,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 0.554564,
+        "system_seconds": 0.005006
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:20:58Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.257844924926758e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007592,
+        "system_seconds": 0.002046
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:20:58Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.072116851806641e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007342,
+        "system_seconds": 0.0018399999999999998
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:58Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.3968930244445801,
+        "allocated_bytes_per_call": 37007360,
+        "minor_collections": 58,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7766016,
+        "user_seconds": 1.58721,
+        "system_seconds": 0.00804
+      },
+      "load_after": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:20:59Z",
+      "load_before": [
+        14.34912109375,
+        13.6123046875,
+        10.259765625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.39249396324157715,
+        "allocated_bytes_per_call": 29413512,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7700480,
+        "user_seconds": 1.567309,
+        "system_seconds": 0.00575
+      },
+      "load_after": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:01Z",
+      "load_before": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4041919708251953,
+        "allocated_bytes_per_call": 37180952,
+        "minor_collections": 58,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 1.593968,
+        "system_seconds": 0.009956
+      },
+      "load_after": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:02Z",
+      "load_before": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4162209828694661,
+        "allocated_bytes_per_call": 29587104,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8011776,
+        "user_seconds": 1.603853,
+        "system_seconds": 0.016378
+      },
+      "load_after": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:04Z",
+      "load_before": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.1360130310058594e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007382,
+        "system_seconds": 0.001836
+      },
+      "load_after": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:04Z",
+      "load_before": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.2289962768554684e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007405999999999999,
+        "system_seconds": 0.001638
+      },
+      "load_after": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:04Z",
+      "load_before": [
+        13.35986328125,
+        13.41943359375,
+        10.2109375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.40752402941385907,
+        "allocated_bytes_per_call": 49747200,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8175616,
+        "user_seconds": 1.628846,
+        "system_seconds": 0.008313
+      },
+      "load_after": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:06Z",
+      "load_before": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4182252883911133,
+        "allocated_bytes_per_call": 42153352,
+        "minor_collections": 64,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8273920,
+        "user_seconds": 1.63196,
+        "system_seconds": 0.012267
+      },
+      "load_after": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:07Z",
+      "load_before": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4267123540242513,
+        "allocated_bytes_per_call": 49920792,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 1.663302,
+        "system_seconds": 0.016804
+      },
+      "load_after": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:09Z",
+      "load_before": [
+        12.36962890625,
+        13.212890625,
+        10.15673828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.41157738367716473,
+        "allocated_bytes_per_call": 42326944,
+        "minor_collections": 65,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8110080,
+        "user_seconds": 1.626395,
+        "system_seconds": 0.00848
+      },
+      "load_after": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:11Z",
+      "load_before": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.966901779174805e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5963776,
+        "user_seconds": 0.008139,
+        "system_seconds": 0.0018529999999999998
+      },
+      "load_after": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:11Z",
+      "load_before": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.022214889526367e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008189,
+        "system_seconds": 0.002368
+      },
+      "load_after": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:11Z",
+      "load_before": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6121443112691244,
+        "allocated_bytes_per_call": 76781064,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8077312,
+        "user_seconds": 2.44793,
+        "system_seconds": 0.005906
+      },
+      "load_after": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:13Z",
+      "load_before": [
+        12.099609375,
+        13.142578125,
+        10.14990234375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.604944626490275,
+        "allocated_bytes_per_call": 69187216,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7716864,
+        "user_seconds": 2.416357,
+        "system_seconds": 0.005327
+      },
+      "load_after": [
+        11.37060546875,
+        12.97412109375,
+        10.10791015625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:16Z",
+      "load_before": [
+        11.37060546875,
+        12.97412109375,
+        10.10791015625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6130356788635254,
+        "allocated_bytes_per_call": 76954656,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7979008,
+        "user_seconds": 2.447522,
+        "system_seconds": 0.005667
+      },
+      "load_after": [
+        11.37060546875,
+        12.97412109375,
+        10.10791015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:18Z",
+      "load_before": [
+        11.37060546875,
+        12.97412109375,
+        10.10791015625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.8251286347707113,
+        "allocated_bytes_per_call": 69360808,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7815168,
+        "user_seconds": 2.769956,
+        "system_seconds": 0.01707
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:21Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.585887908935547e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.005222,
+        "system_seconds": 0.003054
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:21Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.5761127471923827e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.005115,
+        "system_seconds": 0.002239
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:21Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.16344300905863443,
+        "allocated_bytes_per_call": 12897176,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7962624,
+        "user_seconds": 0.654272,
+        "system_seconds": 0.0032199999999999998
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:22Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.16544771194458008,
+        "allocated_bytes_per_call": 16693968,
+        "minor_collections": 26,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7831552,
+        "user_seconds": 0.662333,
+        "system_seconds": 0.003545
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:23Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.16303865114847818,
+        "allocated_bytes_per_call": 13201104,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 0.6552009999999999,
+        "system_seconds": 0.0028699999999999997
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:23Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.16555102666219076,
+        "allocated_bytes_per_call": 16997896,
+        "minor_collections": 27,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7700480,
+        "user_seconds": 0.663638,
+        "system_seconds": 0.0035489999999999996
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:24Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.138086318969727e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.008792,
+        "system_seconds": 0.001864
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:24Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.085872650146484e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.008752,
+        "system_seconds": 0.0020169999999999997
+      },
+      "load_after": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:24Z",
+      "load_before": [
+        10.6201171875,
+        12.79150390625,
+        10.06005859375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.47721465428670246,
+        "allocated_bytes_per_call": 29413512,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 1.840787,
+        "system_seconds": 0.008435999999999999
+      },
+      "load_after": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:26Z",
+      "load_before": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.40552600224812824,
+        "allocated_bytes_per_call": 37007360,
+        "minor_collections": 58,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7946240,
+        "user_seconds": 1.6120539999999999,
+        "system_seconds": 0.00787
+      },
+      "load_after": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:28Z",
+      "load_before": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40247265497843426,
+        "allocated_bytes_per_call": 29587104,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 1.598066,
+        "system_seconds": 0.007666
+      },
+      "load_after": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:29Z",
+      "load_before": [
+        10.009765625,
+        12.62890625,
+        10.0185546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.39967934290568036,
+        "allocated_bytes_per_call": 37180952,
+        "minor_collections": 58,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8077312,
+        "user_seconds": 1.598339,
+        "system_seconds": 0.0059039999999999995
+      },
+      "load_after": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:31Z",
+      "load_before": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.125045776367188e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.0074259999999999994,
+        "system_seconds": 0.002143
+      },
+      "load_after": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:31Z",
+      "load_before": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.043983459472656e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.0072369999999999995,
+        "system_seconds": 0.0017029999999999999
+      },
+      "load_after": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:31Z",
+      "load_before": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.41155799229939777,
+        "allocated_bytes_per_call": 42153352,
+        "minor_collections": 64,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8290304,
+        "user_seconds": 1.628234,
+        "system_seconds": 0.010327
+      },
+      "load_after": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:33Z",
+      "load_before": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.40645527839660645,
+        "allocated_bytes_per_call": 49747200,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 1.624819,
+        "system_seconds": 0.006418999999999999
+      },
+      "load_after": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:34Z",
+      "load_before": [
+        9.7685546875,
+        12.53515625,
+        10.00048828125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4022976557413737,
+        "allocated_bytes_per_call": 42326944,
+        "minor_collections": 65,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8011776,
+        "user_seconds": 1.607758,
+        "system_seconds": 0.006755
+      },
+      "load_after": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:36Z",
+      "load_before": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40680861473083496,
+        "allocated_bytes_per_call": 49920792,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8159232,
+        "user_seconds": 1.634538,
+        "system_seconds": 0.004848
+      },
+      "load_after": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:38Z",
+      "load_before": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.046056747436523e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008312,
+        "system_seconds": 0.00188
+      },
+      "load_after": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:38Z",
+      "load_before": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.05607032775879e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.008471,
+        "system_seconds": 0.002884
+      },
+      "load_after": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:38Z",
+      "load_before": [
+        9.22607421875,
+        12.37646484375,
+        9.958984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6076960563659668,
+        "allocated_bytes_per_call": 69187216,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7831552,
+        "user_seconds": 2.434174,
+        "system_seconds": 0.011549
+      },
+      "load_after": [
+        8.56689453125,
+        12.1875,
+        9.90625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:40Z",
+      "load_before": [
+        8.56689453125,
+        12.1875,
+        9.90625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6134803295135498,
+        "allocated_bytes_per_call": 76781064,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8060928,
+        "user_seconds": 2.448142,
+        "system_seconds": 0.009263
+      },
+      "load_after": [
+        8.56689453125,
+        12.1875,
+        9.90625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:43Z",
+      "load_before": [
+        8.56689453125,
+        12.1875,
+        9.90625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6059949398040771,
+        "allocated_bytes_per_call": 69360808,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 2.416758,
+        "system_seconds": 0.009511
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:45Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6132400035858154,
+        "allocated_bytes_per_call": 76954656,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8060928,
+        "user_seconds": 2.443283,
+        "system_seconds": 0.00907
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:48Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2089481353759765e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.004419,
+        "system_seconds": 0.001646
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:48Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.234935760498047e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.00435,
+        "system_seconds": 0.001532
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:48Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.13968261082967123,
+        "allocated_bytes_per_call": 16693968,
+        "minor_collections": 26,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 0.5596,
+        "system_seconds": 0.003221
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:48Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.1377706527709961,
+        "allocated_bytes_per_call": 12897176,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7798784,
+        "user_seconds": 0.552755,
+        "system_seconds": 0.0031149999999999997
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:49Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.14216899871826172,
+        "allocated_bytes_per_call": 16997896,
+        "minor_collections": 27,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7847936,
+        "user_seconds": 0.5632429999999999,
+        "system_seconds": 0.004573
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:49Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.13878933588663736,
+        "allocated_bytes_per_call": 13201104,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7798784,
+        "user_seconds": 0.555338,
+        "system_seconds": 0.005273
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:50Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.029916763305664e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.0072239999999999995,
+        "system_seconds": 0.0015409999999999998
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:50Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.2561759948730466e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007375,
+        "system_seconds": 0.001593
+      },
+      "load_after": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:50Z",
+      "load_before": [
+        8.201171875,
+        12.05126953125,
+        9.87158203125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.3957526683807373,
+        "allocated_bytes_per_call": 37007360,
+        "minor_collections": 58,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7847936,
+        "user_seconds": 1.583274,
+        "system_seconds": 0.005399
+      },
+      "load_after": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:51Z",
+      "load_before": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.39136068026224774,
+        "allocated_bytes_per_call": 29413512,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7897088,
+        "user_seconds": 1.563917,
+        "system_seconds": 0.0055639999999999995
+      },
+      "load_after": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:53Z",
+      "load_before": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.3960813681284587,
+        "allocated_bytes_per_call": 37180952,
+        "minor_collections": 58,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7897088,
+        "user_seconds": 1.580857,
+        "system_seconds": 0.007202999999999999
+      },
+      "load_after": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:55Z",
+      "load_before": [
+        7.70458984375,
+        11.88427734375,
+        9.8251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.39124401410420734,
+        "allocated_bytes_per_call": 29587104,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 1.563638,
+        "system_seconds": 0.00568
+      },
+      "load_after": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:56Z",
+      "load_before": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.051136016845703e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.0073279999999999994,
+        "system_seconds": 0.0018
+      },
+      "load_after": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:21:56Z",
+      "load_before": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.081892013549805e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007176999999999999,
+        "system_seconds": 0.0015019999999999999
+      },
+      "load_after": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:56Z",
+      "load_before": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4069480101267497,
+        "allocated_bytes_per_call": 49747200,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7995392,
+        "user_seconds": 1.622053,
+        "system_seconds": 0.006438999999999999
+      },
+      "load_after": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:58Z",
+      "load_before": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4018563429514567,
+        "allocated_bytes_per_call": 42153352,
+        "minor_collections": 64,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8028160,
+        "user_seconds": 1.605439,
+        "system_seconds": 0.006264
+      },
+      "load_after": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:21:59Z",
+      "load_before": [
+        7.56787109375,
+        11.7861328125,
+        9.802734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4047740300496419,
+        "allocated_bytes_per_call": 49920792,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8175616,
+        "user_seconds": 1.617656,
+        "system_seconds": 0.005939
+      },
+      "load_after": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:01Z",
+      "load_before": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40154600143432617,
+        "allocated_bytes_per_call": 42326944,
+        "minor_collections": 65,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 1.604438,
+        "system_seconds": 0.005581
+      },
+      "load_after": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:03Z",
+      "load_before": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.846977233886719e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.008135,
+        "system_seconds": 0.0016749999999999998
+      },
+      "load_after": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:03Z",
+      "load_before": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.9349536895751956e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008001,
+        "system_seconds": 0.001643
+      },
+      "load_after": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:03Z",
+      "load_before": [
+        7.20166015625,
+        11.64013671875,
+        9.7626953125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6110276381174723,
+        "allocated_bytes_per_call": 76781064,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8257536,
+        "user_seconds": 2.438947,
+        "system_seconds": 0.009072
+      },
+      "load_after": [
+        6.70458984375,
+        11.46337890625,
+        9.7109375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:05Z",
+      "load_before": [
+        6.70458984375,
+        11.46337890625,
+        9.7109375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6035563151041666,
+        "allocated_bytes_per_call": 69187216,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7716864,
+        "user_seconds": 2.407948,
+        "system_seconds": 0.008137
+      },
+      "load_after": [
+        6.70458984375,
+        11.46337890625,
+        9.7109375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:08Z",
+      "load_before": [
+        6.70458984375,
+        11.46337890625,
+        9.7109375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6086703141530355,
+        "allocated_bytes_per_call": 76954656,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 2.427666,
+        "system_seconds": 0.008737
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:10Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6064276695251465,
+        "allocated_bytes_per_call": 69360808,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7815168,
+        "user_seconds": 2.4155159999999998,
+        "system_seconds": 0.008773
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:13Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.1719932556152344e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.004419,
+        "system_seconds": 0.002209
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:13Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.228975296020508e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.004343,
+        "system_seconds": 0.001632
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:13Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.1375423272450765,
+        "allocated_bytes_per_call": 12897176,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7700480,
+        "user_seconds": 0.550979,
+        "system_seconds": 0.003286
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:13Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.14034136136372885,
+        "allocated_bytes_per_call": 16693968,
+        "minor_collections": 26,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7634944,
+        "user_seconds": 0.559775,
+        "system_seconds": 0.0038759999999999997
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:14Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.1379969914754232,
+        "allocated_bytes_per_call": 13201104,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7716864,
+        "user_seconds": 0.553808,
+        "system_seconds": 0.004424
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:14Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.1404287020365397,
+        "allocated_bytes_per_call": 16997896,
+        "minor_collections": 27,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7700480,
+        "user_seconds": 0.5622579999999999,
+        "system_seconds": 0.003369
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:15Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.04302978515625e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.0072699999999999996,
+        "system_seconds": 0.001934
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:15Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.032062530517578e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007195999999999999,
+        "system_seconds": 0.002041
+      },
+      "load_after": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:15Z",
+      "load_before": [
+        6.56787109375,
+        11.35595703125,
+        9.68310546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.39058764775594074,
+        "allocated_bytes_per_call": 29413512,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 1.560454,
+        "system_seconds": 0.005738
+      },
+      "load_after": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:16Z",
+      "load_before": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.3951729933420817,
+        "allocated_bytes_per_call": 37007360,
+        "minor_collections": 58,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 1.577506,
+        "system_seconds": 0.005991
+      },
+      "load_after": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:18Z",
+      "load_before": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.39173007011413574,
+        "allocated_bytes_per_call": 29587104,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7979008,
+        "user_seconds": 1.56447,
+        "system_seconds": 0.0067269999999999995
+      },
+      "load_after": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:20Z",
+      "load_before": [
+        6.28173828125,
+        11.216796875,
+        9.6435546875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.394088347752889,
+        "allocated_bytes_per_call": 37180952,
+        "minor_collections": 58,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8060928,
+        "user_seconds": 1.574872,
+        "system_seconds": 0.00607
+      },
+      "load_after": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:21Z",
+      "load_before": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.118846893310547e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007306,
+        "system_seconds": 0.00214
+      },
+      "load_after": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:21Z",
+      "load_before": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.094051361083984e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007195,
+        "system_seconds": 0.0016309999999999999
+      },
+      "load_after": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:21Z",
+      "load_before": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4028560320536296,
+        "allocated_bytes_per_call": 42153352,
+        "minor_collections": 64,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8011776,
+        "user_seconds": 1.605423,
+        "system_seconds": 0.00613
+      },
+      "load_after": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:23Z",
+      "load_before": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.40470266342163086,
+        "allocated_bytes_per_call": 49747200,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8224768,
+        "user_seconds": 1.617535,
+        "system_seconds": 0.005663
+      },
+      "load_after": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:24Z",
+      "load_before": [
+        5.8583984375,
+        11.046875,
+        9.5927734375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40824198722839355,
+        "allocated_bytes_per_call": 42326944,
+        "minor_collections": 65,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8257536,
+        "user_seconds": 1.623527,
+        "system_seconds": 0.005091
+      },
+      "load_after": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:26Z",
+      "load_before": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40803297360738117,
+        "allocated_bytes_per_call": 49920792,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7995392,
+        "user_seconds": 1.638091,
+        "system_seconds": 0.004946
+      },
+      "load_after": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:28Z",
+      "load_before": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.8710575103759765e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008123,
+        "system_seconds": 0.00202
+      },
+      "load_after": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:28Z",
+      "load_before": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.779027938842773e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.008013,
+        "system_seconds": 0.0016409999999999999
+      },
+      "load_after": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:28Z",
+      "load_before": [
+        6.51025390625,
+        11.095703125,
+        9.6181640625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6116120020548502,
+        "allocated_bytes_per_call": 69187216,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7815168,
+        "user_seconds": 2.436648,
+        "system_seconds": 0.005601999999999999
+      },
+      "load_after": [
+        6.14892578125,
+        10.9443359375,
+        9.5732421875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:30Z",
+      "load_before": [
+        6.14892578125,
+        10.9443359375,
+        9.5732421875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6079200108846029,
+        "allocated_bytes_per_call": 76781064,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8077312,
+        "user_seconds": 2.428181,
+        "system_seconds": 0.008883
+      },
+      "load_after": [
+        6.14892578125,
+        10.9443359375,
+        9.5732421875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:33Z",
+      "load_before": [
+        6.14892578125,
+        10.9443359375,
+        9.5732421875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6050806045532227,
+        "allocated_bytes_per_call": 69360808,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7716864,
+        "user_seconds": 2.4245769999999998,
+        "system_seconds": 0.008593
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:35Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6087599595387777,
+        "allocated_bytes_per_call": 76954656,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8060928,
+        "user_seconds": 2.417901,
+        "system_seconds": 0.017492999999999998
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:38Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.3670196533203123e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.004543,
+        "system_seconds": 0.0023569999999999997
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:38Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2110939025878907e-08,
+        "allocated_bytes_per_call": 440.00336,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.004471,
+        "system_seconds": 0.002169
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:38Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.14177505175272623,
+        "allocated_bytes_per_call": 16693968,
+        "minor_collections": 26,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 0.567653,
+        "system_seconds": 0.004174
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:38Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.1379833221435547,
+        "allocated_bytes_per_call": 12897176,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 939
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7716864,
+        "user_seconds": 0.552056,
+        "system_seconds": 0.0034
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:39Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.1395596663157145,
+        "allocated_bytes_per_call": 16997896,
+        "minor_collections": 27,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7618560,
+        "user_seconds": 0.558357,
+        "system_seconds": 0.003356
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:39Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.1380766232808431,
+        "allocated_bytes_per_call": 13201104,
+        "minor_collections": 21,
+        "major_collections": 8,
+        "heap_words_after": 61440,
+        "live_words_after": 940
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7684096,
+        "user_seconds": 0.5523819999999999,
+        "system_seconds": 0.003472
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:40Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.0950050354003907e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007316,
+        "system_seconds": 0.00171
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:40Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.106925964355469e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007234,
+        "system_seconds": 0.00155
+      },
+      "load_after": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:40Z",
+      "load_before": [
+        5.896484375,
+        10.81201171875,
+        9.53466796875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.399517297744751,
+        "allocated_bytes_per_call": 37007360,
+        "minor_collections": 58,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7847936,
+        "user_seconds": 1.601648,
+        "system_seconds": 0.006131999999999999
+      },
+      "load_after": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:42Z",
+      "load_before": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.39244826634724933,
+        "allocated_bytes_per_call": 29413512,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7979008,
+        "user_seconds": 1.56606,
+        "system_seconds": 0.008431
+      },
+      "load_after": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:43Z",
+      "load_before": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.3936193784077962,
+        "allocated_bytes_per_call": 37180952,
+        "minor_collections": 58,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8028160,
+        "user_seconds": 1.572762,
+        "system_seconds": 0.006320999999999999
+      },
+      "load_after": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:45Z",
+      "load_before": [
+        5.82421875,
+        10.71533203125,
+        9.5078125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.39018996556599933,
+        "allocated_bytes_per_call": 29587104,
+        "minor_collections": 46,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 1.558893,
+        "system_seconds": 0.005618
+      },
+      "load_after": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:46Z",
+      "load_before": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.285978317260742e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.007568,
+        "system_seconds": 0.0019619999999999998
+      },
+      "load_after": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:46Z",
+      "load_before": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.0859451293945315e-08,
+        "allocated_bytes_per_call": 800.00336,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.007300999999999999,
+        "system_seconds": 0.001728
+      },
+      "load_after": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:46Z",
+      "load_before": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.40537230173746747,
+        "allocated_bytes_per_call": 49747200,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8077312,
+        "user_seconds": 1.615033,
+        "system_seconds": 0.006696
+      },
+      "load_after": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:48Z",
+      "load_before": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4061036904652913,
+        "allocated_bytes_per_call": 42153352,
+        "minor_collections": 64,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7864320,
+        "user_seconds": 1.619511,
+        "system_seconds": 0.0067009999999999995
+      },
+      "load_after": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:50Z",
+      "load_before": [
+        5.517578125,
+        10.5703125,
+        9.46337890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40299733479817706,
+        "allocated_bytes_per_call": 49920792,
+        "minor_collections": 76,
+        "major_collections": 15,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8060928,
+        "user_seconds": 1.612245,
+        "system_seconds": 0.006179
+      },
+      "load_after": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:51Z",
+      "load_before": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.40620899200439453,
+        "allocated_bytes_per_call": 42326944,
+        "minor_collections": 65,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8028160,
+        "user_seconds": 1.613388,
+        "system_seconds": 0.007620999999999999
+      },
+      "load_after": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:53Z",
+      "load_before": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.033897399902344e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5980160,
+        "user_seconds": 0.008312,
+        "system_seconds": 0.002261
+      },
+      "load_after": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T20:22:53Z",
+      "load_before": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.995988845825195e-08,
+        "allocated_bytes_per_call": 824.00336,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008364,
+        "system_seconds": 0.0022129999999999997
+      },
+      "load_after": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:53Z",
+      "load_before": [
+        5.31591796875,
+        10.4443359375,
+        9.42529296875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6081389586130778,
+        "allocated_bytes_per_call": 76781064,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 2.436244,
+        "system_seconds": 0.008208
+      },
+      "load_after": [
+        5.05029296875,
+        10.3037109375,
+        9.38134765625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:55Z",
+      "load_before": [
+        5.05029296875,
+        10.3037109375,
+        9.38134765625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6018680731455485,
+        "allocated_bytes_per_call": 69187216,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 961
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7634944,
+        "user_seconds": 2.398172,
+        "system_seconds": 0.008943999999999999
+      },
+      "load_after": [
+        5.05029296875,
+        10.3037109375,
+        9.38134765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-baseline",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:22:58Z",
+      "load_before": [
+        5.05029296875,
+        10.3037109375,
+        9.38134765625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6064876715342203,
+        "allocated_bytes_per_call": 76954656,
+        "minor_collections": 114,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 2.420762,
+        "system_seconds": 0.008298
+      },
+      "load_after": [
+        4.7255859375,
+        10.14892578125,
+        9.33203125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-spatial-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T20:23:00Z",
+      "load_before": [
+        4.7255859375,
+        10.14892578125,
+        9.33203125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.5992723306020101,
+        "allocated_bytes_per_call": 69360808,
+        "minor_collections": 103,
+        "major_collections": 14,
+        "heap_words_after": 61440,
+        "live_words_after": 962
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7897088,
+        "user_seconds": 2.394003,
+        "system_seconds": 0.007658
+      },
+      "load_after": [
+        4.7255859375,
+        10.14892578125,
+        9.33203125
+      ]
+    }
+  ],
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "cpu_count": 10,
+  "collector_sha256": "dc334c6e23fafd0fe7913990fdd3f2bc39612573e055e670cc830ecaa4a747fd",
+  "warmup": "one operation then full major GC; three measured calls or 100000 admissions",
+  "flags": "Dune release, library and driver -O3; no profiling during timing",
+  "criteria": {
+    "minimum_allocation_reduction": 0.1,
+    "maximum_latency_regression": 0.1
+  },
+  "hardware": "Apple M1 Pro",
+  "summary": [
+    {
+      "mode": "none",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 2.3670196533203123e-08,
+          "min": 2.2089481353759765e-08,
+          "max": 2.5761127471923827e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 440.00336,
+          "min": 440.00336,
+          "max": 440.00336
+        },
+        "minor_collections": {
+          "median": 20,
+          "min": 20,
+          "max": 20
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 2.234935760498047e-08,
+          "min": 2.1719932556152344e-08,
+          "max": 2.585887908935547e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 440.00336,
+          "min": 440.00336,
+          "max": 440.00336
+        },
+        "minor_collections": {
+          "median": 20,
+          "min": 20,
+          "max": 20
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 1.0590996372946446
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.14034136136372885,
+          "min": 0.13952167828877768,
+          "max": 0.16544771194458008
+        },
+        "allocated_bytes_per_call": {
+          "median": 16693968,
+          "min": 16693968,
+          "max": 16693968
+        },
+        "minor_collections": {
+          "median": 26,
+          "min": 26,
+          "max": 26
+        },
+        "major_collections": {
+          "median": 9,
+          "min": 9,
+          "max": 9
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.1379833221435547,
+          "min": 0.1375423272450765,
+          "max": 0.16344300905863443
+        },
+        "allocated_bytes_per_call": {
+          "median": 12897176,
+          "min": 12897176,
+          "max": 12897176
+        },
+        "minor_collections": {
+          "median": 21,
+          "min": 21,
+          "max": 21
+        },
+        "major_collections": {
+          "median": 8,
+          "min": 8,
+          "max": 8
+        }
+      },
+      "allocation_reduction": 0.2274349633352598,
+      "speedup": 1.017089306037442
+    },
+    {
+      "mode": "none",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.1404287020365397,
+          "min": 0.1395596663157145,
+          "max": 0.16555102666219076
+        },
+        "allocated_bytes_per_call": {
+          "median": 16997896,
+          "min": 16997896,
+          "max": 16997896
+        },
+        "minor_collections": {
+          "median": 27,
+          "min": 27,
+          "max": 27
+        },
+        "major_collections": {
+          "median": 9,
+          "min": 9,
+          "max": 9
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.13878933588663736,
+          "min": 0.1379969914754232,
+          "max": 0.16303865114847818
+        },
+        "allocated_bytes_per_call": {
+          "median": 13201104,
+          "min": 13201104,
+          "max": 13201104
+        },
+        "minor_collections": {
+          "median": 21,
+          "min": 21,
+          "max": 21
+        },
+        "major_collections": {
+          "median": 8,
+          "min": 8,
+          "max": 8
+        }
+      },
+      "allocation_reduction": 0.22336835100061792,
+      "speedup": 1.0118119028341008
+    },
+    {
+      "mode": "zero",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 5.0950050354003907e-08,
+          "min": 5.029916763305664e-08,
+          "max": 6.085872650146484e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 800.00336,
+          "min": 800.00336,
+          "max": 800.00336
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 5.106925964355469e-08,
+          "min": 5.04302978515625e-08,
+          "max": 6.138086318969727e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 800.00336,
+          "min": 800.00336,
+          "max": 800.00336
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9976657329598506
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.3968930244445801,
+          "min": 0.3951729933420817,
+          "max": 0.40552600224812824
+        },
+        "allocated_bytes_per_call": {
+          "median": 37007360,
+          "min": 37007360,
+          "max": 37007360
+        },
+        "minor_collections": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "major_collections": {
+          "median": 16,
+          "min": 16,
+          "max": 16
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.39244826634724933,
+          "min": 0.39058764775594074,
+          "max": 0.47721465428670246
+        },
+        "allocated_bytes_per_call": {
+          "median": 29413512,
+          "min": 29413512,
+          "max": 29413512
+        },
+        "minor_collections": {
+          "median": 46,
+          "min": 46,
+          "max": 46
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.20519831730769234,
+      "speedup": 1.011325717243449
+    },
+    {
+      "mode": "zero",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.3960813681284587,
+          "min": 0.3936193784077962,
+          "max": 0.4041919708251953
+        },
+        "allocated_bytes_per_call": {
+          "median": 37180952,
+          "min": 37180952,
+          "max": 37180952
+        },
+        "minor_collections": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "major_collections": {
+          "median": 15,
+          "min": 15,
+          "max": 15
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.39173007011413574,
+          "min": 0.39018996556599933,
+          "max": 0.4162209828694661
+        },
+        "allocated_bytes_per_call": {
+          "median": 29587104,
+          "min": 29587104,
+          "max": 29587104
+        },
+        "minor_collections": {
+          "median": 46,
+          "min": 46,
+          "max": 46
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.20424027873197004,
+      "speedup": 1.0111078988984816
+    },
+    {
+      "mode": "cash",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 5.094051361083984e-08,
+          "min": 5.043983459472656e-08,
+          "max": 5.285978317260742e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 800.00336,
+          "min": 800.00336,
+          "max": 800.00336
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 5.118846893310547e-08,
+          "min": 5.081892013549805e-08,
+          "max": 5.2289962768554684e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 800.00336,
+          "min": 800.00336,
+          "max": 800.00336
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9951560316721005
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.40645527839660645,
+          "min": 0.40470266342163086,
+          "max": 0.40752402941385907
+        },
+        "allocated_bytes_per_call": {
+          "median": 49747200,
+          "min": 49747200,
+          "max": 49747200
+        },
+        "minor_collections": {
+          "median": 76,
+          "min": 76,
+          "max": 76
+        },
+        "major_collections": {
+          "median": 15,
+          "min": 15,
+          "max": 15
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.4061036904652913,
+          "min": 0.4018563429514567,
+          "max": 0.4182252883911133
+        },
+        "allocated_bytes_per_call": {
+          "median": 42153352,
+          "min": 42153352,
+          "max": 42153352
+        },
+        "minor_collections": {
+          "median": 64,
+          "min": 64,
+          "max": 64
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.15264875209056994,
+      "speedup": 1.0008657590156649
+    },
+    {
+      "mode": "cash",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.40680861473083496,
+          "min": 0.40299733479817706,
+          "max": 0.4267123540242513
+        },
+        "allocated_bytes_per_call": {
+          "median": 49920792,
+          "min": 49920792,
+          "max": 49920792
+        },
+        "minor_collections": {
+          "median": 76,
+          "min": 76,
+          "max": 76
+        },
+        "major_collections": {
+          "median": 15,
+          "min": 15,
+          "max": 15
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.40620899200439453,
+          "min": 0.40154600143432617,
+          "max": 0.41157738367716473
+        },
+        "allocated_bytes_per_call": {
+          "median": 42326944,
+          "min": 42326944,
+          "max": 42326944
+        },
+        "minor_collections": {
+          "median": 65,
+          "min": 65,
+          "max": 65
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.152117939154491,
+      "speedup": 1.0014761434095332
+    },
+    {
+      "mode": "multiple",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 5.966901779174805e-08,
+          "min": 5.779027938842773e-08,
+          "max": 6.05607032775879e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 824.00336,
+          "min": 824.00336,
+          "max": 824.00336
+        },
+        "minor_collections": {
+          "median": 39,
+          "min": 39,
+          "max": 39
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 5.995988845825195e-08,
+          "min": 5.8710575103759765e-08,
+          "max": 6.046056747436523e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 824.00336,
+          "min": 824.00336,
+          "max": 824.00336
+        },
+        "minor_collections": {
+          "median": 39,
+          "min": 39,
+          "max": 39
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9951489124816096
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.6110276381174723,
+          "min": 0.6079200108846029,
+          "max": 0.6134803295135498
+        },
+        "allocated_bytes_per_call": {
+          "median": 76781064,
+          "min": 76781064,
+          "max": 76781064
+        },
+        "minor_collections": {
+          "median": 114,
+          "min": 114,
+          "max": 114
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.604944626490275,
+          "min": 0.6018680731455485,
+          "max": 0.6116120020548502
+        },
+        "allocated_bytes_per_call": {
+          "median": 69187216,
+          "min": 69187216,
+          "max": 69187216
+        },
+        "minor_collections": {
+          "median": 103,
+          "min": 103,
+          "max": 103
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.09890261484263885,
+      "speedup": 1.0100554850160242
+    },
+    {
+      "mode": "multiple",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.6087599595387777,
+          "min": 0.6064876715342203,
+          "max": 0.6132400035858154
+        },
+        "allocated_bytes_per_call": {
+          "median": 76954656,
+          "min": 76954656,
+          "max": 76954656
+        },
+        "minor_collections": {
+          "median": 114,
+          "min": 114,
+          "max": 114
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.6059949398040771,
+          "min": 0.5992723306020101,
+          "max": 0.8251286347707113
+        },
+        "allocated_bytes_per_call": {
+          "median": 69360808,
+          "min": 69360808,
+          "max": 69360808
+        },
+        "minor_collections": {
+          "median": 103,
+          "min": 103,
+          "max": 103
+        },
+        "major_collections": {
+          "median": 14,
+          "min": 14,
+          "max": 14
+        }
+      },
+      "allocation_reduction": 0.09867951329676528,
+      "speedup": 1.0045627769360492
+    }
+  ]
+}

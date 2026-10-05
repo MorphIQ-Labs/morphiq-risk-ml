@@ -571,337 +571,338 @@ module Bsm = struct
     c.largest <- max c.largest !n;
     Array.sub x 0 !n
 
-  (* Only the boundary choice varies between these two solves. The closure
-     fixes the model, side, grid, cash schedule, time count and capture policy;
-     payoff/stencil arrays are immutable after their first construction. *)
-  let solver_pair ?cash c p side x time_steps capture =
-    let prepared = ref None in
-    fun upper_boundary ->
-      check c;
-      let n = Array.length x and sigma = Vol.to_float p.volatility in
-      let arr () = Array.make n 0. in
-      let left, right, g, reused, switched =
-        match !prepared with
-        | None -> (arr (), arr (), arr (), false, 0)
-        | Some (left, right, g, switched) -> (left, right, g, true, switched)
-      in
-      let v = arr () in
-      let lo = arr () and diag = arr () and hi = arr () and rhs = arr () in
-      let d = arr () and z = arr () and candidate = arr () in
-      let mask = Array.make n false and oldmask = Array.make n false in
-      let history = Array.make c.cfg.limits.policy_iterations 0 in
-      for i = 0 to n - 1 do
-        tick c;
-        if not reused then
-          g.(i) <- boundary c (payoff_e side (exact x.(i)) (exact p.strike));
-        v.(i) <- g.(i)
-      done;
-      (if reused then (
-         (* A logical stencil-row visit remains a visit when loading a prepared
+  (* The price request owns preparation for one stock-grid key. Payoff and
+     spatial bands depend only on that grid, the fixed model and option side;
+     time steps, boundary choice and cash interpolation do not alter them. *)
+  let solver_pair ?cash ~prepared c p side x time_steps capture =
+   fun upper_boundary ->
+    check c;
+    let n = Array.length x and sigma = Vol.to_float p.volatility in
+    let arr () = Array.make n 0. in
+    let left, right, g, reused, switched =
+      match !prepared with
+      | None -> (arr (), arr (), arr (), false, 0)
+      | Some (left, right, g, switched) ->
+          if
+            Array.length left <> n
+            || Array.length right <> n
+            || Array.length g <> n
+          then fail "prepared spatial grid mismatch";
+          (left, right, g, true, switched)
+    in
+    let v = arr () in
+    let lo = arr () and diag = arr () and hi = arr () and rhs = arr () in
+    let d = arr () and z = arr () and candidate = arr () in
+    let mask = Array.make n false and oldmask = Array.make n false in
+    let history = Array.make c.cfg.limits.policy_iterations 0 in
+    for i = 0 to n - 1 do
+      tick c;
+      if not reused then
+        g.(i) <- boundary c (payoff_e side (exact x.(i)) (exact p.strike));
+      v.(i) <- g.(i)
+    done;
+    (if reused then (
+       (* A logical stencil-row visit remains a visit when loading a prepared
          coefficient. Retain limits/cancellation and switched-row diagnostics. *)
-         for _ = 1 to n - 2 do
-           tick c
-         done;
-         c.switched <- c.switched + switched)
-       else
-         let switched_before = c.switched in
-         let drift = E.sub (exact p.rate) (exact p.dividend_yield) in
-         let coefficient label value =
-           let v, _ = enclosed value in
-           if v < 0. || (v = 0. && E.sign value <> E.Zero) then fail label;
-           v
+       for _ = 1 to n - 2 do
+         tick c
+       done;
+       c.switched <- c.switched + switched)
+     else
+       let switched_before = c.switched in
+       let drift = E.sub (exact p.rate) (exact p.dividend_yield) in
+       let coefficient label value =
+         let v, _ = enclosed value in
+         if v < 0. || (v = 0. && E.sign value <> E.Zero) then fail label;
+         v
+       in
+       for i = 1 to n - 2 do
+         tick c;
+         let hm = E.sub (exact x.(i)) (exact x.(i - 1))
+         and hp = E.sub (exact x.(i + 1)) (exact x.(i)) in
+         let sx = E.mul (exact sigma) (exact x.(i)) in
+         let a2 = E.mul sx sx and b = E.mul drift (exact x.(i)) in
+         let sum = E.add hm hp in
+         let numerator_m = E.sub a2 (E.mul b hp)
+         and numerator_p = E.add a2 (E.mul b hm) in
+         let positive = function
+           | E.Positive | E.Zero -> true
+           | E.Negative -> false
+           | E.Indeterminate -> fail "unresolved central stencil sign"
          in
-         for i = 1 to n - 2 do
-           tick c;
-           let hm = E.sub (exact x.(i)) (exact x.(i - 1))
-           and hp = E.sub (exact x.(i + 1)) (exact x.(i)) in
-           let sx = E.mul (exact sigma) (exact x.(i)) in
-           let a2 = E.mul sx sx and b = E.mul drift (exact x.(i)) in
-           let sum = E.add hm hp in
-           let numerator_m = E.sub a2 (E.mul b hp)
-           and numerator_p = E.add a2 (E.mul b hm) in
-           let positive = function
-             | E.Positive | E.Zero -> true
-             | E.Negative -> false
-             | E.Indeterminate -> fail "unresolved central stencil sign"
-           in
-           let central_m = positive (E.sign numerator_m)
-           and central_p = positive (E.sign numerator_p) in
-           let lm, lp =
-             if central_m && central_p then
-               ( E.div numerator_m (E.mul hm sum),
-                 E.div numerator_p (E.mul hp sum) )
-             else (
-               c.switched <- c.switched + 1;
-               let diffusion_m = E.div a2 (E.mul hm sum)
-               and diffusion_p = E.div a2 (E.mul hp sum) in
-               match E.sign b with
-               | E.Positive -> (diffusion_m, E.add diffusion_p (E.div b hp))
-               | E.Negative ->
-                   (E.add diffusion_m (E.div (E.neg b) hm), diffusion_p)
-               | E.Zero -> (diffusion_m, diffusion_p)
-               | E.Indeterminate -> fail "unresolved upwind direction")
-           in
-           left.(i) <- coefficient "left spatial coefficient resolution" lm;
-           right.(i) <- coefficient "right spatial coefficient resolution" lp
-         done;
-         prepared := Some (left, right, g, c.switched - switched_before));
-      let residual obstacle =
-        let worst = ref 0. and worst_row = ref 0 and indicator = ref 0. in
-        for i = 1 to n - 2 do
-          tick c;
-          (* Original unfactored bands; explicit FMA differs from elimination's
+         let central_m = positive (E.sign numerator_m)
+         and central_p = positive (E.sign numerator_p) in
+         let lm, lp =
+           if central_m && central_p then
+             (E.div numerator_m (E.mul hm sum), E.div numerator_p (E.mul hp sum))
+           else (
+             c.switched <- c.switched + 1;
+             let diffusion_m = E.div a2 (E.mul hm sum)
+             and diffusion_p = E.div a2 (E.mul hp sum) in
+             match E.sign b with
+             | E.Positive -> (diffusion_m, E.add diffusion_p (E.div b hp))
+             | E.Negative ->
+                 (E.add diffusion_m (E.div (E.neg b) hm), diffusion_p)
+             | E.Zero -> (diffusion_m, diffusion_p)
+             | E.Indeterminate -> fail "unresolved upwind direction")
+         in
+         left.(i) <- coefficient "left spatial coefficient resolution" lm;
+         right.(i) <- coefficient "right spatial coefficient resolution" lp
+       done;
+       prepared := Some (left, right, g, c.switched - switched_before));
+    let residual obstacle =
+      let worst = ref 0. and worst_row = ref 0 and indicator = ref 0. in
+      for i = 1 to n - 2 do
+        tick c;
+        (* Original unfactored bands; explicit FMA differs from elimination's
            accumulation. No product complementarity test. *)
-          let pvalue =
-            Float.fma lo.(i)
-              v.(i - 1)
-              (Float.fma diag.(i) v.(i)
-                 (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
+        let pvalue =
+          Float.fma lo.(i)
+            v.(i - 1)
+            (Float.fma diag.(i) v.(i) (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
+        in
+        let e = v.(i) -. g.(i) in
+        let r =
+          if obstacle then
+            float_max
+              (abs_float (float_min pvalue e))
+              (float_max (-.pvalue) (-.e))
+          else abs_float pvalue
+        in
+        ignore (finite "original residual" r);
+        if r > !worst then (
+          worst := r;
+          worst_row := i);
+        let magnitude =
+          abs_float (lo.(i) *. v.(i - 1))
+          +. abs_float (diag.(i) *. v.(i))
+          +. abs_float (hi.(i) *. v.(i + 1))
+          +. abs_float rhs.(i)
+          +. abs_float v.(i)
+          +. abs_float g.(i)
+        in
+        let screen =
+          finite "residual roundoff screen"
+            ((0x1p-48 *. magnitude) +. (32. *. eta))
+        in
+        indicator := float_max !indicator screen
+      done;
+      c.roundoff <- float_max c.roundoff !indicator;
+      if !indicator > c.local /. 4. then fail "residual roundoff resolution";
+      (!worst, !worst_row)
+    in
+    let slab earlier later obstacle =
+      if earlier < later then (
+        let width = E.sub (exact later) (exact earlier) in
+        let h_e = E.div_float width (float time_steps) in
+        let h = finite "time increment" (centre h_e) in
+        if h <= 0. then fail "collapsed time step";
+        if h *. float_max (-.p.rate) 0. > 0.5 then
+          fail "negative-rate matrix margin";
+        let previous = ref later in
+        for j = 1 to time_steps do
+          step c;
+          let t_e =
+            if j = time_steps then exact earlier
+            else E.sub (exact later) (E.mul_float h_e (float j))
           in
-          let e = v.(i) -. g.(i) in
-          let r =
-            if obstacle then
-              float_max
-                (abs_float (float_min pvalue e))
-                (float_max (-.pvalue) (-.e))
-            else abs_float pvalue
+          let t = centre t_e in
+          if (not (t < !previous)) || t < earlier then
+            fail "collapsed time coordinates";
+          previous := t;
+          let remaining = E.sub (exact p.time_to_expiry) t_e in
+          let wait =
+            if t >= p.opens_at then exact 0. else E.sub (exact p.opens_at) t_e
           in
-          ignore (finite "original residual" r);
-          if r > !worst then (
-            worst := r;
-            worst_row := i);
-          let magnitude =
-            abs_float (lo.(i) *. v.(i - 1))
-            +. abs_float (diag.(i) *. v.(i))
-            +. abs_float (hi.(i) *. v.(i + 1))
-            +. abs_float rhs.(i)
-            +. abs_float v.(i)
-            +. abs_float g.(i)
+          let zero =
+            if side = Side.Call then 0.
+            else
+              boundary c
+                (E.mul (exact p.strike)
+                   (exp_product (-.p.rate)
+                      (if p.rate < 0. then remaining else wait)))
           in
-          let screen =
-            finite "residual roundoff screen"
-              ((0x1p-48 *. magnitude) +. (32. *. eta))
+          let top =
+            if upper_boundary then
+              boundary c
+                (E.mul
+                   (exact (if side = Side.Call then x.(n - 1) else p.strike))
+                   (exp_product
+                      (float_max
+                         (if side = Side.Call then -.p.dividend_yield
+                          else -.p.rate)
+                         0.)
+                      remaining))
+            else if obstacle then g.(n - 1)
+            else 0.
           in
-          indicator := float_max !indicator screen
-        done;
-        c.roundoff <- float_max c.roundoff !indicator;
-        if !indicator > c.local /. 4. then fail "residual roundoff resolution";
-        (!worst, !worst_row)
-      in
-      let slab earlier later obstacle =
-        if earlier < later then (
-          let width = E.sub (exact later) (exact earlier) in
-          let h_e = E.div_float width (float time_steps) in
-          let h = finite "time increment" (centre h_e) in
-          if h <= 0. then fail "collapsed time step";
-          if h *. float_max (-.p.rate) 0. > 0.5 then
-            fail "negative-rate matrix margin";
-          let previous = ref later in
-          for j = 1 to time_steps do
-            step c;
-            let t_e =
-              if j = time_steps then exact earlier
-              else E.sub (exact later) (E.mul_float h_e (float j))
+          v.(0) <- zero;
+          v.(n - 1) <- top;
+          for i = 1 to n - 2 do
+            tick c;
+            lo.(i) <- -.h *. left.(i);
+            hi.(i) <- -.h *. right.(i);
+            diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
+            rhs.(i) <- v.(i);
+            let margin =
+              finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
             in
-            let t = centre t_e in
-            if (not (t < !previous)) || t < earlier then
-              fail "collapsed time coordinates";
-            previous := t;
-            let remaining = E.sub (exact p.time_to_expiry) t_e in
-            let wait =
-              if t >= p.opens_at then exact 0. else E.sub (exact p.opens_at) t_e
-            in
-            let zero =
-              if side = Side.Call then 0.
-              else
-                boundary c
-                  (E.mul (exact p.strike)
-                     (exp_product (-.p.rate)
-                        (if p.rate < 0. then remaining else wait)))
-            in
-            let top =
-              if upper_boundary then
-                boundary c
-                  (E.mul
-                     (exact (if side = Side.Call then x.(n - 1) else p.strike))
-                     (exp_product
-                        (float_max
-                           (if side = Side.Call then -.p.dividend_yield
-                            else -.p.rate)
-                           0.)
-                        remaining))
-              else if obstacle then g.(n - 1)
-              else 0.
-            in
-            v.(0) <- zero;
-            v.(n - 1) <- top;
+            if margin < 0.25 || diag.(i) <= 0. then
+              fail "lost binary64 matrix dominance"
+          done;
+          let accepted = ref false and iteration = ref 0 in
+          while not !accepted do
+            (if !iteration >= c.cfg.limits.policy_iterations then
+               let r, row = residual obstacle in
+               raise
+                 (Stop (Nonconvergence { step = c.steps; row; residual = r })));
+            policy c;
+            incr iteration;
+            let changed = ref false and fingerprint = ref 17 in
             for i = 1 to n - 2 do
               tick c;
-              lo.(i) <- -.h *. left.(i);
-              hi.(i) <- -.h *. right.(i);
-              diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
-              rhs.(i) <- v.(i);
-              let margin =
-                finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
+              oldmask.(i) <- mask.(i);
+              let pvalue =
+                Float.fma lo.(i)
+                  v.(i - 1)
+                  (Float.fma diag.(i) v.(i)
+                     (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
               in
-              if margin < 0.25 || diag.(i) <= 0. then
-                fail "lost binary64 matrix dominance"
+              ignore (finite "policy decision" pvalue);
+              mask.(i) <- obstacle && pvalue > v.(i) -. g.(i);
+              fingerprint :=
+                !fingerprint * 65599 lxor if mask.(i) then i else -i;
+              if mask.(i) <> oldmask.(i) then changed := true;
+              d.(i) <- (if mask.(i) then 1. else diag.(i));
+              z.(i) <- (if mask.(i) then g.(i) else rhs.(i))
             done;
-            let accepted = ref false and iteration = ref 0 in
-            while not !accepted do
-              (if !iteration >= c.cfg.limits.policy_iterations then
-                 let r, row = residual obstacle in
+            (* Eliminate known boundaries once, retaining full original bands
+               for the independent residual. Identity rows have zero bands. *)
+            if not mask.(1) then z.(1) <- z.(1) -. (lo.(1) *. zero);
+            if not mask.(n - 2) then
+              z.(n - 2) <- z.(n - 2) -. (hi.(n - 2) *. top);
+            for i = 2 to n - 2 do
+              tick c;
+              if d.(i - 1) <= 0. then fail "nonpositive elimination pivot";
+              let mult = if mask.(i) then 0. else lo.(i) /. d.(i - 1) in
+              let prev_hi = if mask.(i - 1) then 0. else hi.(i - 1) in
+              d.(i) <- finite "elimination pivot" (d.(i) -. (mult *. prev_hi));
+              z.(i) <-
+                finite "elimination right hand side"
+                  (z.(i) -. (mult *. z.(i - 1)))
+            done;
+            for i = n - 2 downto 1 do
+              tick c;
+              if d.(i) <= 0. then fail "nonpositive back substitution pivot";
+              let next =
+                if i = n - 2 || mask.(i) then 0.
+                else hi.(i) *. candidate.(i + 1)
+              in
+              candidate.(i) <-
+                finite "back substitution" ((z.(i) -. next) /. d.(i))
+            done;
+            for i = 1 to n - 2 do
+              tick c;
+              v.(i) <- candidate.(i)
+            done;
+            let r, row = residual obstacle in
+            (if r <= c.local then (
+               accepted := true;
+               c.residual <- float_max c.residual r)
+             else
+               let repeated = ref ((not !changed) && !iteration > 1) in
+               for k = 0 to !iteration - 2 do
+                 tick c;
+                 if history.(k) = !fingerprint then repeated := true
+               done;
+               if !repeated then
                  raise
                    (Stop (Nonconvergence { step = c.steps; row; residual = r })));
-              policy c;
-              incr iteration;
-              let changed = ref false and fingerprint = ref 17 in
-              for i = 1 to n - 2 do
-                tick c;
-                oldmask.(i) <- mask.(i);
-                let pvalue =
-                  Float.fma lo.(i)
-                    v.(i - 1)
-                    (Float.fma diag.(i) v.(i)
-                       (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
-                in
-                ignore (finite "policy decision" pvalue);
-                mask.(i) <- obstacle && pvalue > v.(i) -. g.(i);
-                fingerprint :=
-                  !fingerprint * 65599 lxor if mask.(i) then i else -i;
-                if mask.(i) <> oldmask.(i) then changed := true;
-                d.(i) <- (if mask.(i) then 1. else diag.(i));
-                z.(i) <- (if mask.(i) then g.(i) else rhs.(i))
-              done;
-              (* Eliminate known boundaries once, retaining full original bands
-               for the independent residual. Identity rows have zero bands. *)
-              if not mask.(1) then z.(1) <- z.(1) -. (lo.(1) *. zero);
-              if not mask.(n - 2) then
-                z.(n - 2) <- z.(n - 2) -. (hi.(n - 2) *. top);
-              for i = 2 to n - 2 do
-                tick c;
-                if d.(i - 1) <= 0. then fail "nonpositive elimination pivot";
-                let mult = if mask.(i) then 0. else lo.(i) /. d.(i - 1) in
-                let prev_hi = if mask.(i - 1) then 0. else hi.(i - 1) in
-                d.(i) <- finite "elimination pivot" (d.(i) -. (mult *. prev_hi));
-                z.(i) <-
-                  finite "elimination right hand side"
-                    (z.(i) -. (mult *. z.(i - 1)))
-              done;
-              for i = n - 2 downto 1 do
-                tick c;
-                if d.(i) <= 0. then fail "nonpositive back substitution pivot";
-                let next =
-                  if i = n - 2 || mask.(i) then 0.
-                  else hi.(i) *. candidate.(i + 1)
-                in
-                candidate.(i) <-
-                  finite "back substitution" ((z.(i) -. next) /. d.(i))
-              done;
-              for i = 1 to n - 2 do
-                tick c;
-                v.(i) <- candidate.(i)
-              done;
-              let r, row = residual obstacle in
-              (if r <= c.local then (
-                 accepted := true;
-                 c.residual <- float_max c.residual r)
-               else
-                 let repeated = ref ((not !changed) && !iteration > 1) in
-                 for k = 0 to !iteration - 2 do
-                   tick c;
-                   if history.(k) = !fingerprint then repeated := true
-                 done;
-                 if !repeated then
-                   raise
-                     (Stop
-                        (Nonconvergence { step = c.steps; row; residual = r })));
-              history.(!iteration - 1) <- !fingerprint
-            done
-          done)
-      in
-      (match cash with
-      | None ->
-          slab p.opens_at p.time_to_expiry true;
-          slab 0. p.opens_at false
-      | Some (spec, events, mapping_grid) ->
-          let sampled = Array.make (Array.length mapping_grid) 0. in
-          let interpolate nodes values point =
+            history.(!iteration - 1) <- !fingerprint
+          done
+        done)
+    in
+    (match cash with
+    | None ->
+        slab p.opens_at p.time_to_expiry true;
+        slab 0. p.opens_at false
+    | Some (spec, events, mapping_grid) ->
+        let sampled = Array.make (Array.length mapping_grid) 0. in
+        let interpolate nodes values point =
+          tick c;
+          let last = Array.length nodes - 1 in
+          let vpoint = centre point in
+          let low = ref 0 and high = ref last in
+          while !high - !low > 1 do
             tick c;
-            let last = Array.length nodes - 1 in
-            let vpoint = centre point in
-            let low = ref 0 and high = ref last in
-            while !high - !low > 1 do
+            let mid = !low + ((!high - !low) / 2) in
+            if nodes.(mid) <= vpoint then low := mid else high := mid
+          done;
+          if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
+          else if E.compare_float point nodes.(!high) = E.Zero then
+            values.(!high)
+          else
+            let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
+            let weight = E.div (E.sub point (exact nodes.(!low))) width in
+            (match (E.compare_float weight 0., E.compare_float weight 1.) with
+            | E.Positive, E.Negative -> ()
+            | _ -> fail "cash interpolation weight unresolved");
+            let value, error =
+              enclosed
+                (E.add
+                   (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
+                   (E.mul weight (exact values.(!high))))
+            in
+            c.mapping_width <-
+              float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
+            c.mapping_error <- float_max c.mapping_error error;
+            if error > c.local then
+              fail "cash interpolation arithmetic resolution";
+            nonnegative "cash interpolated value" value
+        in
+        let exercise phase time =
+          if eligible p spec time phase then
+            for i = 0 to n - 1 do
               tick c;
-              let mid = !low + ((!high - !low) / 2) in
-              if nodes.(mid) <= vpoint then low := mid else high := mid
-            done;
-            if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
-            else if E.compare_float point nodes.(!high) = E.Zero then
-              values.(!high)
-            else
-              let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
-              let weight = E.div (E.sub point (exact nodes.(!low))) width in
-              (match (E.compare_float weight 0., E.compare_float weight 1.) with
-              | E.Positive, E.Negative -> ()
-              | _ -> fail "cash interpolation weight unresolved");
-              let value, error =
-                enclosed
-                  (E.add
-                     (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
-                     (E.mul weight (exact values.(!high))))
-              in
-              c.mapping_width <-
-                float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
-              c.mapping_error <- float_max c.mapping_error error;
-              if error > c.local then
-                fail "cash interpolation arithmetic resolution";
-              nonnegative "cash interpolated value" value
-          in
-          let exercise phase time =
-            if eligible p spec time phase then
+              v.(i) <- float_max v.(i) g.(i)
+            done
+        in
+        let later = ref p.time_to_expiry in
+        let advance earlier =
+          if earlier < p.opens_at && p.opens_at < !later then (
+            slab p.opens_at !later true;
+            slab earlier p.opens_at false)
+          else slab earlier !later (earlier >= p.opens_at);
+          later := earlier
+        in
+        List.iter
+          (fun (time, amount) ->
+            check c;
+            advance time;
+            if active_jump p spec time then (
+              exercise After_cash time;
+              for i = 0 to Array.length mapping_grid - 1 do
+                let target =
+                  positive_part (E.sub (exact mapping_grid.(i)) amount)
+                in
+                sampled.(i) <- interpolate x v target
+              done;
               for i = 0 to n - 1 do
-                tick c;
-                v.(i) <- float_max v.(i) g.(i)
-              done
-          in
-          let later = ref p.time_to_expiry in
-          let advance earlier =
-            if earlier < p.opens_at && p.opens_at < !later then (
-              slab p.opens_at !later true;
-              slab earlier p.opens_at false)
-            else slab earlier !later (earlier >= p.opens_at);
-            later := earlier
-          in
-          List.iter
-            (fun (time, amount) ->
-              check c;
-              advance time;
-              if active_jump p spec time then (
-                exercise After_cash time;
-                for i = 0 to Array.length mapping_grid - 1 do
-                  let target =
-                    positive_part (E.sub (exact mapping_grid.(i)) amount)
-                  in
-                  sampled.(i) <- interpolate x v target
-                done;
-                for i = 0 to n - 1 do
-                  candidate.(i) <-
-                    interpolate mapping_grid sampled (exact x.(i))
-                done;
-                Array.blit candidate 0 v 0 n;
-                c.event_applications <- c.event_applications + 1;
-                exercise Before_cash time))
-            (List.rev events);
-          advance 0.);
+                candidate.(i) <- interpolate mapping_grid sampled (exact x.(i))
+              done;
+              Array.blit candidate 0 v 0 n;
+              c.event_applications <- c.event_applications + 1;
+              exercise Before_cash time))
+          (List.rev events);
+        advance 0.);
 
-      let spot_index = ref 0 in
-      for i = 0 to n - 1 do
-        tick c;
-        if x.(i) = p.spot then spot_index := i
-      done;
-      let value = nonnegative "spot price" v.(!spot_index) in
-      (value, if capture then Some v else None)
+    let spot_index = ref 0 in
+    for i = 0 to n - 1 do
+      tick c;
+      if x.(i) = p.spot then spot_index := i
+    done;
+    let value = nonnegative "spot price" v.(!spot_index) in
+    (value, if capture then Some v else None)
 
   let price ?(cancel = fun () -> false) ?(exercise_regions = false)
       ?(premium = false) cfg admitted side =
@@ -1055,7 +1056,19 @@ module Bsm = struct
               then raise (Stop (Resource_limit "cash workspace bytes")));
 
           let fine_time = 4 * cfg.time_steps in
+          (* Single-entry, request-owned cache. grid is deterministic in the
+             fixed inputs/configuration plus (level, domain). Drop the previous
+             preparation before constructing a different grid. *)
+          let spatial = ref None in
           let run ?(mapping_level = 2) level domain time capture =
+            let prepared =
+              match !spatial with
+              | Some (l, d, prepared) when l = level && d = domain -> prepared
+              | _ ->
+                  let prepared = ref None in
+                  spatial := Some (level, domain, prepared);
+                  prepared
+            in
             let x = grid c p level domain in
             let cash =
               Option.map
@@ -1066,7 +1079,7 @@ module Bsm = struct
                     else grid c p mapping_level domain ))
                 cash
             in
-            let solve = solver_pair ?cash c p side x time capture in
+            let solve = solver_pair ?cash ~prepared c p side x time capture in
             let low, vl = solve false in
             let high, vh = solve true in
             if high < low then fail "reversed boundary pair";

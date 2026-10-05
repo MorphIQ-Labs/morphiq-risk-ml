@@ -5,6 +5,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American spatial preparation reuse (#119)
+
+- Reuse immutable payoff and spatial bands across identical refinement grids
+  within one price request. A single-entry grid key bounds lifetime and memory;
+  solution/policy arrays, numerical operations and logical work remain unchanged.
+- Matched allocation falls 22.7% without cash (16.69 → 12.90 MB/request) and
+  15.3% with cash (49.75 → 42.15 MB), with broadly unchanged latency. All 284
+  complete reference outcomes and independent scores are unchanged. See the
+  [qualification report](docs/results-american-spatial-reuse.md).
+  Remaining cash allocation and broader #119/#120 obligations remain open.
+
 ### American enclosure allocation follow-up (#119)
 
 - Fuse scalar enclosure operations and reuse private quotient packing storage;

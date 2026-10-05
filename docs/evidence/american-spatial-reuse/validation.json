@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "runtime_commit": "a0b93a7b241166eaa1dfa961ae699740d07a2db4",
+  "checks": {
+    "install": "pass",
+    "format": "pass",
+    "development_ordinary": "pass",
+    "release_ordinary": "pass",
+    "american_complete_outcomes": "284 identical; independent scoring unchanged",
+    "native_bytecode": "ordinary American controls pass in both profiles",
+    "affected_mutations": "7 of 7 killed after clean baseline",
+    "wrong_grid_fault": "successful mutated build; explicit arithmetic:prepared spatial grid mismatch refusal",
+    "paired_performance": "120 processes complete; original 10% allocation and latency criteria pass"
+  },
+  "logs_sha256": {
+    "test-dev.log": "1e68152c29c35a9890f61027a2283ec4468b0f881c11a3e23b69eb042e427d44",
+    "test-release.log": "9a20877032ea298720ef7f2a86218a774e3a646646aca6f2159024daa3e77f8c",
+    "mutations.log": "97b49c04763fd835882e12b183910ec68953a6998b7a7f2db17a4302c4d1e905",
+    "fault-build.log": "e4f4fe00ae4004aaa6f13b0063f01340e5ea816e185bb9ea216c21f281e55877",
+    "references.log": "90c6632cf50ba9df3310af8dd5269beb1fe5aae8ae432aa2952ddc5352ba20a9"
+  }
+}

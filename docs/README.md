@@ -66,11 +66,12 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
-[American enclosure allocation optimization](results-american-enclosure-allocation.md)
-records scalar fusion, private quotient scratch and shared boundary-pair setup,
-including European regression checks. It follows the
-[first boxing pass](results-american-allocation.md); broader performance work
-remains under #119.
+[American spatial preparation reuse](results-american-spatial-reuse.md) records
+request-local reuse across identical refinement grids. It follows the
+[enclosure pass](results-american-enclosure-allocation.md), which qualified scalar
+fusion, private quotient scratch and boundary-pair setup including European
+consumers, and the [first boxing pass](results-american-allocation.md).
+Broader performance work remains under #119.
 
 [Fast-batch SIMD integration](fast-simd-integration.md) records the staged
 preparation, native batch and planner ownership contracts.
