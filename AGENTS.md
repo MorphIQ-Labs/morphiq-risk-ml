@@ -283,6 +283,40 @@ single-session timing differences do not establish a language-wide advantage.
 See [#8](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/8) and
 [#16](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/16).
 
+For performance campaigns, follow the [worker/tile tuning guide](docs/planner-worker-tuning.md)
+and [operational protocol](docs/operational-campaign.md):
+
+- State the measured path: Fast approximate prices or runtime-certified
+  outputs, scalar or batch, compilation or reused execution, requested
+  quantities and sink work. Batch time divided by output count is amortized
+  cost, not single-request latency. Keep cold-start definitions explicit.
+- Finish task-owned builds, tests and profilers before collecting timings.
+  Use repeated processes and alternate comparison order; retain all samples
+  and host load. A quieter shared machine is not an isolated benchmark host.
+- Measure workers and tile size together against a one-worker reference.
+  Domain startup can outweigh small Fast workloads. Include first-output
+  latency, cancellation and buffer costs before recommending larger tiles or
+  more workers; throughput alone does not establish a better configuration.
+- Label memory scope: coordinator allocation excludes worker bodies;
+  per-process peak RSS is neither allocation volume nor simultaneous
+  deployment-wide memory. Collect per-child resource usage from its own reap,
+  not cumulative child statistics. Small-sample percentiles are descriptive,
+  not tail-latency guarantees.
+- Check complete ordered outcomes across worker counts outside timing.
+  Preserve failures, cancelled status and uncommitted work; cancelled responses
+  do not count as completed-request throughput. Measure cancellation response
+  from actual issuance and report scheduling delay separately. Replay equality
+  establishes compatibility, not independent numerical accuracy.
+- Preserve exact configuration, source/toolchain and binary hashes with raw
+  output and partial evidence on failure. Source guards include staged,
+  unstaged and untracked changes; a binary hash alone does not prove how it
+  was built. Historical reports must keep their measured revisions and hashes.
+- Exercise collectors with malformed/truncated output, timeouts, failed
+  startup, changed replay and impossible criteria. A negative control must
+  reject for the intended reason; a timeout is not evidence that malformed
+  output was detected. Keep lightweight controls in CI and timing campaigns
+  manual unless a calibrated performance gate is deliberately introduced.
+
 The planner implements immutable scenario plans and bounded execution.
 Read [the scenario contract](docs/scenario-planner.md). Its architecture lives in
 [Epic #23](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/23). The implementation must preserve these obligations:
@@ -372,6 +406,24 @@ FerroRisk's GitLab origin, CI stages, Cargo gates or release commands here.
   release acceptance and controls are described in
   [the acceptance dossier](docs/acceptance-and-change-control.md) and tracked in
   [#17](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/17).
+
+### Engineering completion and external acceptance
+
+Keep campaign completion, specified criteria, deployment acceptance and
+independent review distinct. Unset targets or missing observations remain
+pending, never passing. Fix acceptance targets and representative inputs
+before collecting acceptance evidence; do not choose limits to fit results.
+A synthetic local campaign and a successful collector exit do not supply a
+deployment recommendation or owner approval.
+
+Reuse the existing [independent review package](docs/independent-review-package.md)
+and [acceptance dossier](docs/acceptance-and-change-control.md). Record the exact
+candidate covered by evidence; later documentation or harness changes do not
+automatically requalify changed runtime code. Do not invent a reviewer, transfer
+historical approval to a new candidate, or commission/contact someone without
+authorization. When only reviewer selection, deployment requirements or owner
+decisions remain, state those dependencies and leave their issues open rather
+than generating redundant handoff documents or claiming release readiness.
 
 ## Definition of Done
 
