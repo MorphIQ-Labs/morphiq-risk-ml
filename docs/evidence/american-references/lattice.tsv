@@ -1,0 +1,410 @@
+call-80	64	finite	0x1.89b60fcf675c3p+0	0x1.89b60fcf61a4ep+0	0x1.89b60fcf61a62p+0	crr
+call-80	128	finite	0x1.8825975321da1p+0	0x1.882597530b844p+0	0x1.882597530ba81p+0	crr
+call-80	512	finite	0x1.880e7541cee2bp+0	0x1.880e75419e23cp+0	0x1.880e75419ef35p+0	crr
+call-80	513	finite	0x1.878832ea4210ap+0	0x1.878832ea1148ap+0	-	crr
+call-80	1024	finite	0x1.87bb669e2e8e7p+0	0x1.87bb669df7b6ap+0	0x1.87bb669df8b9ep+0	crr
+call-80	1025	finite	0x1.87f2f4b63c4e6p+0	0x1.87f2f4b60575fp+0	-	crr
+call-80	2048	finite	0x1.87dce1b5cf434p+0	0x1.87dce1b5952a8p+0	0x1.87dce1b5964dep+0	crr
+call-80	2049	finite	0x1.87ddeda78e0a5p+0	0x1.87ddeda753f18p+0	-	crr
+call-80	4096	finite	0x1.87e1c852635bfp+0	0x1.87e1c85227959p+0	0x1.87e1c85228c84p+0	crr
+call-80	4097	finite	0x1.87db69ad3c834p+0	0x1.87db69ad00bc5p+0	-	crr
+call-100	64	finite	0x1.264b4a7219a62p+3	0x1.264b4a6b22c2fp+3	0x1.264b4a6b62965p+3	crr
+call-100	128	finite	0x1.26c755c820489p+3	0x1.26c755bc477bdp+3	0x1.26c755bd170b7p+3	crr
+call-100	512	finite	0x1.27248863da10ap+3	0x1.27248852fb10fp+3	0x1.272488547cf0bp+3	crr
+call-100	513	finite	0x1.27611dbfe44b3p+3	0x1.27611daf03966p+3	-	crr
+call-100	1024	finite	0x1.273414459501bp+3	0x1.27341433c0cd7p+3	0x1.273414355dfa8p+3	crr
+call-100	1025	finite	0x1.275262b04b6p+3	0x1.2752629e7713dp+3	-	crr
+call-100	2048	finite	0x1.273bda9424e8dp+3	0x1.273bda81d31b2p+3	0x1.273bda838946fp+3	crr
+call-100	2049	finite	0x1.274b02b8d1ebdp+3	0x1.274b02a68008bp+3	-	crr
+call-100	4096	finite	0x1.273fbdd2caaf8p+3	0x1.273fbdc039309p+3	0x1.273fbdc1f7d9cp+3	crr
+call-100	4097	finite	0x1.27475220fcc95p+3	0x1.2747520e6b43ap+3	-	crr
+call-120	64	finite	0x1.812d61802d6d4p+4	0x1.812d5f8941632p+4	0x1.812d5fee75a42p+4	crr
+call-120	128	finite	0x1.80f2dbeda0e12p+4	0x1.80f2d96985a3ep+4	0x1.80f2d9f70e24ep+4	crr
+call-120	512	finite	0x1.80ff25a56667cp+4	0x1.80ff22ab8ac1cp+4	0x1.80ff235bdc18ep+4	crr
+call-120	513	finite	0x1.80fa341a65246p+4	0x1.80fa312069708p+4	-	crr
+call-120	1024	finite	0x1.80fdfaad41e0ep+4	0x1.80fdf79eacabep+4	0x1.80fdf8560c842p+4	crr
+call-120	1025	finite	0x1.80f7d477f9d3p+4	0x1.80f7d1695f9e7p+4	-	crr
+call-120	2048	finite	0x1.80fc0c69e4c78p+4	0x1.80fc0950db801p+4	0x1.80fc0a0b770d4p+4	crr
+call-120	2049	finite	0x1.80f9bb456979p+4	0x1.80f9b82c5efb7p+4	-	crr
+call-120	4096	finite	0x1.80fa5b54aa49cp+4	0x1.80fa583660666p+4	0x1.80fa58f25e2eap+4	crr
+call-120	4097	finite	0x1.80fb1d1f04088p+4	0x1.80fb1a00b9b96p+4	-	crr
+call-short	64	finite	0x1.b12bfe2dbaac3p-2	0x1.b12bfe2dbaac3p-2	0x1.b12bfe2dbaac3p-2	crr
+call-short	128	finite	0x1.b202a3d3c0ae1p-2	0x1.b202a3d3c0ae1p-2	0x1.b202a3d3c0ae1p-2	crr
+call-short	512	finite	0x1.b2a3e8efb1897p-2	0x1.b2a3e8efb1897p-2	0x1.b2a3e8efb1897p-2	crr
+call-short	513	finite	0x1.b30f717696c7dp-2	0x1.b30f717696c7dp-2	-	crr
+call-short	1024	finite	0x1.b2becfc0e61cp-2	0x1.b2becfc0e61cp-2	0x1.b2becfc0e61cp-2	crr
+call-short	1025	finite	0x1.b2f49abc541c5p-2	0x1.b2f49abc541c5p-2	-	crr
+call-short	2048	finite	0x1.b2cc43cbab769p-2	0x1.b2cc43cbab769p-2	0x1.b2cc43cbab769p-2	crr
+call-short	2049	finite	0x1.b2e72af7bae58p-2	0x1.b2e72af7bae58p-2	-	crr
+call-short	4096	finite	0x1.b2d2fdf9a7867p-2	0x1.b2d2fdf9a7867p-2	0x1.b2d2fdf9a7867p-2	crr
+call-short	4097	finite	0x1.b2e071fb4ddp-2	0x1.b2e071fb4ddp-2	-	crr
+call-long-high-vol	64	finite	0x1.4222c895980ccp+6	0x1.26c4dd3b295ep+6	0x1.3dfa00dbbae2ap+6	crr
+call-long-high-vol	128	finite	0x1.429df26f9d122p+6	0x1.272255ba66402p+6	0x1.3e3bb90884f0ep+6	crr
+call-long-high-vol	512	finite	0x1.430424c69639bp+6	0x1.27686bf6e508fp+6	0x1.3e9f60c463d68p+6	crr
+call-long-high-vol	513	finite	0x1.431869a05d667p+6	0x1.2781ca1ca7254p+6	-	crr
+call-long-high-vol	1024	finite	0x1.431489269b1acp+6	0x1.277419e7f4075p+6	0x1.3eabe30813ea5p+6	crr
+call-long-high-vol	1025	finite	0x1.431ea33f82ccep+6	0x1.2780c83e9dfc4p+6	-	crr
+call-long-high-vol	2048	finite	0x1.431d024b94125p+6	0x1.2779f0d37844cp+6	0x1.3eb118b508067p+6	crr
+call-long-high-vol	2049	finite	0x1.43220f3146b0ap+6	0x1.278047cf6ccfdp+6	-	crr
+call-long-high-vol	4096	finite	0x1.432127aa0d8acp+6	0x1.277cdc45e71c8p+6	0x1.3eb2979bc55e8p+6	crr
+call-long-high-vol	4097	finite	0x1.4323addf55ce7p+6	0x1.278007b7ff422p+6	-	crr
+call-zero-rate-yield	64	finite	0x1.fbcf144d90748p+2	0x1.fbcf144d90741p+2	0x1.fbcf144d90741p+2	crr
+call-zero-rate-yield	128	finite	0x1.fccd364a6edap+2	0x1.fccd364a6ed81p+2	0x1.fccd364a6ed81p+2	crr
+call-zero-rate-yield	512	finite	0x1.fd8c260f2ff73p+2	0x1.fd8c260f2ff04p+2	0x1.fd8c260f2ff04p+2	crr
+call-zero-rate-yield	513	finite	0x1.fe0b0cbc7b346p+2	0x1.fe0b0cbc7b2f7p+2	-	crr
+call-zero-rate-yield	1024	finite	0x1.fdabffc026228p+2	0x1.fdabffc02613p+2	0x1.fdabffc02613p+2	crr
+call-zero-rate-yield	1025	finite	0x1.fdeb7b012dfffp+2	0x1.fdeb7b012df9ap+2	-	crr
+call-zero-rate-yield	2048	finite	0x1.fdbbed589f526p+2	0x1.fdbbed589f46p+2	0x1.fdbbed589f46p+2	crr
+call-zero-rate-yield	2049	finite	0x1.fddbacf40d384p+2	0x1.fddbacf40d2cap+2	-	crr
+call-zero-rate-yield	4096	finite	0x1.fdc3e454be296p+2	0x1.fdc3e454be186p+2	0x1.fdc3e454be186p+2	crr
+call-zero-rate-yield	4097	finite	0x1.fdd3c4a13d1eep+2	0x1.fdd3c4a13d1eap+2	-	crr
+call-negative-rate	64	finite	0x1.6a09e50304bf1p+2	0x1.3f886c4e848c9p+2	0x1.5f8b1ce0930cfp+2	crr
+call-negative-rate	128	finite	0x1.6a6a4b52e51cap+2	0x1.4098b2b65055bp+2	0x1.5fc5f58915292p+2	crr
+call-negative-rate	512	finite	0x1.6ab3fba0bf48ap+2	0x1.416543a603e37p+2	0x1.603c6c6d98d9cp+2	crr
+call-negative-rate	513	finite	0x1.6af264f7298aap+2	0x1.41de6fabb739fp+2	-	crr
+call-negative-rate	1024	finite	0x1.6ac0240eb392dp+2	0x1.4187635880644p+2	0x1.605b568ed4b9fp+2	crr
+call-negative-rate	1025	finite	0x1.6adf5c7077804p+2	0x1.41c400816ecb4p+2	-	crr
+call-negative-rate	2048	finite	0x1.6ac5eb8fcdf92p+2	0x1.419873feb591bp+2	0x1.606479a7841f1p+2	crr
+call-negative-rate	2049	finite	0x1.6ad589ad7f57p+2	0x1.41b6c45cf3c34p+2	-	crr
+call-negative-rate	4096	finite	0x1.6ac8d5f198ebdp+2	0x1.41a0fc84ef35cp+2	0x1.606aacba2436ap+2	crr
+call-negative-rate	4097	finite	0x1.6ad0a5644a1dfp+2	0x1.41b025268c67cp+2	-	crr
+call-negative-yield	64	finite	0x1.8e219d9051aa2p+3	0x1.8e219d9051aa2p+3	0x1.8e219d9051aa2p+3	crr
+call-negative-yield	128	finite	0x1.8ea8442b5f667p+3	0x1.8ea8442b5f667p+3	0x1.8ea8442b5f667p+3	crr
+call-negative-yield	512	finite	0x1.8f0d6ea32bb17p+3	0x1.8f0d6ea32bb17p+3	0x1.8f0d6ea32bb17p+3	crr
+call-negative-yield	513	finite	0x1.8f476ce95c7p+3	0x1.8f476ce95c7p+3	-	crr
+call-negative-yield	1024	finite	0x1.8f1e4ec614ebap+3	0x1.8f1e4ec614ebap+3	0x1.8f1e4ec614ebap+3	crr
+call-negative-yield	1025	finite	0x1.8f3b51487ac02p+3	0x1.8f3b51487ac02p+3	-	crr
+call-negative-yield	2048	finite	0x1.8f26bf3cc7a32p+3	0x1.8f26bf3cc7a32p+3	0x1.8f26bf3cc7a32p+3	crr
+call-negative-yield	2049	finite	0x1.8f354155eb67bp+3	0x1.8f354155eb67bp+3	-	crr
+call-negative-yield	4096	finite	0x1.8f2af7915fcf1p+3	0x1.8f2af7915fcf1p+3	0x1.8f2af7915fcf1p+3	crr
+call-negative-yield	4097	finite	0x1.8f3238d3f4b98p+3	0x1.8f3238d3f4b98p+3	-	crr
+call-low-vol	64	finite	0x1.72ce6f3a951a5p+1	0x1.72ce6f3a951a5p+1	0x1.72ce6f3a951a5p+1	crr
+call-low-vol	128	finite	0x1.72ce6f3a95d2ep+1	0x1.72ce6f3a95d2ep+1	0x1.72ce6f3a95d2ep+1	crr
+call-low-vol	512	finite	0x1.72ce6f3aa918p+1	0x1.72ce6f3aa918p+1	0x1.72ce6f3aa918p+1	crr
+call-low-vol	513	finite	0x1.72ce6f3aa853ap+1	0x1.72ce6f3aa853ap+1	-	crr
+call-low-vol	1024	finite	0x1.72ce6f3ab1187p+1	0x1.72ce6f3ab1187p+1	0x1.72ce6f3ab1187p+1	crr
+call-low-vol	1025	finite	0x1.72ce6f3ab5372p+1	0x1.72ce6f3ab5372p+1	-	crr
+call-low-vol	2048	finite	0x1.72ce6f3ab7267p+1	0x1.72ce6f3ab7267p+1	0x1.72ce6f3ab7267p+1	crr
+call-low-vol	2049	finite	0x1.72ce6f3abc9dap+1	0x1.72ce6f3abc9dap+1	-	crr
+call-low-vol	4096	finite	0x1.72ce6f3aae8acp+1	0x1.72ce6f3aae8acp+1	0x1.72ce6f3aae8acp+1	crr
+call-low-vol	4097	finite	0x1.72ce6f3aaf4e5p+1	0x1.72ce6f3aaf4e5p+1	-	crr
+call-delayed	64	finite	0x1.264b4a7219a62p+3	0x1.264b4a6b22c2fp+3	0x1.264b4a6b62965p+3	crr
+call-delayed	128	finite	0x1.26c755c820489p+3	0x1.26c755bc477bdp+3	0x1.26c755bd170b7p+3	crr
+call-delayed	512	finite	0x1.27248863da10ap+3	0x1.27248852fb10fp+3	0x1.272488547cf0bp+3	crr
+call-delayed	513	finite	0x1.27611dbfe44b1p+3	0x1.27611daf03966p+3	-	crr
+call-delayed	1024	finite	0x1.2734144595017p+3	0x1.27341433c0cd7p+3	0x1.273414355dfa8p+3	crr
+call-delayed	1025	finite	0x1.275262b04b5fdp+3	0x1.2752629e7713dp+3	-	crr
+call-delayed	2048	finite	0x1.273bda9424e89p+3	0x1.273bda81d31b2p+3	0x1.273bda838946fp+3	crr
+call-delayed	2049	finite	0x1.274b02b8d1ebbp+3	0x1.274b02a68008bp+3	-	crr
+call-delayed	4096	finite	0x1.273fbdd2caaf5p+3	0x1.273fbdc039309p+3	0x1.273fbdc1f7d9cp+3	crr
+call-delayed	4097	finite	0x1.27475220fcc9p+3	0x1.2747520e6b43ap+3	-	crr
+call-expiry	64	unavailable	-	-	-	boundary requires analytical route
+call-expiry	128	unavailable	-	-	-	boundary requires analytical route
+call-expiry	512	unavailable	-	-	-	boundary requires analytical route
+call-expiry	513	unavailable	-	-	-	boundary requires analytical route
+call-expiry	1024	unavailable	-	-	-	boundary requires analytical route
+call-expiry	1025	unavailable	-	-	-	boundary requires analytical route
+call-expiry	2048	unavailable	-	-	-	boundary requires analytical route
+call-expiry	2049	unavailable	-	-	-	boundary requires analytical route
+call-expiry	4096	unavailable	-	-	-	boundary requires analytical route
+call-expiry	4097	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	64	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	128	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	512	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	513	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	1024	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	1025	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	2048	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	2049	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	4096	unavailable	-	-	-	boundary requires analytical route
+call-zero-spot	4097	unavailable	-	-	-	boundary requires analytical route
+call-zero-strike	64	finite	0x1.c54266cede02cp+6	0x1.c54266cede02cp+6	0x1.c54266cede02cp+6	crr
+call-zero-strike	128	finite	0x1.c54266ceddfcfp+6	0x1.c54266ceddfcfp+6	0x1.c54266ceddfcfp+6	crr
+call-zero-strike	512	finite	0x1.c54266ceddf53p+6	0x1.c54266ceddf53p+6	0x1.c54266ceddf53p+6	crr
+call-zero-strike	513	finite	0x1.c54266ceddf63p+6	0x1.c54266ceddf63p+6	-	crr
+call-zero-strike	1024	finite	0x1.c54266cede06fp+6	0x1.c54266cede06fp+6	0x1.c54266cede06fp+6	crr
+call-zero-strike	1025	finite	0x1.c54266ceddfa6p+6	0x1.c54266ceddfa6p+6	-	crr
+call-zero-strike	2048	finite	0x1.c54266cede70bp+6	0x1.c54266cede70bp+6	0x1.c54266cede70bp+6	crr
+call-zero-strike	2049	finite	0x1.c54266cedde5fp+6	0x1.c54266cedde5fp+6	-	crr
+call-zero-strike	4096	finite	0x1.c54266cedda7bp+6	0x1.c54266cedda7bp+6	0x1.c54266cedda7bp+6	crr
+call-zero-strike	4097	finite	0x1.c54266ceddfe3p+6	0x1.c54266ceddfe3p+6	-	crr
+call-zero-scale	64	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	128	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	512	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	513	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	1024	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	1025	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	2048	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	2049	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	4096	unavailable	-	-	-	boundary requires analytical route
+call-zero-scale	4097	unavailable	-	-	-	boundary requires analytical route
+put-80	64	finite	0x1.41146c8d80e53p+4	0x1.23eb732a6eb56p+4	0x1.4p+4	crr
+put-80	128	finite	0x1.4100f97026c6p+4	0x1.23d26ba2a9587p+4	0x1.4p+4	crr
+put-80	512	finite	0x1.410c7317411dap+4	0x1.23d0f98192977p+4	0x1.4p+4	crr
+put-80	513	finite	0x1.410b45c421b0ap+4	0x1.23c8955c19acap+4	-	crr
+put-80	1024	finite	0x1.410b84251c54p+4	0x1.23cbc89757fb4p+4	0x1.4p+4	crr
+put-80	1025	finite	0x1.410c2b9846cb8p+4	0x1.23cf4178d8ea7p+4	-	crr
+put-80	2048	finite	0x1.410c1c61426d1p+4	0x1.23cde048d1759p+4	0x1.4p+4	crr
+put-80	2049	finite	0x1.410c1406e27bp+4	0x1.23cdf107edd64p+4	-	crr
+put-80	4096	finite	0x1.410c05bc1a772p+4	0x1.23ce2eb29b233p+4	0x1.4p+4	crr
+put-80	4097	finite	0x1.410bf97c4d5b8p+4	0x1.23cdc8c847a2fp+4	-	crr
+put-100	64	finite	0x1.a952da5280a2ap+2	0x1.932f5d38fb004p+2	0x1.a2b320ecbefd2p+2	crr
+put-100	128	finite	0x1.a9ce8deffec33p+2	0x1.942773db44927p+2	0x1.a36cf2c2d8096p+2	crr
+put-100	512	finite	0x1.aa2acb516764dp+2	0x1.94e1d908ac252p+2	0x1.a41b8517b46f8p+2	crr
+put-100	513	finite	0x1.aa80d9fb568f7p+2	0x1.955b03c0bcbeep+2	-	crr
+put-100	1024	finite	0x1.aa39d6ef05f1p+2	0x1.9500f0ca36a3ep+2	0x1.a439787be79ep+2	crr
+put-100	1025	finite	0x1.aa64e62f93aa7p+2	0x1.953d8d9fa39cfp+2	-	crr
+put-100	2048	finite	0x1.aa4150b582f3dp+2	0x1.95107d6658bccp+2	0x1.a442eb4a6fbd1p+2	crr
+put-100	2049	finite	0x1.aa56da8e13ac2p+2	0x1.952ecdafb5c36p+2	-	crr
+put-100	4096	finite	0x1.aa45024c11b87p+2	0x1.951843e3291b9p+2	0x1.a44885ba25f93p+2	crr
+put-100	4097	finite	0x1.aa4fc7b741f7p+2	0x1.95276c7f88191p+2	-	crr
+put-120	64	finite	0x1.9fe0fb29dd695p+0	0x1.929b18d238516p+0	0x1.992f0a1fa0234p+0	crr
+put-120	128	finite	0x1.9c014de04204ap+0	0x1.8ef2b6d67d17bp+0	0x1.9572c39ed0db1p+0	crr
+put-120	512	finite	0x1.9cbe74010bf94p+0	0x1.8fb74af6d0ce7p+0	0x1.96422c409e377p+0	crr
+put-120	513	finite	0x1.9c8a5e4648bfap+0	0x1.8f683244b9ebfp+0	-	crr
+put-120	1024	finite	0x1.9cae776a14fcbp+0	0x1.8fa49a28eacb9p+0	0x1.96290761b956bp+0	crr
+put-120	1025	finite	0x1.9c5485fcfe67ap+0	0x1.8f4236d41c2p+0	-	crr
+put-120	2048	finite	0x1.9c8f0e5ce6c6cp+0	0x1.8f85b54bc9221p+0	0x1.960e0bfdddfa7p+0	crr
+put-120	2049	finite	0x1.9c6ca723c104bp+0	0x1.8f60a30414388p+0	-	crr
+put-120	4096	finite	0x1.9c74029db945cp+0	0x1.8f6aa3a431a74p+0	0x1.95f2eff5275b9p+0	crr
+put-120	4097	finite	0x1.9c7f7d80b2048p+0	0x1.8f76c049ae32dp+0	-	crr
+put-short	64	finite	0x1.a926219c6bc2ap-2	0x1.a8a3ac0359d86p-2	0x1.a8d548e9c5dfap-2	crr
+put-short	128	finite	0x1.a9ecf2c7b813p-2	0x1.a97a51a95e651p-2	0x1.a9a765ff444bfp-2	crr
+put-short	512	finite	0x1.aa822be7fd27fp-2	0x1.aa1b96c55ce64p-2	0x1.aa4628b4acccdp-2	crr
+put-short	513	finite	0x1.aaebc5666717ep-2	0x1.aa871f4c2aff8p-2	-	crr
+put-short	1024	finite	0x1.aa9b08ddc090bp-2	0x1.aa367d969d4ap-2	0x1.aa607d344b0ecp-2	crr
+put-short	1025	finite	0x1.aacfdca57fdap-2	0x1.aa6c4891edb32p-2	-	crr
+put-short	2048	finite	0x1.aaa77a6992d72p-2	0x1.aa43f1a16445cp-2	0x1.aa6dd80fd8bb4p-2	crr
+put-short	2049	finite	0x1.aac1e61174e58p-2	0x1.aa5ed8cd3b11p-2	-	crr
+put-short	4096	finite	0x1.aaadb206d0c8p-2	0x1.aa4aabcf18907p-2	0x1.aa74784d9d721p-2	crr
+put-short	4097	finite	0x1.aabae84bc3cf3p-2	0x1.aa581fd097f01p-2	-	crr
+put-long-high-vol	64	finite	0x1.141d1d74d9739p+6	0x1.a3c7263508e33p+5	0x1.0a1ad36cf6b71p+6	crr
+put-long-high-vol	128	finite	0x1.149cf5eb94bd6p+6	0x1.a482173382a9ap+5	0x1.0a8130ce3e38cp+6	crr
+put-long-high-vol	512	finite	0x1.1522e51937357p+6	0x1.a50e43ac802d1p+5	0x1.0a7f6aad7bd74p+6	crr
+put-long-high-vol	513	finite	0x1.1530a4367a9bap+6	0x1.a540fff80475dp+5	-	crr
+put-long-high-vol	1024	finite	0x1.1536b73a5122dp+6	0x1.a5259f8e9e395p+5	0x1.0a90271b39e35p+6	crr
+put-long-high-vol	1025	finite	0x1.153d8586560f9p+6	0x1.a53efc3bf2049p+5	-	crr
+put-long-high-vol	2048	finite	0x1.15407593bfc6p+6	0x1.a5314d65a6535p+5	0x1.0a95928b2bb8fp+6	crr
+put-long-high-vol	2049	finite	0x1.1543d8d71eac3p+6	0x1.a53dfb5d8f9e8p+5	-	crr
+put-long-high-vol	4096	finite	0x1.15458c27a6b45p+6	0x1.a537244a846ap+5	0x1.0a9483389360ep+6	crr
+put-long-high-vol	4097	finite	0x1.15473c5072fcdp+6	0x1.a53d7b2eb4b8dp+5	-	crr
+put-zero-rate-yield	64	finite	0x1.fbcf144d9065ep+2	0x1.fbcf144d9065p+2	0x1.fbcf144d9065p+2	crr
+put-zero-rate-yield	128	finite	0x1.fccd364a6ee54p+2	0x1.fccd364a6ee54p+2	0x1.fccd364a6ee54p+2	crr
+put-zero-rate-yield	512	finite	0x1.fd8c260f30678p+2	0x1.fd8c260f30678p+2	0x1.fd8c260f30678p+2	crr
+put-zero-rate-yield	513	finite	0x1.fe0b0cbc7b344p+2	0x1.fe0b0cbc7b2ebp+2	-	crr
+put-zero-rate-yield	1024	finite	0x1.fdabffc0258f4p+2	0x1.fdabffc0258e4p+2	0x1.fdabffc0258e4p+2	crr
+put-zero-rate-yield	1025	finite	0x1.fdeb7b012ddd6p+2	0x1.fdeb7b012ddc4p+2	-	crr
+put-zero-rate-yield	2048	finite	0x1.fdbbed589c4dap+2	0x1.fdbbed589c49cp+2	0x1.fdbbed589c49cp+2	crr
+put-zero-rate-yield	2049	finite	0x1.fddbacf40d5dcp+2	0x1.fddbacf40d56ap+2	-	crr
+put-zero-rate-yield	4096	finite	0x1.fdc3e454bf3efp+2	0x1.fdc3e454bf3efp+2	0x1.fdc3e454bf3efp+2	crr
+put-zero-rate-yield	4097	finite	0x1.fdd3c4a138f4fp+2	0x1.fdd3c4a138e36p+2	-	crr
+put-negative-rate	64	finite	0x1.8332bd926233ep+3	0x1.8332bd926233ep+3	0x1.8332bd926233ep+3	crr
+put-negative-rate	128	finite	0x1.83bae0c648268p+3	0x1.83bae0c648268p+3	0x1.83bae0c648268p+3	crr
+put-negative-rate	512	finite	0x1.8421293e22226p+3	0x1.8421293e22226p+3	0x1.8421293e22226p+3	crr
+put-negative-rate	513	finite	0x1.845dbf40fb965p+3	0x1.845dbf40fb965p+3	-	crr
+put-negative-rate	1024	finite	0x1.843239175ff74p+3	0x1.843239175ff74p+3	0x1.843239175ff74p+3	crr
+put-negative-rate	1025	finite	0x1.845087abd7638p+3	0x1.845087abd7638p+3	-	crr
+put-negative-rate	2048	finite	0x1.843ac16a793f4p+3	0x1.843ac16a793f4p+3	0x1.843ac16a793f4p+3	crr
+put-negative-rate	2049	finite	0x1.8449e99999b03p+3	0x1.8449e99999b03p+3	-	crr
+put-negative-rate	4096	finite	0x1.843f05ad97e27p+3	0x1.843f05ad97e27p+3	0x1.843f05ad97e27p+3	crr
+put-negative-rate	4097	finite	0x1.844699fe64696p+3	0x1.844699fe64696p+3	-	crr
+put-negative-yield	64	finite	0x1.5591837c61cb5p+2	0x1.2138cfc797aefp+2	0x1.49278bf9f2623p+2	crr
+put-negative-yield	128	finite	0x1.5603733d4f2dap+2	0x1.22461cfdb34e9p+2	0x1.498f6b3441c62p+2	crr
+put-negative-yield	512	finite	0x1.564fa1701a72ap+2	0x1.231071ed4c4dcp+2	0x1.4a0b75875897dp+2	crr
+put-negative-yield	513	finite	0x1.568577dbdde2p+2	0x1.23846e79ad572p+2	-	crr
+put-negative-yield	1024	finite	0x1.565bcc3acc628p+2	0x1.233232331db94p+2	0x1.4a2c9b4db10f6p+2	crr
+put-negative-yield	1025	finite	0x1.5676ba58e6d14p+2	0x1.236c3737e9e06p+2	-	crr
+put-negative-yield	2048	finite	0x1.5661bf79550dep+2	0x1.23431320804d7p+2	0x1.4a2be788fbacdp+2	crr
+put-negative-yield	2049	finite	0x1.566f37174a8afp+2	0x1.23601752cb84bp+2	-	crr
+put-negative-yield	4096	finite	0x1.5664aeb40626fp+2	0x1.234b83c9b5813p+2	0x1.4a2985d0eb922p+2	crr
+put-negative-yield	4097	finite	0x1.566b6aeadf4d2p+2	0x1.235a064ed9cecp+2	-	crr
+put-low-vol	64	finite	0x1.245bb30680e7bp-7	0x1.ff91d898fdf46p-48	0x1.553765cb8ff8ep-18	crr
+put-low-vol	128	finite	0x1.bc387ac9d18cdp-7	0x1.4d747f8467f66p-39	0x1.073cb6ad772e2p-15	crr
+put-low-vol	512	finite	0x1.e849d18a13f1dp-7	0x1.3e17962d4b106p-35	0x1.3a54c940b6d8ap-14	crr
+put-low-vol	513	finite	0x1.e85afc2508ecbp-7	0x1.4b4c124ddc7bfp-35	-	crr
+put-low-vol	1024	finite	0x1.ebb9d2b824073p-7	0x1.cf9a47078b9cep-35	0x1.62deeb24ed073p-14	crr
+put-low-vol	1025	finite	0x1.ebc409444e4e4p-7	0x1.d8cb2d1a11671p-35	-	crr
+put-low-vol	2048	finite	0x1.f1fe8af0baa1dp-7	0x1.15feefd5e01d2p-34	0x1.7848db179783ap-14	crr
+put-low-vol	2049	finite	0x1.f201085c0897bp-7	0x1.18b0e8ffc4939p-34	-	crr
+put-low-vol	4096	finite	0x1.f3a539352e9dep-7	0x1.2ff5610c4c57dp-34	0x1.8346b4d14f76p-14	crr
+put-low-vol	4097	finite	0x1.f3a46239c0e5bp-7	0x1.316a7e36c41b3p-34	-	crr
+put-delayed	64	finite	0x1.a74cde4cd2247p+2	0x1.932f5d38fb004p+2	0x1.a1bcd6f388f0bp+2	crr
+put-delayed	128	finite	0x1.a7bf24b5de44fp+2	0x1.942773db44927p+2	0x1.a290e651809f6p+2	crr
+put-delayed	512	finite	0x1.a81438b1c3cbfp+2	0x1.94e1d908ac252p+2	0x1.a33a316f2cfecp+2	crr
+put-delayed	513	finite	0x1.a8687e0c3be3dp+2	0x1.955b03c0bcbeep+2	-	crr
+put-delayed	1024	finite	0x1.a821fc9a0a6f2p+2	0x1.9500f0ca36a3ep+2	0x1.a358cf6d17604p+2	crr
+put-delayed	1025	finite	0x1.a84c46ec13551p+2	0x1.953d8d9fa39cfp+2	-	crr
+put-delayed	2048	finite	0x1.a8291bd6375d2p+2	0x1.95107d6658bccp+2	0x1.a3605ac28bd39p+2	crr
+put-delayed	2049	finite	0x1.a83e32764fef6p+2	0x1.952ecdafb5c36p+2	-	crr
+put-delayed	4096	finite	0x1.a82c89435af7cp+2	0x1.951843e3291b9p+2	0x1.a3667e298a6e6p+2	crr
+put-delayed	4097	finite	0x1.a837137a2e077p+2	0x1.95276c7f88191p+2	-	crr
+put-expiry	64	unavailable	-	-	-	boundary requires analytical route
+put-expiry	128	unavailable	-	-	-	boundary requires analytical route
+put-expiry	512	unavailable	-	-	-	boundary requires analytical route
+put-expiry	513	unavailable	-	-	-	boundary requires analytical route
+put-expiry	1024	unavailable	-	-	-	boundary requires analytical route
+put-expiry	1025	unavailable	-	-	-	boundary requires analytical route
+put-expiry	2048	unavailable	-	-	-	boundary requires analytical route
+put-expiry	2049	unavailable	-	-	-	boundary requires analytical route
+put-expiry	4096	unavailable	-	-	-	boundary requires analytical route
+put-expiry	4097	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	64	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	128	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	512	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	513	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	1024	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	1025	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	2048	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	2049	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	4096	unavailable	-	-	-	boundary requires analytical route
+put-zero-spot	4097	unavailable	-	-	-	boundary requires analytical route
+put-zero-strike	64	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	128	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	512	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	513	finite	0x0p+0	0x0p+0	-	crr
+put-zero-strike	1024	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	1025	finite	0x0p+0	0x0p+0	-	crr
+put-zero-strike	2048	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	2049	finite	0x0p+0	0x0p+0	-	crr
+put-zero-strike	4096	finite	0x0p+0	0x0p+0	0x0p+0	crr
+put-zero-strike	4097	finite	0x0p+0	0x0p+0	-	crr
+put-zero-scale	64	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	128	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	512	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	513	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	1024	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	1025	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	2048	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	2049	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	4096	unavailable	-	-	-	boundary requires analytical route
+put-zero-scale	4097	unavailable	-	-	-	boundary requires analytical route
+call-no-early	64	finite	0x1.4d6bb9c3a9ea8p+3	0x1.4d6bb9c3a9ea8p+3	0x1.4d6bb9c3a9ea8p+3	crr
+call-no-early	128	finite	0x1.4deb531df88dp+3	0x1.4deb531df88dp+3	0x1.4deb531df88dp+3	crr
+call-no-early	512	finite	0x1.4e4b31651fa82p+3	0x1.4e4b31651fa82p+3	0x1.4e4b31651fa82p+3	crr
+call-no-early	513	finite	0x1.4e872cb5b7856p+3	0x1.4e872cb5b7856p+3	-	crr
+call-no-early	1024	finite	0x1.4e5b2f50f5012p+3	0x1.4e5b2f50f5012p+3	0x1.4e5b2f50f5012p+3	crr
+call-no-early	1025	finite	0x1.4e79309ac9227p+3	0x1.4e79309ac9227p+3	-	crr
+call-no-early	2048	finite	0x1.4e632ea723a54p+3	0x1.4e632ea723a54p+3	0x1.4e632ea723a54p+3	crr
+call-no-early	2049	finite	0x1.4e72303492842p+3	0x1.4e72303492842p+3	-	crr
+call-no-early	4096	finite	0x1.4e672e6a3c6b7p+3	0x1.4e672e6a3c6b7p+3	0x1.4e672e6a3c6b7p+3	crr
+call-no-early	4097	finite	0x1.4e6eaf6b1c262p+3	0x1.4e6eaf6b1c262p+3	-	crr
+call-dividend-yield	64	finite	0x1.4p+4	0x1.9483244adff89p+3	0x1.4p+4	crr
+call-dividend-yield	128	finite	0x1.4p+4	0x1.9423d4d73ba35p+3	0x1.4p+4	crr
+call-dividend-yield	512	finite	0x1.4p+4	0x1.947c63f75bbfp+3	0x1.4p+4	crr
+call-dividend-yield	513	finite	0x1.4p+4	0x1.946cb015bfdd5p+3	-	crr
+call-dividend-yield	1024	finite	0x1.4p+4	0x1.948170d9a063cp+3	0x1.4p+4	crr
+call-dividend-yield	1025	finite	0x1.4p+4	0x1.946f0395c367dp+3	-	crr
+call-dividend-yield	2048	finite	0x1.4p+4	0x1.948021d3ca2aap+3	0x1.4p+4	crr
+call-dividend-yield	2049	finite	0x1.4p+4	0x1.9479342d7927dp+3	-	crr
+call-dividend-yield	4096	finite	0x1.4p+4	0x1.947d50cee47fap+3	0x1.4p+4	crr
+call-dividend-yield	4097	finite	0x1.4p+4	0x1.947f92b5147a3p+3	-	crr
+put-deep-exercise	64	finite	0x1.9p+5	0x1.70ea0fc4a8f4ap+5	0x1.9p+5	crr
+put-deep-exercise	128	finite	0x1.9p+5	0x1.70ea7b380b69cp+5	0x1.9p+5	crr
+put-deep-exercise	512	finite	0x1.9p+5	0x1.70eab04382e4p+5	0x1.9p+5	crr
+put-deep-exercise	513	finite	0x1.9p+5	0x1.70eab220b1896p+5	-	crr
+put-deep-exercise	1024	finite	0x1.9p+5	0x1.70eabdea2125cp+5	0x1.9p+5	crr
+put-deep-exercise	1025	finite	0x1.9p+5	0x1.70eab8e0e7bc5p+5	-	crr
+put-deep-exercise	2048	finite	0x1.9p+5	0x1.70eac2b4c3e8fp+5	0x1.9p+5	crr
+put-deep-exercise	2049	finite	0x1.9p+5	0x1.70eac0a3b4965p+5	-	crr
+put-deep-exercise	4096	finite	0x1.9p+5	0x1.70eac4498e412p+5	0x1.9p+5	crr
+put-deep-exercise	4097	finite	0x1.9p+5	0x1.70eac526bcdfdp+5	-	crr
+negative-boundaries-60	64	finite	0x1.4p+5	0x1.3ba45828c10d2p+5	0x1.4p+5	crr
+negative-boundaries-60	128	finite	0x1.4p+5	0x1.3ba4582a17e2cp+5	0x1.4p+5	crr
+negative-boundaries-60	512	finite	0x1.4p+5	0x1.3ba4582bece4ap+5	0x1.4p+5	crr
+negative-boundaries-60	513	finite	0x1.4p+5	0x1.3ba4582bde8f3p+5	-	crr
+negative-boundaries-60	1024	finite	0x1.4p+5	0x1.3ba4582c4aab8p+5	0x1.4p+5	crr
+negative-boundaries-60	1025	finite	0x1.4p+5	0x1.3ba4582c3ffb7p+5	-	crr
+negative-boundaries-60	2048	finite	0x1.4p+5	0x1.3ba4582c7a717p+5	0x1.4p+5	crr
+negative-boundaries-60	2049	finite	0x1.4p+5	0x1.3ba4582c7b2cep+5	-	crr
+negative-boundaries-60	4096	finite	0x1.4p+5	0x1.3ba4582c95cddp+5	0x1.4p+5	crr
+negative-boundaries-60	4097	finite	0x1.4p+5	0x1.3ba4582c95aa6p+5	-	crr
+negative-boundaries-90	64	finite	0x1.4p+3	0x1.19b3dc4b095a3p+3	0x1.4p+3	crr
+negative-boundaries-90	128	finite	0x1.4p+3	0x1.19bb0c02eaf55p+3	0x1.4p+3	crr
+negative-boundaries-90	512	finite	0x1.4p+3	0x1.19b8c5ea3c478p+3	0x1.4p+3	crr
+negative-boundaries-90	513	finite	0x1.4p+3	0x1.19b2abcfc92e1p+3	-	crr
+negative-boundaries-90	1024	finite	0x1.4p+3	0x1.19b593435254cp+3	0x1.4p+3	crr
+negative-boundaries-90	1025	finite	0x1.4p+3	0x1.19b939d4bdd0ep+3	-	crr
+negative-boundaries-90	2048	finite	0x1.4p+3	0x1.19b90d72583fep+3	0x1.4p+3	crr
+negative-boundaries-90	2049	finite	0x1.4p+3	0x1.19b74d4984105p+3	-	crr
+negative-boundaries-90	4096	finite	0x1.4p+3	0x1.19b8da366361bp+3	0x1.4p+3	crr
+negative-boundaries-90	4097	finite	0x1.4p+3	0x1.19b858a94c5c9p+3	-	crr
+negative-boundaries-100	64	finite	0x1.5ec0e29b8b839p+1	0x1.446b2693500cep+1	0x1.57701cbb0baefp+1	crr
+negative-boundaries-100	128	finite	0x1.5f206947c34ebp+1	0x1.4560257a56375p+1	0x1.58037db825b61p+1	crr
+negative-boundaries-100	512	finite	0x1.5f64bc4208231p+1	0x1.461837b647f9fp+1	0x1.58396bacdd219p+1	crr
+negative-boundaries-100	513	finite	0x1.5fa87fa2844f6p+1	0x1.468a0093f8c9cp+1	-	crr
+negative-boundaries-100	1024	finite	0x1.5f6fb1d3f98b1p+1	0x1.4636ec3780866p+1	0x1.585513e842fc7p+1	crr
+negative-boundaries-100	1025	finite	0x1.5f919a05f3d11p+1	0x1.466fd7803004dp+1	-	crr
+negative-boundaries-100	2048	finite	0x1.5f7529b9c1179p+1	0x1.46464730e94a6p+1	0x1.586236697bf61p+1	crr
+negative-boundaries-100	2049	finite	0x1.5f861fd02ae35p+1	0x1.4662be8bf9b2dp+1	-	crr
+negative-boundaries-100	4096	finite	0x1.5f77d61d7f8p+1	0x1.464df4dbb3ac4p+1	0x1.5869b67880027p+1	crr
+negative-boundaries-100	4097	finite	0x1.5f8051940fe3dp+1	0x1.465c30f6f71d7p+1	-	crr
+negative-boundaries-140	64	finite	0x1.77a72989524aap-15	0x1.6f74e5829d80fp-15	0x1.6f98374aadf77p-15	crr
+negative-boundaries-140	128	finite	0x1.e38bb722a43b5p-15	0x1.dab386133238fp-15	0x1.daebd3a123abfp-15	crr
+negative-boundaries-140	512	finite	0x1.0f4339e3da90bp-14	0x1.09c466a46c7dcp-14	0x1.09ee48933b05cp-14	crr
+negative-boundaries-140	513	finite	0x1.0bf3d60c81225p-14	0x1.067cd61c67c93p-14	-	crr
+negative-boundaries-140	1024	finite	0x1.122e375614649p-14	0x1.0ca755220520fp-14	0x1.0cd37866e9d21p-14	crr
+negative-boundaries-140	1025	finite	0x1.12ed23c1f736bp-14	0x1.0d4bc17bc3bbp-14	-	crr
+negative-boundaries-140	2048	finite	0x1.14838a7c2aa2p-14	0x1.0eeb000c8e554p-14	0x1.0f184957beb6ap-14	crr
+negative-boundaries-140	2049	finite	0x1.1530496624cbfp-14	0x1.0f95d576f1b64p-14	-	crr
+negative-boundaries-140	4096	finite	0x1.16336cd318d34p-14	0x1.109be6c2b8aaep-14	0x1.10c9fbade361ep-14	crr
+negative-boundaries-140	4097	finite	0x1.15e858f149ffep-14	0x1.1043bbe43b4cap-14	-	crr
+probability-stress	64	unavailable	-	-	-	inadmissible probability
+probability-stress	128	unavailable	-	-	-	inadmissible probability
+probability-stress	512	unavailable	-	-	-	inadmissible probability
+probability-stress	513	unavailable	-	-	-	inadmissible probability
+probability-stress	1024	unavailable	-	-	-	inadmissible probability
+probability-stress	1025	unavailable	-	-	-	inadmissible probability
+probability-stress	2048	unavailable	-	-	-	inadmissible probability
+probability-stress	2049	unavailable	-	-	-	inadmissible probability
+probability-stress	4096	unavailable	-	-	-	inadmissible probability
+probability-stress	4097	unavailable	-	-	-	inadmissible probability
+deterministic-interior	64	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	128	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	512	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	513	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	1024	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	1025	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	2048	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	2049	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	4096	unavailable	-	-	-	boundary requires analytical route
+deterministic-interior	4097	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	64	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	128	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	512	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	513	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	1024	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	1025	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	2048	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	2049	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	4096	unavailable	-	-	-	boundary requires analytical route
+deterministic-negative-call	4097	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	64	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	128	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	512	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	513	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	1024	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	1025	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	2048	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	2049	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	4096	unavailable	-	-	-	boundary requires analytical route
+deterministic-put	4097	unavailable	-	-	-	boundary requires analytical route
+put-scaled--20	64	finite	0x1.a952da5280a2ap-18	0x1.932f5d38fb004p-18	0x1.a2b320ecbefd2p-18	crr
+put-scaled--20	128	finite	0x1.a9ce8deffec33p-18	0x1.942773db44927p-18	0x1.a36cf2c2d8096p-18	crr
+put-scaled--20	512	finite	0x1.aa2acb516764dp-18	0x1.94e1d908ac252p-18	0x1.a41b8517b46f8p-18	crr
+put-scaled--20	513	finite	0x1.aa80d9fb568f7p-18	0x1.955b03c0bcbeep-18	-	crr
+put-scaled--20	1024	finite	0x1.aa39d6ef05f1p-18	0x1.9500f0ca36a3ep-18	0x1.a439787be79ep-18	crr
+put-scaled--20	1025	finite	0x1.aa64e62f93aa7p-18	0x1.953d8d9fa39cfp-18	-	crr
+put-scaled--20	2048	finite	0x1.aa4150b582f3dp-18	0x1.95107d6658bccp-18	0x1.a442eb4a6fbd1p-18	crr
+put-scaled--20	2049	finite	0x1.aa56da8e13ac2p-18	0x1.952ecdafb5c36p-18	-	crr
+put-scaled--20	4096	finite	0x1.aa45024c11b87p-18	0x1.951843e3291b9p-18	0x1.a44885ba25f93p-18	crr
+put-scaled--20	4097	finite	0x1.aa4fc7b741f7p-18	0x1.95276c7f88191p-18	-	crr
+put-scaled-20	64	finite	0x1.a952da5280a2ap+22	0x1.932f5d38fb004p+22	0x1.a2b320ecbefd2p+22	crr
+put-scaled-20	128	finite	0x1.a9ce8deffec33p+22	0x1.942773db44927p+22	0x1.a36cf2c2d8096p+22	crr
+put-scaled-20	512	finite	0x1.aa2acb516764dp+22	0x1.94e1d908ac252p+22	0x1.a41b8517b46f8p+22	crr
+put-scaled-20	513	finite	0x1.aa80d9fb568f7p+22	0x1.955b03c0bcbeep+22	-	crr
+put-scaled-20	1024	finite	0x1.aa39d6ef05f1p+22	0x1.9500f0ca36a3ep+22	0x1.a439787be79ep+22	crr
+put-scaled-20	1025	finite	0x1.aa64e62f93aa7p+22	0x1.953d8d9fa39cfp+22	-	crr
+put-scaled-20	2048	finite	0x1.aa4150b582f3dp+22	0x1.95107d6658bccp+22	0x1.a442eb4a6fbd1p+22	crr
+put-scaled-20	2049	finite	0x1.aa56da8e13ac2p+22	0x1.952ecdafb5c36p+22	-	crr
+put-scaled-20	4096	finite	0x1.aa45024c11b87p+22	0x1.951843e3291b9p+22	0x1.a44885ba25f93p+22	crr
+put-scaled-20	4097	finite	0x1.aa4fc7b741f7p+22	0x1.95276c7f88191p+22	-	crr

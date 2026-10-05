@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Initial American reference corpus (#110)
+
+- Freeze and execute independent American reference generation before runtime
+  implementation: 41 constant-parameter cases, analytical/empirical uncertainty,
+  pinned QuantLib comparisons, exact extension witnesses and offline failure
+  controls. Retain eight unresolved references and all comparator exceptions.
+  See [scope and evidence](docs/american-references.md). No runtime pricing API,
+  European numerical behavior or default mutation scope changes.
+
 ### American solver and assurance design (#109)
 
 - Define the American solver architecture and estimated-only assurance contract

@@ -95,6 +95,17 @@ The curated mutation mechanisms run with replay bit-identity assertions disabled
 
 The PR #12 audit adds exact rational primitive postconditions to a generated replay of the production DD source, including its elementary and normal-series callers. Allowances are fixed before execution. Nonoverlap checks apply to inputs and component results. They exposed both a binade-boundary defect in low-word sampling and missing normalization after subnormal scaling and split square root; see the [audit record](error-analysis.md#pr-12-source-and-assumption-audit). Zarith 1.14 is needed only for tests.
 
+## American reference campaign
+
+The [initial American references](american-references.md) follow the separately
+frozen #108/#109 model and assurance contracts. They combine a pinned QuantLib
+finite-difference comparator, an original stock lattice, high-precision discrete
+replay and analytical Arb intervals. Empirical and analytical references retain
+distinct labels; unresolved cases and comparator exclusions cannot pass scoring.
+Default CI checks the committed manifest and failure controls offline. Optional
+reference generation neither changes the European fixture guarantees above nor
+adds an American runtime pricing capability.
+
 ## Canonical generated qualification dataset
 
 The optional [canonical portfolio generator](../scripts/generate_canonical_dataset.py)

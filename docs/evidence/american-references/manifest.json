@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "sha256": {
+    "docs/evidence/american-references/build.json": "ff36d6ff72503331bd33493687c1ec51fc63ef8505b40376e255f66118fc7fc6",
+    "docs/evidence/american-references/cases-v1.json": "8f7c6661a03ff81efc8f8c1721df3cc648c07112edeedcfc76a9bfcf299952a9",
+    "docs/evidence/american-references/lattice-input.txt": "3d6fd0db5bbbced9b113c9141412d8b2ac27e9c14ed980ba4a79854ed80722e1",
+    "docs/evidence/american-references/lattice.tsv": "72e1184d93e795a883779775c6a723d8043e8bbae513515492bc9a70dc90d904",
+    "docs/evidence/american-references/lattice.tsv.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/american-references/protocol.md": "4af08af35a4bdcf0d75005ca89c671f2e093927990493f87ad004ba09451a341",
+    "docs/evidence/american-references/quantlib-input.txt": "75c921fdf39fd861aa6130257cfee7b21c4289a2bcdc09a1cf03f00650100808",
+    "docs/evidence/american-references/quantlib.tsv": "76c964c15ffc45aaec2320b582a65c4d41f6fc5811218b46d10108b760aba715",
+    "docs/evidence/american-references/quantlib.tsv.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/american-references/references-v1.json": "af880315da85bb9a8e7bf0d862924c37ff9fdc780086b2e7bd76a5540f8d8f72",
+    "scripts/american_lattice.cpp": "a930619e22ae7d951cd99fe8c3fef03281a1604b23a92fdd2ef3acf67ec9e6b1",
+    "scripts/american_quantlib.cpp": "0a7109337ea0a710ef0e6ee58f758174f597215c62319da5d31c6c0556786935",
+    "scripts/american_reference_data.py": "d0a954257b325e2f6cd6e4b95573feec9d23dc6e31f5e88b951c8ce133427331",
+    "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
+    "scripts/freeze_american_cases.py": "73959f8e14ff32d87384d80ea15ace3a8a8de6d52305ef8622a7f19720c95b23",
+    "scripts/generate_american_references.py": "3bdb3f8365940fad36b3656811c2b540cd1488d639d7d78de5b97acf7d146bd4"
+  }
+}

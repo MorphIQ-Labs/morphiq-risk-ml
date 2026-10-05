@@ -633,6 +633,34 @@
  (action
   (run python3 %{dep:../scripts/exchange_fixture.py} --check)))
 
+; Offline American reference schema/provenance and failure controls only.
+; Full QuantLib/lattice/Arb generation remains an optional manual campaign.
+
+(rule
+ (alias runtest)
+ (deps
+  ../docs/evidence/american-references/build.json
+  ../docs/evidence/american-references/cases-v1.json
+  ../docs/evidence/american-references/lattice-input.txt
+  ../docs/evidence/american-references/lattice.tsv
+  ../docs/evidence/american-references/lattice.tsv.stderr
+  ../docs/evidence/american-references/manifest.json
+  ../docs/evidence/american-references/protocol.md
+  ../docs/evidence/american-references/quantlib-input.txt
+  ../docs/evidence/american-references/quantlib.tsv
+  ../docs/evidence/american-references/quantlib.tsv.stderr
+  ../docs/evidence/american-references/references-v1.json
+  ../scripts/american_lattice.cpp
+  ../scripts/american_quantlib.cpp
+  ../scripts/american_reference_data.py
+  ../scripts/american_runner_io.hpp
+  ../scripts/check_american_references.py
+  ../scripts/freeze_american_cases.py
+  ../scripts/generate_american_references.py
+  ../scripts/test_american_references.py)
+ (action
+  (run python3 %{dep:../scripts/test_american_references.py})))
+
 (test
  (name production_multi)
  (modules production_multi)
