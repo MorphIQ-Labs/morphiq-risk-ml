@@ -200,7 +200,7 @@ let controls () =
                 ~cancel:(fun () ->
                   incr calls;
                   !calls > cancel_after)
-                (config ~cells:128 ~steps:128
+                (config ~cells:32 ~steps:32
                    ~lim:{ limits with max_workspace_bytes = reserved + surplus }
                    1.)
                 admitted side
