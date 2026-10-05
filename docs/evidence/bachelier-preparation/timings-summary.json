@@ -1,0 +1,5766 @@
+{
+  "samples": 7200,
+  "complete": true,
+  "summary": [
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 67.81005625,
+      "process_medians_ns": [
+        68.8476547,
+        67.8710848,
+        67.7490277,
+        67.6269565
+      ],
+      "bytes": 536.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 113.95263750000001,
+      "process_medians_ns": [
+        118.774409,
+        112.792975,
+        115.1123,
+        111.083992
+      ],
+      "bytes": 504.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 180.84716650000001,
+      "process_medians_ns": [
+        180.175775,
+        180.786131,
+        186.88965,
+        180.908202
+      ],
+      "bytes": 1024.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 187.6220705,
+      "process_medians_ns": [
+        187.866206,
+        182.373043,
+        187.377935,
+        190.673831
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 179.809561,
+      "process_medians_ns": [
+        179.68749,
+        177.368165,
+        179.931632,
+        180.175775
+      ],
+      "bytes": 712.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 383.8501,
+      "process_medians_ns": [
+        386.596682,
+        382.69043,
+        383.178715,
+        384.521485
+      ],
+      "bytes": 2064.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 189.3920825,
+      "process_medians_ns": [
+        187.377921,
+        186.523437,
+        193.847654,
+        191.406244
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 69.763189,
+      "process_medians_ns": [
+        69.7021534,
+        69.8242246,
+        71.1669941,
+        69.3359397
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 275.512697,
+      "process_medians_ns": [
+        279.174799,
+        271.850595,
+        393.432614,
+        271.850581
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 186.2182585,
+      "process_medians_ns": [
+        186.279294,
+        185.668952,
+        186.157223,
+        202.392584
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 63.17138455,
+      "process_medians_ns": [
+        63.2324202,
+        63.1103489,
+        63.1103489,
+        65.1855458
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 265.8081045,
+      "process_medians_ns": [
+        265.991204,
+        260.986326,
+        265.625005,
+        277.709958
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 188.5986335,
+      "process_medians_ns": [
+        185.668938,
+        186.88965,
+        190.307617,
+        209.838873
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 58.04442795,
+      "process_medians_ns": [
+        57.8613282,
+        57.8613282,
+        58.2275277,
+        59.0820264
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 262.268074,
+      "process_medians_ns": [
+        259.765628,
+        262.207038,
+        262.32911,
+        267.456045
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 2164.06261,
+      "process_medians_ns": [
+        2160.15633,
+        2167.96889,
+        2179.68773,
+        2160.15633
+      ],
+      "bytes": 16544.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3259.76566,
+      "process_medians_ns": [
+        3289.06253,
+        3167.96877,
+        3246.09391,
+        3273.43741
+      ],
+      "bytes": 15368.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 5433.59397,
+      "process_medians_ns": [
+        5382.81256,
+        5484.37538,
+        5406.25024,
+        5460.9377
+      ],
+      "bytes": 31648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 5115.23444,
+      "process_medians_ns": [
+        5003.90661,
+        5078.12501,
+        5167.96899,
+        5152.34387
+      ],
+      "bytes": 34536.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 2595.70311,
+      "process_medians_ns": [
+        2621.0937,
+        2601.5623,
+        2589.84392,
+        2585.93764
+      ],
+      "bytes": 10352.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 7892.57797,
+      "process_medians_ns": [
+        7898.43716,
+        7886.71832,
+        7886.71878,
+        7925.78157
+      ],
+      "bytes": 44888.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 5197.26564,
+      "process_medians_ns": [
+        5269.5309,
+        5199.21878,
+        5175.78155,
+        5195.3125
+      ],
+      "bytes": 34536.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 585.937414,
+      "process_medians_ns": [
+        585.937869,
+        585.937414,
+        566.40647,
+        585.937414
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 5750.00013,
+      "process_medians_ns": [
+        5769.53107,
+        5722.65617,
+        5742.18757,
+        5757.81269
+      ],
+      "bytes": 36184.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 5242.1874,
+      "process_medians_ns": [
+        6249.99984,
+        5195.3125,
+        5289.0623,
+        5148.43759
+      ],
+      "bytes": 34536.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 404.2969975,
+      "process_medians_ns": [
+        437.500148,
+        402.34363,
+        402.344085,
+        406.24991
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 5589.843795000001,
+      "process_medians_ns": [
+        5679.68755,
+        5585.93774,
+        5582.03146,
+        5593.74985
+      ],
+      "bytes": 36184.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 5199.218774999999,
+      "process_medians_ns": [
+        5371.09372,
+        5148.43759,
+        5242.1874,
+        5156.25015
+      ],
+      "bytes": 34536.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 445.3127075,
+      "process_medians_ns": [
+        457.031547,
+        441.406428,
+        441.405973,
+        449.218987
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 5679.687545000001,
+      "process_medians_ns": [
+        5703.12477,
+        5656.25032,
+        5550.78122,
+        6023.43744
+      ],
+      "bytes": 36184.5,
+      "eligible": 32
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 18937.500500000002,
+      "process_medians_ns": [
+        19343.7518,
+        18812.4977,
+        18437.4985,
+        19062.5033
+      ],
+      "bytes": 132516.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 26828.12375,
+      "process_medians_ns": [
+        27812.5008,
+        26312.5003,
+        26312.5003,
+        27343.7472
+      ],
+      "bytes": 122892.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 44234.3753,
+      "process_medians_ns": [
+        44468.7503,
+        44000.0003,
+        43406.2495,
+        45124.998
+      ],
+      "bytes": 253348.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 45187.5003,
+      "process_medians_ns": [
+        47812.5003,
+        43500.0002,
+        43156.2512,
+        46875.0004
+      ],
+      "bytes": 275180.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 20515.626600000003,
+      "process_medians_ns": [
+        22468.7501,
+        20406.249,
+        20468.7531,
+        20562.5001
+      ],
+      "bytes": 82036.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 66359.37465,
+      "process_medians_ns": [
+        68000.0012,
+        65843.7493,
+        66562.5012,
+        66156.2481
+      ],
+      "bytes": 357212.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 44953.1253,
+      "process_medians_ns": [
+        43968.7501,
+        44656.2517,
+        45249.9989,
+        46750.0031
+      ],
+      "bytes": 275180.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 4359.37545,
+      "process_medians_ns": [
+        4343.75033,
+        4218.74938,
+        4531.24812,
+        4375.00057
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 48999.9984,
+      "process_medians_ns": [
+        48562.4987,
+        48500.0019,
+        49437.4981,
+        52312.4982
+      ],
+      "bytes": 287580.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 44468.75025,
+      "process_medians_ns": [
+        44500.0005,
+        44437.5,
+        44343.7493,
+        50593.7496
+      ],
+      "bytes": 275180.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 2843.74983,
+      "process_medians_ns": [
+        2875.00006,
+        2812.49959,
+        2843.74983,
+        2843.74983
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 47421.8741,
+      "process_medians_ns": [
+        48999.9984,
+        47031.2516,
+        47062.4982,
+        47781.25
+      ],
+      "bytes": 287580.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 44624.99965,
+      "process_medians_ns": [
+        44187.5018,
+        44906.25,
+        44343.7493,
+        45687.4986
+      ],
+      "bytes": 275180.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3234.3741600000003,
+      "process_medians_ns": [
+        3249.99928,
+        3249.99928,
+        3218.74904,
+        3218.74904
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 47578.1271,
+      "process_medians_ns": [
+        47749.9998,
+        47593.7522,
+        47531.2518,
+        47562.502
+      ],
+      "bytes": 287580.0,
+      "eligible": 256
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 538499.997,
+      "process_medians_ns": [
+        536000.007,
+        540999.987,
+        525999.989,
+        585000.031
+      ],
+      "bytes": 2120640.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 471250.0085,
+      "process_medians_ns": [
+        490500.01,
+        459500.006,
+        468500.017,
+        474000
+      ],
+      "bytes": 1966152.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 798000.0225,
+      "process_medians_ns": [
+        813499.966,
+        786499.993,
+        764500.001,
+        809500.052
+      ],
+      "bytes": 4053952.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 1143750.005,
+      "process_medians_ns": [
+        1429500,
+        1046499.99,
+        1041000.01,
+        1241000.02
+      ],
+      "bytes": 4400584.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 384749.9905,
+      "process_medians_ns": [
+        395499.985,
+        377499.964,
+        378999.976,
+        390500.005
+      ],
+      "bytes": 1310896.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 1455500.025,
+      "process_medians_ns": [
+        1491500.01,
+        1393000.01,
+        1419500.04,
+        2018000
+      ],
+      "bytes": 5711416.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 1042499.995,
+      "process_medians_ns": [
+        1036999.98,
+        1043999.98,
+        1041000.01,
+        1051999.98
+      ],
+      "bytes": 4400584.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 84750.005,
+      "process_medians_ns": [
+        85000.0069,
+        82999.9917,
+        84500.0031,
+        85000.0069
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 1151250.005,
+      "process_medians_ns": [
+        1144500.04,
+        1157999.97,
+        1140999.96,
+        1579999.98
+      ],
+      "bytes": 4597304.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 1033249.98,
+      "process_medians_ns": [
+        1033000.01,
+        1029500.04,
+        1033499.95,
+        1049500.02
+      ],
+      "bytes": 4400584.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 61750.004499999995,
+      "process_medians_ns": [
+        61500.0026,
+        61500.0026,
+        62499.952,
+        62000.0064
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 1131999.975,
+      "process_medians_ns": [
+        1097499.98,
+        1105499.98,
+        1189499.98,
+        1158499.97
+      ],
+      "bytes": 4597304.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 1037000.01,
+      "process_medians_ns": [
+        1036499.98,
+        1033500.01,
+        1042500.02,
+        1037500.04
+      ],
+      "bytes": 4400584.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 67750.0211,
+      "process_medians_ns": [
+        66999.9863,
+        68000.0521,
+        67499.9901,
+        70500.013
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 1118999.9649999999,
+      "process_medians_ns": [
+        1106499.99,
+        1128999.98,
+        1108999.95,
+        1181000.03
+      ],
+      "bytes": 4597304.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 68.0542058,
+      "process_medians_ns": [
+        66.894529,
+        69.3359397,
+        68.3593839,
+        67.7490277
+      ],
+      "bytes": 536.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 131.3476475,
+      "process_medians_ns": [
+        130.859377,
+        131.59179,
+        131.103505,
+        193.603512
+      ],
+      "bytes": 536.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 211.608892,
+      "process_medians_ns": [
+        202.880869,
+        202.636727,
+        220.336915,
+        242.431639
+      ],
+      "bytes": 1056.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 252.075203,
+      "process_medians_ns": [
+        250.610356,
+        252.685552,
+        254.882806,
+        251.464854
+      ],
+      "bytes": 1760.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 154.96826249999998,
+      "process_medians_ns": [
+        154.052728,
+        148.925778,
+        155.883797,
+        162.231444
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 421.6918935,
+      "process_medians_ns": [
+        423.339841,
+        418.945305,
+        420.043946,
+        461.547856
+      ],
+      "bytes": 2408.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 252.136232,
+      "process_medians_ns": [
+        251.708983,
+        252.929695,
+        252.075196,
+        252.197268
+      ],
+      "bytes": 1760.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 159.667962,
+      "process_medians_ns": [
+        154.418956,
+        159.667962,
+        160.40039,
+        159.667962
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 428.771976,
+      "process_medians_ns": [
+        424.926768,
+        429.443361,
+        428.100591,
+        466.552734
+      ],
+      "bytes": 2408.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 251.34277600000001,
+      "process_medians_ns": [
+        243.408209,
+        252.319339,
+        250.366213,
+        352.172847
+      ],
+      "bytes": 1760.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 161.01074599999998,
+      "process_medians_ns": [
+        159.545905,
+        160.03419,
+        161.987302,
+        161.987302
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 428.8940475,
+      "process_medians_ns": [
+        428.710948,
+        427.368164,
+        429.077147,
+        460.205086
+      ],
+      "bytes": 2408.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 255.0048775,
+      "process_medians_ns": [
+        254.882806,
+        255.126949,
+        252.929695,
+        312.622063
+      ],
+      "bytes": 1760.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 161.682124,
+      "process_medians_ns": [
+        159.179677,
+        159.301749,
+        165.649411,
+        164.062499
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 429.565425,
+      "process_medians_ns": [
+        426.879879,
+        429.931632,
+        429.199218,
+        450.561529
+      ],
+      "bytes": 2408.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 2158.20319,
+      "process_medians_ns": [
+        2156.25005,
+        2156.25005,
+        2164.06261,
+        2160.15633
+      ],
+      "bytes": 16544.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3761.71874,
+      "process_medians_ns": [
+        3753.90619,
+        3761.71874,
+        3773.43758,
+        3761.71874
+      ],
+      "bytes": 16136.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 6107.421995000001,
+      "process_medians_ns": [
+        6078.12535,
+        6085.93746,
+        6152.34376,
+        6128.90653
+      ],
+      "bytes": 32416.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 6830.078065,
+      "process_medians_ns": [
+        6796.87491,
+        6835.93726,
+        6917.96868,
+        6824.21887
+      ],
+      "bytes": 44688.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 3708.98442,
+      "process_medians_ns": [
+        3699.21872,
+        3718.75012,
+        3792.96898,
+        3699.21872
+      ],
+      "bytes": 15288.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 10777.343499999999,
+      "process_medians_ns": [
+        10742.1874,
+        10781.2498,
+        10843.7503,
+        10773.4372
+      ],
+      "bytes": 59976.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 6953.12497,
+      "process_medians_ns": [
+        6804.68747,
+        7019.53149,
+        6917.96868,
+        6988.28126
+      ],
+      "bytes": 44688.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 3111.32794,
+      "process_medians_ns": [
+        3105.46875,
+        3050.78129,
+        3140.62481,
+        3117.18713
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 10230.46865,
+      "process_medians_ns": [
+        10175.781,
+        10109.3751,
+        10503.9062,
+        10285.1563
+      ],
+      "bytes": 57800.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 6876.953195,
+      "process_medians_ns": [
+        6851.56238,
+        6933.5938,
+        6902.34401,
+        6851.56238
+      ],
+      "bytes": 44688.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3076.17165,
+      "process_medians_ns": [
+        3074.21851,
+        3003.90593,
+        3078.12479,
+        3140.62481
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 10148.43745,
+      "process_medians_ns": [
+        10144.5312,
+        10015.6253,
+        10152.3437,
+        10734.3749
+      ],
+      "bytes": 57800.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 6886.718895,
+      "process_medians_ns": [
+        6812.50003,
+        6851.56283,
+        6921.87496,
+        8222.65656
+      ],
+      "bytes": 44688.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3187.5001700000003,
+      "process_medians_ns": [
+        3074.21897,
+        3140.62527,
+        3234.37507,
+        4468.75038
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 10248.047149999999,
+      "process_medians_ns": [
+        10132.8128,
+        9988.28136,
+        10363.2815,
+        13078.125
+      ],
+      "bytes": 57800.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 18921.877200000003,
+      "process_medians_ns": [
+        18906.2521,
+        18874.9982,
+        18937.5023,
+        18968.7489
+      ],
+      "bytes": 132516.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 30750.00135,
+      "process_medians_ns": [
+        30781.2516,
+        31406.249,
+        30718.7511,
+        30625.0004
+      ],
+      "bytes": 129036.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 49500.000400000004,
+      "process_medians_ns": [
+        49531.2488,
+        47781.25,
+        49624.9995,
+        49468.752
+      ],
+      "bytes": 259492.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 57609.3753,
+      "process_medians_ns": [
+        57375.0003,
+        57406.2506,
+        58625.0026,
+        57812.5
+      ],
+      "bytes": 356180.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 28781.2509,
+      "process_medians_ns": [
+        28624.9997,
+        28531.249,
+        28937.5021,
+        30031.2495
+      ],
+      "bytes": 121468.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 88515.62415,
+      "process_medians_ns": [
+        88343.7497,
+        88687.4986,
+        88031.2509,
+        102031.252
+      ],
+      "bytes": 477644.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 57921.87585,
+      "process_medians_ns": [
+        57468.751,
+        57437.5008,
+        58375.0007,
+        63718.7513
+      ],
+      "bytes": 356180.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 24437.50055,
+      "process_medians_ns": [
+        24625.002,
+        24531.2513,
+        24343.7498,
+        24250.0028
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 83906.24859999999,
+      "process_medians_ns": [
+        83593.7499,
+        84125.0003,
+        83968.7491,
+        83843.7481
+      ],
+      "bytes": 460236.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 60546.87585,
+      "process_medians_ns": [
+        57437.5008,
+        57249.9994,
+        65374.9994,
+        63656.2509
+      ],
+      "bytes": 356180.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 23968.7506,
+      "process_medians_ns": [
+        24343.7498,
+        23843.7497,
+        24031.2511,
+        23906.2501
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 83593.7499,
+      "process_medians_ns": [
+        82875.0017,
+        83812.4979,
+        83375.0019,
+        88531.2511
+      ],
+      "bytes": 460236.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 57937.49915,
+      "process_medians_ns": [
+        57187.5025,
+        58593.7487,
+        61249.9971,
+        57281.2496
+      ],
+      "bytes": 356180.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 24437.50055,
+      "process_medians_ns": [
+        24406.2503,
+        24468.7508,
+        24687.4988,
+        24000.0008
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 84671.87400000001,
+      "process_medians_ns": [
+        83124.9999,
+        84781.248,
+        87437.5,
+        84562.5
+      ],
+      "bytes": 460236.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 528749.9805000001,
+      "process_medians_ns": [
+        526499.993,
+        529499.957,
+        528000.004,
+        546999.974
+      ],
+      "bytes": 2120640.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 536500.0105,
+      "process_medians_ns": [
+        535500.003,
+        536000.007,
+        539999.979,
+        537000.014
+      ],
+      "bytes": 2064456.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 885250.0175000001,
+      "process_medians_ns": [
+        881500.018,
+        875499.973,
+        893999.997,
+        889000.017
+      ],
+      "bytes": 4152256.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 1251250.01,
+      "process_medians_ns": [
+        1237499.99,
+        1222500,
+        1265000.03,
+        1378999.96
+      ],
+      "bytes": 5696152.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 519499.9975,
+      "process_medians_ns": [
+        518999.994,
+        520000.001,
+        518500.048,
+        602499.989
+      ],
+      "bytes": 1941688.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 1970749.96,
+      "process_medians_ns": [
+        1973499.95,
+        1955499.99,
+        1967999.97,
+        2067000.02
+      ],
+      "bytes": 7637776.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 1277750.005,
+      "process_medians_ns": [
+        1260500.05,
+        1278500.01,
+        1349499.97,
+        1277000
+      ],
+      "bytes": 5696152.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 460500.014,
+      "process_medians_ns": [
+        453500.019,
+        505000.004,
+        462000.025,
+        459000.003
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 1951749.99,
+      "process_medians_ns": [
+        1932999.99,
+        1972000,
+        1970499.99,
+        1913000.01
+      ],
+      "bytes": 7359248.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 1299750.0,
+      "process_medians_ns": [
+        1359499.99,
+        1307000,
+        1292500,
+        1268500.05
+      ],
+      "bytes": 5696152.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 453500.019,
+      "process_medians_ns": [
+        451000,
+        456000.038,
+        469000.021,
+        451000
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 1948499.995,
+      "process_medians_ns": [
+        1918500,
+        1947000.04,
+        1977499.98,
+        1949999.95
+      ],
+      "bytes": 7359248.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 1268499.995,
+      "process_medians_ns": [
+        1223500,
+        1266499.98,
+        1270500.01,
+        1275499.99
+      ],
+      "bytes": 5696152.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 451499.9745,
+      "process_medians_ns": [
+        440000.033,
+        447499.973,
+        455499.976,
+        459500.006
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 2006250.0,
+      "process_medians_ns": [
+        1900999.98,
+        2088000.01,
+        2038500.04,
+        1973999.96
+      ],
+      "bytes": 7359248.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 68.05419875,
+      "process_medians_ns": [
+        67.871099,
+        69.0917972,
+        68.2372985,
+        67.6269565
+      ],
+      "bytes": 536.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 112.0605475,
+      "process_medians_ns": [
+        112.182619,
+        148.437508,
+        111.938476,
+        111.572263
+      ],
+      "bytes": 504.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 182.678221,
+      "process_medians_ns": [
+        181.64063,
+        185.546881,
+        180.175775,
+        183.715812
+      ],
+      "bytes": 1024.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 187.01171449999998,
+      "process_medians_ns": [
+        186.88965,
+        245.971677,
+        186.279294,
+        187.133779
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 181.213373,
+      "process_medians_ns": [
+        182.617185,
+        184.204097,
+        176.51368,
+        179.809561
+      ],
+      "bytes": 712.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 385.131834,
+      "process_medians_ns": [
+        385.375984,
+        445.922851,
+        384.887684,
+        380.981447
+      ],
+      "bytes": 2064.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 187.9882845,
+      "process_medians_ns": [
+        187.133793,
+        188.964833,
+        188.842776,
+        186.523437
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 69.88525315,
+      "process_medians_ns": [
+        69.9462959,
+        69.9462817,
+        69.7021392,
+        69.8242246
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 272.94921550000004,
+      "process_medians_ns": [
+        273.193351,
+        279.907226,
+        271.118168,
+        272.70508
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 189.0869115,
+      "process_medians_ns": [
+        182.373043,
+        188.110349,
+        200.439459,
+        190.063474
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 68.0541987,
+      "process_medians_ns": [
+        61.8896507,
+        66.5283295,
+        79.8339812,
+        69.5800679
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 279.6020555,
+      "process_medians_ns": [
+        258.056644,
+        273.803721,
+        285.40039,
+        296.75293
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 186.584472,
+      "process_medians_ns": [
+        181.396473,
+        201.293958,
+        186.401365,
+        186.767579
+      ],
+      "bytes": 1352.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 58.959962250000004,
+      "process_medians_ns": [
+        56.2744162,
+        62.7441352,
+        57.8613282,
+        60.0585963
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 264.7094705,
+      "process_medians_ns": [
+        253.662108,
+        279.785155,
+        265.258777,
+        264.160164
+      ],
+      "bytes": 1520.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 21529.29685,
+      "process_medians_ns": [
+        21140.625,
+        23195.3122,
+        21671.8749,
+        21386.7188
+      ],
+      "bytes": 48392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 25914.0625,
+      "process_medians_ns": [
+        25144.5313,
+        26449.2187,
+        26191.4061,
+        25636.7189
+      ],
+      "bytes": 24672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 49626.952900000004,
+      "process_medians_ns": [
+        47933.5936,
+        51320.3122,
+        51546.8751,
+        47554.6876
+      ],
+      "bytes": 72800.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 23439.4531,
+      "process_medians_ns": [
+        22753.9063,
+        23601.5626,
+        23277.3436,
+        30582.0313
+      ],
+      "bytes": 55448.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 29376.9533,
+      "process_medians_ns": [
+        25593.7498,
+        26605.469,
+        32148.4376,
+        43335.9373
+      ],
+      "bytes": 23568.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 49601.5625,
+      "process_medians_ns": [
+        48816.4064,
+        50132.8122,
+        49070.3128,
+        59957.0312
+      ],
+      "bytes": 79016.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 23410.15625,
+      "process_medians_ns": [
+        22566.4062,
+        23578.1249,
+        23242.1876,
+        25515.6251
+      ],
+      "bytes": 55448.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 25230.46875,
+      "process_medians_ns": [
+        24980.4689,
+        25441.4063,
+        25019.5312,
+        26710.9372
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 50074.21875,
+      "process_medians_ns": [
+        48050.7811,
+        50644.5313,
+        49503.9062,
+        54449.2191
+      ],
+      "bytes": 76840.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 23007.812400000003,
+      "process_medians_ns": [
+        22746.0937,
+        23207.0311,
+        22808.5937,
+        28074.2188
+      ],
+      "bytes": 55448.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 25458.98425,
+      "process_medians_ns": [
+        25015.6249,
+        25378.9062,
+        25539.0623,
+        27804.6873
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 48718.750100000005,
+      "process_medians_ns": [
+        48148.4376,
+        48566.4063,
+        48871.0939,
+        70925.7815
+      ],
+      "bytes": 76840.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 22923.8283,
+      "process_medians_ns": [
+        22781.2498,
+        22886.7189,
+        22960.9377,
+        23148.4373
+      ],
+      "bytes": 55448.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 27248.047,
+      "process_medians_ns": [
+        25199.2187,
+        25417.969,
+        39648.4375,
+        29078.125
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 49023.43745,
+      "process_medians_ns": [
+        48242.1874,
+        49039.0626,
+        49007.8123,
+        65847.6561
+      ],
+      "bytes": 76840.5,
+      "eligible": 8
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 177468.75199999998,
+      "process_medians_ns": [
+        176124.999,
+        177125.003,
+        184906.25,
+        177812.501
+      ],
+      "bytes": 387660.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 208374.9985,
+      "process_medians_ns": [
+        205562.501,
+        208687.503,
+        208093.748,
+        208656.249
+      ],
+      "bytes": 196900.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 386281.248,
+      "process_medians_ns": [
+        382499.999,
+        393500.002,
+        387218.748,
+        385343.748
+      ],
+      "bytes": 582500.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 189968.7485,
+      "process_medians_ns": [
+        189781.247,
+        231593.749,
+        190156.25,
+        188781.25
+      ],
+      "bytes": 442012.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 219343.7525,
+      "process_medians_ns": [
+        314312.5,
+        210562.503,
+        206375.003,
+        228125.002
+      ],
+      "bytes": 187284.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 416312.49950000003,
+      "process_medians_ns": [
+        416374.998,
+        416250.001,
+        430750.002,
+        398437.5
+      ],
+      "bytes": 629292.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 193234.3745,
+      "process_medians_ns": [
+        214000.003,
+        191968.749,
+        191125,
+        194500
+      ],
+      "bytes": 442012.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 203796.875,
+      "process_medians_ns": [
+        205156.251,
+        202156.25,
+        202437.499,
+        205906.25
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 399374.99950000003,
+      "process_medians_ns": [
+        394093.749,
+        399906.25,
+        398843.749,
+        400437.497
+      ],
+      "bytes": 611884.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 189187.5,
+      "process_medians_ns": [
+        188468.752,
+        189906.248,
+        190593.75,
+        188375.001
+      ],
+      "bytes": 442012.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 201296.8745,
+      "process_medians_ns": [
+        201968.753,
+        201562.5,
+        201031.249,
+        199718.75
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 394203.125,
+      "process_medians_ns": [
+        390031.251,
+        395156.25,
+        427968.749,
+        393250
+      ],
+      "bytes": 611884.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 189515.6255,
+      "process_medians_ns": [
+        188124.999,
+        189687.5,
+        209500.002,
+        189343.751
+      ],
+      "bytes": 442012.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 201828.1265,
+      "process_medians_ns": [
+        204156.251,
+        199500.002,
+        216062.501,
+        199437.498
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 394718.7525,
+      "process_medians_ns": [
+        394406.252,
+        393031.249,
+        400843.754,
+        395031.253
+      ],
+      "bytes": 611884.0,
+      "eligible": 64
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 3433499.98,
+      "process_medians_ns": [
+        3371500,
+        3432500,
+        3434499.96,
+        3601000
+      ],
+      "bytes": 6203736.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3427500.025,
+      "process_medians_ns": [
+        3413000.03,
+        3308999.99,
+        3442000.02,
+        3456500.01
+      ],
+      "bytes": 3151568.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 6233750.0,
+      "process_medians_ns": [
+        6214500,
+        6204999.98,
+        6253000,
+        6453000.01
+      ],
+      "bytes": 9322464.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 3708750.01,
+      "process_medians_ns": [
+        3611999.97,
+        3723500.01,
+        3694000.01,
+        3866499.99
+      ],
+      "bytes": 7068896.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 3414499.9800000004,
+      "process_medians_ns": [
+        3371000.06,
+        3385499.99,
+        3445000.04,
+        3443499.97
+      ],
+      "bytes": 2996032.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 7214749.984999999,
+      "process_medians_ns": [
+        7142500.02,
+        7255000,
+        7174499.97,
+        7258000.03
+      ],
+      "bytes": 10064864.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 3729250.0199999996,
+      "process_medians_ns": [
+        3608500,
+        3780000.03,
+        3678500.01,
+        4369500.03
+      ],
+      "bytes": 7068896.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 3343750.0,
+      "process_medians_ns": [
+        3265499.95,
+        3370500,
+        3317000,
+        3478000
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 7314499.99,
+      "process_medians_ns": [
+        6958999.96,
+        7232499.95,
+        7710500.04,
+        7396500.03
+      ],
+      "bytes": 9786336.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3673500.005,
+      "process_medians_ns": [
+        3650500.03,
+        3667499.99,
+        3740500.02,
+        3679500.02
+      ],
+      "bytes": 7068896.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3333500.005,
+      "process_medians_ns": [
+        3274500.02,
+        3330999.99,
+        3396999.96,
+        3336000.02
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 7164250.01,
+      "process_medians_ns": [
+        6963500,
+        7208500,
+        7120000.02,
+        7267999.99
+      ],
+      "bytes": 9786336.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3727749.9800000004,
+      "process_medians_ns": [
+        3673500.03,
+        3729499.99,
+        3725999.97,
+        4028000
+      ],
+      "bytes": 7068896.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3384750.02,
+      "process_medians_ns": [
+        3350500.02,
+        3419000.02,
+        3317000,
+        3604499.97
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 0,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 7109500.005000001,
+      "process_medians_ns": [
+        7059500.03,
+        6980000.01,
+        7159499.98,
+        7583000
+      ],
+      "bytes": 9786336.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 131.59179699999999,
+      "process_medians_ns": [
+        129.028322,
+        134.399414,
+        128.295895,
+        134.155272
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 57.5561572,
+      "process_medians_ns": [
+        57.7392569,
+        57.6171857,
+        55.9082025,
+        57.4951287
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 203.796382,
+      "process_medians_ns": [
+        205.566394,
+        204.589838,
+        198.974618,
+        203.002926
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 133.850094,
+      "process_medians_ns": [
+        133.544916,
+        134.155272,
+        130.004892,
+        134.277343
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 62.9272421,
+      "process_medians_ns": [
+        62.9882777,
+        62.8662065,
+        62.3779215,
+        64.6972609
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 209.838866,
+      "process_medians_ns": [
+        208.862303,
+        210.815429,
+        206.176765,
+        210.9375
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 133.4838945,
+      "process_medians_ns": [
+        133.422859,
+        133.54493,
+        134.277343,
+        132.934574
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 69.5190465,
+      "process_medians_ns": [
+        69.3359397,
+        69.4580109,
+        69.5800821,
+        69.7021392
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 214.17236,
+      "process_medians_ns": [
+        213.989253,
+        214.355467,
+        212.28027,
+        218.749989
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 133.72803,
+      "process_medians_ns": [
+        133.544916,
+        130.24902,
+        144.531256,
+        133.911144
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 180.35888849999998,
+      "process_medians_ns": [
+        176.635751,
+        179.687504,
+        182.617185,
+        181.030273
+      ],
+      "bytes": 712.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 328.9184535,
+      "process_medians_ns": [
+        325.317373,
+        322.509763,
+        332.519534,
+        339.599609
+      ],
+      "bytes": 1728.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 63.659669550000004,
+      "process_medians_ns": [
+        62.3779215,
+        62.3779357,
+        67.1386715,
+        64.9414034
+      ],
+      "bytes": 464.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 111.26709149999999,
+      "process_medians_ns": [
+        111.083992,
+        110.961906,
+        111.450191,
+        114.013673
+      ],
+      "bytes": 504.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 175.903324,
+      "process_medians_ns": [
+        172.119144,
+        175.781253,
+        176.025395,
+        176.391595
+      ],
+      "bytes": 952.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3013.672085,
+      "process_medians_ns": [
+        2906.2503,
+        3019.5315,
+        3019.5315,
+        3007.81267
+      ],
+      "bytes": 22928.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 431.6407285,
+      "process_medians_ns": [
+        425.781309,
+        437.500148,
+        441.405973,
+        425.781309
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 3498.0471399999997,
+      "process_medians_ns": [
+        3398.43746,
+        3503.90656,
+        3492.18772,
+        3507.81238
+      ],
+      "bytes": 24576.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3009.76558,
+      "process_medians_ns": [
+        3023.43778,
+        2976.56243,
+        3007.81267,
+        3011.71849
+      ],
+      "bytes": 22928.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 404.2969975,
+      "process_medians_ns": [
+        406.24991,
+        402.344085,
+        394.531071,
+        410.15619
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 3457.031425,
+      "process_medians_ns": [
+        3378.90606,
+        3468.75004,
+        3453.12492,
+        3460.93793
+      ],
+      "bytes": 24576.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 2964.84382,
+      "process_medians_ns": [
+        3007.81221,
+        2933.59381,
+        2894.53146,
+        2996.09383
+      ],
+      "bytes": 22928.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 576.1717145,
+      "process_medians_ns": [
+        562.499736,
+        566.406015,
+        589.843694,
+        585.937414
+      ],
+      "bytes": 1648.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 3613.28125,
+      "process_medians_ns": [
+        3484.37516,
+        3578.12496,
+        3695.31244,
+        3648.43754
+      ],
+      "bytes": 24576.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 2970.70324,
+      "process_medians_ns": [
+        2933.59381,
+        3019.53105,
+        2921.87497,
+        3007.81267
+      ],
+      "bytes": 22928.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 2587.8907799999997,
+      "process_medians_ns": [
+        2597.65602,
+        2582.03136,
+        2523.43762,
+        2593.7502
+      ],
+      "bytes": 10352.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 5800.781080000001,
+      "process_medians_ns": [
+        5820.31225,
+        5781.24991,
+        5554.6875,
+        5929.68718
+      ],
+      "bytes": 33280.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 2052.73454,
+      "process_medians_ns": [
+        1996.09394,
+        2050.7814,
+        2058.59351,
+        2054.68768
+      ],
+      "bytes": 14240.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3224.6096,
+      "process_medians_ns": [
+        3148.43737,
+        3187.50017,
+        3281.24997,
+        3261.71903
+      ],
+      "bytes": 15368.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 5103.515600000001,
+      "process_medians_ns": [
+        5156.2497,
+        4933.59357,
+        5140.62503,
+        5066.40617
+      ],
+      "bytes": 29344.5,
+      "eligible": 32
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 25109.375200000002,
+      "process_medians_ns": [
+        24687.4988,
+        28656.2499,
+        24625.002,
+        25531.2516
+      ],
+      "bytes": 181908.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3859.3734649999997,
+      "process_medians_ns": [
+        3187.49881,
+        4499.99789,
+        3218.74904,
+        4593.7486
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 28734.375500000002,
+      "process_medians_ns": [
+        27093.7526,
+        53937.4996,
+        28031.2488,
+        29437.5022
+      ],
+      "bytes": 194308.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 24609.375,
+      "process_medians_ns": [
+        23874.9999,
+        24843.75,
+        24718.749,
+        24500.001
+      ],
+      "bytes": 181908.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 2859.374945,
+      "process_medians_ns": [
+        2750.00275,
+        2906.2503,
+        2875.00006,
+        2843.74983
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 27546.87555,
+      "process_medians_ns": [
+        26500.0017,
+        27750.0003,
+        27906.2515,
+        27343.7508
+      ],
+      "bytes": 194308.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 25062.49985,
+      "process_medians_ns": [
+        24031.2511,
+        24906.2505,
+        25218.7529,
+        25218.7492
+      ],
+      "bytes": 181908.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 4343.75033,
+      "process_medians_ns": [
+        4343.75033,
+        4343.75033,
+        4343.75033,
+        4375.00057
+      ],
+      "bytes": 12404.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 29093.7496,
+      "process_medians_ns": [
+        29093.7496,
+        29312.5013,
+        29093.7496,
+        28812.5011
+      ],
+      "bytes": 194308.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 24906.25045,
+      "process_medians_ns": [
+        24718.749,
+        24968.7509,
+        24843.75,
+        25156.2524
+      ],
+      "bytes": 181908.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 20499.999649999998,
+      "process_medians_ns": [
+        20531.2499,
+        20593.7504,
+        20437.5028,
+        20468.7494
+      ],
+      "bytes": 82036.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 45859.37495,
+      "process_medians_ns": [
+        45843.7498,
+        46312.4998,
+        45593.7516,
+        45875.0001
+      ],
+      "bytes": 263940.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 17078.1259,
+      "process_medians_ns": [
+        17031.2487,
+        17218.7501,
+        17124.9994,
+        17031.2524
+      ],
+      "bytes": 114084.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 26124.99885,
+      "process_medians_ns": [
+        26062.502,
+        26249.9998,
+        26156.2491,
+        26093.7486
+      ],
+      "bytes": 122892.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 41109.37515,
+      "process_medians_ns": [
+        41062.4998,
+        41999.9997,
+        41125.0003,
+        41093.75
+      ],
+      "bytes": 234916.0,
+      "eligible": 256
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 508999.976,
+      "process_medians_ns": [
+        508499.972,
+        523500.028,
+        509499.98,
+        502999.988
+      ],
+      "bytes": 2907312.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 67499.9901,
+      "process_medians_ns": [
+        67499.9901,
+        67499.9901,
+        67500.0483,
+        67499.9901
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 604000.0009999999,
+      "process_medians_ns": [
+        606999.965,
+        606000.016,
+        600999.978,
+        601999.986
+      ],
+      "bytes": 3104032.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 508749.974,
+      "process_medians_ns": [
+        507999.968,
+        509499.98,
+        507499.964,
+        510999.991
+      ],
+      "bytes": 2907312.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 61500.0026,
+      "process_medians_ns": [
+        59000.0418,
+        60999.9988,
+        62000.0064,
+        63000.0141
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 600250.0009999999,
+      "process_medians_ns": [
+        582499.953,
+        602499.989,
+        601000.036,
+        599499.966
+      ],
+      "bytes": 3104032.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 510499.98699999996,
+      "process_medians_ns": [
+        488000.049,
+        513000.006,
+        520000.001,
+        507999.968
+      ],
+      "bytes": 2907312.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 85249.9797,
+      "process_medians_ns": [
+        82000.0423,
+        85499.9525,
+        85000.0069,
+        85999.9564
+      ],
+      "bytes": 196784.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 623250.002,
+      "process_medians_ns": [
+        624000.037,
+        631000.032,
+        617999.991,
+        622499.967
+      ],
+      "bytes": 3104032.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 508249.99950000003,
+      "process_medians_ns": [
+        503999.996,
+        504500,
+        561500.026,
+        511999.999
+      ],
+      "bytes": 2907312.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 377250.02,
+      "process_medians_ns": [
+        367500.004,
+        377000.018,
+        390500.005,
+        377500.022
+      ],
+      "bytes": 1310896.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 914250.006,
+      "process_medians_ns": [
+        904500.019,
+        923999.993,
+        904000.015,
+        957000.011
+      ],
+      "bytes": 4218144.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 519749.99950000003,
+      "process_medians_ns": [
+        518999.994,
+        518000.044,
+        521000.009,
+        520500.005
+      ],
+      "bytes": 1825728.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 463500.0075,
+      "process_medians_ns": [
+        462499.971,
+        463000.033,
+        463999.982,
+        465499.994
+      ],
+      "bytes": 1966152.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "eligible",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 736500.0205,
+      "process_medians_ns": [
+        734000.001,
+        735000.009,
+        739999.989,
+        738000.032
+      ],
+      "bytes": 3759040.0,
+      "eligible": 4096
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 196.2280365,
+      "process_medians_ns": [
+        190.185546,
+        196.899421,
+        197.631834,
+        195.556652
+      ],
+      "bytes": 1368.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 160.4614255,
+      "process_medians_ns": [
+        159.667977,
+        161.010732,
+        159.912119,
+        165.649411
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 378.6010795,
+      "process_medians_ns": [
+        367.55371,
+        377.563481,
+        379.638678,
+        422.363271
+      ],
+      "bytes": 2016.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 194.946281,
+      "process_medians_ns": [
+        194.946281,
+        189.575189,
+        194.946281,
+        195.434566
+      ],
+      "bytes": 1368.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 159.6679765,
+      "process_medians_ns": [
+        159.42382,
+        159.790048,
+        160.156247,
+        159.545905
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 376.647947,
+      "process_medians_ns": [
+        369.750964,
+        376.342769,
+        377.44141,
+        376.953125
+      ],
+      "bytes": 2016.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 194.885253,
+      "process_medians_ns": [
+        194.580082,
+        191.6504,
+        195.190424,
+        196.533207
+      ],
+      "bytes": 1368.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 159.42382700000002,
+      "process_medians_ns": [
+        157.226566,
+        159.790034,
+        159.301763,
+        159.545891
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 379.6997065,
+      "process_medians_ns": [
+        385.375984,
+        376.953125,
+        370.605463,
+        382.446288
+      ],
+      "bytes": 2016.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 192.38282049999998,
+      "process_medians_ns": [
+        191.040044,
+        193.725597,
+        189.331061,
+        195.068367
+      ],
+      "bytes": 1368.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 154.41894150000002,
+      "process_medians_ns": [
+        155.029298,
+        154.663084,
+        149.902348,
+        154.174799
+      ],
+      "bytes": 648.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 373.4130945,
+      "process_medians_ns": [
+        374.6338,
+        370.483406,
+        372.192389,
+        374.877928
+      ],
+      "bytes": 2016.01562,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 64.27001865,
+      "process_medians_ns": [
+        64.3310472,
+        63.9648476,
+        64.6972609,
+        64.2089901
+      ],
+      "bytes": 464.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 130.31005649999997,
+      "process_medians_ns": [
+        128.173824,
+        128.662109,
+        132.080075,
+        131.958004
+      ],
+      "bytes": 536.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 196.838371,
+      "process_medians_ns": [
+        197.753906,
+        196.533193,
+        197.143549,
+        195.80078
+      ],
+      "bytes": 984.015625,
+      "eligible": 0
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 4744.14037,
+      "process_medians_ns": [
+        4738.28095,
+        4722.65629,
+        4749.99979,
+        4914.06217
+      ],
+      "bytes": 31736.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3093.74991,
+      "process_medians_ns": [
+        3105.46875,
+        3066.40595,
+        3082.03107,
+        3203.12483
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 8146.484109999999,
+      "process_medians_ns": [
+        8144.53097,
+        8121.09374,
+        8148.43725,
+        8195.3126
+      ],
+      "bytes": 44848.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 4707.03117,
+      "process_medians_ns": [
+        4707.03117,
+        4679.68766,
+        4707.03117,
+        4722.65629
+      ],
+      "bytes": 31736.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3101.56247,
+      "process_medians_ns": [
+        3113.28131,
+        3074.21851,
+        3089.84363,
+        3367.18722
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 8109.37513,
+      "process_medians_ns": [
+        8171.87492,
+        8105.46908,
+        8066.40628,
+        8113.28118
+      ],
+      "bytes": 44848.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 4697.265695,
+      "process_medians_ns": [
+        4527.34366,
+        4687.50022,
+        4707.03117,
+        5003.90615
+      ],
+      "bytes": 31736.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 3158.20307,
+      "process_medians_ns": [
+        3125.00015,
+        3191.40599,
+        3121.09387,
+        3386.71862
+      ],
+      "bytes": 13112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 8144.531419999999,
+      "process_medians_ns": [
+        7914.06273,
+        8132.81258,
+        8156.25026,
+        8167.96864
+      ],
+      "bytes": 44848.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 4689.453135,
+      "process_medians_ns": [
+        4675.78138,
+        4703.12489,
+        4667.96882,
+        4703.12489
+      ],
+      "bytes": 31736.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 3710.93779,
+      "process_medians_ns": [
+        3601.56264,
+        3699.21918,
+        3722.6564,
+        3777.34386
+      ],
+      "bytes": 15288.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 8835.937705,
+      "process_medians_ns": [
+        8855.46888,
+        8816.40653,
+        8683.59348,
+        8980.46892
+      ],
+      "bytes": 47024.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 2070.312575,
+      "process_medians_ns": [
+        2097.65631,
+        2066.40652,
+        2050.7814,
+        2074.21863
+      ],
+      "bytes": 14240.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3792.9687599999997,
+      "process_medians_ns": [
+        3832.03133,
+        3738.28107,
+        3753.90619,
+        3832.03133
+      ],
+      "bytes": 16136.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 5660.1566,
+      "process_medians_ns": [
+        5656.24987,
+        5656.25032,
+        5664.06288,
+        5902.34367
+      ],
+      "bytes": 30112.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 38437.4998,
+      "process_medians_ns": [
+        38531.2487,
+        38343.7509,
+        38250.0002,
+        38687.4999
+      ],
+      "bytes": 252156.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 24062.4995,
+      "process_medians_ns": [
+        24187.4986,
+        23562.4975,
+        24000.0008,
+        24124.9982
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 65937.49825,
+      "process_medians_ns": [
+        64656.2512,
+        65718.7484,
+        66156.2481,
+        66781.2492
+      ],
+      "bytes": 356212.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 38359.37425,
+      "process_medians_ns": [
+        37750,
+        38499.9985,
+        38218.75,
+        41812.5019
+      ],
+      "bytes": 252156.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 24234.37585,
+      "process_medians_ns": [
+        24031.2511,
+        24281.2494,
+        24187.5023,
+        25718.7494
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 66343.7495,
+      "process_medians_ns": [
+        66031.2508,
+        66500.0007,
+        66187.4983,
+        66656.2482
+      ],
+      "bytes": 356212.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 38218.75,
+      "process_medians_ns": [
+        37406.2511,
+        39843.7514,
+        38218.75,
+        38218.75
+      ],
+      "bytes": 252156.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 24249.99915,
+      "process_medians_ns": [
+        23781.2492,
+        24406.2503,
+        24218.7489,
+        24281.2494
+      ],
+      "bytes": 104060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 67187.49865,
+      "process_medians_ns": [
+        67781.2495,
+        66281.249,
+        66593.7478,
+        79906.2509
+      ],
+      "bytes": 356212.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 38437.501650000006,
+      "process_medians_ns": [
+        37781.2503,
+        38468.7519,
+        38499.9985,
+        38406.2514
+      ],
+      "bytes": 252156.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 28640.626600000003,
+      "process_medians_ns": [
+        27812.5008,
+        29781.2512,
+        28468.7521,
+        28812.5011
+      ],
+      "bytes": 121468.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 69359.37565,
+      "process_medians_ns": [
+        68968.7513,
+        69656.2493,
+        69062.502,
+        74312.502
+      ],
+      "bytes": 373620.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 17374.999499999998,
+      "process_medians_ns": [
+        17187.4999,
+        17562.4991,
+        17031.2524,
+        17906.2481
+      ],
+      "bytes": 114084.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 30890.62375,
+      "process_medians_ns": [
+        137718.751,
+        30749.9977,
+        30499.9994,
+        31031.2498
+      ],
+      "bytes": 129036.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 46656.24875,
+      "process_medians_ns": [
+        46624.9985,
+        46687.499,
+        46124.9983,
+        49250.0003
+      ],
+      "bytes": 241060.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 954499.992,
+      "process_medians_ns": [
+        943000.021,
+        965999.963,
+        994500.006,
+        938500.045
+      ],
+      "bytes": 4030848.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 451749.9765,
+      "process_medians_ns": [
+        449999.992,
+        455500.034,
+        453499.961,
+        449999.992
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 1598250.0,
+      "process_medians_ns": [
+        1578999.97,
+        1583000,
+        1655000.03,
+        1613500
+      ],
+      "bytes": 5693944.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 945250.009,
+      "process_medians_ns": [
+        959999.976,
+        944000.029,
+        946499.989,
+        928000.023
+      ],
+      "bytes": 4030848.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 455500.005,
+      "process_medians_ns": [
+        464999.99,
+        448499.981,
+        460500.014,
+        450499.996
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 1616499.97,
+      "process_medians_ns": [
+        1655999.98,
+        1576999.96,
+        1862999.98,
+        1571999.98
+      ],
+      "bytes": 5693944.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 943249.994,
+      "process_medians_ns": [
+        929000.031,
+        942499.959,
+        944000.029,
+        955500
+      ],
+      "bytes": 4030848.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 454749.99950000003,
+      "process_medians_ns": [
+        453000.015,
+        453000.015,
+        456999.987,
+        456499.984
+      ],
+      "bytes": 1663160.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 1580249.9849999999,
+      "process_medians_ns": [
+        1579999.98,
+        1590500,
+        1580499.99,
+        1555999.97
+      ],
+      "bytes": 5693944.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 941499.9805000001,
+      "process_medians_ns": [
+        926500.012,
+        964500.01,
+        937499.979,
+        945499.982
+      ],
+      "bytes": 4030848.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 520250.0035,
+      "process_medians_ns": [
+        506000.011,
+        519499.998,
+        528000.004,
+        521000.009
+      ],
+      "bytes": 1941688.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 1656250.04,
+      "process_medians_ns": [
+        1599000.01,
+        1687999.99,
+        1679500.04,
+        1633000.04
+      ],
+      "bytes": 5972472.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 520500.005,
+      "process_medians_ns": [
+        506000.011,
+        520500.005,
+        522500.02,
+        520500.005
+      ],
+      "bytes": 1825728.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 541749.9924999999,
+      "process_medians_ns": [
+        527000.055,
+        545000.017,
+        541999.994,
+        541499.991
+      ],
+      "bytes": 2064456.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "fallback-heavy",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 854749.9890000001,
+      "process_medians_ns": [
+        815499.981,
+        830999.983,
+        878499.995,
+        1640999.98
+      ],
+      "bytes": 3857344.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 134.27735,
+      "process_medians_ns": [
+        133.422859,
+        134.155286,
+        134.887699,
+        134.399414
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 57.80029255,
+      "process_medians_ns": [
+        57.7392569,
+        57.7392569,
+        58.3495989,
+        57.8613282
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 206.604007,
+      "process_medians_ns": [
+        203.735354,
+        203.369154,
+        209.47266,
+        226.074221
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 133.54493,
+      "process_medians_ns": [
+        133.54493,
+        133.178716,
+        133.54493,
+        139.770506
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 63.35449145,
+      "process_medians_ns": [
+        63.2324202,
+        61.523437,
+        67.9931702,
+        63.4765627
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 211.7309565,
+      "process_medians_ns": [
+        207.519534,
+        205.566408,
+        217.041006,
+        215.942379
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 133.7890655,
+      "process_medians_ns": [
+        132.690431,
+        133.056645,
+        134.521486,
+        139.282236
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 70.43457369999999,
+      "process_medians_ns": [
+        69.8242246,
+        69.4579967,
+        71.0449228,
+        71.5331936
+      ],
+      "bytes": 168.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 216.7358345,
+      "process_medians_ns": [
+        216.06445,
+        208.007819,
+        217.407219,
+        218.383789
+      ],
+      "bytes": 1184.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 133.8501005,
+      "process_medians_ns": [
+        133.789058,
+        133.911129,
+        138.061523,
+        133.789072
+      ],
+      "bytes": 1016.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 181.7626935,
+      "process_medians_ns": [
+        180.66406,
+        183.10547,
+        182.1289,
+        181.396487
+      ],
+      "bytes": 712.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 338.684082,
+      "process_medians_ns": [
+        338.378911,
+        329.711909,
+        355.834956,
+        338.989253
+      ],
+      "bytes": 1728.01562,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 63.53759825,
+      "process_medians_ns": [
+        62.2558645,
+        62.5000069,
+        64.5751896,
+        64.6972609
+      ],
+      "bytes": 464.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 111.206056,
+      "process_medians_ns": [
+        110.595693,
+        110.961921,
+        112.182619,
+        111.450191
+      ],
+      "bytes": 504.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 1,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 176.69678,
+      "process_medians_ns": [
+        175.415039,
+        178.34472,
+        177.490236,
+        175.903324
+      ],
+      "bytes": 952.015625,
+      "eligible": 1
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 22373.04695,
+      "process_medians_ns": [
+        22355.4689,
+        22128.906,
+        22390.625,
+        22523.4376
+      ],
+      "bytes": 52672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 25220.70325,
+      "process_medians_ns": [
+        25246.0941,
+        24960.9375,
+        31339.8441,
+        25195.3124
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 48146.48445,
+      "process_medians_ns": [
+        47347.6562,
+        47773.4375,
+        48796.875,
+        48519.5314
+      ],
+      "bytes": 74064.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 22388.6716,
+      "process_medians_ns": [
+        21917.9688,
+        22292.9684,
+        22484.3748,
+        23113.2813
+      ],
+      "bytes": 52672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 25160.1564,
+      "process_medians_ns": [
+        25136.7187,
+        25015.6249,
+        25183.5941,
+        26199.2186
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 47972.65615,
+      "process_medians_ns": [
+        47902.3438,
+        47374.9997,
+        48042.9685,
+        48300.7811
+      ],
+      "bytes": 74064.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 22474.6093,
+      "process_medians_ns": [
+        22398.4375,
+        22417.9685,
+        22531.2501,
+        24984.3747
+      ],
+      "bytes": 52672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 25447.26545,
+      "process_medians_ns": [
+        25273.4376,
+        25433.5937,
+        25460.9372,
+        25703.1252
+      ],
+      "bytes": 21392.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 48388.672000000006,
+      "process_medians_ns": [
+        47257.8126,
+        47984.3752,
+        48792.9688,
+        50039.0624
+      ],
+      "bytes": 74064.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 22375.0003,
+      "process_medians_ns": [
+        22144.5312,
+        22300.7814,
+        22449.2192,
+        22601.5623
+      ],
+      "bytes": 52672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 25689.45295,
+      "process_medians_ns": [
+        25445.3125,
+        25406.2497,
+        25933.5934,
+        26363.2814
+      ],
+      "bytes": 23568.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 48689.453,
+      "process_medians_ns": [
+        48382.8126,
+        48601.5624,
+        48777.3436,
+        52546.8749
+      ],
+      "bytes": 76240.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 21755.85925,
+      "process_medians_ns": [
+        21265.625,
+        21562.5,
+        21949.2185,
+        23683.5936
+      ],
+      "bytes": 47816.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 25792.968950000002,
+      "process_medians_ns": [
+        25812.5001,
+        25761.7189,
+        26632.8125,
+        25773.4378
+      ],
+      "bytes": 24672.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 32,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 47802.73435,
+      "process_medians_ns": [
+        46417.9689,
+        47453.1248,
+        48152.3439,
+        48339.8439
+      ],
+      "bytes": 72224.5,
+      "eligible": 8
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 185562.4995,
+      "process_medians_ns": [
+        183281.249,
+        184749.999,
+        186437.501,
+        186375
+      ],
+      "bytes": 419716.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 201468.7505,
+      "process_medians_ns": [
+        200531.249,
+        202625,
+        201187.5,
+        201750.001
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 390250.0015,
+      "process_medians_ns": [
+        386875.003,
+        383312.501,
+        393625,
+        406562.5
+      ],
+      "bytes": 589588.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 186765.62449999998,
+      "process_medians_ns": [
+        184500.001,
+        186937.501,
+        186593.748,
+        188531.249
+      ],
+      "bytes": 419716.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 200453.127,
+      "process_medians_ns": [
+        196781.25,
+        201406.252,
+        199937.502,
+        200968.752
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 392218.75,
+      "process_medians_ns": [
+        390156.249,
+        384999.999,
+        394281.251,
+        395593.75
+      ],
+      "bytes": 589588.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 185609.3765,
+      "process_medians_ns": [
+        185656.252,
+        184093.751,
+        186031.251,
+        185562.501
+      ],
+      "bytes": 419716.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 200937.4985,
+      "process_medians_ns": [
+        200281.251,
+        200562.499,
+        201312.498,
+        205624.998
+      ],
+      "bytes": 169876.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 392093.751,
+      "process_medians_ns": [
+        392937.502,
+        387812.499,
+        394999.999,
+        391250
+      ],
+      "bytes": 589588.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 185796.8765,
+      "process_medians_ns": [
+        190343.751,
+        185593.752,
+        184375,
+        186000.001
+      ],
+      "bytes": 419716.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 206968.751,
+      "process_medians_ns": [
+        219281.25,
+        204437.5,
+        203937.499,
+        209500.002
+      ],
+      "bytes": 187284.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 395609.3735,
+      "process_medians_ns": [
+        429000,
+        395656.247,
+        394625,
+        395562.5
+      ],
+      "bytes": 606996.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 179812.5015,
+      "process_medians_ns": [
+        181500,
+        179156.25,
+        179718.751,
+        179906.252
+      ],
+      "bytes": 383052.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 210000.0,
+      "process_medians_ns": [
+        214718.752,
+        212593.75,
+        207281.249,
+        207406.25
+      ],
+      "bytes": 196900.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 256,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 384687.501,
+      "process_medians_ns": [
+        385156.251,
+        385656.251,
+        382124.999,
+        384218.751
+      ],
+      "bytes": 577892.0,
+      "eligible": 64
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3610750.02,
+      "process_medians_ns": [
+        3582499.98,
+        3608500,
+        3613000.04,
+        3614999.99
+      ],
+      "bytes": 6711952.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3298749.975,
+      "process_medians_ns": [
+        3389499.97,
+        3253500.04,
+        3268999.98,
+        3328499.97
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "sleef-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 6887250.025,
+      "process_medians_ns": [
+        7042500.02,
+        6900500.04,
+        6856000.05,
+        6874000.01
+      ],
+      "bytes": 9429392.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "compile",
+      "median_process_median_ns": 3556999.99,
+      "process_medians_ns": [
+        3602999.96,
+        3564499.96,
+        3549500.02,
+        3503000.01
+      ],
+      "bytes": 6711952.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "execute",
+      "median_process_median_ns": 3326249.9800000004,
+      "process_medians_ns": [
+        3382000.02,
+        3275499.97,
+        3376999.99,
+        3212500.01
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-simd",
+      "phase": "one-shot",
+      "median_process_median_ns": 7051000.02,
+      "process_medians_ns": [
+        7248000.01,
+        7075000.03,
+        6948500,
+        7027000.01
+      ],
+      "bytes": 9429392.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "compile",
+      "median_process_median_ns": 3611749.9699999997,
+      "process_medians_ns": [
+        3769999.95,
+        3589999.98,
+        3535500.03,
+        3633499.96
+      ],
+      "bytes": 6711952.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "execute",
+      "median_process_median_ns": 3457000.0149999997,
+      "process_medians_ns": [
+        3506499.98,
+        3439000.05,
+        3312000.02,
+        3474999.98
+      ],
+      "bytes": 2717504.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "native-scalar",
+      "phase": "one-shot",
+      "median_process_median_ns": 6997749.965,
+      "process_medians_ns": [
+        9848500.02,
+        7036999.97,
+        6950000.01,
+        6958499.96
+      ],
+      "bytes": 9429392.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "compile",
+      "median_process_median_ns": 3670749.98,
+      "process_medians_ns": [
+        4261999.97,
+        3587999.96,
+        3539000,
+        3753500
+      ],
+      "bytes": 6711952.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "execute",
+      "median_process_median_ns": 3457000.015,
+      "process_medians_ns": [
+        4416499.99,
+        3389500.02,
+        3406500.04,
+        3507499.99
+      ],
+      "bytes": 2996032.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "prepared-ocaml",
+      "phase": "one-shot",
+      "median_process_median_ns": 7075500.005000001,
+      "process_medians_ns": [
+        7644500,
+        6955499.99,
+        7030499.98,
+        7120500.03
+      ],
+      "bytes": 9707920.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "compile",
+      "median_process_median_ns": 3433249.98,
+      "process_medians_ns": [
+        3486500.01,
+        3436999.98,
+        3412000.02,
+        3429499.98
+      ],
+      "bytes": 6130008.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "execute",
+      "median_process_median_ns": 3441749.9850000003,
+      "process_medians_ns": [
+        3418000.01,
+        3429999.98,
+        3477499.99,
+        3453499.99
+      ],
+      "bytes": 3151568.0,
+      "eligible": 1024
+    },
+    {
+      "revision": 1,
+      "family": "mixed",
+      "n": 4096,
+      "backend": "batch-fast",
+      "phase": "one-shot",
+      "median_process_median_ns": 6235499.98,
+      "process_medians_ns": [
+        6251999.99,
+        6209500.02,
+        6218999.97,
+        6407500.01
+      ],
+      "bytes": 9248736.0,
+      "eligible": 1024
+    }
+  ]
+}

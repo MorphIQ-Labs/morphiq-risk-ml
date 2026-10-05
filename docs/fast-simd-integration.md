@@ -30,6 +30,8 @@ Scalar prices, IV, Greeks and certified quantities retain their numerical
 operation graphs. First-stage tests cover fixture equivalence, selection
 boundaries, immutable concurrent use and compile-time rejection of forged
 parameters and access through the stable Bachelier surface.
+The [first-stage evidence](results-bachelier-preparation.md) records exact
+110,632-row compatibility, affected mutations and paired preparation measurements.
 
 ## Integration obligations
 
