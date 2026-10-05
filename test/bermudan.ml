@@ -251,7 +251,9 @@ let controls () =
     (fun r ->
       List.iter
         (fun cash ->
-          let p = model ~s:0x1p-30 ~vol:0.4 ~r ~opens:0.2 () in
+          (* A high diffusion rate makes the absorbing boundary materially
+             observable at the spot anchor after spatial refinement. *)
+          let p = model ~s:0x1p-30 ~vol:2. ~r ~opens:0.2 () in
           let ds = regular [ 0.2; 0.55; 1. ] in
           let cash = if cash then Some (spec [ (0.4, 5.) ]) else None in
           let a = unwrap (A.admit_bermudan ?cash p ds) in
