@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American/Bermudan contract design (#108)
+
+- Define the planned BSM stopping model, immediate settlement, explicit exercise
+  and dividend-event sides, limited-liability cash dividends, piecewise inputs
+  and deterministic/negative-rate boundaries.
+- Record additive API ownership, distinct estimated/certified outcomes and
+  analytical examples in the [design](docs/american-model-contract.md).
+  This documentation adds no runtime capability or numerical changes.
+
 ### Bounded native Fast planner tiles (#8)
 
 - Batch eligible homogeneous Bachelier scenario rows on ARM64 single-worker

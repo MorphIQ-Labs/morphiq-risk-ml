@@ -15,6 +15,11 @@ These definitions are what the library computes. Every accuracy claim is measure
 
 The separate [production adapter](production-boundary-design.md) serves prices and smooth Greeks with enforced, caller-requested absolute error bounds in their units. It uses these same exact models and preserves the certified IV contract. Its explicit boundary exclusions and computational failures are capability outcomes, not new financial definitions.
 
+The separate [American/Bermudan design](american-model-contract.md) defines the
+planned stopping model and event conventions under #108. It is not implemented
+by the European APIs below and does not inherit their numerical certificates or
+IV rounding guarantees.
+
 ## Black-76 family
 
 | Model | Definition |
