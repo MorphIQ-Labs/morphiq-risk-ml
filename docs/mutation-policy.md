@@ -276,6 +276,7 @@ existing independently checked price capability. The full catalog now contains 1
 mechanisms; default CI still selects the same seven core mutants.
 
 The optional `american-spatial-grid-key` fault omits domain expansion from the
-request-local preparation key. The reused-band length precondition must explicitly reject the
-wrong grid through the ordinary American capability witness after a successful build; source/replay identity alone
-is not the kill. Current full catalog: 109; default core remains seven.
+request-local preparation key. The reused-band length precondition must explicitly
+reject the wrong grid through the ordinary American capability witness after a
+successful build; source/replay identity alone is not the kill. Default core
+remains seven.

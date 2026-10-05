@@ -1,0 +1,5 @@
+{
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "Fatal error: exception Failure(\"arithmetic:prepared spatial grid mismatch\")\n"
+}

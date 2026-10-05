@@ -1,6 +1,7 @@
 # American enclosure allocation follow-up (#119)
 
-This follows the [first boxing pass](results-american-allocation.md). The frozen
+The subsequent [request-local spatial reuse pass](results-american-spatial-reuse.md)
+remeasures this implementation as its baseline. This report follows the [first boxing pass](results-american-allocation.md). The frozen
 [protocol](evidence/american-enclosure-allocation/protocol.md) targets at least
 50% less allocation than #131 for matched no/zero/one-cash prices, including
 requested diagnostics, without more than 10% median latency regression. This
