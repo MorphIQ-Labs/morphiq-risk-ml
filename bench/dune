@@ -194,3 +194,11 @@
    %{dep:../scripts/test_operational_campaign.py}
    %{exe:planner_load.exe}
    %{dep:operational-local.json})))
+
+(executable
+ (name native_fast_planner)
+ (modules native_fast_planner)
+ (ocamlopt_flags
+  (:standard -O3))
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix))

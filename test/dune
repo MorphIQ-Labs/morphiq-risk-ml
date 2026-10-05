@@ -785,3 +785,25 @@
    %{test}
    %{dep:../oracle/fixtures/european.txt}
    %{dep:../oracle/fixtures/displaced.txt})))
+
+(test
+ (name native_fast_planner)
+ (modules native_fast_planner)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/benchmark_native_tiles.py
+  ../scripts/test_benchmark_native_tiles.py)
+ (action
+  (run python3 %{dep:../scripts/test_benchmark_native_tiles.py})))

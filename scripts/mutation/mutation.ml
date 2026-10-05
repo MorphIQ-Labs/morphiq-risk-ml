@@ -38,6 +38,16 @@ type mutant = {
 let catalog =
   [
     {
+      id = "native-planner-order";
+      file = "lib/planner.ml";
+      snippet = "results.(!next)";
+      replacement = "results.(Array.length results - 1 - !next)";
+      killer = "native_fast_planner";
+      mechanism =
+        "native tile outputs retain original indices across expiry and invalid \
+         rows";
+    };
+    {
       id = "native-bachelier-exponent";
       file = "lib/bachelier_operation_graph.h";
       snippet = "T hi=C(0.5)*sq;";
@@ -1084,7 +1094,7 @@ let guard_arguments = function
   | "exchange_reference" -> [ [ "exchange_reference" ] ]
   | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
   | "native_bachelier_reference" -> [ [ "european"; "displaced" ] ]
-  | "native_bachelier" -> [ [] ]
+  | "native_bachelier" | "native_fast_planner" -> [ [] ]
   | "oracle_iv" | "certified_iv_reference" -> [ [ "iv" ] ]
   | "enclosure_reference" | "dd_reference" -> [ [ "dd" ] ]
   | "oracle_normal" -> [ [ "normal" ] ]
