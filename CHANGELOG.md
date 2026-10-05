@@ -5,6 +5,29 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Bounded native Fast planner tiles (#8)
+
+- Batch eligible homogeneous Bachelier scenario rows on ARM64 single-worker
+  execution, with invocation-private preparation chunks capped at 256 rows.
+  Preserve logical tiles, ordered failures, cancellation and sink boundaries.
+- Paired 4,096-position/four-scenario eligible execution improves 24–27% and
+  allocates about 9% less; mixed books are essentially unchanged. Fallback-heavy
+  serial jobs cost 1–2% more. Multiworker execution retains scalar pricing after
+  inconsistent native results. See [complete evidence](docs/results-native-planner.md).
+- Preserve numerical gates and exact served words; extend chunk, ownership,
+  failure and mutation controls. No SLEEF dependency or certification change.
+
+### Native compiled Bachelier Fast batches (#8)
+
+- Reuse private admitted Bachelier coordinates and pack sufficiently dense,
+  bounded OTM batches for an operation-preserving ARM64 kernel. Other models,
+  unsupported targets and one-shot `run`/`evaluate` retain scalar execution.
+- Preserve selected scalar words and existing accuracy gates; retain independent
+  references, foreign-boundary controls, native/bytecode packaging and paired
+  performance evidence. Compilation cost and reused throughput are separate.
+  See [qualification](docs/results-native-bachelier-batches.md). SLEEF remains
+  optional research; certified APIs and release acceptance are unchanged.
+
 ### Integrated candidate qualification (#17)
 
 - Retain the exact-source qualification of `f703546`: three-platform package

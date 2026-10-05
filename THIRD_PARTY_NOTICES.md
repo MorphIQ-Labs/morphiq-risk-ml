@@ -13,11 +13,11 @@ records the actual downloaded sources, development chronology and hashes.
 
 | Material | Project use | Notice |
 | --- | --- | --- |
-| Peter Jäckel, Let's Be Rational, 2024 reference revision | Derived portions in `lib/lbr.ml`, `lib/normalised_black.ml`, and the generated polynomial replay from `oracle/lift_polynomials.py` | [Upstream permission and warranty notice](LICENSES/LetsBeRational.txt); existing source headers remain intact |
+| Peter Jäckel, Let's Be Rational, 2024 reference revision | Derived portions in `lib/lbr.ml`, `lib/normalised_black.ml`, `lib/bachelier_operation_graph.h`, and the generated polynomial replay from `oracle/lift_polynomials.py` | [Upstream permission and warranty notice](LICENSES/LetsBeRational.txt); existing source headers remain intact; native kernel notices also accompany `lib/bachelier_kernel_NOTICE.txt` |
 | QD 2.3.24 author-hosted tarball, Hida, Li, and Bailey | Historical exponential adaptation, now replaced in `lib/dd.ml` by the [project-derived polynomial](docs/results-dd-exponential-optimization.md); retained notices identify earlier versions | [Original COPYING](LICENSES/QD-COPYING.txt), [original license DOC](LICENSES/QD-BSD-LBNL-License.doc), and [complete text extraction](LICENSES/QD-BSD-LBNL-License.txt); terms review remains open |
 | Wichura AS241 / Royal Statistical Society | Historical adaptation, replaced by [project-derived Gaussian inversion](docs/inverse-normal-replacement.md) in `lib/normal.ml` | [StatLib distribution notice](LICENSES/AS241-StatLib.txt); no unrestricted grant established |
 | Cody CALERF, March 19, 1990 | Historical adaptation, replaced by [project-generated error functions](docs/error-function-replacement.md) in `lib/cody.ml` | Original author attribution retained; no explicit grant in the inspected source/README |
-| Sun fdlibm | `lib/elementary.ml` references the split logarithm constant, tiny-input rule, and related elementary-function constructions | [Sun permission notice](LICENSES/Sun-fdlibm.txt) |
+| Sun fdlibm | `lib/elementary.ml` references the split logarithm constant, tiny-input rule, and related elementary-function constructions; `lib/bachelier_operation_graph.h` ports its restricted reduced exponential | [Sun permission notice](LICENSES/Sun-fdlibm.txt); also retained in `lib/bachelier_kernel_NOTICE.txt` |
 
 Sources:
 

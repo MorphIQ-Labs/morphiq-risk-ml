@@ -16,6 +16,8 @@ module Exchange = Exchange
 module Production = Production
 
 module Internal = struct
+  module Bachelier_fast = Bachelier.Fast_middle
+  module Bachelier_native = Bachelier_native
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split

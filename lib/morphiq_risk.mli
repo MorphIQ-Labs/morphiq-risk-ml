@@ -37,7 +37,37 @@ module Units = Units
 module Iv = Iv
 module Greeks = Greeks
 module Black = Black
-module Bachelier = Bachelier
+
+module Bachelier : sig
+  (** European options under the normal (Bachelier) model.
+
+      Fast Greek results are checked per field for finiteness in their output
+      units. Unresolved arithmetic returns [Greeks.Numerical_failure]; a finite
+      result retains the documented checked-input accuracy scope. *)
+
+  type inputs = Bachelier.inputs = {
+    forward : float;
+    strike : float;
+    time_to_expiry : float;
+    rate : float;
+  }
+
+  type admitted = Bachelier.admitted
+  (** Inputs that passed the domain check. Only {!admit} constructs one. *)
+
+  val admit : inputs -> (admitted, Refusal.t) result
+  (** Forward and strike may take any finite sign. *)
+
+  val price : admitted -> Side.t -> Vol.normal Vol.t -> float
+
+  val implied :
+    admitted -> Side.t -> float -> (Vol.normal Iv.t, Refusal.t) result
+  (** A correctly rounded positive inverse, a mathematical classification, or an
+      explicit computational failure; see {!Iv.t}. *)
+
+  val greeks : admitted -> Side.t -> Vol.normal Vol.t -> Vol.normal Greeks.t
+end
+
 module Normal = Normal
 module Batch = Batch
 module Scenario = Scenario
@@ -49,6 +79,24 @@ module Production : module type of Production
     covered by the stability policy and may change in any release. *)
 
 module Internal : sig
+  module Bachelier_fast : sig
+    type t = private { q : float; low : float; s : float; discount : float }
+
+    val may_prepare : Bachelier.inputs -> Side.t -> Vol.normal Vol.t -> bool
+    val prepare : Bachelier.admitted -> Side.t -> Vol.normal Vol.t -> t option
+    val price : t -> float
+  end
+
+  module Bachelier_native : sig
+    type t
+
+    val backend : int
+    val default_enabled : bool
+    val compile : Bachelier_fast.t array -> t
+    val length : t -> int
+    val execute : ?scalar:bool -> t -> float array
+  end
+
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split

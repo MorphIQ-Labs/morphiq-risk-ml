@@ -38,6 +38,40 @@ type mutant = {
 let catalog =
   [
     {
+      id = "native-planner-chunk-offset";
+      file = "lib/planner.ml";
+      snippet = "first = work.first + !offset";
+      replacement = "first = work.first";
+      killer = "native_fast_planner";
+      mechanism = "private preparation chunks preserve the original tile offset";
+    };
+    {
+      id = "native-planner-order";
+      file = "lib/planner.ml";
+      snippet = "results.(!next)";
+      replacement = "results.(Array.length results - 1 - !next)";
+      killer = "native_fast_planner";
+      mechanism =
+        "native tile outputs retain original indices across expiry and invalid \
+         rows";
+    };
+    {
+      id = "native-bachelier-exponent";
+      file = "lib/bachelier_operation_graph.h";
+      snippet = "T hi=C(0.5)*sq;";
+      replacement = "T hi=sq;";
+      killer = "native_bachelier_reference";
+      mechanism = "native Gaussian exponent retains its half-square scaling";
+    };
+    {
+      id = "native-bachelier-mode";
+      file = "lib/bachelier_kernel_stubs.c";
+      snippet = "mode<1 || mode>2 ||";
+      replacement = "0 ||";
+      killer = "native_bachelier";
+      mechanism = "native boundary rejects unsupported dispatch modes";
+    };
+    {
       id = "fast-planner-tile";
       file = "lib/planner.ml";
       snippet = "work <> tile plan work.id";
@@ -65,10 +99,10 @@ let catalog =
     {
       id = "fast-batch-order";
       file = "lib/batch.ml";
-      snippet = "let execute batch = Array.map price batch";
+      snippet = "| Scalar_batch entries -> Array.map price entries";
       replacement =
-        "let execute batch = Array.init (Array.length batch) (fun i -> price \
-         batch.(Array.length batch - i - 1))";
+        "| Scalar_batch entries -> Array.init (Array.length entries) (fun i -> \
+         price entries.(Array.length entries - i - 1))";
       killer = "fast_batch";
       mechanism =
         "compiled fast results preserve original item order and failures";
@@ -1067,6 +1101,8 @@ let replace needle by hay =
 let guard_arguments = function
   | "exchange_reference" -> [ [ "exchange_reference" ] ]
   | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
+  | "native_bachelier_reference" -> [ [ "european"; "displaced" ] ]
+  | "native_bachelier" | "native_fast_planner" -> [ [] ]
   | "oracle_iv" | "certified_iv_reference" -> [ [ "iv" ] ]
   | "enclosure_reference" | "dd_reference" -> [ [ "dd" ] ]
   | "oracle_normal" -> [ [ "normal" ] ]
