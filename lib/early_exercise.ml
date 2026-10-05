@@ -729,9 +729,13 @@ module Bsm = struct
      original words; rounded time coordinates are not dependency identities.
      A 256-byte entry charge covers the list/tuple/key/array headers and boxed
      words on the supported 64-bit runtime; payload is 8 bytes per step. *)
-  let boundary_values cache earlier later next_exercise time_steps =
+  let boundary_values ~max_steps cache earlier later next_exercise time_steps =
     let remaining, entries = !cache in
-    if remaining = 0 && entries = [] then None
+    if
+      (remaining = 0 && entries = [])
+      || time_steps > max_steps
+      || time_steps > Sys.max_floatarray_length
+    then None
     else
       let key =
         ( Int64.bits_of_float earlier,
@@ -879,7 +883,8 @@ module Bsm = struct
         if h *. float_max (-.p.rate) 0. > 0.5 then
           fail "negative-rate matrix margin";
         let zero_values =
-          boundary_values boundary_cache earlier later next_exercise time_steps
+          boundary_values ~max_steps:c.cfg.limits.max_steps boundary_cache earlier
+            later next_exercise time_steps
         in
         let previous = ref later in
         for j = 1 to time_steps do
