@@ -869,7 +869,15 @@
  (name american_pricing)
  (modules american_pricing)
  (modes byte exe)
- (libraries morphiq_risk unix))
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
 
 (rule
  (alias runtest)
@@ -887,15 +895,3 @@
     %{dep:../scripts/check_american_runtime.py}
     --executable
     %{exe:american_pricing.exe}))))
-
-(rule
- (alias runtest)
- (deps
-  american_pricing.bc
-  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
-  ../lib/dllmorphiq_risk_stubs%{ext_dll})
- (action
-  (setenv
-   CAML_LD_LIBRARY_PATH
-   ../lib:../lib/fp
-   (run %{dep:american_pricing.bc}))))
