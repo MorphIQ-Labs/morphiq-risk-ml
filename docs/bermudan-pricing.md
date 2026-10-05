@@ -68,6 +68,23 @@ in linear time, with metadata, workspace, row, step and cancellation limits.
 More exercise dates add slabs and can exhaust those limits. Admission memory
 is proportional to supplied schedules; numerical work caps govern pricing.
 
+Zero-stock put boundaries reuse successful evaluations within the request, keyed
+by the original slab endpoint words, next exercise word, time-step count and
+integer step. The same enclosed evaluator runs on every miss. The local
+arithmetic allowance is fixed and its recorded maximum error never decreases,
+so reuse preserves both validation and the accumulated indicator. Discount
+recurrences and rounded-time keys are not used. Positive-rate American puts
+with immediate opening and calls skip this preparation.
+
+Optional preparation consumes only surplus after the existing solver and event
+metadata reservations: 128 bytes for the owner plus 256 bytes per entry and
+8 bytes per time step, including conservative overhead for the supported
+64-bit runtime. Each array must also fit the runtime array limit and the
+request's maximum step count. The entry charge bounds the lookup list as well
+as its arrays. When an entry does not fit, that slab uses the original evaluator;
+workspace availability, logical work counts and cancellation points are
+unchanged. See [qualification](results-bermudan-boundary.md).
+
 Results retain method identity, refinement, residual, arithmetic, cash-mapping
 and work diagnostics. Exercise regions are available only at a listed valuation
 instant and only on a sampled numerical route. Cash-European premiums remain

@@ -294,6 +294,17 @@ let controls () =
             [ 128; 4096; 1048576 ])
         [ false; true ])
     [ 0.05; -0.05 ];
+  expect "oversized optional boundary array falls back"
+    (match
+       A.price
+         (config
+            ~steps:((Sys.max_floatarray_length + 1) / 4)
+            ~lim:{ limits with max_steps = 1; max_workspace_bytes = max_int }
+            1.)
+         admitted Side.Put
+     with
+    | Error (A.Arithmetic_unresolved "collapsed time coordinates") -> true
+    | _ -> false);
   let run () = A.price cfg admitted Side.Put in
   let expected = run () in
   let workers = Array.init 2 (fun _ -> Domain.spawn run) in

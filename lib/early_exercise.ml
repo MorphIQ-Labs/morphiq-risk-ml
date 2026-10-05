@@ -883,8 +883,8 @@ module Bsm = struct
         if h *. float_max (-.p.rate) 0. > 0.5 then
           fail "negative-rate matrix margin";
         let zero_values =
-          boundary_values ~max_steps:c.cfg.limits.max_steps boundary_cache earlier
-            later next_exercise time_steps
+          boundary_values ~max_steps:c.cfg.limits.max_steps boundary_cache
+            earlier later next_exercise time_steps
         in
         let previous = ref later in
         for j = 1 to time_steps do

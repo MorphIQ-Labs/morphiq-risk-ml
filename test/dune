@@ -1008,4 +1008,5 @@
   ../scripts/test_bermudan_boundary.py
   ../scripts/benchmark_bermudan_boundary.py
   ../scripts/benchmark_american_allocation.py)
- (action (run python3 %{dep:../scripts/test_bermudan_boundary.py})))
+ (action
+  (run python3 %{dep:../scripts/test_bermudan_boundary.py})))
