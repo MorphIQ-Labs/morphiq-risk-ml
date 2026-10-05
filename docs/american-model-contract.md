@@ -5,7 +5,10 @@ No American runtime API is implemented by this document.** It fixes the real
 quantity, event semantics and ownership that #109–#120 must implement and qualify.
 The general schedule names in the API sketch remain proposed; #111/#112 supply
 the [constant-coefficient scalar API](american-pricing.md), including
-[scheduled cash dividends](american-cash-dividends.md). Existing European
+[scheduled cash dividends](american-cash-dividends.md). #113 adds
+[explicit finite Bermudan schedules](bermudan-pricing.md) through
+`Bsm.admit_bermudan`; the broader coefficient-schedule sketch remains proposed.
+Existing European
 definitions, certificates and served values are unchanged.
 
 Work is staged on `feature/american-integration`, created from main at

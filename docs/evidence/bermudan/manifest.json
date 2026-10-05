@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "sha256": {
+    "docs/evidence/bermudan/arithmetic.json": "78bbd210e548f9fdcd8d14634acd7c1323b215d14b0c0a96bbede2964038c770",
+    "docs/evidence/bermudan/build.json": "05af5f4ac6e71c15b29bd0cc9f801511d4f8e288a949da8647635977ec94604f",
+    "docs/evidence/bermudan/canonical-comparisons.json": "fe279ffed5cc6102491709c3b20742397b5173c2698bfd9b898ee8e143c58ebc",
+    "docs/evidence/bermudan/cases-v1.json": "7e9c1e20f837d9a09fae075c0246ba75a8145137b77ab0930326e25a11e4e33d",
+    "docs/evidence/bermudan/protocol.md": "a7b97253d5844328833281a4b2383051b2390f6d3304162ac89e3f752523f9bc",
+    "docs/evidence/bermudan/quadrature-input.txt": "5db4f6474f3f0ee923abe23db321924f9fb6a9859dd9ff70506550ee0ee7d04c",
+    "docs/evidence/bermudan/quadrature.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/bermudan/quadrature.tsv": "6e5e7e1055ba7e5631a2344e384575565576bdafd8daacc7b3542105f827554b",
+    "docs/evidence/bermudan/quantlib-input.txt": "65157bb2825cbea05034b9b0759cba67e3960b677fc8f148c22bd12e91942dc1",
+    "docs/evidence/bermudan/quantlib.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/bermudan/quantlib.tsv": "0397f5e9acaad7a640d47249efcbdf1c24b4149856ffc0d840279efbd0494dc5",
+    "docs/evidence/bermudan/references.json": "cb46f500664a0d9841e809654803ae5b71ef75afb1117c707adc233cac5123d2",
+    "docs/evidence/bermudan/runner-controls.json": "78e7da7c88c5f374e25b755e749a6531dbd67a697376174470d3814f3998a90e",
+    "scripts/american_cash_io.hpp": "8b244a25ea0c62bf120f3e6343bea68b846dfc688de020be65e23d9f4ee705e8",
+    "scripts/american_cash_references.py": "addb1fc6db074495129549885fb7ddfc80cbea7d62e5a1c3a9ba72fcc1c9e55b",
+    "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
+    "scripts/bermudan_io.hpp": "408c5673cc8be726dd26373cdff5cb66e82c491b511948a1db95137a7ae69b79",
+    "scripts/bermudan_quadrature.cpp": "e7c1d173af77dd03b5e7d84692077aa8421cdf267c96545885ccd7fcc0a6592a",
+    "scripts/bermudan_quantlib.cpp": "3fb66f459bd90db93ac63c5e6e5faf146be829bbdbb5d8fad56c9a553180dddd",
+    "scripts/bermudan_references.py": "6dfefef5f9312762de2e9df04ca870ed3e958256f11638314439905adc893759",
+    "scripts/check_bermudan_reference_arithmetic.py": "7e27c35ad0f26befa50052be81574ab97c58d839746eb80a1d1eca2130245b21",
+    "scripts/freeze_bermudan.py": "71bf5e16dd9868a2b36f81971e44813ca488dbee8d03c06889b176ce5bc8a6ae"
+  }
+}

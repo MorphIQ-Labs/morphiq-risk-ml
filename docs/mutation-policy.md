@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **109
+seven core mutants. The catalog currently contains **112
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -255,6 +255,12 @@ the first chunk instead of advancing its original offset. The dense-tile guard
 checks whole ordered rows across 256/257/512/513-row tiles; the seven-mutant core
 is unchanged.
 
+The optional `bermudan-finite-deterministic`, `bermudan-valuation-projection`
+and `bermudan-next-right-boundary` mutants use `bermudan`: a finite deterministic
+stopping strategy, immediate intrinsic payoff at a listed valuation date, and
+analytical discounted-strike bounds before the first right. These are optional;
+default PR CI still runs only the seven core mutants.
+
 The optional `american-cash-opening-side`, `american-cash-liquidator` and
 `american-cash-refinement` mutants are guarded by `american_cash`: event-side
 exercise eligibility, the limited-liability jump and independent mapping
@@ -272,7 +278,7 @@ Three optional mechanisms cover transported scalar input radii, stale packing
 scratch slots and the orientation of a reused American stencil. The scalar
 witness checks exact-rational containment before compatibility fingerprints;
 changed replay bits alone are not a kill. The American witness requires the
-existing independently checked price capability. The full catalog now contains 109
+existing independently checked price capability. The full catalog now contains 112
 mechanisms; default CI still selects the same seven core mutants.
 
 The optional `american-spatial-grid-key` fault omits domain expansion from the

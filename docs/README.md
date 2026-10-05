@@ -2,13 +2,15 @@
 
 Start with the [project README](../README.md) for installation and a certified
 pricing example. The current implementation includes the European scalar family,
-typed batches, bounded scenario planning, and estimated scalar American prices. The original slice proposal has
+typed batches, bounded scenario planning, and estimated scalar American and Bermudan prices. The original slice proposal has
 been retired; it remains in Git history.
 
 - [Experimental baseline](experimental-baseline.md): claim owners, exact-candidate evidence and limitations.
 - [Open-source closeout](opensource-closeout.md): current provenance, packaging and security disposition.
 
 ## Current contracts
+
+- [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 
 - [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.
 

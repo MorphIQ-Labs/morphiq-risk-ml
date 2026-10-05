@@ -1,5 +1,6 @@
-(** Estimated American prices. These results are not [Production] certificates.
-    See [docs/american-pricing.md] for numerical capability and limitations. *)
+(** Estimated American and Bermudan prices. These results are not [Production]
+    certificates. See [docs/american-pricing.md] for numerical capability and
+    limitations. *)
 module Bsm : sig
   type inputs = {
     spot : float;
@@ -21,6 +22,7 @@ module Bsm : sig
     dividends : dividend array;
   }
 
+  type exercise_instant = { time : float; side : event_side }
   type admitted
   type input_error = Invalid_input of string
 
@@ -37,6 +39,21 @@ module Bsm : sig
       valuation precedes opening, which precedes expiry in instant order. An
       [After_cash] valuation does not subtract the valuation-date payment again.
       The input array is copied; malformed schedules fail before any pricing. *)
+
+  val admit_bermudan :
+    ?cash:cash_specification ->
+    inputs ->
+    exercise_instant array ->
+    (admitted, input_error) result
+  (** Freeze nonempty strictly ordered exercise instants. First/last match
+      [opens_at]/expiry and their cash sides. Regular is required off cash
+      dates; Before/After on cash dates. Both sides at one date are distinct
+      rights. Reject duplicates, unsorted dates and missing expiry. Arrays are
+      copied. Numerical time refinement never adds exercise rights. *)
+
+  val exercise_schedule : admitted -> exercise_instant array option
+  (** A fresh copy for Bermudan admission, including terminal-only schedules;
+      [None] identifies continuous American exercise. *)
 
   val cash_specification : admitted -> cash_specification option
   (** Returns a copy of the frozen schedule. *)

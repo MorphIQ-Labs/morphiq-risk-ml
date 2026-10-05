@@ -958,3 +958,43 @@
     %{dep:../scripts/check_american_cash.py}
     --executable
     %{exe:american_cash.exe}))))
+
+(test
+ (name bermudan)
+ (modules bermudan)
+ (modes byte exe)
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_bermudan.py
+  ../scripts/test_bermudan.py
+  ../scripts/freeze_bermudan.py
+  ../scripts/american_reference_data.py
+  ../scripts/american_runner_io.hpp
+  ../scripts/check_american_cash.py
+  ../scripts/american_cash_io.hpp
+  ../scripts/american_cash_references.py
+  ../scripts/bermudan_io.hpp
+  ../scripts/bermudan_quantlib.cpp
+  ../scripts/bermudan_quadrature.cpp
+  ../scripts/bermudan_references.py
+  ../scripts/check_bermudan_reference_arithmetic.py
+  (glob_files ../docs/evidence/bermudan/*))
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_bermudan.py})
+   (run
+    python3
+    %{dep:../scripts/check_bermudan.py}
+    --executable
+    %{exe:bermudan.exe}))))

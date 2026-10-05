@@ -57,6 +57,30 @@ let catalog =
       mechanism = "packing must not consume stale scalar-quotient scratch slots";
     };
     {
+      id = "bermudan-finite-deterministic";
+      file = "lib/early_exercise.ml";
+      snippet = "if regular || before then add t;";
+      replacement = "if before then add t;";
+      killer = "bermudan";
+      mechanism = "deterministic stopping uses every listed date";
+    };
+    {
+      id = "bermudan-valuation-projection";
+      file = "lib/early_exercise.ml";
+      snippet = "if before || regular then project ();";
+      replacement = "if before then project ();";
+      killer = "bermudan";
+      mechanism = "a listed valuation right enforces its immediate payoff";
+    };
+    {
+      id = "bermudan-next-right-boundary";
+      file = "lib/early_exercise.ml";
+      snippet = "| Some date -> E.sub (exact date) t_e";
+      replacement = "| Some _ -> exact 0.";
+      killer = "bermudan";
+      mechanism = "absorbing puts discount to the next permitted exercise date";
+    };
+    {
       id = "american-spatial-grid-key";
       file = "lib/early_exercise.ml";
       snippet = "when l = level && d = domain -> prepared";
@@ -1193,7 +1217,7 @@ let guard_arguments = function
   | "shared_greeks" | "production_boundary" | "production_multi"
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
-    ->
+  | "bermudan" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
@@ -1240,6 +1264,7 @@ let rec remove_tree path =
   else Sys.remove path
 
 let guard_controls () =
+  List.iter (fun m -> ignore (guard_arguments m.killer)) (catalog @ probes);
   let work = Filename.temp_dir "mutation-guard-controls" "" in
   Fun.protect
     ~finally:(fun () -> remove_tree work)
