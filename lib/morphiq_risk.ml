@@ -13,6 +13,7 @@ module Batch = Batch
 module Scenario = Scenario
 module Planner = Planner
 module Exchange = Exchange
+module Early_exercise = Early_exercise
 module Production = Production
 
 module Internal = struct

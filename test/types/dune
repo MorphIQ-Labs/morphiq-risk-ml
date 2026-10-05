@@ -650,3 +650,99 @@
  (alias runtest)
  (action
   (diff public_fast_preparation.expected public_fast_preparation.out)))
+
+(rule
+ (deps forge_american_admitted.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_admitted.out)
+ (action
+  (with-stderr-to
+   forge_american_admitted.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_admitted.cmo
+     forge_american_admitted.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_admitted.expected forge_american_admitted.out)))
+
+(rule
+ (deps forge_american_estimate.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_estimate.out)
+ (action
+  (with-stderr-to
+   forge_american_estimate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_estimate.cmo
+     forge_american_estimate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_estimate.expected forge_american_estimate.out)))
+
+(rule
+ (deps american_into_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets american_into_certificate.out)
+ (action
+  (with-stderr-to
+   american_into_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_into_certificate.cmo
+     american_into_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff american_into_certificate.expected american_into_certificate.out)))
+
+(rule
+ (deps normal_into_american.ml ../../lib/morphiq_risk.cma)
+ (targets normal_into_american.out)
+ (action
+  (with-stderr-to
+   normal_into_american.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     normal_into_american.cmo
+     normal_into_american.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff normal_into_american.expected normal_into_american.out)))

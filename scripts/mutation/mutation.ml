@@ -38,6 +38,23 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-stationary-stopping";
+      file = "lib/early_exercise.ml";
+      snippet = "| E.Positive, E.Negative -> add root";
+      replacement = "| E.Positive, E.Negative -> ()";
+      killer = "american_pricing";
+      mechanism =
+        "deterministic stopping includes admissible interior stationary points";
+    };
+    {
+      id = "american-delayed-opening";
+      file = "lib/early_exercise.ml";
+      snippet = "slab 0. p.opens_at false;";
+      replacement = "slab 0. p.opens_at true;";
+      killer = "american_pricing";
+      mechanism = "the obstacle is absent before the exercise window opens";
+    };
+    {
       id = "native-planner-chunk-offset";
       file = "lib/planner.ml";
       snippet = "first = work.first + !offset";
@@ -1114,7 +1131,7 @@ let guard_arguments = function
   | "fast_planner" | "fast_batch" | "enclosure_sum" | "shared_greeks"
   | "production_boundary" | "production_multi" | "planner_contract"
   | "prepared_division" | "carry_cancellation" | "greek_cancellation"
-  | "rho_midpoint" ->
+  | "rho_midpoint" | "american_pricing" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

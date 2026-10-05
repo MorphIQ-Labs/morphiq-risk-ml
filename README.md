@@ -1,7 +1,7 @@
 # morphiq-risk-ml
 
 An OCaml library for European option pricing, implied volatility, analytic
-Greeks, and deterministic portfolio scenarios.
+Greeks, estimated scalar American prices, and deterministic portfolio scenarios.
 
 The library implements Black–Scholes–Merton, Black-76, displaced Black, and
 Bachelier from their mathematical definitions. Model admission, volatility
@@ -17,7 +17,8 @@ institutional deployment approval.
 
 | Capability | Contract |
 | --- | --- |
-| Prices | Calls and puts, including expiry and zero volatility |
+| European prices | Calls and puts, including expiry and zero volatility |
+| American prices | Estimated scalar BSM calls/puts with continuous yield, bounded work and explicit numerical failures; [capability and limits](docs/american-pricing.md). No full-price certificate |
 | Implied volatility | Positive roots require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly |
 | Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
 | Numerical acceptance | `Production` requires caller-selected absolute error limits and returns private value/error certificates or explicit failures |
@@ -29,13 +30,14 @@ institutional deployment approval.
 
 The planner rolls valuation dates forward with fixed expiries and frozen
 markets. It reports post-expiry requests explicitly. Economic P&L, settlement,
-surface calibration, American exercise, stochastic-volatility models,
+surface calibration, American portfolio scenarios, stochastic-volatility models,
 distributed execution, and durable resume are outside the current API.
 
-American and Bermudan support is being designed under
+American extensions continue under
 [Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
-The [financial contract](docs/american-model-contract.md) fixes exercise and
-dividend semantics; it does not add runtime support yet.
+The scalar API currently covers constant coefficients and no cash dividends.
+Cash dividends, Bermudan schedules and piecewise coefficients remain planned.
+Tight numerical requests often remain unavailable; see the [executed evidence](docs/american-pricing.md#measured-numerical-capability).
 
 ## Build and install from source
 

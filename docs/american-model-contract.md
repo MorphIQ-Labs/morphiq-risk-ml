@@ -3,7 +3,8 @@
 **Design for #108 under [Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
 No American runtime API is implemented by this document.** It fixes the real
 quantity, event semantics and ownership that #109–#120 must implement and qualify.
-Names in the API sketch are proposed, not callable exports. Existing European
+The general schedule names in the API sketch remain proposed; #111 now supplies
+the [constant/no-cash scalar API](american-pricing.md). Existing European
 definitions, certificates and served values are unchanged.
 
 Work is staged on `feature/american-integration`, created from main at

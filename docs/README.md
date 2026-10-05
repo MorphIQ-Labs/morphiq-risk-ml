@@ -2,13 +2,15 @@
 
 Start with the [project README](../README.md) for installation and a certified
 pricing example. The current implementation includes the European scalar family,
-typed batches, and bounded scenario planning. The original slice proposal has
+typed batches, bounded scenario planning, and estimated scalar American prices. The original slice proposal has
 been retired; it remains in Git history.
 
 - [Experimental baseline](experimental-baseline.md): claim owners, exact-candidate evidence and limitations.
 - [Open-source closeout](opensource-closeout.md): current provenance, packaging and security disposition.
 
 ## Current contracts
+
+- [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.
 
 - [Fast scenario streaming](fast-planner.md): shared structural/scheduler contracts, distinct approximate prices and bounded output.
 
@@ -26,7 +28,7 @@ been retired; it remains in Git history.
 - [Public interface](../lib/morphiq_risk.mli) and [type audit](type-boundary-audit.md).
 - [Stability](stability.md), [determinism](determinism.md), and [numerical backend](numerical-backend-contract.md).
 
-## Planned model extensions
+## American model foundations and planned extensions
 
 - [American and Bermudan contract](american-model-contract.md): the #108 design
   for optimal stopping, immediate settlement, explicit dividend-event sides,
