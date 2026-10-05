@@ -198,6 +198,13 @@ let controls () =
     | _ -> false);
   print_endline "American cash controls passed"
 
+let snapshot outcome =
+  if Sys.getenv_opt "MORPHIQ_AMERICAN_SNAPSHOT" = Some "1" then
+    ":snapshot="
+    ^ Digest.to_hex
+        (Digest.string (Marshal.to_string outcome [ Marshal.No_sharing ]))
+  else ""
+
 let decode s = Int64.float_of_bits (Int64.of_string ("0x" ^ s))
 
 let phase = function
@@ -254,18 +261,20 @@ let corpus path refined =
                   ~expiry:(phase expiry) ds
               in
               let cfg = config ~lim ~cells ~steps (decode epsilon) in
-              match A.price cfg (unwrap (A.admit_cash p cash)) side with
+              let outcome = A.price cfg (unwrap (A.admit_cash p cash)) side in
+              match outcome with
               | Error e ->
-                  Printf.printf "%s\tunavailable\t-\t%s\n%!" id (failure e)
+                  Printf.printf "%s\tunavailable\t-\t%s\n%!" id
+                    (failure e ^ snapshot outcome)
               | Ok x ->
                   Printf.printf
-                    "%s\testimated\t%h\t%s:steps=%d:rows=%d:map=%d:roundoff=%h\n\
+                    "%s\testimated\t%h\t%s:steps=%d:rows=%d:map=%d:roundoff=%h%s\n\
                      %!"
                     id x.value x.method_name x.work.steps x.work.row_visits
                     (Option.fold ~none:0
                        ~some:(fun m -> m.A.event_applications)
                        x.mapping)
-                    x.maximum_roundoff_indicator)
+                    x.maximum_roundoff_indicator (snapshot outcome))
           | _ -> failwith "cash protocol"
         done
       with End_of_file -> ())

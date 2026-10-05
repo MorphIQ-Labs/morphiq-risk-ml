@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "runtime_commit": "3f4cd8a1e6d40b03096d7a66765a2ffdf082e055",
+  "runtime_sha256": "f64242a59027b805c1076d28c987fdfed3645ca5285b7a1fb172b762aacaf246",
+  "driver_sha256": "8b00f9ad41ce8ef7c28abd72fccceaeedc0a9f6ee4a874a4467329cebed16a58",
+  "sampling_rate": 0.0001,
+  "stack_depth": 12,
+  "requests": 1,
+  "scope": "statistical allocation attribution, not timing",
+  "modes": {
+    "cash": {
+      "samples": 1498,
+      "by_solver_function": {
+        "other": 601,
+        "interpolate": 445,
+        "slab": 364,
+        "coefficient": 69,
+        "residual": 7,
+        "arr": 12
+      },
+      "unprofiled_bytes": 115126032.0
+    },
+    "none": {
+      "samples": 631,
+      "by_solver_function": {
+        "other": 449,
+        "coefficient": 47,
+        "slab": 130,
+        "arr": 5
+      },
+      "unprofiled_bytes": 47282608.0
+    }
+  }
+}

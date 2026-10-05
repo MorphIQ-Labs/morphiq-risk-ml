@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "candidate_runtime_commit": "3f4cd8a",
+  "checks": {
+    "development_build_install": "pass",
+    "format": "pass",
+    "development_ordinary_suite": "pass",
+    "release_build_install": "pass",
+    "release_ordinary_suite": "pass",
+    "native_complete_reference_replay": "284/284 identical, independent scores unchanged",
+    "bytecode_american_controls": "pass",
+    "collector_failure_controls": "4 groups pass (malformed/truncated, workload/GC/metric validation, startup/exit/timeout, coverage/criteria, source/binary guards)",
+    "affected_mutants": "5/5 killed after clean baseline and successful mutated build"
+  },
+  "bytecode_setup_note": "Initial manual launch set CAML_LD_LIBRARY_PATH before opam exec; opam replaced it and stub loading failed before tests started. Corrected command sets env after opam exec; both controls then passed. Setup failure is not numerical evidence.",
+  "logs": {
+    "test-dev.log": {
+      "sha256": "0c4745a3518d79102beaabb40828909d64d8583409ae72296c689405293ac6a4",
+      "compressed_file": "test-dev.log.gz"
+    },
+    "test-release.log": {
+      "sha256": "fcbad98622ecbeb0f11c7e261cb2241b837c870c93693702bad858b256052db5",
+      "compressed_file": "test-release.log.gz"
+    },
+    "mutations.log": {
+      "sha256": "05284cadd208355090c4d10c3398a8f507ce72891b85dba6eb39b8042f24fd5c",
+      "compressed_file": "mutations.log.gz"
+    },
+    "bytecode.log": {
+      "sha256": "bcae29d0fd21929d8896b961f5fea855eb58f717b3d0a2eefc88106213ba6930",
+      "compressed_file": "bytecode.log.gz"
+    },
+    "bytecode-qualified.log": {
+      "sha256": "b54448f6a298fc0feb10892b7b0212770da82486ce13327e10e3419f1a044693",
+      "compressed_file": "bytecode-qualified.log.gz"
+    }
+  }
+}

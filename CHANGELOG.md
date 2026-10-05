@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American scalar allocation (#119)
+
+- Specialize float comparisons and inline finite/nonnegative checks in
+  `Early_exercise.Bsm`, removing temporary boxes from native solver row loops.
+  Preserve the arithmetic, refinement policy, work limits and public API.
+  On the paired shared-host cash workload, cumulative allocation falls from
+  1.76 GB to 115.5 MB (93.4%) and median latency from 737 to 450 ms (1.64×).
+- All 284 primary/loose, initial/refined reference outcomes match the #130
+  runtime, including complete diagnostics and failures; independent scoring is
+  unchanged. See the [paired performance and compatibility evidence](docs/results-american-allocation.md).
+  Successful American prices remain estimated-only, with the same strict-target
+  availability limitations. Remaining enclosure and batch work stays in #119.
+
 ### Scheduled American cash dividends (#112)
 
 - Add `Early_exercise.Bsm.admit_cash`, a copied schedule with explicit event

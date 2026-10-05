@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "baseline_commit": "732f6b61ff1d8be2cd16037adf4fc03ede76dc89",
+  "runtime_sha256": "61d7e200af0d4ed8b0b8ca4a4873e002cf091671c0fb452a936b225ea28d82d0",
+  "driver_sha256": "b37c123d3165eec85880870a70f2a16506aae4d08eb4688e470fb11618580a4e",
+  "compiler": "OCaml 5.3.0 Flambda; release library -O3",
+  "sampling_rate": 0.0001,
+  "stack_depth": 12,
+  "requests": 1,
+  "scope": "Gc.Memprof statistical allocation, not latency; callbacks are excluded from sampling. Full stack records retained.",
+  "modes": {
+    "cash": {
+      "samples": 21987,
+      "by_solver_function": {
+        "residual": 12705,
+        "slab": 8233,
+        "interpolate": 398,
+        "other": 562,
+        "coefficient": 66,
+        "arr": 13,
+        "exercise": 10
+      },
+      "top_allocation_sites": [
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 63-73",
+          3190
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 647, characters 12-52",
+          3163
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 754, characters 18-48",
+          1661
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 31-57",
+          1622
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 751, characters 50-78",
+          1616
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 74-79",
+          1610
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 764, characters 43-69",
+          1608
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", lines 624-626, characters 10-79",
+          1582
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", lines 728-731, characters 16-62",
+          1561
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 628, characters 16-30",
+          1530
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 710, characters 47-77",
+          1435
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exact in file \"lib/enclosure.ml\", line 153, characters 4-60",
+          297
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack_array in file \"lib/enclosure.ml\", lines 143-149, characters 4-5",
+          296
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\", line 201, characters 18-46",
+          156
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul in file \"lib/enclosure.ml\", line 238, characters 18-42",
+          147
+        ]
+      ],
+      "unprofiled_bytes": 1755749256.0
+    },
+    "none": {
+      "samples": 7837,
+      "by_solver_function": {
+        "residual": 4572,
+        "slab": 2814,
+        "coefficient": 39,
+        "other": 408,
+        "arr": 4
+      },
+      "top_allocation_sites": [
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 647, characters 12-52",
+          1207
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 63-73",
+          1112
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 628, characters 16-30",
+          574
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", lines 624-626, characters 10-79",
+          568
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 751, characters 50-78",
+          564
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", lines 728-731, characters 16-62",
+          564
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 31-57",
+          556
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 764, characters 43-69",
+          554
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 754, characters 18-48",
+          553
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.residual in file \"lib/early_exercise.ml\", line 630, characters 74-79",
+          552
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Early_exercise.Bsm.solve.slab in file \"lib/early_exercise.ml\", line 710, characters 47-77",
+          459
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.pack_array in file \"lib/enclosure.ml\", lines 143-149, characters 4-5",
+          117
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.exact in file \"lib/enclosure.ml\", line 153, characters 4-60",
+          110
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.mul in file \"lib/enclosure.ml\", line 238, characters 18-42",
+          66
+        ],
+        [
+          "Raised by primitive operation at Morphiq_risk__Enclosure.Make.add in file \"lib/enclosure.ml\", line 201, characters 18-46",
+          59
+        ]
+      ],
+      "unprofiled_bytes": 625590992.0
+    }
+  }
+}

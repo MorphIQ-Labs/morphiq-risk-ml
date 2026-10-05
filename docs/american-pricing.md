@@ -187,6 +187,10 @@ No existing European helper, served value or replay digest is changed.
 
 ## Initial scalar performance
 
+These are historical #111 measurements. See the
+[matched allocation optimization](results-american-allocation.md) for the
+current native scalar result and unchanged numerical/availability evidence.
+
 The [complete samples](evidence/american-implementation/performance.json) cover
 one admitted ATM put, S=K=100, r=.05, q=.02, sigma=.2, T=1, with the refined
 **loose tolerance=1** configuration. Each price includes all boundary/refinement
@@ -211,8 +215,8 @@ The overlapping timings do not establish a diagnostics speed advantage.
 
 **About 1.18 GB is cumulative OCaml allocation per general pricing request**, not
 RSS or the live workspace cap. This is a substantial initial implementation cost,
-not an optimized path or acceptable portfolio throughput claim. Profile allocation
-and arithmetic under #119 before selecting optimizations or a native backend.
+not an optimized path or acceptable portfolio throughput claim. The subsequent
+#119 profile and boxing optimization are recorded in the linked matched report.
 No previous American runtime exists for a before/after speedup comparison.
 The preliminary admission measurements were invalidated by constant folding;
 [their raw observations](evidence/american-implementation/performance-preliminary.json)

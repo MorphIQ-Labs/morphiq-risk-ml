@@ -181,6 +181,10 @@ artifact qualification or institutional acceptance.
 
 ## Scalar cost comparison
 
+These are historical #112 measurements. The subsequent
+[matched allocation optimization](results-american-allocation.md) removes the
+dominant boxed-float allocation while retaining the outcomes and work counts.
+
 The [complete samples](evidence/american-cash/performance.json) cover an admitted
 ATM put, S=K=100, r=.05, q=.02, sigma=.2, T=1. All three modes use the same refined
 128-cell/128-step, loose tolerance=1 configuration and work limits. Cash events
@@ -203,8 +207,9 @@ Source guards include staged/unstaged/untracked work and executable hashes.
 Cash costs about 2.93 times this no-cash request; zero cash costs 2.85 times.
 Additional event slabs and independent map refinements are real work even when
 the payment is zero. The 1.76 GB figure is **cumulative allocation**, not live
-workspace or RSS. It is substantial and remains an optimization priority under
-#119. This comparison changes the model workload; it is not a speed regression
+workspace or RSS. This motivated the focused #119 pass linked above;
+remaining enclosure allocation is still material. This comparison changes the
+model workload; it is not a speed regression
 against #111's different 256-step configuration, an optimized throughput claim,
 or evidence for a native backend. Preserve numerical outcomes and the original
 acceptance policy when profiling and reducing these costs.

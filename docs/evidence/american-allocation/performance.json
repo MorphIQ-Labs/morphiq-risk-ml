@@ -1,0 +1,5975 @@
+{
+  "schema": "american-allocation-v1",
+  "complete": true,
+  "builds": {
+    "baseline": {
+      "revision": "1d2e0471142c04b9f9feeb2c17fc9a5d7ba5602d",
+      "status": "",
+      "source_sha256": {
+        "bench/american_allocation.ml": "8b00f9ad41ce8ef7c28abd72fccceaeedc0a9f6ee4a874a4467329cebed16a58",
+        "bench/dune": "bee0ee73402a31b72216736494a809ed206f5d524671c6fe2ce94f2cdbc34c60",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "61d7e200af0d4ed8b0b8ca4a4873e002cf091671c0fb452a936b225ea28d82d0",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "f871a544ff6fd88b668809896cbfa005ae01dd46eab2765bd499e4ec9440f7fb",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+          "sha256": "aa0f0cc0865e9834ca846ce5e6511d0babd667a2c90d3b3321d92ab29d777c65"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-119-evidence/cash-baseline-v2",
+          "sha256": "b70992a50e7059d74e81d09b33ea60545253d6154f5e0f56db13d12bc6f11603"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-119-evidence/plain-baseline-v2",
+          "sha256": "6d84060aa8ff1fbe39b55bc8af5d585f28ad1e164a5ba45a799e0a00fcd4503f"
+        }
+      }
+    },
+    "candidate": {
+      "revision": "3f4cd8a1e6d40b03096d7a66765a2ffdf082e055",
+      "status": "",
+      "status_scope": "runtime/build/benchmark inputs; evidence-only new files excluded",
+      "source_sha256": {
+        "bench/american_allocation.ml": "8b00f9ad41ce8ef7c28abd72fccceaeedc0a9f6ee4a874a4467329cebed16a58",
+        "bench/dune": "86522b1ef63f45ae1ff33c0ac1113e0de9d90be4578472c6d242e4b51e287120",
+        "dune": "b9d1f1fa74ff918eaae241c31214b042a5a1a247c4e700a78808ee1eb76024e9",
+        "dune-project": "98433e5c3e11c5cfbc47dbd85a663906351adca8ea2bfce89d8d2b29074ea74d",
+        "lib/adaptive_iv.ml": "7d9b5f5d4f80ac96b155b38eb84f7ddeb110609be1463717414fc2acfc31f1d5",
+        "lib/adaptive_iv.mli": "474fb4f92da7138730c1b7e28f4ed0c01c8be7e80624b7ebede4378e0bf08c57",
+        "lib/bachelier.ml": "02887dd7b6562bdfda57eb37e046c3ecd8ecda485a92afecbaf1d6e05001144f",
+        "lib/bachelier.mli": "900d13e1398cd9d5c323f6103127f6e94cb601d1bb2ace1dfc2f3ac720384e3b",
+        "lib/bachelier_kernel_NOTICE.txt": "d74e6a1bebec00028272c74b03ba82ad8c0e9dc62d720a4685a0de4f2b9c32db",
+        "lib/bachelier_kernel_stubs.c": "38990355ae9ff614535f860e6d7a50f747567e30fa9b835adaaeecd91a9b46c8",
+        "lib/bachelier_native.ml": "12e1a6b8f96e0a3e6394ce181376012170cbb07104dcf8753ec3af86e4d14863",
+        "lib/bachelier_native.mli": "d61a59bc3680b693521498acbf05ba7f53e7d211c1d937567ca5396d29209e9b",
+        "lib/bachelier_operation_graph.h": "83021de5a91b4ed93a8cfc202c0c6647bae32e80f28bd784bdd82981b6e70411",
+        "lib/batch.ml": "5909f13c7840a36aae61b090db19d18b02ad39681f5380c6bd0b604398ab32a1",
+        "lib/batch.mli": "b254ffaae5acb4e0bd13fa6db32366a18ec7da39160b535e9fba7d0583f95647",
+        "lib/black.ml": "6820c3483af06c7b64bf5853f75e9ccc22e75ac70c52fdf1178fa6478e96e9ac",
+        "lib/black.mli": "f4394a9770aa8107e5fe6e4fd73ccf06a35920000aeb206b385b70ddbd13ead8",
+        "lib/black_rho.ml": "5791a06e35a4dfb6dd0ceb830768396efb0fc6452defe059d8800914fdffafcf",
+        "lib/black_rho.mli": "e92e2ba9c57efba23bd61aa652fdfe9055b7428fd36bc0b1794578ec413f9394",
+        "lib/boundary_greeks.ml": "189d91aaeced8700a4cf09ab9539a392e7d6278d2e47e5a35fe11ac6ca10f0cc",
+        "lib/boundary_greeks.mli": "88194547f75522e97bb8811d375f783dbbc4f480ae8e308cda5af58857fae598",
+        "lib/certified_iv.ml": "a302d527e5eca6a16283ed91484ee5103bc621139e1b3d64ed6fd6be2407e501",
+        "lib/certified_iv.mli": "0d367d22e9e2b00884ce3e3c3eb8e65afa5922acef4a8e1e482a1f4b7ce83fda",
+        "lib/cody.ml": "9c7fb6c6b584f3db80e507a645b19e372ffbf8b4026f6a3f70180a7ab8acafff",
+        "lib/cody.mli": "d3a647b9ad279abef9bcef285ee74603def0e108a4ec50dc6e09fef58464f24a",
+        "lib/dd.ml": "d1af2e5671f53948250e48a87aea57df668c73d6b217bc9a07b7815c9b783eec",
+        "lib/dd.mli": "b35ba39f9fef586d37bfdd51828e41cce7bb08f894b763ccafc7e82995f4b504",
+        "lib/dune": "a36a047296cc9ab6bebbc82fb115e83332cfc4803c0cf81ffbd68ef2661bde5e",
+        "lib/early_exercise.ml": "f64242a59027b805c1076d28c987fdfed3645ca5285b7a1fb172b762aacaf246",
+        "lib/early_exercise.mli": "7bd054e08d6379355b32f395e64ac5babba11d9c90bc9958613e053c4c1e8ee1",
+        "lib/elementary.ml": "8c6495d2e25cbdaf56c3c2c8594bb07b889603a44754bb84126a0c1e1b78f3d8",
+        "lib/elementary.mli": "1b5214dc9f0703694a2baa3d126e0580f2b9b76411838b5477b9633bd18c1409",
+        "lib/enclosure.ml": "f871a544ff6fd88b668809896cbfa005ae01dd46eab2765bd499e4ec9440f7fb",
+        "lib/enclosure.mli": "17aa2d2724087972ab66bb01c1e4baa0e8faff7b191b9be0c983379d2a982133",
+        "lib/enclosure_round.ml": "fed6165b88be67f09babdbb9640f6acf06737e49565d6c4960a221c5ccda92ff",
+        "lib/enclosure_round.mli": "bcf873baa8d6d053a4d88d1764bf6a2039bbbd50e5289624fabbc558580af4aa",
+        "lib/erf_coefficients.ml": "1984fd48edb22f6536570a14b13255182aab231daf0326a3d51254be2d300257",
+        "lib/exchange.ml": "0958bbe2fbaa050722182a985dd10d3f1ed27e356e73f9c4fd21d9189f9af370",
+        "lib/exchange.mli": "eff844f2b87d0408dbbc4b5937abbe3b189454f3e62b66b28c74b16e6ae01db3",
+        "lib/fp/dune": "1a4837586e1b9dc79b581434f231ccbbfb274ba3459b03807afb1cd38de229f0",
+        "lib/fp/morphiq_fp.ml": "2c4389e0346e286955385f3c8107fdd098b4f060b21853c2c64a767b0f0606b7",
+        "lib/fp/morphiq_fp_stubs.c": "e071f5e82caa86b78baded2142c09bcf7879e68d40ce12facc3dcf702849e787",
+        "lib/greeks.ml": "f46f69677a58beb1d7f64629962181a8d70d712c1a644fbb624090494e5127cf",
+        "lib/greeks.mli": "4f89141fda59b4896d1ce13d353739192f07f51196f238c421791c9b12edb002",
+        "lib/iv.ml": "ce5c6af77749dc68a7286b80bc89624815c5aab4387cf257c51e62d3e7c9f4fc",
+        "lib/iv.mli": "ed5937d559c85cbb650b795dc2c6e81b56a60426719f99707b80f1a9fdd1ed18",
+        "lib/iv_iteration.ml": "2817de7e8eea4e08e5cd0417f314b129abc8f6e26ca313f207ce95a8e27d05ec",
+        "lib/iv_iteration.mli": "866ce0505cf75276c66ddbc665d181ca46501b71aadbc56165a16f32399bfacf",
+        "lib/lbr.ml": "a0ddee1ba4ffd799fafd76a2dca57be041fbcfb52ed46ae60495f231523b2481",
+        "lib/lbr.mli": "9794efbc70a943dd191be8a14292683e0b0e32d8cea4df7d27adc32ea484f396",
+        "lib/model_enclosure.ml": "72f4e8dfe884f8969e4eea4ce6803ff81e3a1080df4f5af4ed4df70082dedf54",
+        "lib/model_enclosure.mli": "f0ffbfc99fc53a09cbee197a36501b069108bb32e98503140196cb62412714c7",
+        "lib/morphiq_risk.ml": "475f921b2559de10816eeef15401d246502f25d5702042a8069cf2da50cc7be9",
+        "lib/morphiq_risk.mli": "ed5622085618e0e4f5bb1ed95c3351367f18dcccce78afdd7b24d63f8e375087",
+        "lib/normal.ml": "46e519319643dbaf565339b18dda3e70641e159627cfdef8280398a8ce454c53",
+        "lib/normal.mli": "ee4bcfd091a388f6bd65681fe4c579730f626af28fda08e1ae48942481c57acf",
+        "lib/normal_dd.ml": "89fbdbcb426b4925661131eb93471e07bef4ab9a2461b1e6fa8414482030a511",
+        "lib/normal_dd.mli": "a3404511d0b5defd957188918aa9abb5b7548b4e59fa620a0ec5071572de5025",
+        "lib/normalised_black.ml": "fdc49129f694054b73a3286e49004f085f3a5081c98bf8ae9b1bb05a2978a759",
+        "lib/normalised_black.mli": "b6cba0534844dbcbc031e354b7f16bfa5910cfd3aaa178fc978da33f4c0fc958",
+        "lib/planner.ml": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+        "lib/planner.mli": "9149ac89ddef21a32e78ce308565e9a73d5ce72236ec76b3ffcacce82d1846ec",
+        "lib/production.ml": "3fcadb84b1b2d1eb7f0829d578de39fb6ef43e8a5fc1febbef58b7ab8c5f1133",
+        "lib/production.mli": "a294fc48a0680013e4d58a05d6a44b324590dce9da2ffb347aa7e2a82f31add8",
+        "lib/refusal.ml": "916a32977ae27e9984996605a6f9fd1ff1f2ca8de807197483c8bf275c7c1fc0",
+        "lib/refusal.mli": "c714225b105167e60213f66f43a9e241951cd171f95ab017a779df2274c1c7df",
+        "lib/scenario.ml": "d6c5a1dff1495ebaeb92b0b6ad75fd528d764489531970ea6c5196859e1ad330",
+        "lib/scenario.mli": "a0fd3b23788db23ebc6bb64a69012ece1204379b4495b3a218700b318d60917b",
+        "lib/side.ml": "6d34ab20005212e1235cadf8fdea0ae35f5b2911dc0b8a6317771916a842891e",
+        "lib/side.mli": "d0a2b00eada9c96283a9ebedd201d187d5273002edb10bb231aec4be2fe5d920",
+        "lib/split.ml": "ce621f86479ee172d48ab82fb30a40bb1644e60642656ec1e32aeb2a54d1876b",
+        "lib/split.mli": "6e53ddf5551cd47e45ebc114a7906fd73d9504ff9db1a17574abf056a90d97e2",
+        "lib/units.ml": "caa385b622d479eb96c1cde496b96cb24df9c32a580866b304f7f9d17b74808b",
+        "lib/units.mli": "583eeb7e2add4254edeec24996b34268cd4d9ce9d541241870ce4a9989c9643e",
+        "lib/vol.ml": "4c9f3b728d5a69ad0fac85f4b68537f32b4fd472219eba79364e68b77d209d99",
+        "lib/vol.mli": "942d3bd6b3296c32e8c15c3b6ebf9fb8b812981d0ce8e68f83c397b6b029f5fd",
+        "morphiq_risk_ml.opam.locked": "9d9043194105c0ce399e0390ac7bedfb681b9f5cb77766e3736e8c7b04dd3df1"
+      },
+      "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035\n",
+      "profile": "release; library and driver -O3",
+      "binaries": {
+        "bench": {
+          "path": "/tmp/morphiq-american-119-evidence/bench-candidate",
+          "sha256": "623f71e5c3311493d83c87bc7b13d0bc183526aa851caa6972bbd29e877c7371"
+        },
+        "cash": {
+          "path": "/tmp/morphiq-american-119-evidence/cash-candidate",
+          "sha256": "ac23909761036850807761f1fbe9cc4b3900d0306bc1737dc9c0f6fc6a7b1fc1"
+        },
+        "plain": {
+          "path": "/tmp/morphiq-american-119-evidence/plain-candidate",
+          "sha256": "4d3e557b713efe28524af41f379c81acf5c4fd190d02f85f5a927d7f795b6376"
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:39Z",
+      "load_before": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2699832916259766e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5898240,
+        "user_seconds": 0.004652,
+        "system_seconds": 0.003036
+      },
+      "load_after": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:39Z",
+      "load_before": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.1538734436035157e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.004502,
+        "system_seconds": 0.0027619999999999997
+      },
+      "load_after": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:39Z",
+      "load_before": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.24811832110087076,
+        "allocated_bytes_per_call": 625395922.6666666,
+        "minor_collections": 898,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7553024,
+        "user_seconds": 0.9890639999999999,
+        "system_seconds": 0.005362
+      },
+      "load_after": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:40Z",
+      "load_before": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.15136933326721191,
+        "allocated_bytes_per_call": 48331005.333333336,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7585792,
+        "user_seconds": 0.60365,
+        "system_seconds": 0.004014
+      },
+      "load_after": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:41Z",
+      "load_before": [
+        23.4306640625,
+        29.01953125,
+        18.85546875
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.25773000717163086,
+        "allocated_bytes_per_call": 626094568,
+        "minor_collections": 899,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7634944,
+        "user_seconds": 1.012365,
+        "system_seconds": 0.0071259999999999995
+      },
+      "load_after": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:42Z",
+      "load_before": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.15241829554239908,
+        "allocated_bytes_per_call": 48331128,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7585792,
+        "user_seconds": 0.609208,
+        "system_seconds": 0.003829
+      },
+      "load_after": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:42Z",
+      "load_before": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.07807731628418e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007489999999999999,
+        "system_seconds": 0.002042
+      },
+      "load_after": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:42Z",
+      "load_before": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.3610801696777345e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007777,
+        "system_seconds": 0.00234
+      },
+      "load_after": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:42Z",
+      "load_before": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7065680027008057,
+        "allocated_bytes_per_call": 1739018048,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7438336,
+        "user_seconds": 2.791477,
+        "system_seconds": 0.014879999999999999
+      },
+      "load_after": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:45Z",
+      "load_before": [
+        22.35498046875,
+        28.70361328125,
+        18.80322265625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.451660950978597,
+        "allocated_bytes_per_call": 92407432,
+        "minor_collections": 138,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7946240,
+        "user_seconds": 1.694388,
+        "system_seconds": 0.016614
+      },
+      "load_after": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:47Z",
+      "load_before": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7029500007629395,
+        "allocated_bytes_per_call": 1739018293.3333333,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 2.785756,
+        "system_seconds": 0.013151999999999999
+      },
+      "load_after": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:50Z",
+      "load_before": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4163619677225749,
+        "allocated_bytes_per_call": 93106496,
+        "minor_collections": 139,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7995392,
+        "user_seconds": 1.664026,
+        "system_seconds": 0.008442999999999999
+      },
+      "load_after": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:52Z",
+      "load_before": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.151987075805664e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007581999999999999,
+        "system_seconds": 0.0018269999999999998
+      },
+      "load_after": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:42:52Z",
+      "load_before": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.1360130310058594e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007532,
+        "system_seconds": 0.0024779999999999997
+      },
+      "load_after": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:52Z",
+      "load_before": [
+        21.4453125,
+        28.40966796875,
+        18.75732421875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7124656836191813,
+        "allocated_bytes_per_call": 1755096597.3333333,
+        "minor_collections": 2516,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7864320,
+        "user_seconds": 2.8282089999999998,
+        "system_seconds": 0.012443
+      },
+      "load_after": [
+        20.2080078125,
+        28.03759765625,
+        18.68212890625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:54Z",
+      "load_before": [
+        20.2080078125,
+        28.03759765625,
+        18.68212890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4240000247955322,
+        "allocated_bytes_per_call": 115475832,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7766016,
+        "user_seconds": 1.689639,
+        "system_seconds": 0.009137
+      },
+      "load_after": [
+        20.2080078125,
+        28.03759765625,
+        18.68212890625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:56Z",
+      "load_before": [
+        20.2080078125,
+        28.03759765625,
+        18.68212890625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7119789918263754,
+        "allocated_bytes_per_call": 1755795637.3333333,
+        "minor_collections": 2517,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7782400,
+        "user_seconds": 2.809537,
+        "system_seconds": 0.014743
+      },
+      "load_after": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:42:59Z",
+      "load_before": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.42464232444763184,
+        "allocated_bytes_per_call": 115475922.66666667,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 1.705066,
+        "system_seconds": 0.010747
+      },
+      "load_after": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:01Z",
+      "load_before": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.006002426147461e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.008492999999999999,
+        "system_seconds": 0.0028499999999999997
+      },
+      "load_after": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:01Z",
+      "load_before": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.9349536895751956e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.00828,
+        "system_seconds": 0.002369
+      },
+      "load_after": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:01Z",
+      "load_before": [
+        18.74951171875,
+        27.60498046875,
+        18.583984375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 1.0470449924468994,
+        "allocated_bytes_per_call": 2599199981.3333335,
+        "minor_collections": 3724,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 8028160,
+        "user_seconds": 4.152135,
+        "system_seconds": 0.021644
+      },
+      "load_after": [
+        18.12890625,
+        27.3291015625,
+        18.5390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:05Z",
+      "load_before": [
+        18.12890625,
+        27.3291015625,
+        18.5390625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6542190710703532,
+        "allocated_bytes_per_call": 165807061.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 2.544904,
+        "system_seconds": 0.017137
+      },
+      "load_after": [
+        17.2373046875,
+        26.9912109375,
+        18.47119140625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:08Z",
+      "load_before": [
+        17.2373046875,
+        26.9912109375,
+        18.47119140625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.0544953346252441,
+        "allocated_bytes_per_call": 2599898757.3333335,
+        "minor_collections": 3725,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7176192,
+        "user_seconds": 4.17271,
+        "system_seconds": 0.021544999999999998
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 0,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:12Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7350730101267496,
+        "allocated_bytes_per_call": 165806813.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7471104,
+        "user_seconds": 2.610271,
+        "system_seconds": 0.043569
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:15Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2881031036376953e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.004768,
+        "system_seconds": 0.003792
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:15Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.5279521942138672e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.004752,
+        "system_seconds": 0.002901
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:15Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.1836219628651937,
+        "allocated_bytes_per_call": 48331005.333333336,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7356416,
+        "user_seconds": 0.6374489999999999,
+        "system_seconds": 0.023996999999999997
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:16Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.25651804606119794,
+        "allocated_bytes_per_call": 625395922.6666666,
+        "minor_collections": 898,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7372800,
+        "user_seconds": 1.011648,
+        "system_seconds": 0.012218999999999999
+      },
+      "load_after": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:17Z",
+      "load_before": [
+        16.41748046875,
+        26.6591796875,
+        18.40380859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.15430633227030435,
+        "allocated_bytes_per_call": 48331128,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7831552,
+        "user_seconds": 0.6065539999999999,
+        "system_seconds": 0.007936
+      },
+      "load_after": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:17Z",
+      "load_before": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.25151435534159344,
+        "allocated_bytes_per_call": 626094568,
+        "minor_collections": 899,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7536640,
+        "user_seconds": 0.993243,
+        "system_seconds": 0.010287
+      },
+      "load_after": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:18Z",
+      "load_before": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.149126052856445e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007581999999999999,
+        "system_seconds": 0.00195
+      },
+      "load_after": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:18Z",
+      "load_before": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.1131248474121097e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007423,
+        "system_seconds": 0.002108
+      },
+      "load_after": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:18Z",
+      "load_before": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4543387095133464,
+        "allocated_bytes_per_call": 92407432,
+        "minor_collections": 138,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7946240,
+        "user_seconds": 1.679282,
+        "system_seconds": 0.017773
+      },
+      "load_after": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:20Z",
+      "load_before": [
+        15.5029296875,
+        26.29931640625,
+        18.3251953125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.6990716457366943,
+        "allocated_bytes_per_call": 1739018048,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7946240,
+        "user_seconds": 2.775921,
+        "system_seconds": 0.015427999999999999
+      },
+      "load_after": [
+        15.30224609375,
+        26.078125,
+        18.2939453125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:23Z",
+      "load_before": [
+        15.30224609375,
+        26.078125,
+        18.2939453125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4507730007171631,
+        "allocated_bytes_per_call": 93106496,
+        "minor_collections": 139,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 1.681099,
+        "system_seconds": 0.022597
+      },
+      "load_after": [
+        15.30224609375,
+        26.078125,
+        18.2939453125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:25Z",
+      "load_before": [
+        15.30224609375,
+        26.078125,
+        18.2939453125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7034106254577637,
+        "allocated_bytes_per_call": 1739018293.3333333,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7274496,
+        "user_seconds": 2.773609,
+        "system_seconds": 0.02087
+      },
+      "load_after": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:27Z",
+      "load_before": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.235910415649414e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.00767,
+        "system_seconds": 0.003836
+      },
+      "load_after": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:27Z",
+      "load_before": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.280017852783203e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007712999999999999,
+        "system_seconds": 0.002578
+      },
+      "load_after": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:28Z",
+      "load_before": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.44171865781148273,
+        "allocated_bytes_per_call": 115475832,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 1.719676,
+        "system_seconds": 0.018802
+      },
+      "load_after": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:29Z",
+      "load_before": [
+        14.79736328125,
+        25.79443359375,
+        18.2392578125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.736530621846517,
+        "allocated_bytes_per_call": 1755096597.3333333,
+        "minor_collections": 2516,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7208960,
+        "user_seconds": 2.898795,
+        "system_seconds": 0.018556
+      },
+      "load_after": [
+        16.4951171875,
+        25.96337890625,
+        18.34326171875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:32Z",
+      "load_before": [
+        16.4951171875,
+        25.96337890625,
+        18.34326171875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4501802921295166,
+        "allocated_bytes_per_call": 115475922.66666667,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7864320,
+        "user_seconds": 1.753142,
+        "system_seconds": 0.016272
+      },
+      "load_after": [
+        16.4951171875,
+        25.96337890625,
+        18.34326171875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:34Z",
+      "load_before": [
+        16.4951171875,
+        25.96337890625,
+        18.34326171875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.8140116532643636,
+        "allocated_bytes_per_call": 1755795637.3333333,
+        "minor_collections": 2517,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7815168,
+        "user_seconds": 2.949525,
+        "system_seconds": 0.040086
+      },
+      "load_after": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:37Z",
+      "load_before": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.968021392822266e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.009228,
+        "system_seconds": 0.009968999999999999
+      },
+      "load_after": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:37Z",
+      "load_before": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 9.007930755615234e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5963776,
+        "user_seconds": 0.009212,
+        "system_seconds": 0.006715
+      },
+      "load_after": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:37Z",
+      "load_before": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7074886957804362,
+        "allocated_bytes_per_call": 165807061.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7061504,
+        "user_seconds": 2.6805849999999998,
+        "system_seconds": 0.056358
+      },
+      "load_after": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:41Z",
+      "load_before": [
+        17.015625,
+        25.9140625,
+        18.3701171875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 1.4999279975891113,
+        "allocated_bytes_per_call": 2599199981.3333335,
+        "minor_collections": 3724,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7045120,
+        "user_seconds": 4.527951,
+        "system_seconds": 0.146317
+      },
+      "load_after": [
+        16.69384765625,
+        25.69921875,
+        18.33837890625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:47Z",
+      "load_before": [
+        16.69384765625,
+        25.69921875,
+        18.33837890625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6889766852060953,
+        "allocated_bytes_per_call": 165806813.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 2.627747,
+        "system_seconds": 0.026475
+      },
+      "load_after": [
+        17.43896484375,
+        25.7041015625,
+        18.3828125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 1,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:49Z",
+      "load_before": [
+        17.43896484375,
+        25.7041015625,
+        18.3828125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.134378989537557,
+        "allocated_bytes_per_call": 2599898757.3333335,
+        "minor_collections": 3725,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 4.305423,
+        "system_seconds": 0.039428
+      },
+      "load_after": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:54Z",
+      "load_before": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2699832916259766e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.004693,
+        "system_seconds": 0.003266
+      },
+      "load_after": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:54Z",
+      "load_before": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2971630096435548e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.004641,
+        "system_seconds": 0.002356
+      },
+      "load_after": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:54Z",
+      "load_before": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.2513679663340251,
+        "allocated_bytes_per_call": 625395922.6666666,
+        "minor_collections": 898,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7602176,
+        "user_seconds": 0.99866,
+        "system_seconds": 0.005703
+      },
+      "load_after": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:55Z",
+      "load_before": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.15231863657633463,
+        "allocated_bytes_per_call": 48331005.333333336,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 0.60734,
+        "system_seconds": 0.0042699999999999995
+      },
+      "load_after": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:56Z",
+      "load_before": [
+        16.52294921875,
+        25.376953125,
+        18.31005859375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.26294930775960285,
+        "allocated_bytes_per_call": 626094568,
+        "minor_collections": 899,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7471104,
+        "user_seconds": 1.015384,
+        "system_seconds": 0.012712999999999999
+      },
+      "load_after": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:57Z",
+      "load_before": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.1819133758544922,
+        "allocated_bytes_per_call": 48331128,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7782400,
+        "user_seconds": 0.637929,
+        "system_seconds": 0.014161
+      },
+      "load_after": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:57Z",
+      "load_before": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.519866943359375e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008126,
+        "system_seconds": 0.005202
+      },
+      "load_after": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:43:57Z",
+      "load_before": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.3169727325439456e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.008,
+        "system_seconds": 0.002688
+      },
+      "load_after": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:43:57Z",
+      "load_before": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.8000326951344808,
+        "allocated_bytes_per_call": 1739018048,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6963200,
+        "user_seconds": 2.890152,
+        "system_seconds": 0.046146
+      },
+      "load_after": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:01Z",
+      "load_before": [
+        16.40087890625,
+        25.20458984375,
+        18.29052734375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.4693269729614258,
+        "allocated_bytes_per_call": 92407432,
+        "minor_collections": 138,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7127040,
+        "user_seconds": 1.765589,
+        "system_seconds": 0.046508
+      },
+      "load_after": [
+        15.88818359375,
+        24.9521484375,
+        18.24169921875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:03Z",
+      "load_before": [
+        15.88818359375,
+        24.9521484375,
+        18.24169921875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.8348340193430582,
+        "allocated_bytes_per_call": 1739018293.3333333,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7258112,
+        "user_seconds": 2.904749,
+        "system_seconds": 0.052076
+      },
+      "load_after": [
+        15.88818359375,
+        24.9521484375,
+        18.24169921875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:06Z",
+      "load_before": [
+        15.88818359375,
+        24.9521484375,
+        18.24169921875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4794653256734212,
+        "allocated_bytes_per_call": 93106496,
+        "minor_collections": 139,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7438336,
+        "user_seconds": 1.751876,
+        "system_seconds": 0.030477999999999998
+      },
+      "load_after": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:08Z",
+      "load_before": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.4018049240112305e-07,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.010886999999999999,
+        "system_seconds": 0.012100999999999999
+      },
+      "load_after": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:08Z",
+      "load_before": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.097793579101562e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.008343,
+        "system_seconds": 0.006111
+      },
+      "load_after": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:08Z",
+      "load_before": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.954897960027059,
+        "allocated_bytes_per_call": 1755096597.3333333,
+        "minor_collections": 2516,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7192576,
+        "user_seconds": 3.026135,
+        "system_seconds": 0.072339
+      },
+      "load_after": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:12Z",
+      "load_before": [
+        15.49658203125,
+        24.72021484375,
+        18.19921875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.5623610019683838,
+        "allocated_bytes_per_call": 115475832,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7258112,
+        "user_seconds": 1.826263,
+        "system_seconds": 0.029217
+      },
+      "load_after": [
+        17.37841796875,
+        24.95703125,
+        18.32080078125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:14Z",
+      "load_before": [
+        17.37841796875,
+        24.95703125,
+        18.32080078125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.8328433036804199,
+        "allocated_bytes_per_call": 1755795637.3333333,
+        "minor_collections": 2517,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7208960,
+        "user_seconds": 3.02058,
+        "system_seconds": 0.06372
+      },
+      "load_after": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:17Z",
+      "load_before": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4922812779744466,
+        "allocated_bytes_per_call": 115475922.66666667,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7274496,
+        "user_seconds": 1.824604,
+        "system_seconds": 0.036808
+      },
+      "load_after": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:19Z",
+      "load_before": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.395101547241212e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.00886,
+        "system_seconds": 0.003469
+      },
+      "load_after": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:19Z",
+      "load_before": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.110191345214844e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.008646,
+        "system_seconds": 0.002828
+      },
+      "load_after": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:19Z",
+      "load_before": [
+        17.98828125,
+        24.95751953125,
+        18.35986328125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 1.100529670715332,
+        "allocated_bytes_per_call": 2599199981.3333335,
+        "minor_collections": 3724,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7225344,
+        "user_seconds": 4.3262,
+        "system_seconds": 0.035328
+      },
+      "load_after": [
+        17.82861328125,
+        24.80859375,
+        18.345703125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:24Z",
+      "load_before": [
+        17.82861328125,
+        24.80859375,
+        18.345703125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7393680413564047,
+        "allocated_bytes_per_call": 165807061.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7782400,
+        "user_seconds": 2.60375,
+        "system_seconds": 0.021974
+      },
+      "load_after": [
+        20.00439453125,
+        25.1435546875,
+        18.50146484375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:27Z",
+      "load_before": [
+        20.00439453125,
+        25.1435546875,
+        18.50146484375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.2379080454508464,
+        "allocated_bytes_per_call": 2599898757.3333335,
+        "minor_collections": 3725,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7290880,
+        "user_seconds": 4.480419,
+        "system_seconds": 0.052228
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 2,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:32Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6759282747904459,
+        "allocated_bytes_per_call": 165806813.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7766016,
+        "user_seconds": 2.603791,
+        "system_seconds": 0.019166
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:35Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.238035202026367e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.00475,
+        "system_seconds": 0.003289
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:35Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.228975296020508e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.004705,
+        "system_seconds": 0.002794
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:35Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.15770467122395834,
+        "allocated_bytes_per_call": 48331005.333333336,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7913472,
+        "user_seconds": 0.619884,
+        "system_seconds": 0.005339
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:35Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.25406702359517414,
+        "allocated_bytes_per_call": 625395922.6666666,
+        "minor_collections": 898,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7553024,
+        "user_seconds": 1.01102,
+        "system_seconds": 0.006346999999999999
+      },
+      "load_after": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:36Z",
+      "load_before": [
+        18.72265625,
+        24.79248046875,
+        18.416015625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.16628694534301758,
+        "allocated_bytes_per_call": 48331128,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 0.6249469999999999,
+        "system_seconds": 0.006735
+      },
+      "load_after": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:37Z",
+      "load_before": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.26499366760253906,
+        "allocated_bytes_per_call": 626094568,
+        "minor_collections": 899,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7421952,
+        "user_seconds": 1.03523,
+        "system_seconds": 0.011397
+      },
+      "load_after": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:38Z",
+      "load_before": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.2280426025390626e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007757999999999999,
+        "system_seconds": 0.0026639999999999997
+      },
+      "load_after": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:38Z",
+      "load_before": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.182981491088867e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007574,
+        "system_seconds": 0.0021939999999999998
+      },
+      "load_after": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:38Z",
+      "load_before": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.46157026290893555,
+        "allocated_bytes_per_call": 92407432,
+        "minor_collections": 138,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7258112,
+        "user_seconds": 1.74191,
+        "system_seconds": 0.021618
+      },
+      "load_after": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:40Z",
+      "load_before": [
+        18.74462890625,
+        24.6962890625,
+        18.41943359375
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7436336676279703,
+        "allocated_bytes_per_call": 1739018048,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7880704,
+        "user_seconds": 2.816819,
+        "system_seconds": 0.016288
+      },
+      "load_after": [
+        17.8037109375,
+        24.40234375,
+        18.35205078125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:43Z",
+      "load_before": [
+        17.8037109375,
+        24.40234375,
+        18.35205078125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4342859586079915,
+        "allocated_bytes_per_call": 93106496,
+        "minor_collections": 139,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 1.7004059999999999,
+        "system_seconds": 0.011928
+      },
+      "load_after": [
+        17.8037109375,
+        24.40234375,
+        18.35205078125
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:45Z",
+      "load_before": [
+        17.8037109375,
+        24.40234375,
+        18.35205078125
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.721241315205892,
+        "allocated_bytes_per_call": 1739018293.3333333,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7323648,
+        "user_seconds": 2.830555,
+        "system_seconds": 0.022927
+      },
+      "load_after": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:48Z",
+      "load_before": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.3207874298095705e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007719999999999999,
+        "system_seconds": 0.0023769999999999998
+      },
+      "load_after": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:48Z",
+      "load_before": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.2928924560546876e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007685,
+        "system_seconds": 0.0019039999999999999
+      },
+      "load_after": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:48Z",
+      "load_before": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.44983402887980145,
+        "allocated_bytes_per_call": 115475832,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 1.759472,
+        "system_seconds": 0.014568999999999999
+      },
+      "load_after": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:49Z",
+      "load_before": [
+        17.0185546875,
+        24.1298828125,
+        18.291015625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7246840000152588,
+        "allocated_bytes_per_call": 1755096597.3333333,
+        "minor_collections": 2516,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7323648,
+        "user_seconds": 2.875595,
+        "system_seconds": 0.019746
+      },
+      "load_after": [
+        16.2958984375,
+        23.86181640625,
+        18.23046875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:52Z",
+      "load_before": [
+        16.2958984375,
+        23.86181640625,
+        18.23046875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.4476643403371175,
+        "allocated_bytes_per_call": 115475922.66666667,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7651328,
+        "user_seconds": 1.752586,
+        "system_seconds": 0.016783
+      },
+      "load_after": [
+        16.2958984375,
+        23.86181640625,
+        18.23046875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:54Z",
+      "load_before": [
+        16.2958984375,
+        23.86181640625,
+        18.23046875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7305200099945068,
+        "allocated_bytes_per_call": 1755795637.3333333,
+        "minor_collections": 2517,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7192576,
+        "user_seconds": 2.896152,
+        "system_seconds": 0.017311
+      },
+      "load_after": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:57Z",
+      "load_before": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.112098693847656e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.008645,
+        "system_seconds": 0.002691
+      },
+      "load_after": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:44:57Z",
+      "load_before": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.087064743041992e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.00848,
+        "system_seconds": 0.0022299999999999998
+      },
+      "load_after": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:44:57Z",
+      "load_before": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.681575616200765,
+        "allocated_bytes_per_call": 165807061.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7733248,
+        "user_seconds": 2.640541,
+        "system_seconds": 0.019767
+      },
+      "load_after": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:00Z",
+      "load_before": [
+        15.47119140625,
+        23.56494140625,
+        18.15869140625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 1.1448980172475178,
+        "allocated_bytes_per_call": 2599199981.3333335,
+        "minor_collections": 3724,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7585792,
+        "user_seconds": 4.403412,
+        "system_seconds": 0.042696
+      },
+      "load_after": [
+        14.79248046875,
+        23.28955078125,
+        18.09326171875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:05Z",
+      "load_before": [
+        14.79248046875,
+        23.28955078125,
+        18.09326171875
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.7783986727396647,
+        "allocated_bytes_per_call": 165806813.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7028736,
+        "user_seconds": 2.747279,
+        "system_seconds": 0.035028
+      },
+      "load_after": [
+        14.56884765625,
+        23.10205078125,
+        18.05712890625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 3,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:08Z",
+      "load_before": [
+        14.56884765625,
+        23.10205078125,
+        18.05712890625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.1882503827412922,
+        "allocated_bytes_per_call": 2599898757.3333335,
+        "minor_collections": 3725,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7241728,
+        "user_seconds": 4.488469,
+        "system_seconds": 0.06540699999999999
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:13Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.3050308227539063e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.0047599999999999995,
+        "system_seconds": 0.0027489999999999997
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:13Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 2.2900104522705077e-08,
+        "allocated_bytes_per_call": 419.40568,
+        "minor_collections": 20,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.0051329999999999995,
+        "system_seconds": 0.0034579999999999997
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:13Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.2712132930755615,
+        "allocated_bytes_per_call": 625395922.6666666,
+        "minor_collections": 898,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7471104,
+        "user_seconds": 1.046159,
+        "system_seconds": 0.01377
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:14Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.16240668296813965,
+        "allocated_bytes_per_call": 48331005.333333336,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 883
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 0.6417959999999999,
+        "system_seconds": 0.009914
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:14Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.259252389272054,
+        "allocated_bytes_per_call": 626094568,
+        "minor_collections": 899,
+        "major_collections": 10,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7585792,
+        "user_seconds": 1.022302,
+        "system_seconds": 0.009512
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "none",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:16Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "none",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.15761836369832358,
+        "allocated_bytes_per_call": 48331128,
+        "minor_collections": 72,
+        "major_collections": 9,
+        "heap_words_after": 61440,
+        "live_words_after": 884
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 0.623439,
+        "system_seconds": 0.006101
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:16Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.337953567504883e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.007922,
+        "system_seconds": 0.0028699999999999997
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:16Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 5.276203155517578e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.007743,
+        "system_seconds": 0.002168
+      },
+      "load_after": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:16Z",
+      "load_before": [
+        14.12255859375,
+        22.86767578125,
+        18.00390625
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.9452913602193197,
+        "allocated_bytes_per_call": 1739018048,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7782400,
+        "user_seconds": 3.077738,
+        "system_seconds": 0.045117
+      },
+      "load_after": [
+        13.7919921875,
+        22.65380859375,
+        17.95654296875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:20Z",
+      "load_before": [
+        13.7919921875,
+        22.65380859375,
+        17.95654296875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.5436103343963623,
+        "allocated_bytes_per_call": 92407432,
+        "minor_collections": 138,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7831552,
+        "user_seconds": 1.897094,
+        "system_seconds": 0.039928
+      },
+      "load_after": [
+        13.48828125,
+        22.443359375,
+        17.90966796875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:22Z",
+      "load_before": [
+        13.48828125,
+        22.443359375,
+        17.90966796875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.9553696314493815,
+        "allocated_bytes_per_call": 1739018293.3333333,
+        "minor_collections": 2493,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6930432,
+        "user_seconds": 3.12767,
+        "system_seconds": 0.07113499999999999
+      },
+      "load_after": [
+        13.48828125,
+        22.443359375,
+        17.90966796875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "zero",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:26Z",
+      "load_before": [
+        13.48828125,
+        22.443359375,
+        17.90966796875
+      ],
+      "sample": {
+        "mode": "zero",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.6069450378417969,
+        "allocated_bytes_per_call": 93106496,
+        "minor_collections": 139,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7929856,
+        "user_seconds": 1.875164,
+        "system_seconds": 0.033201
+      },
+      "load_after": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:28Z",
+      "load_before": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.066083908081054e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5914624,
+        "user_seconds": 0.008276,
+        "system_seconds": 0.005362
+      },
+      "load_after": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:28Z",
+      "load_before": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 6.197929382324219e-08,
+        "allocated_bytes_per_call": 796.78608,
+        "minor_collections": 38,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.009314,
+        "system_seconds": 0.0035359999999999996
+      },
+      "load_after": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:28Z",
+      "load_before": [
+        13.36865234375,
+        22.26953125,
+        17.875
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.9186749458312988,
+        "allocated_bytes_per_call": 1755096597.3333333,
+        "minor_collections": 2516,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7258112,
+        "user_seconds": 3.194307,
+        "system_seconds": 0.051599
+      },
+      "load_after": [
+        13.0185546875,
+        22.048828125,
+        17.82275390625
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:33Z",
+      "load_before": [
+        13.0185546875,
+        22.048828125,
+        17.82275390625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.5220893224080404,
+        "allocated_bytes_per_call": 115475832,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7749632,
+        "user_seconds": 1.8552389999999999,
+        "system_seconds": 0.028839
+      },
+      "load_after": [
+        13.0185546875,
+        22.048828125,
+        17.82275390625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:35Z",
+      "load_before": [
+        13.0185546875,
+        22.048828125,
+        17.82275390625
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.8682013352711996,
+        "allocated_bytes_per_call": 1755795637.3333333,
+        "minor_collections": 2517,
+        "major_collections": 16,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7290880,
+        "user_seconds": 3.113697,
+        "system_seconds": 0.042439
+      },
+      "load_after": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "cash",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:38Z",
+      "load_before": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ],
+      "sample": {
+        "mode": "cash",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 0.5398263136545817,
+        "allocated_bytes_per_call": 115475922.66666667,
+        "minor_collections": 171,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7143424,
+        "user_seconds": 1.878242,
+        "system_seconds": 0.034624999999999996
+      },
+      "load_after": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:40Z",
+      "load_before": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 9.083986282348633e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5947392,
+        "user_seconds": 0.010199,
+        "system_seconds": 0.004961
+      },
+      "load_after": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "admission",
+        "--calls",
+        "100000"
+      ],
+      "started_utc": "2026-10-05T17:45:40Z",
+      "load_before": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "admission",
+        "calls": 100000,
+        "seconds_per_call": 7.654905319213868e-08,
+        "allocated_bytes_per_call": 817.86224,
+        "minor_collections": 39,
+        "major_collections": 0,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 5931008,
+        "user_seconds": 0.009707,
+        "system_seconds": 0.004163
+      },
+      "load_after": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:40Z",
+      "load_before": [
+        12.8564453125,
+        21.865234375,
+        17.78271484375
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 1.378637711207072,
+        "allocated_bytes_per_call": 2599199981.3333335,
+        "minor_collections": 3724,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 7077888,
+        "user_seconds": 4.5510019999999995,
+        "system_seconds": 0.080417
+      },
+      "load_after": [
+        12.54736328125,
+        21.6513671875,
+        17.73095703125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "price",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:46Z",
+      "load_before": [
+        12.54736328125,
+        21.6513671875,
+        17.73095703125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "price",
+        "calls": 3,
+        "seconds_per_call": 0.7483343283335367,
+        "allocated_bytes_per_call": 165807061.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 905
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6864896,
+        "user_seconds": 2.784596,
+        "system_seconds": 0.04659
+      },
+      "load_after": [
+        15.06591796875,
+        22.02197265625,
+        17.884765625
+      ]
+    },
+    {
+      "variant": "baseline",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-baseline-v2",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:49Z",
+      "load_before": [
+        15.06591796875,
+        22.02197265625,
+        17.884765625
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.6704402764638264,
+        "allocated_bytes_per_call": 2599898757.3333335,
+        "minor_collections": 3725,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6963200,
+        "user_seconds": 4.804843,
+        "system_seconds": 0.099177
+      },
+      "load_after": [
+        16.021484375,
+        22.1044921875,
+        17.93798828125
+      ]
+    },
+    {
+      "variant": "candidate",
+      "round": 4,
+      "command": [
+        "/tmp/morphiq-american-119-evidence/bench-candidate",
+        "--measure",
+        "--mode",
+        "multiple",
+        "--phase",
+        "diagnostics",
+        "--calls",
+        "3"
+      ],
+      "started_utc": "2026-10-05T17:45:55Z",
+      "load_before": [
+        16.021484375,
+        22.1044921875,
+        17.93798828125
+      ],
+      "sample": {
+        "mode": "multiple",
+        "phase": "diagnostics",
+        "calls": 3,
+        "seconds_per_call": 1.274802605311076,
+        "allocated_bytes_per_call": 165806813.33333334,
+        "minor_collections": 243,
+        "major_collections": 17,
+        "heap_words_after": 61440,
+        "live_words_after": 906
+      },
+      "usage": {
+        "returncode": 0,
+        "timed_out": false,
+        "peak_rss_bytes": 6864896,
+        "user_seconds": 3.047867,
+        "system_seconds": 0.10345199999999999
+      },
+      "load_after": [
+        18.1015625,
+        22.4345703125,
+        18.07861328125
+      ]
+    }
+  ],
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "cpu_count": 10,
+  "collector_sha256": "81c2b626c520b099ef45ac3a5b269cdeeb20ddb2f0d44d0a605ff8439b2b3202",
+  "warmup": "one operation then full major GC; three measured calls or 100000 admissions",
+  "flags": "Dune release, library and driver -O3; no profiling during timing",
+  "hardware": "Apple M1 Pro",
+  "summary": [
+    {
+      "mode": "none",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 2.2699832916259766e-08,
+          "min": 2.228975296020508e-08,
+          "max": 2.5279521942138672e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 419.40568,
+          "min": 419.40568,
+          "max": 419.40568
+        },
+        "minor_collections": {
+          "median": 20,
+          "min": 20,
+          "max": 20
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 2.2881031036376953e-08,
+          "min": 2.1538734436035157e-08,
+          "max": 2.2971630096435548e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 419.40568,
+          "min": 419.40568,
+          "max": 419.40568
+        },
+        "minor_collections": {
+          "median": 20,
+          "min": 20,
+          "max": 20
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9920808586016464
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.25406702359517414,
+          "min": 0.24811832110087076,
+          "max": 0.2712132930755615
+        },
+        "allocated_bytes_per_call": {
+          "median": 625395922.6666666,
+          "min": 625395922.6666666,
+          "max": 625395922.6666666
+        },
+        "minor_collections": {
+          "median": 898,
+          "min": 898,
+          "max": 898
+        },
+        "major_collections": {
+          "median": 10,
+          "min": 10,
+          "max": 10
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.15770467122395834,
+          "min": 0.15136933326721191,
+          "max": 0.1836219628651937
+        },
+        "allocated_bytes_per_call": {
+          "median": 48331005.333333336,
+          "min": 48331005.333333336,
+          "max": 48331005.333333336
+        },
+        "minor_collections": {
+          "median": 72,
+          "min": 72,
+          "max": 72
+        },
+        "major_collections": {
+          "median": 9,
+          "min": 9,
+          "max": 9
+        }
+      },
+      "allocation_reduction": 0.9227193469262613,
+      "speedup": 1.611030425562794
+    },
+    {
+      "mode": "none",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.259252389272054,
+          "min": 0.25151435534159344,
+          "max": 0.26499366760253906
+        },
+        "allocated_bytes_per_call": {
+          "median": 626094568,
+          "min": 626094568,
+          "max": 626094568
+        },
+        "minor_collections": {
+          "median": 899,
+          "min": 899,
+          "max": 899
+        },
+        "major_collections": {
+          "median": 10,
+          "min": 10,
+          "max": 10
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.15761836369832358,
+          "min": 0.15241829554239908,
+          "max": 0.1819133758544922
+        },
+        "allocated_bytes_per_call": {
+          "median": 48331128,
+          "min": 48331128,
+          "max": 48331128
+        },
+        "minor_collections": {
+          "median": 72,
+          "min": 72,
+          "max": 72
+        },
+        "major_collections": {
+          "median": 9,
+          "min": 9,
+          "max": 9
+        }
+      },
+      "allocation_reduction": 0.9228053868054003,
+      "speedup": 1.6448108151170422
+    },
+    {
+      "mode": "zero",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 5.182981491088867e-08,
+          "min": 5.07807731628418e-08,
+          "max": 5.519866943359375e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 796.78608,
+          "min": 796.78608,
+          "max": 796.78608
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 5.276203155517578e-08,
+          "min": 5.149126052856445e-08,
+          "max": 5.3610801696777345e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 796.78608,
+          "min": 796.78608,
+          "max": 796.78608
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9823316764572978
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.7436336676279703,
+          "min": 0.6990716457366943,
+          "max": 0.9452913602193197
+        },
+        "allocated_bytes_per_call": {
+          "median": 1739018048,
+          "min": 1739018048,
+          "max": 1739018048
+        },
+        "minor_collections": {
+          "median": 2493,
+          "min": 2493,
+          "max": 2493
+        },
+        "major_collections": {
+          "median": 16,
+          "min": 16,
+          "max": 16
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.46157026290893555,
+          "min": 0.451660950978597,
+          "max": 0.5436103343963623
+        },
+        "allocated_bytes_per_call": {
+          "median": 92407432,
+          "min": 92407432,
+          "max": 92407432
+        },
+        "minor_collections": {
+          "median": 138,
+          "min": 138,
+          "max": 138
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9468622927138247,
+      "speedup": 1.6110952706125348
+    },
+    {
+      "mode": "zero",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.721241315205892,
+          "min": 0.7029500007629395,
+          "max": 0.9553696314493815
+        },
+        "allocated_bytes_per_call": {
+          "median": 1739018293.3333333,
+          "min": 1739018293.3333333,
+          "max": 1739018293.3333333
+        },
+        "minor_collections": {
+          "median": 2493,
+          "min": 2493,
+          "max": 2493
+        },
+        "major_collections": {
+          "median": 16,
+          "min": 16,
+          "max": 16
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.4507730007171631,
+          "min": 0.4163619677225749,
+          "max": 0.6069450378417969
+        },
+        "allocated_bytes_per_call": {
+          "median": 93106496,
+          "min": 93106496,
+          "max": 93106496
+        },
+        "minor_collections": {
+          "median": 139,
+          "min": 139,
+          "max": 139
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9464603124895631,
+      "speedup": 1.600010014039048
+    },
+    {
+      "mode": "cash",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 5.2928924560546876e-08,
+          "min": 5.151987075805664e-08,
+          "max": 2.4018049240112305e-07
+        },
+        "allocated_bytes_per_call": {
+          "median": 796.78608,
+          "min": 796.78608,
+          "max": 796.78608
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 5.3207874298095705e-08,
+          "min": 5.1360130310058594e-08,
+          "max": 6.197929382324219e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 796.78608,
+          "min": 796.78608,
+          "max": 796.78608
+        },
+        "minor_collections": {
+          "median": 38,
+          "min": 38,
+          "max": 38
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 0.9947573598601962
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.736530621846517,
+          "min": 0.7124656836191813,
+          "max": 0.954897960027059
+        },
+        "allocated_bytes_per_call": {
+          "median": 1755096597.3333333,
+          "min": 1755096597.3333333,
+          "max": 1755096597.3333333
+        },
+        "minor_collections": {
+          "median": 2516,
+          "min": 2516,
+          "max": 2516
+        },
+        "major_collections": {
+          "median": 16,
+          "min": 16,
+          "max": 16
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.44983402887980145,
+          "min": 0.4240000247955322,
+          "max": 0.5623610019683838
+        },
+        "allocated_bytes_per_call": {
+          "median": 115475832,
+          "min": 115475832,
+          "max": 115475832
+        },
+        "minor_collections": {
+          "median": 171,
+          "min": 171,
+          "max": 171
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9342054265415065,
+      "speedup": 1.6373386061536102
+    },
+    {
+      "mode": "cash",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 0.8140116532643636,
+          "min": 0.7119789918263754,
+          "max": 0.8682013352711996
+        },
+        "allocated_bytes_per_call": {
+          "median": 1755795637.3333333,
+          "min": 1755795637.3333333,
+          "max": 1755795637.3333333
+        },
+        "minor_collections": {
+          "median": 2517,
+          "min": 2517,
+          "max": 2517
+        },
+        "major_collections": {
+          "median": 16,
+          "min": 16,
+          "max": 16
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.4501802921295166,
+          "min": 0.42464232444763184,
+          "max": 0.5398263136545817
+        },
+        "allocated_bytes_per_call": {
+          "median": 115475922.66666667,
+          "min": 115475922.66666667,
+          "max": 115475922.66666667
+        },
+        "minor_collections": {
+          "median": 171,
+          "min": 171,
+          "max": 171
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9342315698870005,
+      "speedup": 1.808190335062853
+    },
+    {
+      "mode": "multiple",
+      "phase": "admission",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 6.395101547241212e-08,
+          "min": 6.006002426147461e-08,
+          "max": 9.083986282348633e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 817.86224,
+          "min": 817.86224,
+          "max": 817.86224
+        },
+        "minor_collections": {
+          "median": 39,
+          "min": 39,
+          "max": 39
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 6.112098693847656e-08,
+          "min": 5.9349536895751956e-08,
+          "max": 7.654905319213868e-08
+        },
+        "allocated_bytes_per_call": {
+          "median": 817.86224,
+          "min": 817.86224,
+          "max": 817.86224
+        },
+        "minor_collections": {
+          "median": 39,
+          "min": 39,
+          "max": 39
+        },
+        "major_collections": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "allocation_reduction": 0.0,
+      "speedup": 1.0463020752067407
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 1.1448980172475178,
+          "min": 1.0470449924468994,
+          "max": 1.4999279975891113
+        },
+        "allocated_bytes_per_call": {
+          "median": 2599199981.3333335,
+          "min": 2599199981.3333335,
+          "max": 2599199981.3333335
+        },
+        "minor_collections": {
+          "median": 3724,
+          "min": 3724,
+          "max": 3724
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.7074886957804362,
+          "min": 0.6542190710703532,
+          "max": 0.7483343283335367
+        },
+        "allocated_bytes_per_call": {
+          "median": 165807061.33333334,
+          "min": 165807061.33333334,
+          "max": 165807061.33333334
+        },
+        "minor_collections": {
+          "median": 243,
+          "min": 243,
+          "max": 243
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9362084246983267,
+      "speedup": 1.6182562690765994
+    },
+    {
+      "mode": "multiple",
+      "phase": "diagnostics",
+      "baseline": {
+        "seconds_per_call": {
+          "median": 1.1882503827412922,
+          "min": 1.0544953346252441,
+          "max": 1.6704402764638264
+        },
+        "allocated_bytes_per_call": {
+          "median": 2599898757.3333335,
+          "min": 2599898757.3333335,
+          "max": 2599898757.3333335
+        },
+        "minor_collections": {
+          "median": 3725,
+          "min": 3725,
+          "max": 3725
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "candidate": {
+        "seconds_per_call": {
+          "median": 0.7350730101267496,
+          "min": 0.6759282747904459,
+          "max": 1.274802605311076
+        },
+        "allocated_bytes_per_call": {
+          "median": 165806813.33333334,
+          "min": 165806813.33333334,
+          "max": 165806813.33333334
+        },
+        "minor_collections": {
+          "median": 243,
+          "min": 243,
+          "max": 243
+        },
+        "major_collections": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        }
+      },
+      "allocation_reduction": 0.9362256653780633,
+      "speedup": 1.6165066141340172
+    }
+  ]
+}

@@ -202,3 +202,10 @@
   (:standard -O3))
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix))
+
+(executable
+ (name american_allocation)
+ (modules american_allocation)
+ (ocamlopt_flags
+  (:standard -O3))
+ (libraries morphiq_risk unix))
