@@ -35,6 +35,12 @@ source = replace_once(source, '  let execute (Plan p as plan) ~workers ~cancella
       let result = evaluate_tile_original plan work in
       (match result with Error _ -> () | Ok rows -> Planner_probe.retain (Array.length rows));
       result)
+  let evaluate_tile_with_original = evaluate_tile_with
+  let evaluate_tile_with ~batch plan work =
+    Planner_probe.evaluate work.id (fun () ->
+      let result = evaluate_tile_with_original ~batch plan work in
+      (match result with Error _ -> () | Ok rows -> Planner_probe.retain (Array.length rows));
+      result)
   let execute (Plan p as plan) ~workers ~cancellation ~sink =""")
 source = replace_once(source, 'let run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =',
                       'module Domain = Planner_probe.Domains\n\nlet run_waves ~max_workers ~tiles ~workers ~check_cancel ~run_tile ~accept =')

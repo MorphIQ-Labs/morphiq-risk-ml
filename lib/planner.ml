@@ -1080,17 +1080,19 @@ module Fast = struct
     in
     Bachelier_native.default_enabled && work.length >= 32 && homogeneous 0
 
-  let evaluate_tile (Plan p as plan) work =
+  let evaluate_tile_with ~batch (Plan p as plan) work =
     if
       work.id < 0 || work.id >= p.explanation.tiles || work <> tile plan work.id
     then Error "tile does not belong to fast plan"
     else
       let point = Scenario.point p.scenarios work.scenario in
       Ok
-        (if batch_tile p work then evaluate_chunked_tile p work point
+        (if batch && batch_tile p work then evaluate_chunked_tile p work point
          else
            Array.init work.length (fun i ->
                evaluate_position p work.scenario point (work.first + i)))
+
+  let evaluate_tile plan work = evaluate_tile_with ~batch:true plan work
 
   type event = Row of row | Finished of completion
 
@@ -1109,7 +1111,9 @@ module Fast = struct
       incr committed
     in
     let run_tile id =
-      try evaluate_tile plan (tile plan id)
+      (* Fresh native preparation is qualified for serial execution. Preserve
+         the scalar parallel path until its allocation/GC costs are qualified. *)
+      try evaluate_tile_with ~batch:(workers = 1) plan (tile plan id)
       with e -> Error (Printexc.to_string e)
     in
     let stop =
