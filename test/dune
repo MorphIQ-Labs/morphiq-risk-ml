@@ -1010,3 +1010,38 @@
   ../scripts/benchmark_american_allocation.py)
  (action
   (run python3 %{dep:../scripts/test_bermudan_boundary.py})))
+
+(test
+ (name american_piecewise)
+ (modules american_piecewise)
+ (modes byte exe)
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_american_piecewise.py
+  ../scripts/test_american_piecewise.py
+  ../scripts/benchmark_american_piecewise.py
+  ../scripts/benchmark_bermudan_boundary.py
+  ../scripts/benchmark_american_allocation.py
+  ../scripts/collect_american_piecewise.py
+  ../scripts/american_piecewise_reference.py
+  ../scripts/american_reference_data.py
+  (source_tree ../docs/evidence/american-piecewise))
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_american_piecewise.py})
+   (run
+    python3
+    %{dep:../scripts/check_american_piecewise.py}
+    --executable
+    %{exe:american_piecewise.exe}))))

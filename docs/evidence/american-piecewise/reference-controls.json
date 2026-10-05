@@ -1,0 +1,90 @@
+{
+  "reproduction_sha256": "4d6b8c18f53a2a0bfdbb4f57175a2e5325d8315829c00b53bdb520bac11638c6",
+  "identical_reference_rows": true,
+  "controls": [
+    {
+      "program": "quadrature",
+      "case": "help",
+      "returncode": 0,
+      "stdout": "Cash protocol | exercise count (0=American) and time/side pairs | rate change count and time/level pairs | yield changes | volatility changes. All numbers are original binary64 words; base levels and horizon are in the cash protocol.\n",
+      "stderr": ""
+    },
+    {
+      "program": "quadrature",
+      "case": "version",
+      "returncode": 0,
+      "stdout": "piecewise-quadrature 1\n",
+      "stderr": ""
+    },
+    {
+      "program": "quadrature",
+      "case": "end-options",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "program": "quadrature",
+      "case": "unknown",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "unrecognized arguments\n"
+    },
+    {
+      "program": "quadrature",
+      "case": "truncated",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "five piecewise fields required\n"
+    },
+    {
+      "program": "quadrature",
+      "case": "missing-curve",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "five piecewise fields required\n"
+    },
+    {
+      "program": "quantlib",
+      "case": "help",
+      "returncode": 0,
+      "stdout": "Cash protocol | exercise count (0=American) and time/side pairs | rate change count and time/level pairs | yield changes | volatility changes. All numbers are original binary64 words; base levels and horizon are in the cash protocol.\n",
+      "stderr": ""
+    },
+    {
+      "program": "quantlib",
+      "case": "version",
+      "returncode": 0,
+      "stdout": "piecewise-quantlib 1\n",
+      "stderr": ""
+    },
+    {
+      "program": "quantlib",
+      "case": "end-options",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "program": "quantlib",
+      "case": "unknown",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "unrecognized arguments\n"
+    },
+    {
+      "program": "quantlib",
+      "case": "truncated",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "five piecewise fields required\n"
+    },
+    {
+      "program": "quantlib",
+      "case": "missing-curve",
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "five piecewise fields required\n"
+    }
+  ]
+}

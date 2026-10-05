@@ -1,0 +1,9 @@
+File "piecewise_normal_volatility.ml", line 5, characters 35-42:
+5 |   P.Volatility.create ~horizon:1. ~initial ~changes:[||]
+                                       ^^^^^^^
+Error: The value "initial" has type "Morphiq_risk.Vol.normal Morphiq_risk.Vol.t"
+       but an expression was expected of type
+         "Morphiq_risk__.Vol.lognormal Morphiq_risk__.Vol.t" =
+           "Morphiq_risk__.Vol.lognormal Morphiq_risk.Vol.t"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk__.Vol.lognormal" = "Morphiq_risk.Vol.lognormal"

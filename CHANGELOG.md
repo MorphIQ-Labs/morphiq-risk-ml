@@ -5,6 +5,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Piecewise American and Bermudan coefficients (#114)
+
+- Add distinct immutable rate, yield and lognormal-volatility schedules through
+  `Early_exercise.Bsm.Piecewise`, with explicit horizons and right-continuous
+  levels. Reject incomplete/mismatched coverage and malformed partitions.
+- Align rollback with coefficient/cash/exercise events; preserve finite exercise
+  rights, integrate original-input discount/carry/variance, and handle interior
+  discount and deterministic exercise optima. Results remain estimated-only.
+- Preserve all 412 existing complete outcomes and independent scores. The new
+  40-case corpus passes 14 analytical comparisons at the primary target; refined
+  loose pricing passes 36 comparisons, with four references too wide to score.
+- Constant-path latency/allocation regression limits pass. New varying examples
+  cost about 0.57–0.92 s and allocate 219–341 MB cumulatively per price; further
+  allocation work remains #119. See [qualification](docs/results-american-piecewise.md)
+  for provenance, unavailable cases, raw samples and assurance limits.
+
 ### Bermudan boundary-discount reuse (#119)
 
 - Reuse successful zero-stock boundary values by original slab and time-grid

@@ -38,6 +38,43 @@ type mutant = {
 let catalog =
   [
     {
+      id = "piecewise-average-profile";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "let curve_level curve t = snd curve.segments.(curve_index curve t)";
+      replacement =
+        "let curve_level curve _ = let sum = ref 0. in Array.iteri (fun i \
+         (t,v) -> let stop = if i + 1 < Array.length curve.segments then fst \
+         curve.segments.(i+1) else curve.horizon in sum := !sum +. v *. (stop \
+         -. t)) curve.segments; !sum /. curve.horizon";
+      killer = "american_piecewise";
+      mechanism = "time ordering of coefficients affects early exercise";
+    };
+    {
+      id = "piecewise-left-knot";
+      file = "lib/early_exercise.ml";
+      snippet = "if fst curve.segments.(m) <= t then lo := m else hi := m";
+      replacement = "if fst curve.segments.(m) < t then lo := m else hi := m";
+      killer = "american_piecewise";
+      mechanism = "rollback uses the right coefficient at each slab start";
+    };
+    {
+      id = "piecewise-future-optimum";
+      file = "lib/early_exercise.ml";
+      snippet = "Array.iter (fun (t, _) -> add t) curve.segments";
+      replacement = "()";
+      killer = "american_piecewise";
+      mechanism = "interior rate knots can maximize the future discount factor";
+    };
+    {
+      id = "piecewise-stencil-key";
+      file = "lib/early_exercise.ml";
+      snippet = "if key p <> !current_key then (";
+      replacement = "if false then (";
+      killer = "american_piecewise";
+      mechanism = "operator preparation changes with coefficients";
+    };
+    {
       id = "enclosure-scalar-radius";
       file = "lib/enclosure.ml";
       snippet =
@@ -102,8 +139,8 @@ let catalog =
     {
       id = "american-prepared-stencil";
       file = "lib/early_exercise.ml";
-      snippet = "(left, right, g, true, switched)";
-      replacement = "(right, left, g, true, switched)";
+      snippet = "(left, right, g, previous_key = key p, switched)";
+      replacement = "(right, left, g, previous_key = key p, switched)";
       killer = "american_pricing";
       mechanism = "both boundary solves use the same correctly oriented stencil";
     };
@@ -1228,7 +1265,7 @@ let guard_arguments = function
   | "shared_greeks" | "production_boundary" | "production_multi"
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
-  | "bermudan" ->
+  | "bermudan" | "american_piecewise" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

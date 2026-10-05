@@ -746,3 +746,75 @@
  (alias runtest)
  (action
   (diff normal_into_american.expected normal_into_american.out)))
+
+(rule
+ (deps piecewise_rate_as_yield.ml ../../lib/morphiq_risk.cma)
+ (targets piecewise_rate_as_yield.out)
+ (action
+  (with-stderr-to
+   piecewise_rate_as_yield.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     piecewise_rate_as_yield.cmo
+     piecewise_rate_as_yield.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff piecewise_rate_as_yield.expected piecewise_rate_as_yield.out)))
+
+(rule
+ (deps piecewise_normal_volatility.ml ../../lib/morphiq_risk.cma)
+ (targets piecewise_normal_volatility.out)
+ (action
+  (with-stderr-to
+   piecewise_normal_volatility.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     piecewise_normal_volatility.cmo
+     piecewise_normal_volatility.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff piecewise_normal_volatility.expected piecewise_normal_volatility.out)))
+
+(rule
+ (deps piecewise_as_constant.ml ../../lib/morphiq_risk.cma)
+ (targets piecewise_as_constant.out)
+ (action
+  (with-stderr-to
+   piecewise_as_constant.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     piecewise_as_constant.cmo
+     piecewise_as_constant.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff piecewise_as_constant.expected piecewise_as_constant.out)))

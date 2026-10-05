@@ -1,5 +1,8 @@
 # Explicit Bermudan exercise schedules
 
+`Bsm.Piecewise.admit_bermudan` extends these same finite-rights and cash-side
+conventions to [piecewise coefficients](piecewise-american.md).
+
 `Early_exercise.Bsm.admit_bermudan` prices a call or put with a finite set of
 exercise instants under constant BSM coefficients, continuous yield and optional
 scheduled liquidator cash dividends. Every successful output is **Estimated_only**.
