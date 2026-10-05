@@ -422,9 +422,10 @@ must follow the [research preservation policy](research/README.md). Public
 builds do not depend on a private paper archive. The source record distinguishes
 inspection from source reuse, canonical execution and proved numerical bounds.
 
-#109 owns discretization, boundary truncation, solver/backend choice, acceptance
-budgets and feasibility of continuum certification. #110 owns executable
-independent references and failure controls. Neither a finite-difference grid
+The [#109 solver design](american-solver-design.md) selects discretization, boundary
+truncation, solver/backend ownership, acceptance budgets and the continuum
+certification gate. #110 owns executable independent references and failure
+controls. Neither a finite-difference grid
 nor an empirical refinement estimate is part of the real model defined here.
 
 This epic does not include futures-style margining, Black-76/displaced/normal
