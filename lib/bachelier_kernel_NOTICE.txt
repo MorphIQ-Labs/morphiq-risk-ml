@@ -1,4 +1,4 @@
-This optional experiment adapts existing project arithmetic.
+This native kernel adapts existing project arithmetic.
 
 Copyright © 2013-2024 Peter Jäckel.
 

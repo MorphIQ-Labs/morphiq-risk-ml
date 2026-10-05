@@ -98,7 +98,23 @@ let () =
       check (same (F.execute batch) expected) "batch output ownership";
       let d = Domain.spawn (fun () -> F.execute batch) in
       check (same (F.execute batch) (Domain.join d)) "batch concurrent replay")
-    [ 0; 1; 31; 32; 33; 64; 65; 256 ];
+    [ 0; 1; 31; 32; 33; 34; 35; 64; 65; 256 ];
+  List.iter
+    (fun selected ->
+      let inputs =
+        Array.init 64 (fun i ->
+            if i < selected then request i
+            else
+              F.Price
+                ( Batch.Bachelier,
+                  { forward = 1.; strike = 0.; time_to_expiry = 0.; rate = 0. },
+                  Side.Call,
+                  vol ))
+      in
+      check
+        (same (F.execute (F.compile inputs)) (F.run inputs))
+        "native density boundary")
+    [ 31; 32; 33 ];
   let rejects f =
     match f () with
     | () -> failwith "native guard accepted malformed call"
