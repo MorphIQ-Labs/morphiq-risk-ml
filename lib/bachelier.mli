@@ -24,3 +24,14 @@ val implied : admitted -> Side.t -> float -> (Vol.normal Iv.t, Refusal.t) result
     explicit computational failure; see {!Iv.t}. *)
 
 val greeks : admitted -> Side.t -> Vol.normal Vol.t -> Vol.normal Greeks.t
+
+(** Internal bounded OTM preparation; exposed only through [Internal] by the
+    primary public interface. A failed selection means scalar fallback, not
+    mathematical refusal. Parameters are immutable and retain the original
+    operation graph, including the quotient residual. *)
+module Fast_middle : sig
+  type t = private { q : float; low : float; s : float; discount : float }
+
+  val prepare : admitted -> Side.t -> Vol.normal Vol.t -> t option
+  val price : t -> float
+end

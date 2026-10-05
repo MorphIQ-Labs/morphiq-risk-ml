@@ -26,6 +26,6 @@
 
 (rule
  (alias runtest)
- (deps campaign.py test_campaign.py)
+ (deps campaign.py compare.py test_campaign.py)
  (action
   (run python3 %{dep:test_campaign.py})))

@@ -42,6 +42,7 @@ let admit i =
     Ok (Expiry { forward = i.forward; strike = i.strike; rate = i.rate })
   else
     let distance, distance_low = Split.two_sum i.forward (-.i.strike) in
+    let root_time, root_time_low = Split.sqrt i.time_to_expiry in
     Ok
       (Live
          {
@@ -52,8 +53,8 @@ let admit i =
            distance;
            distance_low;
            time = i.time_to_expiry;
-           root_time = fst (Split.sqrt i.time_to_expiry);
-           root_time_low = snd (Split.sqrt i.time_to_expiry);
+           root_time;
+           root_time_low;
          })
 
 (* D s φ(d) Y'(-d) with d = |Δ| / s, the out-of-the-money part, for s > 0.
@@ -105,6 +106,46 @@ let price a side sigma =
         if in_the_money then
           Dd.to_float (Dd.add (intrinsic ()) (Dd.of_float otm))
         else otm
+
+(* Internal preparation for the fixed middle-OTM operation graph. Admission
+   owns the original coordinates; this helper never recomputes their distance,
+   discount or square root and never caches a served price. *)
+module Fast_middle = struct
+  type t = { q : float; low : float; s : float; discount : float }
+
+  let in_range x = Float.is_finite x && x >= 0x1p-100 && x <= 0x1p100
+
+  let prepare a side sigma =
+    match a with
+    | Expiry _ -> None
+    | Live { distance; distance_low; discount; root_time; root_time_low; _ }
+      when Side.sign side *. distance <= 0.
+           && Vol.to_float sigma > 0.
+           && in_range (Float.abs distance)
+           && in_range discount ->
+        let s =
+          Dd.mul_float
+            { hi = root_time; lo = root_time_low }
+            (Vol.to_float sigma)
+        in
+        if not (in_range s.hi) then None
+        else
+          let abs_distance, abs_low = abs_parts distance distance_low in
+          let q, low = Split.quotient_dd abs_distance abs_low s.hi s.lo in
+          let d = q +. low in
+          if Float.is_finite q && Float.is_finite low && d >= 0.46875 && d <= 4.
+          then Some { q; low; s = s.hi; discount }
+          else None
+    | Live _ -> None
+
+  let price p =
+    let square, low = Split.square p.q in
+    let m =
+      p.discount *. p.s *. inv_sqrt_2pi
+      *. Normalised_black.y_prime (-.(p.q +. p.low))
+    in
+    Split.scaled_exp_neg m (0.5 *. square) ((0.5 *. low) +. (p.q *. p.low))
+end
 
 let sqrt_two_pi = Normalised_black.sqrt_two_pi
 

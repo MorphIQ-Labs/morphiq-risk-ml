@@ -602,3 +602,51 @@
  (alias runtest)
  (action
   (diff fast_planner_tile.expected fast_planner_tile.out)))
+
+(rule
+ (deps forge_fast_preparation.ml ../../lib/morphiq_risk.cma)
+ (targets forge_fast_preparation.out)
+ (action
+  (with-stderr-to
+   forge_fast_preparation.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_fast_preparation.cmo
+     forge_fast_preparation.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_fast_preparation.expected forge_fast_preparation.out)))
+
+(rule
+ (deps public_fast_preparation.ml ../../lib/morphiq_risk.cma)
+ (targets public_fast_preparation.out)
+ (action
+  (with-stderr-to
+   public_fast_preparation.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     public_fast_preparation.cmo
+     public_fast_preparation.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff public_fast_preparation.expected public_fast_preparation.out)))

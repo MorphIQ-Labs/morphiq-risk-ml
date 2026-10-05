@@ -44,6 +44,9 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
+[Fast-batch SIMD integration](fast-simd-integration.md) records the staged
+preparation, native batch and planner ownership contracts.
+
 [Optional Fast-batch SIMD experiment](results-fast-simd.md) compares bounded
 Bachelier preparation, native scalar, SIMD and SLEEF, including one-shot
 regressions and the decision to retain the current production backend.
