@@ -267,7 +267,8 @@ let bench mode =
   in
   let operation () =
     match mode with
-    | "admission" -> ignore (Sys.opaque_identity (A.admit p))
+    | "admission" ->
+        ignore (Sys.opaque_identity (A.admit (Sys.opaque_identity p)))
     | "price" | "diagnostics" -> (
         let result =
           A.price ~exercise_regions:(mode = "diagnostics")
