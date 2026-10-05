@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "name": "bermudan-loose-initial",
+      "count": 32,
+      "counts": {
+        "pass": 18,
+        "runtime_unavailable": 14
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "bermudan-loose-refined",
+      "count": 32,
+      "counts": {
+        "pass": 26,
+        "reference_too_wide": 5,
+        "runtime_unavailable": 1
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "bermudan-primary-initial",
+      "count": 32,
+      "counts": {
+        "pass": 14,
+        "runtime_unavailable": 18
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "bermudan-primary-refined",
+      "count": 32,
+      "counts": {
+        "pass": 16,
+        "runtime_unavailable": 16
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "cash-loose-initial",
+      "count": 30,
+      "counts": {
+        "runtime_unavailable": 19,
+        "pass": 11
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "cash-loose-refined",
+      "count": 30,
+      "counts": {
+        "pass": 29,
+        "runtime_unavailable": 1
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "cash-primary-initial",
+      "count": 30,
+      "counts": {
+        "runtime_unavailable": 21,
+        "pass": 9
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "cash-primary-refined",
+      "count": 30,
+      "counts": {
+        "runtime_unavailable": 20,
+        "pass": 10
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "plain-loose-initial",
+      "count": 41,
+      "counts": {
+        "unresolved_reference": 4,
+        "runtime_unavailable": 18,
+        "pass": 19
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "plain-loose-refined",
+      "count": 41,
+      "counts": {
+        "unresolved_reference": 6,
+        "pass": 32,
+        "runtime_unavailable": 3
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "plain-primary-initial",
+      "count": 41,
+      "counts": {
+        "runtime_unavailable": 22,
+        "pass": 18,
+        "unresolved_reference": 1
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    },
+    {
+      "name": "plain-primary-refined",
+      "count": 41,
+      "counts": {
+        "runtime_unavailable": 23,
+        "pass": 17,
+        "unresolved_reference": 1
+      },
+      "full_outcomes_equal": true,
+      "independent_rows_equal": true
+    }
+  ],
+  "total": 412,
+  "scope": "Existing independent references reused unchanged, not regenerated; all unavailable and uncertain rows retained."
+}

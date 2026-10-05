@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Bermudan boundary-discount reuse (#119)
+
+- Reuse successful zero-stock boundary values by original slab and time-grid
+  identity within one request. Use only surplus workspace and retain uncached
+  fallback, cancellation points, arithmetic checks and logical work counts.
+- Preserve all 412 complete American/Bermudan campaign outcomes and independent
+  classifications. Paired Bermudan allocation falls 77.3% without cash
+  (178.9 → 40.5 MB) and 75.3% with cash (259.1 → 64.0 MB); median latency falls
+  about 25% in both cases. American performance is effectively unchanged.
+  See [qualification](docs/results-bermudan-boundary.md). Broader #119/#120
+  work and deployment targets remain open.
+
 ### Explicit Bermudan exercise schedules (#113)
 
 - Add `Early_exercise.Bsm.admit_bermudan` with immutable, strictly ordered
@@ -17,8 +29,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   The frozen 32-case refined loose campaign has 26 independent passes, five
   references too wide and one explicit runtime refusal; tight targets remain
   limited. American performance is unchanged; measured Bermudan allocation of
-  179/259 MB without/with cash needs the boundary-discount follow-up under #119
-  before compiled workloads. See [Bermudan evidence](docs/results-bermudan.md).
+  179/259 MB without/with cash motivated the #119 boundary-discount follow-up
+  above. See [Bermudan evidence](docs/results-bermudan.md).
 
 ### American spatial preparation reuse (#119)
 

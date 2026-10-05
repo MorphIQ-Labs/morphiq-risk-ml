@@ -723,10 +723,41 @@ module Bsm = struct
     c.largest <- max c.largest !n;
     Array.sub x 0 !n
 
+  (* Cache only successful scalar boundary values, not enclosures. Every hit
+     follows a previous boundary check in this same request, whose local
+     allowance is fixed and boundary_error only increases. Slab keys retain
+     original words; rounded time coordinates are not dependency identities.
+     A 256-byte entry charge covers the list/tuple/key/array headers and boxed
+     words on the supported 64-bit runtime; payload is 8 bytes per step. *)
+  let boundary_values ~max_steps cache earlier later next_exercise time_steps =
+    let remaining, entries = !cache in
+    if
+      (remaining = 0 && entries = [])
+      || time_steps > max_steps
+      || time_steps > Sys.max_floatarray_length
+    then None
+    else
+      let key =
+        ( Int64.bits_of_float earlier,
+          Int64.bits_of_float later,
+          Option.map Int64.bits_of_float next_exercise,
+          time_steps )
+      in
+      match List.assoc_opt key entries with
+      | Some values -> Some values
+      | None ->
+          if remaining < 256 || time_steps > (remaining - 256) / 8 then None
+          else
+            let values = Array.make time_steps nan in
+            cache :=
+              (remaining - 256 - (8 * time_steps), (key, values) :: entries);
+            Some values
+
   (* The price request owns preparation for one stock-grid key. Payoff and
      spatial bands depend only on that grid, the fixed model and option side;
      time steps, boundary choice and cash interpolation do not alter them. *)
-  let solver_pair ?cash ?bermudan ~prepared c p side x time_steps capture =
+  let solver_pair ?cash ?bermudan ~prepared ~boundary_cache c p side x
+      time_steps capture =
    fun upper_boundary ->
     check c;
     let n = Array.length x and sigma = Vol.to_float p.volatility in
@@ -851,6 +882,10 @@ module Bsm = struct
         if h <= 0. then fail "collapsed time step";
         if h *. float_max (-.p.rate) 0. > 0.5 then
           fail "negative-rate matrix margin";
+        let zero_values =
+          boundary_values ~max_steps:c.cfg.limits.max_steps boundary_cache
+            earlier later next_exercise time_steps
+        in
         let previous = ref later in
         for j = 1 to time_steps do
           step c;
@@ -873,10 +908,21 @@ module Bsm = struct
           let zero =
             if side = Side.Call then 0.
             else
-              boundary c
-                (E.mul (exact p.strike)
-                   (exp_product (-.p.rate)
-                      (if p.rate < 0. then remaining else wait)))
+              let cached =
+                match zero_values with None -> nan | Some vs -> vs.(j - 1)
+              in
+              if not (Float.is_nan cached) then cached
+              else
+                let value =
+                  boundary c
+                    (E.mul (exact p.strike)
+                       (exp_product (-.p.rate)
+                          (if p.rate < 0. then remaining else wait)))
+                in
+                (match zero_values with
+                | None -> ()
+                | Some vs -> vs.(j - 1) <- value);
+                value
           in
           let top =
             if upper_boundary then
@@ -1266,6 +1312,26 @@ module Bsm = struct
                    > (remaining - (48 * cfg.limits.max_nodes)) / 1024
               then raise (Stop (Resource_limit "cash workspace bytes")));
 
+          (* Existing checks above make each reservation fit before these
+             products are formed. Reuse is optional: insufficient surplus keeps
+             the original evaluator, including its original resource outcomes. *)
+          let metadata =
+            cash_count + Option.fold ~none:0 ~some:Array.length dates
+          in
+          let reserved =
+            (512 * cfg.limits.max_nodes)
+            + (32 * cfg.limits.policy_iterations)
+            + 65536 + (1024 * metadata)
+            + if cash = None then 0 else 48 * cfg.limits.max_nodes
+          in
+          let cache_bytes =
+            if
+              side = Side.Call
+              || (dates = None && p.rate >= 0. && p.opens_at = 0.)
+            then 0
+            else max 0 (cfg.limits.max_workspace_bytes - reserved - 128)
+          in
+          let boundary_cache = ref (cache_bytes, []) in
           let fine_time = 4 * cfg.time_steps in
           (* Single-entry, request-owned cache. grid is deterministic in the
              fixed inputs/configuration plus (level, domain). Drop the previous
@@ -1291,7 +1357,8 @@ module Bsm = struct
                 cash
             in
             let solve =
-              solver_pair ?cash ?bermudan ~prepared c p side x time capture
+              solver_pair ?cash ?bermudan ~prepared ~boundary_cache c p side x
+                time capture
             in
             let low, vl = solve false in
             let high, vh = solve true in

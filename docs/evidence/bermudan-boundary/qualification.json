@@ -1,0 +1,14 @@
+{
+  "runtime_revision": "326c31ce1b5a16dc83e0cfa949345387da051a85",
+  "final_numerical_witness_revision": "eb5b346c7c0057c230aad47501ebd3e128cc992e",
+  "performance_revision": "6b6e45a318d303dae2cc4e79bb020dddfd88bce1",
+  "scope": "Runtime unchanged after 326c31c. Subsequent commits strengthen test witnesses and resolve admission clock resolution; final development/release suites run with the strengthened witness. Eleven named mutants used the original dependency witness; the wrong-slab mutant also has a separately retained independent numerical kill.",
+  "ordinary": [
+    "validation.json",
+    "validation-final-witness.json"
+  ],
+  "mutation": [
+    "mutations.log.gz",
+    "boundary-mutation.json"
+  ]
+}

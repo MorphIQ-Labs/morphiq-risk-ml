@@ -1,0 +1,16 @@
+from pathlib import Path
+import subprocess,json,hashlib,os
+root=Path.cwd();out=Path('/tmp/morphiq-boundary-evidence');prefix=out/'install';consumer=out/'profile';consumer.mkdir(exist_ok=True)
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+opam=['opam','exec','--switch=morphiq-risk-ml','--']
+subprocess.run(opam+['dune','build','--release','@install'],check=True)
+with (out/'install.log').open('w') as f:subprocess.run(opam+['dune','install','--profile','release','--prefix',str(prefix)],stdout=f,stderr=subprocess.STDOUT,check=True)
+p=consumer/'profile.ml';p.write_bytes((root/'docs/evidence/bermudan/profile-driver.ml.txt').read_bytes());exe=consumer/'profile'
+command=opam+['env','OCAMLPATH='+str(prefix/'lib'),'ocamlfind','ocamlopt','-g','-O3','-package','morphiq_risk_ml,unix','-linkpkg','-o',str(exe),str(p)]
+subprocess.run(command,cwd=consumer,check=True)
+record=dict(scope='Allocation sampling only; unchanged historical driver with current installed release library.',build=json.loads((out/'candidate-build.json').read_text()),command=command,source_sha256=sha(p),binary_sha256=sha(exe),sampling_rate=0.0001,calls=3,rows=[],installed_static_sha256={str(q.relative_to(prefix)):sha(q) for q in (prefix/'lib').rglob('*') if q.suffix in ('.a','.cmxa')})
+for mode in ('none','cash'):
+ raw=out/('profile-'+mode+'.txt')
+ with raw.open('w') as f:subprocess.run([str(exe),'--mode',mode,'--calls','3'],stdout=f,stderr=subprocess.STDOUT,check=True)
+ record['rows'].append(dict(mode=mode,raw_sha256=sha(raw)))
+(out/'allocation-profile.json').write_text(json.dumps(record,indent=2)+'\n')

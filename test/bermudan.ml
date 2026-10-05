@@ -245,6 +245,89 @@ let controls () =
   expect "next-right feasible stopping lower"
     (future.value
     >= cap -. (low_spot *. exp (-0.02 *. 0.5)) -. error future -. arithmetic);
+  (* The minimum existing workspace leaves no room for optional preparation.
+     Equal complete outcomes establish that reuse adds no required capacity. *)
+  List.iter
+    (fun r ->
+      List.iter
+        (fun cash ->
+          (* A high diffusion rate makes the absorbing boundary materially
+             observable at the spot anchor after spatial refinement. *)
+          let p = model ~s:0x1p-30 ~vol:2. ~r ~opens:0.2 () in
+          let ds = regular [ 0.2; 0.55; 1. ] in
+          let cash = if cash then Some (spec [ (0.4, 5.) ]) else None in
+          let a = unwrap (A.admit_bermudan ?cash p ds) in
+          let reserved =
+            (512 * limits.max_nodes)
+            + (32 * limits.policy_iterations)
+            + 65536
+            + (1024 * Array.length ds)
+            + if cash = None then 0 else (48 * limits.max_nodes) + 1024
+          in
+          let run extra cancel =
+            A.price ~cancel
+              (config
+                 ~lim:{ limits with max_workspace_bytes = reserved + extra }
+                 1.)
+              a Side.Put
+          in
+          let expected = run 0 (fun () -> false) in
+          expect "boundary fallback outcome"
+            (if r >= 0. then Result.is_ok expected
+             else expected = Error (A.Arithmetic_unresolved "global price cap"));
+          List.iter
+            (fun extra ->
+              let actual = run extra (fun () -> false) in
+              (match actual with
+              | Ok x when r >= 0. ->
+                  (* Before the first right/cash event, C(t)-S with
+                     C(t)=K exp(-r*(opening-t)) is a discrete subsolution:
+                     exp(-r*h)*(1+r*h) <= 1 and the -S row contributes
+                     -h*q*S <= 0. Payoff and exterior values dominate it.
+                     Allow accumulated residual/arithmetic screens, not an
+                     observed refinement difference that can mask this fault. *)
+                  let lower = (p.strike *. exp (-.r *. p.opens_at)) -. p.spot in
+                  let arithmetic =
+                    x.boundary_arithmetic_indicator
+                    +. float x.work.steps
+                       *. (x.maximum_residual +. x.maximum_roundoff_indicator)
+                  in
+                  expect "cached irregular feasible stopping lower"
+                    (x.value >= lower -. arithmetic)
+              | Error e when r >= 0. ->
+                  failwith
+                    ("cached irregular feasible stopping availability: "
+                   ^ failure e)
+              | _ -> ());
+              expect "boundary reuse dependency identity" (actual = expected);
+              List.iter
+                (fun stop ->
+                  let cancelled extra =
+                    let calls = ref 0 in
+                    let outcome =
+                      run extra (fun () ->
+                          incr calls;
+                          !calls = stop)
+                    in
+                    (outcome, !calls)
+                  in
+                  expect "boundary reuse cancellation identity"
+                    (cancelled extra = cancelled 0))
+                [ 1; 50; 500 ])
+            [ 128; 4096; 1048576 ])
+        [ false; true ])
+    [ 0.05; -0.05 ];
+  expect "oversized optional boundary array falls back"
+    (match
+       A.price
+         (config
+            ~steps:((Sys.max_floatarray_length + 1) / 4)
+            ~lim:{ limits with max_steps = 1; max_workspace_bytes = max_int }
+            1.)
+         admitted Side.Put
+     with
+    | Error (A.Arithmetic_unresolved "collapsed time coordinates") -> true
+    | _ -> false);
   let run () = A.price cfg admitted Side.Put in
   let expected = run () in
   let workers = Array.init 2 (fun _ -> Domain.spawn run) in

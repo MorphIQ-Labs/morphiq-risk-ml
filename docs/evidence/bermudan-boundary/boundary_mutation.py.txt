@@ -1,0 +1,29 @@
+from pathlib import Path
+import subprocess,tempfile,os,json,hashlib,shutil
+root=Path.cwd();out=Path('/tmp/morphiq-boundary-evidence');work=Path(tempfile.mkdtemp(prefix='morphiq-boundary-witness-'))
+files=subprocess.check_output(['git','ls-files'],text=True).splitlines()
+for name in files:
+ target=work/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(root/name,target)
+env={k:v for k,v in os.environ.items() if not k.startswith('DUNE_') and k!='INSIDE_DUNE'}
+record=dict(revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),workspace=str(work),runs=[])
+def run(name,cmd):
+ r=subprocess.run(cmd,cwd=work,env=env,capture_output=True,text=True)
+ (out/(name+'.log')).write_text(r.stdout+r.stderr)
+ record['runs'].append(dict(name=name,command=cmd,returncode=r.returncode,stdout=r.stdout,stderr=r.stderr))
+ return r
+build=['opam','exec','--switch=morphiq-risk-ml','--','dune','build','--release','test/bermudan.exe']
+assert run('boundary-baseline-build',build).returncode==0
+assert run('boundary-baseline-control',[str(work/'_build/default/test/bermudan.exe')]).returncode==0
+path=work/'lib/early_exercise.ml';source=path.read_text()
+needle='Int64.bits_of_float earlier,\n          Int64.bits_of_float later,\n          Option.map Int64.bits_of_float next_exercise,'
+assert source.count(needle)==1
+try:
+ path.write_text(source.replace(needle,'Int64.zero, Int64.zero, None,'))
+ assert run('boundary-mutant-build',build).returncode==0
+ r=run('boundary-mutant-control',[str(work/'_build/default/test/bermudan.exe')])
+ assert r.returncode in (1,2) and 'cached irregular feasible stopping ' in r.stderr, r.stderr
+ record['numerical_witness_killed']=True
+finally:
+ path.write_text(source)
+ (out/'boundary-mutation.json').write_text(json.dumps(record,indent=2)+'\n')
+print('Wrong-slab cache rejected by independent feasible-stopping inequality',flush=True)

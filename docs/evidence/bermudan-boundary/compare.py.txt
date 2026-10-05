@@ -1,0 +1,17 @@
+from pathlib import Path
+import subprocess,os,sys,json
+root=Path.cwd();out=Path('/tmp/morphiq-boundary-evidence');kind=sys.argv[1]
+env=dict(os.environ,MORPHIQ_AMERICAN_SNAPSHOT='1')
+for corpus,exe,script in [('bermudan','bermudan','check_bermudan.py'),('plain','american_pricing','check_american_runtime.py'),('cash','american_cash','check_american_cash.py')]:
+ for mode in ('primary','loose'):
+  for refined in (False,True):
+   name=f"{corpus}-{mode}-{'refined' if refined else 'initial'}";dest=out/f'reference-{kind}'/name
+   cmd=['python3',str(root/'scripts'/script),'--executable',str(out/(exe+'-'+kind)),'--mode',mode,'--output',str(dest)]
+   if refined:cmd+=['--refined']
+   subprocess.run(cmd,env=env,check=True)
+   if kind=='candidate':
+    before=out/'reference-baseline'/name
+    assert (before/'stdout.tsv').read_bytes()==(dest/'stdout.tsv').read_bytes(),name
+    a=json.loads((before/'results.json').read_text());b=json.loads((dest/'results.json').read_text())
+    assert a['rows']==b['rows'],name
+   print(kind,name,'passed',flush=True)

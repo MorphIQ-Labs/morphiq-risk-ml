@@ -10,6 +10,8 @@ been retired; it remains in Git history.
 
 ## Current contracts
 
+- [Bermudan boundary reuse](results-bermudan-boundary.md): bounded request-owned discounts, unchanged outcomes and paired allocation/latency evidence.
+
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 
 - [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.

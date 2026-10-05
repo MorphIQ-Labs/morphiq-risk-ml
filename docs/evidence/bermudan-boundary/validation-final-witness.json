@@ -1,0 +1,25 @@
+[
+  {
+    "name": "dev-final-witness",
+    "command": [
+      "build",
+      "@install",
+      "@fmt",
+      "@runtest"
+    ],
+    "returncode": 0,
+    "seconds": 149.47452330589294
+  },
+  {
+    "name": "release-final-witness",
+    "command": [
+      "build",
+      "--release",
+      "@install",
+      "@fmt",
+      "@runtest"
+    ],
+    "returncode": 0,
+    "seconds": 142.53356504440308
+  }
+]

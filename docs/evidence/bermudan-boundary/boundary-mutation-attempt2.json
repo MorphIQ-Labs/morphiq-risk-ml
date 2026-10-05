@@ -1,0 +1,56 @@
+{
+  "revision": "de1d3589d751a4f947712343bb70093c4658bff4",
+  "workspace": "/var/folders/yq/gxnn8d696f58z2ksd9nltj1r0000gn/T/morphiq-boundary-witness-0l8cyum0",
+  "runs": [
+    {
+      "name": "boundary-baseline-build",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "dune",
+        "build",
+        "--release",
+        "test/bermudan.exe"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "boundary-baseline-control",
+      "command": [
+        "/var/folders/yq/gxnn8d696f58z2ksd9nltj1r0000gn/T/morphiq-boundary-witness-0l8cyum0/_build/default/test/bermudan.exe"
+      ],
+      "returncode": 0,
+      "stdout": "Bermudan contract controls passed\n",
+      "stderr": ""
+    },
+    {
+      "name": "boundary-mutant-build",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "dune",
+        "build",
+        "--release",
+        "test/bermudan.exe"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "(cd _build/default && /Users/stephen/.opam/morphiq-risk-ml/bin/ocamlopt.opt -w -40 -strict-sequence -w +a-4-40-41-42-44-45-70 -open Morphiq_fp -g -O3 -I lib/.morphiq_risk.objs/byte -I lib/.morphiq_risk.objs/native -I lib/fp/.morphiq_fp.objs/byte -I lib/fp/.morphiq_fp.objs/native -cmi-file lib/.morphiq_risk.objs/byte/morphiq_risk__Early_exercise.cmi -no-alias-deps -open Morphiq_risk__ -o lib/.morphiq_risk.objs/native/morphiq_risk__Early_exercise.cmx -c -impl lib/early_exercise.ml)\nFile \"lib/early_exercise.ml\", line 732, characters 39-46:\n732 |   let boundary_values ~max_steps cache earlier later next_exercise time_steps =\n                                             ^^^^^^^\nWarning 27 [unused-var-strict]: unused variable earlier.\n\nFile \"lib/early_exercise.ml\", line 732, characters 47-52:\n732 |   let boundary_values ~max_steps cache earlier later next_exercise time_steps =\n                                                     ^^^^^\nWarning 27 [unused-var-strict]: unused variable later.\n\nFile \"lib/early_exercise.ml\", line 732, characters 53-66:\n732 |   let boundary_values ~max_steps cache earlier later next_exercise time_steps =\n                                                           ^^^^^^^^^^^^^\nWarning 27 [unused-var-strict]: unused variable next_exercise.\n"
+    },
+    {
+      "name": "boundary-mutant-control",
+      "command": [
+        "/var/folders/yq/gxnn8d696f58z2ksd9nltj1r0000gn/T/morphiq-boundary-witness-0l8cyum0/_build/default/test/bermudan.exe"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "Fatal error: exception Failure(\"boundary reuse dependency identity\")\n"
+    }
+  ]
+}

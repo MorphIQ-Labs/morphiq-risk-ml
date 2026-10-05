@@ -1,0 +1,31 @@
+{
+  "sha256": {
+    "docs/evidence/bermudan-boundary/allocation-profile.json": "8cd2d7c67bbf9e4d4f74511398961ced30d01bb7f52b843a748da8ecff9823c2",
+    "docs/evidence/bermudan-boundary/baseline-build.json": "0fc6719546d52aa9ad7f918ec6af5171a823c15c42ae418c0c22115d39efd0cc",
+    "docs/evidence/bermudan-boundary/boundary-mutation-attempt2.json": "3a6f3e77263ed4a162eb93af70272905cf5310e14b44515546317fbf65ed8c86",
+    "docs/evidence/bermudan-boundary/boundary-mutation-attempt3.json": "0a1351a4b2c8c44d342d811559b9bb1ee7166456805244982632865ac6bd2598",
+    "docs/evidence/bermudan-boundary/boundary-mutation.json": "9d14facc7bed397f4c8633b9c597cc4fd71ada9547b8f99154d6c2a1e9cdd4e0",
+    "docs/evidence/bermudan-boundary/boundary_mutation.py.txt": "0fa5ec7a726c49a6237eebb6b0b6c1d311cb1ad0d58e284d43f4bab6a223ac04",
+    "docs/evidence/bermudan-boundary/candidate-build.json": "ee215e284baf45696ece6cf1d4e1d6e3bd1b47b16b7c584f3f0667411eceb3c0",
+    "docs/evidence/bermudan-boundary/capture.py.txt": "c87550577bed9d8d641df5dc7b59b259cecd89316db9153baf02865790495412",
+    "docs/evidence/bermudan-boundary/compare.py.txt": "6dd96b3ea90e7338534ba4d69fc92594798ad7f693c006925f30cf75062ce817",
+    "docs/evidence/bermudan-boundary/compatibility.json": "4fe442ff1c2a44c22bdbceafe709ba4c5b0f00d2a88b2c44ab7c6f1b32745940",
+    "docs/evidence/bermudan-boundary/compatibility.tar.gz": "f8fe9b2d8edd28659088350da52f146034329c72dc48e9ab87f9f61a81880464",
+    "docs/evidence/bermudan-boundary/controls-final.log.gz": "7158fd61079909eb05bb2cfed9effde9f9c0d4e9dbd3c59550761269358634a5",
+    "docs/evidence/bermudan-boundary/dev-final-witness.log.gz": "098018f7d055bc771bc5940c5bb4eb84aede1436cbacd482e18ef374371bf89f",
+    "docs/evidence/bermudan-boundary/dev-final.log.gz": "24d2879c20bd35ed459b413b82ca9813e708dd50eb48a161292404ba5e755db0",
+    "docs/evidence/bermudan-boundary/mutation-self.log.gz": "a5235c6358f0607b0d1fc0a7665cc5e19a164ffef71f298e9ddb0d993561e8ba",
+    "docs/evidence/bermudan-boundary/mutations.log.gz": "bfd0ce4ef75074803535249f2bfc5c1bb9c6491c9acd6a02d00998e4117d520b",
+    "docs/evidence/bermudan-boundary/performance-raw.tar.gz": "5def697bb9a1621f929e7cdad92c337e4515abe084700d15d3b9ba85a35ac091",
+    "docs/evidence/bermudan-boundary/performance.json": "1ac55ecfdbea010880811c2828519259ab81bebb46b5e964162b9228f8af4dc2",
+    "docs/evidence/bermudan-boundary/profile-cash.txt.gz": "de37f3d8e2c0761205e78a7ce35e66b694cbda772a0dc2d0fa6643261db255ef",
+    "docs/evidence/bermudan-boundary/profile-none.txt.gz": "9f75a4c90b06c604caec5ec7646c7adc89013bdd5ac3f6f13dade52c0a473bf9",
+    "docs/evidence/bermudan-boundary/profile.py.txt": "1879ab7486783e2ee24a9014f7ef0b9eb2e7c68c7aa4a4ee192ec73aaaf23611",
+    "docs/evidence/bermudan-boundary/protocol.md": "7acf7853037d19e99ac50a63954fb3c9c91e3b7771f64084b5903c17ce8251db",
+    "docs/evidence/bermudan-boundary/qualification.json": "484ad8ad6ea41256ea9acaf9668d66e85f52d5722a67820a38db6f89b5e8cfc8",
+    "docs/evidence/bermudan-boundary/release-final-witness.log.gz": "a640daeef58869e63617740ad0b35db74f172598a3cdcbac380b64c8256a514e",
+    "docs/evidence/bermudan-boundary/release-final.log.gz": "9b45c96cbc38979569bb3664ce42082148aba188c11cb92ad166e2ba541da78a",
+    "docs/evidence/bermudan-boundary/validation-final-witness.json": "50b5407b86e671054e58087504bbf0b940b7ece7ba609594f058404bbd749a50",
+    "docs/evidence/bermudan-boundary/validation.json": "a604deec1d9d48586dbe4afe0f32eaf5de52648c96070781231692977bd85181"
+  }
+}
