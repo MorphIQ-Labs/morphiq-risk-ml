@@ -10,46 +10,13 @@ external clock : unit -> float = "morphiq_simd_clock"
 let ok = function Ok x -> x | Error _ -> failwith "invalid experiment input"
 let normal x = ok (Vol.normal x)
 let lognormal x = ok (Vol.lognormal x)
-let range x = Float.is_finite x && x >= 0x1p-100 && x <= 0x1p100
 
 let prepare (F.Price (model, inputs, side, vol)) =
   match model with
   | Batch.Bachelier -> (
       match Bachelier.admit inputs with
       | Error _ -> None
-      | Ok _ ->
-          let theta = Side.sign side in
-          let distance, low =
-            I.Split.two_sum inputs.forward (-.inputs.strike)
-          in
-          let root, root_low = I.Split.sqrt inputs.time_to_expiry in
-          let s =
-            I.Dd.mul_float { hi = root; lo = root_low } (Vol.to_float vol)
-          in
-          let product = inputs.rate *. inputs.time_to_expiry in
-          let residual =
-            Float.fma inputs.rate inputs.time_to_expiry (-.product)
-          in
-          let discount =
-            if product >= 0. then I.Split.scaled_exp_neg 1. product residual
-            else I.Elementary.exp (-.product) *. (1. -. residual)
-          in
-          if
-            inputs.time_to_expiry <= 0.
-            || Vol.to_float vol <= 0.
-            || theta *. distance > 0.
-            || (not (range (Float.abs distance)))
-            || not (range s.hi && range discount)
-          then None
-          else
-            let a, al =
-              if distance < 0. then (-.distance, -.low) else (distance, low)
-            in
-            let q, r = I.Split.quotient_dd a al s.hi s.lo in
-            let d = q +. r in
-            if Float.is_finite q && Float.is_finite r && d >= 0.46875 && d <= 4.
-            then Some (q, r, s.hi, discount)
-            else None)
+      | Ok admitted -> I.Bachelier_fast.prepare admitted side vol)
   | _ -> None
 
 type plan = {
@@ -75,11 +42,11 @@ let compile requests =
   let padded = count + (count mod 2) in
   let parameters = Array.make (4 * padded) 1. in
   Array.iteri
-    (fun i (_, (q, r, s, discount)) ->
-      parameters.(i) <- q;
-      parameters.(padded + i) <- r;
-      parameters.((2 * padded) + i) <- s;
-      parameters.((3 * padded) + i) <- discount)
+    (fun i (_, (p : I.Bachelier_fast.t)) ->
+      parameters.(i) <- p.q;
+      parameters.(padded + i) <- p.low;
+      parameters.((2 * padded) + i) <- p.s;
+      parameters.((3 * padded) + i) <- p.discount)
     selected;
   if count < padded then parameters.(padded + count) <- 0.;
   {

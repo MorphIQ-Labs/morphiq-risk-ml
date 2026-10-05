@@ -1,0 +1,4 @@
+File "forge_fast_preparation.ml", line 2, characters 2-45:
+2 |   { q = 1.; low = 0.; s = 1.; discount = 1. }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "Morphiq_risk.Internal.Bachelier_fast.t"

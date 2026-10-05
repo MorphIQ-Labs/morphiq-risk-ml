@@ -739,3 +739,13 @@
  (modules dd_word_replay)
  (modes byte exe)
  (libraries oracle_fixture morphiq_risk))
+
+(test
+ (name bachelier_preparation)
+ (modules bachelier_preparation)
+ (libraries fast_reference_cases morphiq_risk)
+ (action
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/european.txt}
+   %{dep:../oracle/fixtures/displaced.txt})))
