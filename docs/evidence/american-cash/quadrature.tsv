@@ -1,0 +1,90 @@
+call-single	256	finite	0x1.d919c4143e45bp+2	0x1.d919c4143e45bp+2
+call-single	512	finite	0x1.d831809254066p+2	0x1.d831809254066p+2
+call-single	1024	finite	0x1.d7ce00c993f8dp+2	0x1.d7ce00c993f8dp+2
+call-multiple	256	finite	0x1.b488d85fcf252p+2	0x1.b488d85fcf252p+2
+call-multiple	512	finite	0x1.b2ab72dde9fp+2	0x1.b2ab72dde9fp+2
+call-multiple	1024	finite	0x1.b20d6d6cb5a16p+2	0x1.b20d6d6cb5a16p+2
+call-large	256	finite	0x1.941a28723d657p-4	0x1.941a28723d657p-4
+call-large	512	finite	0x1.90cce37d95332p-4	0x1.90cce37d95332p-4
+call-large	1024	finite	0x1.8f63391ba01e9p-4	0x1.8f63391ba01e9p-4
+call-zero-dividend	256	finite	0x1.2848226c4911ap+3	0x1.2848226c4911ap+3
+call-zero-dividend	512	finite	0x1.27cf6b34eab2dp+3	0x1.27cf6b34eab2dp+3
+call-zero-dividend	1024	finite	0x1.279b924da9d5bp+3	0x1.279b924da9d5bp+3
+call-negative-rates	256	finite	0x1.bba43591973dp+2	0x1.bba43591973dp+2
+call-negative-rates	512	finite	0x1.bab7b54971446p+2	0x1.bab7b54971446p+2
+call-negative-rates	1024	finite	0x1.ba51eba050399p+2	0x1.ba51eba050399p+2
+call-coincident	256	finite	0x1.a686e7d5544adp+2	0x1.a686e7d5544adp+2
+call-coincident	512	finite	0x1.a5bccb0b6c237p+2	0x1.a5bccb0b6c237p+2
+call-coincident	1024	finite	0x1.a566d04bf7b7ap+2	0x1.a566d04bf7b7ap+2
+call-delayed-after	256	finite	0x1.b33f8d8098262p+2	0x1.b33f8d8098262p+2
+call-delayed-after	512	finite	0x1.b24a8672d6035p+2	0x1.b24a8672d6035p+2
+call-delayed-after	1024	finite	0x1.b1e1a8dc0abb7p+2	0x1.b1e1a8dc0abb7p+2
+call-expiry-before	256	finite	0x1.27d5ec1a95ac7p+3	0x1.27d5ec1a95ac7p+3
+call-expiry-before	512	finite	0x1.279f82c588411p+3	0x1.279f82c588411p+3
+call-expiry-before	1024	finite	0x1.277122a16961dp+3	0x1.277122a16961dp+3
+call-expiry-after	256	finite	0x1.4d3c3586a5896p+2	0x1.4d3c3586a5896p+2
+call-expiry-after	512	finite	0x1.4ccc6edbfaeaap+2	0x1.4ccc6edbfaeaap+2
+call-expiry-after	1024	finite	0x1.4c6e2b907781dp+2	0x1.4c6e2b907781dp+2
+put-single	256	finite	0x1.25cd9db3f0f61p+3	0x1.25cd9db3f0f61p+3
+put-single	512	finite	0x1.25579a64d64ffp+3	0x1.25579a64d64ffp+3
+put-single	1024	finite	0x1.2525591a6b712p+3	0x1.2525591a6b712p+3
+put-multiple	256	finite	0x1.455ddcb54251ep+3	0x1.455ddcb54251ep+3
+put-multiple	512	finite	0x1.44652bc4df753p+3	0x1.44652bc4df753p+3
+put-multiple	1024	finite	0x1.44138c4dfb76p+3	0x1.44138c4dfb76p+3
+put-large	256	finite	0x1.861fbb6eef736p+4	0x1.861fbb6eef736p+4
+put-large	512	finite	0x1.861fbb78be565p+4	0x1.861fbb78be565p+4
+put-large	1024	finite	0x1.861fbb7ca551bp+4	0x1.861fbb7ca551bp+4
+put-zero-dividend	256	finite	0x1.ac45af9eae69cp+2	0x1.ac45af9eae69cp+2
+put-zero-dividend	512	finite	0x1.ab5a4eaa6d5ccp+2	0x1.ab5a4eaa6d5ccp+2
+put-zero-dividend	1024	finite	0x1.aaf5bbee61339p+2	0x1.aaf5bbee61339p+2
+put-negative-rates	256	finite	0x1.4bb6122cf0253p+3	0x1.4bb6122cf0253p+3
+put-negative-rates	512	finite	0x1.4b3916dcab6d2p+3	0x1.4b3916dcab6d2p+3
+put-negative-rates	1024	finite	0x1.4b03ac75de08cp+3	0x1.4b03ac75de08cp+3
+put-coincident	256	finite	0x1.b23d17ef8e087p+3	0x1.b23d17ef8e087p+3
+put-coincident	512	finite	0x1.b1d5e4c53991dp+3	0x1.b1d5e4c53991dp+3
+put-coincident	1024	finite	0x1.b1aa03eb4a042p+3	0x1.b1aa03eb4a042p+3
+put-delayed-after	256	finite	0x1.25cd9db3f0f61p+3	0x1.25cd9db3f0f61p+3
+put-delayed-after	512	finite	0x1.25579a64d64ffp+3	0x1.25579a64d64ffp+3
+put-delayed-after	1024	finite	0x1.2525591a6b712p+3	0x1.2525591a6b712p+3
+put-expiry-before	256	finite	0x1.9644a098bbc8dp+2	0x1.9644a098bbc8dp+2
+put-expiry-before	512	finite	0x1.95d7cdedfd5fp+2	0x1.95d7cdedfd5fp+2
+put-expiry-before	1024	finite	0x1.957b0da596811p+2	0x1.957b0da596811p+2
+put-expiry-after	256	finite	0x1.7a4f35dba27b1p+3	0x1.7a4f35dba27b1p+3
+put-expiry-after	512	finite	0x1.7a175285fb5b4p+3	0x1.7a175285fb5b4p+3
+put-expiry-after	1024	finite	0x1.79e830e0250bfp+3	0x1.79e830e0250bfp+3
+valuation-before	256	finite	0x1.4f1a6959551f9p+3	0x1.4f1a6959551f9p+3
+valuation-before	512	finite	0x1.4ed56fb6fed17p+3	0x1.4ed56fb6fed17p+3
+valuation-before	1024	finite	0x1.4ea0378d299a3p+3	0x1.4ea0378d299a3p+3
+valuation-after	256	finite	0x1.4f1a7133cae07p+3	0x1.4f1a7133cae07p+3
+valuation-after	512	finite	0x1.4ed567661d322p+3	0x1.4ed567661d322p+3
+valuation-after	1024	finite	0x1.4ea0074b48413p+3	0x1.4ea0074b48413p+3
+call-zero-time-both	256	unavailable	-	analytical reference row
+call-zero-time-both	512	unavailable	-	analytical reference row
+call-zero-time-both	1024	unavailable	-	analytical reference row
+call-zero-time-after-only	256	unavailable	-	analytical reference row
+call-zero-time-after-only	512	unavailable	-	analytical reference row
+call-zero-time-after-only	1024	unavailable	-	analytical reference row
+put-zero-time-both	256	unavailable	-	analytical reference row
+put-zero-time-both	512	unavailable	-	analytical reference row
+put-zero-time-both	1024	unavailable	-	analytical reference row
+put-zero-time-after-only	256	unavailable	-	analytical reference row
+put-zero-time-after-only	512	unavailable	-	analytical reference row
+put-zero-time-after-only	1024	unavailable	-	analytical reference row
+deterministic-joint	256	unavailable	-	analytical reference row
+deterministic-joint	512	unavailable	-	analytical reference row
+deterministic-joint	1024	unavailable	-	analytical reference row
+deterministic-interior	256	unavailable	-	analytical reference row
+deterministic-interior	512	unavailable	-	analytical reference row
+deterministic-interior	1024	unavailable	-	analytical reference row
+deterministic-rounded-sum	256	unavailable	-	analytical reference row
+deterministic-rounded-sum	512	unavailable	-	analytical reference row
+deterministic-rounded-sum	1024	unavailable	-	analytical reference row
+zero-stock-negative-rate	256	unavailable	-	analytical reference row
+zero-stock-negative-rate	512	unavailable	-	analytical reference row
+zero-stock-negative-rate	1024	unavailable	-	analytical reference row
+zero-strike-put	256	unavailable	-	analytical reference row
+zero-strike-put	512	unavailable	-	analytical reference row
+zero-strike-put	1024	unavailable	-	analytical reference row
+unrepresentable-joint	256	unavailable	-	analytical reference row
+unrepresentable-joint	512	unavailable	-	analytical reference row
+unrepresentable-joint	1024	unavailable	-	analytical reference row

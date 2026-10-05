@@ -1,0 +1,90 @@
+call-single	128	finite	0x1.d7426da08d422p+2	0x1.d72fc065d6db9p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-single	256	finite	0x1.d72fc37424705p+2	0x1.d7273c40f2871p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-single	512	finite	0x1.d72898beb5319p+2	0x1.d72701845dacfp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-multiple	128	finite	0x1.b1d0b730b4e8ep+2	0x1.b158fbb7acf99p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-multiple	256	finite	0x1.b152db7313339p+2	0x1.b13f8f6976ad3p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-multiple	512	finite	0x1.b13fb5863e2cap+2	0x1.b13972cb19301p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-large	128	exception	-	-	-	end must be larger than start
+call-large	256	exception	-	-	-	end must be larger than start
+call-large	512	exception	-	-	-	end must be larger than start
+call-zero-dividend	128	finite	0x1.274acd4980302p+3	0x1.275d97dfaf21cp+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-zero-dividend	256	finite	0x1.2745678324cedp+3	0x1.274a1005320aap+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-zero-dividend	512	finite	0x1.274411f2f98dep+3	0x1.27453b0426e79p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-negative-rates	128	finite	0x1.b9b4cb28f2e06p+2	0x1.b9ac8b90f03dep+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-negative-rates	256	finite	0x1.b9abb4383d33bp+2	0x1.b9a6dd9c14677p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-negative-rates	512	finite	0x1.b9a86f20eb4aep+2	0x1.b9a6e27a4083bp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-coincident	128	finite	0x1.a4c0634d12cf4p+2	0x1.d7315f14e04ecp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-coincident	256	finite	0x1.a4d0cbf9d9af6p+2	0x1.d7277fea96dcfp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-coincident	512	finite	0x1.a4d3b352bd059p+2	0x1.d7267cb4d8393p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-delayed-after	128	finite	0x1.b18c8743da694p+2	0x1.d72fc065d6b74p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-delayed-after	256	finite	0x1.b147b494c2c14p+2	0x1.d7273c40f27cp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-delayed-after	512	finite	0x1.b1363062cf0d3p+2	0x1.d72701845da47p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+call-expiry-before	128	exception	-	-	-	endpoint cash convention excluded
+call-expiry-before	256	exception	-	-	-	endpoint cash convention excluded
+call-expiry-before	512	exception	-	-	-	endpoint cash convention excluded
+call-expiry-after	128	exception	-	-	-	endpoint cash convention excluded
+call-expiry-after	256	exception	-	-	-	endpoint cash convention excluded
+call-expiry-after	512	exception	-	-	-	endpoint cash convention excluded
+put-single	128	finite	0x1.24c2dfcfff89ap+3	0x1.24b19bfef81d4p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-single	256	finite	0x1.24c61e7efb94ap+3	0x1.24c1aeceae6acp+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-single	512	finite	0x1.24c9a5614d6a3p+3	0x1.24c8a46b01d47p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-multiple	128	finite	0x1.43d7790623a3cp+3	0x1.439c6c1dbd741p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-multiple	256	finite	0x1.43ab3d303fcd1p+3	0x1.439dd452f8068p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-multiple	512	finite	0x1.43a41ee59b5f4p+3	0x1.43a0f976c3df6p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-large	128	exception	-	-	-	end must be larger than start
+put-large	256	exception	-	-	-	end must be larger than start
+put-large	512	exception	-	-	-	end must be larger than start
+put-zero-dividend	128	finite	0x1.a9dff74ba4d54p+2	0x1.a9f7615bd5ed7p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-zero-dividend	256	finite	0x1.aa1f13cd17646p+2	0x1.aa25579af3244p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-zero-dividend	512	finite	0x1.aa36f26e223cep+2	0x1.aa388cbee64dbp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-negative-rates	128	finite	0x1.4ab91f3bb6945p+3	0x1.4a9ed22419497p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-negative-rates	256	finite	0x1.4aaac9286bc72p+3	0x1.4aa47ce05b3fbp+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-negative-rates	512	finite	0x1.4aa857efa66d3p+3	0x1.4aa6d16353e2ap+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-coincident	128	finite	0x1.b15632fb1cc2p+3	0x1.24b1e9acc57e5p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-coincident	256	finite	0x1.b1562e8eb9c18p+3	0x1.24c1447cb1585p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-coincident	512	finite	0x1.b1599c6c48e28p+3	0x1.24c8866c57c73p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-delayed-after	128	finite	0x1.24c2df95b0beep+3	0x1.24b19bfef81d1p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-delayed-after	256	finite	0x1.24c61e782319fp+3	0x1.24c1aeceae6acp+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-delayed-after	512	finite	0x1.24c9a5605179ep+3	0x1.24c8a46b01d44p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
+put-expiry-before	128	exception	-	-	-	endpoint cash convention excluded
+put-expiry-before	256	exception	-	-	-	endpoint cash convention excluded
+put-expiry-before	512	exception	-	-	-	endpoint cash convention excluded
+put-expiry-after	128	exception	-	-	-	endpoint cash convention excluded
+put-expiry-after	256	exception	-	-	-	endpoint cash convention excluded
+put-expiry-after	512	exception	-	-	-	endpoint cash convention excluded
+valuation-before	128	exception	-	-	-	endpoint cash convention excluded
+valuation-before	256	exception	-	-	-	endpoint cash convention excluded
+valuation-before	512	exception	-	-	-	endpoint cash convention excluded
+valuation-after	128	exception	-	-	-	endpoint cash convention excluded
+valuation-after	256	exception	-	-	-	endpoint cash convention excluded
+valuation-after	512	exception	-	-	-	endpoint cash convention excluded
+call-zero-time-both	128	exception	-	-	-	analytical boundary excluded
+call-zero-time-both	256	exception	-	-	-	analytical boundary excluded
+call-zero-time-both	512	exception	-	-	-	analytical boundary excluded
+call-zero-time-after-only	128	exception	-	-	-	analytical boundary excluded
+call-zero-time-after-only	256	exception	-	-	-	analytical boundary excluded
+call-zero-time-after-only	512	exception	-	-	-	analytical boundary excluded
+put-zero-time-both	128	exception	-	-	-	analytical boundary excluded
+put-zero-time-both	256	exception	-	-	-	analytical boundary excluded
+put-zero-time-both	512	exception	-	-	-	analytical boundary excluded
+put-zero-time-after-only	128	exception	-	-	-	analytical boundary excluded
+put-zero-time-after-only	256	exception	-	-	-	analytical boundary excluded
+put-zero-time-after-only	512	exception	-	-	-	analytical boundary excluded
+deterministic-joint	128	exception	-	-	-	analytical boundary excluded
+deterministic-joint	256	exception	-	-	-	analytical boundary excluded
+deterministic-joint	512	exception	-	-	-	analytical boundary excluded
+deterministic-interior	128	exception	-	-	-	analytical boundary excluded
+deterministic-interior	256	exception	-	-	-	analytical boundary excluded
+deterministic-interior	512	exception	-	-	-	analytical boundary excluded
+deterministic-rounded-sum	128	exception	-	-	-	analytical boundary excluded
+deterministic-rounded-sum	256	exception	-	-	-	analytical boundary excluded
+deterministic-rounded-sum	512	exception	-	-	-	analytical boundary excluded
+zero-stock-negative-rate	128	exception	-	-	-	analytical boundary excluded
+zero-stock-negative-rate	256	exception	-	-	-	analytical boundary excluded
+zero-stock-negative-rate	512	exception	-	-	-	analytical boundary excluded
+zero-strike-put	128	exception	-	-	-	analytical boundary excluded
+zero-strike-put	256	exception	-	-	-	analytical boundary excluded
+zero-strike-put	512	exception	-	-	-	analytical boundary excluded
+unrepresentable-joint	128	exception	-	-	-	analytical boundary excluded
+unrepresentable-joint	256	exception	-	-	-	analytical boundary excluded
+unrepresentable-joint	512	exception	-	-	-	analytical boundary excluded
