@@ -13,6 +13,9 @@ let () =
       ("--mode", Arg.Set_string mode, "none, zero, cash, multiple");
       ("--phase", Arg.Set_string phase, "admission, price, diagnostics");
       ("--measure", Arg.Set measure, "Measure without allocation profiling");
+      ( "--",
+        Arg.Rest (fun _ -> raise (Arg.Bad "unexpected positional argument")),
+        "End options (no positional arguments accepted)" );
       ( "--version",
         Arg.Unit
           (fun () ->

@@ -126,6 +126,9 @@ Build the recorded baseline and candidate revisions with the recorded OCaml
 `test/american_cash.exe`; keep separate immutable executable copies and capture
 the source and binary hashes in build manifests with the schema retained in
 the performance record. Paths can be relocated; hashes must still match.
+The final PR also makes the benchmark's `--` end-of-options handling explicit;
+that later CLI-only change is outside the measured driver revisions and does
+not alter the solver or measured operation.
 
 Run the two existing independent scorers with `MORPHIQ_AMERICAN_SNAPSHOT=1`,
 `--mode primary|loose`, with/without `--refined`, and compare their complete
