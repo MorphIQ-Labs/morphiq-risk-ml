@@ -1,0 +1,482 @@
+{
+  "schema": 1,
+  "complete": true,
+  "mode": "loose",
+  "configuration": "refined",
+  "counts": {
+    "pass": 26,
+    "reference_too_wide": 5,
+    "runtime_unavailable": 1
+  },
+  "rows": [
+    {
+      "id": "terminal-call",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:rows=1:map=0:roundoff=0x1.7e1e8ad74dcdfp-51",
+      "value": 9.227005508154049,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "6722313923117571/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "6722313923117571/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "terminal-put",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:rows=1:map=0:roundoff=0x1.3dadf41d1b9c2p-53",
+      "value": 6.330080627549918,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5588676974309595/40564819207303340847894502572032",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5588676974309595/40564819207303340847894502572032",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "expiry-call",
+      "outcome": "estimated",
+      "detail": "expiry:steps=0:rows=1:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-sparse",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x1.7d5425cdf6f39p-54",
+      "value": 24.60776862584909,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "3354202733454985/40564819207303340847894502572032",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "3354202733454985/40564819207303340847894502572032",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-middle",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=9:map=0:roundoff=0x1.a12f62f2b6fcap-51",
+      "value": 27.543916265833534,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "absorbing-negative-rate",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:rows=2:map=0:roundoff=0x1.92161cd58af33p-54",
+      "value": 128.40254166877415,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-strike-negative-yield",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:rows=2:map=0:roundoff=0x1.194cbcd360c51p-48",
+      "value": 113.31484530668263,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "4948677646220923/1267650600228229401496703205376",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "4948677646220923/1267650600228229401496703205376",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-after",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=7:map=0:roundoff=0x0p+0",
+      "value": 0.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-both",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=9:map=0:roundoff=0x0p+0",
+      "value": 10.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-large",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=7:map=0:roundoff=0x0p+0",
+      "value": 2.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-joint",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=8:map=0:roundoff=0x0p+0",
+      "value": 2.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-time-before-after",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=4:map=0:roundoff=0x0p+0",
+      "value": 30.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7638884911254323/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7638884911254323/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-time-after",
+      "outcome": "estimated",
+      "detail": "Bermudan-deterministic-stopping:steps=0:rows=4:map=0:roundoff=0x0p+0",
+      "value": 30.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7638884911254323/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7638884911254323/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "terminal-cash-before",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=7936:rows=25570450:map=0:roundoff=0x1.1fa79b2826cc6p-35",
+      "value": 10.862826419227012,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "11124250609308223522083994665/5070602400912917605986812821504",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "11124250609308223522083994665/5070602400912917605986812821504",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "terminal-cash-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=7936:rows=25760096:map=18:roundoff=0x1.e45ba1f7295a4p-35",
+      "value": 28.043052562776165,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7147510382995876515251137137/5070602400912917605986812821504",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7147510382995876515251137137/5070602400912917605986812821504",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-sparse",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=11776:rows=32055061:map=0:roundoff=0x1.065678644dd1p-35",
+      "value": 6.487002419767259,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "40706451543117/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-irregular",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=23552:rows=63541515:map=0:roundoff=0x1.05cef63abc5bp-35",
+      "value": 6.5203898079773,
+      "comparison": {
+        "status": "reference_too_wide"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-dense",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=47104:rows=126514423:map=0:roundoff=0x1.223f90f1037ddp-37",
+      "value": 6.610290834122058,
+      "comparison": {
+        "status": "reference_too_wide"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-now",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=11776:rows=32061600:map=0:roundoff=0x1.065678644dd1p-35",
+      "value": 50.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/8589934592",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/8589934592",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-future",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=11776:rows=32054949:map=0:roundoff=0x1.065678644dd1p-35",
+      "value": 48.02859225235853,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "9220478555/140737488355328",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "9220478555/140737488355328",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "call-cash-before",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47445342:map=18:roundoff=0x1.0a98089819e3fp-31",
+      "value": 7.360511325194139,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "76721198440191/1125899906842624",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-cash-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47445342:map=18:roundoff=0x1.0a9765c8946c9p-31",
+      "value": 6.767625363174524,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "80607643717989/1125899906842624",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-cash-both",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47454397:map=18:roundoff=0x1.0a98089819e3fp-31",
+      "value": 7.360511325194139,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "76721198440191/1125899906842624",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-cash-both",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47454397:map=18:roundoff=0x1.064fe8821c3bfp-35",
+      "value": 8.999440060582787,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "39663765918597/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-cash-joint",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47454398:map=18:roundoff=0x1.064fe8821c3bfp-35",
+      "value": 8.999440060582787,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "39663765918597/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-zero-cash",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=47454447:map=18:roundoff=0x1.065678644dd1p-35",
+      "value": 6.487002419767259,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "40706451543117/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-negative-rate",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=17664:rows=47798288:map=0:roundoff=0x1.0aeb522ea1568p-35",
+      "value": 10.766653870828675,
+      "comparison": {
+        "status": "reference_too_wide"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-negative-rate",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=11776:rows=32055061:map=0:roundoff=0x1.0fee1ec45a433p-31",
+      "value": 6.851483212329854,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "26646563022277/281474976710656",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-low-vol",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=17664:rows=47798288:map=0:roundoff=0x1.8ebe8a32d090dp-39",
+      "value": 0.9898094690902914,
+      "comparison": {
+        "status": "reference_too_wide"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-short",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.0fdf055c016fp-3,0x1.be402c4c4c8p-6:time=0x1.0ae3a20baap-12,0x1.0b00f5015ep-13:event=0x0p+0,0x0p+0:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-liquidator",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=15872:rows=48127050:map=18:roundoff=0x1.4efe29fcf883bp-41",
+      "value": 1.9505884681141195,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "137366405/35184372088832",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "137366405/35184372088832",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "cash-negative-rate",
+      "outcome": "estimated",
+      "detail": "backward-Euler-Bermudan-v1:steps=23808:rows=70558492:map=18:roundoff=0x1.0aeb522ea1568p-35",
+      "value": 13.884697762678732,
+      "comparison": {
+        "status": "reference_too_wide"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    }
+  ],
+  "binary_sha256": "b6307bbe5635e5888d94933a7e866c6eebcbffc1deaad5772792be9b23685d88"
+}

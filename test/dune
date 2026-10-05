@@ -989,7 +989,7 @@
   ../scripts/bermudan_quadrature.cpp
   ../scripts/bermudan_references.py
   ../scripts/check_bermudan_reference_arithmetic.py
-  (glob_files ../docs/evidence/bermudan/*))
+  (source_tree ../docs/evidence/bermudan))
  (action
   (progn
    (run python3 %{dep:../scripts/test_bermudan.py})

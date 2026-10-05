@@ -32,6 +32,10 @@ def main():
                     value=decode(raw,mode,'price',3)
                     result['runs'].append(dict(round=round_,variant=variant,load=load,sample=value,resources=resources));save()
         result['summary']=[dict(variant=v,mode=m,metrics={key:dict(median=statistics.median(xs),min=min(xs),max=max(xs)) for key in ('seconds_per_call','allocated_bytes_per_call') for xs in [[r['sample'][key] for r in result['runs'] if r['variant']==v and r['sample']['mode']==m]]}) for v in ('baseline','candidate','bermudan') for m in ('none','cash')]
+        guard(candidate,current=True)
+        require(not subprocess.check_output(['git','-C',str(ROOT),'status','--porcelain','--untracked-files=all','--','lib','bench','test','scripts/benchmark_bermudan.py','dune','dune-project']), 'measured source changed during campaign')
+        for name,h in candidate['source_sha256'].items():require(sha(ROOT/name)==h,'source changed during campaign: '+name)
+        require(sha(candidate['binaries']['bermudan']['path'])==candidate['binaries']['bermudan']['sha256'],'Bermudan binary changed during campaign')
         result['complete']=True
     finally:save()
     print(json.dumps(result['summary']))

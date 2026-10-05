@@ -1,0 +1,32 @@
+terminal-call	estimated	0x1.2743a10e31127p+3	European-reduction:steps=0:rows=1:map=0:roundoff=0x1.7e1e8ad74dcdfp-51
+terminal-put	estimated	0x1.95200a7f17afp+2	European-reduction:steps=0:rows=1:map=0:roundoff=0x1.3dadf41d1b9c2p-53
+expiry-call	estimated	0x1.4p+2	expiry:steps=0:rows=1:map=0:roundoff=0x0p+0
+deterministic-sparse	estimated	0x1.89b96b9838e84p+4	Bermudan-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x1.7d5425cdf6f39p-54
+deterministic-middle	estimated	0x1.b8b3e18ad8479p+4	Bermudan-deterministic-stopping:steps=0:rows=9:map=0:roundoff=0x1.a12f62f2b6fcap-51
+absorbing-negative-rate	estimated	0x1.00ce19f10d531p+7	absorbing-stock:steps=0:rows=2:map=0:roundoff=0x1.92161cd58af33p-54
+zero-strike-negative-yield	estimated	0x1.c54266cede01p+6	zero-strike:steps=0:rows=2:map=0:roundoff=0x1.194cbcd360c51p-48
+deterministic-after	estimated	0x0p+0	Bermudan-deterministic-stopping:steps=0:rows=7:map=0:roundoff=0x0p+0
+deterministic-both	estimated	0x1.4p+3	Bermudan-deterministic-stopping:steps=0:rows=9:map=0:roundoff=0x0p+0
+deterministic-large	estimated	0x1p+1	Bermudan-deterministic-stopping:steps=0:rows=7:map=0:roundoff=0x0p+0
+deterministic-joint	estimated	0x1p+1	Bermudan-deterministic-stopping:steps=0:rows=8:map=0:roundoff=0x0p+0
+zero-time-before-after	estimated	0x1.ep+4	Bermudan-deterministic-stopping:steps=0:rows=4:map=0:roundoff=0x0p+0
+zero-time-after	estimated	0x1.ep+4	Bermudan-deterministic-stopping:steps=0:rows=4:map=0:roundoff=0x0p+0
+terminal-cash-before	unavailable	-	accuracy:space=0x1.4809a3accc6p-6,0x1.48e75be0bfp-8:time=0x1.0e46747f48p-10,0x1.0f64b2e414p-11:event=0x0p+0,0x0p+0:domain=0x0p+0,0x0p+0:spread=0x0p+0
+terminal-cash-after	unavailable	-	arithmetic:residual roundoff resolution
+put-sparse	unavailable	-	accuracy:space=0x1.2251ca63519p-6,0x1.02471821458p-8:time=0x1.374d7db67dp-9,0x1.3791010bd2p-10:event=0x0p+0,0x0p+0:domain=0x1.a12a8p-32,0x0p+0:spread=0x0p+0
+put-irregular	unavailable	-	accuracy:space=0x1.157288e3e6dp-6,0x1.d4b90a0c928p-9:time=0x1.a18799dd83p-10,0x1.a1dc35286ep-11:event=0x0p+0,0x0p+0:domain=0x1.81a0cp-32,0x0p+0:spread=0x0p+0
+put-dense	unavailable	-	accuracy:space=0x1.101231f75d9p-6,0x1.07ab1ad6594p-8:time=0x1.6a1e6f5894p-11,0x1.6a4191d5e4p-12:event=0x0p+0,0x0p+0:domain=0x1.58528p-32,0x0p+0:spread=0x0p+0
+put-now	estimated	0x1.9p+5	backward-Euler-Bermudan-v1:steps=11776:rows=32061600:map=0:roundoff=0x1.065678644dd1p-35
+put-future	estimated	0x1.803a8e9326641p+5	backward-Euler-Bermudan-v1:steps=11776:rows=32054949:map=0:roundoff=0x1.065678644dd1p-35
+call-cash-before	unavailable	-	arithmetic:residual roundoff resolution
+call-cash-after	unavailable	-	arithmetic:residual roundoff resolution
+call-cash-both	unavailable	-	arithmetic:residual roundoff resolution
+put-cash-both	unavailable	-	accuracy:space=0x1.e92bce696bp-9,0x1.2344c40f76p-10:time=0x1.37819fb955p-9,0x1.37c6993a22p-10:event=0x1.929e58f531cp-7,0x1.bb31c6238dp-9:domain=0x1.60e7p-33,0x0p+0:spread=0x0p+0
+put-cash-joint	unavailable	-	accuracy:space=0x1.e92bce696bp-9,0x1.2344c40f76p-10:time=0x1.37819fb955p-9,0x1.37c6993a22p-10:event=0x1.929e58f531cp-7,0x1.bb31c6238dp-9:domain=0x1.60e7p-33,0x0p+0:spread=0x0p+0
+put-zero-cash	unavailable	-	accuracy:space=0x1.2251ca63519p-6,0x1.02471821458p-8:time=0x1.374d7db67dp-9,0x1.3791010bd2p-10:event=0x1.9f14b99cba4p-7,0x1.e597aa2edc8p-9:domain=0x1.a12a8p-32,0x0p+0:spread=0x0p+0
+put-negative-rate	unavailable	-	accuracy:space=0x1.333f0d4b388p-6,0x1.31f0d509868p-8:time=0x1.511e468956p-10,0x1.513fc82de4p-11:event=0x0p+0,0x0p+0:domain=0x1.8fa8p-36,0x0p+0:spread=0x0p+0
+call-negative-rate	unavailable	-	arithmetic:residual roundoff resolution
+put-low-vol	unavailable	-	accuracy:space=0x1.6f663ae8762cp-4,0x1.9e655120e81ap-6:time=0x1.c1fc5fd912p-12,0x1.c232aa71dcp-13:event=0x0p+0,0x0p+0:domain=0x0p+0,0x0p+0:spread=0x0p+0
+put-short	unavailable	-	accuracy:space=0x1.0fdf055c016fp-3,0x1.be402c4c4c8p-6:time=0x1.0ae3a20baap-12,0x1.0b00f5015ep-13:event=0x0p+0,0x0p+0:domain=0x0p+0,0x0p+0:spread=0x0p+0
+put-liquidator	estimated	0x1.f359c40e813ffp+0	backward-Euler-Bermudan-v1:steps=15872:rows=48127050:map=18:roundoff=0x1.4efe29fcf883bp-41
+cash-negative-rate	unavailable	-	accuracy:space=0x1.52d2cdbf6cp-11,0x1.19431e1a3cp-9:time=0x1.3c3f5acd96p-10,0x1.3c653febdcp-11:event=0x1.719bc0b824p-7,0x1.71e4182315p-9:domain=0x1.b0ep-38,0x0p+0:spread=0x0p+0
