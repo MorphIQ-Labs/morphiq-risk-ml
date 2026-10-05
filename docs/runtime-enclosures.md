@@ -63,7 +63,7 @@ Bounds follow directly from the supported representation: additions insert at
 most eight terms; multiplication inserts at most 32 terms (two words per pair
 of at most four retained words on each side); scaling uses at most four;
 `of_words` uses two; denominator lower parts use at most three. No global pool,
-thread-local cache, borrowed lifetime or shared mutable scratch is introduced.
+thread-local cache, user-visible borrowed lifetime or shared mutable scratch is introduced.
 
 ### Scalar fusion and quotient-local scratch
 

@@ -1,5 +1,9 @@
 # Scalar American allocation optimization (#119)
 
+This records the first boxing pass. The subsequent
+[enclosure and setup reuse pass](results-american-enclosure-allocation.md)
+remeasures this runtime as its baseline and reduces the remaining allocation.
+
 The native American solver now specializes float comparisons and explicitly
 inlines its finite/nonnegative checks. This removes temporary boxed floats from
 the repeated row loops. It does not change the public API, solver policy,
