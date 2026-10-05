@@ -38,3 +38,14 @@
  (alias runtest)
  (action
   (run %{exe:american_cash_price.exe})))
+
+(executable
+ (name bermudan_price)
+ (modules bermudan_price)
+ (modes byte exe)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:bermudan_price.exe})))

@@ -7,7 +7,10 @@ This document selects the first implementation architecture, freezes engineering
 acceptance rules before pricing comparisons, and gives #116 a certification gate.
 Existing European APIs, numerical values and certificates are unchanged.
 The subsequent [#111 implementation and executed limits](american-pricing.md)
-are documented separately.
+are documented separately. The [#113 Bermudan implementation](bermudan-pricing.md)
+uses the continuation-only/discrete-projection rule below; numerical refinements
+preserve the financial exercise instants. Its independent references and executed
+limits are separate from this design evidence.
 
 Select a nonuniform **stock-space grid including zero**, a monotone spatial
 operator, backward Euler time stepping and policy iteration for the American

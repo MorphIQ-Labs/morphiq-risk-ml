@@ -19,9 +19,12 @@ module Bsm = struct
     dividends : dividend array;
   }
 
+  type exercise_instant = { time : float; side : event_side }
+
   type admitted =
     | Admitted of inputs
     | With_cash of inputs * cash_specification
+    | Bermudan of inputs * cash_specification option * exercise_instant array
 
   type input_error = Invalid_input of string
 
@@ -55,7 +58,7 @@ module Bsm = struct
     | Ok _ ->
         let previous = ref 0. and valid = ref true in
         Array.iter
-          (fun d ->
+          (fun (d : dividend) ->
             if
               (not (Float.is_finite d.time && Float.is_finite d.amount))
               || d.time < !previous || d.time > p.time_to_expiry
@@ -63,7 +66,9 @@ module Bsm = struct
             then valid := false;
             previous := d.time)
           cash.dividends;
-        let event t = Array.exists (fun d -> d.time = t) cash.dividends in
+        let event t =
+          Array.exists (fun (d : dividend) -> d.time = t) cash.dividends
+        in
         let phase t side = event t = (side <> Regular) in
         if not !valid then Error (Invalid_input "cash schedule")
         else if
@@ -81,12 +86,70 @@ module Bsm = struct
           Ok
             (With_cash (p, { cash with dividends = Array.copy cash.dividends }))
 
-  let inputs = function Admitted p | With_cash (p, _) -> p
+  let admit_bermudan ?cash p dates =
+    match match cash with None -> admit p | Some c -> admit_cash p c with
+    | Error e -> Error e
+    | Ok base ->
+        let cash = match base with With_cash (_, c) -> Some c | _ -> None in
+        let ds = match cash with None -> [||] | Some c -> c.dividends in
+        let cursor = ref 0 and previous = ref None and valid = ref true in
+        Array.iter
+          (fun (e : exercise_instant) ->
+            while !cursor < Array.length ds && ds.(!cursor).time < e.time do
+              incr cursor
+            done;
+            let event =
+              !cursor < Array.length ds && ds.(!cursor).time = e.time
+            in
+            if
+              (not (Float.is_finite e.time))
+              || e.time < 0. || e.time > p.time_to_expiry
+              || event <> (e.side <> Regular)
+            then valid := false;
+            (match !previous with
+            | Some before
+              when before.time > e.time
+                   || (before.time = e.time && rank before.side >= rank e.side)
+              ->
+                valid := false
+            | _ -> ());
+            previous := Some e)
+          dates;
+        let opening, expiry =
+          match cash with
+          | None -> (Regular, Regular)
+          | Some c -> (c.opening_side, c.expiry_side)
+        in
+        if Array.length dates = 0 then
+          Error (Invalid_input "empty Bermudan schedule")
+        else if
+          (not !valid)
+          || dates.(0).time <> p.opens_at
+          || dates.(0).side <> opening
+          || dates.(Array.length dates - 1).time <> p.time_to_expiry
+          || dates.(Array.length dates - 1).side <> expiry
+        then Error (Invalid_input "Bermudan exercise instants")
+        else
+          Ok
+            (Bermudan
+               ( p,
+                 cash,
+                 Array.map
+                   (fun e ->
+                     { e with time = (if e.time = 0. then 0. else e.time) })
+                   dates ))
+
+  let inputs = function
+    | Admitted p | With_cash (p, _) | Bermudan (p, _, _) -> p
 
   let cash_specification = function
-    | Admitted _ -> None
-    | With_cash (_, cash) ->
+    | Admitted _ | Bermudan (_, None, _) -> None
+    | With_cash (_, cash) | Bermudan (_, Some cash, _) ->
         Some { cash with dividends = Array.copy cash.dividends }
+
+  let exercise_schedule = function
+    | Bermudan (_, _, dates) -> Some (Array.copy dates)
+    | Admitted _ | With_cash _ -> None
 
   let eligible p cash t side =
     (t > p.opens_at || (t = p.opens_at && rank side >= rank cash.opening_side))
@@ -329,7 +392,7 @@ module Bsm = struct
     then raise (Stop (Resource_limit "cash metadata"));
     let events = ref [] in
     Array.iteri
-      (fun i d ->
+      (fun i (d : dividend) ->
         incr visits;
         if i land 255 = 0 && cancel () then raise (Stop Cancelled);
         match !events with
@@ -430,6 +493,95 @@ module Bsm = struct
       if eligible p cash p.time_to_expiry cash.expiry_side then
         add (exact p.time_to_expiry) !stock;
       Some ("cash-deterministic-stopping", !best)
+
+  (* Merge already admitted orders; neither sorting nor solver steps add rights. *)
+  let prepare_bermudan cfg cancel visits dates events cash_count =
+    let count = Array.length dates in
+    if
+      count > cfg.limits.max_row_visits - !visits
+      || count
+         > (max 0 (cfg.limits.max_workspace_bytes - 65536) / 1024) - cash_count
+    then raise (Stop (Resource_limit "Bermudan metadata"));
+    let i = ref 0 and pending = ref events and result = ref [] in
+    while !i < count || !pending <> [] do
+      if cancel () then raise (Stop Cancelled);
+      let next = if !i < count then dates.(!i).time else infinity in
+      let time =
+        match !pending with (t, _) :: _ -> float_min t next | [] -> next
+      in
+      let amount =
+        match !pending with
+        | (t, a) :: tail when t = time ->
+            pending := tail;
+            Some a
+        | _ -> None
+      in
+      let regular = ref false and before = ref false and after = ref false in
+      while !i < count && dates.(!i).time = time do
+        incr visits;
+        (match dates.(!i).side with
+        | Regular -> regular := true
+        | Before_cash -> before := true
+        | After_cash -> after := true);
+        incr i
+      done;
+      result := (time, amount, !regular, !before, !after) :: !result
+    done;
+    List.rev !result
+
+  let bermudan_analytic cfg cancel visits p cash timeline side =
+    if p.spot = 0. || (p.strike = 0. && side = Side.Put) then analytic p side
+    else if
+      cash = None
+      && (p.strike = 0.
+         || p.opens_at = p.time_to_expiry
+         || (side = Side.Call && p.dividend_yield = 0. && p.rate >= 0.))
+    then analytic p side
+    else if
+      p.spot <> 0.
+      && (not (p.strike = 0. && side = Side.Put))
+      && Vol.to_float p.volatility <> 0.
+      && p.time_to_expiry <> 0.
+    then None
+    else
+      let best = ref (0., 0.)
+      and stock = ref (exact p.spot)
+      and previous = ref 0. in
+      let tick () =
+        incr visits;
+        if !visits > cfg.limits.max_row_visits then
+          raise (Stop (Resource_limit "Bermudan deterministic visits"));
+        if cancel () then raise (Stop Cancelled)
+      in
+      let add t =
+        tick ();
+        let value, error =
+          enclosed
+            (E.mul
+               (exp_product (-.p.rate) (exact t))
+               (payoff_e side !stock (exact p.strike)))
+        in
+        best := (float_max value (fst !best), float_max error (snd !best))
+      in
+      List.iter
+        (fun (t, amount, regular, before, after) ->
+          tick ();
+          if t > !previous && E.sign !stock <> E.Zero then
+            stock :=
+              E.mul !stock
+                (E.exp
+                   (E.mul
+                      (E.sub (exact p.rate) (exact p.dividend_yield))
+                      (E.sub (exact t) (exact !previous))));
+          if regular || before then add t;
+          (match (amount, cash) with
+          | Some a, Some spec when active_jump p spec t ->
+              stock := positive_part (E.sub !stock a)
+          | _ -> ());
+          if after then add t;
+          previous := t)
+        timeline;
+      Some ("Bermudan-deterministic-stopping", !best)
 
   type context = {
     cfg : configuration;
@@ -574,7 +726,7 @@ module Bsm = struct
   (* The price request owns preparation for one stock-grid key. Payoff and
      spatial bands depend only on that grid, the fixed model and option side;
      time steps, boundary choice and cash interpolation do not alter them. *)
-  let solver_pair ?cash ~prepared c p side x time_steps capture =
+  let solver_pair ?cash ?bermudan ~prepared c p side x time_steps capture =
    fun upper_boundary ->
     check c;
     let n = Array.length x and sigma = Vol.to_float p.volatility in
@@ -691,7 +843,7 @@ module Bsm = struct
       if !indicator > c.local /. 4. then fail "residual roundoff resolution";
       (!worst, !worst_row)
     in
-    let slab earlier later obstacle =
+    let slab ?next_exercise earlier later obstacle =
       if earlier < later then (
         let width = E.sub (exact later) (exact earlier) in
         let h_e = E.div_float width (float time_steps) in
@@ -712,7 +864,11 @@ module Bsm = struct
           previous := t;
           let remaining = E.sub (exact p.time_to_expiry) t_e in
           let wait =
-            if t >= p.opens_at then exact 0. else E.sub (exact p.opens_at) t_e
+            match next_exercise with
+            | Some date -> E.sub (exact date) t_e
+            | None ->
+                if t >= p.opens_at then exact 0.
+                else E.sub (exact p.opens_at) t_e
           in
           let zero =
             if side = Side.Call then 0.
@@ -822,50 +978,84 @@ module Bsm = struct
           done
         done)
     in
-    (match cash with
-    | None ->
+    let project () =
+      for i = 0 to n - 1 do
+        tick c;
+        v.(i) <- float_max v.(i) g.(i)
+      done
+    in
+    let jump =
+      match cash with
+      | None -> fun _ -> fail "missing cash mapping"
+      | Some (_, _, mapping_grid) ->
+          let sampled = Array.make (Array.length mapping_grid) 0. in
+          let interpolate nodes values point =
+            tick c;
+            let last = Array.length nodes - 1 in
+            let vpoint = centre point in
+            let low = ref 0 and high = ref last in
+            while !high - !low > 1 do
+              tick c;
+              let mid = !low + ((!high - !low) / 2) in
+              if nodes.(mid) <= vpoint then low := mid else high := mid
+            done;
+            if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
+            else if E.compare_float point nodes.(!high) = E.Zero then
+              values.(!high)
+            else
+              let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
+              let weight = E.div (E.sub point (exact nodes.(!low))) width in
+              (match (E.compare_float weight 0., E.compare_float weight 1.) with
+              | E.Positive, E.Negative -> ()
+              | _ -> fail "cash interpolation weight unresolved");
+              let value, error =
+                enclosed
+                  (E.add
+                     (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
+                     (E.mul weight (exact values.(!high))))
+              in
+              c.mapping_width <-
+                float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
+              c.mapping_error <- float_max c.mapping_error error;
+              if error > c.local then
+                fail "cash interpolation arithmetic resolution";
+              nonnegative "cash interpolated value" value
+          in
+          fun amount ->
+            for i = 0 to Array.length mapping_grid - 1 do
+              let target =
+                positive_part (E.sub (exact mapping_grid.(i)) amount)
+              in
+              sampled.(i) <- interpolate x v target
+            done;
+            for i = 0 to n - 1 do
+              candidate.(i) <- interpolate mapping_grid sampled (exact x.(i))
+            done;
+            Array.blit candidate 0 v 0 n;
+            c.event_applications <- c.event_applications + 1
+    in
+    (match (bermudan, cash) with
+    | Some timeline, _ ->
+        let later = ref p.time_to_expiry and next = ref p.time_to_expiry in
+        List.iter
+          (fun (time, amount, regular, before, after) ->
+            check c;
+            slab ~next_exercise:!next time !later false;
+            if after then project ();
+            (match (amount, cash) with
+            | Some a, Some (spec, _, _) when active_jump p spec time -> jump a
+            | _ -> ());
+            if before || regular then project ();
+            if regular || before || after then next := time;
+            later := time)
+          (List.rev timeline);
+        slab ~next_exercise:!next 0. !later false
+    | None, None ->
         slab p.opens_at p.time_to_expiry true;
         slab 0. p.opens_at false
-    | Some (spec, events, mapping_grid) ->
-        let sampled = Array.make (Array.length mapping_grid) 0. in
-        let interpolate nodes values point =
-          tick c;
-          let last = Array.length nodes - 1 in
-          let vpoint = centre point in
-          let low = ref 0 and high = ref last in
-          while !high - !low > 1 do
-            tick c;
-            let mid = !low + ((!high - !low) / 2) in
-            if nodes.(mid) <= vpoint then low := mid else high := mid
-          done;
-          if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
-          else if E.compare_float point nodes.(!high) = E.Zero then
-            values.(!high)
-          else
-            let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
-            let weight = E.div (E.sub point (exact nodes.(!low))) width in
-            (match (E.compare_float weight 0., E.compare_float weight 1.) with
-            | E.Positive, E.Negative -> ()
-            | _ -> fail "cash interpolation weight unresolved");
-            let value, error =
-              enclosed
-                (E.add
-                   (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
-                   (E.mul weight (exact values.(!high))))
-            in
-            c.mapping_width <-
-              float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
-            c.mapping_error <- float_max c.mapping_error error;
-            if error > c.local then
-              fail "cash interpolation arithmetic resolution";
-            nonnegative "cash interpolated value" value
-        in
+    | None, Some (spec, events, _) ->
         let exercise phase time =
-          if eligible p spec time phase then
-            for i = 0 to n - 1 do
-              tick c;
-              v.(i) <- float_max v.(i) g.(i)
-            done
+          if eligible p spec time phase then project ()
         in
         let later = ref p.time_to_expiry in
         let advance earlier =
@@ -881,17 +1071,7 @@ module Bsm = struct
             advance time;
             if active_jump p spec time then (
               exercise After_cash time;
-              for i = 0 to Array.length mapping_grid - 1 do
-                let target =
-                  positive_part (E.sub (exact mapping_grid.(i)) amount)
-                in
-                sampled.(i) <- interpolate x v target
-              done;
-              for i = 0 to n - 1 do
-                candidate.(i) <- interpolate mapping_grid sampled (exact x.(i))
-              done;
-              Array.blit candidate 0 v 0 n;
-              c.event_applications <- c.event_applications + 1;
+              jump amount;
               exercise Before_cash time))
           (List.rev events);
         advance 0.);
@@ -909,8 +1089,8 @@ module Bsm = struct
     let p = inputs admitted in
     let cash =
       match admitted with
-      | Admitted _ -> None
-      | With_cash (_, spec) ->
+      | Admitted _ | Bermudan (_, None, _) -> None
+      | With_cash (_, spec) | Bermudan (_, Some spec, _) ->
           if Array.length spec.dividends = 0 then None else Some spec
     in
     try
@@ -923,10 +1103,26 @@ module Bsm = struct
         | None -> []
         | Some spec -> prepare_cash cfg cancel cash_visits spec
       in
+      let dates =
+        match admitted with Bermudan (_, _, dates) -> Some dates | _ -> None
+      in
+      let cash_count =
+        match cash with None -> 0 | Some c -> Array.length c.dividends
+      in
+      let bermudan =
+        Option.map
+          (fun dates ->
+            prepare_bermudan cfg cancel cash_visits dates events cash_count)
+          dates
+      in
       let immediate =
-        match cash with
-        | None -> p.opens_at = 0.
-        | Some spec -> eligible p spec 0. spec.valuation_side
+        match (dates, cash) with
+        | Some ds, _ -> (
+            ds.(0).time = 0.
+            && ds.(0).side
+               = match cash with None -> Regular | Some c -> c.valuation_side)
+        | None, None -> p.opens_at = 0.
+        | None, Some spec -> eligible p spec 0. spec.valuation_side
       in
       let allowance = cfg.tolerance /. 64. in
       let make_result method_name value arithmetic refinement work residual
@@ -974,10 +1170,12 @@ module Bsm = struct
         }
       in
       let analytical =
-        match cash with
-        | None -> analytic p side
-        | Some spec when Array.length spec.dividends = 0 -> analytic p side
-        | Some spec -> cash_analytic cfg cancel cash_visits p spec events side
+        match (bermudan, cash) with
+        | Some timeline, _ ->
+            bermudan_analytic cfg cancel cash_visits p cash timeline side
+        | None, None -> analytic p side
+        | None, Some spec ->
+            cash_analytic cfg cancel cash_visits p spec events side
       in
       match analytical with
       | Some (method_name, (value, error)) ->
@@ -1039,6 +1237,19 @@ module Bsm = struct
             }
           in
           check_workspace c;
+          (match dates with
+          | None -> ()
+          | Some ds ->
+              let reserved =
+                (512 * cfg.limits.max_nodes)
+                + (32 * cfg.limits.policy_iterations)
+                + 65536
+                + if cash = None then 0 else 48 * cfg.limits.max_nodes
+              in
+              if
+                Array.length ds + cash_count
+                > max 0 (cfg.limits.max_workspace_bytes - reserved) / 1024
+              then raise (Stop (Resource_limit "Bermudan workspace bytes")));
           (match cash with
           | None -> ()
           | Some spec ->
@@ -1079,7 +1290,9 @@ module Bsm = struct
                     else grid c p mapping_level domain ))
                 cash
             in
-            let solve = solver_pair ?cash ~prepared c p side x time capture in
+            let solve =
+              solver_pair ?cash ?bermudan ~prepared c p side x time capture
+            in
             let low, vl = solve false in
             let high, vh = solve true in
             if high < low then fail "reversed boundary pair";
@@ -1178,7 +1391,9 @@ module Bsm = struct
             try
               if not exercise_regions then Not_requested
               else if not immediate then
-                Unavailable "exercise window has not opened"
+                Unavailable
+                  (if dates = None then "exercise window has not opened"
+                   else "valuation instant is not an exercise right")
               else
                 match (vl, vh) with
                 | Some a, Some b ->
@@ -1238,8 +1453,11 @@ module Bsm = struct
             }
           in
           Ok
-            (make_result "backward-Euler-policy-v1" value 0. (Some refinement)
-               work c.residual c.roundoff c.boundary_error regions
+            (make_result
+               (if dates = None then "backward-Euler-policy-v1"
+                else "backward-Euler-Bermudan-v1")
+               value 0. (Some refinement) work c.residual c.roundoff
+               c.boundary_error regions
                (Option.map
                   (fun _ ->
                     {

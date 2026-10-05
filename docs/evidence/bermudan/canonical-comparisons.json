@@ -1,0 +1,951 @@
+{
+  "scope": "Supplementary discrepancies; independent radius empirical, not a certificate. Cash Spot conventions differ.",
+  "rows": [
+    {
+      "id": "terminal-call",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 9.227005508154049,
+      "independent_radius": 6.628713308212923e-16,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.227880972160104,
+          "adapter_minus_independent": 0.0008754640060555374,
+          "unmodified_value": 9.230174945995003,
+          "unmodified_minus_independent": 0.003169437840954359
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.227222161933245,
+          "adapter_minus_independent": 0.00021665377919610762,
+          "unmodified_value": 9.227790826260524,
+          "unmodified_minus_independent": 0.0007853181064749748
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.22705929964065,
+          "adapter_minus_independent": 5.3791486601895144e-05,
+          "unmodified_value": 9.227200964578632,
+          "unmodified_minus_independent": 0.00019545642458318468
+        }
+      ]
+    },
+    {
+      "id": "terminal-put",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 6.330080627549918,
+      "independent_radius": 1.377715242794279e-16,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.330081893299124,
+          "adapter_minus_independent": 1.2657492058920639e-06,
+          "unmodified_value": 6.3310762780010945,
+          "unmodified_minus_independent": 0.000995650451176111
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.330080556343635,
+          "adapter_minus_independent": -7.120628353618486e-08,
+          "unmodified_value": 6.3303273831762645,
+          "unmodified_minus_independent": 0.000246755626346129
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.3300804675035405,
+          "adapter_minus_independent": -1.6004637792832455e-07,
+          "unmodified_value": 6.330141991390185,
+          "unmodified_minus_independent": 6.136384026689257e-05
+        }
+      ]
+    },
+    {
+      "id": "expiry-call",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 5.0,
+      "independent_radius": 5e-75,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-sparse",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 24.60776862584909,
+      "independent_radius": 8.268748139400286e-17,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-middle",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 27.543916265833534,
+      "independent_radius": 7.237007930042119e-16,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "absorbing-negative-rate",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 128.40254166877415,
+      "independent_radius": 8.718858479247211e-17,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "zero-strike-negative-yield",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 113.31484530668263,
+      "independent_radius": 3.903818327644823e-15,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-after",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 0.0,
+      "independent_radius": 1e-75,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-both",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 10.0,
+      "independent_radius": 1e-74,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-large",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 2.0,
+      "independent_radius": 2e-75,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "deterministic-joint",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 2.0,
+      "independent_radius": 2e-75,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "zero-time-before-after",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 30.0,
+      "independent_radius": 3e-74,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "zero-time-after",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 30.0,
+      "independent_radius": 3e-74,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "analytical boundary excluded"
+        }
+      ]
+    },
+    {
+      "id": "terminal-cash-before",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 10.865020290828403,
+      "independent_radius": 7.84526661701966e-16,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        }
+      ]
+    },
+    {
+      "id": "terminal-cash-after",
+      "independent_kind": "precision-refined-analytical",
+      "independent_value": 28.041642964898465,
+      "independent_radius": 1.6685440528598034e-15,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "endpoint cash convention excluded"
+        }
+      ]
+    },
+    {
+      "id": "put-sparse",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.500350622987429,
+      "independent_radius": 0.0589609803861606,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489347044729242,
+          "adapter_minus_independent": -0.011003578258186764,
+          "unmodified_value": 6.489824797190388,
+          "unmodified_minus_independent": -0.010525825797040866
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489565127529147,
+          "adapter_minus_independent": -0.01078549545828178,
+          "unmodified_value": 6.489662725942922,
+          "unmodified_minus_independent": -0.010687897044507011
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489615707083921,
+          "adapter_minus_independent": -0.010734915903507947,
+          "unmodified_value": 6.489620816336053,
+          "unmodified_minus_independent": -0.010729806651375462
+        }
+      ]
+    },
+    {
+      "id": "put-irregular",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.540065608251179,
+      "independent_radius": 0.15979470894984615,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.522007423773786,
+          "adapter_minus_independent": -0.01805818447739327,
+          "unmodified_value": 6.521988103580029,
+          "unmodified_minus_independent": -0.018077504671150102
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.52240802389782,
+          "adapter_minus_independent": -0.01765758435335929,
+          "unmodified_value": 6.522479447127003,
+          "unmodified_minus_independent": -0.01758616112417677
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.5226593087556575,
+          "adapter_minus_independent": -0.01740629949552197,
+          "unmodified_value": 6.522658157393899,
+          "unmodified_minus_independent": -0.017407450857280793
+        }
+      ]
+    },
+    {
+      "id": "put-dense",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.642783418284149,
+      "independent_radius": 0.3179253150609007,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.610655547488809,
+          "adapter_minus_independent": -0.03212787079533985,
+          "unmodified_value": 6.611179842389915,
+          "unmodified_minus_independent": -0.031603575894234126
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.611594833665942,
+          "adapter_minus_independent": -0.031188584618207393,
+          "unmodified_value": 6.611805282956616,
+          "unmodified_minus_independent": -0.03097813532753335
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.61194750376369,
+          "adapter_minus_independent": -0.030835914520459085,
+          "unmodified_value": 6.6119784064734635,
+          "unmodified_minus_independent": -0.030805011810685734
+        }
+      ]
+    },
+    {
+      "id": "put-now",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 50.0,
+      "independent_radius": 2.9103830456733704e-09,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 50.00000001055814,
+          "adapter_minus_independent": 1.0558139251770626e-08,
+          "unmodified_value": 50.000000018996865,
+          "unmodified_minus_independent": 1.8996864525888668e-08
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 50.00000000030657,
+          "adapter_minus_independent": 3.0657076877105283e-10,
+          "unmodified_value": 50.00000000235025,
+          "unmodified_minus_independent": 2.350247996218968e-09
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 50.00000000000777,
+          "adapter_minus_independent": 7.773337529215496e-12,
+          "unmodified_value": 50.0000000001712,
+          "unmodified_minus_independent": 1.7119816675403854e-10
+        }
+      ]
+    },
+    {
+      "id": "put-future",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 48.02853341268114,
+      "independent_radius": 6.675763188468409e-06,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 48.02851355250398,
+          "adapter_minus_independent": -1.9860177161490356e-05,
+          "unmodified_value": 48.02861378217123,
+          "unmodified_minus_independent": 8.036949008527472e-05
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 48.02852758235898,
+          "adapter_minus_independent": -5.830322159283696e-06,
+          "unmodified_value": 48.02855249559024,
+          "unmodified_minus_independent": 1.9082909098244727e-05
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 48.028531088929476,
+          "adapter_minus_independent": -2.3237516657559354e-06,
+          "unmodified_value": 48.02853732648768,
+          "unmodified_minus_independent": 3.913806537525488e-06
+        }
+      ]
+    },
+    {
+      "id": "call-cash-before",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 7.371948429921519,
+      "independent_radius": 0.05670500806072809,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.363429277523996,
+          "adapter_minus_independent": -0.008519152397523655,
+          "unmodified_value": 7.3622895235556465,
+          "unmodified_minus_independent": -0.009658906365872966
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.362290230873225,
+          "adapter_minus_independent": -0.009658199048294236,
+          "unmodified_value": 7.361769736695287,
+          "unmodified_minus_independent": -0.01017869322623266
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.361852820424278,
+          "adapter_minus_independent": -0.010095609497241753,
+          "unmodified_value": 7.361755732787582,
+          "unmodified_minus_independent": -0.010192697133937223
+        }
+      ]
+    },
+    {
+      "id": "call-cash-after",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.779398153085677,
+      "independent_radius": 0.05982117970204115,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.774202153209697,
+          "adapter_minus_independent": -0.005195999875979851,
+          "unmodified_value": 7.3622895235556465,
+          "unmodified_minus_independent": 0.5828913704699694
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.770001532533002,
+          "adapter_minus_independent": -0.009396620552674761,
+          "unmodified_value": 7.361769736695287,
+          "unmodified_minus_independent": 0.5823715836096097
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.76893241705839,
+          "adapter_minus_independent": -0.010465736027287065,
+          "unmodified_value": 7.361755732787582,
+          "unmodified_minus_independent": 0.5823575797019052
+        }
+      ]
+    },
+    {
+      "id": "call-cash-both",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 7.371948429921519,
+      "independent_radius": 0.05670500806072809,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.363429277523996,
+          "adapter_minus_independent": -0.008519152397523655,
+          "unmodified_value": 7.3622895235556465,
+          "unmodified_minus_independent": -0.009658906365872966
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.362290230873225,
+          "adapter_minus_independent": -0.009658199048294236,
+          "unmodified_value": 7.361769736695287,
+          "unmodified_minus_independent": -0.01017869322623266
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 7.361852820424278,
+          "adapter_minus_independent": -0.010095609497241753,
+          "unmodified_value": 7.361755732787582,
+          "unmodified_minus_independent": -0.010192697133937223
+        }
+      ]
+    },
+    {
+      "id": "put-cash-both",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 9.011070509534793,
+      "independent_radius": 0.05882655291386385,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.004553260633047,
+          "adapter_minus_independent": -0.006517248901745987,
+          "unmodified_value": 8.70240187029872,
+          "unmodified_minus_independent": -0.3086686392360729
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.00164897235785,
+          "adapter_minus_independent": -0.009421537176942607,
+          "unmodified_value": 8.700418275748245,
+          "unmodified_minus_independent": -0.3106522337865485
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.000801024819703,
+          "adapter_minus_independent": -0.010269484715090371,
+          "unmodified_value": 8.699867003991058,
+          "unmodified_minus_independent": -0.31120350554373566
+        }
+      ]
+    },
+    {
+      "id": "put-cash-joint",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 9.011070509534793,
+      "independent_radius": 0.05882655291386385,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.004553260633047,
+          "adapter_minus_independent": -0.006517248901745987,
+          "unmodified_value": 7.696224060202072,
+          "unmodified_minus_independent": -1.3148464493327214
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.00164897235785,
+          "adapter_minus_independent": -0.009421537176942607,
+          "unmodified_value": 7.69396651942895,
+          "unmodified_minus_independent": -1.317103990105843
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 9.000801024819703,
+          "adapter_minus_independent": -0.010269484715090371,
+          "unmodified_value": 7.6934472450433615,
+          "unmodified_minus_independent": -1.3176232644914316
+        }
+      ]
+    },
+    {
+      "id": "put-zero-cash",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.500350622987429,
+      "independent_radius": 0.0589609803861606,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489347044729242,
+          "adapter_minus_independent": -0.011003578258186764,
+          "unmodified_value": 6.489824796521004,
+          "unmodified_minus_independent": -0.010525826466424526
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489565127529147,
+          "adapter_minus_independent": -0.01078549545828178,
+          "unmodified_value": 6.48966272577306,
+          "unmodified_minus_independent": -0.01068789721436847
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.489615707083921,
+          "adapter_minus_independent": -0.010734915903507947,
+          "unmodified_value": 6.489620816293581,
+          "unmodified_minus_independent": -0.010729806693848154
+        }
+      ]
+    },
+    {
+      "id": "put-negative-rate",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 10.785822863746859,
+      "independent_radius": 0.15033037104986136,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 10.767526514329537,
+          "adapter_minus_independent": -0.018296349417321167,
+          "unmodified_value": 10.770692528896475,
+          "unmodified_minus_independent": -0.015130334850383065
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 10.768518969336302,
+          "adapter_minus_independent": -0.017303894410556353,
+          "unmodified_value": 10.769308325509293,
+          "unmodified_minus_independent": -0.016514538237565546
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 10.768769614190264,
+          "adapter_minus_independent": -0.017053249556594707,
+          "unmodified_value": 10.768964943895613,
+          "unmodified_minus_independent": -0.01685791985124574
+        }
+      ]
+    },
+    {
+      "id": "call-negative-rate",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 6.867551482332773,
+      "independent_radius": 0.07859933893934468,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.852752424358686,
+          "adapter_minus_independent": -0.014799057974086871,
+          "unmodified_value": 6.854729944906471,
+          "unmodified_minus_independent": -0.012821537426301433
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.853912302999547,
+          "adapter_minus_independent": -0.013639179333226004,
+          "unmodified_value": 6.854232634362439,
+          "unmodified_minus_independent": -0.013318847970333891
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 6.854060850303254,
+          "adapter_minus_independent": -0.013490632029518501,
+          "unmodified_value": 6.854149994751982,
+          "unmodified_minus_independent": -0.01340148758079085
+        }
+      ]
+    },
+    {
+      "id": "put-low-vol",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 1.0459822645338301,
+      "independent_radius": 0.1886289317411487,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 0.9961855159813153,
+          "adapter_minus_independent": -0.04979674855251481,
+          "unmodified_value": 0.9967401469207434,
+          "unmodified_minus_independent": -0.04924211761308672
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 0.9968438510269204,
+          "adapter_minus_independent": -0.04913841350690973,
+          "unmodified_value": 0.9969711962629773,
+          "unmodified_minus_independent": -0.04901106827085289
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 0.9970106090721715,
+          "adapter_minus_independent": -0.0489716554616586,
+          "unmodified_value": 0.9970646762398956,
+          "unmodified_minus_independent": -0.048917588293934555
+        }
+      ]
+    },
+    {
+      "id": "put-short",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 1.440439068918884,
+      "independent_radius": 0.9347753482523098,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "exception",
+          "detail": "time mapping excluded"
+        },
+        {
+          "grid": 256,
+          "status": "exception",
+          "detail": "time mapping excluded"
+        },
+        {
+          "grid": 512,
+          "status": "exception",
+          "detail": "time mapping excluded"
+        }
+      ]
+    },
+    {
+      "id": "put-liquidator",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 1.950588494849289,
+      "independent_radius": 3.8774528787755e-06,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start",
+          "adapter_value": 1.9505849266172286,
+          "adapter_minus_independent": -3.568232060491283e-06
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start",
+          "adapter_value": 1.9505880991198725,
+          "adapter_minus_independent": -3.9572941656906835e-07
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start",
+          "adapter_value": 1.9505888955508615,
+          "adapter_minus_independent": 4.00701572367268e-07
+        }
+      ]
+    },
+    {
+      "id": "cash-negative-rate",
+      "independent_kind": "empirical-quadrature",
+      "independent_value": 13.900731209780556,
+      "independent_radius": 0.13713246839434134,
+      "canonical": [
+        {
+          "grid": 128,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 13.888345093445157,
+          "adapter_minus_independent": -0.012386116335399322,
+          "unmodified_value": 13.88886478900294,
+          "unmodified_minus_independent": -0.011866420777616682
+        },
+        {
+          "grid": 256,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 13.886202920373622,
+          "adapter_minus_independent": -0.014528289406934292,
+          "unmodified_value": 13.886295800502394,
+          "unmodified_minus_independent": -0.014435409278162226
+        },
+        {
+          "grid": 512,
+          "status": "finite",
+          "detail": "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions",
+          "adapter_value": 13.885605569001413,
+          "adapter_minus_independent": -0.015125640779142913,
+          "unmodified_value": 13.885640835226118,
+          "unmodified_minus_independent": -0.015090374554437957
+        }
+      ]
+    }
+  ]
+}

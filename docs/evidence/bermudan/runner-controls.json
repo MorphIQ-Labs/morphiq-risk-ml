@@ -1,0 +1,72 @@
+[
+  {
+    "runner": "quadrature",
+    "control": "truncated",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "missing exercise separator\n"
+  },
+  {
+    "runner": "quadrature",
+    "control": "missing-right",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "truncated exercise side\n"
+  },
+  {
+    "runner": "quadrature",
+    "control": "unknown-flag",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "unrecognized arguments\n"
+  },
+  {
+    "runner": "quadrature",
+    "control": "--help",
+    "returncode": 0,
+    "stdout": "Read cash research protocol, then | count and exercise time-word/side pairs. Sides: 0=regular,1=before,2=after.\n",
+    "stderr": ""
+  },
+  {
+    "runner": "quadrature",
+    "control": "--version",
+    "returncode": 0,
+    "stdout": "bermudan-quadrature 1\n",
+    "stderr": ""
+  },
+  {
+    "runner": "quantlib",
+    "control": "truncated",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "missing exercise separator\n"
+  },
+  {
+    "runner": "quantlib",
+    "control": "missing-right",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "truncated exercise side\n"
+  },
+  {
+    "runner": "quantlib",
+    "control": "unknown-flag",
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "unrecognized arguments\n"
+  },
+  {
+    "runner": "quantlib",
+    "control": "--help",
+    "returncode": 0,
+    "stdout": "Read cash research protocol, then | count and exercise time-word/side pairs. Sides: 0=regular,1=before,2=after.\n",
+    "stderr": ""
+  },
+  {
+    "runner": "quantlib",
+    "control": "--version",
+    "returncode": 0,
+    "stdout": "bermudan-quantlib 1\n",
+    "stderr": ""
+  }
+]

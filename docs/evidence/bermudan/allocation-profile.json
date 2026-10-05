@@ -1,0 +1,33 @@
+{
+  "scope": "Supplementary allocation sampling, after timing; not latency evidence.",
+  "sampling_rate": 0.0001,
+  "calls": 3,
+  "compiler": "OCaml 5.3.0 Flambda; ocamlopt -g -O3; installed release library",
+  "binary_sha256": "af55193d71d7653561442bb6d0c74dceb7cc8dcd417af2aeb842db778088f73a",
+  "source_sha256": "54224def6522d5cb5d5f72c965fe377a9297c1ac31197e661c0aa10a8ffdba2a",
+  "runtime_sha256": "884cfcd92b288891c5de2ebb55bcc67d3a01a8b244fa976eea2dd2f66f969d1a",
+  "rows": [
+    {
+      "mode": "none",
+      "samples": 6657,
+      "boundary_exponential_samples": 5831,
+      "boundary_exponential_fraction": 0.8759200841219769,
+      "raw_sha256": "e443e22cece72f07d61fcb1a50bdc2ea840de98d2ea5bd989c22207f009e2c7e"
+    },
+    {
+      "mode": "cash",
+      "samples": 9766,
+      "boundary_exponential_samples": 7870,
+      "boundary_exponential_fraction": 0.8058570550890846,
+      "raw_sha256": "295a5236325f5347ec666d73dd30f6dff6bbbde8199b7e5b92826ef5aebaccb7"
+    }
+  ],
+  "installed_static_sha256": {
+    "lib/morphiq_risk_ml/morphiq_risk.a": "e548e0e8f58a110a977d0486c056ed07fcd77c07a4cf9e82680dfc8b26c8313b",
+    "lib/morphiq_risk_ml/libmorphiq_risk_stubs.a": "25a691668046a0ec91ae79971e2fa85dff0a4273c5cc9fd1fb1e4a50902db2b7",
+    "lib/morphiq_risk_ml/morphiq_risk.cmxa": "ae232a30efefc57074c5ac1af74ee39c79afa66a3a01e257576a5c794c9913f8",
+    "lib/morphiq_risk_ml/fp/libmorphiq_fp_stubs.a": "87fba5fb5eea7bdd09c39e553739d653e34dbe239201b083aee71c6930e63129",
+    "lib/morphiq_risk_ml/fp/morphiq_fp.a": "f5cd33b3aa9a4ee54bd23ddd1d3a115ac7a0061b14eaf2198af9eb82899f8524",
+    "lib/morphiq_risk_ml/fp/morphiq_fp.cmxa": "5f2fc0cbf1e443c7c5330459480d8dab93af390c55cb01cec18be5f2f2db6eb8"
+  }
+}

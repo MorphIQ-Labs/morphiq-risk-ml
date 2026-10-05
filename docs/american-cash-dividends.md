@@ -6,6 +6,8 @@ separate input. Do not encode the same payment in both yield and the schedule.
 The [financial contract](american-model-contract.md) and
 [frozen numerical policy](american-solver-design.md) govern this implementation.
 Every returned price remains **Estimated_only**.
+[Bermudan admission](bermudan-pricing.md) accepts the same cash specification
+with explicit finite exercise instants; only those instants confer rights.
 
 Run the [complete cash pricing example](../examples/american_cash_price.ml) with
 `dune exec examples/american_cash_price.exe`.
@@ -85,8 +87,7 @@ in #120. Exercise regions
 at valuation are unavailable if the opening instant has not arrived, including
 valuation-before/opening-after at the same physical date.
 
-Bermudan schedules, varying coefficients, cash Greeks/IV and planner adapters
-remain separate work. The API exposes no alternative dividend convention;
+Varying coefficients, cash Greeks/IV and planner adapters remain separate work. The API exposes no alternative dividend convention;
 escrowed dividends and spot adjustment are not substitutes for this model.
 
 ## Work and memory

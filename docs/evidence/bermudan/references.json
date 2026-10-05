@@ -1,0 +1,2025 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-05T21:03:50.375534+00:00",
+  "runtime_source_sha256": "4bf678f0b081c14db9b32cda143ebce1c8b2bf7e3354a65b3a529274624dabc4",
+  "runtime_worktree_modified": false,
+  "rows": [
+    {
+      "id": "terminal-call",
+      "analytical_80": "9.2270055081540480778496785593575350707484351836770766588757785001288772068532068",
+      "analytical_160": "9.22700550815404807784967855935753507074843518367707665887577850012887720685320678466959626143875466931128947025181104857233593855948540554077277540291268368309",
+      "quadrature": [
+        [
+          "terminal-call",
+          "256",
+          "finite",
+          "0x1.27d5ec1a95ac7p+3",
+          "0x1.27d5ec1a95ac7p+3"
+        ],
+        [
+          "terminal-call",
+          "512",
+          "finite",
+          "0x1.279f82c588411p+3",
+          "0x1.279f82c588411p+3"
+        ],
+        [
+          "terminal-call",
+          "1024",
+          "finite",
+          "0x1.277122a16961dp+3",
+          "0x1.277122a16961dp+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "terminal-call",
+          "128",
+          "finite",
+          "0x1.274acd0959ddep+3",
+          "0x1.275d97d92d07p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-call",
+          "256",
+          "finite",
+          "0x1.274567694dc02p+3",
+          "0x1.274a0ffca3c4cp+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-call",
+          "512",
+          "finite",
+          "0x1.274411dd46b24p+3",
+          "0x1.27453af50f842p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 9.227005508154049,
+      "radius": 6.628713308212923e-16,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "terminal-put",
+      "analytical_80": "6.3300806275499185417005655123416250934192166158472704273118754166858198429065712",
+      "analytical_160": "6.33008062754991854170056551234162509341921661584727042731187541668581984290657103024098830226047842588850049964938211769117974287420445515919592013113276015492",
+      "quadrature": [
+        [
+          "terminal-put",
+          "256",
+          "finite",
+          "0x1.9644a098bbc8dp+2",
+          "0x1.9644a098bbc8dp+2"
+        ],
+        [
+          "terminal-put",
+          "512",
+          "finite",
+          "0x1.95d7cdedfd5fp+2",
+          "0x1.95d7cdedfd5fp+2"
+        ],
+        [
+          "terminal-put",
+          "1024",
+          "finite",
+          "0x1.957b0da596811p+2",
+          "0x1.957b0da596811p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "terminal-put",
+          "128",
+          "finite",
+          "0x1.95200fce2e2d1p+2",
+          "0x1.95305a8e9fc03p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-put",
+          "256",
+          "finite",
+          "0x1.95200a32a2a64p+2",
+          "0x1.95241576edc7cp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "terminal-put",
+          "512",
+          "finite",
+          "0x1.952009d33e786p+2",
+          "0x1.95210be003a88p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.330080627549918,
+      "radius": 1.377715242794279e-16,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "expiry-call",
+      "analytical_80": "5.0",
+      "analytical_160": "5.0",
+      "quadrature": [
+        [
+          "expiry-call",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "expiry-call",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "expiry-call",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "expiry-call",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "expiry-call",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "expiry-call",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 5.0,
+      "radius": 5e-75,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-sparse",
+      "analytical_80": "24.607768625849089889092422468622490437894273971314954118649381630879545905356088",
+      "analytical_160": "24.60776862584908988909242246862249043789427397131495411864938163087954590535608824137589641043282998670577668061737982170425636080865612742836479679970633780601",
+      "quadrature": [
+        [
+          "deterministic-sparse",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-sparse",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-sparse",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-sparse",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-sparse",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-sparse",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 24.60776862584909,
+      "radius": 8.268748139400286e-17,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-middle",
+      "analytical_80": "27.54391626583353341678281418458656727406881175585959046258390372073411732433386",
+      "analytical_160": "27.54391626583353341678281418458656727406881175585959046258390372073411732433386009772150645966617766544591970448799294891155298720518304255771915924029885199246",
+      "quadrature": [
+        [
+          "deterministic-middle",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-middle",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-middle",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-middle",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-middle",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-middle",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 27.543916265833534,
+      "radius": 7.237007930042119e-16,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "absorbing-negative-rate",
+      "analytical_80": "128.4025416687741484073420568062436458336280865281463089217507296872207765867238",
+      "analytical_160": "128.4025416687741484073420568062436458336280865281463089217507296872207765867238002753306419439553568901662831749679687305854754236046488427501779898729592310046",
+      "quadrature": [
+        [
+          "absorbing-negative-rate",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "absorbing-negative-rate",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "absorbing-negative-rate",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "absorbing-negative-rate",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-negative-rate",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "absorbing-negative-rate",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 128.40254166877415,
+      "radius": 8.718858479247211e-17,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "zero-strike-negative-yield",
+      "analytical_80": "113.31484530668263168290072278117938725655031317451816259128200360788235778800484",
+      "analytical_160": "113.3148453066826316829007227811793872565503131745181625912820036078823577880048386513939990794941728573231527015647307565704821045258473399878556402591699526116",
+      "quadrature": [
+        [
+          "zero-strike-negative-yield",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-strike-negative-yield",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-strike-negative-yield",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "zero-strike-negative-yield",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-negative-yield",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-strike-negative-yield",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 113.31484530668263,
+      "radius": 3.903818327644823e-15,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-after",
+      "analytical_80": "0.0",
+      "analytical_160": "0.0",
+      "quadrature": [
+        [
+          "deterministic-after",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-after",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-after",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-after",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-after",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-after",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 0.0,
+      "radius": 1e-75,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-both",
+      "analytical_80": "10.0",
+      "analytical_160": "10.0",
+      "quadrature": [
+        [
+          "deterministic-both",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-both",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-both",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-both",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-both",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-both",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 10.0,
+      "radius": 1e-74,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-large",
+      "analytical_80": "2.0",
+      "analytical_160": "2.0",
+      "quadrature": [
+        [
+          "deterministic-large",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-large",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-large",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-large",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-large",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-large",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 2.0,
+      "radius": 2e-75,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "deterministic-joint",
+      "analytical_80": "2.0",
+      "analytical_160": "2.0",
+      "quadrature": [
+        [
+          "deterministic-joint",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-joint",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "deterministic-joint",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "deterministic-joint",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-joint",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "deterministic-joint",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 2.0,
+      "radius": 2e-75,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "zero-time-before-after",
+      "analytical_80": "30.0",
+      "analytical_160": "30.0",
+      "quadrature": [
+        [
+          "zero-time-before-after",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-time-before-after",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-time-before-after",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "zero-time-before-after",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-time-before-after",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-time-before-after",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 30.0,
+      "radius": 3e-74,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "zero-time-after",
+      "analytical_80": "30.0",
+      "analytical_160": "30.0",
+      "quadrature": [
+        [
+          "zero-time-after",
+          "256",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-time-after",
+          "512",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ],
+        [
+          "zero-time-after",
+          "1024",
+          "unavailable",
+          "-",
+          "analytical reference row"
+        ]
+      ],
+      "quantlib": [
+        [
+          "zero-time-after",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-time-after",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ],
+        [
+          "zero-time-after",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "analytical boundary excluded"
+        ]
+      ],
+      "value": 30.0,
+      "radius": 3e-74,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "terminal-cash-before",
+      "analytical_80": "10.865020290828403378301288140937583915341242862178447538426207357911874861408767",
+      "analytical_160": "10.86502029082840337830128814093758391534124286217844753842620735791187486140876658113552012407359712462815967862237069838095117723224573714632845916732637590205",
+      "quadrature": [
+        [
+          "terminal-cash-before",
+          "256",
+          "finite",
+          "0x1.5c549d6f86029p+3",
+          "0x1.5c549d6f86029p+3"
+        ],
+        [
+          "terminal-cash-before",
+          "512",
+          "finite",
+          "0x1.5c08e30ebd902p+3",
+          "0x1.5c08e30ebd902p+3"
+        ],
+        [
+          "terminal-cash-before",
+          "1024",
+          "finite",
+          "0x1.5be762d8f3ee4p+3",
+          "0x1.5be762d8f3ee4p+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "terminal-cash-before",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "terminal-cash-before",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "terminal-cash-before",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ]
+      ],
+      "value": 10.865020290828403,
+      "radius": 7.84526661701966e-16,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "terminal-cash-after",
+      "analytical_80": "28.041642964898462972011122859979262949312017289038527460141856772912281234410943",
+      "analytical_160": "28.04164296489846297201112285997926294931201728903852746014185677291228123441094241339217435272913928387739359090231630355297005925995327066945948089184745846568",
+      "quadrature": [
+        [
+          "terminal-cash-after",
+          "256",
+          "finite",
+          "0x1.c0c23988ffd79p+4",
+          "0x1.c0c23988ffd79p+4"
+        ],
+        [
+          "terminal-cash-after",
+          "512",
+          "finite",
+          "0x1.c0b7549400264p+4",
+          "0x1.c0b7549400264p+4"
+        ],
+        [
+          "terminal-cash-after",
+          "1024",
+          "finite",
+          "0x1.c0b29cfa9e2dp+4",
+          "0x1.c0b29cfa9e2dp+4"
+        ]
+      ],
+      "quantlib": [
+        [
+          "terminal-cash-after",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "terminal-cash-after",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ],
+        [
+          "terminal-cash-after",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "endpoint cash convention excluded"
+        ]
+      ],
+      "value": 28.041642964898465,
+      "radius": 1.6685440528598034e-15,
+      "reference_kind": "precision-refined-analytical",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-sparse",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-sparse",
+          "256",
+          "finite",
+          "0x1.a15ebf9ce6432p+2",
+          "0x1.a15ebf9ce6432p+2"
+        ],
+        [
+          "put-sparse",
+          "512",
+          "finite",
+          "0x1.a06d3e8c0648ap+2",
+          "0x1.a06d3e8c0648ap+2"
+        ],
+        [
+          "put-sparse",
+          "1024",
+          "finite",
+          "0x1.a005be9e90e93p+2",
+          "0x1.a005be9e90e93p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-sparse",
+          "128",
+          "finite",
+          "0x1.9f5176446067fp+2",
+          "0x1.9f594a1b2cf69p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-sparse",
+          "256",
+          "finite",
+          "0x1.9f5508f8fffcp+2",
+          "0x1.9f56a2547faf1p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-sparse",
+          "512",
+          "finite",
+          "0x1.9f55dd1e62228p+2",
+          "0x1.9f55f28c66aacp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.500350622987429,
+      "radius": 0.0589609803861606,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-irregular",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-irregular",
+          "256",
+          "finite",
+          "0x1.a64ef4578a888p+2",
+          "0x1.a64ef4578a888p+2"
+        ],
+        [
+          "put-irregular",
+          "512",
+          "finite",
+          "0x1.a3c06f72c2518p+2",
+          "0x1.a3c06f72c2518p+2"
+        ],
+        [
+          "put-irregular",
+          "1024",
+          "finite",
+          "0x1.a2906f574885cp+2",
+          "0x1.a2906f574885cp+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-irregular",
+          "128",
+          "finite",
+          "0x1.a16891d3582bp+2",
+          "0x1.a16840ca71bf1p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-irregular",
+          "256",
+          "finite",
+          "0x1.a16f221073c8bp+2",
+          "0x1.a1704da28f876p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-irregular",
+          "512",
+          "finite",
+          "0x1.a1734007838d9p+2",
+          "0x1.a1733b333fa48p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.540065608251179,
+      "radius": 0.15979470894984615,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    },
+    {
+      "id": "put-dense",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-dense",
+          "256",
+          "finite",
+          "0x1.b13d4bf2685b7p+2",
+          "0x1.b13d4bf2685b7p+2"
+        ],
+        [
+          "put-dense",
+          "512",
+          "finite",
+          "0x1.ac271318443e8p+2",
+          "0x1.ac271318443e8p+2"
+        ],
+        [
+          "put-dense",
+          "1024",
+          "finite",
+          "0x1.a9235d0ffc41bp+2",
+          "0x1.a9235d0ffc41bp+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-dense",
+          "128",
+          "finite",
+          "0x1.a714fb0165776p+2",
+          "0x1.a71d920ec280fp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-dense",
+          "256",
+          "finite",
+          "0x1.a7245ea83fdbap+2",
+          "0x1.a727d15874657p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-dense",
+          "512",
+          "finite",
+          "0x1.a72a25dce22b3p+2",
+          "0x1.a72aa77a6a59ap+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.642783418284149,
+      "radius": 0.3179253150609007,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    },
+    {
+      "id": "put-now",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-now",
+          "256",
+          "finite",
+          "0x1.9p+5",
+          "0x1.9p+5"
+        ],
+        [
+          "put-now",
+          "512",
+          "finite",
+          "0x1.9p+5",
+          "0x1.9p+5"
+        ],
+        [
+          "put-now",
+          "1024",
+          "finite",
+          "0x1.9p+5",
+          "0x1.9p+5"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-now",
+          "128",
+          "finite",
+          "0x1.900000016ac66p+5",
+          "0x1.900000028cba3p+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-now",
+          "256",
+          "finite",
+          "0x1.900000000a88ap+5",
+          "0x1.9000000050c1p+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-now",
+          "512",
+          "finite",
+          "0x1.9000000000446p+5",
+          "0x1.9000000005e1ep+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 50.0,
+      "radius": 2.9103830456733704e-09,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-future",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-future",
+          "256",
+          "finite",
+          "0x1.803a70f42fdd4p+5",
+          "0x1.803a70f42fdd4p+5"
+        ],
+        [
+          "put-future",
+          "512",
+          "finite",
+          "0x1.803a7014487ecp+5",
+          "0x1.803a7014487ecp+5"
+        ],
+        [
+          "put-future",
+          "1024",
+          "finite",
+          "0x1.803a6fb9d2786p+5",
+          "0x1.803a6fb9d2786p+5"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-future",
+          "128",
+          "finite",
+          "0x1.803a65503bfaap+5",
+          "0x1.803a99dcd51f5p+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-future",
+          "256",
+          "finite",
+          "0x1.803a6cab4a205p+5",
+          "0x1.803a79bb163bfp+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-future",
+          "512",
+          "finite",
+          "0x1.803a6e81eef89p+5",
+          "0x1.803a71c71fd6cp+5",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 48.02853341268114,
+      "radius": 6.675763188468409e-06,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "call-cash-before",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "call-cash-before",
+          "256",
+          "finite",
+          "0x1.d919c4143e3bp+2",
+          "0x1.d919c4143e3bp+2"
+        ],
+        [
+          "call-cash-before",
+          "512",
+          "finite",
+          "0x1.d831809253fc9p+2",
+          "0x1.d831809253fc9p+2"
+        ],
+        [
+          "call-cash-before",
+          "1024",
+          "finite",
+          "0x1.d7ce00c993ef3p+2",
+          "0x1.d7ce00c993ef3p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "call-cash-before",
+          "128",
+          "finite",
+          "0x1.d7426cdf57f75p+2",
+          "0x1.d72fc065d6b71p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-before",
+          "256",
+          "finite",
+          "0x1.d72fc35d50b0dp+2",
+          "0x1.d7273c40f27b8p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-before",
+          "512",
+          "finite",
+          "0x1.d72898bb6c023p+2",
+          "0x1.d72701845da4cp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 7.371948429921519,
+      "radius": 0.05670500806072809,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "call-cash-after",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "call-cash-after",
+          "256",
+          "finite",
+          "0x1.b33f8d6dd3d2ep+2",
+          "0x1.b33f8d6dd3d2ep+2"
+        ],
+        [
+          "call-cash-after",
+          "512",
+          "finite",
+          "0x1.b24a8660f4f82p+2",
+          "0x1.b24a8660f4f82p+2"
+        ],
+        [
+          "call-cash-after",
+          "1024",
+          "finite",
+          "0x1.b1e1a8ca8435dp+2",
+          "0x1.b1e1a8ca8435dp+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "call-cash-after",
+          "128",
+          "finite",
+          "0x1.b18c873021d1dp+2",
+          "0x1.d72fc065d6b71p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-after",
+          "256",
+          "finite",
+          "0x1.b147b48206581p+2",
+          "0x1.d7273c40f27b8p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-after",
+          "512",
+          "finite",
+          "0x1.b13630500666bp+2",
+          "0x1.d72701845da4cp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.779398153085677,
+      "radius": 0.05982117970204115,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "call-cash-both",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "call-cash-both",
+          "256",
+          "finite",
+          "0x1.d919c4143e3bp+2",
+          "0x1.d919c4143e3bp+2"
+        ],
+        [
+          "call-cash-both",
+          "512",
+          "finite",
+          "0x1.d831809253fc9p+2",
+          "0x1.d831809253fc9p+2"
+        ],
+        [
+          "call-cash-both",
+          "1024",
+          "finite",
+          "0x1.d7ce00c993ef3p+2",
+          "0x1.d7ce00c993ef3p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "call-cash-both",
+          "128",
+          "finite",
+          "0x1.d7426cdf57f75p+2",
+          "0x1.d72fc065d6b71p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-both",
+          "256",
+          "finite",
+          "0x1.d72fc35d50b0dp+2",
+          "0x1.d7273c40f27b8p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-cash-both",
+          "512",
+          "finite",
+          "0x1.d72898bb6c023p+2",
+          "0x1.d72701845da4cp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 7.371948429921519,
+      "radius": 0.05670500806072809,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-cash-both",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-cash-both",
+          "256",
+          "finite",
+          "0x1.2106a21dd656ap+3",
+          "0x1.2106a21dd656ap+3"
+        ],
+        [
+          "put-cash-both",
+          "512",
+          "finite",
+          "0x1.208e280ff3207p+3",
+          "0x1.208e280ff3207p+3"
+        ],
+        [
+          "put-cash-both",
+          "1024",
+          "finite",
+          "0x1.205ab08a8cdd2p+3",
+          "0x1.205ab08a8cdd2p+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-cash-both",
+          "128",
+          "finite",
+          "0x1.20254ce1304a9p+3",
+          "0x1.167a137cb2a1bp+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-cash-both",
+          "256",
+          "finite",
+          "0x1.200d82254b2adp+3",
+          "0x1.1669d3967b806p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-cash-both",
+          "512",
+          "finite",
+          "0x1.20068fdeececdp+3",
+          "0x1.16654f7cb61d7p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 9.011070509534793,
+      "radius": 0.05882655291386385,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-cash-joint",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-cash-joint",
+          "256",
+          "finite",
+          "0x1.2106a21dd656ap+3",
+          "0x1.2106a21dd656ap+3"
+        ],
+        [
+          "put-cash-joint",
+          "512",
+          "finite",
+          "0x1.208e280ff3207p+3",
+          "0x1.208e280ff3207p+3"
+        ],
+        [
+          "put-cash-joint",
+          "1024",
+          "finite",
+          "0x1.205ab08a8cdd2p+3",
+          "0x1.205ab08a8cdd2p+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-cash-joint",
+          "128",
+          "finite",
+          "0x1.20254ce1304a9p+3",
+          "0x1.ec8eef5c50662p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-cash-joint",
+          "256",
+          "finite",
+          "0x1.200d82254b2adp+3",
+          "0x1.ec69f28c5dd7bp+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-cash-joint",
+          "512",
+          "finite",
+          "0x1.20068fdeececdp+3",
+          "0x1.ec61708dbd9a3p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 9.011070509534793,
+      "radius": 0.05882655291386385,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-zero-cash",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-zero-cash",
+          "256",
+          "finite",
+          "0x1.a15ebf9ce6432p+2",
+          "0x1.a15ebf9ce6432p+2"
+        ],
+        [
+          "put-zero-cash",
+          "512",
+          "finite",
+          "0x1.a06d3e8c0648ap+2",
+          "0x1.a06d3e8c0648ap+2"
+        ],
+        [
+          "put-zero-cash",
+          "1024",
+          "finite",
+          "0x1.a005be9e90e93p+2",
+          "0x1.a005be9e90e93p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-zero-cash",
+          "128",
+          "finite",
+          "0x1.9f5176446067fp+2",
+          "0x1.9f594a1a74f6ep+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-zero-cash",
+          "256",
+          "finite",
+          "0x1.9f5508f8fffcp+2",
+          "0x1.9f56a25450fe2p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-zero-cash",
+          "512",
+          "finite",
+          "0x1.9f55dd1e62228p+2",
+          "0x1.9f55f28c5afep+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.500350622987429,
+      "radius": 0.0589609803861606,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-negative-rate",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-negative-rate",
+          "256",
+          "finite",
+          "0x1.5ac6d814f2098p+3",
+          "0x1.5ac6d814f2098p+3"
+        ],
+        [
+          "put-negative-rate",
+          "512",
+          "finite",
+          "0x1.5992f7ac7bffep+3",
+          "0x1.5992f7ac7bffep+3"
+        ],
+        [
+          "put-negative-rate",
+          "1024",
+          "finite",
+          "0x1.592575fd87bdp+3",
+          "0x1.592575fd87bdp+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-negative-rate",
+          "128",
+          "finite",
+          "0x1.588f93c3bb76bp+3",
+          "0x1.58a98360dc388p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-negative-rate",
+          "256",
+          "finite",
+          "0x1.5897b517f4f62p+3",
+          "0x1.589e2c7e534b4p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-negative-rate",
+          "512",
+          "finite",
+          "0x1.5899c2bbe3621p+3",
+          "0x1.589b5c5eb9ab1p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 10.785822863746859,
+      "radius": 0.15033037104986136,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    },
+    {
+      "id": "call-negative-rate",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "call-negative-rate",
+          "256",
+          "finite",
+          "0x1.b9571644fcb74p+2",
+          "0x1.b9571644fcb74p+2"
+        ],
+        [
+          "call-negative-rate",
+          "512",
+          "finite",
+          "0x1.b81524e461023p+2",
+          "0x1.b81524e461023p+2"
+        ],
+        [
+          "call-negative-rate",
+          "1024",
+          "finite",
+          "0x1.b785f6a70dcc1p+2",
+          "0x1.b785f6a70dcc1p+2"
+        ]
+      ],
+      "quantlib": [
+        [
+          "call-negative-rate",
+          "128",
+          "finite",
+          "0x1.b6937ee78d232p+2",
+          "0x1.b6b3e53a12405p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-negative-rate",
+          "256",
+          "finite",
+          "0x1.b6a67fc9c23fp+2",
+          "0x1.b6abbf5af0ce7p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "call-negative-rate",
+          "512",
+          "finite",
+          "0x1.b6a8eed7362bep+2",
+          "0x1.b6aa64bd55a74p+2",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 6.867551482332773,
+      "radius": 0.07859933893934468,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": true
+    },
+    {
+      "id": "put-low-vol",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-low-vol",
+          "256",
+          "finite",
+          "0x1.1ff3ac80c8e13p+0",
+          "0x1.1ff3ac80c8e13p+0"
+        ],
+        [
+          "put-low-vol",
+          "512",
+          "finite",
+          "0x1.13e12d6eaeca4p+0",
+          "0x1.13e12d6eaeca4p+0"
+        ],
+        [
+          "put-low-vol",
+          "1024",
+          "finite",
+          "0x1.0bc57e625e6b1p+0",
+          "0x1.0bc57e625e6b1p+0"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-low-vol",
+          "128",
+          "finite",
+          "0x1.fe0c0727c6fb2p-1",
+          "0x1.fe54b97b45083p-1",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-low-vol",
+          "256",
+          "finite",
+          "0x1.fe625136c2362p-1",
+          "0x1.fe73023601c8cp-1",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "put-low-vol",
+          "512",
+          "finite",
+          "0x1.fe782caf75c4ep-1",
+          "0x1.fe7f42e0e4f4cp-1",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 1.0459822645338301,
+      "radius": 0.1886289317411487,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    },
+    {
+      "id": "put-short",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-short",
+          "256",
+          "finite",
+          "0x1.a506358947b0cp+0",
+          "0x1.a506358947b0cp+0"
+        ],
+        [
+          "put-short",
+          "512",
+          "finite",
+          "0x1.6932d990f13f3p+0",
+          "0x1.6932d990f13f3p+0"
+        ],
+        [
+          "put-short",
+          "1024",
+          "finite",
+          "0x1.70c09d64e325ep+0",
+          "0x1.70c09d64e325ep+0"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-short",
+          "128",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ],
+        [
+          "put-short",
+          "256",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ],
+        [
+          "put-short",
+          "512",
+          "exception",
+          "-",
+          "-",
+          "-",
+          "time mapping excluded"
+        ]
+      ],
+      "value": 1.440439068918884,
+      "radius": 0.9347753482523098,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    },
+    {
+      "id": "put-liquidator",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "put-liquidator",
+          "256",
+          "finite",
+          "0x1.f359ad856d358p+0",
+          "0x1.f359ad856d358p+0"
+        ],
+        [
+          "put-liquidator",
+          "512",
+          "finite",
+          "0x1.f359bdc8b7573p+0",
+          "0x1.f359bdc8b7573p+0"
+        ],
+        [
+          "put-liquidator",
+          "1024",
+          "finite",
+          "0x1.f359c48154e13p+0",
+          "0x1.f359c48154e13p+0"
+        ]
+      ],
+      "quantlib": [
+        [
+          "put-liquidator",
+          "128",
+          "finite",
+          "0x1.f35988a3e43d1p+0",
+          "-",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start"
+        ],
+        [
+          "put-liquidator",
+          "256",
+          "finite",
+          "0x1.f359bdddafc8ep+0",
+          "-",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start"
+        ],
+        [
+          "put-liquidator",
+          "512",
+          "finite",
+          "0x1.f359cb3a54eafp+0",
+          "-",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start"
+        ]
+      ],
+      "value": 1.950588494849289,
+      "radius": 3.8774528787755e-06,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": true,
+      "loose_resolved": true
+    },
+    {
+      "id": "cash-negative-rate",
+      "analytical_80": null,
+      "analytical_160": null,
+      "quadrature": [
+        [
+          "cash-negative-rate",
+          "256",
+          "finite",
+          "0x1.be4f1f1db04f1p+3",
+          "0x1.be4f1f1db04f1p+3"
+        ],
+        [
+          "cash-negative-rate",
+          "512",
+          "finite",
+          "0x1.bd364635bc857p+3",
+          "0x1.bd364635bc857p+3"
+        ],
+        [
+          "cash-negative-rate",
+          "1024",
+          "finite",
+          "0x1.bcd2ca420fceep+3",
+          "0x1.bcd2ca420fceep+3"
+        ]
+      ],
+      "quantlib": [
+        [
+          "cash-negative-rate",
+          "128",
+          "finite",
+          "0x1.bc6d52b07d16ap+3",
+          "0x1.bc719491eaac9p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-negative-rate",
+          "256",
+          "finite",
+          "0x1.bc5bc63a13fb1p+3",
+          "0x1.bc5c8902b7ad7p+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ],
+        [
+          "cash-negative-rate",
+          "512",
+          "finite",
+          "0x1.bc56e17d80878p+3",
+          "0x1.bc572b72e98bbp+3",
+          "-",
+          "finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions"
+        ]
+      ],
+      "value": 13.900731209780556,
+      "radius": 0.13713246839434134,
+      "reference_kind": "empirical-quadrature",
+      "primary_resolved": false,
+      "loose_resolved": false
+    }
+  ],
+  "runners": {
+    "quadrature": {
+      "binary_sha256": "791ab9bac5156bfa2aac89cdc159317802b684431c774852792cd0499f18241e",
+      "levels": [
+        256,
+        512,
+        1024
+      ]
+    },
+    "quantlib": {
+      "binary_sha256": "3a71879b58ab799093da53c6944933964df9bd41f4cfc05fd5c5dc212839ed12",
+      "levels": [
+        128,
+        256,
+        512
+      ]
+    }
+  },
+  "source_sha256": {
+    "scripts/freeze_bermudan.py": "71bf5e16dd9868a2b36f81971e44813ca488dbee8d03c06889b176ce5bc8a6ae",
+    "scripts/bermudan_io.hpp": "408c5673cc8be726dd26373cdff5cb66e82c491b511948a1db95137a7ae69b79",
+    "scripts/american_cash_io.hpp": "8b244a25ea0c62bf120f3e6343bea68b846dfc688de020be65e23d9f4ee705e8",
+    "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
+    "scripts/bermudan_quadrature.cpp": "e7c1d173af77dd03b5e7d84692077aa8421cdf267c96545885ccd7fcc0a6592a",
+    "scripts/bermudan_quantlib.cpp": "3fb66f459bd90db93ac63c5e6e5faf146be829bbdbb5d8fad56c9a553180dddd",
+    "/private/tmp/morphiq-bermudan/scripts/bermudan_references.py": "6dfefef5f9312762de2e9df04ca870ed3e958256f11638314439905adc893759",
+    "docs/evidence/bermudan/cases-v1.json": "7e9c1e20f837d9a09fae075c0246ba75a8145137b77ab0930326e25a11e4e33d",
+    "docs/evidence/bermudan/protocol.md": "a7b97253d5844328833281a4b2383051b2390f6d3304162ac89e3f752523f9bc"
+  },
+  "raw_sha256": {
+    "quantlib.tsv": "0397f5e9acaad7a640d47249efcbdf1c24b4149856ffc0d840279efbd0494dc5",
+    "quadrature.tsv": "6e5e7e1055ba7e5631a2344e384575565576bdafd8daacc7b3542105f827554b"
+  }
+}

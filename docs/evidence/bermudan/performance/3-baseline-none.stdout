@@ -1,0 +1,1 @@
+{"mode":"none","phase":"price","calls":3,"seconds_per_call":0.1406099796295166,"allocated_bytes_per_call":12897176,"minor_collections":21,"major_collections":8,"heap_words_after":61440,"live_words_after":939}

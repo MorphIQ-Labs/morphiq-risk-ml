@@ -1,0 +1,15 @@
+{
+  "scope": "Local installed public example only; not source-artifact or release qualification.",
+  "package_origin": "/tmp/morphiq-bermudan-evidence/install/lib/morphiq_risk_ml",
+  "source_sha256": "fc2801f67589c6652687749b3d0787f65c1f9439fc07c4228e4071acecf7460e",
+  "modes": {
+    "native": {
+      "stdout": "Estimated Bermudan put with cash: 9.00003498208 (backward-Euler-Bermudan-v1); 31744 accepted time steps\nPremium unavailable: matching cash-European comparison not implemented\n",
+      "binary_sha256": "82c510ee0094697bec48255996819b1259cb9dcb8e03300c3e73c0510b48030b"
+    },
+    "bytecode": {
+      "stdout": "Estimated Bermudan put with cash: 9.00003498208 (backward-Euler-Bermudan-v1); 31744 accepted time steps\nPremium unavailable: matching cash-European comparison not implemented\n",
+      "binary_sha256": "6ce95277d53956c5b56ef795ba4099c000798e720576a3a1333bcbdce46f1e62"
+    }
+  }
+}

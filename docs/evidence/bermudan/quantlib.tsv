@@ -1,0 +1,96 @@
+terminal-call	128	finite	0x1.274acd0959ddep+3	0x1.275d97d92d07p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+terminal-call	256	finite	0x1.274567694dc02p+3	0x1.274a0ffca3c4cp+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+terminal-call	512	finite	0x1.274411dd46b24p+3	0x1.27453af50f842p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+terminal-put	128	finite	0x1.95200fce2e2d1p+2	0x1.95305a8e9fc03p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+terminal-put	256	finite	0x1.95200a32a2a64p+2	0x1.95241576edc7cp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+terminal-put	512	finite	0x1.952009d33e786p+2	0x1.95210be003a88p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+expiry-call	128	exception	-	-	-	analytical boundary excluded
+expiry-call	256	exception	-	-	-	analytical boundary excluded
+expiry-call	512	exception	-	-	-	analytical boundary excluded
+deterministic-sparse	128	exception	-	-	-	analytical boundary excluded
+deterministic-sparse	256	exception	-	-	-	analytical boundary excluded
+deterministic-sparse	512	exception	-	-	-	analytical boundary excluded
+deterministic-middle	128	exception	-	-	-	analytical boundary excluded
+deterministic-middle	256	exception	-	-	-	analytical boundary excluded
+deterministic-middle	512	exception	-	-	-	analytical boundary excluded
+absorbing-negative-rate	128	exception	-	-	-	analytical boundary excluded
+absorbing-negative-rate	256	exception	-	-	-	analytical boundary excluded
+absorbing-negative-rate	512	exception	-	-	-	analytical boundary excluded
+zero-strike-negative-yield	128	exception	-	-	-	analytical boundary excluded
+zero-strike-negative-yield	256	exception	-	-	-	analytical boundary excluded
+zero-strike-negative-yield	512	exception	-	-	-	analytical boundary excluded
+deterministic-after	128	exception	-	-	-	analytical boundary excluded
+deterministic-after	256	exception	-	-	-	analytical boundary excluded
+deterministic-after	512	exception	-	-	-	analytical boundary excluded
+deterministic-both	128	exception	-	-	-	analytical boundary excluded
+deterministic-both	256	exception	-	-	-	analytical boundary excluded
+deterministic-both	512	exception	-	-	-	analytical boundary excluded
+deterministic-large	128	exception	-	-	-	analytical boundary excluded
+deterministic-large	256	exception	-	-	-	analytical boundary excluded
+deterministic-large	512	exception	-	-	-	analytical boundary excluded
+deterministic-joint	128	exception	-	-	-	analytical boundary excluded
+deterministic-joint	256	exception	-	-	-	analytical boundary excluded
+deterministic-joint	512	exception	-	-	-	analytical boundary excluded
+zero-time-before-after	128	exception	-	-	-	analytical boundary excluded
+zero-time-before-after	256	exception	-	-	-	analytical boundary excluded
+zero-time-before-after	512	exception	-	-	-	analytical boundary excluded
+zero-time-after	128	exception	-	-	-	analytical boundary excluded
+zero-time-after	256	exception	-	-	-	analytical boundary excluded
+zero-time-after	512	exception	-	-	-	analytical boundary excluded
+terminal-cash-before	128	exception	-	-	-	endpoint cash convention excluded
+terminal-cash-before	256	exception	-	-	-	endpoint cash convention excluded
+terminal-cash-before	512	exception	-	-	-	endpoint cash convention excluded
+terminal-cash-after	128	exception	-	-	-	endpoint cash convention excluded
+terminal-cash-after	256	exception	-	-	-	endpoint cash convention excluded
+terminal-cash-after	512	exception	-	-	-	endpoint cash convention excluded
+put-sparse	128	finite	0x1.9f5176446067fp+2	0x1.9f594a1b2cf69p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-sparse	256	finite	0x1.9f5508f8fffcp+2	0x1.9f56a2547faf1p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-sparse	512	finite	0x1.9f55dd1e62228p+2	0x1.9f55f28c66aacp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-irregular	128	finite	0x1.a16891d3582bp+2	0x1.a16840ca71bf1p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-irregular	256	finite	0x1.a16f221073c8bp+2	0x1.a1704da28f876p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-irregular	512	finite	0x1.a1734007838d9p+2	0x1.a1733b333fa48p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-dense	128	finite	0x1.a714fb0165776p+2	0x1.a71d920ec280fp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-dense	256	finite	0x1.a7245ea83fdbap+2	0x1.a727d15874657p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-dense	512	finite	0x1.a72a25dce22b3p+2	0x1.a72aa77a6a59ap+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-now	128	finite	0x1.900000016ac66p+5	0x1.900000028cba3p+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-now	256	finite	0x1.900000000a88ap+5	0x1.9000000050c1p+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-now	512	finite	0x1.9000000000446p+5	0x1.9000000005e1ep+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-future	128	finite	0x1.803a65503bfaap+5	0x1.803a99dcd51f5p+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-future	256	finite	0x1.803a6cab4a205p+5	0x1.803a79bb163bfp+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-future	512	finite	0x1.803a6e81eef89p+5	0x1.803a71c71fd6cp+5	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-before	128	finite	0x1.d7426cdf57f75p+2	0x1.d72fc065d6b71p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-before	256	finite	0x1.d72fc35d50b0dp+2	0x1.d7273c40f27b8p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-before	512	finite	0x1.d72898bb6c023p+2	0x1.d72701845da4cp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-after	128	finite	0x1.b18c873021d1dp+2	0x1.d72fc065d6b71p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-after	256	finite	0x1.b147b48206581p+2	0x1.d7273c40f27b8p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-after	512	finite	0x1.b13630500666bp+2	0x1.d72701845da4cp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-both	128	finite	0x1.d7426cdf57f75p+2	0x1.d72fc065d6b71p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-both	256	finite	0x1.d72fc35d50b0dp+2	0x1.d7273c40f27b8p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-cash-both	512	finite	0x1.d72898bb6c023p+2	0x1.d72701845da4cp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-both	128	finite	0x1.20254ce1304a9p+3	0x1.167a137cb2a1bp+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-both	256	finite	0x1.200d82254b2adp+3	0x1.1669d3967b806p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-both	512	finite	0x1.20068fdeececdp+3	0x1.16654f7cb61d7p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-joint	128	finite	0x1.20254ce1304a9p+3	0x1.ec8eef5c50662p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-joint	256	finite	0x1.200d82254b2adp+3	0x1.ec69f28c5dd7bp+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-cash-joint	512	finite	0x1.20068fdeececdp+3	0x1.ec61708dbd9a3p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-zero-cash	128	finite	0x1.9f5176446067fp+2	0x1.9f594a1a74f6ep+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-zero-cash	256	finite	0x1.9f5508f8fffcp+2	0x1.9f56a25450fe2p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-zero-cash	512	finite	0x1.9f55dd1e62228p+2	0x1.9f55f28c5afep+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-negative-rate	128	finite	0x1.588f93c3bb76bp+3	0x1.58a98360dc388p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-negative-rate	256	finite	0x1.5897b517f4f62p+3	0x1.589e2c7e534b4p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-negative-rate	512	finite	0x1.5899c2bbe3621p+3	0x1.589b5c5eb9ab1p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-negative-rate	128	finite	0x1.b6937ee78d232p+2	0x1.b6b3e53a12405p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-negative-rate	256	finite	0x1.b6a67fc9c23fp+2	0x1.b6abbf5af0ce7p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+call-negative-rate	512	finite	0x1.b6a8eed7362bep+2	0x1.b6aa64bd55a74p+2	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-low-vol	128	finite	0x1.fe0c0727c6fb2p-1	0x1.fe54b97b45083p-1	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-low-vol	256	finite	0x1.fe625136c2362p-1	0x1.fe73023601c8cp-1	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-low-vol	512	finite	0x1.fe782caf75c4ep-1	0x1.fe7f42e0e4f4cp-1	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+put-short	128	exception	-	-	-	time mapping excluded
+put-short	256	exception	-	-	-	time mapping excluded
+put-short	512	exception	-	-	-	time mapping excluded
+put-liquidator	128	finite	0x1.f35988a3e43d1p+0	-	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start
+put-liquidator	256	finite	0x1.f359bdddafc8ep+0	-	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start
+put-liquidator	512	finite	0x1.f359cb3a54eafp+0	-	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions; Spot unavailable: end must be larger than start
+cash-negative-rate	128	finite	0x1.bc6d52b07d16ap+3	0x1.bc719491eaac9p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+cash-negative-rate	256	finite	0x1.bc5bc63a13fb1p+3	0x1.bc5c8902b7ad7p+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions
+cash-negative-rate	512	finite	0x1.bc56e17d80878p+3	0x1.bc572b72e98bbp+3	-	finite-rights liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions

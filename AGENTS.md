@@ -39,8 +39,10 @@ Compiler, arithmetic or backend work additionally follows the
 - `Black.Make` shares the lognormal kernel across carry/shift choices;
   `Bachelier` owns the normal model. Model-specific abstract admission types
   and volatility coordinates enforce structural separation.
-- `Early_exercise.Bsm` owns bounded, estimated-only scalar American prices.
-  Read [its capability and limits](docs/american-pricing.md). Refined grids and
+- `Early_exercise.Bsm` owns bounded, estimated-only scalar American and Bermudan prices.
+  Read [American capability](docs/american-pricing.md) and the
+  [finite exercise contract](docs/bermudan-pricing.md). Refining a numerical time
+  grid must never add Bermudan exercise rights. Refined grids and
   small residuals are diagnostics, not continuum certificates; failures and
   unresolved references cannot count as accuracy passes.
 - `Exchange` owns certified scalar two-asset European exchange prices, with
