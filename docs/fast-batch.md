@@ -36,9 +36,11 @@ certificate is required fails compilation. Certified Batch/Production APIs are
 unchanged. Initial fast batch scope is price only; Greeks and IV retain their
 existing scalar/certified APIs.
 
-Compilation calls each model's existing scalar `admit`, storing its immutable
-admitted value or its exact `Refusal.t` at the original index. Execution calls
-that model's scalar `price`. It serves only finite nonnegative results, preserving
+Compilation calls each model's existing scalar `admit`. It retains immutable
+admitted values or exact refusals; selected Bachelier entries instead retain
+private prepared coordinates. Execution uses the original scalar `price` or
+the operation-preserving native middle-branch kernel described below.
+It serves only finite nonnegative results, preserving
 the exact binary64 word, including signed zero. Nonfinite or negative results
 become `Numerical_failure`; they are never clamped or substituted. Other valid
 items still execute. Expected failures are values; unexpected programming or
@@ -56,7 +58,8 @@ The compiled batch fixes every input, side and volatility. It performs no
 numerical pricing until execution. Changing market/model inputs requires a new
 compile; this API does not accept later shocks or claim to cache a whole market.
 Duplicate items remain separate. There is no cross-item common-expression or
-result cache, SIMD transformation, worker pool or generated machine code.
+result cache, worker pool or generated machine code. Selected Bachelier rows
+use a precompiled two-lane ARM64 kernel.
 
 Callers must not mutate the request array during `compile` or `run`. Compilation
 maps it to private storage and retains no alias to the caller's array. Every
@@ -65,16 +68,40 @@ All retained model data are immutable. Execution has no shared mutable scratch,
 so the same compiled batch can be reused concurrently. Separate callers own
 their own results. Empty batches compile and execute as empty batches.
 
-Compilation retains O(n) admitted entries and does O(n) admissions. Execution
-allocates O(n) result slots plus scalar-kernel temporary allocations. The caller
+Compilation retains O(n) private entries and does O(n) admissions. Selected
+native rows use four binary64 arrays packed into one private allocation;
+execution allocates a fresh numeric output array before restoring original
+indices. Fallback rows retain scalar-kernel temporary allocations. The caller
 controls n and available memory; allocation failure is not a per-item numerical
 outcome. These are flat batches, not Cartesian scenario plans or a streaming
 interface. Bounded fast scenario execution is tracked separately in #97.
 
-A compiled batch removes repeated admission; it does not make the numerical
-kernel itself faster. Account for request construction, compilation and output
-extraction when evaluating one-shot use. The [measurement report](results-fast-batch.md) separates those
-costs from reusable execution and pre-admitted scalar dispatch.
+A compiled batch removes repeated admission and can use the native kernel for
+eligible Bachelier rows. Account for request construction, compilation and output
+extraction when evaluating one-shot use. The [original measurement report](results-fast-batch.md)
+describes the scalar implementation at its recorded revision.
+
+## Native Bachelier selection
+
+On ARM64 with the supported flat-float-array compiler, compilation considers
+native packing only for batches with at least 32 Bachelier rows comprising at
+least half the requests. At least 32 rows and half the batch must then satisfy
+the fixed numerical gate: live OTM, positive normal volatility, absolute
+distance/discount/standard-deviation high word in [2^-100,2^100], and corrected
+standardized distance in [0.46875,4]. Other entries use their scalar path.
+Small, sparse, unselected and non-ARM64 batches keep the scalar layout.
+These size/density limits control packing cost, not financial validity or
+numerical tolerances. The unchanged `run` and `evaluate` operations remain
+scalar, avoiding packing overhead for one-shot/single requests.
+
+The native kernel ports the existing rational and split exponential operation
+graph, using only explicit FMAs and separately rounded multiplications. There
+is no SLEEF dependency or host exponential substitution. A final odd row uses
+the same C scalar graph. Private inputs are immutable; each invocation owns
+its result buffer, retains no foreign pointers and does not release the OCaml
+runtime lock. See [the integration contract](fast-simd-integration.md) for the
+arithmetic and ownership obligations. Certified outputs, Greeks and IV do not
+route through this kernel.
 
 ## Integration sequence
 

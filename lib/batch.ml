@@ -70,7 +70,11 @@ module Fast = struct
     | Bachelier_price of Bachelier.admitted * Side.t * Vol.normal Vol.t
     | Invalid of Refusal.t
 
-  type t = prepared array
+  type slot = Scalar of prepared | Native of int
+
+  type t =
+    | Scalar_batch of prepared array
+    | Native_batch of { slots : slot array; kernel : Bachelier_native.t }
 
   let prepare (Price (model, inputs, side, sigma)) =
     match model with
@@ -106,7 +110,72 @@ module Fast = struct
 
   let evaluate request = price (prepare request)
   let run requests = Array.map evaluate requests
-  let compile requests = Array.map prepare requests
-  let length = Array.length
-  let execute batch = Array.map price batch
+
+  let compile requests =
+    let entries = Array.map prepare requests in
+    let n = Array.length entries in
+    (* Performance dispatch is separate from numerical selection: #121
+       demonstrated throughput at >=32 rows. Sparse mixed books retain the
+       scalar layout. This does not alter the fixed middle-branch domain. *)
+    let bachelier_count =
+      if n >= 32 && Bachelier_native.default_enabled then
+        Array.fold_left
+          (fun n -> function Bachelier_price _ -> n + 1 | _ -> n)
+          0 entries
+      else 0
+    in
+    if bachelier_count < 32 || bachelier_count < n - bachelier_count then
+      Scalar_batch entries
+    else
+      let selected =
+        Array.map
+          (function
+            | Bachelier_price (a, side, sigma) ->
+                Bachelier.Fast_middle.prepare a side sigma
+            | _ -> None)
+          entries
+      in
+      let count =
+        Array.fold_left
+          (fun n -> function Some _ -> n + 1 | None -> n)
+          0 selected
+      in
+      if count < 32 || count < n - count then Scalar_batch entries
+      else
+        let cursor = ref 0 in
+        let values =
+          Array.init count (fun _ ->
+              while selected.(!cursor) = None do
+                incr cursor
+              done;
+              let value = Option.get selected.(!cursor) in
+              incr cursor;
+              value)
+        in
+        let next = ref 0 in
+        let slots =
+          Array.mapi
+            (fun i entry ->
+              match selected.(i) with
+              | None -> Scalar entry
+              | Some _ ->
+                  let slot = Native !next in
+                  incr next;
+                  slot)
+            entries
+        in
+        Native_batch { slots; kernel = Bachelier_native.compile values }
+
+  let length = function
+    | Scalar_batch entries -> Array.length entries
+    | Native_batch p -> Array.length p.slots
+
+  let execute = function
+    | Scalar_batch entries -> Array.map price entries
+    | Native_batch p ->
+        let values = Bachelier_native.execute p.kernel in
+        Array.map
+          (function
+            | Scalar entry -> price entry | Native i -> finish values.(i))
+          p.slots
 end

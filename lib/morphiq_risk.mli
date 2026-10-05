@@ -86,6 +86,16 @@ module Internal : sig
     val price : t -> float
   end
 
+  module Bachelier_native : sig
+    type t
+
+    val backend : int
+    val default_enabled : bool
+    val compile : Bachelier_fast.t array -> t
+    val length : t -> int
+    val execute : ?scalar:bool -> t -> float array
+  end
+
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split

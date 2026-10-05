@@ -38,7 +38,7 @@ def main():
             inputs=[line for line in fixture.read_text().splitlines() if line and not line.startswith('#')]
             for mode in ('exe','bc'):
                 binary=build/'test'/('dd_word_replay.'+mode)
-                env=dict(os.environ,CAML_LD_LIBRARY_PATH=str(build/'lib/fp'))
+                env=dict(os.environ,CAML_LD_LIBRARY_PATH=os.pathsep.join([str(build/'lib'),str(build/'lib/fp')]))
                 result=subprocess.check_output([str(binary),str(fixture)],env=env,timeout=180)
                 lines=result.decode().splitlines()
                 if [line.split('\t')[0] for line in lines] != inputs:

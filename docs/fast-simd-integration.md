@@ -33,6 +33,68 @@ parameters and access through the stable Bachelier surface.
 The [first-stage evidence](results-bachelier-preparation.md) records exact
 110,632-row compatibility, affected mutations and paired preparation measurements.
 
+## Native Fast-batch boundary
+
+`Bachelier_native` owns the foreign boundary. Its input is an array of private
+`Fast_middle.t` values, so ordinary typed code cannot supply unadmitted raw
+coordinates. Compilation copies them into a private SoA array with four
+contiguous `n`-element spans: standardized distance high word, residual,
+standard deviation high word and discount. Currency scaling and side have
+already been resolved by the owning Bachelier preparation. No exact displaced
+sums or lognormal models cross this boundary.
+
+Each execution allocates a fresh `n`-element numeric result array. The C primitive
+checks dispatch mode, flat-array tags and the `4*n` input length before indexing;
+the OCaml owner bounds `4*n` before allocation. Empty arrays are supported.
+Array pointers are borrowed only for that call, registered as OCaml roots, never
+retained and never passed through a callback or runtime-lock release. Inputs are
+read-only, outputs are invocation-private, and NEON loads/stores permit the
+ordinary array alignment. Concurrent executions therefore share no scratch.
+Non-flat-array configurations retain private typed values and use OCaml scalar
+execution. Unsupported platforms keep the public scalar batch layout.
+
+ARM64 uses two lanes, with an odd final selected row evaluated by the same C
+scalar template. The scalar C instantiation is also an explicit private
+assurance control on supported x86-64. It is not enabled as the public default
+there without performance evidence. Both native and bytecode public consumers
+link the installed stub library; SLEEF is not a build or runtime dependency.
+
+### Arithmetic and source ownership
+
+`bachelier_operation_graph.h` ports the already reviewed experiment graph from
+PR #121, originating in this project's `Normalised_black.y_prime`, `Split.square`,
+`Split.scaled_exp_neg` and `Elementary.exp`. Coefficients retain their binary64
+words and expression grouping. Full inherited Jäckel and Sun notices accompany
+the native sources and installed project notices. No new external coefficient
+source or elementary approximation is introduced.
+
+| Operation | Preserved implementation |
+| --- | --- |
+| Middle rational | Same numerator/denominator Horner grouping and ordinary division; no reciprocal approximation |
+| Square/residual | Separate `q*q`, then explicit fused `fma(q,q,-square)` |
+| Scale | `((discount*s)*inv_sqrt_2pi)*Y_prime(-(q+low))` |
+| Exponent | Same half-square high/low words, logarithm split, floor and explicit reduction FMAs |
+| Reduced exponential | Same polynomial coefficients, rounded reduction and explicit FMAs |
+| Exponent restoration | Scalar `ldexp`; ARM64 multiplication by exactly constructed normal powers of two |
+
+The fixed gate bounds the rational argument and exponent integers. Its rational
+numerator/denominator are positive and restoration remains normal; no subnormal
+rescaling branch is selected. The reduced exponential's tiny-argument case
+rounds its Horner accumulator to one, preserving `1+x`. These restricted-domain
+arguments are inherited from the [operation audit](results-fast-simd.md#scope-and-arithmetic),
+not a whole-domain proof of the native compiler. C flags disable implicit
+contraction, reassociation/fast-math and automatic vectorization; only explicit
+FMA intrinsics fuse. Native reference tests independently score original-input
+fixtures before checking served bits.
+
+`Batch.Fast` restores original indices and owns conversion to finite,
+nonnegative successful prices or numerical failures. Invalid admissions and
+unselected entries retain scalar behavior. It only packs batches with at least
+32 selected rows and selected density at least one half, after an inexpensive
+Bachelier-count check; size/density dispatch cannot change admission or numerical
+quality gates. `run` and `evaluate` remain scalar. No price is cached at compile
+time, and fallback-heavy batches retain their original scalar execution layout.
+
 ## Integration obligations
 
 Native adoption must preserve original output indices, finite-result/failure

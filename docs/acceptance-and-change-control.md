@@ -4,6 +4,12 @@ The current package is experimental **0.3.0**, with its separate
 [integrated candidate qualification](candidate-fast-optimized.md). The dated 0.2.0 record
 below remains unchanged and pending for institutional use.
 
+The subsequent [Fast SIMD integration](fast-simd-integration.md) changes runtime
+preparation and the native Fast-batch backend. Its staged engineering evidence
+does not transfer exact-candidate qualification or owner/reviewer approval from
+`f703546` to the changed runtime. Combined integration evidence and a new immutable
+candidate are required before updating the acceptance record below.
+
 The institutional acceptance process establishes engineering evidence toward Epic #27. It does not
 approve deployment or freeze a release. The authoritative machine-readable
 [current acceptance record](acceptance/pending-fast-candidate.json) is deliberately pending
