@@ -26,6 +26,13 @@ been retired; it remains in Git history.
 - [Public interface](../lib/morphiq_risk.mli) and [type audit](type-boundary-audit.md).
 - [Stability](stability.md), [determinism](determinism.md), and [numerical backend](numerical-backend-contract.md).
 
+## Planned model extensions
+
+- [American and Bermudan contract](american-model-contract.md): the #108 design
+  for optimal stopping, immediate settlement, explicit dividend-event sides,
+  limited-liability cash dividends and piecewise coefficients. This is the
+  foundation for Epic #107; it does not add an implemented pricing capability.
+
 ## Numerical methods and verification
 
 - [Adversarial assurance closeout](adversarial-assurance-closeout.md): current source, finding dispositions, retained uncertainty and review obligations.

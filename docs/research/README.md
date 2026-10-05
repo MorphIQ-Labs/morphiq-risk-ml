@@ -33,6 +33,19 @@ prior revisions; see the [original proposal](https://github.com/MorphIQ-Labs/mor
 | Jonathan Richard Shewchuk (1997), *Adaptive Precision Floating-Point Arithmetic and Fast Robust Geometric Predicates* | Author report CMU-CS-96-140R, dated October 1, 1997; from Discrete & Computational Geometry 18(3), 305–363 | [Source](https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf) |
 | Fredrik Johansson (2016), *Arb: Efficient Arbitrary-Precision Midpoint-Radius Interval Arithmetic* | arXiv:1611.02831v1, 9 November 2016, author preprint | [Source](https://arxiv.org/pdf/1611.02831v1) |
 
+## American contract design references
+
+The [#108 model design](../american-model-contract.md) inspected versioned online
+HTML for Jherek Healy's *Pricing American options under negative rates*
+([arXiv:2109.15157v1](https://arxiv.org/html/2109.15157v1), §§2–3) and *The Pricing
+of Vanilla Options with Cash Dividends as a Classic Vanilla Basket Option Problem*
+([arXiv:2106.12971v1](https://arxiv.org/html/2106.12971v1), §§2 and 4.1).
+No original PDF was acquired in that design task. The
+[separate source record](../evidence/american-contract/sources.json) retains the
+inspection scope, pinned QuantLib file hashes and absence of numerical execution.
+It does not amend the historical acquisition manifest or assert new archived
+paper holdings. Future acquired originals follow the preservation policy below.
+
 ## Unavailable reference
 
 **Fischer Black (1976), The pricing of commodity contracts.** [Publisher](https://www.sciencedirect.com/science/article/pii/0304405X76900246).

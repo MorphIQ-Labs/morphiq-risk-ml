@@ -29,8 +29,13 @@ institutional deployment approval.
 
 The planner rolls valuation dates forward with fixed expiries and frozen
 markets. It reports post-expiry requests explicitly. Economic P&L, settlement,
-surface calibration, American exercise, stochastic-volatility models, SIMD,
+surface calibration, American exercise, stochastic-volatility models,
 distributed execution, and durable resume are outside the current API.
+
+American and Bermudan support is being designed under
+[Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
+The [financial contract](docs/american-model-contract.md) fixes exercise and
+dividend semantics; it does not add runtime support yet.
 
 ## Build and install from source
 

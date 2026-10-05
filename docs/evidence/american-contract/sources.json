@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "issue": 108,
+  "base_commit": "bab3ffda321f8df2cd83a5bc982aa3b76a7fdf51",
+  "reviewed_on": "2026-10-05",
+  "scope": "Financial contract design. No runtime change, canonical pricing execution, numerical scoring or imported third-party implementation.",
+  "papers": [
+    {
+      "id": "2021-healy-american-options-negative-rates-arxiv-v1",
+      "title": "Pricing American options under negative rates",
+      "author": "Jherek Healy",
+      "version": "arXiv:2109.15157v1, 2021-09-30",
+      "url": "https://arxiv.org/html/2109.15157v1",
+      "inspection": "Versioned HTML sections 2 and 3, including rate/yield conditions and exercise-region topology. Solver algorithm/proof selection remains #109.",
+      "acquisition": "Online HTML inspection through browser retrieval; no original PDF acquired in #108.",
+      "pdf_sha256": null,
+      "redistributed": false,
+      "terms_observed": "Versioned HTML page labels the work CC BY 4.0."
+    },
+    {
+      "id": "2021-healy-cash-dividend-basket-arxiv-v1",
+      "title": "The Pricing of Vanilla Options with Cash Dividends as a Classic Vanilla Basket Option Problem",
+      "author": "Jherek Healy",
+      "version": "arXiv:2106.12971v1, 2021-06-24",
+      "url": "https://arxiv.org/html/2106.12971v1",
+      "inspection": "Versioned HTML sections 2 and 4.1 for the stock-jump model and explicit low-stock dividend policy. No approximation formula adopted; project settlement, continuous yield and exercise-side semantics are separately stated.",
+      "acquisition": "Online HTML inspection through browser retrieval; no original PDF acquired in #108.",
+      "pdf_sha256": null,
+      "redistributed": false,
+      "terms_observed": "Versioned HTML page labels the work CC BY 4.0."
+    }
+  ],
+  "canonical_inspection": {
+    "repository": "https://github.com/lballabio/QuantLib",
+    "commit": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+    "pin_reason": "Reuse the explicit canonical source revision already recorded by the project; no dependence on a moving branch.",
+    "acquired_at_utc": "2026-10-05T12:41:26.871412+00:00",
+    "files": [
+      {
+        "path": "ql/exercise.hpp",
+        "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/ql/exercise.hpp",
+        "sha256": "8f079ea946e99ce24b66afc150a1570b2f5ef99fbf6a1f5ac04163d9254bcad7",
+        "bytes": 3292
+      },
+      {
+        "path": "ql/exercise.cpp",
+        "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/ql/exercise.cpp",
+        "sha256": "70a7cbc82d4497a65738bc31c6738d482f11a9929b1fff02a8ef734a1e31ff48",
+        "bytes": 2303
+      },
+      {
+        "path": "ql/methods/finitedifferences/utilities/fdmdividendhandler.cpp",
+        "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/ql/methods/finitedifferences/utilities/fdmdividendhandler.cpp",
+        "sha256": "33c88df2b2846ee1cf5c30c908c76c70548ef197c123af8f1fdbb841e9f43825",
+        "bytes": 4233
+      },
+      {
+        "path": "LICENSE.TXT",
+        "url": "https://raw.githubusercontent.com/lballabio/QuantLib/79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c/LICENSE.TXT",
+        "sha256": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+        "bytes": 8758
+      }
+    ],
+    "observations": [
+      "Exercise types distinguish continuous windows, discrete dates and terminal exercise; delayed settlement is a separate upstream flag, excluded here.",
+      "Upstream Bermudan constructor sorts dates; the project design instead rejects unordered or duplicate instants.",
+      "FdmDividendHandler uses a positive mesh-floor clamp and one matching dividend entry; comparator adapters must reconcile low-stock boundaries and joint events before scoring."
+    ],
+    "license": "QuantLib LICENSE.TXT inspected at the same revision; copyright/conditions retained in local inspection copies. No source or coefficients redistributed or copied into the runtime.",
+    "execution_status": "Not built or executed for American pricing in #108; #110 owns canonical baseline execution."
+  },
+  "project_derivations": [
+    "Exact-real stopping target with event-side exercise and immediate settlement.",
+    "Joint-event limited-liability transition and absorbing-zero boundary.",
+    "Deterministic interior stationary condition q*S(t)=r*K and exact 250/9 example."
+  ],
+  "research_preservation": "No PDFs or paper payloads in the public repository. Later original acquisitions follow docs/research/README.md and the private research-library policy. Public builds require no private assets."
+}
