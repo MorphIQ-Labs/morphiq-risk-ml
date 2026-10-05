@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **108
+seven core mutants. The catalog currently contains **109
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -272,5 +272,10 @@ Three optional mechanisms cover transported scalar input radii, stale packing
 scratch slots and the orientation of a reused American stencil. The scalar
 witness checks exact-rational containment before compatibility fingerprints;
 changed replay bits alone are not a kill. The American witness requires the
-existing independently checked price capability. The full catalog contains 108
+existing independently checked price capability. The full catalog now contains 109
 mechanisms; default CI still selects the same seven core mutants.
+
+The optional `american-spatial-grid-key` fault omits domain expansion from the
+request-local preparation key. The reused-band length precondition must explicitly reject the
+wrong grid through the ordinary American capability witness after a successful build; source/replay identity alone
+is not the kill. Current full catalog: 109; default core remains seven.

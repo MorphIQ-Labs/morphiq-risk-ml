@@ -57,6 +57,14 @@ let catalog =
       mechanism = "packing must not consume stale scalar-quotient scratch slots";
     };
     {
+      id = "american-spatial-grid-key";
+      file = "lib/early_exercise.ml";
+      snippet = "when l = level && d = domain -> prepared";
+      replacement = "when l = level -> prepared";
+      killer = "american_pricing";
+      mechanism = "spatial preparation cannot cross a changed domain grid";
+    };
+    {
       id = "american-prepared-stencil";
       file = "lib/early_exercise.ml";
       snippet = "(left, right, g, true, switched)";

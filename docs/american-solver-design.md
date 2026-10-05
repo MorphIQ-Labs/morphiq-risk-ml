@@ -249,12 +249,15 @@ memory. Count all live grids, time/event metadata and requested diagnostics in a
 checked byte budget before allocation. No full N-by-N matrix is needed at runtime.
 The dense matrices in the research probe are intentionally independent checks.
 
-For the current constant-input implementation, each serial lower/upper pair
-shares immutable payoff and spatial-stencil arrays in a private closure that
-fixes all their dependencies. Matrices, factors, values and policy flags remain
-solve-owned. Logical row visits, cancellation checks and upwind-row diagnostics
-are preserved. The pair's shared arrays replace per-solve arrays; they do not
-add another grid-sized cache. See the [allocation qualification](results-american-enclosure-allocation.md).
+For the current constant-input implementation, one price request owns a
+single-entry spatial preparation cache. The fixed model, side and configuration
+plus `(spatial level, domain expansion)` determine the grid, payoff and spatial
+bands. Equal keys permit reuse across boundary, time and cash-mapping refinements;
+a changed key releases the previous entry before building the new grid.
+Matrices, factors, values and policy flags remain solve-owned. Logical row visits,
+cancellation sites and upwind counts are preserved. Preparation replaces the
+current solve's three arrays; no historical grid or per-event cache is retained.
+See the [request-local reuse derivation and qualification](results-american-spatial-reuse.md).
 
 One worker exclusively owns each mutable workspace. Compiled model/grid data
 may be immutable shared data; no global mutable factor cache. Pricing stays
