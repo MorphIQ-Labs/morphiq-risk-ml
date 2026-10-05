@@ -1,0 +1,96 @@
+terminal-call	256	finite	0x1.27d5ec1a95ac7p+3	0x1.27d5ec1a95ac7p+3
+terminal-call	512	finite	0x1.279f82c588411p+3	0x1.279f82c588411p+3
+terminal-call	1024	finite	0x1.277122a16961dp+3	0x1.277122a16961dp+3
+terminal-put	256	finite	0x1.9644a098bbc8dp+2	0x1.9644a098bbc8dp+2
+terminal-put	512	finite	0x1.95d7cdedfd5fp+2	0x1.95d7cdedfd5fp+2
+terminal-put	1024	finite	0x1.957b0da596811p+2	0x1.957b0da596811p+2
+expiry-call	256	unavailable	-	analytical reference row
+expiry-call	512	unavailable	-	analytical reference row
+expiry-call	1024	unavailable	-	analytical reference row
+deterministic-sparse	256	unavailable	-	analytical reference row
+deterministic-sparse	512	unavailable	-	analytical reference row
+deterministic-sparse	1024	unavailable	-	analytical reference row
+deterministic-middle	256	unavailable	-	analytical reference row
+deterministic-middle	512	unavailable	-	analytical reference row
+deterministic-middle	1024	unavailable	-	analytical reference row
+absorbing-negative-rate	256	unavailable	-	analytical reference row
+absorbing-negative-rate	512	unavailable	-	analytical reference row
+absorbing-negative-rate	1024	unavailable	-	analytical reference row
+zero-strike-negative-yield	256	unavailable	-	analytical reference row
+zero-strike-negative-yield	512	unavailable	-	analytical reference row
+zero-strike-negative-yield	1024	unavailable	-	analytical reference row
+deterministic-after	256	unavailable	-	analytical reference row
+deterministic-after	512	unavailable	-	analytical reference row
+deterministic-after	1024	unavailable	-	analytical reference row
+deterministic-both	256	unavailable	-	analytical reference row
+deterministic-both	512	unavailable	-	analytical reference row
+deterministic-both	1024	unavailable	-	analytical reference row
+deterministic-large	256	unavailable	-	analytical reference row
+deterministic-large	512	unavailable	-	analytical reference row
+deterministic-large	1024	unavailable	-	analytical reference row
+deterministic-joint	256	unavailable	-	analytical reference row
+deterministic-joint	512	unavailable	-	analytical reference row
+deterministic-joint	1024	unavailable	-	analytical reference row
+zero-time-before-after	256	unavailable	-	analytical reference row
+zero-time-before-after	512	unavailable	-	analytical reference row
+zero-time-before-after	1024	unavailable	-	analytical reference row
+zero-time-after	256	unavailable	-	analytical reference row
+zero-time-after	512	unavailable	-	analytical reference row
+zero-time-after	1024	unavailable	-	analytical reference row
+terminal-cash-before	256	finite	0x1.5c549d6f86029p+3	0x1.5c549d6f86029p+3
+terminal-cash-before	512	finite	0x1.5c08e30ebd902p+3	0x1.5c08e30ebd902p+3
+terminal-cash-before	1024	finite	0x1.5be762d8f3ee4p+3	0x1.5be762d8f3ee4p+3
+terminal-cash-after	256	finite	0x1.c0c23988ffd79p+4	0x1.c0c23988ffd79p+4
+terminal-cash-after	512	finite	0x1.c0b7549400264p+4	0x1.c0b7549400264p+4
+terminal-cash-after	1024	finite	0x1.c0b29cfa9e2dp+4	0x1.c0b29cfa9e2dp+4
+put-sparse	256	finite	0x1.a15ebf9ce6432p+2	0x1.a15ebf9ce6432p+2
+put-sparse	512	finite	0x1.a06d3e8c0648ap+2	0x1.a06d3e8c0648ap+2
+put-sparse	1024	finite	0x1.a005be9e90e93p+2	0x1.a005be9e90e93p+2
+put-irregular	256	finite	0x1.a64ef4578a888p+2	0x1.a64ef4578a888p+2
+put-irregular	512	finite	0x1.a3c06f72c2518p+2	0x1.a3c06f72c2518p+2
+put-irregular	1024	finite	0x1.a2906f574885cp+2	0x1.a2906f574885cp+2
+put-dense	256	finite	0x1.b13d4bf2685b7p+2	0x1.b13d4bf2685b7p+2
+put-dense	512	finite	0x1.ac271318443e8p+2	0x1.ac271318443e8p+2
+put-dense	1024	finite	0x1.a9235d0ffc41bp+2	0x1.a9235d0ffc41bp+2
+put-now	256	finite	0x1.9p+5	0x1.9p+5
+put-now	512	finite	0x1.9p+5	0x1.9p+5
+put-now	1024	finite	0x1.9p+5	0x1.9p+5
+put-future	256	finite	0x1.803a70f42fdd4p+5	0x1.803a70f42fdd4p+5
+put-future	512	finite	0x1.803a7014487ecp+5	0x1.803a7014487ecp+5
+put-future	1024	finite	0x1.803a6fb9d2786p+5	0x1.803a6fb9d2786p+5
+call-cash-before	256	finite	0x1.d919c4143e3bp+2	0x1.d919c4143e3bp+2
+call-cash-before	512	finite	0x1.d831809253fc9p+2	0x1.d831809253fc9p+2
+call-cash-before	1024	finite	0x1.d7ce00c993ef3p+2	0x1.d7ce00c993ef3p+2
+call-cash-after	256	finite	0x1.b33f8d6dd3d2ep+2	0x1.b33f8d6dd3d2ep+2
+call-cash-after	512	finite	0x1.b24a8660f4f82p+2	0x1.b24a8660f4f82p+2
+call-cash-after	1024	finite	0x1.b1e1a8ca8435dp+2	0x1.b1e1a8ca8435dp+2
+call-cash-both	256	finite	0x1.d919c4143e3bp+2	0x1.d919c4143e3bp+2
+call-cash-both	512	finite	0x1.d831809253fc9p+2	0x1.d831809253fc9p+2
+call-cash-both	1024	finite	0x1.d7ce00c993ef3p+2	0x1.d7ce00c993ef3p+2
+put-cash-both	256	finite	0x1.2106a21dd656ap+3	0x1.2106a21dd656ap+3
+put-cash-both	512	finite	0x1.208e280ff3207p+3	0x1.208e280ff3207p+3
+put-cash-both	1024	finite	0x1.205ab08a8cdd2p+3	0x1.205ab08a8cdd2p+3
+put-cash-joint	256	finite	0x1.2106a21dd656ap+3	0x1.2106a21dd656ap+3
+put-cash-joint	512	finite	0x1.208e280ff3207p+3	0x1.208e280ff3207p+3
+put-cash-joint	1024	finite	0x1.205ab08a8cdd2p+3	0x1.205ab08a8cdd2p+3
+put-zero-cash	256	finite	0x1.a15ebf9ce6432p+2	0x1.a15ebf9ce6432p+2
+put-zero-cash	512	finite	0x1.a06d3e8c0648ap+2	0x1.a06d3e8c0648ap+2
+put-zero-cash	1024	finite	0x1.a005be9e90e93p+2	0x1.a005be9e90e93p+2
+put-negative-rate	256	finite	0x1.5ac6d814f2098p+3	0x1.5ac6d814f2098p+3
+put-negative-rate	512	finite	0x1.5992f7ac7bffep+3	0x1.5992f7ac7bffep+3
+put-negative-rate	1024	finite	0x1.592575fd87bdp+3	0x1.592575fd87bdp+3
+call-negative-rate	256	finite	0x1.b9571644fcb74p+2	0x1.b9571644fcb74p+2
+call-negative-rate	512	finite	0x1.b81524e461023p+2	0x1.b81524e461023p+2
+call-negative-rate	1024	finite	0x1.b785f6a70dcc1p+2	0x1.b785f6a70dcc1p+2
+put-low-vol	256	finite	0x1.1ff3ac80c8e13p+0	0x1.1ff3ac80c8e13p+0
+put-low-vol	512	finite	0x1.13e12d6eaeca4p+0	0x1.13e12d6eaeca4p+0
+put-low-vol	1024	finite	0x1.0bc57e625e6b1p+0	0x1.0bc57e625e6b1p+0
+put-short	256	finite	0x1.a506358947b0cp+0	0x1.a506358947b0cp+0
+put-short	512	finite	0x1.6932d990f13f3p+0	0x1.6932d990f13f3p+0
+put-short	1024	finite	0x1.70c09d64e325ep+0	0x1.70c09d64e325ep+0
+put-liquidator	256	finite	0x1.f359ad856d358p+0	0x1.f359ad856d358p+0
+put-liquidator	512	finite	0x1.f359bdc8b7573p+0	0x1.f359bdc8b7573p+0
+put-liquidator	1024	finite	0x1.f359c48154e13p+0	0x1.f359c48154e13p+0
+cash-negative-rate	256	finite	0x1.be4f1f1db04f1p+3	0x1.be4f1f1db04f1p+3
+cash-negative-rate	512	finite	0x1.bd364635bc857p+3	0x1.bd364635bc857p+3
+cash-negative-rate	1024	finite	0x1.bcd2ca420fceep+3	0x1.bcd2ca420fceep+3
