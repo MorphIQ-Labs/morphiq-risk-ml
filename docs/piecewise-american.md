@@ -55,8 +55,10 @@ IV, batch/planner adapter, nonconstant interpolation or stochastic volatility.
 
 The backward-Euler policy solver splits rollback intervals at the union of
 coefficient knots, cash dates, finite exercise dates and American opening.
-Spatial bands are rebuilt when their coefficient tuple changes; cached bands
-are owned by the request and keyed by both stock grid and coefficients.
+Spatial bands use immutable request-owned snapshots keyed by original rate,
+yield and volatility words. Only one stock grid (level and domain) is retained;
+changing that grid releases its snapshots. Cache misses rebuild the original
+enclosed bands. Loading a snapshot preserves logical row visits and upwind counts.
 At a cash date the backward order remains After exercise, liquidator mapping,
 Before exercise. A coefficient change adds neither a stock jump nor a Bermudan
 exercise right. The traversed interval uses its own coefficients.
@@ -77,6 +79,10 @@ original-word elapsed-time enclosure is added. Maxima with overlapping candidate
 intervals retain an enclosure of the maximum; ambiguous ordering is not resolved
 by silently discarding the other candidate. Successful boundary scalars may be
 reused only within the same immutable request and exact slab/time-grid identity.
+Zero and upper boundaries have distinct keys; upper values additionally retain
+the original stock-grid endpoint for calls (strike for puts). Every entry follows
+a successful boundary check, with fixed local allowance and monotonically
+increasing boundary-error diagnostics.
 
 All-zero volatility follows the deterministic stock trajectory through coefficient
 and cash events. American exercise also considers admissible stationary points
@@ -100,3 +106,12 @@ metadata reservation is 1024 bytes per declared coefficient level, in addition
 to the existing stock-grid/solver reservations. It covers partition references,
 merged-event storage and temporary enclosure work; it is not measured allocation
 per request. Execution scratch is request-owned; the admitted curves are immutable.
+
+Optional stencil and boundary entries share one surplus workspace budget after
+all existing reservations. Piecewise cache owners reserve 256 bytes; each
+immutable pair of bands charges `256 + 16 * nodes` bytes, and each scalar
+boundary array charges `256 + 8 * steps`. The overhead allowances cover keys,
+boxes, list/tuple and array headers on the supported 64-bit runtime. Grid changes
+return the stencil reservation; retained boundary arrays remain charged. If an
+entry cannot fit, use the original evaluator. No global cache or new admission
+requirement is introduced. See the [optimization protocol](piecewise-allocation-protocol.md).
