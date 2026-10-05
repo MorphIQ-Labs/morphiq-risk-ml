@@ -1,0 +1,30 @@
+call-single	unavailable	-	accuracy:space=0x1.0969ebc18748p-5,0x1.bf70e9e464ap-6:time=0x1.28da34d843p-7,0x1.297d527b31p-8:event=0x1.34ab2c30a062p-3,0x1.16b20389a288p-5:domain=0x1.1p-45,0x0p+0:spread=0x0p+0
+call-multiple	unavailable	-	accuracy:space=0x1.17738a1cb46p-3,0x1.a072652dd56cp-4:time=0x1.85803378728p-8,0x1.85df9189af8p-9:event=0x1.362aed7dd0cfp-2,0x1.572c4e81deb8p-4:domain=0x1p-50,0x0p+0:spread=0x0p+0
+call-large	unavailable	-	accuracy:space=0x1.1aaf7115c42p-8,0x1.01c7df668edcp-10:time=0x1.6f0fddfb39ap-10,0x1.73a286c3016p-11:event=0x0p+0,0x0p+0:domain=0x0p+0,0x0p+0:spread=0x0p+0
+call-zero-dividend	unavailable	-	accuracy:space=0x1.460e2ca1fe2ep-2,0x1.2737ee3cbdap-4:time=0x1.204ed7d1914p-7,0x1.208664e48a8p-8:event=0x1.7f65b6f4ddap-3,0x1.84585af75c5p-5:domain=0x1.6644p-32,0x0p+0:spread=0x0p+0
+call-negative-rates	unavailable	-	accuracy:space=0x1.89e30f8f312p-5,0x1.6d607cfc52bp-5:time=0x1.1dc6d221426p-7,0x1.1e6003987e4p-8:event=0x1.3cba598daa7p-3,0x1.2026978320d8p-5:domain=0x1.c2p-43,0x0p+0:spread=0x0p+0
+call-coincident	unavailable	-	accuracy:space=0x1.2b1438a67f78p-2,0x1.360d00082f5p-6:time=0x1.1d245d3556ap-7,0x1.1d90072789p-8:event=0x1.a956ee37b3bp-5,0x1.b7fcb0deedep-7:domain=0x0p+0,0x0p+0:spread=0x0p+0
+call-delayed-after	unavailable	-	accuracy:space=0x1.f9f5a21e16dp-6,0x1.e84cd1e8d12p-6:time=0x1.f9f675458dcp-8,0x1.fabc2c076ep-9:event=0x1.7fe7e168749ap-3,0x1.84d3deebbb3p-5:domain=0x1.52eb8p-33,0x0p+0:spread=0x0p+0
+call-expiry-before	unavailable	-	arithmetic:residual roundoff resolution
+call-expiry-after	unavailable	-	arithmetic:residual roundoff resolution
+put-single	unavailable	-	accuracy:space=0x1.3b630ab034p-11,0x1.2b58bfeb75p-5:time=0x1.660c2193d04p-7,0x1.6c151ac0c88p-8:event=0x1.9ecf89d5eefcp-3,0x1.a346401b163p-5:domain=0x1.418f4p-31,0x0p+0:spread=0x0p+0
+put-multiple	unavailable	-	accuracy:space=0x1.18384806279cp-3,0x1.64a8f657ee3p-4:time=0x1.a4aa14ee28p-8,0x1.adbba07823p-9:event=0x1.7e7e7ce630bcp-2,0x1.84a501e60258p-4:domain=0x1.76538p-32,0x0p+0:spread=0x0p+0
+put-large	unavailable	-	accuracy:space=0x1.8f7fe2988p-15,0x1.42240574p-18:time=0x1.e97e939b8p-14,0x1.ec2446e9p-15:event=0x1.576589p-20,0x1.5a3e7dcp-22:domain=0x0p+0,0x0p+0:spread=0x0p+0
+put-zero-dividend	unavailable	-	accuracy:space=0x1.6c80be1030e3p-2,0x1.3c24d794c434p-4:time=0x1.54ddb16b33ap-7,0x1.5a8002e755p-8:event=0x1.830357815f84p-3,0x1.8ba7c70f885p-5:domain=0x1.5315bp-30,0x0p+0:spread=0x0p+0
+put-negative-rates	unavailable	-	accuracy:space=0x1.523a71d2cc2p-6,0x1.2218496fa45p-5:time=0x1.1d20c68b054p-7,0x1.24c4bc9dc4p-8:event=0x1.8f838d524d14p-3,0x1.93df0315f8ep-5:domain=0x1.5295p-32,0x0p+0:spread=0x0p+0
+put-coincident	unavailable	-	accuracy:space=0x1.00cf31086462p-2,0x1.7ede089ab33p-5:time=0x1.f9dbef87ef8p-8,0x1.024e9eaae18p-8:event=0x1.5e6b3e43c658p-3,0x1.703b6387c73p-5:domain=0x1.accep-33,0x0p+0:spread=0x0p+0
+put-delayed-after	unavailable	-	accuracy:space=0x1.3b630ab0bcp-11,0x1.2b58bfeb75p-5:time=0x1.660c2193d04p-7,0x1.6c151ac0c88p-8:event=0x1.9ecf89d5eefcp-3,0x1.a346401b163p-5:domain=0x1.418f4p-31,0x0p+0:spread=0x0p+0
+put-expiry-before	unavailable	-	accuracy:space=0x1.46e89f505382p-2,0x1.27b9b528ad98p-4:time=0x1.067e44b90cp-6,0x1.06e90f5df6p-7:event=0x0p+0,0x0p+0:domain=0x1.575c08p-29,0x0p+0:spread=0x0p+0
+put-expiry-after	unavailable	-	accuracy:space=0x1.71768486e4bp-4,0x1.8aebdb6fbfp-8:time=0x1.45680d1eeecp-7,0x1.48017f86a58p-8:event=0x1.1508db67fe08p-3,0x1.01605acb92p-4:domain=0x1.575bcp-29,0x0p+0:spread=0x0p+0
+valuation-before	unavailable	-	arithmetic:residual roundoff resolution
+valuation-after	unavailable	-	arithmetic:residual roundoff resolution
+call-zero-time-both	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0
+call-zero-time-after-only	estimated	0x0p+0	cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0
+put-zero-time-both	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0
+put-zero-time-after-only	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0
+deterministic-joint	estimated	0x1.4p+3	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x0p+0
+deterministic-interior	estimated	0x1.b8b3e18ad8479p+4	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1.c151b51f0ffabp-50
+deterministic-rounded-sum	estimated	0x1.3333333333334p-2	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1p-55
+zero-stock-negative-rate	estimated	0x1.00ce19f10d531p+7	absorbing-stock:steps=0:rows=1:map=0:roundoff=0x1.92161cd58af33p-54
+zero-strike-put	estimated	0x0p+0	zero-strike:steps=0:rows=1:map=0:roundoff=0x0p+0
+unrepresentable-joint	unavailable	-	arithmetic:nonfinite enclosure arithmetic

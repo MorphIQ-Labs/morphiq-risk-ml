@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Scheduled American cash dividends (#112)
+
+- Add `Early_exercise.Bsm.admit_cash`, a copied schedule with explicit event
+  sides, joint original-input cash sums and the absorbing jump `max(S-D,0)`.
+  Add event-aligned stepping, deterministic stopping and independent mapping
+  refinement. Cash European-premium diagnostics explicitly remain unavailable.
+- Extend refinement/result records with event/mapping diagnostics. This is an
+  intentional API shape change on the temporary American integration branch;
+  existing no-cash inputs, served values and European certificates are unchanged.
+- Retain the frozen 30-case independent/canonical campaign, failures and strict
+  versus loose scoring in [cash evidence](docs/american-cash-dividends.md).
+  Three optional mutation witnesses leave the seven-mutant default lane intact.
+
 ### Estimated scalar American prices (#111)
 
 - Add `Early_exercise.Bsm`: opaque admitted inputs, bounded original OCaml

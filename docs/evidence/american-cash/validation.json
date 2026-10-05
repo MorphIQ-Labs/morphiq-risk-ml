@@ -1,0 +1,34 @@
+{
+  "source_commit": "729cefd",
+  "checks": [
+    "development ordinary suite at implementation checkpoint",
+    "final release ordinary suite",
+    "final full mutation-profile baseline",
+    "five affected compiled mutants killed by named guards",
+    "build @install and formatting",
+    "installed native/bytecode cash example identical",
+    "native/bytecode cash controls",
+    "cash scorer and provenance controls",
+    "independent 80/160-digit arithmetic checks",
+    "both canonical runner CLI/malformed input controls"
+  ],
+  "affected_mutants": [
+    "american-cash-opening-side",
+    "american-cash-liquidator",
+    "american-cash-refinement",
+    "american-stationary-stopping",
+    "american-delayed-opening"
+  ],
+  "default_ci_mutants": 7,
+  "full_catalog": 105,
+  "no_cash_compatibility": "All 41 primary-initial and all 41 loose-refined raw outcome streams byte-identical to #111. Includes failures and unresolved references.",
+  "preliminary_failures": [
+    "Scorer rejected reference kind adapter; no numerical score published.",
+    "Mutation baseline passed but explicit cash guard registration was absent; no mutant kill claimed. Registration corrected and full baseline plus all five named mutants passed.",
+    "One mutation launch refused while the other Dune process held its lock; restarted after it completed.",
+    "Preliminary collectors overlapping a build are retained but excluded from final source-bound qualification.",
+    "See installed-consumer.json for custom-prefix DLL lookup setup."
+  ],
+  "scope": "Estimated scalar cash extension only; tight-request failures, optional cash premium unavailability and unresolved reference widths remain visible. No main merge, release, certification or deployment qualification.",
+  "canonical_export_note": "Upstream Spot exceptions isolated so large-cash liquidator rows execute. Independent values/radii unchanged; canonical comparison regenerated. No runtime changes."
+}

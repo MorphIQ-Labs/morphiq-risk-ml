@@ -11,6 +11,16 @@ module Bsm : sig
     volatility : Vol.lognormal Vol.t;
   }
 
+  type event_side = Regular | Before_cash | After_cash
+  type dividend = { time : float; amount : float }
+
+  type cash_specification = {
+    valuation_side : event_side;
+    opening_side : event_side;
+    expiry_side : event_side;
+    dividends : dividend array;
+  }
+
   type admitted
   type input_error = Invalid_input of string
 
@@ -18,6 +28,18 @@ module Bsm : sig
   (** Constant coefficients, continuous yield, no cash dividends. Exercise is
       allowed throughout [opens_at,time_to_expiry], including both endpoints.
       Every original field is validated before boundary dispatch. *)
+
+  val admit_cash :
+    inputs -> cash_specification -> (admitted, input_error) result
+  (** Freeze an ordered schedule of finite nonnegative amounts in [0,T]. Cash at
+      one time forms one joint exact sum, with jump [max(S-D,0)]. Zero amounts
+      retain event identity. Event sides are mandatory exactly at cash dates;
+      valuation precedes opening, which precedes expiry in instant order. An
+      [After_cash] valuation does not subtract the valuation-date payment again.
+      The input array is copied; malformed schedules fail before any pricing. *)
+
+  val cash_specification : admitted -> cash_specification option
+  (** Returns a copy of the frozen schedule. *)
 
   val inputs : admitted -> inputs
 
@@ -47,6 +69,7 @@ module Bsm : sig
     space_changes : float * float;
     time_changes : float * float;
     domain_changes : float * float;
+    event_changes : (float * float) option;
     boundary_half_spread : float;
     observed_sum : float;
   }
@@ -82,7 +105,17 @@ module Bsm : sig
     subtraction_indicator : float;
   }
   (** The European comparison is enclosed separately. The American component
-      remains estimated, so the premium has no full-price error bound. *)
+      remains estimated, so the premium has no full-price error bound. Cash
+      requests currently report this optional comparison as [Unavailable]. *)
+
+  type mapping = {
+    event_applications : int;
+    maximum_cell_width : float;
+    arithmetic_indicator : float;
+  }
+  (** Work across all solves and interpolation diagnostics, not a bound on the
+      event discretization error. Independent mapping refinement is recorded in
+      [refinement.event_changes]. *)
 
   type assurance = Estimated_only
 
@@ -92,6 +125,7 @@ module Bsm : sig
     method_name : string;
     requested_tolerance : float;
     refinement : refinement option;
+    mapping : mapping option;
     maximum_residual : float;
     maximum_roundoff_indicator : float;
     boundary_arithmetic_indicator : float;

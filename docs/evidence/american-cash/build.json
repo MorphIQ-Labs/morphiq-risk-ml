@@ -1,0 +1,30 @@
+{
+  "quantlib_revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "compiler_flags": [
+    "-std=c++17",
+    "-O3",
+    "-ffp-contract=off",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "quantlib_build_sha256": {
+    "CMakeCache.txt": "05b68832ac5c51192a0a50659081d90c5a678966da4eba87e37121ded8ffa1a6",
+    "ql/config.hpp": "578dea77fa21c11b0eb9dc9d7174e3942757b10ca9d26813f3a48ca071c1b932",
+    "ql/libQuantLib.1.44.0.dylib": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161"
+  },
+  "corpus_freeze_commit": "4b1081133894c285ed4237c67bdb039d90fc07ca",
+  "runtime_changed": false,
+  "quantlib_build": "Reused pinned source-bound build; all three prior artifact hashes verified. No full rebuild claimed.",
+  "limitations": [
+    "Original adapter uses linear interpolation from explicit zero to first positive QuantLib node; finite domain remains approximate.",
+    "Endpoint cash, deterministic and zero boundaries excluded from canonical adapter.",
+    "Long-double joint sums in research C++ cover frozen stochastic integer amounts; exact original-word high precision calculations cover nonrepresentable deterministic sums.",
+    "No reference is a continuum certificate; unresolved rows retained."
+  ],
+  "quantlib_cash_source_sha256": {
+    "ql/methods/finitedifferences/utilities/fdmdividendhandler.cpp": "33c88df2b2846ee1cf5c30c908c76c70548ef197c123af8f1fdbb841e9f43825",
+    "ql/methods/finitedifferences/stepconditions/fdmstepconditioncomposite.cpp": "6f720f38d6afc17343a3b4d5555266b453663eb6b859e7b00204f8857c25c959"
+  }
+}

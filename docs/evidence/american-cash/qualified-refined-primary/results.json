@@ -1,0 +1,333 @@
+{
+  "schema": 1,
+  "complete": true,
+  "mode": "primary",
+  "configuration": "refined",
+  "counts": {
+    "runtime_unavailable": 20,
+    "pass": 10
+  },
+  "rows": [
+    {
+      "id": "call-single",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-multiple",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-large",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-zero-dividend",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-negative-rates",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-coincident",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-delayed-after",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-expiry-before",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-expiry-after",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-single",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.03a2e1b6ep-13,0x1.5ddfc86b15p-9:time=0x1.88624ca1a3p-9,0x1.8f45ce863cp-10:event=0x1.9cff3f40f98p-7,0x1.a173044a32p-9:domain=0x1.60e9p-33,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-multiple",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.22530a07188p-8,0x1.156785c10ap-10:time=0x1.cbc0f48a72p-10,0x1.d0feae1eep-11:event=0x1.828d729759ep-6,0x1.82f14a8ca18p-8:domain=0x1.ca0ep-34,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-large",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=49241557:map=18:roundoff=0x1.05ba2e8aefaa3p-37",
+      "value": 24.38276192874855,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "4198147233/281474976710656",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "4198147233/281474976710656",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-dividend",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.4c33021e07bp-6,0x1.4bd89d4c8f4p-8:time=0x1.74bf2de31b8p-9,0x1.7c0490c613p-10:event=0x1.87e7771b86ap-7,0x1.8761b9123p-9:domain=0x1.a12acp-32,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-negative-rates",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.36c88d2b88p-12,0x1.48fd9ad4eap-9:time=0x1.3b7b781302p-9,0x1.41c2a63732p-10:event=0x1.93d88ff4744p-7,0x1.940c8fe4b6p-9:domain=0x1.71fep-34,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-coincident",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.2b50153226p-7,0x1.64458c9728p-11:time=0x1.1999a0aceap-9,0x1.1f0a511ebep-10:event=0x1.67d091d35dp-7,0x1.684a1f25aap-9:domain=0x1.a2p-35,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-delayed-after",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.03a2e1b6ep-13,0x1.5ddfc86b15p-9:time=0x1.88624ca1a3p-9,0x1.8f45ce863cp-10:event=0x1.9cff3f40f98p-7,0x1.a173044a32p-9:domain=0x1.60e9p-33,0x0p+0:spread=0x0p+0",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-expiry-before",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-expiry-after",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "valuation-before",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "valuation-after",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-zero-time-both",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "call-zero-time-after-only",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0",
+      "value": 0.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-time-both",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-time-after-only",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-joint",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x0p+0",
+      "value": 10.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-interior",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1.c151b51f0ffabp-50",
+      "value": 27.543916265833534,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-rounded-sum",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1p-55",
+      "value": 0.30000000000000004,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/36028797018963968",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/36028797018963968",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-stock-negative-rate",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:rows=1:map=0:roundoff=0x1.92161cd58af33p-54",
+      "value": 128.40254166877415,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-strike-put",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:rows=1:map=0:roundoff=0x0p+0",
+      "value": 0.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "unrepresentable-joint",
+      "outcome": "unavailable",
+      "detail": "arithmetic:nonfinite enclosure arithmetic",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    }
+  ],
+  "binary_sha256": "f87e1c72c0a649e3fe9a42f8d6cd3eadcda072565bc393b2dc5dfe616367e108"
+}

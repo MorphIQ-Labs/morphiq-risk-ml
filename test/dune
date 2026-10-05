@@ -895,3 +895,40 @@
     %{dep:../scripts/check_american_runtime.py}
     --executable
     %{exe:american_pricing.exe}))))
+
+(test
+ (name american_cash)
+ (modules american_cash)
+ (modes byte exe)
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_american_cash.py
+  ../scripts/test_american_cash.py
+  ../scripts/freeze_american_cash.py
+  ../scripts/american_reference_data.py
+  ../scripts/american_runner_io.hpp
+  ../scripts/american_cash_io.hpp
+  ../scripts/american_cash_quantlib.cpp
+  ../scripts/american_cash_quadrature.cpp
+  ../scripts/american_cash_references.py
+  ../scripts/check_cash_reference_arithmetic.py
+  (glob_files ../docs/evidence/american-cash/*))
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_american_cash.py})
+   (run
+    python3
+    %{dep:../scripts/check_american_cash.py}
+    --executable
+    %{exe:american_cash.exe}))))

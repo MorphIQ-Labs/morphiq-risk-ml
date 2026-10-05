@@ -1,0 +1,728 @@
+{
+  "schema": "american-cash-corpus-v1",
+  "sides": {
+    "Regular": 0,
+    "Before_cash": 1,
+    "After_cash": 2
+  },
+  "rows": [
+    {
+      "id": "call-single",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-multiple",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fd0000000000000",
+          "amount": "4008000000000000"
+        },
+        {
+          "time": "3fe8000000000000",
+          "amount": "4010000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-large",
+      "side": "call",
+      "inputs": {
+        "spot": "4034000000000000",
+        "strike": "4039000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4044000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f39000000000000"
+    },
+    {
+      "id": "call-zero-dividend",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "0000000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-negative-rates",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "bf847ae147ae147b",
+        "yield_": "bf947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-coincident",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        },
+        {
+          "time": "3fe0000000000000",
+          "amount": "401c000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-delayed-after",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3fe0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 2,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-expiry-before",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3ff0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3ff0000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 1,
+      "expiry_side": 1,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-expiry-after",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3ff0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3ff0000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 2,
+      "expiry_side": 2,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-single",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-multiple",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fd0000000000000",
+          "amount": "4008000000000000"
+        },
+        {
+          "time": "3fe8000000000000",
+          "amount": "4010000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-large",
+      "side": "put",
+      "inputs": {
+        "spot": "4034000000000000",
+        "strike": "4039000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4044000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f39000000000000"
+    },
+    {
+      "id": "put-zero-dividend",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "0000000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-negative-rates",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "bf847ae147ae147b",
+        "yield_": "bf947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-coincident",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        },
+        {
+          "time": "3fe0000000000000",
+          "amount": "401c000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-delayed-after",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3fe0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 2,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-expiry-before",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3ff0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3ff0000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 1,
+      "expiry_side": 1,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-expiry-after",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3ff0000000000000"
+      },
+      "cash": [
+        {
+          "time": "3ff0000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 2,
+      "expiry_side": 2,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "valuation-before",
+      "side": "call",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 1,
+      "opening_side": 2,
+      "expiry_side": 0,
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "valuation-after",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 2,
+      "opening_side": 2,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-zero-time-both",
+      "side": "call",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 1,
+      "opening_side": 1,
+      "expiry_side": 2,
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "call-zero-time-after-only",
+      "side": "call",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 1,
+      "opening_side": 2,
+      "expiry_side": 2,
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "put-zero-time-both",
+      "side": "put",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 1,
+      "opening_side": 1,
+      "expiry_side": 2,
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "put-zero-time-after-only",
+      "side": "put",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "0000000000000000",
+          "amount": "4024000000000000"
+        }
+      ],
+      "valuation_side": 1,
+      "opening_side": 2,
+      "expiry_side": 2,
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "deterministic-joint",
+      "side": "put",
+      "inputs": {
+        "spot": "4024000000000000",
+        "strike": "4024000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "0000000000000000",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "401c000000000000"
+        },
+        {
+          "time": "3fe0000000000000",
+          "amount": "4020000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f24000000000000"
+    },
+    {
+      "id": "deterministic-interior",
+      "side": "call",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4056800000000000",
+        "rate": "3fd0000000000000",
+        "yield_": "3fc0000000000000",
+        "volatility": "0000000000000000",
+        "time": "4020000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "4010000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "deterministic-rounded-sum",
+      "side": "put",
+      "inputs": {
+        "spot": "3ff0000000000000",
+        "strike": "3ff0000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "0000000000000000",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "3fb999999999999a"
+        },
+        {
+          "time": "3fe0000000000000",
+          "amount": "3fc999999999999a"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3ef0000000000000"
+    },
+    {
+      "id": "zero-stock-negative-rate",
+      "side": "put",
+      "inputs": {
+        "spot": "0000000000000000",
+        "strike": "4059000000000000",
+        "rate": "bfc0000000000000",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "4000000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "zero-strike-put",
+      "side": "put",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "0000000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "4014000000000000"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "unrepresentable-joint",
+      "side": "put",
+      "inputs": {
+        "spot": "4024000000000000",
+        "strike": "4024000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "0000000000000000",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "cash": [
+        {
+          "time": "3fe0000000000000",
+          "amount": "7fefffffffffffff"
+        },
+        {
+          "time": "3fe0000000000000",
+          "amount": "7fefffffffffffff"
+        }
+      ],
+      "valuation_side": 0,
+      "opening_side": 0,
+      "expiry_side": 0,
+      "epsilon": "3f24000000000000"
+    }
+  ]
+}

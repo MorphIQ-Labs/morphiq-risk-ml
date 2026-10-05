@@ -1,0 +1,459 @@
+{
+  "schema": 1,
+  "complete": true,
+  "mode": "loose",
+  "configuration": "refined",
+  "counts": {
+    "pass": 29,
+    "runtime_unavailable": 1
+  },
+  "rows": [
+    {
+      "id": "call-single",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=50740817:map=18:roundoff=0x1.0a98998f0082ep-31",
+      "value": 7.360511325194367,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "4795074902509/70368744177664",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-multiple",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=23808:rows=74550420:map=36:roundoff=0x1.0a95e4d693c5bp-31",
+      "value": 6.768198713139165,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "36710731736773/281474976710656",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-large",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=52074910:map=18:roundoff=0x1.0a90aa9712c1dp-33",
+      "value": 0.09706130571734747,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "264442549941823/72057594037927936",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-zero-dividend",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=49874770:map=18:roundoff=0x1.0a9ab077be136p-31",
+      "value": 9.22444830399479,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "40665009396559/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-negative-rates",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=47445339:map=18:roundoff=0x1.0ff695841003p-31",
+      "value": 6.899543503963293,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "39094651096285/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-coincident",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=50812280:map=18:roundoff=0x1.0a96310e20e3cp-31",
+      "value": 6.574348261949391,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "8359222748549/140737488355328",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-delayed-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=49387304:map=18:roundoff=0x1.0a980aa6b5b2ap-31",
+      "value": 6.767625380697036,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5037977880623/70368744177664",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "call-expiry-before",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24153941:map=0:roundoff=0x1.04766d432cd7dp-30",
+      "value": 9.223355706414543,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "37013386926398584891379073539/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "37013386926398584891379073539/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "call-expiry-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24341205:map=18:roundoff=0x1.04738623cffebp-30",
+      "value": 5.186694404686779,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "38279987377198741617486113741/20282409603651670423947251286016",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "38279987377198741617486113741/20282409603651670423947251286016",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-single",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=48419383:map=18:roundoff=0x1.064fe8821c3bfp-35",
+      "value": 9.148488362956368,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "9843774994989/140737488355328",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-multiple",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=23808:rows=71500359:map=36:roundoff=0x1.06030a889aab7p-35",
+      "value": 10.112827022399907,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "76555819339383/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-large",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=49236368:map=18:roundoff=0x1.05ba2e8aefaa3p-37",
+      "value": 24.38276192874855,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "4198147233/281474976710656",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "4198147233/281474976710656",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-dividend",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=48589281:map=18:roundoff=0x1.065678644dd1p-35",
+      "value": 6.657478031956352,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "80204493224273/1125899906842624",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-negative-rates",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=49029787:map=18:roundoff=0x1.08c981196a068p-35",
+      "value": 10.33167035271444,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1293981180179/17592186044416",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-coincident",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=48419323:map=18:roundoff=0x1.0646b8e993befp-35",
+      "value": 13.541497541377948,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "34281874559891/562949953421312",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-delayed-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=15872:rows=48410329:map=18:roundoff=0x1.064fe8821c3bfp-35",
+      "value": 9.148488362956368,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "9843774994989/140737488355328",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "reference_too_wide"
+      }
+    },
+    {
+      "id": "put-expiry-before",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24153941:map=0:roundoff=0x1.01aef85de73eap-34",
+      "value": 6.32662475670056,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "140186776208027482458787246299/40564819207303340847894502572032",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "140186776208027482458787246299/40564819207303340847894502572032",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-expiry-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24341205:map=18:roundoff=0x1.01aef85de73eap-34",
+      "value": 11.802280921871205,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "16937802858984281795073669369/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "16937802858984281795073669369/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "valuation-before",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24695044:map=18:roundoff=0x1.1194f2d060a9p-30",
+      "value": 10.446851150885358,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "18925624406068357104778473545/5070602400912917605986812821504",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "18925624406068357104778473545/5070602400912917605986812821504",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "valuation-after",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=7936:rows=24153941:map=0:roundoff=0x1.048b73a0c70f6p-30",
+      "value": 10.447025454215144,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "18041801523570225500159340617/5070602400912917605986812821504",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "fail",
+        "worst_error": "18041801523570225500159340617/5070602400912917605986812821504",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "call-zero-time-both",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "call-zero-time-after-only",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 0.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-time-both",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-zero-time-after-only",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 5.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-joint",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 10.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "5092589940836215/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-interior",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x1.c151b51f0ffabp-50",
+      "value": 27.543916265833534,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7339197957099479/10141204801825835211973625643008",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "deterministic-rounded-sum",
+      "outcome": "estimated",
+      "detail": "cash-deterministic-stopping:steps=0:rows=0:map=0:roundoff=0x1p-55",
+      "value": 0.30000000000000004,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/36028797018963968",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/36028797018963968",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-stock-negative-rate",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:rows=0:map=0:roundoff=0x1.92161cd58af33p-54",
+      "value": 128.40254166877415,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "7073578358094537/81129638414606681695789005144064",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "zero-strike-put",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:rows=0:map=0:roundoff=0x0p+0",
+      "value": 0.0,
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      },
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1018517988167243/1018517988167243043134222844204689080525734196832968125318070224677190649881668353091698688",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "unrepresentable-joint",
+      "outcome": "unavailable",
+      "detail": "arithmetic:nonfinite enclosure arithmetic",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    }
+  ],
+  "binary_sha256": "5b8843948c809bbf8c96002bd28dd8ed0fd63bfc00c24353a16213fe63176ed4"
+}

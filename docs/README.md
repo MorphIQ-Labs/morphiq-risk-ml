@@ -44,6 +44,10 @@ been retired; it remains in Git history.
   comparison, independent lattice/analytical corpus, retained uncertainty and
   offline failure controls. This prepares #111; no runtime American API is added.
 
+- [American cash dividends](american-cash-dividends.md): immutable schedules,
+  explicit event sides, joint liquidator jumps, independent mapping refinement
+  and the #112 reference/cost evidence.
+
 ## Numerical methods and verification
 
 - [Adversarial assurance closeout](adversarial-assurance-closeout.md): current source, finding dispositions, retained uncertainty and review obligations.

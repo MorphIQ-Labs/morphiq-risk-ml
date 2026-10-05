@@ -1,0 +1,106 @@
+[
+  {
+    "runner": "quadrature",
+    "arguments": [
+      "--help"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quadrature",
+    "arguments": [
+      "--version"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quadrature",
+    "arguments": [
+      "--"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quadrature",
+    "arguments": [
+      "--bogus"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quadrature",
+    "fault": "truncated",
+    "status": "rejected",
+    "reason": "truncated base"
+  },
+  {
+    "runner": "quadrature",
+    "fault": "extra",
+    "status": "rejected",
+    "reason": "extra cash fields"
+  },
+  {
+    "runner": "quadrature",
+    "fault": "bad-side",
+    "status": "rejected",
+    "reason": "cash research budget/side"
+  },
+  {
+    "runner": "quadrature",
+    "fault": "nonfinite",
+    "status": "rejected",
+    "reason": "nonfinite input"
+  },
+  {
+    "runner": "quantlib",
+    "arguments": [
+      "--help"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quantlib",
+    "arguments": [
+      "--version"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quantlib",
+    "arguments": [
+      "--"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quantlib",
+    "arguments": [
+      "--bogus"
+    ],
+    "status": "pass"
+  },
+  {
+    "runner": "quantlib",
+    "fault": "truncated",
+    "status": "rejected",
+    "reason": "truncated base"
+  },
+  {
+    "runner": "quantlib",
+    "fault": "extra",
+    "status": "rejected",
+    "reason": "extra cash fields"
+  },
+  {
+    "runner": "quantlib",
+    "fault": "bad-side",
+    "status": "rejected",
+    "reason": "cash research budget/side"
+  },
+  {
+    "runner": "quantlib",
+    "fault": "nonfinite",
+    "status": "rejected",
+    "reason": "nonfinite input"
+  }
+]

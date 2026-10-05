@@ -9,7 +9,20 @@ module Bsm = struct
     volatility : Vol.lognormal Vol.t;
   }
 
-  type admitted = Admitted of inputs
+  type event_side = Regular | Before_cash | After_cash
+  type dividend = { time : float; amount : float }
+
+  type cash_specification = {
+    valuation_side : event_side;
+    opening_side : event_side;
+    expiry_side : event_side;
+    dividends : dividend array;
+  }
+
+  type admitted =
+    | Admitted of inputs
+    | With_cash of inputs * cash_specification
+
   type input_error = Invalid_input of string
 
   let admit p =
@@ -34,7 +47,55 @@ module Bsm = struct
         Error (Invalid_input "exercise window")
     | None -> Ok (Admitted p)
 
-  let inputs (Admitted p) = p
+  let rank = function Regular -> 0 | Before_cash -> 1 | After_cash -> 2
+
+  let admit_cash p cash =
+    match admit p with
+    | Error e -> Error e
+    | Ok _ ->
+        let previous = ref 0. and valid = ref true in
+        Array.iter
+          (fun d ->
+            if
+              (not (Float.is_finite d.time && Float.is_finite d.amount))
+              || d.time < !previous || d.time > p.time_to_expiry
+              || d.amount < 0.
+            then valid := false;
+            previous := d.time)
+          cash.dividends;
+        let event t = Array.exists (fun d -> d.time = t) cash.dividends in
+        let phase t side = event t = (side <> Regular) in
+        if not !valid then Error (Invalid_input "cash schedule")
+        else if
+          not
+            (phase 0. cash.valuation_side
+            && phase p.opens_at cash.opening_side
+            && phase p.time_to_expiry cash.expiry_side)
+        then Error (Invalid_input "cash event side")
+        else if
+          (p.opens_at = 0. && rank cash.valuation_side > rank cash.opening_side)
+          || p.opens_at = p.time_to_expiry
+             && rank cash.opening_side > rank cash.expiry_side
+        then Error (Invalid_input "cash exercise instant ordering")
+        else
+          Ok
+            (With_cash (p, { cash with dividends = Array.copy cash.dividends }))
+
+  let inputs = function Admitted p | With_cash (p, _) -> p
+
+  let cash_specification = function
+    | Admitted _ -> None
+    | With_cash (_, cash) ->
+        Some { cash with dividends = Array.copy cash.dividends }
+
+  let eligible p cash t side =
+    (t > p.opens_at || (t = p.opens_at && rank side >= rank cash.opening_side))
+    && (t < p.time_to_expiry
+       || (t = p.time_to_expiry && rank side <= rank cash.expiry_side))
+
+  let active_jump p cash t =
+    (not (t = 0. && cash.valuation_side = After_cash))
+    && not (t = p.time_to_expiry && cash.expiry_side = Before_cash)
 
   type limits = {
     max_nodes : int;
@@ -80,6 +141,7 @@ module Bsm = struct
     space_changes : float * float;
     time_changes : float * float;
     domain_changes : float * float;
+    event_changes : (float * float) option;
     boundary_half_spread : float;
     observed_sum : float;
   }
@@ -115,6 +177,12 @@ module Bsm = struct
     subtraction_indicator : float;
   }
 
+  type mapping = {
+    event_applications : int;
+    maximum_cell_width : float;
+    arithmetic_indicator : float;
+  }
+
   type assurance = Estimated_only
 
   type estimated_price = {
@@ -123,6 +191,7 @@ module Bsm = struct
     method_name : string;
     requested_tolerance : float;
     refinement : refinement option;
+    mapping : mapping option;
     maximum_residual : float;
     maximum_roundoff_indicator : float;
     boundary_arithmetic_indicator : float;
@@ -241,6 +310,118 @@ module Bsm = struct
     then Some ("European-reduction", european p side)
     else None
 
+  (* Coincident amounts are added as original-word enclosures before any
+     subtraction. A numeric failure is not invalid financial admission. *)
+  let prepare_cash cfg cancel visits cash =
+    let count = Array.length cash.dividends in
+    let budget = cfg.limits.max_workspace_bytes in
+    if
+      count > cfg.limits.max_row_visits || count > max 0 (budget - 65536) / 1024
+    then raise (Stop (Resource_limit "cash metadata"));
+    let events = ref [] in
+    Array.iteri
+      (fun i d ->
+        incr visits;
+        if i land 255 = 0 && cancel () then raise (Stop Cancelled);
+        match !events with
+        | (time, amount) :: tail when time = d.time ->
+            events := (time, E.add amount (exact d.amount)) :: tail
+        | _ -> events := (d.time, exact d.amount) :: !events)
+      cash.dividends;
+    List.rev !events
+
+  let cash_analytic cfg cancel visits p cash events side =
+    let sigma = Vol.to_float p.volatility in
+    if p.spot = 0. || (p.strike = 0. && side = Side.Put) then analytic p side
+    else if sigma <> 0. && p.time_to_expiry <> 0. then None
+    else
+      let best = ref (0., 0.)
+      and stock = ref (exact p.spot)
+      and previous = ref 0. in
+      let tick () =
+        incr visits;
+        if !visits > cfg.limits.max_row_visits then
+          raise (Stop (Resource_limit "deterministic cash visits"));
+        if cancel () then raise (Stop Cancelled)
+      in
+      let add time state =
+        tick ();
+        let value, error =
+          enclosed
+            (E.mul
+               (exp_product (-.p.rate) time)
+               (payoff_e side state (exact p.strike)))
+        in
+        best := (max value (fst !best), max error (snd !best))
+      in
+      let segment time =
+        tick ();
+        if time > !previous then (
+          let start = !previous and initial = !stock in
+          let state t =
+            E.mul initial
+              (E.exp
+                 (E.mul
+                    (E.sub (exact p.rate) (exact p.dividend_yield))
+                    (E.sub t (exact start))))
+          in
+          let lo = max start p.opens_at in
+          (* Open intervals have the same supremum at a limiting endpoint.
+             A zero-length interval confers no additional exercise right. *)
+          if lo < time then (
+            add (exact lo) (state (exact lo));
+            add (exact time) (state (exact time));
+            if
+              p.rate <> 0. && p.dividend_yield <> 0.
+              && p.rate > 0. = (p.dividend_yield > 0.)
+              && p.rate <> p.dividend_yield && p.strike > 0.
+            then
+              let positive =
+                match E.sign initial with
+                | E.Positive -> true
+                | E.Zero -> false
+                | E.Negative | E.Indeterminate ->
+                    fail "cash stationary stock sign unresolved"
+              in
+              if positive then
+                let ratio =
+                  E.sub
+                    (E.add
+                       (E.log (exact (abs_float p.rate)))
+                       (E.log (exact p.strike)))
+                    (E.add
+                       (E.log (exact (abs_float p.dividend_yield)))
+                       (E.log initial))
+                in
+                let stationary =
+                  E.add (exact start)
+                    (E.div ratio
+                       (E.sub (exact p.rate) (exact p.dividend_yield)))
+                in
+                match
+                  ( E.compare_float stationary lo,
+                    E.compare_float stationary time )
+                with
+                | E.Positive, E.Negative -> add stationary (state stationary)
+                | E.Indeterminate, _ | _, E.Indeterminate ->
+                    fail "cash stationary endpoint unresolved"
+                | _ -> ());
+          stock := state (exact time));
+        previous := time
+      in
+      List.iter
+        (fun (time, amount) ->
+          segment time;
+          if active_jump p cash time then (
+            if eligible p cash time Before_cash then add (exact time) !stock;
+            stock := positive_part (E.sub !stock amount);
+            if eligible p cash time After_cash then add (exact time) !stock))
+        events;
+      segment p.time_to_expiry;
+      if eligible p cash p.time_to_expiry cash.expiry_side then
+        add (exact p.time_to_expiry) !stock;
+      Some ("cash-deterministic-stopping", !best)
+
   type context = {
     cfg : configuration;
     cancel : unit -> bool;
@@ -252,6 +433,9 @@ module Bsm = struct
     mutable residual : float;
     mutable roundoff : float;
     mutable boundary_error : float;
+    mutable event_applications : int;
+    mutable mapping_width : float;
+    mutable mapping_error : float;
     local : float;
   }
 
@@ -378,7 +562,7 @@ module Bsm = struct
     c.largest <- max c.largest !n;
     Array.sub x 0 !n
 
-  let solve c p side x time_steps upper_boundary capture =
+  let solve ?cash c p side x time_steps upper_boundary capture =
     check c;
     let n = Array.length x and sigma = Vol.to_float p.volatility in
     let arr () = Array.make n 0. in
@@ -600,8 +784,80 @@ module Bsm = struct
           done
         done)
     in
-    slab p.opens_at p.time_to_expiry true;
-    slab 0. p.opens_at false;
+    (match cash with
+    | None ->
+        slab p.opens_at p.time_to_expiry true;
+        slab 0. p.opens_at false
+    | Some (spec, events, mapping_grid) ->
+        let sampled = Array.make (Array.length mapping_grid) 0. in
+        let interpolate nodes values point =
+          tick c;
+          let last = Array.length nodes - 1 in
+          let vpoint = centre point in
+          let low = ref 0 and high = ref last in
+          while !high - !low > 1 do
+            tick c;
+            let mid = !low + ((!high - !low) / 2) in
+            if nodes.(mid) <= vpoint then low := mid else high := mid
+          done;
+          if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
+          else if E.compare_float point nodes.(!high) = E.Zero then
+            values.(!high)
+          else
+            let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
+            let weight = E.div (E.sub point (exact nodes.(!low))) width in
+            (match (E.compare_float weight 0., E.compare_float weight 1.) with
+            | E.Positive, E.Negative -> ()
+            | _ -> fail "cash interpolation weight unresolved");
+            let value, error =
+              enclosed
+                (E.add
+                   (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
+                   (E.mul weight (exact values.(!high))))
+            in
+            c.mapping_width <-
+              max c.mapping_width (nodes.(!high) -. nodes.(!low));
+            c.mapping_error <- max c.mapping_error error;
+            if error > c.local then
+              fail "cash interpolation arithmetic resolution";
+            nonnegative "cash interpolated value" value
+        in
+        let exercise phase time =
+          if eligible p spec time phase then
+            for i = 0 to n - 1 do
+              tick c;
+              v.(i) <- max v.(i) g.(i)
+            done
+        in
+        let later = ref p.time_to_expiry in
+        let advance earlier =
+          if earlier < p.opens_at && p.opens_at < !later then (
+            slab p.opens_at !later true;
+            slab earlier p.opens_at false)
+          else slab earlier !later (earlier >= p.opens_at);
+          later := earlier
+        in
+        List.iter
+          (fun (time, amount) ->
+            check c;
+            advance time;
+            if active_jump p spec time then (
+              exercise After_cash time;
+              for i = 0 to Array.length mapping_grid - 1 do
+                let target =
+                  positive_part (E.sub (exact mapping_grid.(i)) amount)
+                in
+                sampled.(i) <- interpolate x v target
+              done;
+              for i = 0 to n - 1 do
+                candidate.(i) <- interpolate mapping_grid sampled (exact x.(i))
+              done;
+              Array.blit candidate 0 v 0 n;
+              c.event_applications <- c.event_applications + 1;
+              exercise Before_cash time))
+          (List.rev events);
+        advance 0.);
+
     let spot_index = ref 0 in
     for i = 0 to n - 1 do
       tick c;
@@ -611,17 +867,37 @@ module Bsm = struct
     (value, if capture then Some v else None)
 
   let price ?(cancel = fun () -> false) ?(exercise_regions = false)
-      ?(premium = false) cfg (Admitted p) side =
+      ?(premium = false) cfg admitted side =
+    let p = inputs admitted in
+    let cash =
+      match admitted with
+      | Admitted _ -> None
+      | With_cash (_, spec) ->
+          if Array.length spec.dividends = 0 then None else Some spec
+    in
     try
       if cancel () then raise (Stop Cancelled);
       if cfg.limits.max_workspace_bytes < 65536 then
         raise (Stop (Resource_limit "analytic workspace bytes"));
+      let cash_visits = ref 0 in
+      let events =
+        match cash with
+        | None -> []
+        | Some spec -> prepare_cash cfg cancel cash_visits spec
+      in
+      let immediate =
+        match cash with
+        | None -> p.opens_at = 0.
+        | Some spec -> eligible p spec 0. spec.valuation_side
+      in
       let allowance = cfg.tolerance /. 64. in
       let make_result method_name value arithmetic refinement work residual
-          roundoff boundary_error regions =
+          roundoff boundary_error regions mapping =
         ignore (nonnegative "accepted price" value);
         let premium_result =
           if not premium then Not_requested
+          else if cash <> None then
+            Unavailable "matching cash-European comparison not implemented"
           else
             try
               if cancel () then raise (Stop Cancelled);
@@ -650,6 +926,7 @@ module Bsm = struct
           method_name;
           requested_tolerance = cfg.tolerance;
           refinement;
+          mapping;
           maximum_residual = residual;
           maximum_roundoff_indicator = max arithmetic roundoff;
           boundary_arithmetic_indicator = boundary_error;
@@ -658,14 +935,20 @@ module Bsm = struct
           early_exercise_premium = premium_result;
         }
       in
-      match analytic p side with
+      let analytical =
+        match cash with
+        | None -> analytic p side
+        | Some spec when Array.length spec.dividends = 0 -> analytic p side
+        | Some spec -> cash_analytic cfg cancel cash_visits p spec events side
+      in
+      match analytical with
       | Some (method_name, (value, error)) ->
           if error > allowance then fail "analytic arithmetic resolution";
           let work =
             {
               steps = 0;
               policy_solves = 0;
-              row_visits = 0;
+              row_visits = !cash_visits;
               largest_grid = 0;
               final_nodes = 0;
               final_upper_stock = 0.;
@@ -678,7 +961,8 @@ module Bsm = struct
             (make_result method_name value error None work 0. 0. error
                (if exercise_regions then
                   Unavailable "no sampled grid on analytic route"
-                else Not_requested))
+                else Not_requested)
+               None)
       | None ->
           let gamma =
             if p.rate >= 0. then 1.
@@ -704,21 +988,49 @@ module Bsm = struct
               cancel;
               steps = 0;
               policies = 0;
-              visits = 0;
+              visits = !cash_visits;
               largest = 0;
               switched = 0;
               residual = 0.;
               roundoff = 0.;
               boundary_error = 0.;
+              event_applications = 0;
+              mapping_width = 0.;
+              mapping_error = 0.;
               local;
             }
           in
           check_workspace c;
+          (match cash with
+          | None -> ()
+          | Some spec ->
+              let reserved =
+                (512 * cfg.limits.max_nodes)
+                + (32 * cfg.limits.policy_iterations)
+                + 65536
+              in
+              let remaining = cfg.limits.max_workspace_bytes - reserved in
+              if
+                remaining < 0
+                || cfg.limits.max_nodes > remaining / 48
+                || Array.length spec.dividends
+                   > (remaining - (48 * cfg.limits.max_nodes)) / 1024
+              then raise (Stop (Resource_limit "cash workspace bytes")));
+
           let fine_time = 4 * cfg.time_steps in
-          let run level domain time capture =
+          let run ?(mapping_level = 2) level domain time capture =
             let x = grid c p level domain in
-            let low, vl = solve c p side x time false capture in
-            let high, vh = solve c p side x time true capture in
+            let cash =
+              Option.map
+                (fun spec ->
+                  ( spec,
+                    events,
+                    if level = mapping_level then x
+                    else grid c p mapping_level domain ))
+                cash
+            in
+            let low, vl = solve ?cash c p side x time false capture in
+            let high, vh = solve ?cash c p side x time true capture in
             if high < low then fail "reversed boundary pair";
             let midpoint = low +. (0.5 *. (high -. low)) in
             (midpoint, 0.5 *. (high -. low), x, vl, vh)
@@ -738,18 +1050,39 @@ module Bsm = struct
           let t1 =
             value_of (run 2 cfg.domain_expansions (2 * cfg.time_steps) false)
           in
+          let mapping_values =
+            match cash with
+            | None -> None
+            | Some _ ->
+                Some
+                  ( value_of
+                      (run ~mapping_level:0 2 cfg.domain_expansions fine_time
+                         false),
+                    value_of
+                      (run ~mapping_level:1 2 cfg.domain_expansions fine_time
+                         false) )
+          in
           let value, spread, x, vl, vh =
             run 2 cfg.domain_expansions fine_time exercise_regions
           in
           let sc = (abs_float (s1 -. s0), abs_float (value -. s1))
           and tc = (abs_float (t1 -. t0), abs_float (value -. t1))
           and dc = (abs_float (d1 -. d0), abs_float (value -. d1)) in
-          let sum = snd sc +. snd tc +. snd dc +. spread in
+          let ec =
+            Option.map
+              (fun (a, b) -> (abs_float (b -. a), abs_float (value -. b)))
+              mapping_values
+          in
+          let sum =
+            snd sc +. snd tc +. snd dc +. spread
+            +. match ec with None -> 0. | Some (_, b) -> b
+          in
           let refinement =
             {
               space_changes = sc;
               time_changes = tc;
               domain_changes = dc;
+              event_changes = ec;
               boundary_half_spread = spread;
               observed_sum = sum;
             }
@@ -759,7 +1092,9 @@ module Bsm = struct
             && max a b <= cfg.tolerance /. 8.
           in
           if
-            (not (small sc && small tc && small dc))
+            (not
+               (small sc && small tc && small dc
+               && Option.fold ~none:true ~some:small ec))
             || spread > cfg.tolerance /. 8.
             || sum > cfg.tolerance /. 2.
           then raise (Stop (Accuracy_not_demonstrated refinement));
@@ -777,19 +1112,21 @@ module Bsm = struct
                     (exact p.time_to_expiry)))
           in
           if value > cap +. c.boundary_error then fail "global price cap";
-          (if p.opens_at = 0. then
+          (if immediate then
              let intrinsic =
                boundary c (payoff_e side (exact p.spot) (exact p.strike))
              in
              if value < intrinsic -. c.boundary_error then
                fail "immediate exercise lower bound");
-          let ev, ee = european p side in
-          if value +. sum +. c.boundary_error < ev -. ee then
-            fail "matching European lower bound beyond refinement diagnostics";
+          (if cash = None then
+             let ev, ee = european p side in
+             if value +. sum +. c.boundary_error < ev -. ee then
+               fail
+                 "matching European lower bound beyond refinement diagnostics");
           let regions =
             try
               if not exercise_regions then Not_requested
-              else if p.opens_at > 0. then
+              else if not immediate then
                 Unavailable "exercise window has not opened"
               else
                 match (vl, vh) with
@@ -851,7 +1188,15 @@ module Bsm = struct
           in
           Ok
             (make_result "backward-Euler-policy-v1" value 0. (Some refinement)
-               work c.residual c.roundoff c.boundary_error regions)
+               work c.residual c.roundoff c.boundary_error regions
+               (Option.map
+                  (fun _ ->
+                    {
+                      event_applications = c.event_applications;
+                      maximum_cell_width = c.mapping_width;
+                      arithmetic_indicator = c.mapping_error;
+                    })
+                  cash))
     with
     | Stop failure -> Error failure
     | E.Unresolved message -> Error (Arithmetic_unresolved message)
