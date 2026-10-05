@@ -4,25 +4,25 @@ Measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`).
 
 ## Accuracy
 
-Prices are scored against FerroRisk's #440 exact-input oracle: 50,094 contracts, mpmath values refined until successive precisions agree to 1e-45 (`oracle/convert_440.py`). Regions follow FerroRisk's `score_european_formulations.region()`. Every row passes.
+This historical cross-check uses an external exact-input pricing oracle: 50,094 contracts, mpmath values refined until successive precisions agree to 1e-45. The [dataset converter](../oracle/convert_440.py) identifies the source schema and preserves the reference regions. Every row passed in the recorded run.
 
-Worst error per region, ours vs FerroRisk's published SPEC §7.1 (#440) contract:
+This implementation's measured worst error per region:
 
-| Region | Rows | Worst ULP | FerroRisk worst ULP | Worst ε·scale | FerroRisk worst ε·scale |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Black family, deep ITM | 6,133 | 2 | 175 | 1.03 | 28.4 |
-| Black family, ITM | 3,414 | 7 | 37 | 2.08 | 17.3 |
-| Black family, near ATM, tiny variance | 4,016 | 4 | 552 | 0.0099 | 0.10 |
-| Black family, OTM | 9,897 | 16 | 3,504 | 2.06 | 17.9 |
-| Black family, strike outside [1e-100, 1e100] | 19,320 | 10 | 7.3e6 | 1.79 | 613 |
-| Black family, zero variance | 4,278 | 1 | 4.3e15 | 0.54 | 567 |
-| Bachelier, all regions | 3,036 | 3 | 329 | 5.07 | 4.3 |
+| Region | Rows | Worst ULP | Worst ε·scale |
+| --- | ---: | ---: | ---: |
+| Black family, deep ITM | 6,133 | 2 | 1.03 |
+| Black family, ITM | 3,414 | 7 | 2.08 |
+| Black family, near ATM, tiny variance | 4,016 | 4 | 0.0099 |
+| Black family, OTM | 9,897 | 16 | 2.06 |
+| Black family, strike outside [1e-100, 1e100] | 19,320 | 10 | 1.79 |
+| Black family, zero variance | 4,278 | 1 | 0.54 |
+| Bachelier, all regions | 3,036 | 3 | 5.07 |
 
-The enforced ULP budgets are the measured worst with about 2× headroom, so a regression to FerroRisk-level error fails.
+The historical ULP regression budgets used the measured worst with about 2× headroom. They are measured quality gates, not analytical guarantees.
 
-Two Bachelier rows exceed FerroRisk's ε·scale worst: s = 1000, a price of 359, and 2 ULP. The scorer accepts any value within 4 ULP of exact, because ε·scale exists to expose cancellation in values far below the scale, and a near-exact value has none.
+Two Bachelier rows have s = 1000, a price of 359, and 2 ULP error. The scorer accepts any value within 4 ULP of exact, because ε·scale exists to expose cancellation in values far below the scale, and a near-exact value has none.
 
-In this table "Black family" means BSM, Black-76 and #440's displaced rows, which are scored as Black-76 on binary64-shifted coordinates (`black76_shifted`), because that is what #440 measured.
+In this table "Black family" means BSM, Black-76 and the external oracle's displaced rows, which are scored as Black-76 on binary64-shifted coordinates (`black76_shifted`), matching the reference input convention.
 
 ## Displaced Black on its own definition
 
@@ -46,13 +46,13 @@ The binary64 intrinsic it replaced could land below the exact intrinsic. The inv
 
 ## A zero-variance cancellation
 
-The #440 grid's worst zero-variance case is a put with S ≈ 9.8e-151, K = 1e-150 and (r − q)T = 0.02. Its value (3.2e-168) is 3e-18 of either leg. Checked independently with mpmath at 400 digits, FerroRisk's reference is right to 1.8e-17. We were at 1.2e-15, which is 8 ULP.
+The external pricing grid's worst zero-variance case is a put with S ≈ 9.8e-151, K = 1e-150 and (r − q)T = 0.02. Its value (3.2e-168) is 3e-18 of either leg. Checked independently with mpmath at 400 digits, the external reference is right to 1.8e-17. We were at 1.2e-15, which is 8 ULP.
 
 The cause was the log-moneyness's quotient remainder `(S − qK)/(qK)`. It was rounded to binary64, costing about 1e-33 in x, and that error survives a cancellation to 1e-18. With the remainder and its second-order term carried in double-double, the case is now 1 ULP. A mutant that rounds the remainder fails that row.
 
 ## Known limit: Region III's erfcx difference
 
-The worst extreme-scale case (10 ULP at h = −4.6, s = 1) is in the normalised Black function's Region III. There, `b = e^(−(h²+t²)/2)·(erfcx(q1) − erfcx(q2))/2` and the two erfcx values cancel by about 6×. This is the method's own accuracy, the same as Jäckel's reference, and FerroRisk's value checks out to 4.7e-17 against mpmath. It stays within budget (32) and is analysed in [error-analysis.md](error-analysis.md).
+The worst extreme-scale case (10 ULP at h = −4.6, s = 1) is in the normalised Black function's Region III. There, `b = e^(−(h²+t²)/2)·(erfcx(q1) − erfcx(q2))/2` and the two erfcx values cancel by about 6×. This is the method's own accuracy, the same as Jäckel's reference. It stays within budget (32) and is analysed in [error-analysis.md](error-analysis.md).
 
 ## What made the difference
 
@@ -60,7 +60,7 @@ Each technique below is derived from first principles. Where a mutant can decide
 
 | Technique | What it fixes | Mutant |
 | --- | --- | --- |
-| Log-moneyness `x = ln(S/K) + (r−q)T` as a double-double: an atanh-series log, exact carry products, and the quotient remainder of S/K | Contracts at the money by construction, e.g. `ln(S/K) = 4.5` cancelled by `(r−q)T = −4.5`. FerroRisk's 4.3e15-ULP zero-variance row is one of these. | the remainder is below the certified bound's resolution (§5.1) |
+| Log-moneyness `x = ln(S/K) + (r−q)T` as a double-double: an atanh-series log, exact carry products, and the quotient remainder of S/K | Contracts at the money by construction, e.g. `ln(S/K) = 4.5` cancelled by `(r−q)T = −4.5`. | the remainder is below the certified bound's resolution (§5.1) |
 | `√T` and `s = σ√T` as double-doubles, carried into `h = x/s` | A relative ε in s becomes ε·h² in `exp(−h²/2)`: 413 ULP at h = 25 | `root-time-low` |
 | `x`'s low part carried into the Gaussian exponent | The deep-OTM tail | (covered by the first mutant) |
 | Forward intrinsic as `K e^(−rT)·expm1(x)` near the money | Cancellation between the two discounted legs | `intrinsic-expm1` |

@@ -91,6 +91,5 @@ optional comparison implementations have their own licenses. Dependency pins
 and generator provenance are not substitutes for those terms. The project does
 not vendor or relicense those complete dependencies through Apache-2.0.
 
-FerroRisk code/data remain governed by that separate project's terms. Its
-optional comparison scripts do not make it a build or runtime dependency, and
-this project's license grants no rights to it or other MorphIQ Labs projects.
+Externally acquired comparison code and data remain governed by their own
+terms. This project's license grants no rights to other repositories.

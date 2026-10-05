@@ -65,7 +65,7 @@ minimizer's treatment of unresolved outcomes. Mutation guard controls explicitly
 exercise exit 3. The optional Arb price/Greek/IV audits use the same verified
 archive reader; the IV report separately counts excluded non-root rows.
 
-The optional Ferro comparison passes an explicit `--external` argument. Its
+The optional external comparison passes an explicit `--external` argument. Its
 inputs have shape checks and a reported fingerprint, but no claim of committed
 corpus completeness or provenance. This mode is never used by ordinary mutation
 guards. Fingerprints establish identity, not mathematical correctness; the

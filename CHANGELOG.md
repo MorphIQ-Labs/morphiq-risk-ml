@@ -520,7 +520,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - The public surface is `Morphiq_risk` minus `Internal`. Numerical building blocks moved under `Morphiq_risk.Internal`, outside the stability policy.
 - `Morphiq_risk.version`, a stability policy and this changelog.
 
-- **This project's own oracles for every layer** (docs/oracles.md): elementary functions, the normal distribution, European and displaced prices, implied volatility with exact roots and rounding cells, and Greeks by two independent routes. They are committed as fixtures with a SHA-256 manifest (`scripts/manifest.py check`), so the tests no longer depend on FerroRisk's data. `scripts/ferro_crosscheck.sh` keeps FerroRisk as a second opinion.
+- **This project's own oracles for every layer** (docs/oracles.md): elementary functions, the normal distribution, European and displaced prices, implied volatility with exact roots and rounding cells, and Greeks by two independent routes. They are committed as fixtures with a SHA-256 manifest (`scripts/manifest.py check`), so the tests no longer depend on downloaded external reference data.
 - **Property-based tests** (`test/properties.ml`, QCheck, fixed seed): bounds, parity, monotonicity, Greek signs, exact homogeneity, translation invariance, IV accuracy and finite differences.
 - **An error analysis** (docs/error-analysis.md).
 
@@ -557,14 +557,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 - **Exact homogeneity.** The internal scale exponent uses floor division, so price(2^j S, 2^j K) = 2^j price(S, K) bit for bit.
 
 ### Changed (claims)
-- **IV accuracy is now stated per contract.** It composes normalization and kernel envelopes, including the maximum-gap error and minimum-vega error transport. The random property composes forward and inverse uncertainty; its former 4× rule is removed. The previous "≤ 2 ULP of the exact root" held on FerroRisk's grid but not in general; the worst found over random contracts is 4 ULP from a 2-ULP cell.
+- **IV accuracy is now stated per contract.** It composes normalization and kernel envelopes, including the maximum-gap error and minimum-vega error transport. The random property composes forward and inverse uncertainty; its former 4× rule is removed. The previous "≤ 2 ULP of the exact root" held on the historical reference grid but not in general; the worst found over random contracts is 4 ULP from a 2-ULP cell.
 
 ## [0.1.0] - 2026-10-02
 
 The first slice: the exact European family.
 
 ### Added
-- **Models:** BSM, Black-76, displaced Black (Black-76 on exact sums F + d, K + d) and Bachelier. Each has prices, implied volatility (the #448 outcome classes as `Iv.t`) and ten analytic Greeks with typed units.
+- **Models:** BSM, Black-76, displaced Black (Black-76 on exact sums F + d, K + d) and Bachelier. Each has prices, implied volatility (explicit outcome classes as `Iv.t`) and ten analytic Greeks with typed units.
 - **Normal distribution:** Cody erfcx, `norm_cdf`/`pdf`/`log_cdf`, and AS241 `norm_inv`. A double-double normal distribution for cancelling Greeks.
 - **Model contracts** (docs/model-contracts.md).
 - **Oracles and evidence:** see docs/results-*.md.

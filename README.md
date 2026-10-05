@@ -5,8 +5,7 @@ Greeks, and deterministic portfolio scenarios.
 
 The library implements Black–Scholes–Merton, Black-76, displaced Black, and
 Bachelier from their mathematical definitions. Model admission, volatility
-coordinates, and Greek units are represented in the public types. FerroRisk is
-an optional comparison implementation; it is not a dependency.
+coordinates, and Greek units are represented in the public types.
 
 **Status:** pre-1.0, with version 0.3.0 currently unreleased. The supported
 capabilities and numerical limitations below apply independently of release
@@ -133,4 +132,4 @@ retain their unresolved terms; replacement does not relicense old commits.
 Research papers retain their authors' and publishers' rights and are linked
 from the [bibliography](docs/research/README.md), rather than bundled in the
 source tree. This license applies to this project only; it does not license
-FerroRisk or other MorphIQ Labs repositories, or grant trademark rights.
+other repositories or grant trademark rights.

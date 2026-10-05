@@ -1,6 +1,6 @@
 # Slice 1: findings
 
-Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Black and Bachelier) has prices, implied volatility and ten analytic Greeks. All are scored against FerroRisk's independent references, and every row with an expectation passes.
+Status as of 2026-10-02. The exact European family (BSM, Black-76, displaced Black and Bachelier) has prices, implied volatility and ten analytic Greeks. The historical cross-checks in [pricing](results-pricing.md), [IV](results-iv.md) and [Greeks](results-greeks.md) record the external datasets and results; every row with an expectation passed.
 
 ## Original exit criteria
 
@@ -10,7 +10,7 @@ and is described in [the documentation guide](README.md).
 
 ### 1. Accuracy
 
-Measured against this project's own oracles (docs/oracles.md): mpmath, refined to agreement between precisions, committed and hash-checked. FerroRisk's references are an optional cross-check (`scripts/ferro_crosscheck.sh`), and every row of them also passes.
+Measured against this project's own oracles (docs/oracles.md): mpmath, refined to agreement between precisions, committed and hash-checked.
 
 | Layer | Oracle | Rows | Worst error |
 | --- | --- | ---: | --- |
@@ -48,16 +48,16 @@ The mutation catalog (`dune exec scripts/mutation/mutation.exe`) removes each cl
 | Admission is a type | Shown | Each model application has its own abstract `admitted`. A forged one is rejected, and so is a BSM contract given to Black-76. |
 | Volatility coordinate in the type | Shown | `Vol.lognormal Vol.t` and `Vol.normal Vol.t` do not unify, and the same holds for IV outcomes and per-volatility Greeks. |
 | Units in the type | Shown | A daily theta is not an annual rate. A Black vega and a Bachelier vega do not net. |
-| Exhaustive outcome variants | Shown | `Iv.t` covers FerroRisk's #448 classes. `Greeks.value` puts a payoff kink in the one Greek it affects. |
+| Exhaustive outcome variants | Shown | `Iv.t` explicitly represents inverse outcomes. `Greeks.value` puts a payoff kink in the one Greek it affects. |
 | One kernel per family | Shown | BSM, Black-76 and displaced Black are `Black.Make` over three ~10-line carries. |
 | Exercise style unrepresentable | Shown | A European slice has no exercise-style input. |
 
 All nine compile-failure tests pin the compiler's diagnostic, so a change in why something is rejected is visible. The three mixed-veta tests cover its volatility coordinate, distinction from theta, and daily/annual separation; [the type audit](type-boundary-audit.md) also records unchecked labeling boundaries and remaining caller obligations.
 
-## Where FerroRisk's references disagree with each other
+## Reference input conventions
 
-- **Displaced Black shift.** #440 uses binary64-shifted coordinates; the IV and Greek references use exact sums. This project defines displaced Black on the exact sums, owns an oracle for that definition, and labels #440's displaced rows `black76_shifted` (docs/model-contracts.md). It's being taken up in FerroRisk separately.
-- **Oracle versions.** The IV reference at the `!551` head predates #448's rounded zero-volatility bound. Scoring needs the #448 stack tip.
+- **Displaced Black shift.** The external pricing dataset uses binary64-shifted coordinates; the IV and Greek datasets use exact sums. This project defines displaced Black on exact sums, owns an oracle for that definition, and labels the rounded-shift pricing rows `black76_shifted`. See the [historical comparison](results-greeks.md#the-displaced-black-convention) and [model contract](model-contracts.md).
+- **Oracle versions.** Historical IV scoring requires the dataset revision containing `rounded_zero_volatility_bound` expectations; earlier revisions omit that case.
 
 ## Not attempted in this slice
 

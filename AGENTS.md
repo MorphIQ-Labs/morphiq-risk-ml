@@ -9,9 +9,8 @@ inputs, not a universal proof.
 
 This file is the repository's engineering contract and single source of truth
 for agent instructions. `CLAUDE.md` contains only `@AGENTS.md`.
-The policies are adapted from `ai-program/AGENTS.md` and the root and engine
-guides in `ferro-risk`, specialized for this OCaml project. Their Rust commands,
-GitLab workflows and release automation are not this repository's tooling.
+The policies are specialized for this OCaml project. Use this repository's
+commands, workflows and release controls.
 Explicit user instructions take precedence; do not turn routine implementation
 choices into additional approval requirements.
 
@@ -20,9 +19,9 @@ choices into additional approval requirements.
 `morphiq-risk-ml` is an independent OCaml implementation of the exact European
 option family: BSM, Black-76, displaced Black and Bachelier, with prices,
 implied volatility and ten analytic Greeks. It works from first principles,
-research and canonical implementations; it is not a line-by-line Rust port.
-FerroRisk is an optional independent comparison, not a runtime dependency or
-the definition of correctness.
+research and canonical implementations. External comparisons provide
+supplementary evidence; model definitions and analytical contracts govern
+correctness.
 
 Read the [documentation guide](docs/README.md), [model contracts](docs/model-contracts.md),
 [error analysis](docs/error-analysis.md), [oracle methodology](docs/oracles.md),
@@ -110,7 +109,6 @@ in [docs/oracles.md](docs/oracles.md):
 
 ```sh
 oracle/build.sh                            # regenerate all reference fixtures
-scripts/ferro_crosscheck.sh                 # optional external comparison
 dune exec scripts/mutation/mutation.exe -- --core
 dune exec scripts/mutation/mutation.exe -- quotient-remainder
 dune exec scripts/mutation/mutation.exe -- --list
@@ -158,9 +156,9 @@ that no discriminating test can exist.
 The normal Dune development build treats enabled warnings as errors; the
 mutation profile deliberately differs. No separate OCaml lint tool, pre-commit
 hook, performance threshold gate, fuzz campaign or proof-assistant CI job is
-configured here. Do not report such gates as passing or borrow those claims
-from FerroRisk. Validate workflow changes locally with `actionlint`, and
-exercise changed gate scripts and their failure controls before pushing them.
+configured here. Do not report absent gates as passing. Validate workflow
+changes locally with `actionlint`, and exercise changed gate scripts and their
+failure controls before pushing them.
 
 ## Numerical Contracts and Assurance
 
@@ -178,10 +176,9 @@ exercise changed gate scripts and their failure controls before pushing them.
    applicable canonical implementation at a recorded revision; retain its
    baseline and independently refine from original inputs.
    Identify absent counterparts and differing conventions. Do not infer that
-   agreement with FerroRisk, QuantLib or another binary64 library proves
-   accuracy; this repository does not yet have FerroRisk's mandatory QuantLib
-   comparison gate. Document discrepancies per case, including input-conversion
-   effects and unresolved differences, rather than only aggregate improvement.
+   agreement with QuantLib or another binary64 library proves accuracy.
+   Document discrepancies per case, including input-conversion effects and
+   unresolved differences, rather than only aggregate improvement.
 4. **Derive bounds before scoring.** Separate analytical truncation error,
    rounding, conditioning, input transformation and reference uncertainty.
    Measured envelopes are regression evidence, not derived guarantees. Never
@@ -201,6 +198,11 @@ exercise changed gate scripts and their failure controls before pushing them.
    is authoritative: checked certificate domains are not every finite input
    admitted by the API; IV now enforces runtime boundary and rounding-cell enclosures. Test certificates
    are not runtime certificates or formal verification of the compiler.
+   Runtime certification, campaign completion, deployment acceptance and
+   independent review are distinct. Unset targets or missing observations
+   remain pending; a successful collector exit is not owner approval. Fix
+   representative inputs and acceptance targets before collecting acceptance
+   evidence, rather than fitting limits to observed results.
 7. **Preserve arithmetic semantics.** Keep `Morphiq_fp` multiplication and
    explicit `Float.fma` usage. Do not introduce implicit contraction,
    reassociation, fast-math, host `erf`/transcendental substitutions or new SIMD
@@ -260,6 +262,9 @@ or completeness of the requirements themselves.
 - Partial results, non-finite arithmetic, missing evidence, truncated output
   and failed dependencies must be visible. Gate controls distinguish a tool
   that failed to start from a completed test that rejected the intended fault.
+  Exercise collectors with malformed/truncated output, timeouts, failed startup,
+  changed replay and impossible criteria. Assert the intended rejection reason;
+  a timeout does not establish that malformed output was detected.
 - Multi-writer artifacts need unique staging paths, validation and atomic
   publication. Bound retries, buffers and resource use from the supported
   workload; an arbitrary comfortable constant is not a justification.
@@ -276,12 +281,31 @@ or completeness of the requirements themselves.
 ## Performance and Planned Scenario Execution
 
 Measure pricing, admission, IV and Greek costs separately and end to end.
-Record hardware, OS, compiler/options, source revision, input corpus, warm-up,
-repeated-run variation and host load. Profile allocation/GC and arithmetic
-before selecting changes. No calibrated automated performance gate exists;
-single-session timing differences do not establish a language-wide advantage.
-See [#8](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/8) and
-[#16](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/16).
+State the path: Fast approximate prices or runtime-certified outputs, scalar
+or batch, compilation or reused execution, requested quantities and sink work.
+Batch time divided by output count is amortized cost, not single-request
+latency. Define cold-start scope; small-sample percentiles are descriptive,
+not tail-latency guarantees.
+
+Record hardware, OS, compiler/options, source revision, exact configuration,
+input corpus, binary hash, warm-up, variation and host load. Finish task-owned
+builds, tests and profilers before timing; use repeated processes and alternate
+comparison order. Retain all raw samples and partial evidence on failure.
+A quieter shared machine is not an isolated host. Source guards cover staged, unstaged and untracked
+changes; a binary hash alone does not establish its build provenance.
+Historical reports retain their measured revisions and hashes.
+
+Profile allocation/GC and arithmetic before selecting changes. Label memory
+scope: coordinator allocation excludes worker bodies; per-process peak RSS
+is neither allocation volume nor simultaneous deployment-wide memory. Collect
+per-child resource usage from its own reap, not cumulative child statistics.
+No calibrated automated performance gate exists. Keep lightweight collector
+controls in CI and timing campaigns manual unless such a gate is deliberately
+introduced. Single-session differences do not establish a language-wide advantage.
+See [#8](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/8),
+[#16](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/16), the
+[worker/tile tuning guide](docs/planner-worker-tuning.md) and
+[operational protocol](docs/operational-campaign.md).
 
 The planner implements immutable scenario plans and bounded execution.
 Read [the scenario contract](docs/scenario-planner.md). Its architecture lives in
@@ -292,12 +316,21 @@ Read [the scenario contract](docs/scenario-planner.md). Its architecture lives i
 - Enumerate the Cartesian workload lazily in bounded tiles, with checked
   counts and output-size estimates. Do not allocate the entire result cube
   by default. Preserve stable item IDs, failures and completion status.
+  Cancelled responses are not completed-request throughput; retain uncommitted
+  work. Measure cancellation response from actual issuance and report controller
+  scheduling delay separately.
 - Share immutable inputs; keep scratch and caches worker-owned unless a
   justified synchronization contract says otherwise. Reuse work only when
   all dependencies and conventions match; avoid global mutable caches.
 - Fix logical reduction order independently of physical scheduling and worker
   count, and derive its numerical error. Aggregate only compatible units,
   coordinates, currencies and factors. Partial totals are not complete totals.
+  Check complete ordered outcomes across worker counts outside timing; replay
+  equality establishes compatibility, not independent numerical accuracy.
+- Tune workers and tile size together against a one-worker reference. Domain
+  startup can outweigh small Fast workloads. Include first-output latency,
+  cancellation and buffer costs before recommending more workers or larger
+  tiles; throughput alone does not establish a better configuration.
 - The recommended time scenario rolls valuation time with fixed expiries and
   explicit day-count/market conventions. Post-expiry settlement and economic
   P&L require their own contract; do not silently clamp time or invent cashflows.
@@ -333,8 +366,8 @@ benchmark build products.
 
 ## Issues, Pull Requests, and Releases
 
-This project uses **GitHub**, `gh`, and `.github/workflows/`. Do not copy
-FerroRisk's GitLab origin, CI stages, Cargo gates or release commands here.
+This project uses **GitHub**, `gh`, and `.github/workflows/`. Use the OCaml/Dune
+checks and GitHub release controls documented here.
 
 - Every non-bug work issue has a **native GitHub Epic parent**. An `epic:`
   title or body checklist alone is insufficient. Set the actual issue type
@@ -372,6 +405,11 @@ FerroRisk's GitLab origin, CI stages, Cargo gates or release commands here.
   release acceptance and controls are described in
   [the acceptance dossier](docs/acceptance-and-change-control.md) and tracked in
   [#17](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/17).
+- Reuse the existing [independent review package](docs/independent-review-package.md)
+  and acceptance dossier. Identify the exact candidate covered by evidence;
+  documentation or harness changes do not requalify changed runtime code.
+  Do not invent a reviewer, transfer historical approval to a new candidate,
+  or commission/contact someone without authorization.
 
 ## Definition of Done
 
@@ -380,6 +418,8 @@ local checks pass, and evidence states exactly what was tested and what was
 not. Changed contracts, references, bounds, manifests, results and compatibility
 records agree. Hot-path changes have measured evidence without weakened
 correctness. Remaining work has a specific justified disposition in its Epic;
-fully resolved issues close through the final PR. No universal proof,
-production readiness, performance result or concurrency guarantee is claimed
-beyond the evidence actually obtained.
+fully resolved issues close through the final PR. When only reviewer selection,
+deployment requirements or owner decisions remain, name those dependencies and
+leave their issues open. Do not generate redundant handoff documents to replace
+missing external decisions. No universal proof, production readiness, performance
+result or concurrency guarantee is claimed beyond the evidence actually obtained.
