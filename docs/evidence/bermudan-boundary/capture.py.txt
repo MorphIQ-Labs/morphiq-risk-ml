@@ -1,0 +1,12 @@
+from pathlib import Path
+import subprocess,json,hashlib,shutil
+import sys
+kind=sys.argv[1]
+root=Path.cwd();out=Path('/tmp/morphiq-boundary-evidence');sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+paths=['lib','bench','test','scripts/benchmark_bermudan.py','scripts/benchmark_bermudan_boundary.py','scripts/benchmark_american_allocation.py','scripts/test_bermudan_boundary.py','dune','dune-project','morphiq_risk_ml.opam.locked']
+files=subprocess.check_output(['git','ls-files',*paths],text=True).splitlines()
+b=dict(revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),status=subprocess.check_output(['git','status','--porcelain','--untracked-files=all','--',*paths],text=True),source_sha256={p:sha(p) for p in files},compiler=subprocess.check_output(['opam','exec','--switch=morphiq-risk-ml','--','ocamlopt','-config'],text=True),profile='release; library and American driver -O3; Bermudan test driver release default',binaries={})
+assert not b['status']
+for name,src in [('bench','bench/american_allocation.exe'),('bermudan','test/bermudan.exe'),('american_pricing','test/american_pricing.exe'),('american_cash','test/american_cash.exe')]:
+ dest=out/(name+'-'+kind);shutil.copyfile(root/'_build/default'/src,dest);dest.chmod(0o755);b['binaries'][name]=dict(path=str(dest),sha256=sha(dest))
+(out/(kind+'-build.json')).write_text(json.dumps(b,indent=2)+'\n')

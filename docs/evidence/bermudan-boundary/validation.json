@@ -1,0 +1,57 @@
+[
+  {
+    "name": "dev-final",
+    "command": [
+      "build",
+      "@install",
+      "@fmt",
+      "@runtest"
+    ],
+    "returncode": 0,
+    "seconds": 128.2687418460846
+  },
+  {
+    "name": "release-final",
+    "command": [
+      "build",
+      "--release",
+      "@install",
+      "@fmt",
+      "@runtest"
+    ],
+    "returncode": 0,
+    "seconds": 144.98963284492493
+  },
+  {
+    "name": "mutation-self",
+    "command": [
+      "exec",
+      "scripts/mutation/mutation.exe",
+      "--",
+      "--self-test"
+    ],
+    "returncode": 0,
+    "seconds": 0.5623652935028076
+  },
+  {
+    "name": "mutations",
+    "command": [
+      "exec",
+      "scripts/mutation/mutation.exe",
+      "--",
+      "bermudan-boundary-slab-key",
+      "bermudan-finite-deterministic",
+      "bermudan-valuation-projection",
+      "bermudan-next-right-boundary",
+      "american-spatial-grid-key",
+      "american-prepared-stencil",
+      "american-cash-opening-side",
+      "american-cash-liquidator",
+      "american-cash-refinement",
+      "american-stationary-stopping",
+      "american-delayed-opening"
+    ],
+    "returncode": 0,
+    "seconds": 244.0188410282135
+  }
+]

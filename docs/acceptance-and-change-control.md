@@ -30,6 +30,14 @@ the exact source, source-compatibility evidence, artifacts and validation.
 Independent-review and deployment decisions are assessed separately rather
 than treating all owner review as absent.
 
+The temporary American integration branch adds estimated scalar American and
+Bermudan pricing. Its [boundary-reuse qualification](results-bermudan-boundary.md)
+retains 412 unchanged outcomes, independent-reference classifications and paired
+performance evidence. This focused optimization does not transfer the European
+candidate's source-artifact qualification or owner/reviewer decisions to the
+American capability. Strict availability, unresolved references, full-catalog
+and deployment obligations remain tracked in #119/#120.
+
 ## Dossier and decision
 
 The [independent review package](independent-review-package.md) maps model,

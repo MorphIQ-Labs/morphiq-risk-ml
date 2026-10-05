@@ -1,5 +1,9 @@
 # Bermudan implementation evidence (#113)
 
+The subsequent [boundary-reuse qualification](results-bermudan-boundary.md)
+records the current integration performance. This report retains the original
+#113 measurements and limitations.
+
 The implementation adds explicit finite exercise schedules to the estimated
 scalar BSM API. The [contract and limits](bermudan-pricing.md) and
 [frozen protocol](evidence/bermudan/protocol.md) govern this campaign. The corpus
