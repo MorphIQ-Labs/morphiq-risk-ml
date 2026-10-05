@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Explicit Bermudan exercise schedules (#113)
+
+- Add `Early_exercise.Bsm.admit_bermudan` with immutable, strictly ordered
+  exercise instants and explicit cash-event sides. Internal time refinement
+  never adds rights; deterministic stopping checks only listed instants.
+- Reuse bounded linear continuation and liquidator cash mapping with next-right
+  absorbing boundaries. Schedule identity and numerical failures stay explicit;
+  all successful outputs remain estimated-only.
+- Preserve all 284 complete American campaign outcomes and independent scores.
+  The frozen 32-case refined loose campaign has 26 independent passes, five
+  references too wide and one explicit runtime refusal; tight targets remain
+  limited. See [Bermudan evidence](docs/results-bermudan.md).
+
 ### American spatial preparation reuse (#119)
 
 - Reuse immutable payoff and spatial bands across identical refinement grids

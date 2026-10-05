@@ -27,7 +27,7 @@ def main():
             order=('baseline','candidate','bermudan') if round_%2==0 else ('bermudan','candidate','baseline')
             for mode in ('none','cash'):
                 for variant in order:
-                    command=([candidate['binaries']['bermudan']['path'],'--bench',mode] if variant=='bermudan' else [builds[variant]['binaries']['bench']['path'],mode,'price'])
+                    command=([candidate['binaries']['bermudan']['path'],'--bench',mode] if variant=='bermudan' else [builds[variant]['binaries']['bench']['path'],'--measure','--mode',mode,'--phase','price','--calls','3'])
                     load=os.getloadavg();raw,resources=sample(command,a.output/f'{round_}-{variant}-{mode}')
                     value=decode(raw,mode,'price',3)
                     result['runs'].append(dict(round=round_,variant=variant,load=load,sample=value,resources=resources));save()
