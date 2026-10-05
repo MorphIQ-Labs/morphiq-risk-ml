@@ -17,6 +17,8 @@ def replace_once(text, old, new):
         raise ValueError('planner instrumentation site missing/ambiguous: ' + old)
     return text.replace(old, new)
 
+source = replace_once(source, 'Bachelier.Fast_middle.may_prepare',
+                      'Bachelier_fast.may_prepare')
 source = replace_once(source, 'let execute t ~workers ~cancellation ~sink =', '''let evaluate_tile_original = evaluate_tile
 let evaluate_tile t work =
   Planner_probe.evaluate work.id (fun () ->

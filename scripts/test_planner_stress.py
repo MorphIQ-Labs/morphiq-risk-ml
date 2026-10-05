@@ -26,12 +26,16 @@ class Controls(unittest.TestCase):
         generator = Path(__file__).with_name('instrument_planner.py')
         with tempfile.TemporaryDirectory() as directory:
             source = Path(directory) / 'planner.ml'
-            for text in ('', 'let execute t ~workers ~cancellation ~sink =\n' * 2):
+            hint = 'Bachelier.Fast_middle.may_prepare'
+            execute = 'let execute t ~workers ~cancellation ~sink ='
+            for text, site in [('', hint), (hint + '\n' + hint, hint),
+                               (hint, execute), (hint + '\n' + (execute + '\n') * 2, execute)]:
                 source.write_text(text)
                 result = subprocess.run([sys.executable, str(generator), str(source)],
                                         capture_output=True, text=True, timeout=5)
                 self.assertNotEqual(result.returncode, 0)
                 self.assertEqual(result.stdout, '')
+                self.assertIn('planner instrumentation site missing/ambiguous: ' + site, result.stderr)
 
 
 if __name__ == '__main__':
