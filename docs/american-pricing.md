@@ -11,8 +11,9 @@ Every successful result is **Estimated_only**. A requested tolerance governs
 observed refinement and arithmetic screens; it is not an absolute price error
 bound. This API cannot produce a `Production.certified` value.
 [Explicit Bermudan schedules](bermudan-pricing.md) use a separate admission
-function in the same module. Piecewise coefficients, Greeks, IV and batch/planner
-support remain #114–#118. There is no implicit date adapter or settlement convention.
+function in the same module. [Piecewise coefficients](piecewise-american.md)
+use the distinct `Bsm.Piecewise` surface. Greeks, IV and batch/planner
+support remain #115–#118. There is no implicit date adapter or settlement convention.
 
 ## Use and outcomes
 

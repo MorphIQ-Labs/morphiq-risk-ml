@@ -35,7 +35,7 @@ distributed execution, and durable resume are outside the current API.
 
 American extensions continue under
 [Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
-The scalar API covers constant coefficients, continuous yield and scheduled
+The scalar API covers constant and [piecewise coefficients](docs/piecewise-american.md), continuous yield and scheduled
 [limited-liability cash dividends](docs/american-cash-dividends.md), with explicit
 before/after-event exercise rights and [explicit Bermudan schedules](docs/bermudan-pricing.md).
 Piecewise coefficients remain planned.
