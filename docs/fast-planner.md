@@ -30,7 +30,7 @@ forward by the planner. The shared typed transformation carries the model,
 original scalar inputs and model-specific volatility into either evaluator.
 
 Compilation freezes structure and bindings, not admission of all future shocked
-rows. `Batch.Fast.evaluate` admits the complete inputs after each shock. A
+rows. `Batch.Fast` admits the complete inputs after each shock. A
 negative normal forward may be valid; a nonpositive Black coordinate or negative
 volatility is an explicit input refusal. Post-expiry takes precedence and is
 reported as `Post_expiry`, without clamping time or inventing settlement.
@@ -55,7 +55,7 @@ including failures and zero weights. At most
 row slots are retained in a wave. Every product/sum is checked before use.
 The explained raw value volume is eight bytes per calculation, a lower bound
 excluding OCaml objects, identities, error values, input snapshots, scalar
-scratch and the GC heap. It is not a process-RSS guarantee. Arrays for a whole
+and native preparation scratch and the GC heap. It is not a process-RSS guarantee. Arrays for a whole
 scenario cube are never created. Empty portfolios or zero scenarios complete
 with no rows.
 
@@ -84,6 +84,30 @@ Cancelled or Worker_failure, with committed row/calculation counts. There are
 no summaries to flush, no retries and no durable resume. Reusing a plan requires
 a fresh output destination. Callers must not mutate input arrays during compile;
 later mutations cannot affect the frozen plan. Tile result arrays are fresh.
+
+### Native Bachelier tiles
+
+On supported ARM64 targets, `execute ~workers:1` can pass homogeneous Bachelier
+tiles of at least 32 rows through `Batch.Fast.compile` and `execute`. Direct
+`evaluate_tile` also enables this route. Multiworker `execute`, mixed-model
+tiles, small tiles and unsupported targets retain scalar evaluation. This is
+performance routing within the same Fast contract, not a new pricing mode.
+
+Each shocked row receives fresh preparation. An inexpensive model-owned hint
+avoids packing when fewer than 32 valid requests, or less than half, appear
+eligible. Rounded hint coordinates never authorize native evaluation:
+the existing admitted Bachelier selector and batch density checks remain the
+sole numerical/native gates. Every unselected or invalid row keeps its outcome
+and original position; expiry retains precedence over volatility refusal.
+
+Preparation runs in private chunks of at most 256 rows, bounding temporary
+packing arrays independently of the logical tile size. The native SoA has at
+most 1,024 float words. Chunks do not create public tiles, callbacks or additional
+cancellation points; the entire logical tile still finishes before delivery.
+The existing logical result buffer remains bounded by the caller's policy.
+Scratch is invocation-owned, with no scenario cube or shared mutable cache.
+See [paired measurements and qualification](results-native-planner.md) for the
+single-worker gains, fallback costs and deferred multiworker adoption.
 
 ## Example
 
@@ -120,8 +144,9 @@ This prints per-unit scenario valuations, not portfolio totals or economic P&L.
 implementation; #98 owns integrated qualification. The batch and
 planner compilers reuse different work: `Batch.Fast` caches admission for fixed
 requests, while `Planner.Fast` caches structural bindings and generates and admits
-rows lazily to maintain scenario memory bounds. Neither changes the underlying
-numerical kernel or guarantees a benefit from multiple workers on small jobs.
+rows lazily to maintain scenario memory bounds. The native path preserves the
+selected scalar operation graph; neither compiler guarantees a benefit from
+multiple workers on small jobs.
 
 See [integrated qualification](fast-integration-qualification.md) for retained
 fixture coverage, concurrency, memory measurements and platform evidence.

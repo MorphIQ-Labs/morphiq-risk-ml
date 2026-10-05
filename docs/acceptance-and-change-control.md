@@ -5,7 +5,8 @@ The current package is experimental **0.3.0**, with its separate
 below remains unchanged and pending for institutional use.
 
 The subsequent [Fast SIMD integration](fast-simd-integration.md) changes runtime
-preparation and the native Fast-batch backend. Its staged engineering evidence
+preparation, the native Fast-batch backend and eligible serial planner tiles.
+Its [planner qualification](results-native-planner.md) and staged engineering evidence
 does not transfer exact-candidate qualification or owner/reviewer approval from
 `f703546` to the changed runtime. Combined integration evidence and a new immutable
 candidate are required before updating the acceptance record below.

@@ -32,6 +32,10 @@ val greeks : admitted -> Side.t -> Vol.normal Vol.t -> Vol.normal Greeks.t
 module Fast_middle : sig
   type t = private { q : float; low : float; s : float; discount : float }
 
+  val may_prepare : inputs -> Side.t -> Vol.normal Vol.t -> bool
+  (** Performance hint on rounded coordinates, not admission or selection.
+      Always use [prepare] before executing the bounded operation graph. *)
+
   val prepare : admitted -> Side.t -> Vol.normal Vol.t -> t option
   val price : t -> float
 end

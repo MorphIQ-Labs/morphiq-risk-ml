@@ -115,6 +115,19 @@ module Fast_middle = struct
 
   let in_range x = Float.is_finite x && x >= 0x1p-100 && x <= 0x1p100
 
+  (* A cheap routing hint only. Rounded coordinates may disagree with the exact
+     admitted gate at a boundary; prepare remains the sole numerical selector. *)
+  let may_prepare (inputs : inputs) side sigma =
+    let distance = Side.sign side *. (inputs.forward -. inputs.strike) in
+    let sigma = Vol.to_float sigma in
+    if distance >= 0. || inputs.time_to_expiry <= 0. || sigma <= 0. then false
+    else
+      let scale = sigma *. Float.sqrt inputs.time_to_expiry in
+      if not (in_range (-.distance) && in_range scale) then false
+      else
+        let q = -.distance /. scale in
+        q >= 0.46875 && q <= 4.
+
   let prepare a side sigma =
     match a with
     | Expiry _ -> None

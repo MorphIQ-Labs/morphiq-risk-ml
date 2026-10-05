@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **98
+seven core mutants. The catalog currently contains **100
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -246,3 +246,11 @@ independent original-input price references before replay compatibility, and
 `native-bachelier-mode`, checked by deliberate rejected foreign dispatch modes.
 The former's replay check is disabled in the mutation profile. These two optional
 mechanisms bring the catalog to 98; the seven core mutants remain unchanged.
+
+The optional `native-planner-order` mechanism reverses packed native tile
+results. Its dense-tile original-input guard includes expiry and invalid rows,
+so restoring a value to the wrong original index fails. The full catalog now
+contains 100 mechanisms including `native-planner-chunk-offset`, which repeats
+the first chunk instead of advancing its original offset. The dense-tile guard
+checks whole ordered rows across 256/257/512/513-row tiles; the seven-mutant core
+is unchanged.

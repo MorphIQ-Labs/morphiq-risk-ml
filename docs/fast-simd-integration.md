@@ -103,6 +103,29 @@ rows select the native path, their prepared coordinates still feed the identical
 OCaml scalar graph rather than being discarded. Unselected rows retain their
 original scalar pricing path.
 
+## Bounded planner integration
+
+Stage 3 routes eligible homogeneous Bachelier scenario tiles through the compiled
+Fast-batch owner. Automatic adoption is limited to ARM64 `execute ~workers:1`;
+direct `evaluate_tile` also uses the native route. Multiworker execution remains
+scalar because the retained trials did not establish a stable benefit. Mixed
+models and tiles smaller than 32 rows retain their scalar path.
+
+The original shock/date transformation runs once per row. A model-owned rounded
+hint avoids clearly unsuitable packing, but only admitted `Fast_middle.prepare`
+can select a native row. Private chunks contain at most 256 rows, matching the
+supported OCaml 5.3 minor-array allocation threshold; the four-span native input
+can still allocate in the major heap. This bounds scratch independently of the
+caller's logical tile. Scheduling, cancellation checks, sink delivery and public
+tile identity retain their existing granularity. Private scratch does not change
+the explained logical output-slot bound or establish an RSS bound.
+
+The [stage-3 report](results-native-planner.md) retains independent original-input
+references, exact ordered outcomes, chunk-boundary and failure controls, six
+affected mutations, installed consumers and complete paired jobs. Shared-host
+multiworker variation and superseded regressions remain visible. SLEEF and
+parallel native planner adoption remain deferred.
+
 ## Integration obligations
 
 Native adoption must preserve original output indices, finite-result/failure

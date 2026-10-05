@@ -946,20 +946,10 @@ module Fast = struct
     price : (float, error) result;
   }
 
-  let evaluate_position p scenario_id point index =
-    let position = p.portfolio.(index) in
-    let price =
-      match prepare_position p point index with
-      | Expired -> Error Post_expiry
-      | Prepared (model, inputs, vol) -> (
-          match vol with
-          | Error e -> Error (Scalar (Batch.Fast.Invalid_input e))
-          | Ok sigma ->
-              Result.map_error
-                (fun e -> Scalar e)
-                (Batch.Fast.evaluate
-                   (Batch.Fast.Price (model, inputs, position.side, sigma))))
-    in
+  let fast_request (position : position) model inputs sigma =
+    Batch.Fast.Price (model, inputs, position.side, sigma)
+
+  let make_row scenario_id index (position : position) price =
     {
       scenario_id;
       instrument_index = index;
@@ -971,15 +961,138 @@ module Fast = struct
       price;
     }
 
-  let evaluate_tile (Plan p as plan) work =
+  let evaluate_position p scenario_id point index =
+    let position = p.portfolio.(index) in
+    let price =
+      match prepare_position p point index with
+      | Expired -> Error Post_expiry
+      | Prepared (model, inputs, vol) -> (
+          match vol with
+          | Error e -> Error (Scalar (Batch.Fast.Invalid_input e))
+          | Ok sigma ->
+              Result.map_error
+                (fun e -> Scalar e)
+                (Batch.Fast.evaluate (fast_request position model inputs sigma))
+          )
+    in
+    make_row scenario_id index position price
+
+  type tile_entry = Rejected of error | Price_request of Batch.Fast.request
+
+  let evaluate_batch_tile p work point =
+    let entries =
+      Array.init work.length (fun i ->
+          let index = work.first + i in
+          let position = p.portfolio.(index) in
+          match prepare_position p point index with
+          | Expired -> Rejected Post_expiry
+          | Prepared (model, inputs, vol) -> (
+              match vol with
+              | Error e -> Rejected (Scalar (Batch.Fast.Invalid_input e))
+              | Ok sigma ->
+                  Price_request (fast_request position model inputs sigma)))
+    in
+    let count = ref 0 and likely = ref 0 in
+    Array.iter
+      (function
+        | Rejected _ -> ()
+        | Price_request (Batch.Fast.Price (model, inputs, side, sigma)) ->
+            incr count;
+            let selected =
+              match model with
+              | Batch.Bachelier ->
+                  Bachelier.Fast_middle.may_prepare inputs side sigma
+              | _ -> false
+            in
+            if selected then incr likely)
+      entries;
+    let count = !count and likely = !likely in
+    let make i price =
+      let index = work.first + i in
+      make_row work.scenario index p.portfolio.(index) price
+    in
+    if likely < 32 || likely < count - likely then
+      Array.mapi
+        (fun i entry ->
+          make i
+            (match entry with
+            | Rejected e -> Error e
+            | Price_request request ->
+                Result.map_error
+                  (fun e -> Scalar e)
+                  (Batch.Fast.evaluate request)))
+        entries
+    else
+      let cursor = ref 0 in
+      let rec next_request () =
+        let entry = entries.(!cursor) in
+        incr cursor;
+        match entry with Price_request r -> r | Rejected _ -> next_request ()
+      in
+      let requests = Array.init count (fun _ -> next_request ()) in
+      let results = Batch.Fast.execute (Batch.Fast.compile requests) in
+      let next = ref 0 in
+      Array.mapi
+        (fun i entry ->
+          let price =
+            match entry with
+            | Rejected e -> Error e
+            | Price_request _ ->
+                let price =
+                  Result.map_error (fun e -> Scalar e) results.(!next)
+                in
+                incr next;
+                price
+          in
+          make i price)
+        entries
+
+  let evaluate_chunked_tile p work point =
+    (* 256-word arrays fit the supported OCaml 5.3 minor-allocation limit.
+       Bound preparation scratch independently of the caller's scheduling tile;
+       the native SoA has at most 4*256 float words. *)
+    let capacity = 256 in
+    if work.length <= capacity then evaluate_batch_tile p work point
+    else
+      let first = evaluate_batch_tile p { work with length = capacity } point in
+      let rows = Array.make work.length first.(0) in
+      Array.blit first 0 rows 0 capacity;
+      let offset = ref capacity in
+      while !offset < work.length do
+        let length = min capacity (work.length - !offset) in
+        let chunk = { work with first = work.first + !offset; length } in
+        let values =
+          if length >= 32 then evaluate_batch_tile p chunk point
+          else
+            Array.init length (fun i ->
+                evaluate_position p work.scenario point (chunk.first + i))
+        in
+        Array.blit values 0 rows !offset length;
+        offset := !offset + length
+      done;
+      rows
+
+  let batch_tile p work =
+    (* Keep mixed-model and small tiles on their scalar streaming path. *)
+    let rec homogeneous i =
+      i = work.length
+      || (p.portfolio.(work.first + i).model = Bachelier && homogeneous (i + 1))
+    in
+    Bachelier_native.default_enabled && work.length >= 32 && homogeneous 0
+
+  let evaluate_tile_with ~batch (Plan p as plan) work =
     if
       work.id < 0 || work.id >= p.explanation.tiles || work <> tile plan work.id
     then Error "tile does not belong to fast plan"
     else
       let point = Scenario.point p.scenarios work.scenario in
       Ok
-        (Array.init work.length (fun i ->
-             evaluate_position p work.scenario point (work.first + i)))
+        (if batch && batch_tile p work then evaluate_chunked_tile p work point
+         else
+           Array.init work.length (fun i ->
+               evaluate_position p work.scenario point (work.first + i)))
+
+  let evaluate_tile plan work = evaluate_tile_with ~batch:true plan work
 
   type event = Row of row | Finished of completion
 
@@ -998,7 +1111,9 @@ module Fast = struct
       incr committed
     in
     let run_tile id =
-      try evaluate_tile plan (tile plan id)
+      (* Fresh native preparation is qualified for serial execution. Preserve
+         the scalar parallel path until its allocation/GC costs are qualified. *)
+      try evaluate_tile_with ~batch:(workers = 1) plan (tile plan id)
       with e -> Error (Printexc.to_string e)
     in
     let stop =

@@ -82,6 +82,7 @@ module Internal : sig
   module Bachelier_fast : sig
     type t = private { q : float; low : float; s : float; discount : float }
 
+    val may_prepare : Bachelier.inputs -> Side.t -> Vol.normal Vol.t -> bool
     val prepare : Bachelier.admitted -> Side.t -> Vol.normal Vol.t -> t option
     val price : t -> float
   end
