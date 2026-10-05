@@ -23,3 +23,9 @@
    -L%{env:MORPHIQ_SLEEF_PREFIX=/nonexistent}/lib
    -cclib
    -lsleef)))
+
+(rule
+ (alias runtest)
+ (deps campaign.py test_campaign.py)
+ (action
+  (run python3 %{dep:test_campaign.py})))

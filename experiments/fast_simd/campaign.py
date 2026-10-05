@@ -18,6 +18,7 @@ import sys
 import time
 
 NAMES = ['batch-fast', 'prepared-ocaml', 'native-scalar', 'native-simd', 'sleef-simd']
+RUN_TIMEOUT_SECONDS = 180
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -141,6 +142,33 @@ def metadata(binary):
     assert not git('status','--porcelain','--untracked-files=all','--','lib'), 'changed library source'
     return {'source':git('rev-parse','HEAD'),'library_tree':git('rev-parse','HEAD:lib'),'source_status':git('status','--porcelain'), 'experiment_files':{str(p):sha(p) for p in sorted(Path('experiments/fast_simd').iterdir()) if p.is_file()}, 'platform':platform.platform(),'python':sys.version,'load':os.getloadavg(),'binary_sha256':sha(binary),'utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
 
+def adjudicate(report, destination):
+    """Refine each changed price from original binary64 inputs, not intermediates."""
+    import mpmath as mp
+    assert mp.__version__ == '1.3.0'
+    source=json.loads(Path(report).read_text()); rows=[]; counts=collections.Counter()
+    for row in source['changed_rows']:
+        fields=row['input'].split()
+        assert fields[0]=='bachelier'
+        inputs=list(map(number,fields[4:]))
+        values=[number(row['outcomes'][j]) for j in [0,4]]
+        refined=[]
+        for digits in [100,200]:
+            with mp.workdps(digits):
+                f,k,t,r,_,sigma,_,reference=map(mp.mpf,inputs)
+                distance=(f-k)*(1 if fields[1]=='call' else -1)
+                s=sigma*mp.sqrt(t); z=distance/s
+                exact=mp.exp(-r*t)*(distance*mp.erfc(-z/mp.sqrt(2))/2+s*mp.exp(-z*z/2)/mp.sqrt(2*mp.pi))
+                assert word(float(exact))==row['reference'], ('reference changed',row['row'])
+                errors=[(mp.mpf(v)-exact)/mp.mpf(math.ulp(inputs[-1])) for v in values]
+                disposition='improved' if abs(errors[1])<abs(errors[0]) else 'worsened' if abs(errors[1])>abs(errors[0]) else 'equal'
+                refined.append({'reference_decimal':mp.nstr(exact,60),'baseline_error_ulp':float(errors[0]),'sleef_error_ulp':float(errors[1]),'disposition':disposition})
+        assert refined[0]==refined[1], ('unresolved changed row',row['row'])
+        counts[refined[1]['disposition']]+=1
+        rows.append(row|refined[1])
+    write(destination,{'input_sha256':source['input_sha256'],'trace_sha256':source['trace_sha256'],'refinement_digits':[100,200],'counts':dict(counts),'rows':rows,'universal_bound':False})
+    print(json.dumps(dict(counts)))
+
 def collect(binary,out):
     out=Path(out);out.mkdir(exist_ok=False)
     before=metadata(binary);write(out/'before.json',before)
@@ -149,7 +177,7 @@ def collect(binary,out):
         start=metadata(binary)
         cmd=[str(Path(binary).resolve()),'--bench']+(['--reverse'] if run in [1,2] else [])
         with (out/f'run-{run}.jsonl').open('w') as stdout, (out/f'run-{run}.stderr').open('w') as stderr:
-            subprocess.run(cmd,stdout=stdout,stderr=stderr,check=True,timeout=180)
+            subprocess.run(cmd,stdout=stdout,stderr=stderr,check=True,timeout=RUN_TIMEOUT_SECONDS)
         rows=[json.loads(s) for s in (out/f'run-{run}.jsonl').read_text().splitlines()]
         expected={(family,n,backend,phase,sample) for family in ['eligible','fallback-heavy','mixed'] for n in [1,32,256,4096] for backend in NAMES for phase in ['compile','execute','one-shot'] for sample in range(1,6)}
         seen=set()
@@ -180,8 +208,10 @@ def main():
     g=sub.add_parser('generate');g.add_argument('output');g.add_argument('binary')
     s=sub.add_parser('score');s.add_argument('input');s.add_argument('trace');s.add_argument('output')
     c=sub.add_parser('collect');c.add_argument('binary');c.add_argument('output')
+    d=sub.add_parser('adjudicate');d.add_argument('report');d.add_argument('output')
     a=p.parse_args()
     if a.command=='generate': generate(a.output, a.binary)
     elif a.command=='score': score(a.input,a.trace,a.output)
+    elif a.command=='adjudicate': adjudicate(a.report,a.output)
     else: collect(a.binary,a.output)
 if __name__=='__main__': main()

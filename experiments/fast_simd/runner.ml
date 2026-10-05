@@ -341,9 +341,14 @@ let controls () =
         if n > 0 then got.(0) <- Ok 123.;
         if not (equal expected (execute mode p)) then failwith "output alias"
       done;
-      let d = Domain.spawn (fun () -> execute 2 p) in
-      let direct = execute 2 p in
-      if not (equal direct (Domain.join d)) then failwith "concurrent replay")
+      for mode = 0 to 3 do
+        let expected = execute mode p in
+        let d = Domain.spawn (fun () -> execute mode p) in
+        let direct = execute mode p in
+        if not (equal direct (Domain.join d)) then failwith "concurrent replay";
+        if n > 0 then direct.(0) <- Ok 123.;
+        if not (equal expected (execute mode p)) then failwith "output alias"
+      done)
     [ 0; 1; 2; 3; 17; 256 ];
   let rejects f =
     match f () with

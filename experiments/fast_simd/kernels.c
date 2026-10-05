@@ -4,6 +4,9 @@
  * NOTICE.txt alongside this file. Elementary exp follows lib/elementary.ml;
  * its Sun notice is also retained in NOTICE.txt. No SLEEF source is vendored.
  */
+#if !defined(__aarch64__)
+#error "This optional experiment requires AArch64 AdvSIMD"
+#endif
 #include <arm_neon.h>
 #include <math.h>
 #include <stdint.h>
