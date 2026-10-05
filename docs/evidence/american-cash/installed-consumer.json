@@ -1,0 +1,16 @@
+{
+  "source_commit": "729cefd",
+  "prefix": "/tmp/morphiq-american-112-evidence/install",
+  "package_query": "/tmp/morphiq-american-112-evidence/install/lib/morphiq_risk_ml",
+  "commands": [
+    "opam exec --switch=morphiq-risk-ml -- dune install --profile release --prefix PREFIX",
+    "OCAMLPATH=PREFIX/lib opam exec --switch=morphiq-risk-ml -- ocamlfind ocamlopt -O3 -linkpkg -package morphiq_risk_ml cash_consumer.ml -o native",
+    "opam exec --switch=morphiq-risk-ml -- env CAML_LD_LIBRARY_PATH=PREFIX/lib/stublibs OCAMLPATH=PREFIX/lib ocamlfind ocamlc -linkpkg -package morphiq_risk_ml cash_consumer.ml -o byte",
+    "CAML_LD_LIBRARY_PATH=PREFIX/lib/stublibs ./byte"
+  ],
+  "native_stdout": "Estimated American put with cash: 9.14925919024 (backward-Euler-policy-v1); 31744 accepted time steps\nPremium unavailable: matching cash-European comparison not implemented\n",
+  "bytecode_stdout": "Estimated American put with cash: 9.14925919024 (backward-Euler-policy-v1); 31744 accepted time steps\nPremium unavailable: matching cash-European comparison not implemented\n",
+  "identical": true,
+  "scope": "Installed local public cash example, independent of workspace library search. Not cross-platform artifact qualification.",
+  "setup_failure": "Initial bytecode link lacked the custom-prefix DLL path; opam exec replaces the inherited CAML_LD_LIBRARY_PATH. Setting it through env after opam exec fixed lookup. No code or numerical tolerance change."
+}

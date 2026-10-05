@@ -80,8 +80,8 @@ proof. Analytical cash routes have no sampled mapping diagnostic.
 
 Immediate-payoff and global cap checks remain in force when applicable. Cash
 requests do not use the no-cash European lower bound. The optional matching
-cash-European premium currently returns `Unavailable`; a dedicated comparison
-and broader numerical qualification remain tracked in #120. Exercise regions
+cash-European premium currently returns `Unavailable`; broader numerical qualification and this capability limitation remain recorded
+in #120. Exercise regions
 at valuation are unavailable if the opening instant has not arrived, including
 valuation-before/opening-after at the same physical date.
 
@@ -127,8 +127,10 @@ Reference/runner source hashes, every raw result, exceptions and per-case scorin
 are retained in [the evidence directory](evidence/american-cash/). The original
 baseline remains in `47f871f`; the later export fixes advisory radius-eligibility
 metadata to use the frozen radius criterion (the first export used full width),
-and corrects CLI help. All canonical/quadrature raw numerical streams remain
-byte-identical. Acceptance always uses the shared independent scorer's radius
+and corrects CLI help. Independent quadrature results remain byte-identical. The final canonical
+adapter also isolates upstream Spot failures so they do not suppress a valid
+liquidator solve: both large-cash rows now execute even though the unmodified
+Spot engine rejects its mesh. The original failures remain in `47f871f`. Acceptance always uses the shared independent scorer's radius
 rule, never that advisory metadata. An initial scorer integration error rejected
 the reference-kind label before scoring; its raw stream is retained separately.
 
@@ -145,3 +147,64 @@ python3 scripts/check_american_cash.py \
 Ordinary CI runs native/bytecode controls, the initial primary corpus, provenance
 and scorer failure controls. Larger campaigns, optional mutants and measurements
 are retained local evidence. No default CI job or seven-mutant core is expanded.
+
+
+The [qualified campaigns](evidence/american-cash/numerical-source.json) use
+immutable release executables from `729cefd`, with source and executable guards:
+
+| Requested criterion | Configuration | Reference pass | Runtime unavailable | Reference fail |
+| --- | --- | ---: | ---: | ---: |
+| Primary epsilon=2^-16 max(S,K) | initial | 9 | 21 | 0 |
+| Primary | refined | 10 | 20 | 0 |
+| Separate loose epsilon=max(S,K)/100 | initial | 11 | 19 | 0 |
+| Separate loose | refined | 29 | 1 | 0 |
+
+These are all 30 frozen cases in each run. The overflowing joint total is
+financially valid, has an exact reference price, and remains numerically
+unavailable. Most stochastic prices cannot satisfy the strict requested
+criterion under these budgets. Larger grids do not waive the arithmetic screen.
+At the **primary** goal, the same 29 loose prices give 10 passes, six failures
+and 13 references too wide to score; the unavailable row remains unavailable.
+The largest loose worst-reference error is 0.136 currency units (`put-multiple`),
+including the empirical reference radius. Loose success does not establish the
+strict goal. The finest model-matched QuantLib adapter has 14 loose comparison
+passes and 16 explicit exclusions; unmodified Spot results are not scored as if
+they were this model. See [every canonical row](evidence/american-cash/canonical-comparisons.json).
+
+All 41 original no-cash outcomes, including failures and unresolved references,
+remain byte-identical in both primary-initial and loose-refined comparisons.
+No European replay digest changed. Final release tests and the full mutation
+baseline pass; all five affected compiled mutants are killed by their specified
+public numerical controls. [Installed native and bytecode consumers](evidence/american-cash/installed-consumer.json)
+produce identical output. These are local checks, not cross-platform source
+artifact qualification or institutional acceptance.
+
+## Scalar cost comparison
+
+The [complete samples](evidence/american-cash/performance.json) cover an admitted
+ATM put, S=K=100, r=.05, q=.02, sigma=.2, T=1. All three modes use the same refined
+128-cell/128-step, loose tolerance=1 configuration and work limits. Cash events
+are at t=.5. Each request executes its full refinement/boundary program. Optional
+diagnostics and admission are excluded from these timings.
+
+| Schedule | Median request | Range of process means | Cumulative allocation/request |
+| --- | ---: | ---: | ---: |
+| None | 271 ms | 266–272 ms | 625,591,208 bytes |
+| One zero payment | 772 ms | 737–804 ms | 1,739,277,808 bytes |
+| One payment of 5 | 793 ms | 756–817 ms | 1,755,749,328 bytes |
+
+This is Apple M1 Pro, 16 GiB, macOS 27, OCaml 5.3.0 Flambda, release library -O3.
+Five fresh processes per mode alternate order; each warms up once, collects a
+full major GC, then averages three requests. All task-owned computation finishes
+before timing. The shared host's one-minute load is 11.23–12.04; it is not isolated.
+These ranges describe process means, not tail percentiles or a deployment SLA.
+Source guards include staged/unstaged/untracked work and executable hashes.
+
+Cash costs about 2.93 times this no-cash request; zero cash costs 2.85 times.
+Additional event slabs and independent map refinements are real work even when
+the payment is zero. The 1.76 GB figure is **cumulative allocation**, not live
+workspace or RSS. It is substantial and remains an optimization priority under
+#119. This comparison changes the model workload; it is not a speed regression
+against #111's different 256-step configuration, an optimized throughput claim,
+or evidence for a native backend. Preserve numerical outcomes and the original
+acceptance policy when profiling and reducing these costs.

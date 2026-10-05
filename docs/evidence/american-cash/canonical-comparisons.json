@@ -1,0 +1,1962 @@
+{
+  "schema": 1,
+  "scope": "Canonical liquidator adapter is empirical; unmodified Spot output has different dividend conventions. Every original row retained.",
+  "rows": [
+    {
+      "id": "call-single",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-single",
+            "128",
+            "finite",
+            "0x1.d7426da08d422p+2",
+            "0x1.d72fc065d6db9p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "73435673590591/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d72fc065d6db9p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-single",
+            "256",
+            "finite",
+            "0x1.d72fc37424705p+2",
+            "0x1.d7273c40f2871p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "18679576191511/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d7273c40f2871p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-single",
+            "512",
+            "finite",
+            "0x1.d72898beb5319p+2",
+            "0x1.d72701845dacfp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "9401350705033/140737488355328",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d72701845dacfp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-multiple",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-multiple",
+            "128",
+            "finite",
+            "0x1.b1d0b730b4e8ep+2",
+            "0x1.b158fbb7acf99p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "8462365275533/70368744177664",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b158fbb7acf99p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-multiple",
+            "256",
+            "finite",
+            "0x1.b152db7313339p+2",
+            "0x1.b13f8f6976ad3p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "144046765208613/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b13f8f6976ad3p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-multiple",
+            "512",
+            "finite",
+            "0x1.b13fb5863e2cap+2",
+            "0x1.b13972cb19301p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "36340653928741/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b13972cb19301p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-large",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-large",
+            "128",
+            "finite",
+            "0x1.8ec59e87f693fp-4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "121588188074655/36028797018963968",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-large",
+            "256",
+            "finite",
+            "0x1.8d009ee933a3dp-4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "4286034330449/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-large",
+            "512",
+            "finite",
+            "0x1.8d25840fc9d77p-4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "135885391902851/36028797018963968",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-zero-dividend",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-zero-dividend",
+            "128",
+            "finite",
+            "0x1.274acd4980302p+3",
+            "0x1.275d97dfaf21cp+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "38732521746957/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.275d97dfaf21cp+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-zero-dividend",
+            "256",
+            "finite",
+            "0x1.2745678324cedp+3",
+            "0x1.274a1005320aap+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "19551719552017/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.274a1005320aap+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-zero-dividend",
+            "512",
+            "finite",
+            "0x1.274411f2f98dep+3",
+            "0x1.27453b0426e79p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "39195126766641/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.27453b0426e79p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-negative-rates",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-negative-rates",
+            "128",
+            "finite",
+            "0x1.b9b4cb28f2e06p+2",
+            "0x1.b9ac8b90f03dep+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "75806603826107/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b9ac8b90f03dep+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-negative-rates",
+            "256",
+            "finite",
+            "0x1.b9abb4383d33bp+2",
+            "0x1.b9a6dd9c14677p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "38215618549571/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b9a6dd9c14677p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-negative-rates",
+            "512",
+            "finite",
+            "0x1.b9a86f20eb4aep+2",
+            "0x1.b9a6e27a4083bp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "76655942028563/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.b9a6e27a4083bp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-coincident",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-coincident",
+            "128",
+            "finite",
+            "0x1.a4c0634d12cf4p+2",
+            "0x1.d7315f14e04ecp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "33496471776303/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d7315f14e04ecp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-coincident",
+            "256",
+            "finite",
+            "0x1.a4d0cbf9d9af6p+2",
+            "0x1.d7277fea96dcfp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "16466333366935/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d7277fea96dcfp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-coincident",
+            "512",
+            "finite",
+            "0x1.a4d3b352bd059p+2",
+            "0x1.d7267cb4d8393p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "65665792718073/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d7267cb4d8393p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-delayed-after",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "call-delayed-after",
+            "128",
+            "finite",
+            "0x1.b18c8743da694p+2",
+            "0x1.d72fc065d6b74p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "73202837851607/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d72fc065d6b74p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "call-delayed-after",
+            "256",
+            "finite",
+            "0x1.b147b494c2c14p+2",
+            "0x1.d7273c40f27cp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "77932317313111/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d7273c40f27cp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "call-delayed-after",
+            "512",
+            "finite",
+            "0x1.b1363062cf0d3p+2",
+            "0x1.d72701845da47p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "9892004284531/140737488355328",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.d72701845da47p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "call-expiry-before",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-before",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-before",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-before",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "call-expiry-after",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-after",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-after",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "call-expiry-after",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "put-single",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-single",
+            "128",
+            "finite",
+            "0x1.24c2dfcfff89ap+3",
+            "0x1.24b19bfef81d4p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "19143659725/274877906944",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24b19bfef81d4p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-single",
+            "256",
+            "finite",
+            "0x1.24c61e7efb94ap+3",
+            "0x1.24c1aeceae6acp+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "2436451887733/35184372088832",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c1aeceae6acp+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-single",
+            "512",
+            "finite",
+            "0x1.24c9a5614d6a3p+3",
+            "0x1.24c8a46b01d47p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "38740864109047/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c8a46b01d47p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-multiple",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-multiple",
+            "128",
+            "finite",
+            "0x1.43d7790623a3cp+3",
+            "0x1.439c6c1dbd741p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "4530503349061/35184372088832",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.439c6c1dbd741p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-multiple",
+            "256",
+            "finite",
+            "0x1.43ab3d303fcd1p+3",
+            "0x1.439dd452f8068p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "75527772533179/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.439dd452f8068p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-multiple",
+            "512",
+            "finite",
+            "0x1.43a41ee59b5f4p+3",
+            "0x1.43a0f976c3df6p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "9502117525267/70368744177664",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.43a0f976c3df6p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-large",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-large",
+            "128",
+            "finite",
+            "0x1.861fbb2d0cd75p+4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "pass",
+              "worst_error": "62402609/140737488355328",
+              "scope": "empirical"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "62402609/140737488355328",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-large",
+            "256",
+            "finite",
+            "0x1.861fbb712638p+4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "pass",
+              "worst_error": "53398103/281474976710656",
+              "scope": "empirical"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "53398103/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-large",
+            "512",
+            "finite",
+            "0x1.861fbb7e41f4p+4",
+            "-",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "pass",
+              "worst_error": "43033313/281474976710656",
+              "scope": "empirical"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "43033313/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "-",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-zero-dividend",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-zero-dividend",
+            "128",
+            "finite",
+            "0x1.a9dff74ba4d54p+2",
+            "0x1.a9f7615bd5ed7p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "83788494145829/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.a9f7615bd5ed7p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-zero-dividend",
+            "256",
+            "finite",
+            "0x1.aa1f13cd17646p+2",
+            "0x1.aa25579af3244p+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "79451515183155/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.aa25579af3244p+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-zero-dividend",
+            "512",
+            "finite",
+            "0x1.aa36f26e223cep+2",
+            "0x1.aa388cbee64dbp+2",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "77811205681835/1125899906842624",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.aa388cbee64dbp+2",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-negative-rates",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-negative-rates",
+            "128",
+            "finite",
+            "0x1.4ab91f3bb6945p+3",
+            "0x1.4a9ed22419497p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "39477859624267/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.4a9ed22419497p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-negative-rates",
+            "256",
+            "finite",
+            "0x1.4aaac9286bc72p+3",
+            "0x1.4aa47ce05b3fbp+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "20231518988559/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.4aa47ce05b3fbp+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-negative-rates",
+            "512",
+            "finite",
+            "0x1.4aa857efa66d3p+3",
+            "0x1.4aa6d16353e2ap+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "40630869665725/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.4aa6d16353e2ap+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-coincident",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-coincident",
+            "128",
+            "finite",
+            "0x1.b15632fb1cc2p+3",
+            "0x1.24b1e9acc57e5p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "17063583709413/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24b1e9acc57e5p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-coincident",
+            "256",
+            "finite",
+            "0x1.b1562e8eb9c18p+3",
+            "0x1.24c1447cb1585p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "17064177406185/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c1447cb1585p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-coincident",
+            "512",
+            "finite",
+            "0x1.b1599c6c48e28p+3",
+            "0x1.24c8866c57c73p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "16946352297953/281474976710656",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c8866c57c73p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-delayed-after",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "finite",
+          "raw": [
+            "put-delayed-after",
+            "128",
+            "finite",
+            "0x1.24c2df95b0beep+3",
+            "0x1.24b19bfef81d1p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "9801569064235/140737488355328",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24b19bfef81d1p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 256,
+          "outcome": "finite",
+          "raw": [
+            "put-delayed-after",
+            "256",
+            "finite",
+            "0x1.24c61e782319fp+3",
+            "0x1.24c1aeceae6acp+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "38983237381883/562949953421312",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c1aeceae6acp+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        },
+        {
+          "level": 512,
+          "outcome": "finite",
+          "raw": [
+            "put-delayed-after",
+            "512",
+            "finite",
+            "0x1.24c9a5605179ep+3",
+            "0x1.24c8a46b01d44p+3",
+            "-",
+            "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions"
+          ],
+          "matched_liquidator": {
+            "primary": {
+              "status": "reference_too_wide"
+            },
+            "loose": {
+              "status": "pass",
+              "worst_error": "9685216285247/140737488355328",
+              "scope": "empirical"
+            }
+          },
+          "unmodified_spot": {
+            "value": "0x1.24c8a46b01d44p+3",
+            "comparison": "different model; not accuracy-scored against liquidator",
+            "reason": "positive mesh floor and per-entry/duplicate-time cash handling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "put-expiry-before",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-before",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-before",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-before",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "put-expiry-after",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-after",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-after",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "put-expiry-after",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valuation-before",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "valuation-before",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "valuation-before",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "valuation-before",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "valuation-after",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "valuation-after",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "valuation-after",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "valuation-after",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "endpoint cash convention excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "call-zero-time-both",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-both",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-both",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-both",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "call-zero-time-after-only",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-after-only",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-after-only",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "call-zero-time-after-only",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "put-zero-time-both",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-both",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-both",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-both",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "put-zero-time-after-only",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-after-only",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-after-only",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "put-zero-time-after-only",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deterministic-joint",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-joint",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-joint",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-joint",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deterministic-interior",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-interior",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-interior",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-interior",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deterministic-rounded-sum",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-rounded-sum",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-rounded-sum",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "deterministic-rounded-sum",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zero-stock-negative-rate",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "zero-stock-negative-rate",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "zero-stock-negative-rate",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "zero-stock-negative-rate",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zero-strike-put",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "zero-strike-put",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "zero-strike-put",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "zero-strike-put",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unrepresentable-joint",
+      "levels": [
+        {
+          "level": 128,
+          "outcome": "exception",
+          "raw": [
+            "unrepresentable-joint",
+            "128",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 256,
+          "outcome": "exception",
+          "raw": [
+            "unrepresentable-joint",
+            "256",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        },
+        {
+          "level": 512,
+          "outcome": "exception",
+          "raw": [
+            "unrepresentable-joint",
+            "512",
+            "exception",
+            "-",
+            "-",
+            "-",
+            "analytical boundary excluded"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -81,7 +81,9 @@ int main(int argc, char** argv) {
                     ext::make_shared<AmericanExercise>(opening,expiry,false));
                 option.setPricingEngine(ext::make_shared<FdBlackScholesVanillaEngine>(
                     process,schedule,x.n,x.n,2,FdmSchemeDesc::CrankNicolson()));
-                const double baseline = option.NPV();
+                double baseline = 0.; bool baseline_ok = false; std::string baseline_reason;
+                try {baseline = option.NPV(); baseline_ok = std::isfinite(baseline);}
+                catch(const std::exception& error) {baseline_reason = clean(error.what());}
                 auto mesh=ext::make_shared<FdmMesherComposite>(ext::make_shared<FdmBlackScholesMesher>(x.n,process,x.t,x.k));
                 auto payoff=ext::make_shared<PlainVanillaPayoff>(x.side=="call"?Option::Call:Option::Put,x.k);
                 auto calculator=ext::make_shared<FdmLogInnerValue>(payoff,mesh,0);
@@ -91,8 +93,11 @@ int main(int argc, char** argv) {
                 FdmBlackScholesSolver solver(Handle<GeneralizedBlackScholesProcess>(process),x.k,desc,FdmSchemeDesc::CrankNicolson());
                 const double value = solver.valueAt(x.s);
                 if (!std::isfinite(value)) throw std::runtime_error("nonfinite canonical price");
-                std::cout << "finite\t" << std::hexfloat << value << "\t" << baseline
-                    << "\t-\tmatched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions\n";
+                std::cout << "finite\t" << std::hexfloat << value << "\t";
+                if(baseline_ok) std::cout << baseline; else std::cout << "-";
+                std::cout << "\t-\tmatched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions";
+                if(!baseline_ok) std::cout << "; Spot unavailable: " << baseline_reason;
+                std::cout << '\n';
             } catch (const std::exception& error) {
                 std::cout << "exception\t-\t-\t-\t" << clean(error.what()) << '\n';
             }

@@ -10,14 +10,16 @@
     "docs/evidence/american-cash/quadrature.tsv": "a53e22496863a7eb7b9396b9e469d3532d352588f4aff569927ed57c6e864612",
     "docs/evidence/american-cash/quantlib-input.txt": "0f7e69890e3e7f60fe35b8e31e75008182e175f78142c3b81f9b02419b4cf15a",
     "docs/evidence/american-cash/quantlib.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "docs/evidence/american-cash/quantlib.tsv": "7bdb61971512c8cf4ef5c827cb129d7a3e62ad2997c6be53bccf77caa14b24d6",
-    "docs/evidence/american-cash/references.json": "86996020f71356a3630d6f8e30b24549ec22deb432f9c4ff60974d064e1771c4",
+    "docs/evidence/american-cash/quantlib.tsv": "541b4875fb9b0f211a6412ea0e7bff6a4fd5378f22652c85734f9ad57afe2c93",
+    "docs/evidence/american-cash/references.json": "911bef254799f65d809935e2543aa16a6a8eb0428d59d83ce4f1bdeb255ff3a6",
     "scripts/american_cash_io.hpp": "8b244a25ea0c62bf120f3e6343bea68b846dfc688de020be65e23d9f4ee705e8",
     "scripts/american_cash_quadrature.cpp": "4f4e98b98182e74dd88eabc979c50c623d32f229301d0338fb47d576b98ddd41",
-    "scripts/american_cash_quantlib.cpp": "4cef5d8e2dca90841bb18f4557710dd7f866c53e791dd79f88f3a86d8cf5d320",
+    "scripts/american_cash_quantlib.cpp": "919cdd38351385af437c65aca90e6b6157ef421bf8c26ff61a1bee512745a708",
     "scripts/american_cash_references.py": "addb1fc6db074495129549885fb7ddfc80cbea7d62e5a1c3a9ba72fcc1c9e55b",
     "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
     "scripts/check_cash_reference_arithmetic.py": "f413afde78fe7d249f8183d3a0270b299ca0a54b41aa6de4ab8b8fc280813492",
-    "scripts/freeze_american_cash.py": "c76365824650a511cefe924f79825fd5b2648f832f1507fd03192ebdc5775c39"
+    "scripts/freeze_american_cash.py": "c76365824650a511cefe924f79825fd5b2648f832f1507fd03192ebdc5775c39",
+    "docs/evidence/american-cash/runner-controls.json": "3f7899ef96e2aa2ef3fa168840f8b66992187521002f01001f8fd3d88c0573a9",
+    "docs/evidence/american-cash/canonical-comparisons.json": "1e4111f1dbdeb83f63e8550cb019650fa789488dea62e7b2c0fff358cad2255f"
   }
 }

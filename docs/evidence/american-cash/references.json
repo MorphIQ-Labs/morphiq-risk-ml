@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "created_utc": "2026-10-05T15:59:28.299285+00:00",
-  "runtime_source_sha256": "2e6800b4544e7eb32c52de985cae7d29aa102685b2b2021fb8751206123b0b37",
-  "runtime_worktree_modified": true,
+  "created_utc": "2026-10-05T16:18:59.335924+00:00",
+  "runtime_source_sha256": "61d7e200af0d4ed8b0b8ca4a4873e002cf091671c0fb452a936b225ea28d82d0",
+  "runtime_worktree_modified": false,
   "rows": [
     {
       "id": "call-single",
@@ -159,29 +159,29 @@
         [
           "call-large",
           "128",
-          "exception",
+          "finite",
+          "0x1.8ec59e87f693fp-4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ],
         [
           "call-large",
           "256",
-          "exception",
+          "finite",
+          "0x1.8d009ee933a3dp-4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ],
         [
           "call-large",
           "512",
-          "exception",
+          "finite",
+          "0x1.8d25840fc9d77p-4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ]
       ],
       "value": 0.09750673587587468,
@@ -717,29 +717,29 @@
         [
           "put-large",
           "128",
-          "exception",
+          "finite",
+          "0x1.861fbb2d0cd75p+4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ],
         [
           "put-large",
           "256",
-          "exception",
+          "finite",
+          "0x1.861fbb712638p+4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ],
         [
           "put-large",
           "512",
-          "exception",
+          "finite",
+          "0x1.861fbb7e41f4p+4",
           "-",
           "-",
-          "-",
-          "end must be larger than start"
+          "matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start"
         ]
       ],
       "value": 24.382747160813874,
@@ -1875,7 +1875,7 @@
       ]
     },
     "quantlib": {
-      "binary_sha256": "1fe214dcad5378fd35c1dabff18cfe0aabc25c7a25fe8f15e7aaf2c45e105e43",
+      "binary_sha256": "0f2630b641af6fa4613c82d5f3a6d25230cb6fedac229bb96782940f5711ff70",
       "levels": [
         128,
         256,
@@ -1888,13 +1888,13 @@
     "scripts/american_cash_io.hpp": "8b244a25ea0c62bf120f3e6343bea68b846dfc688de020be65e23d9f4ee705e8",
     "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
     "scripts/american_cash_quadrature.cpp": "4f4e98b98182e74dd88eabc979c50c623d32f229301d0338fb47d576b98ddd41",
-    "scripts/american_cash_quantlib.cpp": "4cef5d8e2dca90841bb18f4557710dd7f866c53e791dd79f88f3a86d8cf5d320",
+    "scripts/american_cash_quantlib.cpp": "919cdd38351385af437c65aca90e6b6157ef421bf8c26ff61a1bee512745a708",
     "/private/tmp/morphiq-american-cash/scripts/american_cash_references.py": "addb1fc6db074495129549885fb7ddfc80cbea7d62e5a1c3a9ba72fcc1c9e55b",
     "docs/evidence/american-cash/cases-v1.json": "43fa4bd14a488bb4886999cf10792def7075b102622704998be4eaa93c902ff5",
     "docs/evidence/american-cash/protocol.md": "0df464e76fa0ad9cecf04a88e3519d52fec1639eaf061107f7825edec84dd6a9"
   },
   "raw_sha256": {
-    "quantlib.tsv": "7bdb61971512c8cf4ef5c827cb129d7a3e62ad2997c6be53bccf77caa14b24d6",
+    "quantlib.tsv": "541b4875fb9b0f211a6412ea0e7bff6a4fd5378f22652c85734f9ad57afe2c93",
     "quadrature.tsv": "a53e22496863a7eb7b9396b9e469d3532d352588f4aff569927ed57c6e864612"
   }
 }

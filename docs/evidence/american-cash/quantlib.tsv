@@ -4,9 +4,9 @@ call-single	512	finite	0x1.d72898beb5319p+2	0x1.d72701845dacfp+2	-	matched liqui
 call-multiple	128	finite	0x1.b1d0b730b4e8ep+2	0x1.b158fbb7acf99p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 call-multiple	256	finite	0x1.b152db7313339p+2	0x1.b13f8f6976ad3p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 call-multiple	512	finite	0x1.b13fb5863e2cap+2	0x1.b13972cb19301p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
-call-large	128	exception	-	-	-	end must be larger than start
-call-large	256	exception	-	-	-	end must be larger than start
-call-large	512	exception	-	-	-	end must be larger than start
+call-large	128	finite	0x1.8ec59e87f693fp-4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
+call-large	256	finite	0x1.8d009ee933a3dp-4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
+call-large	512	finite	0x1.8d25840fc9d77p-4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
 call-zero-dividend	128	finite	0x1.274acd4980302p+3	0x1.275d97dfaf21cp+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 call-zero-dividend	256	finite	0x1.2745678324cedp+3	0x1.274a1005320aap+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 call-zero-dividend	512	finite	0x1.274411f2f98dep+3	0x1.27453b0426e79p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
@@ -31,9 +31,9 @@ put-single	512	finite	0x1.24c9a5614d6a3p+3	0x1.24c8a46b01d47p+3	-	matched liquid
 put-multiple	128	finite	0x1.43d7790623a3cp+3	0x1.439c6c1dbd741p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 put-multiple	256	finite	0x1.43ab3d303fcd1p+3	0x1.439dd452f8068p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 put-multiple	512	finite	0x1.43a41ee59b5f4p+3	0x1.43a0f976c3df6p+3	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
-put-large	128	exception	-	-	-	end must be larger than start
-put-large	256	exception	-	-	-	end must be larger than start
-put-large	512	exception	-	-	-	end must be larger than start
+put-large	128	finite	0x1.861fbb2d0cd75p+4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
+put-large	256	finite	0x1.861fbb712638p+4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
+put-large	512	finite	0x1.861fbb7e41f4p+4	-	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions; Spot unavailable: end must be larger than start
 put-zero-dividend	128	finite	0x1.a9dff74ba4d54p+2	0x1.a9f7615bd5ed7p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 put-zero-dividend	256	finite	0x1.aa1f13cd17646p+2	0x1.aa25579af3244p+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
 put-zero-dividend	512	finite	0x1.aa36f26e223cep+2	0x1.aa388cbee64dbp+2	-	matched liquidator adapter; unmodified Spot baseline has different floor/coincident conventions
