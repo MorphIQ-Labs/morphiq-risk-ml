@@ -3,8 +3,9 @@
 **Design for #108 under [Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
 No American runtime API is implemented by this document.** It fixes the real
 quantity, event semantics and ownership that #109–#120 must implement and qualify.
-The general schedule names in the API sketch remain proposed; #111 now supplies
-the [constant/no-cash scalar API](american-pricing.md). Existing European
+The general schedule names in the API sketch remain proposed; #111/#112 supply
+the [constant-coefficient scalar API](american-pricing.md), including
+[scheduled cash dividends](american-cash-dividends.md). Existing European
 definitions, certificates and served values are unchanged.
 
 Work is staged on `feature/american-integration`, created from main at
@@ -391,9 +392,10 @@ before that point and decreases afterwards. This supplies a deterministic
 counterexample to using only immediate and terminal zero-volatility payoffs.
 
 An estimated-price response would report `Estimated_only { value; diagnostics }`
-with separately labelled refinement/residual information. Unsupported cash
-pricing in the first constant/no-cash solver returns an unsupported-capability
-outcome; a grid cap reached mid-solve returns a failure/incomplete outcome, not
+with separately labelled refinement/residual information. The current scalar
+API cannot express Bermudan or varying-coefficient schedules. A future general
+adapter must return an explicit unsupported outcome for undelivered capabilities;
+a grid cap reached mid-solve returns a failure/incomplete outcome, not
 the last iterate dressed as a price. Exact expiry/deterministic examples do not
 by themselves authorize a runtime certificate or an implementation shortcut.
 

@@ -55,7 +55,7 @@ static double solve(const CashRow& row, bool upper) {
     return v[std::lower_bound(x.begin(),x.end(),p.s)-x.begin()];
 }
 int main(int argc,char** argv) {
-    if(int r=cli(argc,argv,"american-cash-quadrature 1");r!=-1)return r;
+    if(int r=cash_cli(argc,argv,"american-cash-quadrature 1");r!=-1)return r;
     try {unsigned count=0; for(std::string line;std::getline(std::cin,line);) {if(++count>512) throw std::runtime_error("row budget"); auto x=cash_row(line); std::cout<<x.p.id<<'\t'<<x.p.n<<'\t'; try {auto lo=solve(x,false),hi=solve(x,true); if(!std::isfinite(lo)||!std::isfinite(hi)||hi<lo)throw std::runtime_error("invalid boundary pair"); std::cout<<"finite\t"<<std::hexfloat<<lo<<'\t'<<hi<<'\n';}catch(const std::exception& e){std::cout<<"unavailable\t-\t"<<clean(e.what())<<'\n';}} }
     catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 2;}
 }

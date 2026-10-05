@@ -1,7 +1,7 @@
 # Estimated scalar American pricing
 
-`Early_exercise.Bsm` implements #111's constant-coefficient, no-cash American
-call/put contract. It supports continuous yield, finite signed rates/yields,
+`Early_exercise.Bsm` implements constant-coefficient American call/put pricing,
+including #112's [scheduled cash-dividend extension](american-cash-dividends.md). It supports continuous yield, finite signed rates/yields,
 expiry, zero stock/strike, deterministic stopping and delayed exercise opening.
 Inputs denote their original exact binary64 values. Read the
 [financial contract](american-model-contract.md) and
@@ -9,9 +9,9 @@ Inputs denote their original exact binary64 values. Read the
 
 Every successful result is **Estimated_only**. A requested tolerance governs
 observed refinement and arithmetic screens; it is not an absolute price error
-bound. This API cannot produce a `Production.certified` value. Cash dividends,
+bound. This API cannot produce a `Production.certified` value.
 Bermudan schedules, piecewise coefficients, Greeks, IV and batch/planner support
-remain #112–#118. There is no implicit date adapter or settlement convention.
+remain #113–#118. There is no implicit date adapter or settlement convention.
 
 ## Use and outcomes
 
@@ -52,7 +52,9 @@ The optional premium subtracts a separately enclosed, model-matched European
 terminal price. Its European error and subtraction indicator are reported
 separately; the American component remains estimated and has no rigorous error
 bound. A small negative estimated premium is not clipped to zero. Optional
-comparison failure is `Unavailable`, not a fabricated zero.
+comparison failure is `Unavailable`, not a fabricated zero. Cash-dividend
+requests currently report the matching European comparison as unavailable;
+they never substitute the no-cash European value.
 
 ## Implementation and arithmetic
 
@@ -71,7 +73,8 @@ from [#110](american-references.md). The existing source/paper provenance applie
   existing bounded `Enclosure.Fast` arithmetic. Positive coefficients that cannot
   be represented are refused. Converted coefficients are still approximate;
   their uncertainty is not a PDE error certificate.
-- Use backward Euler on separately subdivided [opens,T] and [0,opens] slabs.
+- Use backward Euler on separately subdivided [opens,T] and [0,opens] slabs,
+  additionally splitting at each cash date for cash requests.
   Original endpoints are exact; interior coordinates are independently formed
   from an enclosed slab length divided by the integer count. The rounded step
   is a coefficient approximation, not a change of financial time. Collapsed
@@ -97,7 +100,7 @@ from [#110](american-references.md). The existing source/paper provenance applie
   diagnostic. Three domains and independent three-level space/time refinements
   must satisfy the original frozen policy. No extrapolation order is assumed.
 - Check intrinsic/global price inequalities without clipping. The matching
-  European lower comparison additionally uses the recorded refinement sum as
+  no-cash European lower comparison additionally uses the recorded refinement sum as
   an engineering discrepancy screen, not a rigorous American uncertainty bound.
 
 The analytical paths use expansion arithmetic for expiry, absorbing stock,
@@ -105,7 +108,9 @@ zero strike and original-input deterministic stopping. Deterministic candidates
 include both window endpoints and interior q*S(t)=r*K; the 250/9 interior maximum
 has a direct regression. Equal/nonzero volatility is never inferred from a
 rounded sigma-squared. European reduction applies to a degenerate exercise
-window or a no-yield call with nonnegative rate. Analytical results retain the
+window or a no-yield call with nonnegative rate on the no-cash route. Cash
+requests use event-aware deterministic stopping; see the extension for its
+additional diagnostics, restrictions and costs. Analytical results retain the
 same estimated-only public type, even where their internal arithmetic is enclosed.
 
 ## Work, memory and cancellation
@@ -129,6 +134,10 @@ wall-clock cancellation SLA is claimed. User callback exceptions propagate.
 Unwinding releases request-owned references without publishing a partial result.
 
 ## Measured numerical capability
+
+This section retains the #111 **no-cash** campaign. The separate
+[cash campaign](american-cash-dividends.md#evidence-and-limits) does not extend
+these results to other dividend conventions.
 
 The [campaign protocol](evidence/american-implementation/protocol.md) was frozen
 as commit `ecadc0e` before scoring the runtime. Both initial and refined budgets
@@ -172,8 +181,8 @@ python3 scripts/check_american_runtime.py \
 
 Default CI runs the initial primary corpus, native/bytecode public controls,
 negative type tests and scorer failure controls. The larger campaigns and scalar
-measurements are explicit local evidence. Two affected American mutations are
-added to the optional catalog; the seven-mutant default lane is unchanged.
+measurements are explicit local evidence. The original two American mutations and three cash-event mutations are
+in the optional catalog; the seven-mutant default lane is unchanged.
 No existing European helper, served value or replay digest is changed.
 
 ## Initial scalar performance

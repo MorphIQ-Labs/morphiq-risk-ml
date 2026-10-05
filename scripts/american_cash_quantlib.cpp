@@ -44,7 +44,7 @@ public:
     }
 };
 int main(int argc, char** argv) {
-    if (int result = cli(argc, argv, "american-cash-quantlib 1"); result != -1) return result;
+    if (int result = cash_cli(argc, argv, "american-cash-quantlib 1"); result != -1) return result;
     const Date today(1, January, 2025);
     const Actual360 dc;
     SavedSettings saved;

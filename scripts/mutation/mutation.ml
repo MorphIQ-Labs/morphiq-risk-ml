@@ -38,6 +38,32 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-cash-opening-side";
+      file = "lib/early_exercise.ml";
+      snippet = "rank side >= rank cash.opening_side";
+      replacement = "true";
+      killer = "american_cash";
+      mechanism =
+        "opening after a dividend excludes exercise before that dividend";
+    };
+    {
+      id = "american-cash-liquidator";
+      file = "lib/early_exercise.ml";
+      snippet = "positive_part (E.sub (exact mapping_grid.(i)) amount)";
+      replacement = "exact mapping_grid.(i)";
+      killer = "american_cash";
+      mechanism =
+        "cash mapping reduces stock and preserves the absorbing zero state";
+    };
+    {
+      id = "american-cash-refinement";
+      file = "lib/early_exercise.ml";
+      snippet = "Option.fold ~none:true ~some:small ec";
+      replacement = "true";
+      killer = "american_cash";
+      mechanism = "cash mapping must independently demonstrate refinement";
+    };
+    {
       id = "american-stationary-stopping";
       file = "lib/early_exercise.ml";
       snippet = "| E.Positive, E.Negative -> add root";
@@ -49,8 +75,8 @@ let catalog =
     {
       id = "american-delayed-opening";
       file = "lib/early_exercise.ml";
-      snippet = "slab 0. p.opens_at false;";
-      replacement = "slab 0. p.opens_at true;";
+      snippet = "slab 0. p.opens_at false";
+      replacement = "slab 0. p.opens_at true";
       killer = "american_pricing";
       mechanism = "the obstacle is absent before the exercise window opens";
     };
@@ -1131,7 +1157,7 @@ let guard_arguments = function
   | "fast_planner" | "fast_batch" | "enclosure_sum" | "shared_greeks"
   | "production_boundary" | "production_multi" | "planner_contract"
   | "prepared_division" | "carry_cancellation" | "greek_cancellation"
-  | "rho_midpoint" | "american_pricing" ->
+  | "rho_midpoint" | "american_pricing" | "american_cash" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

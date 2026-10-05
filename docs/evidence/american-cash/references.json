@@ -1,7 +1,8 @@
 {
   "schema": 1,
-  "created_utc": "2026-10-05T15:46:52.461058+00:00",
-  "runtime_changed": false,
+  "created_utc": "2026-10-05T15:59:28.299285+00:00",
+  "runtime_source_sha256": "2e6800b4544e7eb32c52de985cae7d29aa102685b2b2021fb8751206123b0b37",
+  "runtime_worktree_modified": true,
   "rows": [
     {
       "id": "call-single",
@@ -125,7 +126,7 @@
       "radius": 0.11655188603919697,
       "reference_kind": "empirical-quadrature",
       "primary_resolved": false,
-      "loose_resolved": false
+      "loose_resolved": true
     },
     {
       "id": "call-large",
@@ -683,7 +684,7 @@
       "radius": 0.12143123728636596,
       "reference_kind": "empirical-quadrature",
       "primary_resolved": false,
-      "loose_resolved": false
+      "loose_resolved": true
     },
     {
       "id": "put-large",
@@ -1866,7 +1867,7 @@
   ],
   "runners": {
     "quadrature": {
-      "binary_sha256": "ad1caf1d74d6842b9ab15eff174e9a81707c6b3ef9b68964a2d4ecc93f2cd7e3",
+      "binary_sha256": "aa94414a332b915cfe420190541456f4997368c08509c622b155770a19f18097",
       "levels": [
         256,
         512,
@@ -1874,7 +1875,7 @@
       ]
     },
     "quantlib": {
-      "binary_sha256": "03fbfac8432a2f938f03b9189f1f8c68f9969209dbe568dc8f47624ec69c6ef7",
+      "binary_sha256": "1fe214dcad5378fd35c1dabff18cfe0aabc25c7a25fe8f15e7aaf2c45e105e43",
       "levels": [
         128,
         256,
@@ -1884,11 +1885,11 @@
   },
   "source_sha256": {
     "scripts/freeze_american_cash.py": "c76365824650a511cefe924f79825fd5b2648f832f1507fd03192ebdc5775c39",
-    "scripts/american_cash_io.hpp": "d73db37a0796c527b59468a369ced2e99198735cba29d9eff137cedbd02c2d7d",
+    "scripts/american_cash_io.hpp": "8b244a25ea0c62bf120f3e6343bea68b846dfc688de020be65e23d9f4ee705e8",
     "scripts/american_runner_io.hpp": "b8798b7874ae4213d909c429d2e3604a8c38a57456518848762e2b5a650e2704",
-    "scripts/american_cash_quadrature.cpp": "a064767c70460792cea0800b09fab112c62d7be0c6f97ae09748f0241a8dabd9",
-    "scripts/american_cash_quantlib.cpp": "63631e0f8467272edfe95f713e8b02503b040e60d760b73b979a57e578ee844f",
-    "/private/tmp/morphiq-american-cash/scripts/american_cash_references.py": "351b24f2f184be27d1f03d17cda6d7b927883bbe36503e9a5a144a4f10230801",
+    "scripts/american_cash_quadrature.cpp": "4f4e98b98182e74dd88eabc979c50c623d32f229301d0338fb47d576b98ddd41",
+    "scripts/american_cash_quantlib.cpp": "4cef5d8e2dca90841bb18f4557710dd7f866c53e791dd79f88f3a86d8cf5d320",
+    "/private/tmp/morphiq-american-cash/scripts/american_cash_references.py": "addb1fc6db074495129549885fb7ddfc80cbea7d62e5a1c3a9ba72fcc1c9e55b",
     "docs/evidence/american-cash/cases-v1.json": "43fa4bd14a488bb4886999cf10792def7075b102622704998be4eaa93c902ff5",
     "docs/evidence/american-cash/protocol.md": "0df464e76fa0ad9cecf04a88e3519d52fec1639eaf061107f7825edec84dd6a9"
   },

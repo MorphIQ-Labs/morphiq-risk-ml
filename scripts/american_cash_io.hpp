@@ -29,4 +29,13 @@ inline std::vector<std::pair<double,long double>> joint_cash(const CashRow& x) {
     for(auto e:x.cash) { if(!out.empty() && out.back().first==e.first) out.back().second+=e.second; else out.emplace_back(e.first,e.second); }
     return out;
 }
+inline int cash_cli(int argc,char** argv,const char* version) {
+    if(argc==2 && std::string(argv[1])=="--help") {
+        std::cout<<"Read stdin: id side steps first-index seven original binary64 words "
+          "(spot strike rate yield volatility time opens), valuation/opening/expiry sides "
+          "(0=regular,1=before,2=after), cash count, then time/amount word pairs.\n";
+        return 0;
+    }
+    return cli(argc,argv,version);
+}
 #endif

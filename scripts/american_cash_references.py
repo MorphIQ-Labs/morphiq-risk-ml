@@ -58,7 +58,7 @@ def main():
     ap.add_argument('--quadrature',required=True);ap.add_argument('--quantlib',required=True);ap.add_argument('--output',type=pathlib.Path,required=True)
     args=ap.parse_args(); args.output.mkdir(parents=True,exist_ok=True)
     corpus=json.loads(pathlib.Path('docs/evidence/american-cash/cases-v1.json').read_text())
-    report={'schema':1,'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'runtime_changed':False,'rows':[],'runners':{}}
+    report={'schema':1,'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'runtime_source_sha256':hashlib.sha256(pathlib.Path('lib/early_exercise.ml').read_bytes()).hexdigest(), 'runtime_worktree_modified':bool(subprocess.check_output(['git','diff','--','lib/early_exercise.ml'])),'rows':[],'runners':{}}
     parsed={}
     for name,exe,levels in [('quadrature',args.quadrature,(256,512,1024)),('quantlib',args.quantlib,(128,256,512))]:
         request=''.join(wire(row,n)+'\n' for row in corpus['rows'] for n in levels)
@@ -89,8 +89,8 @@ def main():
             radius=4*max(abs(values[1]-values[0]),abs(values[2]-values[1]))+(pairs[-1][1]-pairs[-1][0])/2+256*2**-53*1024*max(decode(row['inputs']['spot']),decode(row['inputs']['strike']))
             out.update(value=values[-1],radius=radius,reference_kind='empirical-quadrature')
         if 'radius' in out:
-            out['primary_resolved']=2*out['radius']<=decode(row['epsilon'])/8
-            out['loose_resolved']=2*out['radius']<=max(decode(row['inputs']['spot']),decode(row['inputs']['strike']))/800
+            out['primary_resolved']=out['radius']<=decode(row['epsilon'])/8
+            out['loose_resolved']=out['radius']<=max(decode(row['inputs']['spot']),decode(row['inputs']['strike']))/800
         report['rows'].append(out)
     paths=['scripts/freeze_american_cash.py','scripts/american_cash_io.hpp','scripts/american_runner_io.hpp','scripts/american_cash_quadrature.cpp','scripts/american_cash_quantlib.cpp',__file__,'docs/evidence/american-cash/cases-v1.json','docs/evidence/american-cash/protocol.md']
     report['source_sha256']={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths}

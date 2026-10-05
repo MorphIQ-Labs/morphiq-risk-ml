@@ -1,0 +1,30 @@
+call-single	unavailable	-	arithmetic:residual roundoff resolution
+call-multiple	unavailable	-	arithmetic:residual roundoff resolution
+call-large	unavailable	-	arithmetic:residual roundoff resolution
+call-zero-dividend	unavailable	-	arithmetic:residual roundoff resolution
+call-negative-rates	unavailable	-	arithmetic:residual roundoff resolution
+call-coincident	unavailable	-	arithmetic:residual roundoff resolution
+call-delayed-after	unavailable	-	arithmetic:residual roundoff resolution
+call-expiry-before	unavailable	-	arithmetic:residual roundoff resolution
+call-expiry-after	unavailable	-	arithmetic:residual roundoff resolution
+put-single	unavailable	-	accuracy:space=0x1.03a2e1b6ep-13,0x1.5ddfc86b15p-9:time=0x1.88624ca1a3p-9,0x1.8f45ce863cp-10:event=0x1.9cff3f40f98p-7,0x1.a173044a32p-9:domain=0x1.60e9p-33,0x0p+0:spread=0x0p+0
+put-multiple	unavailable	-	accuracy:space=0x1.22530a07188p-8,0x1.156785c10ap-10:time=0x1.cbc0f48a72p-10,0x1.d0feae1eep-11:event=0x1.828d729759ep-6,0x1.82f14a8ca18p-8:domain=0x1.ca0ep-34,0x0p+0:spread=0x0p+0
+put-large	estimated	0x1.861fcaf8e21p+4	backward-Euler-policy-v1:steps=15872:rows=49241557:map=18:roundoff=0x1.05ba2e8aefaa3p-37
+put-zero-dividend	unavailable	-	accuracy:space=0x1.4c33021e07bp-6,0x1.4bd89d4c8f4p-8:time=0x1.74bf2de31b8p-9,0x1.7c0490c613p-10:event=0x1.87e7771b86ap-7,0x1.8761b9123p-9:domain=0x1.a12acp-32,0x0p+0:spread=0x0p+0
+put-negative-rates	unavailable	-	accuracy:space=0x1.36c88d2b88p-12,0x1.48fd9ad4eap-9:time=0x1.3b7b781302p-9,0x1.41c2a63732p-10:event=0x1.93d88ff4744p-7,0x1.940c8fe4b6p-9:domain=0x1.71fep-34,0x0p+0:spread=0x0p+0
+put-coincident	unavailable	-	accuracy:space=0x1.2b50153226p-7,0x1.64458c9728p-11:time=0x1.1999a0aceap-9,0x1.1f0a511ebep-10:event=0x1.67d091d35dp-7,0x1.684a1f25aap-9:domain=0x1.a2p-35,0x0p+0:spread=0x0p+0
+put-delayed-after	unavailable	-	accuracy:space=0x1.03a2e1b6ep-13,0x1.5ddfc86b15p-9:time=0x1.88624ca1a3p-9,0x1.8f45ce863cp-10:event=0x1.9cff3f40f98p-7,0x1.a173044a32p-9:domain=0x1.60e9p-33,0x0p+0:spread=0x0p+0
+put-expiry-before	unavailable	-	arithmetic:residual roundoff resolution
+put-expiry-after	unavailable	-	arithmetic:residual roundoff resolution
+valuation-before	unavailable	-	arithmetic:residual roundoff resolution
+valuation-after	unavailable	-	arithmetic:residual roundoff resolution
+call-zero-time-both	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0
+call-zero-time-after-only	estimated	0x0p+0	cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0
+put-zero-time-both	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=6:map=0:roundoff=0x0p+0
+put-zero-time-after-only	estimated	0x1.4p+2	cash-deterministic-stopping:steps=0:rows=5:map=0:roundoff=0x0p+0
+deterministic-joint	estimated	0x1.4p+3	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x0p+0
+deterministic-interior	estimated	0x1.b8b3e18ad8479p+4	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1.c151b51f0ffabp-50
+deterministic-rounded-sum	estimated	0x1.3333333333334p-2	cash-deterministic-stopping:steps=0:rows=11:map=0:roundoff=0x1p-55
+zero-stock-negative-rate	estimated	0x1.00ce19f10d531p+7	absorbing-stock:steps=0:rows=1:map=0:roundoff=0x1.92161cd58af33p-54
+zero-strike-put	estimated	0x0p+0	zero-strike:steps=0:rows=1:map=0:roundoff=0x0p+0
+unrepresentable-joint	unavailable	-	arithmetic:nonfinite enclosure arithmetic
