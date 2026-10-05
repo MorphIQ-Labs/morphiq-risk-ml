@@ -73,4 +73,39 @@ Matched American regression uses the unchanged price driver and source-verified
 models; their ratio to American times is not a speedup. Broader optimization is
 #119; strict-target and source-artifact qualification remain #120.
 
-Final source-bound measurements and validation records accompany this report.
+The source-bound candidate is `b7cbc6af29ed98268d121ba587b5a4753a989527`.
+[Raw samples and build manifests](evidence/bermudan/performance/results.json)
+record an Apple M1 Pro, OCaml 5.3.0 Flambda, macOS 27, load 18.63–30.21.
+Task-owned compute finished before timing; this remained a shared machine.
+
+| Workload | Median price latency | Cumulative allocation / price |
+|---|---:|---:|
+| American, no cash: baseline → candidate | 140.25 → 139.76 ms | 12.8972 → 12.8980 MB |
+| American, cash: baseline → candidate | 407.80 → 407.28 ms | 42.1534 → 42.1540 MB |
+| Bermudan, two dates, no cash | 383.28 ms | 178.89 MB |
+| Bermudan, two dates and both cash sides | 557.42 ms | 259.14 MB |
+
+The American changes are within this session's timing variation, with under
+1 KB extra allocation per request. These different financial models do not
+establish an American/Bermudan speed comparison. Process peak RSS across samples
+was 7.73–8.19 MB, distinct from cumulative allocation. No deployment memory or
+latency budget has been accepted.
+
+**Bermudan allocation remains material and needs follow-up under #119 before
+compiled workloads.** A subsequent [allocation profile](evidence/bermudan/allocation-profile.json)
+attributes about 88% of no-cash and 81% of cash sampled allocation to enclosed
+exponentials used in the absorbing boundary's next-exercise discount. Continuous
+American exercise often has zero waiting time, so it avoids that computation.
+A bounded request-owned cache of exact slab/time-level boundary evaluations is
+a candidate for a separate correctness-preserving optimization pass; numerical
+recurrences or rounded-time cache keys require their own derivation. No such
+cache is implemented or measured here. Cash interpolation and all strict-target
+limitations remain relevant.
+
+Development/release suites, package/format checks, explicit bytecode contract
+controls, the locally installed public native/bytecode example, and ten affected
+mutation witnesses pass. [Validation records](evidence/bermudan/validation.json)
+retain the initial surviving boundary probe and its corrected numerical witness.
+The default seven-mutant CI lane is unchanged; full-catalog and cross-platform
+source-artifact qualification remain #120. No release or main-branch merge is
+implied.

@@ -1,0 +1,21 @@
+{
+  "runtime_revision": "b7cbc6af29ed98268d121ba587b5a4753a989527",
+  "checks": {
+    "development_suite": "passed",
+    "release_suite": "passed",
+    "format": "passed",
+    "package_build": "passed",
+    "native_bytecode_installed_example": "passed",
+    "explicit_bytecode_contracts": "passed",
+    "affected_mutants": 10,
+    "full_catalog": "not run"
+  },
+  "logs": {
+    "dev-final.log": "5411afb4f36a6cc01082d174a5dc9d6b40647e0aec271ac380734d11c5e0b052",
+    "release-suite.log": "6c66591cd0153a844341247185a43bec5375c82e44abafdb7559441f45b5593a",
+    "mutations.log": "4ad6c4cedf9f0912c7df8d8657c2ffa707469119c1fe4675443f0df1574a1236",
+    "boundary-mutation.log": "2a1013a79aad7fde37f74b62a187b2ba8a030053ae74cf0763b2ea60addaacef",
+    "bytecode-controls.log": "fd242bd838dcb6fbf69ee9700cfb44a47f9d3402fe9e890a533d58fc0d17fe95"
+  },
+  "mutation_disposition": "Initial boundary witness survived because upwinding disconnected zero; strengthened diffusion-dominated witness kills it. Other nine killed in prior combined run. No build or harness failure counted as a kill."
+}

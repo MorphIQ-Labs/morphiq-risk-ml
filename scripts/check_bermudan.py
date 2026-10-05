@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score the frozen cash campaign without turning missing prices into passes."""
+"""Score the frozen Bermudan campaign without turning missing prices into passes."""
 import argparse, collections, hashlib, json, math, pathlib, struct, tempfile
 from fractions import Fraction as F
 from american_reference_data import score_price, require, strict_json, capture
