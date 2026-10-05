@@ -291,6 +291,10 @@ let controls () =
                   in
                   expect "cached irregular feasible stopping lower"
                     (x.value >= lower -. error x -. arithmetic)
+              | Error e when r >= 0. ->
+                  failwith
+                    ("cached irregular feasible stopping availability: "
+                   ^ failure e)
               | _ -> ());
               expect "boundary reuse dependency identity" (actual = expected);
               List.iter
