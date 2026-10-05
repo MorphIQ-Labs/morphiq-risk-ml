@@ -51,7 +51,8 @@ let catalog =
       file = "lib/enclosure.ml";
       snippet = "pack_array terms (na + 2) (a.error +^ 0.0)";
       replacement =
-        "pack_array terms (Float.Array.length terms) (a.error +^ 0.0)";
+        "pack_array terms (if a.hi > 2.0 then Float.Array.length terms else na \
+         + 2) (a.error +^ 0.0)";
       killer = "enclosure_scalar";
       mechanism = "packing must not consume stale scalar-quotient scratch slots";
     };
