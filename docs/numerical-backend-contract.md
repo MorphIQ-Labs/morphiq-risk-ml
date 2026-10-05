@@ -18,9 +18,11 @@ being able to compile the source is insufficient.
 - Binary64 basic arithmetic and square root round to nearest, ties to even.
   Gradual underflow is required. Flush-to-zero, denormals-are-zero and changes
   to the floating-point rounding mode are outside the contract.
-- Each source multiplication rounds separately through `Morphiq_fp.( *. )`.
-  Only explicit `Float.fma` calls are fused. The FFI multiplication stub
-  compiles with contraction disabled. Double-word residual algorithms depend
+- Each OCaml multiplication rounds separately through `Morphiq_fp.( *. )`.
+  Native Bachelier kernel multiplication rounds separately with C contraction
+  disabled. Only explicit `Float.fma`, C `fma` or corresponding vector-intrinsic
+  calls are fused. The FFI multiplication stub also compiles with contraction
+  disabled. Double-word residual algorithms depend
   on the stated ordering and on normalized input words.
 - No reassociation, reciprocal replacement, approximate square root,
   fast-math, finite-only assumptions or signed-zero elimination is permitted

@@ -9,6 +9,47 @@ let finite x = Float.is_finite x
 let vol = ok (Vol.lognormal 0.2)
 let normal_vol = ok (Vol.normal 10.)
 
+let native_fast_batch () =
+  let requests =
+    Array.init 67 (fun i ->
+        Batch.Fast.Price
+          ( Batch.Bachelier,
+            {
+              forward = -.(5. +. (float (i mod 32) /. 2.));
+              strike = 0.;
+              time_to_expiry = 1.;
+              rate = 0.;
+            },
+            Side.Call,
+            normal_vol ))
+  in
+  requests.(3) <-
+    Batch.Fast.Price
+      ( Batch.Bachelier,
+        { forward = Float.nan; strike = 0.; time_to_expiry = 1.; rate = 0. },
+        Side.Call,
+        normal_vol );
+  requests.(11) <-
+    Batch.Fast.Price
+      ( Batch.Bachelier,
+        { forward = 1.; strike = 0.; time_to_expiry = 0.; rate = 0. },
+        Side.Call,
+        normal_vol );
+  let expected = Batch.Fast.run requests in
+  let compiled = Batch.Fast.compile requests in
+  requests.(0) <- requests.(3);
+  let same a b = Marshal.to_string a [] = Marshal.to_string b [] in
+  check
+    (same (Batch.Fast.execute compiled) expected)
+    "installed native batch replay";
+  let d = Domain.spawn (fun () -> Batch.Fast.execute compiled) in
+  let result = Batch.Fast.execute compiled in
+  check (same result (Domain.join d)) "installed native batch concurrency";
+  result.(0) <- Error Batch.Fast.Numerical_failure;
+  check
+    (same (Batch.Fast.execute compiled) expected)
+    "installed native batch output isolation"
+
 let batch_model : type i c. (i, c) Batch.model -> i -> c Vol.t -> unit =
  fun model inputs volatility ->
   let fast = Batch.Fast.Price (model, inputs, Side.Call, volatility) in
@@ -155,6 +196,7 @@ let execute workers plan =
   (List.rev !events, status)
 
 let () =
+  native_fast_batch ();
   let inputs =
     Black.Black76_carry.
       { forward = 100.; strike = 100.; time_to_expiry = 1.; rate = 0.02 }

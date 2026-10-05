@@ -66,7 +66,10 @@ module Fast : sig
   (** Admits each item once and snapshots the supplied array. Admission errors
       remain at their original indices. Do not mutate the array during this
       call; mutation afterwards cannot affect the compiled batch. O(n) retained
-      storage; callers control n. No scenario cube or worker pool is created. *)
+      storage; callers control n. Eligible Bachelier batches may pack private
+      native coordinates on ARM64; other items retain scalar execution. This
+      changes neither numerical gates nor failure classification. No scenario
+      cube or worker pool is created. *)
 
   val length : t -> int
 

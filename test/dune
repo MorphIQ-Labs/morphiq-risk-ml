@@ -40,11 +40,13 @@
  (modules fp_contract)
  (modes byte exe)
  (libraries morphiq_fp)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp
+   ../lib:../lib/fp
    (run %{test}))))
 
 (test
@@ -636,11 +638,13 @@
  (modules production_multi)
  (modes byte exe)
  (libraries morphiq_risk)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp
+   ../lib:../lib/fp
    (run %{test}))))
 
 (test
@@ -648,11 +652,13 @@
  (modules shared_greeks)
  (modes byte exe)
  (libraries morphiq_risk)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp
+   ../lib:../lib/fp
    (run %{test}))))
 
 (test
@@ -660,11 +666,13 @@
  (modules enclosure_sum)
  (modes byte exe)
  (libraries morphiq_risk zarith)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
    (run %{test}))))
 
 (test
@@ -672,11 +680,13 @@
  (modules fast_batch)
  (modes byte exe)
  (libraries morphiq_risk)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp
+   ../lib:../lib/fp
    (run %{test}))))
 
 (test
@@ -694,11 +704,13 @@
  (modules fast_planner)
  (modes byte exe)
  (libraries morphiq_risk)
- (deps ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
  (action
   (setenv
    CAML_LD_LIBRARY_PATH
-   ../lib/fp
+   ../lib:../lib/fp
    (run %{test}))))
 
 (library
@@ -744,6 +756,30 @@
  (name bachelier_preparation)
  (modules bachelier_preparation)
  (libraries fast_reference_cases morphiq_risk)
+ (action
+  (run
+   %{test}
+   %{dep:../oracle/fixtures/european.txt}
+   %{dep:../oracle/fixtures/displaced.txt})))
+
+(test
+ (name native_bachelier)
+ (modules native_bachelier)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(test
+ (name native_bachelier_reference)
+ (modules native_bachelier_reference)
+ (libraries morphiq_risk oracle_fixture float_score certified)
  (action
   (run
    %{test}
