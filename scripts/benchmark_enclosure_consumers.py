@@ -7,6 +7,8 @@ from pathlib import Path
 import statistics
 import time
 import os
+import platform
+import subprocess
 from benchmark_american_allocation import guard, require, sample, sha
 
 CASES = {'bsm-'+x for x in ('ordinary', 'tail', 'short', 'expiry', 'accuracy-failure')} | {'black76', 'displaced', 'normal'}
@@ -90,8 +92,11 @@ def main():
 
     guards(); args.output.mkdir(parents=True, exist_ok=False)
     report = dict(schema='enclosure-consumers-v1', complete=False, builds=builds, runs=[],
+                  platform=platform.platform(), cpu_count=os.cpu_count(),
                   collector_sha256=sha(__file__), criteria='<=10% median latency/allocation regression per price/end-to-end case',
                   aggregation='median of five process means, each retaining five inner samples of 40 calls')
+    if platform.system() == 'Darwin':
+        report['hardware'] = subprocess.check_output(['sysctl', '-n', 'machdep.cpu.brand_string'], text=True).strip()
     def save():
         (args.output/'results.json').write_text(json.dumps(report, indent=2, allow_nan=False)+'\n')
     try:
