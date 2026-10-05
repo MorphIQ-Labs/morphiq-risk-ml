@@ -66,6 +66,10 @@ been retired; it remains in Git history.
 
 ## Evidence and history
 
+[American scalar allocation optimization](results-american-allocation.md)
+records the measured removal of boxed row-loop temporaries, complete numerical
+compatibility and the remaining enclosure/batch work under #119.
+
 [Fast-batch SIMD integration](fast-simd-integration.md) records the staged
 preparation, native batch and planner ownership contracts.
 Its [native batch](results-native-bachelier-batches.md) and
