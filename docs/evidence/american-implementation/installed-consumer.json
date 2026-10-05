@@ -1,0 +1,126 @@
+[
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "dune",
+      "install",
+      "--build-dir",
+      "_build_release",
+      "--prefix",
+      "/tmp/morphiq-american-111-installed/prefix"
+    ],
+    "cwd": "/private/tmp/morphiq-american-bsm",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/tmp/morphiq-american-111-installed/prefix/lib",
+      "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-111-installed/prefix/lib/stublibs",
+      "ocamlfind",
+      "query",
+      "morphiq_risk_ml"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "/tmp/morphiq-american-111-installed/prefix/lib/morphiq_risk_ml\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/tmp/morphiq-american-111-installed/prefix/lib",
+      "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-111-installed/prefix/lib/stublibs",
+      "ocamlfind",
+      "ocamlopt",
+      "-package",
+      "morphiq_risk_ml",
+      "-linkpkg",
+      "-o",
+      "native",
+      "consumer.ml"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/tmp/morphiq-american-111-installed/consumer/native"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "Estimated American put: 6.65747803196 (backward-Euler-policy-v1); 11776 accepted time steps\nEstimated early-exercise premium: 0.327397404406\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/tmp/morphiq-american-111-installed/prefix/lib",
+      "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-111-installed/prefix/lib/stublibs",
+      "ocamlfind",
+      "ocamlc",
+      "-package",
+      "morphiq_risk_ml",
+      "-linkpkg",
+      "-o",
+      "bytecode",
+      "consumer.ml"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/tmp/morphiq-american-111-installed/consumer/bytecode"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "Estimated American put: 6.65747803196 (backward-Euler-policy-v1); 11776 accepted time steps\nEstimated early-exercise premium: 0.327397404406\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/tmp/morphiq-american-111-installed/prefix/lib",
+      "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-111-installed/prefix/lib/stublibs",
+      "ocamlfind",
+      "ocamlopt",
+      "-O3",
+      "-package",
+      "morphiq_risk_ml,unix",
+      "-linkpkg",
+      "-o",
+      "benchmark",
+      "driver.ml"
+    ],
+    "cwd": "/tmp/morphiq-american-111-installed/consumer",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

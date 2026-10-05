@@ -6,6 +6,8 @@ The [financial contract](american-model-contract.md) at #108 defines the target.
 This document selects the first implementation architecture, freezes engineering
 acceptance rules before pricing comparisons, and gives #116 a certification gate.
 Existing European APIs, numerical values and certificates are unchanged.
+The subsequent [#111 implementation and executed limits](american-pricing.md)
+are documented separately.
 
 Select a nonuniform **stock-space grid including zero**, a monotone spatial
 operator, backward Euler time stepping and policy iteration for the American

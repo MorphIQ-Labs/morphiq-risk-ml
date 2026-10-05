@@ -17,3 +17,13 @@
  (alias runtest)
  (action
   (run %{exe:exchange_price.exe})))
+
+(executable
+ (name american_price)
+ (modules american_price)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:american_price.exe})))

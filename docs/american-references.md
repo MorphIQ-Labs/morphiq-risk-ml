@@ -4,7 +4,8 @@
 initial reference corpus before runtime American pricing. It follows the
 [financial contract](american-model-contract.md) and
 [solver/assurance design](american-solver-design.md). **No runtime American API
-is implemented or qualified by this campaign.**
+is implemented or qualified by this campaign.** Subsequent runtime results
+are in the [#111 implementation evidence](american-pricing.md).
 
 The [frozen protocol](evidence/american-references/protocol.md) and
 [41-case corpus](evidence/american-references/cases-v1.json) were committed as

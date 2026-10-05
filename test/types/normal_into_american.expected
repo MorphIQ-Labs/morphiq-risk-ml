@@ -1,0 +1,9 @@
+File "normal_into_american.ml", line 4, characters 24-25:
+4 |   { p with volatility = v }
+                            ^
+Error: The value "v" has type "Morphiq_risk.Vol.normal Morphiq_risk.Vol.t"
+       but an expression was expected of type
+         "Morphiq_risk__.Vol.lognormal Morphiq_risk__.Vol.t" =
+           "Morphiq_risk__.Vol.lognormal Morphiq_risk.Vol.t"
+       Type "Morphiq_risk.Vol.normal" is not compatible with type
+         "Morphiq_risk__.Vol.lognormal" = "Morphiq_risk.Vol.lognormal"

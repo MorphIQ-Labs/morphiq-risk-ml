@@ -1,4 +1,4 @@
-(** MorphIQ Risk: European option pricing, implied volatility and Greeks.
+(** MorphIQ Risk: option pricing, implied volatility and Greeks.
 
     The models are defined in docs/model-contracts.md, and every served quantity
     is measured against those definitions (docs/results-slice.md). The stability
@@ -73,6 +73,7 @@ module Batch = Batch
 module Scenario = Scenario
 module Planner = Planner
 module Exchange = Exchange
+module Early_exercise = Early_exercise
 
 module Production : module type of Production
 (** Numerical building blocks, exposed for testing and research. They are not

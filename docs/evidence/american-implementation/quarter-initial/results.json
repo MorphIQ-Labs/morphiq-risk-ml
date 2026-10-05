@@ -1,0 +1,522 @@
+{
+  "schema": "american-runtime-campaign-v1",
+  "complete": true,
+  "mode": "quarter",
+  "configuration": "initial",
+  "counts": {
+    "runtime_unavailable": 23,
+    "pass": 17,
+    "unresolved_reference": 1
+  },
+  "rows": [
+    {
+      "id": "call-80",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.546aedc4f6dep-5,0x1.b503c2f6b1ap-7:time=0x1.ea1ddde1bd6p-9,0x1.e6612112bbcp-10:domain=0x1.29ep-41,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-100",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.46e88b860f6ep-2,0x1.27b9a8add6ep-4:time=0x1.1fde4f8ecc8p-6,0x1.204ed7d1914p-7:domain=0x1.93134p-31,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-120",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.3514ad8bfe5p-3,0x1.4b4f86a2c2p-5:time=0x1.9a11289d65p-8,0x1.a0ec601496p-9:domain=0x1.38p-43,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-short",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6313bf1d2de48p-5,0x1.49c33617a027dp-4:time=0x1.16d6bb6f3d8p-13,0x1.1783d16869p-14:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-long-high-vol",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:policies=0:rows=0:roundoff=0x1.7895068b7fce1p-55:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.fdcbdb70c3308p+2",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/1125899906842624",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/1125899906842624",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-negative-rate",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.9ba933439a25p-2,0x1.59d6b75a1c3cp-4:time=0x1.2718a41c062p-6,0x1.2afc06db25cp-7:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-negative-yield",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.647e9cab9b4ap-2,0x1.4207c28e57f8p-4:time=0x1.b68166d52b8p-7,0x1.b6d7a131e2p-8:domain=0x1.c65294p-27,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-low-vol",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.1a6b7ee1c2cp-8,0x1.6867d030bep-9:time=0x1.b2f9d4df7p-10,0x1.b3b56e34c8p-11:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-delayed",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.460e2ca47aacp-2,0x1.2737ee3ce6bp-4:time=0x1.204ed7d49c4p-7,0x1.208664e54c8p-8:domain=0x1.6668p-32,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "call-expiry",
+      "outcome": "estimated",
+      "detail": "expiry:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+2",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-spot",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-strike",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:policies=0:rows=0:roundoff=0x1.194cbcd360c51p-48:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.c54266cede01p+6",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/70368744177664",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/70368744177664",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-zero-scale",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-80",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.63ac26428ecp-5,0x1.e0329df817p-7:time=0x1.12c1f648dcp-9,0x1.2ca1ad521p-10:domain=0x1.74p-39,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-100",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6caae770d53cp-2,0x1.3bebc85913ccp-4:time=0x1.4ecbb85c148p-6,0x1.54ddb16b33ap-7:domain=0x1.575bep-29,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-120",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.49dc810478448p-3,0x1.5fa19ec610c6p-5:time=0x1.659b6d0641bp-8,0x1.825274ddf9ep-9:domain=0x1.61fb84p-29,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-short",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.636a993dd4b29p-5,0x1.4a1e12ebd0039p-4:time=0x1.17b8ef721b4p-13,0x1.184f00af5f8p-14:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-long-high-vol",
+      "outcome": "unavailable",
+      "detail": "arithmetic:residual roundoff resolution",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.4ea2eed125f1p-2,0x1.2eb8709e2edcp-4:time=0x1.02487bae868p-6,0x1.02a47c82fc4p-7:domain=0x1.feb4ap-31,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-negative-rate",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.67d6aa253328p-2,0x1.45444c09651p-4:time=0x1.6e0aee74a4cp-7,0x1.6e6fe170a7p-8:domain=0x1.524ep-34,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-negative-yield",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.255fc4897c6p-2,0x1.7e55f26de408p-4:time=0x1.11fd4b5fdd8p-6,0x1.17863a7eabcp-7:domain=0x1.cbb86cp-27,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-low-vol",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.bd2c8ee2ceb76p-8,0x1.3546043cfad74p-7:time=0x1.d5b931d63p-14,0x1.da4cb9b0ea4p-15:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "unresolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-delayed",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6d2d955603ffp-2,0x1.4a2f56c6edd8p-4:time=0x1.71505f2a8fcp-7,0x1.77733ff04bcp-8:domain=0x1.5315ap-30,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-expiry",
+      "outcome": "estimated",
+      "detail": "expiry:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-spot",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x1.92161cd58af33p-54:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.00ce19f10d531p+7",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/35184372088832",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/35184372088832",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-strike",
+      "outcome": "estimated",
+      "detail": "zero-strike:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-zero-scale",
+      "outcome": "estimated",
+      "detail": "absorbing-stock:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x0p+0",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "0",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-no-early",
+      "outcome": "estimated",
+      "detail": "European-reduction:steps=0:policies=0:rows=0:roundoff=0x1.f511bbf93eb4cp-51:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4e6b2e3d54dc2p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "call-dividend-yield",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=1472:policies=1607:rows=1357079:roundoff=0x1.46d344c3c5c9ep-32:grid=193:upper=0x1.ep+10:time=128:domains=2:switched=28",
+      "reference_status": "resolved",
+      "value": "0x1.4p+4",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "15/536870912",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "15/536870912",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "put-deep-exercise",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=1472:policies=1540:rows=1239850:roundoff=0x1.065193f635ec3p-36:grid=185:upper=0x1.9p+10:time=128:domains=2:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.9p+5",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-60",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=1472:policies=1506:rows=1369692:roundoff=0x1.0c8d8af7f03d1p-38:grid=205:upper=0x1.9p+10:time=128:domains=2:switched=40",
+      "reference_status": "resolved",
+      "value": "0x1.4p+5",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-90",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=1472:policies=1552:rows=1407878:roundoff=0x1.0c8d8af7f03d1p-38:grid=205:upper=0x1.9p+10:time=128:domains=2:switched=42",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "25/1073741824",
+        "scope": "empirical"
+      }
+    },
+    {
+      "id": "negative-boundaries-100",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.cc599d5d489cp-1,0x1.b9a1a758223bp-3:time=0x1.1429f30256dp-7,0x1.18227cff88ap-8:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "negative-boundaries-140",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.affbde3a26ba5p-13,0x1.712aec858c36cp-14:time=0x1.28ce7a2ec202cp-15,0x1.14ad5bd62ae98p-16:domain=0x0p+0,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "probability-stress",
+      "outcome": "estimated",
+      "detail": "backward-Euler-policy-v1:steps=1472:policies=1472:rows=1186904:roundoff=0x1.848100000299cp-40:grid=185:upper=0x1.9p+10:time=128:domains=2:switched=1934",
+      "reference_status": "unresolved",
+      "value": "0x1.7db50c2806cf6p-25",
+      "primary_comparison": {
+        "status": "unresolved_reference"
+      },
+      "comparison": {
+        "status": "unresolved_reference"
+      }
+    },
+    {
+      "id": "deterministic-interior",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x1.c71c71c71ea63p-51:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.bc71c71c71c72p+4",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/281474976710656",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/281474976710656",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "deterministic-negative-call",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x0p+0:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "deterministic-put",
+      "outcome": "estimated",
+      "detail": "deterministic-stopping:steps=0:policies=0:rows=0:roundoff=0x1.81b60d9da48d4p-55:grid=0:upper=0x0p+0:time=0:domains=0:switched=0",
+      "reference_status": "resolved",
+      "value": "0x1.4p+3",
+      "primary_comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      },
+      "comparison": {
+        "status": "pass",
+        "worst_error": "1/562949953421312",
+        "scope": "analytic_interval"
+      }
+    },
+    {
+      "id": "put-scaled--20",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6caae770d53cp-22,0x1.3bebc85913ccp-24:time=0x1.4ecbb85c148p-26,0x1.54ddb16b33ap-27:domain=0x1.575bep-49,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    },
+    {
+      "id": "put-scaled-20",
+      "outcome": "unavailable",
+      "detail": "accuracy:space=0x1.6caae770d53cp+18,0x1.3bebc85913ccp+16:time=0x1.4ecbb85c148p+14,0x1.54ddb16b33ap+13:domain=0x1.575bep-9,0x0p+0:spread=0x0p+0",
+      "reference_status": "resolved",
+      "comparison": {
+        "status": "runtime_unavailable"
+      }
+    }
+  ]
+}

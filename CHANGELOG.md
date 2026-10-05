@@ -5,6 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Estimated scalar American prices (#111)
+
+- Add `Early_exercise.Bsm`: opaque admitted inputs, bounded original OCaml
+  finite-difference/policy solver, analytical boundaries and deterministic
+  stopping, delayed opening, signed rates/yields, cancellation and optional
+  exercise/premium diagnostics. Results remain estimated-only; no European
+  certificate or default numerical behavior changes.
+- Retain all six frozen-corpus campaigns, including strict-request failures
+  and unresolved references. General prices are available under the separate
+  loose engineering configuration; that does not establish the original tight
+  target. See [capability, derivation and evidence](docs/american-pricing.md).
+- Add native/bytecode controls, negative type tests and two optional numerical
+  mutants; preserve the seven-mutant default CI lane and European replay digest.
+
 ### Initial American reference corpus (#110)
 
 - Freeze and execute independent American reference generation before runtime

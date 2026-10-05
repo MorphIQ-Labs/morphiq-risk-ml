@@ -864,3 +864,34 @@
   ../scripts/test_benchmark_native_tiles.py)
  (action
   (run python3 %{dep:../scripts/test_benchmark_native_tiles.py})))
+
+(test
+ (name american_pricing)
+ (modules american_pricing)
+ (modes byte exe)
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_american_runtime.py
+  ../scripts/test_american_runtime.py
+  ../scripts/american_reference_data.py
+  ../docs/evidence/american-references/cases-v1.json
+  ../docs/evidence/american-references/references-v1.json)
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_american_runtime.py})
+   (run
+    python3
+    %{dep:../scripts/check_american_runtime.py}
+    --executable
+    %{exe:american_pricing.exe}))))
