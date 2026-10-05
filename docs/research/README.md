@@ -64,6 +64,13 @@ the [public probe](../../scripts/check_american_solver_design.py) is original
 exact-rational algebra evidence and has no private archive dependency.
 This is a new acquisition record, not a rewrite of the historical manifest.
 
+The [#110 executable reference campaign](../american-references.md) reuses the
+pinned QuantLib source and verified build; its expanded source/build/runner hashes
+are in the [build record](../evidence/american-references/build.json). The stock
+lattice and analytical reference code are original derivations, not translations
+of a comparator. No new paper was acquired. The #109 archive preservation has
+landed via research-library PR #18 at `92c1abb0d42f98437af5d80d2525fe0e69f027a3`.
+
 ## Unavailable reference
 
 **Fischer Black (1976), The pricing of commodity contracts.** [Publisher](https://www.sciencedirect.com/science/article/pii/0304405X76900246).

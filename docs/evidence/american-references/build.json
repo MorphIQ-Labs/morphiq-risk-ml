@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "acquired_at_utc": "2026-10-05T13:52:02.327138+00:00",
+  "corpus_freeze_commit": "436988409f08efeaf7b4910e37ec0c5e8569493a",
+  "runtime_change": false,
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "quantlib_revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "quantlib_status": "clean",
+  "quantlib_build": "Reused the source-bound build recorded in docs/evidence/exchange-implementation/quantlib-build.json. cmake --build /tmp/morphiq-exchange-ql-build -j 2 returned ninja: no work to do. Library/config/cache hashes verified identical; no fresh full QuantLib rebuild claimed.",
+  "compiler_flags": [
+    "-std=c++17",
+    "-O3",
+    "-ffp-contract=off",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "header_search": "QuantLib/Boost headers passed as system includes; project adapter/header retain warning-as-error checks.",
+  "commands": {
+    "lattice": "clang++ -std=c++17 -O3 -ffp-contract=off -Wall -Wextra -Werror scripts/american_lattice.cpp -o lattice",
+    "quantlib": "clang++ -std=c++17 -O3 -ffp-contract=off -Wall -Wextra -Werror -I/tmp/morphiq-exchange-ql-build -isystem /Users/stephen/Development/MorphIQ-Labs/QuantLib -isystem /opt/homebrew/include scripts/american_quantlib.cpp -L/tmp/morphiq-exchange-ql-build/ql -lQuantLib -Wl,-rpath,/tmp/morphiq-exchange-ql-build/ql -o quantlib"
+  },
+  "binaries": {
+    "lattice": "e9516cef6b0c660ea7e51e556805feb88da7205bd8ab6b2d80e51ed5a14c0fd8",
+    "quantlib": "879e9c073dba4ee188d62331519dc892d203fb28a7ac1693f08cdefd9cf5d2dc"
+  },
+  "quantlib_build_sha256": {
+    "CMakeCache.txt": "05b68832ac5c51192a0a50659081d90c5a678966da4eba87e37121ded8ffa1a6",
+    "ql/config.hpp": "578dea77fa21c11b0eb9dc9d7174e3942757b10ca9d26813f3a48ca071c1b932",
+    "ql/libQuantLib.1.44.0.dylib": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161"
+  },
+  "quantlib_source_sha256": {
+    "LICENSE.TXT": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+    "ql/pricingengines/vanilla/fdblackscholesvanillaengine.cpp": "4d049de6c97e299575ab78eae8c56598e53d0233edd561e0797d36253a40a877",
+    "ql/pricingengines/vanilla/fdblackscholesvanillaengine.hpp": "c4758ecc3af00fa932425a35e4fc6dcd5a375ac64a54a8d80d10fa190e5a15c0",
+    "ql/methods/finitedifferences/solvers/fdmbackwardsolver.cpp": "4663c02b1fd89424c266559b17cf23837acbeee7c10a86ed04c6a95b22abd503",
+    "ql/methods/finitedifferences/stepconditions/fdmstepconditioncomposite.cpp": "6f720f38d6afc17343a3b4d5555266b453663eb6b859e7b00204f8857c25c959"
+  },
+  "provenance": "Original adapter and lattice; no third-party runtime implementation copied. QuantLib terms and archive in #109 source record. No new paper acquisition in #110.",
+  "scope": "Serial engineering reference run; no timing/latency or universal accuracy claim.",
+  "preliminary_failures": [
+    "First attempt retained lattice outcomes but could not start the not-yet-built canonical runner; no complete fixture published.",
+    "Second attempt retained both raw streams but bounded-size endpoint export rejected a huge exact denominator for a tiny probability. Outward binary64 endpoints are now checked by Arb; raw engine outcomes remain byte-identical."
+  ],
+  "final_export": "Analytical/reference export replayed from verified original input streams, runner source hashes, executable hashes and raw stream hashes. Primary results unchanged; also records the epsilon/4 challenge specified in #109. No canonical timing claim.",
+  "manual_controls": {
+    "native-controls": [
+      {
+        "runner": "lattice",
+        "status": "pass",
+        "controls": [
+          "help",
+          "version",
+          "end-of-options",
+          "unknown argument",
+          "truncated input",
+          "nonfinite input",
+          "node budget"
+        ]
+      },
+      {
+        "runner": "quantlib",
+        "status": "pass",
+        "controls": [
+          "help",
+          "version",
+          "end-of-options",
+          "unknown argument",
+          "truncated input",
+          "nonfinite input",
+          "node budget"
+        ]
+      }
+    ],
+    "cache-controls": [
+      {
+        "changed": "lattice.tsv",
+        "rejection": "reused raw stream mismatch",
+        "status": "pass"
+      },
+      {
+        "changed": "lattice-input.txt",
+        "rejection": "reused raw input mismatch",
+        "status": "pass"
+      }
+    ]
+  },
+  "endpoint_export_control": "Arb at 256 bits: exp(-100000000) exported to finite outward endpoints with bounded (<400 character) rational strings, containment checked. No exact positive value replaced by an exact-zero reference."
+}

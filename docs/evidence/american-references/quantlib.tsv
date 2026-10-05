@@ -1,0 +1,164 @@
+call-80	128	finite	0x1.87fd0e62acdebp+0	-	-	exact word time mapping
+call-80	256	finite	0x1.87e6f10dd4fafp+0	-	-	exact word time mapping
+call-80	512	finite	0x1.87e1738b233bcp+0	-	-	exact word time mapping
+call-80	1024	finite	0x1.87e0162093471p+0	-	-	exact word time mapping
+call-100	128	finite	0x1.275d97dfedaddp+3	-	-	exact word time mapping
+call-100	256	finite	0x1.274a100541e47p+3	-	-	exact word time mapping
+call-100	512	finite	0x1.27453b042ae3bp+3	-	-	exact word time mapping
+call-100	1024	finite	0x1.2744075ff5c21p+3	-	-	exact word time mapping
+call-120	128	finite	0x1.8123b6d515087p+4	-	-	exact word time mapping
+call-120	256	finite	0x1.8104af4c49dcbp+4	-	-	exact word time mapping
+call-120	512	finite	0x1.80fd00a5fe7dcp+4	-	-	exact word time mapping
+call-120	1024	finite	0x1.80fb17737c65bp+4	-	-	exact word time mapping
+call-short	128	finite	0x1.b2f48157eac58p-2	-	-	exact word time mapping
+call-short	256	finite	0x1.b2e05ad8102f8p-2	-	-	exact word time mapping
+call-short	512	finite	0x1.b2db5ed13cedp-2	-	-	exact word time mapping
+call-short	1024	finite	0x1.b2da21ade80bfp-2	-	-	exact word time mapping
+call-long-high-vol	128	finite	0x1.4208c0f397bf1p+6	-	-	exact word time mapping
+call-long-high-vol	256	finite	0x1.42d72101705f9p+6	-	-	exact word time mapping
+call-long-high-vol	512	finite	0x1.430e2246b95a1p+6	-	-	exact word time mapping
+call-long-high-vol	1024	finite	0x1.431db30496d6p+6	-	-	exact word time mapping
+call-zero-rate-yield	128	finite	0x1.fdf4f0bf1132dp+2	-	-	exact word time mapping
+call-zero-rate-yield	256	finite	0x1.fdd608f4ea5e9p+2	-	-	exact word time mapping
+call-zero-rate-yield	512	finite	0x1.fdce63e281936p+2	-	-	exact word time mapping
+call-zero-rate-yield	1024	finite	0x1.fdcc7d300d5fdp+2	-	-	exact word time mapping
+call-negative-rate	128	finite	0x1.6a448f36fc37dp+2	-	-	exact word time mapping
+call-negative-rate	256	finite	0x1.6a90abe00aa8p+2	-	-	exact word time mapping
+call-negative-rate	512	finite	0x1.6ab05923d5b29p+2	-	-	exact word time mapping
+call-negative-rate	1024	finite	0x1.6abe976969aa8p+2	-	-	exact word time mapping
+call-negative-yield	128	finite	0x1.8f5542e0d9988p+3	-	-	exact word time mapping
+call-negative-yield	256	finite	0x1.8f38a001b868p+3	-	-	exact word time mapping
+call-negative-yield	512	finite	0x1.8f318973d2476p+3	-	-	exact word time mapping
+call-negative-yield	1024	finite	0x1.8f2fc6047d742p+3	-	-	exact word time mapping
+call-low-vol	128	finite	0x1.72ec872c5ad39p+1	-	-	exact word time mapping
+call-low-vol	256	finite	0x1.72d5e56b15e25p+1	-	-	exact word time mapping
+call-low-vol	512	finite	0x1.72d04ad398424p+1	-	-	exact word time mapping
+call-low-vol	1024	finite	0x1.72cee5e2f58f5p+1	-	-	exact word time mapping
+call-delayed	128	finite	0x1.275d97dfedabep+3	-	-	exact word time mapping
+call-delayed	256	finite	0x1.274a100541e3bp+3	-	-	exact word time mapping
+call-delayed	512	finite	0x1.27453b042ae3ap+3	-	-	exact word time mapping
+call-delayed	1024	finite	0x1.2744075ff5c19p+3	-	-	exact word time mapping
+call-expiry	128	incompatible	0x0p+0	-	-	Instrument expiry convention
+call-expiry	256	incompatible	0x0p+0	-	-	Instrument expiry convention
+call-expiry	512	incompatible	0x0p+0	-	-	Instrument expiry convention
+call-expiry	1024	incompatible	0x0p+0	-	-	Instrument expiry convention
+call-zero-spot	128	exception	-	-	-	negative or null underlying given
+call-zero-spot	256	exception	-	-	-	negative or null underlying given
+call-zero-spot	512	exception	-	-	-	negative or null underlying given
+call-zero-spot	1024	exception	-	-	-	negative or null underlying given
+call-zero-strike	128	finite	0x1.c545643df6d47p+6	-	-	exact word time mapping
+call-zero-strike	256	finite	0x1.c54324d34fc11p+6	-	-	exact word time mapping
+call-zero-strike	512	finite	0x1.c542962563f9dp+6	-	-	exact word time mapping
+call-zero-strike	1024	finite	0x1.c542729effaebp+6	-	-	exact word time mapping
+call-zero-scale	128	exception	-	-	-	negative or null underlying given
+call-zero-scale	256	exception	-	-	-	negative or null underlying given
+call-zero-scale	512	exception	-	-	-	negative or null underlying given
+call-zero-scale	1024	exception	-	-	-	negative or null underlying given
+put-80	128	finite	0x1.40ededf76ee14p+4	-	-	exact word time mapping
+put-80	256	finite	0x1.40fe1488331c4p+4	-	-	exact word time mapping
+put-80	512	finite	0x1.41058bfd61d48p+4	-	-	exact word time mapping
+put-80	1024	finite	0x1.4108e5075beadp+4	-	-	exact word time mapping
+put-100	128	finite	0x1.a9f76102ffa42p+2	-	-	exact word time mapping
+put-100	256	finite	0x1.aa25577d10a13p+2	-	-	exact word time mapping
+put-100	512	finite	0x1.aa388cab1ae98p+2	-	-	exact word time mapping
+put-100	1024	finite	0x1.aa411055089c7p+2	-	-	exact word time mapping
+put-120	128	finite	0x1.9bec00f44019bp+0	-	-	exact word time mapping
+put-120	256	finite	0x1.9c3a41402a897p+0	-	-	exact word time mapping
+put-120	512	finite	0x1.9c5a176b613bp+0	-	-	exact word time mapping
+put-120	1024	finite	0x1.9c67cff57f64ep+0	-	-	exact word time mapping
+put-short	128	finite	0x1.aaa70d9c59679p-2	-	-	exact word time mapping
+put-short	256	finite	0x1.aaaee8a3aa9p-2	-	-	exact word time mapping
+put-short	512	finite	0x1.aab219752fcccp-2	-	-	exact word time mapping
+put-short	1024	finite	0x1.aab33a366a226p-2	-	-	exact word time mapping
+put-long-high-vol	128	finite	0x1.14f47e44ce437p+6	-	-	exact word time mapping
+put-long-high-vol	256	finite	0x1.15211cdffb7bfp+6	-	-	exact word time mapping
+put-long-high-vol	512	finite	0x1.1536c68aa5376p+6	-	-	exact word time mapping
+put-long-high-vol	1024	finite	0x1.1540d7bbf3142p+6	-	-	exact word time mapping
+put-zero-rate-yield	128	finite	0x1.fde202d29a544p+2	-	-	exact word time mapping
+put-zero-rate-yield	256	finite	0x1.fdd15762053ep+2	-	-	exact word time mapping
+put-zero-rate-yield	512	finite	0x1.fdcd38b25dc9ep+2	-	-	exact word time mapping
+put-zero-rate-yield	1024	finite	0x1.fdcc328b20f1ep+2	-	-	exact word time mapping
+put-negative-rate	128	finite	0x1.845423ca1ca25p+3	-	-	exact word time mapping
+put-negative-rate	256	finite	0x1.844777c3cbdbap+3	-	-	exact word time mapping
+put-negative-rate	512	finite	0x1.8444545f8b02cp+3	-	-	exact word time mapping
+put-negative-rate	1024	finite	0x1.84438c75b3dbfp+3	-	-	exact word time mapping
+put-negative-yield	128	finite	0x1.55d9fcd9f3c8ep+2	-	-	exact word time mapping
+put-negative-yield	256	finite	0x1.56274e97c7345p+2	-	-	exact word time mapping
+put-negative-yield	512	finite	0x1.56490be480e58p+2	-	-	exact word time mapping
+put-negative-yield	1024	finite	0x1.5658bbdd99212p+2	-	-	exact word time mapping
+put-low-vol	128	finite	0x1.9a38515ece4e6p-7	-	-	exact word time mapping
+put-low-vol	256	finite	0x1.d85f282fdb1a8p-7	-	-	exact word time mapping
+put-low-vol	512	finite	0x1.e553777d0b234p-7	-	-	exact word time mapping
+put-low-vol	1024	finite	0x1.edcbd602b6818p-7	-	-	exact word time mapping
+put-delayed	128	finite	0x1.a7e5cf0a0844bp+2	-	-	exact word time mapping
+put-delayed	256	finite	0x1.a8016204299ffp+2	-	-	exact word time mapping
+put-delayed	512	finite	0x1.a821cc5ea768ep+2	-	-	exact word time mapping
+put-delayed	1024	finite	0x1.a825887246e02p+2	-	-	exact word time mapping
+put-expiry	128	incompatible	0x0p+0	-	-	Instrument expiry convention
+put-expiry	256	incompatible	0x0p+0	-	-	Instrument expiry convention
+put-expiry	512	incompatible	0x0p+0	-	-	Instrument expiry convention
+put-expiry	1024	incompatible	0x0p+0	-	-	Instrument expiry convention
+put-zero-spot	128	exception	-	-	-	negative or null underlying given
+put-zero-spot	256	exception	-	-	-	negative or null underlying given
+put-zero-spot	512	exception	-	-	-	negative or null underlying given
+put-zero-spot	1024	exception	-	-	-	negative or null underlying given
+put-zero-strike	128	finite	0x0p+0	-	-	exact word time mapping
+put-zero-strike	256	finite	0x0p+0	-	-	exact word time mapping
+put-zero-strike	512	finite	0x0p+0	-	-	exact word time mapping
+put-zero-strike	1024	finite	0x0p+0	-	-	exact word time mapping
+put-zero-scale	128	exception	-	-	-	negative or null underlying given
+put-zero-scale	256	exception	-	-	-	negative or null underlying given
+put-zero-scale	512	exception	-	-	-	negative or null underlying given
+put-zero-scale	1024	exception	-	-	-	negative or null underlying given
+call-no-early	128	finite	0x1.4e89cfbe154cp+3	-	-	exact word time mapping
+call-no-early	256	finite	0x1.4e72c5cd8175p+3	-	-	exact word time mapping
+call-no-early	512	finite	0x1.4e6d11f816defp+3	-	-	exact word time mapping
+call-no-early	1024	finite	0x1.4e6ba6e7bf1dap+3	-	-	exact word time mapping
+call-dividend-yield	128	finite	0x1.3ffff589607eap+4	-	-	exact word time mapping
+call-dividend-yield	256	finite	0x1.400000007ea55p+4	-	-	exact word time mapping
+call-dividend-yield	512	finite	0x1.3fffffffff4ddp+4	-	-	exact word time mapping
+call-dividend-yield	1024	finite	0x1.3ffffffffffe1p+4	-	-	exact word time mapping
+put-deep-exercise	128	finite	0x1.900000028cba3p+5	-	-	exact word time mapping
+put-deep-exercise	256	finite	0x1.9000000050c1p+5	-	-	exact word time mapping
+put-deep-exercise	512	finite	0x1.9000000005e1ep+5	-	-	exact word time mapping
+put-deep-exercise	1024	finite	0x1.9000000000305p+5	-	-	exact word time mapping
+negative-boundaries-60	128	finite	0x1.40000000d4069p+5	-	-	exact word time mapping
+negative-boundaries-60	256	finite	0x1.4000000003f04p+5	-	-	exact word time mapping
+negative-boundaries-60	512	finite	0x1.4000000000753p+5	-	-	exact word time mapping
+negative-boundaries-60	1024	finite	0x1.400000000008dp+5	-	-	exact word time mapping
+negative-boundaries-90	128	finite	0x1.40008b392b708p+3	-	-	exact word time mapping
+negative-boundaries-90	256	finite	0x1.400005832b03bp+3	-	-	exact word time mapping
+negative-boundaries-90	512	finite	0x1.400000099299p+3	-	-	exact word time mapping
+negative-boundaries-90	1024	finite	0x1.4000000001383p+3	-	-	exact word time mapping
+negative-boundaries-100	128	finite	0x1.5f1b011b9a26p+1	-	-	exact word time mapping
+negative-boundaries-100	256	finite	0x1.5f507b9912a4ep+1	-	-	exact word time mapping
+negative-boundaries-100	512	finite	0x1.5f670bcb558e6p+1	-	-	exact word time mapping
+negative-boundaries-100	1024	finite	0x1.5f7133e84d6b8p+1	-	-	exact word time mapping
+negative-boundaries-140	128	finite	0x1.2236d0f701962p-14	-	-	exact word time mapping
+negative-boundaries-140	256	finite	0x1.19b7b2a5a5667p-14	-	-	exact word time mapping
+negative-boundaries-140	512	finite	0x1.17bb15e99031fp-14	-	-	exact word time mapping
+negative-boundaries-140	1024	finite	0x1.174d89928255bp-14	-	-	exact word time mapping
+probability-stress	128	finite	0x1.05f6093eb0081p-8	-	-	exact word time mapping
+probability-stress	256	finite	0x1.31dd4eb9934abp-9	-	-	exact word time mapping
+probability-stress	512	finite	0x1.55d45dd21674p-11	-	-	exact word time mapping
+probability-stress	1024	finite	0x1.136668ae2858p-12	-	-	exact word time mapping
+deterministic-interior	128	finite	0x1.bc7a354b4e2f1p+4	-	-	exact word time mapping
+deterministic-interior	256	finite	0x1.bc73ff96ca4acp+4	-	-	exact word time mapping
+deterministic-interior	512	finite	0x1.bc72660355277p+4	-	-	exact word time mapping
+deterministic-interior	1024	finite	0x1.bc71ee2c18ddep+4	-	-	exact word time mapping
+deterministic-negative-call	128	finite	0x1.4000000000018p+3	-	-	exact word time mapping
+deterministic-negative-call	256	finite	0x1.4000000000018p+3	-	-	exact word time mapping
+deterministic-negative-call	512	finite	0x1.4000000000018p+3	-	-	exact word time mapping
+deterministic-negative-call	1024	finite	0x1.4000000000018p+3	-	-	exact word time mapping
+deterministic-put	128	finite	0x1.3ffffffffffe8p+3	-	-	exact word time mapping
+deterministic-put	256	finite	0x1.3ffffffffffe8p+3	-	-	exact word time mapping
+deterministic-put	512	finite	0x1.3ffffffffffe8p+3	-	-	exact word time mapping
+deterministic-put	1024	finite	0x1.3ffffffffffe8p+3	-	-	exact word time mapping
+put-scaled--20	128	finite	0x1.a9f76102ffa37p-18	-	-	exact word time mapping
+put-scaled--20	256	finite	0x1.aa25577d109a6p-18	-	-	exact word time mapping
+put-scaled--20	512	finite	0x1.aa388cab1abbap-18	-	-	exact word time mapping
+put-scaled--20	1024	finite	0x1.aa41105508846p-18	-	-	exact word time mapping
+put-scaled-20	128	finite	0x1.a9f76102ffa94p+22	-	-	exact word time mapping
+put-scaled-20	256	finite	0x1.aa25577d109b2p+22	-	-	exact word time mapping
+put-scaled-20	512	finite	0x1.aa388cab1ad3dp+22	-	-	exact word time mapping
+put-scaled-20	1024	finite	0x1.aa4110550853bp+22	-	-	exact word time mapping
