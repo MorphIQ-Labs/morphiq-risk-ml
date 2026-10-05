@@ -9,9 +9,8 @@ inputs, not a universal proof.
 
 This file is the repository's engineering contract and single source of truth
 for agent instructions. `CLAUDE.md` contains only `@AGENTS.md`.
-The policies are adapted from `ai-program/AGENTS.md` and the root and engine
-guides in `ferro-risk`, specialized for this OCaml project. Their Rust commands,
-GitLab workflows and release automation are not this repository's tooling.
+The policies are specialized for this OCaml project. Use this repository's
+commands, workflows and release controls.
 Explicit user instructions take precedence; do not turn routine implementation
 choices into additional approval requirements.
 
@@ -20,9 +19,9 @@ choices into additional approval requirements.
 `morphiq-risk-ml` is an independent OCaml implementation of the exact European
 option family: BSM, Black-76, displaced Black and Bachelier, with prices,
 implied volatility and ten analytic Greeks. It works from first principles,
-research and canonical implementations; it is not a line-by-line Rust port.
-FerroRisk is an optional independent comparison, not a runtime dependency or
-the definition of correctness.
+research and canonical implementations. External comparisons provide
+supplementary evidence; model definitions and analytical contracts govern
+correctness.
 
 Read the [documentation guide](docs/README.md), [model contracts](docs/model-contracts.md),
 [error analysis](docs/error-analysis.md), [oracle methodology](docs/oracles.md),
@@ -110,7 +109,6 @@ in [docs/oracles.md](docs/oracles.md):
 
 ```sh
 oracle/build.sh                            # regenerate all reference fixtures
-scripts/ferro_crosscheck.sh                 # optional external comparison
 dune exec scripts/mutation/mutation.exe -- --core
 dune exec scripts/mutation/mutation.exe -- quotient-remainder
 dune exec scripts/mutation/mutation.exe -- --list
@@ -158,9 +156,9 @@ that no discriminating test can exist.
 The normal Dune development build treats enabled warnings as errors; the
 mutation profile deliberately differs. No separate OCaml lint tool, pre-commit
 hook, performance threshold gate, fuzz campaign or proof-assistant CI job is
-configured here. Do not report such gates as passing or borrow those claims
-from FerroRisk. Validate workflow changes locally with `actionlint`, and
-exercise changed gate scripts and their failure controls before pushing them.
+configured here. Do not report absent gates as passing. Validate workflow
+changes locally with `actionlint`, and exercise changed gate scripts and their
+failure controls before pushing them.
 
 ## Numerical Contracts and Assurance
 
@@ -178,10 +176,9 @@ exercise changed gate scripts and their failure controls before pushing them.
    applicable canonical implementation at a recorded revision; retain its
    baseline and independently refine from original inputs.
    Identify absent counterparts and differing conventions. Do not infer that
-   agreement with FerroRisk, QuantLib or another binary64 library proves
-   accuracy; this repository does not yet have FerroRisk's mandatory QuantLib
-   comparison gate. Document discrepancies per case, including input-conversion
-   effects and unresolved differences, rather than only aggregate improvement.
+   agreement with QuantLib or another binary64 library proves accuracy.
+   Document discrepancies per case, including input-conversion effects and
+   unresolved differences, rather than only aggregate improvement.
 4. **Derive bounds before scoring.** Separate analytical truncation error,
    rounding, conditioning, input transformation and reference uncertainty.
    Measured envelopes are regression evidence, not derived guarantees. Never
@@ -293,9 +290,8 @@ not tail-latency guarantees.
 Record hardware, OS, compiler/options, source revision, exact configuration,
 input corpus, binary hash, warm-up, variation and host load. Finish task-owned
 builds, tests and profilers before timing; use repeated processes and alternate
-comparison order. Retain
-all raw samples and partial evidence on failure. A quieter shared machine is
-not an isolated host. Source guards cover staged, unstaged and untracked
+comparison order. Retain all raw samples and partial evidence on failure.
+A quieter shared machine is not an isolated host. Source guards cover staged, unstaged and untracked
 changes; a binary hash alone does not establish its build provenance.
 Historical reports retain their measured revisions and hashes.
 
@@ -370,8 +366,8 @@ benchmark build products.
 
 ## Issues, Pull Requests, and Releases
 
-This project uses **GitHub**, `gh`, and `.github/workflows/`. Do not copy
-FerroRisk's GitLab origin, CI stages, Cargo gates or release commands here.
+This project uses **GitHub**, `gh`, and `.github/workflows/`. Use the OCaml/Dune
+checks and GitHub release controls documented here.
 
 - Every non-bug work issue has a **native GitHub Epic parent**. An `epic:`
   title or body checklist alone is insufficient. Set the actual issue type

@@ -2,7 +2,7 @@
 
 This project's own references check accuracy independently of its analytical error bounds. They are generated from the model definitions (docs/model-contracts.md) in mpmath, independently of the library's algorithms. The fixtures are committed, hashed and checked in CI, so the tests need no downloaded reference data. Test builds use Python 3's standard library to verify the analytical majorants; mpmath is needed only to regenerate fixtures.
 
-The approach is modelled on FerroRisk's oracle practice: pinned generators, agreement between precisions, provenance hashes, and analytic bounds for values below binary64. FerroRisk's data serves only as an optional second opinion (`scripts/ferro_crosscheck.sh`). It is never ground truth.
+The oracle workflow uses pinned generators, agreement between precisions, provenance hashes, and analytic bounds for values below binary64. External comparison data provides supplementary evidence, not ground truth.
 
 See [oracle assurance](oracle-assurance.md) for the exact finite ULP scorer,
 complete-input gates, failure controls and bounded independent counterexample
@@ -14,7 +14,7 @@ reduction. Precision agreement alone never establishes a reference proof.
 | --- | --- | --- |
 | `elementary` | `gen_elementary.py` | exp, expm1, log, log1p over every binade, the reduction boundaries and a random sample (111k); each reference carries its residual, exact − reference, for fractional-ULP scoring |
 | `normal` | `gen_normal.py` | Φ, φ, ln Φ, erf, erfc, erfcx and Φ⁻¹ over every binade, old/new interval neighbors, underflow and overflow (130,394; all original 82,000 rows retained) |
-| `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid on the design of FerroRisk #440, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
+| `european` | `gen_european.py` | BSM, Black-76 and Bachelier prices (57k), in three families: a grid over scale, moneyness, maturity and volatility, carry-cancelled forwards (`cancel`), and a fixed-seed random sample |
 | `displaced` | `gen_displaced.py` | displaced Black on exact sums (41,768); 63% have an unrepresentable F + d or K + d |
 | `iv` | `gen_iv.py` | implied-volatility outcomes, exact roots and rounding cells for all four models, on a grid and a random sample |
 | `dd` | `gen_dd.py` | 86,145 three-word/exponent references, including 47,719 nonzero low words, every exponential reduction boundary and subnormals |
@@ -71,13 +71,13 @@ ULP-only comparison. `MORPHIQ_ORACLE_TRACE` emits fixture-aligned result words;
 
 ## What the oracles have caught
 
-These were found by this project's own oracles and property tests, not FerroRisk's. The details are in docs/results-*.md and the error analysis.
+These were found by this project's own oracles and property tests. The details are in docs/results-*.md and the error analysis.
 
 - **The log-moneyness quotient remainder** was rounded. That cost about 1e-33 in x, and the error survives a cancellation to 1e-18.
 - **The intrinsic's formulation** needed choosing by the size of x's parts. A carry-cancelled forward was 13 ULP off at zero variance.
 - **The scale exponent** used truncating division, which broke exact homogeneity.
 - **A subnormal quote** lost bits to rescaling before the inverse's final correction.
-- **"Within 2 ULP of the exact root"** held on FerroRisk's grid but not in general. The scorer now executes price/vega certificates and retains historical conditioned quality gates; Jäckel's attainable accuracy alone is not an implementation error guarantee.
+- **"Within 2 ULP of the exact root"** held on the historical reference grid but not in general. The scorer now executes price/vega certificates and retains historical conditioned quality gates; Jäckel's attainable accuracy alone is not an implementation error guarantee.
 - **In the generators themselves:** a false agreed zero at T = 1e-200, and an unconverged root returned as a value. Both are fixed by rules 3 and 4.
 
 ## Bound and scorer controls

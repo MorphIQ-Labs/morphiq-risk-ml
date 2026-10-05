@@ -2,11 +2,12 @@
 
 Measured on 2026-10-02 with OCaml 5.3.0 + flambda (`-O3`).
 
-## Historical FerroRisk cross-check
+## Historical external-reference cross-check
 
-Scored against FerroRisk's Greek derivative reference (`greek_derivative_reference.json`): 61,621 Greek values for the four slice models. Each value comes from mpmath at two precisions and, where both exist, from two independent routes (explicit closed form and differentiated price).
+Scored against the external `greek_derivative_reference.json` dataset, whose source and format are identified by the [converter](../oracle/convert_greeks.py): 61,621 Greek values for the four slice models. Each value comes from mpmath at two precisions and, where both exist, from two independent routes (explicit closed form and differentiated price).
 
-Conventions are FerroRisk's:
+The dataset uses these conventions:
+
 - Time Greeks are `−∂/∂T / 365`.
 - Vega is per unit volatility.
 - Forward models' rho is `−T·V`.
@@ -34,11 +35,9 @@ The other reference statuses:
 | below_binary64 (exact value underflows) | 16,282 | all within 4 subnormal quanta of 0 |
 | above_binary64 (exact value overflows) | 32 | all `infinity` |
 | kink (payoff kink at expiry and strike) | 200 | all refused with `Payoff_kink` |
-| boundary (one-sided limits FerroRisk makes no claim about) | 9,472 | recorded: 8,768 values, 704 refusals |
+| boundary (one-sided limits without reference expectations) | 9,472 | recorded: 8,768 values, 704 refusals |
 
 Charm cancels at the money: `q·Δ` and `D_q·φ(d1)·∂d1/∂T` agree to about 1/80 of their size, and Bachelier's two terms behave the same way. Binary64 Φ cannot resolve that difference, and the first version measured 205 ULP (Black) and 24 ULP (Bachelier). Where |d| ≤ 6, both brackets are now evaluated in double-double (`Normal_dd`), giving 4 and 2 ULP. The tails keep the Mills-ratio form, which is already relatively accurate.
-
-FerroRisk states no per-region Greek accuracy contract for these models (#449). Its envelope measures a scaled error, not ULP, and describes itself as "not an accuracy contract". No row-level comparison is claimed.
 
 ## Method
 
@@ -56,12 +55,12 @@ FerroRisk states no per-region Greek accuracy contract for these models (#449). 
 
 ## The displaced-Black convention
 
-FerroRisk's references disagree about displaced Black:
+The external reference datasets use different displaced-Black conventions:
 
-- The #440 pricing study prices on binary64-shifted coordinates `fl(F+d)` and `fl(K+d)`. That is FerroRisk's public pricing contract.
+- The [pricing dataset](../oracle/convert_440.py) uses binary64-shifted coordinates `fl(F+d)` and `fl(K+d)`.
 - The IV and Greek references shift by the exact sum.
 
-The exact sum is the model's definition, so displaced Black here uses it. The #440 displaced rows are scored as Black-76 on #440's binary64-shifted inputs, which is the model #440 actually measured. FerroRisk itself does not reconcile the two conventions.
+The exact sum is this project's model definition. External pricing rows with rounded shifts are scored as Black-76 on those binary64-shifted inputs, rather than being presented as evidence for the exact-sum displaced model.
 
 ## Types
 
