@@ -1,0 +1,880 @@
+{
+  "schema": "american-reference-corpus-v1",
+  "financial_contract_issue": 108,
+  "acceptance_policy_issue": 109,
+  "policy": {
+    "epsilon_scale_power": -16,
+    "reference_radius_fraction": "1/8",
+    "lattice_levels": [
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "paired_offset": 1,
+    "extrapolation": "2*A(2N)-A(N); empirical candidate only",
+    "radius": "4*max(last two extrapolate differences) + roundoff screen",
+    "roundoff_screen": "256*2^-52*max_level*max(spot,strike)",
+    "quantlib_levels": [
+      128,
+      256,
+      512,
+      1024
+    ],
+    "damping_steps": 2,
+    "mpmath_digits": [
+      80,
+      160
+    ],
+    "precision_steps": [
+      64,
+      128
+    ],
+    "arb_bits": [
+      256,
+      512
+    ],
+    "process_timeout_seconds": 600,
+    "comparator": "Retain every finite outcome, exclusion and exception; no canonical output defines truth"
+  },
+  "rows": [
+    {
+      "id": "call-80",
+      "side": "call",
+      "category": "regular",
+      "inputs": {
+        "spot": "4054000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-100",
+      "side": "call",
+      "category": "regular",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-120",
+      "side": "call",
+      "category": "regular",
+      "inputs": {
+        "spot": "405e000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5e000000000000"
+    },
+    {
+      "id": "call-short",
+      "side": "call",
+      "category": "short",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3f66c16c16c16c17",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-long-high-vol",
+      "side": "call",
+      "category": "long-high-vol",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3ff0000000000000",
+        "time": "4024000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "side": "call",
+      "category": "zero-carry",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-negative-rate",
+      "side": "call",
+      "category": "negative-rate",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "bfa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-negative-yield",
+      "side": "call",
+      "category": "negative-yield",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "bf9eb851eb851eb8",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-low-vol",
+      "side": "call",
+      "category": "low-vol",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3f747ae147ae147b",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-delayed",
+      "side": "call",
+      "category": "delayed",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3fe0000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-expiry",
+      "side": "call",
+      "category": "expiry",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "call-zero-spot",
+      "side": "call",
+      "category": "zero-spot",
+      "inputs": {
+        "spot": "0000000000000000",
+        "strike": "4059000000000000",
+        "rate": "bfc0000000000000",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "4000000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-zero-strike",
+      "side": "call",
+      "category": "zero-strike",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "0000000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "bfc0000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-zero-scale",
+      "side": "call",
+      "category": "zero-scale",
+      "inputs": {
+        "spot": "0000000000000000",
+        "strike": "0000000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "0000000000000000"
+    },
+    {
+      "id": "put-80",
+      "side": "put",
+      "category": "regular",
+      "inputs": {
+        "spot": "4054000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-100",
+      "side": "put",
+      "category": "regular",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-120",
+      "side": "put",
+      "category": "regular",
+      "inputs": {
+        "spot": "405e000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5e000000000000"
+    },
+    {
+      "id": "put-short",
+      "side": "put",
+      "category": "short",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3f66c16c16c16c17",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-long-high-vol",
+      "side": "put",
+      "category": "long-high-vol",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3ff0000000000000",
+        "time": "4024000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "side": "put",
+      "category": "zero-carry",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "0000000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-negative-rate",
+      "side": "put",
+      "category": "negative-rate",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "bfa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-negative-yield",
+      "side": "put",
+      "category": "negative-yield",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "bf9eb851eb851eb8",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-low-vol",
+      "side": "put",
+      "category": "low-vol",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3f747ae147ae147b",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-delayed",
+      "side": "put",
+      "category": "delayed",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "3fe0000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-expiry",
+      "side": "put",
+      "category": "expiry",
+      "inputs": {
+        "spot": "405a400000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "0000000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5a400000000000"
+    },
+    {
+      "id": "put-zero-spot",
+      "side": "put",
+      "category": "zero-spot",
+      "inputs": {
+        "spot": "0000000000000000",
+        "strike": "4059000000000000",
+        "rate": "bfc0000000000000",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "4000000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-zero-strike",
+      "side": "put",
+      "category": "zero-strike",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "0000000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "bfc0000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "put-zero-scale",
+      "side": "put",
+      "category": "zero-scale",
+      "inputs": {
+        "spot": "0000000000000000",
+        "strike": "0000000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "0000000000000000"
+    },
+    {
+      "id": "call-no-early",
+      "side": "call",
+      "category": "european-reduction",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "0000000000000000",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "call-dividend-yield",
+      "side": "call",
+      "category": "exercise",
+      "inputs": {
+        "spot": "405e000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3fc3333333333333",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5e000000000000"
+    },
+    {
+      "id": "put-deep-exercise",
+      "side": "put",
+      "category": "exercise",
+      "inputs": {
+        "spot": "4049000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "negative-boundaries-60",
+      "side": "put",
+      "category": "negative-rates-region",
+      "inputs": {
+        "spot": "404e000000000000",
+        "strike": "4059000000000000",
+        "rate": "bf747ae147ae147b",
+        "yield_": "bf847ae147ae147b",
+        "volatility": "3fa47ae147ae147b",
+        "time": "4014000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "negative-boundaries-90",
+      "side": "put",
+      "category": "negative-rates-region",
+      "inputs": {
+        "spot": "4056800000000000",
+        "strike": "4059000000000000",
+        "rate": "bf747ae147ae147b",
+        "yield_": "bf847ae147ae147b",
+        "volatility": "3fa47ae147ae147b",
+        "time": "4014000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "negative-boundaries-100",
+      "side": "put",
+      "category": "negative-rates-region",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "bf747ae147ae147b",
+        "yield_": "bf847ae147ae147b",
+        "volatility": "3fa47ae147ae147b",
+        "time": "4014000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "negative-boundaries-140",
+      "side": "put",
+      "category": "negative-rates-region",
+      "inputs": {
+        "spot": "4061800000000000",
+        "strike": "4059000000000000",
+        "rate": "bf747ae147ae147b",
+        "yield_": "bf847ae147ae147b",
+        "volatility": "3fa47ae147ae147b",
+        "time": "4014000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f61800000000000"
+    },
+    {
+      "id": "probability-stress",
+      "side": "put",
+      "category": "lattice-domain-stress",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4059000000000000",
+        "rate": "3fc0000000000000",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3ee4f8b588e368f1",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "deterministic-interior",
+      "side": "call",
+      "category": "deterministic",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4056800000000000",
+        "rate": "3fd0000000000000",
+        "yield_": "3fc0000000000000",
+        "volatility": "0000000000000000",
+        "time": "4020000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "deterministic-negative-call",
+      "side": "call",
+      "category": "deterministic",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "4056800000000000",
+        "rate": "bfc0000000000000",
+        "yield_": "0000000000000000",
+        "volatility": "0000000000000000",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f59000000000000"
+    },
+    {
+      "id": "deterministic-put",
+      "side": "put",
+      "category": "deterministic",
+      "inputs": {
+        "spot": "4059000000000000",
+        "strike": "405b800000000000",
+        "rate": "3fc0000000000000",
+        "yield_": "3fb0000000000000",
+        "volatility": "0000000000000000",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3f5b800000000000"
+    },
+    {
+      "id": "put-scaled--20",
+      "side": "put",
+      "category": "scaling",
+      "inputs": {
+        "spot": "3f19000000000000",
+        "strike": "3f19000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "3e19000000000000"
+    },
+    {
+      "id": "put-scaled-20",
+      "side": "put",
+      "category": "scaling",
+      "inputs": {
+        "spot": "4199000000000000",
+        "strike": "4199000000000000",
+        "rate": "3fa999999999999a",
+        "yield_": "3f947ae147ae147b",
+        "volatility": "3fc999999999999a",
+        "time": "3ff0000000000000",
+        "opens": "0000000000000000"
+      },
+      "epsilon": "4099000000000000"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "scaling",
+      "base": "put-100",
+      "other": "put-scaled--20",
+      "power": -20
+    },
+    {
+      "kind": "scaling",
+      "base": "put-100",
+      "other": "put-scaled-20",
+      "power": 20
+    }
+  ],
+  "extension_cases": [
+    {
+      "id": "cash-call-before",
+      "kind": "zero-carry-cash",
+      "side": "call",
+      "spot": 100,
+      "strike": 90,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "american",
+      "opens": [
+        0,
+        "regular"
+      ],
+      "expiry": [
+        1,
+        "regular"
+      ],
+      "exact": "10"
+    },
+    {
+      "id": "cash-call-after-open",
+      "kind": "zero-carry-cash",
+      "side": "call",
+      "spot": 100,
+      "strike": 90,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "american",
+      "opens": [
+        0.5,
+        "after"
+      ],
+      "expiry": [
+        1,
+        "regular"
+      ],
+      "exact": "0"
+    },
+    {
+      "id": "cash-bermudan-after",
+      "kind": "zero-carry-cash",
+      "side": "call",
+      "spot": 100,
+      "strike": 90,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "bermudan",
+      "rights": [
+        [
+          0.5,
+          "after"
+        ],
+        [
+          1,
+          "regular"
+        ]
+      ],
+      "exact": "0"
+    },
+    {
+      "id": "cash-bermudan-both",
+      "kind": "zero-carry-cash",
+      "side": "call",
+      "spot": 100,
+      "strike": 90,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "bermudan",
+      "rights": [
+        [
+          0.5,
+          "before"
+        ],
+        [
+          0.5,
+          "after"
+        ],
+        [
+          1,
+          "regular"
+        ]
+      ],
+      "exact": "10"
+    },
+    {
+      "id": "cash-expiry-before",
+      "kind": "zero-carry-cash",
+      "side": "put",
+      "spot": 100,
+      "strike": 110,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "european",
+      "rights": [
+        [
+          0.5,
+          "before"
+        ]
+      ],
+      "exact": "10"
+    },
+    {
+      "id": "cash-expiry-after",
+      "kind": "zero-carry-cash",
+      "side": "put",
+      "spot": 100,
+      "strike": 110,
+      "dividends": [
+        [
+          0.5,
+          20
+        ]
+      ],
+      "exercise": "european",
+      "rights": [
+        [
+          0.5,
+          "after"
+        ]
+      ],
+      "exact": "30"
+    },
+    {
+      "id": "cash-limited-liability",
+      "kind": "zero-carry-cash",
+      "side": "put",
+      "spot": 3,
+      "strike": 2,
+      "dividends": [
+        [
+          0.5,
+          1
+        ],
+        [
+          0.5,
+          4
+        ]
+      ],
+      "exercise": "european",
+      "rights": [
+        [
+          1,
+          "regular"
+        ]
+      ],
+      "exact": "2"
+    },
+    {
+      "id": "cash-zero-horizon",
+      "kind": "zero-carry-cash",
+      "side": "put",
+      "spot": 100,
+      "strike": 110,
+      "dividends": [
+        [
+          0,
+          20
+        ]
+      ],
+      "exercise": "european",
+      "rights": [
+        [
+          0,
+          "after"
+        ]
+      ],
+      "exact": "30"
+    },
+    {
+      "id": "curve-zero-stock",
+      "kind": "absorbing-put-curve",
+      "spot": 0,
+      "strike": 100,
+      "rate_knots": [
+        [
+          0,
+          -0.25
+        ],
+        [
+          1,
+          0.125
+        ]
+      ],
+      "expiry": 2,
+      "exact_expression": "100*exp(1/4)",
+      "maximizer": 1
+    }
+  ]
+}
