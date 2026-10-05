@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **105
+seven core mutants. The catalog currently contains **108
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -265,3 +265,12 @@ mechanisms exercise the original 250/9 deterministic maximum and rejection of
 pre-opening exercise through `american_pricing`. They add two entries to the
 optional catalog; the default seven remain unchanged. These are financial-model
 witnesses, not continuum accuracy proofs.
+
+### Scalar enclosure fusion and American setup reuse (#119)
+
+Three optional mechanisms cover transported scalar input radii, stale packing
+scratch slots and the orientation of a reused American stencil. The scalar
+witness checks exact-rational containment before compatibility fingerprints;
+changed replay bits alone are not a kill. The American witness requires the
+existing independently checked price capability. The full catalog contains 108
+mechanisms; default CI still selects the same seven core mutants.

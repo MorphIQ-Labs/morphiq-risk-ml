@@ -48,20 +48,63 @@ the original logical list for research/test consumers; production arithmetic
 works directly from the fixed slots. `Internal.Enclosure.S.t` changes layout and
 removes the list-valued `tail` field; stable public APIs are unchanged.
 
-Each packing operation owns a checked float array containing its input terms.
+Each packing operation uses a checked float array containing its input terms.
 That same array becomes the growing expansion. Before inserting term `i`, the
 expansion length is at most `i`. The term at `i` is read before the grow step;
 its writes end at or before `i`, so future terms remain intact. Inside grow,
 at most `j` residuals have been emitted when reading slot `j`, so its write
 cannot overwrite an unread expansion word either. Both loops preserve the
 previous increasing-magnitude expansion and insertion order. All accesses stay
-checked. Arrays never escape into an enclosure or cross calls/workers/domains.
+checked. Arrays never escape into an enclosure or cross public operation calls,
+workers or domains. Scalar division reuses a private array across its own
+sequential suboperations, as derived below.
 
 Bounds follow directly from the supported representation: additions insert at
 most eight terms; multiplication inserts at most 32 terms (two words per pair
 of at most four retained words on each side); scaling uses at most four;
 `of_words` uses two; denominator lower parts use at most three. No global pool,
 thread-local cache, borrowed lifetime or shared mutable scratch is introduced.
+
+### Scalar fusion and quotient-local scratch
+
+Subtraction inserts the same logical words as `add a (neg b)`, negating the
+right words while filling the packing input instead of allocating a temporary
+record. Zero shortcuts still return `neg b` or `a` in the original order.
+Scalar additions/differences insert the same two words as an exact scalar:
+`b, +0` or `-b, -0`. On the zero-left shortcut, negated scalar results retain
+negative padding zeros in every negated slot. Scalar validation still precedes
+shortcuts, including zero operands and nonfinite scalar inputs.
+
+`mul_float` visits the same `na × 2` pairs as `mul a (exact b)`, including the
+zero low word, separately rounded products, explicit FMA residuals and finite
+checks. It stores pairs in the same reverse-pair order and accumulates quantum
+allowances in the same forward order. An exact scalar has radius zero and
+magnitude `abs b`: the original magnitude fold starts at zero, adds `abs b`,
+then zero slots, all exact identities under the existing outward-zero rules.
+Thus its propagated input radius remains
+`(centre_magnitude a *^ 0) +^ (abs b *^ a.error)`. Precision, product allowances,
+radius rounding and failure conditions are unchanged. The generic multiplication
+remains an independent implementation for full-field compatibility comparisons.
+
+Scalar division now owns one eight-word packing array. Each quotient proposal
+is an exact scalar with two logical words, so multiplying it by the denominator
+uses eight terms. Adding that proposal to the quotient needs at most six;
+subtracting the product from the remainder needs at most eight, for either
+supported precision. A checked private allocator enforces this derived bound.
+Each operation overwrites its entire used prefix before packing; packing receives
+the used length, not capacity, so stale tail slots cannot participate. Retained
+fields are copied into immutable results before the next operation reuses the
+array. No recursive call, callback or user-visible borrowed buffer shares it.
+Exceptions abandon only that call's scratch, and separate calls/domains own
+separate arrays. All array accesses remain checked.
+
+`test/enclosure_scalar.ml` checks full fields (including padding-zero signs),
+refusal classifications and exact-rational containment over boundary and seeded
+inputs in both precisions. It also checks that retained results survive later
+divisions/failures and concurrent independent calls. The optional scalar-radius
+and scratch-length mutants require numerical containment failures, not changed
+replay fingerprints. The complete model/certificate/reference suites remain
+separate obligations.
 
 Addition emits all logical words of its first operand, then its second, including
 the same explicit zero slots as before. Multiplication visits operand pairs in

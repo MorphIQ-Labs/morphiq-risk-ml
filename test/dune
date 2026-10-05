@@ -29,6 +29,20 @@
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
+ (name enclosure_scalar)
+ (modules enclosure_scalar)
+ (modes byte exe)
+ (libraries morphiq_risk zarith)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(test
  (name model_enclosure_reference)
  (modules model_enclosure_reference)
  (libraries oracle_fixture morphiq_risk zarith)
