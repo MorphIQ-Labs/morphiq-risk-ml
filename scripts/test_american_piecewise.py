@@ -8,6 +8,7 @@ import tempfile
 import unittest
 from check_american_piecewise import BASE, classify, request
 from collect_american_piecewise import assemble
+from benchmark_american_piecewise import acceptance
 
 
 class Controls(unittest.TestCase):
@@ -32,6 +33,14 @@ class Controls(unittest.TestCase):
         self.assertTrue(all(r['comparison']['status']=='runtime_unavailable' for r in classify(unavailable,self.cases,self.refs,'loose')))
         refs=copy.deepcopy(self.refs);refs[0]['radius']='0x1p+20'
         self.assertEqual(classify(raw,self.cases,refs,'loose')[0]['comparison']['status'],'reference_too_wide')
+
+    def test_performance_criteria(self):
+        summary=[dict(family=f,mode=m,baseline={k:{'median':1.} for k in ('seconds_per_call','allocated_bytes_per_call')},candidate={k:{'median':1.} for k in ('seconds_per_call','allocated_bytes_per_call')}) for f in ('american','bermudan','piecewise') for m in ('none','cash')]
+        acceptance(summary)
+        with self.assertRaisesRegex(ValueError,'incomplete workloads'):acceptance(summary[:-1])
+        for key,reason in [('seconds_per_call','latency'),('allocated_bytes_per_call','allocation')]:
+            bad=copy.deepcopy(summary);bad[0]['candidate'][key]['median']=2.
+            with self.assertRaisesRegex(ValueError,reason):acceptance(bad)
 
     def test_retained_reference_arithmetic(self):
         archive=BASE/'reference-raw.tar.gz'

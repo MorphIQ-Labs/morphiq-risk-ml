@@ -1030,6 +1030,9 @@
  (deps
   ../scripts/check_american_piecewise.py
   ../scripts/test_american_piecewise.py
+  ../scripts/benchmark_american_piecewise.py
+  ../scripts/benchmark_bermudan_boundary.py
+  ../scripts/benchmark_american_allocation.py
   ../scripts/collect_american_piecewise.py
   ../scripts/american_piecewise_reference.py
   ../scripts/american_reference_data.py

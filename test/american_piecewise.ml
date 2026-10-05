@@ -360,11 +360,67 @@ let corpus path refined =
         done
       with End_of_file -> ())
 
+let bench mode =
+  let admitted =
+    match mode with
+    | "none" ->
+        unwrap
+          (P.admit
+             (piece_model (model ())
+                [| (0.25, 0.08); (0.75, -0.03) |]
+                [| (0.5, 0.06) |]
+                [| (0.375, 0.3) |]))
+    | "cash" ->
+        unwrap
+          (P.admit_cash
+             (piece_model (model ())
+                [| (0.5, -0.03) |]
+                [| (0.5, 0.08) |]
+                [| (0.5, 0.35) |])
+             (spec [ (0.5, 5.) ]))
+    | _ -> failwith "benchmark mode"
+  in
+  let cfg =
+    config ~cells:128 ~steps:128
+      ~lim:
+        {
+          limits with
+          max_nodes = 8192;
+          max_steps = 131072;
+          max_policy_solves = 1048576;
+          max_row_visits = 1000000000;
+          max_workspace_bytes = 8388608;
+        }
+      1.
+  in
+  let run () =
+    match P.price cfg admitted Side.Put with
+    | Ok _ -> ()
+    | Error e -> failwith (failure e)
+  in
+  run ();
+  Gc.full_major ();
+  let gc_before = Gc.quick_stat () in
+  let bytes = Gc.allocated_bytes () and start = Unix.gettimeofday () in
+  for _ = 1 to 3 do
+    run ()
+  done;
+  let elapsed = (Unix.gettimeofday () -. start) /. 3. in
+  let allocated = (Gc.allocated_bytes () -. bytes) /. 3. in
+  let gc_after = Gc.stat () in
+  Printf.printf
+    "{\"mode\":%S,\"phase\":\"price\",\"calls\":3,\"seconds_per_call\":%.17g,\"allocated_bytes_per_call\":%.17g,\"minor_collections\":%d,\"major_collections\":%d,\"heap_words_after\":%d,\"live_words_after\":%d}\n"
+    mode elapsed allocated
+    (gc_after.minor_collections - gc_before.minor_collections)
+    (gc_after.major_collections - gc_before.major_collections)
+    gc_after.heap_words gc_after.live_words
+
 let () =
   match Array.to_list Sys.argv with
   | [ _ ] -> controls ()
   | [ _; "--corpus"; path ] | [ _; "--"; path ] -> corpus path false
   | [ _; "--refined-corpus"; path ] -> corpus path true
+  | [ _; "--bench"; mode ] -> bench mode
   | [ _; "--help" ] ->
       print_endline
         "american-piecewise [--corpus FILE|--refined-corpus FILE|-- \
