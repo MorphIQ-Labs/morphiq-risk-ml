@@ -992,35 +992,85 @@ module Fast = struct
               | Ok sigma ->
                   Price_request (fast_request position model inputs sigma)))
     in
-    let count =
-      Array.fold_left
-        (fun n -> function Price_request _ -> n + 1 | _ -> n)
-        0 entries
+    let count = ref 0 and likely = ref 0 in
+    Array.iter
+      (function
+        | Rejected _ -> ()
+        | Price_request (Batch.Fast.Price (model, inputs, side, sigma)) ->
+            incr count;
+            let selected =
+              match model with
+              | Batch.Bachelier ->
+                  Bachelier.Fast_middle.may_prepare inputs side sigma
+              | _ -> false
+            in
+            if selected then incr likely)
+      entries;
+    let count = !count and likely = !likely in
+    let make i price =
+      let index = work.first + i in
+      make_row work.scenario index p.portfolio.(index) price
     in
-    let cursor = ref 0 in
-    let rec next_request () =
-      let entry = entries.(!cursor) in
-      incr cursor;
-      match entry with Price_request r -> r | Rejected _ -> next_request ()
-    in
-    let requests = Array.init count (fun _ -> next_request ()) in
-    let results = Batch.Fast.execute (Batch.Fast.compile requests) in
-    let next = ref 0 in
-    Array.mapi
-      (fun i entry ->
-        let price =
-          match entry with
-          | Rejected e -> Error e
-          | Price_request _ ->
-              let price =
-                Result.map_error (fun e -> Scalar e) results.(!next)
-              in
-              incr next;
-              price
+    if likely < 32 || likely < count - likely then
+      Array.mapi
+        (fun i entry ->
+          make i
+            (match entry with
+            | Rejected e -> Error e
+            | Price_request request ->
+                Result.map_error
+                  (fun e -> Scalar e)
+                  (Batch.Fast.evaluate request)))
+        entries
+    else
+      let cursor = ref 0 in
+      let rec next_request () =
+        let entry = entries.(!cursor) in
+        incr cursor;
+        match entry with Price_request r -> r | Rejected _ -> next_request ()
+      in
+      let requests = Array.init count (fun _ -> next_request ()) in
+      let results = Batch.Fast.execute (Batch.Fast.compile requests) in
+      let next = ref 0 in
+      Array.mapi
+        (fun i entry ->
+          let price =
+            match entry with
+            | Rejected e -> Error e
+            | Price_request _ ->
+                let price =
+                  Result.map_error (fun e -> Scalar e) results.(!next)
+                in
+                incr next;
+                price
+          in
+          make i price)
+        entries
+
+  let evaluate_chunked_tile p work point =
+    (* 256-word arrays fit the supported OCaml 5.3 minor-allocation limit.
+       Bound preparation scratch independently of the caller's scheduling tile;
+       the native SoA has at most 4*256 float words. *)
+    let capacity = 256 in
+    if work.length <= capacity then evaluate_batch_tile p work point
+    else
+      let first = evaluate_batch_tile p { work with length = capacity } point in
+      let rows = Array.make work.length first.(0) in
+      Array.blit first 0 rows 0 capacity;
+      let offset = ref capacity in
+      while !offset < work.length do
+        let length = min capacity (work.length - !offset) in
+        let chunk = { work with first = work.first + !offset; length } in
+        let values =
+          if length >= 32 then evaluate_batch_tile p chunk point
+          else
+            Array.init length (fun i ->
+                evaluate_position p work.scenario point (chunk.first + i))
         in
-        let index = work.first + i in
-        make_row work.scenario index p.portfolio.(index) price)
-      entries
+        Array.blit values 0 rows !offset length;
+        offset := !offset + length
+      done;
+      rows
 
   let batch_tile p work =
     (* Keep mixed-model and small tiles on their scalar streaming path. *)
@@ -1037,7 +1087,7 @@ module Fast = struct
     else
       let point = Scenario.point p.scenarios work.scenario in
       Ok
-        (if batch_tile p work then evaluate_batch_tile p work point
+        (if batch_tile p work then evaluate_chunked_tile p work point
          else
            Array.init work.length (fun i ->
                evaluate_position p work.scenario point (work.first + i)))

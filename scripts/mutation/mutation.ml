@@ -38,6 +38,14 @@ type mutant = {
 let catalog =
   [
     {
+      id = "native-planner-chunk-offset";
+      file = "lib/planner.ml";
+      snippet = "first = work.first + !offset";
+      replacement = "first = work.first";
+      killer = "native_fast_planner";
+      mechanism = "private preparation chunks preserve the original tile offset";
+    };
+    {
       id = "native-planner-order";
       file = "lib/planner.ml";
       snippet = "results.(!next)";

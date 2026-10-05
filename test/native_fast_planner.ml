@@ -52,21 +52,21 @@ let points =
 
 let scenarios = ok (S.paired points)
 
-let plan tile_rows =
+let plan ?(portfolio = portfolio) tile_rows =
   ok
     (F.compile ~snapshot_id:"native-tiles" ~base_day:0
        ~day_count:P.Actual_365_fixed ~portfolio ~market ~scenarios
        ~limits:
          {
-           max_instruments = 129;
+           max_instruments = Array.length portfolio;
            max_scenarios = 7;
-           max_calculations = 903;
+           max_calculations = Array.length portfolio * 7;
            tile_rows;
            max_workers = 4;
            max_buffered_results = tile_rows * 4;
          })
 
-let expected (r : F.row) =
+let expected (portfolio : P.position array) (r : F.row) =
   let position = portfolio.(r.instrument_index)
   and point = points.(r.scenario_id) in
   if point.offset_days > position.expiry_day then Error F.Post_expiry
@@ -98,13 +98,13 @@ let expected (r : F.row) =
                   position.side,
                   sigma )))
 
-let trace p workers =
+let trace ?(portfolio = portfolio) p workers =
   let rows = ref [] in
   let completion =
     F.execute p ~workers ~cancellation:(P.cancellation ()) ~sink:(function
       | F.Row row ->
           check
-            (same row.price (expected row))
+            (same row.price (expected portfolio row))
             "native tile scalar original-input outcome";
           let pos = portfolio.(row.instrument_index) in
           check
@@ -119,8 +119,8 @@ let trace p workers =
   in
   check
     (completion.stop = P.Complete
-    && completion.rows_committed = 903
-    && completion.calculations_committed = 903)
+    && completion.rows_committed = Array.length portfolio * 7
+    && completion.calculations_committed = Array.length portfolio * 7)
     "native tile complete coverage";
   (List.rev !rows, completion)
 
@@ -162,6 +162,21 @@ let () =
         "native sink failure commit boundary";
       check (same (trace p 2) baseline) "native worker cleanup/reuse")
     [ 31; 32; 33; 64; 65; 128 ];
+  let large =
+    Array.init 513 (fun i ->
+        { (portfolio.(i mod Array.length portfolio)) with id = string_of_int i })
+  in
+  let baseline_large = trace ~portfolio:large (plan ~portfolio:large 1) 1 in
+  List.iter
+    (fun tile_rows ->
+      let p = plan ~portfolio:large tile_rows in
+      List.iter
+        (fun workers ->
+          check
+            (same (trace ~portfolio:large p workers) baseline_large)
+            "native preparation chunks preserve logical tiles and final tails")
+        [ 1; 2; 4 ])
+    [ 256; 257; 512; 513 ];
   let p = plan 65 in
   let d = Domain.spawn (fun () -> trace p 2) in
   check (same (trace p 2) (Domain.join d)) "native concurrent planner reuse";
