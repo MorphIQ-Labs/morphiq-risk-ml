@@ -59,6 +59,10 @@ class Controls(unittest.TestCase):
                         value['allocated_bytes_per_call'] = 100 if variant == 'baseline' else 5
                         runs.append(dict(variant=variant, round=round_, sample=value))
         summary = b.summarize(runs); b.acceptance(summary)
+        b.acceptance(summary, reduction=.5, regression=.1)
+        for reduction, regression in ((float('nan'), .1), (1.1, .1), (.5, -.1)):
+            with self.assertRaisesRegex(ValueError, 'invalid acceptance criteria'):
+                b.acceptance(summary, reduction, regression)
         with self.assertRaisesRegex(ValueError, 'incomplete or duplicate'):
             b.summarize(runs[:-1])
         with self.assertRaisesRegex(ValueError, 'incomplete or duplicate'):

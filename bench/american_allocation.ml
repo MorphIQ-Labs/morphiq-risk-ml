@@ -6,6 +6,10 @@ let mode = ref "cash"
 let phase = ref "price"
 let measure = ref false
 
+let allocated_words () =
+  let minor, promoted, major = Gc.counters () in
+  minor +. major -. promoted
+
 let () =
   Arg.parse
     [
@@ -97,16 +101,12 @@ let () =
   operation ();
   Gc.full_major ();
   let before = Gc.quick_stat () and start = Unix.gettimeofday () in
+  let words_before = allocated_words () in
   for _ = 1 to !calls do
     operation ()
   done;
   let elapsed = Unix.gettimeofday () -. start and after = Gc.quick_stat () in
-  let allocated =
-    8.
-    *. (after.minor_words +. after.major_words -. after.promoted_words
-       -. (before.minor_words +. before.major_words -. before.promoted_words))
-    /. float !calls
-  in
+  let allocated = 8. *. (allocated_words () -. words_before) /. float !calls in
   if !measure then (
     Gc.full_major ();
     let live = Gc.stat () in

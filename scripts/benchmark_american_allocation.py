@@ -112,14 +112,16 @@ def summarize(runs, rounds=5):
     return result
 
 
-def acceptance(summary):
+def acceptance(summary, reduction=0.9, regression=0.1):
+    require(math.isfinite(reduction) and 0 <= reduction <= 1 and
+            math.isfinite(regression) and regression >= 0, 'invalid acceptance criteria')
     require(len(summary) == len(MODES)*len(PHASES) and
             {(r['mode'], r['phase']) for r in summary} == {(m, p) for m in MODES for p in PHASES},
             'incomplete acceptance summary')
     for row in summary:
         if row['mode'] in ('none', 'zero', 'cash') and row['phase'] in ('price', 'diagnostics'):
-            require(row['allocation_reduction'] >= 0.9, 'allocation criterion failed')
-            require(row['speedup'] >= 1/1.1, 'latency criterion failed')
+            require(row['allocation_reduction'] >= reduction, 'allocation criterion failed')
+            require(row['speedup'] >= 1/(1+regression), 'latency criterion failed')
 
 
 def main():
@@ -128,7 +130,13 @@ def main():
     parser.add_argument('--baseline', type=Path, required=True, help='Recorded clean baseline build manifest')
     parser.add_argument('--candidate', type=Path, required=True, help='Recorded clean candidate build manifest')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--minimum-allocation-reduction', type=float, default=0.9,
+                        help='Fraction frozen in the campaign protocol before runtime edits')
+    parser.add_argument('--maximum-latency-regression', type=float, default=0.1)
     args = parser.parse_args()
+    require(math.isfinite(args.minimum_allocation_reduction) and 0 <= args.minimum_allocation_reduction <= 1 and
+            math.isfinite(args.maximum_latency_regression) and args.maximum_latency_regression >= 0,
+            'invalid acceptance criteria')
     builds = {variant: json.loads(getattr(args, variant).read_text()) for variant in ('baseline', 'candidate')}
     for variant, build in builds.items():
         guard(build, current=variant == 'candidate')
@@ -140,6 +148,8 @@ def main():
                   platform=platform.platform(), cpu_count=os.cpu_count(), collector_sha256=sha(__file__),
                   warmup='one operation then full major GC; three measured calls or 100000 admissions',
                   flags='Dune release, library and driver -O3; no profiling during timing')
+    report['criteria'] = dict(minimum_allocation_reduction=args.minimum_allocation_reduction,
+                             maximum_latency_regression=args.maximum_latency_regression)
     if platform.system() == 'Darwin':
         report['hardware'] = subprocess.check_output(['sysctl', '-n', 'machdep.cpu.brand_string'], text=True).strip()
 
@@ -167,7 +177,7 @@ def main():
         for variant, build in builds.items():
             guard(build, current=variant == 'candidate')
         report['summary'] = summarize(report['runs'])
-        acceptance(report['summary'])
+        acceptance(report['summary'], args.minimum_allocation_reduction, args.maximum_latency_regression)
         report['complete'] = True
     except BaseException as error:
         report['failure'] = str(error)
