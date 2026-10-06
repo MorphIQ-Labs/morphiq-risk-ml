@@ -42,6 +42,23 @@ module type S = sig
   val compare_float : t -> float -> sign
   val error_of_float : t -> float -> float
 
+  type interpolation =
+    | Endpoint of float
+    | Interpolated of t
+    | Unresolved_weight
+
+  val linear_interpolate :
+    t ->
+    lower:float ->
+    upper:float ->
+    left:float ->
+    right:float ->
+    interpolation
+  (** Original-input convex linear interpolation. Exact endpoints return the
+      supplied scalar unchanged. Interior weights must be strictly enclosed in
+      (0,1); otherwise [Unresolved_weight]. Arithmetic may raise [Unresolved].
+      Returned enclosures own immutable fields; no scratch escapes. *)
+
   val add_error : t -> float -> t
   (** Enlarge a radius by a proved nonnegative error allowance. *)
 end
@@ -427,6 +444,25 @@ struct
 
   let compare_float a b = sign (sub_float a b)
   let error_of_float a b = magnitude (sub_float a b)
+
+  type interpolation =
+    | Endpoint of float
+    | Interpolated of t
+    | Unresolved_weight
+
+  let linear_interpolate point ~lower ~upper ~left ~right =
+    if compare_float point lower = Zero then Endpoint left
+    else if compare_float point upper = Zero then Endpoint right
+    else
+      let width = sub (exact upper) (exact lower) in
+      let weight = div (sub point (exact lower)) width in
+      match (compare_float weight 0., compare_float weight 1.) with
+      | Positive, Negative ->
+          Interpolated
+            (add
+               (mul (sub (exact 1.) weight) (exact left))
+               (mul weight (exact right)))
+      | _ -> Unresolved_weight
 
   let sqrt a =
     if is_zero a then a
