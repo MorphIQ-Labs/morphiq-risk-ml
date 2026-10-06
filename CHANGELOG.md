@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Certified American/Bermudan reductions (#116)
+
+- Add `Early_exercise.Bsm.Certified` for no-cash expiry, terminal-only rights,
+  and zero-yield calls with nonnegative rates. Original inputs and proved exact
+  reductions feed outward arithmetic; validated currency limits and private
+  certificates distinguish unsupported, unresolved and exceeded-accuracy outcomes.
+- General stopping prices and all early-exercise Greeks remain estimated-only.
+  Existing estimated APIs and European values are unchanged. See the
+  [derivations, independent references and general proof gaps](docs/american-certification.md).
+
 ### Greek allocation and residual optimization (#119)
 
 - Reuse successful boundary values across volatility perturbations within one

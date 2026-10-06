@@ -18,7 +18,7 @@ institutional deployment approval.
 | Capability | Contract |
 | --- | --- |
 | European prices | Calls and puts, including expiry and zero volatility |
-| American prices | Estimated scalar BSM calls/puts with continuous yield, bounded work and explicit numerical failures; [capability and limits](docs/american-pricing.md). No full-price certificate |
+| American prices | Estimated scalar BSM calls/puts with continuous yield, bounded work and explicit numerical failures; [capability and limits](docs/american-pricing.md). General stopping remains estimated-only; separate [certified exact reductions](docs/american-certification.md) cover a guarded subset |
 | Implied volatility | Positive roots require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly |
 | Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
 | American/Bermudan Greeks | Estimated delta, gamma, parallel vega/rho and fixed-event theta with per-quantity failures; [coordinates and limits](docs/american-greeks.md) |

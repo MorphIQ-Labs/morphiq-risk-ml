@@ -7,9 +7,11 @@ Inputs denote their original exact binary64 values. Read the
 [financial contract](american-model-contract.md) and
 [frozen solver policy](american-solver-design.md#6-frozen-acceptance-policy-results-and-bounded-work).
 
-Every successful result is **Estimated_only**. A requested tolerance governs
+Every successful `Bsm.price` result is **Estimated_only**. A requested tolerance governs
 observed refinement and arithmetic screens; it is not an absolute price error
 bound. This API cannot produce a `Production.certified` value.
+The separate [`Bsm.Certified` API](american-certification.md) certifies only
+proved exact reductions, with its own private price and explicit error limit.
 [Explicit Bermudan schedules](bermudan-pricing.md) use a separate admission
 function in the same module. [Piecewise coefficients](piecewise-american.md)
 use the distinct `Bsm.Piecewise` surface. [Estimated Greeks](american-greeks.md)

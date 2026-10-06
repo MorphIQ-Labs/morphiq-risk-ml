@@ -38,6 +38,85 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-certified-cash";
+      file = "lib/early_exercise.ml";
+      snippet = "Error (Unsupported_capability Cash_specification)";
+      replacement = "Ok Terminal_only";
+      killer = "american_certification";
+      mechanism = "cash semantics cannot be discarded by certification";
+    };
+    {
+      id = "american-certified-window";
+      file = "lib/early_exercise.ml";
+      snippet = "p.opens_at = p.time_to_expiry then Ok Terminal_only";
+      replacement = "p.opens_at <= p.time_to_expiry then Ok Terminal_only";
+      killer = "american_certification";
+      mechanism = "only terminal-only rights reduce arbitrary puts to Europe";
+    };
+    {
+      id = "american-certified-side";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "else if side = Side.Call && p.dividend_yield = 0. && p.rate >= 0. then\n\
+        \            Ok No_early_exercise_call";
+      replacement =
+        "else if p.dividend_yield = 0. && p.rate >= 0. then\n\
+        \            Ok No_early_exercise_call";
+      killer = "american_certification";
+      mechanism = "no-early-exercise theorem is for calls";
+    };
+    {
+      id = "american-certified-rate";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "else if side = Side.Call && p.dividend_yield = 0. && p.rate >= 0. then\n\
+        \            Ok No_early_exercise_call";
+      replacement =
+        "else if side = Side.Call && p.dividend_yield = 0. && true then\n\
+        \            Ok No_early_exercise_call";
+      killer = "american_certification";
+      mechanism = "no-early-exercise call proof requires nonnegative rate";
+    };
+    {
+      id = "american-certified-yield";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "else if side = Side.Call && p.dividend_yield = 0. && p.rate >= 0. then\n\
+        \            Ok No_early_exercise_call";
+      replacement =
+        "else if side = Side.Call && p.rate >= 0. then\n\
+        \            Ok No_early_exercise_call";
+      killer = "american_certification";
+      mechanism = "no-early-exercise call proof retains zero yield";
+    };
+    {
+      id = "american-certified-bound";
+      file = "lib/early_exercise.ml";
+      snippet = "else Ok { value; absolute_error; reduction }";
+      replacement = "else Ok { value; absolute_error = 0.; reduction }";
+      killer = "american_certification";
+      mechanism = "certificate retains outward arithmetic radius";
+    };
+    {
+      id = "american-certified-limit";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "else if absolute_error > max_error then Error Accuracy_exceeded";
+      replacement =
+        "else if false && absolute_error > max_error then Error \
+         Accuracy_exceeded";
+      killer = "american_certification";
+      mechanism = "boundary certificate enforces the caller error limit";
+    };
+    {
+      id = "american-certified-accuracy";
+      file = "lib/early_exercise.ml";
+      snippet = "Float.is_finite x && x >= 0. then Ok x";
+      replacement = "Float.is_finite x then Ok x";
+      killer = "american_certification";
+      mechanism = "validated accuracy type rejects negative limits";
+    };
+    {
       id = "american-residual-fma";
       file = "lib/american_residual_stubs.c";
       snippet =
@@ -1361,6 +1440,7 @@ let replace needle by hay =
    Missing mappings or fixtures fail before any mutant is scored. Native
    executables avoid an ambient bytecode DLL search-path dependency. *)
 let guard_arguments = function
+  | "american_certification" -> [ [ "american_certification" ] ]
   | "exchange_reference" -> [ [ "exchange_reference" ] ]
   | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
   | "native_bachelier_reference" -> [ [ "european"; "displaced" ] ]
@@ -1394,7 +1474,9 @@ let guard ~cwd name =
   let actions =
     List.map
       (List.map (fun fixture ->
-           if fixture = "exchange_reference" then
+           if fixture = "american_certification" then
+             "_build/default/docs/evidence/american-certification/reference-v2/references.tsv"
+           else if fixture = "exchange_reference" then
              "_build/default/test/exchange_reference.tsv"
            else "_build/default/oracle/fixtures/" ^ fixture ^ ".txt"))
       (guard_arguments name)

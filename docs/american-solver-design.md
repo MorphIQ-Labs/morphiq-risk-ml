@@ -462,6 +462,8 @@ domain and evaluated original-input enclosures. First assess exact expiry/zero
 reductions and the proved q=0, r>=0 no-cash call-to-European reduction separately;
 any reuse requires a model-matching proof and existing certificate applicability.
 Do not announce all Americans certified because a European reduction works.
+The delivered [#116 disposition](american-certification.md) certifies guarded
+exact reductions separately and retains the general stopping proof gaps below.
 
 | Obligation | Evidence now | Gate before a runtime certificate |
 | --- | --- | --- |

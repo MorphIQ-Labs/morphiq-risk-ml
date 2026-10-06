@@ -1,0 +1,8 @@
+File "american_piecewise_certificate.ml", line 5, characters 20-21:
+5 |   A.Certified.price p Side.Call ~max_error:limit
+                        ^
+Error: The value "p" has type
+         "A.Piecewise.admitted" =
+           "Morphiq_risk.Early_exercise.Bsm.Piecewise.admitted"
+       but an expression was expected of type
+         "Morphiq_risk.Early_exercise.Bsm.admitted"

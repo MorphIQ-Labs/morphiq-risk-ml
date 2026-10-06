@@ -1,6 +1,7 @@
-(** Estimated American and Bermudan prices and Greeks. These results are not
-    [Production] certificates. See [docs/american-pricing.md] for numerical
-    capability and limitations. *)
+(** Estimated American and Bermudan prices and Greeks, plus separately typed
+    certificates for proved exact-model reductions in [Bsm.Certified]. General
+    stopping prices remain estimated-only. See [docs/american-pricing.md] and
+    [docs/american-certification.md] for capability and limitations. *)
 module Bsm : sig
   type inputs = {
     spot : float;
@@ -59,6 +60,52 @@ module Bsm : sig
   (** Returns a copy of the frozen schedule. *)
 
   val inputs : admitted -> inputs
+
+  module Certified : sig
+    (** Exact-model reductions only. The general PDE estimates and their
+        diagnostics do not enter these certificates. *)
+    type unsupported = Cash_specification | General_stopping
+
+    type error =
+      | Invalid_accuracy
+      | Unsupported_capability of unsupported
+      | Arithmetic_unresolved
+      | Accuracy_exceeded
+      | Cancelled
+
+    type absolute_error_limit = private float
+
+    val absolute_error_limit : float -> (absolute_error_limit, error) result
+    (** A finite nonnegative absolute currency-error limit. Zero requires an
+        exact certificate; this is distinct from a refinement configuration. *)
+
+    type reduction = Expiry | Terminal_only | No_early_exercise_call
+
+    type price = private {
+      value : float;
+      absolute_error : float;
+      reduction : reduction;
+    }
+    (** Finite value and finite outward error for the original stopping value,
+        accepted only when the error meets the explicit limit. No Greek or IV
+        guarantee follows from this price certificate. *)
+
+    val price :
+      ?cancel:(unit -> bool) ->
+      admitted ->
+      Side.t ->
+      max_error:absolute_error_limit ->
+      (price, error) result
+    (** Constant coefficients with no cash specification: expiry; terminal-only
+        American or Bermudan exercise; or calls with q=0 and r>=0. Every other
+        exercise model is explicitly unsupported, including any cash record
+        (even an empty/zero-payment schedule). Piecewise admission is a distinct
+        type. Original inputs feed the existing European enclosure unchanged;
+        expiry and zero-spot/strike boundaries use enclosed payoffs directly.
+        Component arithmetic limits still apply. No PDE work/configuration or
+        empirical fallback is used. Cancellation is checked before work and
+        before return; caller callback exceptions propagate. *)
+  end
 
   type limits = {
     max_nodes : int;

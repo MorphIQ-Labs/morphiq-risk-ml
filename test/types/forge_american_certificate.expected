@@ -1,0 +1,4 @@
+File "forge_american_certificate.ml", line 4, characters 20-77:
+4 | let (_ : C.price) = { value = 1.; absolute_error = 0.; reduction = C.Expiry }
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "C.price"

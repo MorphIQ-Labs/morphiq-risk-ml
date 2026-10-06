@@ -1,0 +1,5 @@
+File "forge_american_accuracy.ml", line 3, characters 62-65:
+3 | let (_ : Early_exercise.Bsm.Certified.absolute_error_limit) = -1.
+                                                                  ^^^
+Error: The constant "-1." has type "float" but an expression was expected of type
+         "Morphiq_risk.Early_exercise.Bsm.Certified.absolute_error_limit"

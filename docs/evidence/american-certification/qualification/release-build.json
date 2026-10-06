@@ -1,0 +1,1 @@
+{"command": ["dune", "build", "--profile", "release", "@install", "bench/american_certified.exe"], "exit": 0, "seconds": 1.6614899635314941}
