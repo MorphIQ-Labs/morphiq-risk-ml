@@ -1,7 +1,7 @@
 # morphiq-risk-ml
 
 An OCaml library for European option pricing, implied volatility, analytic
-Greeks, estimated scalar American/Bermudan prices and Greeks, and deterministic portfolio scenarios.
+Greeks, American/Bermudan pricing with typed compiled batches, and deterministic portfolio scenarios.
 
 The library implements Black–Scholes–Merton, Black-76, displaced Black, and
 Bachelier from their mathematical definitions. Model admission, volatility
@@ -22,6 +22,7 @@ institutional deployment approval.
 | European implied volatility | Positive roots require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly |
 | Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
 | American/Bermudan implied volatility | Separate [estimated intervals](docs/american-implied-volatility.md) for constant sigma; explicit uncertainty, plateaus and bounded failures. Cash puts and curve inversion are unsupported |
+| American/Bermudan batches and scenarios | Immutable typed requests, fixed exercise/cash date rolls and bounded unweighted streaming; [contract](docs/american-compiled.md) |
 | American/Bermudan Greeks | Estimated delta, gamma, parallel vega/rho and fixed-event theta with per-quantity failures; [coordinates and limits](docs/american-greeks.md) |
 | Numerical acceptance | `Production` requires caller-selected absolute error limits and returns private value/error certificates or explicit failures |
 | Exchange prices | Certified scalar two-asset European prices with typed correlation and an explicit currency error limit; [scope and limits](docs/exchange-prices.md) |
@@ -32,7 +33,7 @@ institutional deployment approval.
 
 The planner rolls valuation dates forward with fixed expiries and frozen
 markets. It reports post-expiry requests explicitly. Economic P&L, settlement,
-surface calibration, American portfolio scenarios, stochastic-volatility models,
+surface calibration, certified American aggregation, stochastic-volatility models,
 distributed execution, and durable resume are outside the current API.
 
 American extensions continue under
@@ -40,7 +41,6 @@ American extensions continue under
 The scalar API covers constant and [piecewise coefficients](docs/piecewise-american.md), continuous yield and scheduled
 [limited-liability cash dividends](docs/american-cash-dividends.md), with explicit
 before/after-event exercise rights and [explicit Bermudan schedules](docs/bermudan-pricing.md).
-Piecewise coefficients remain planned.
 Tight numerical requests often remain unavailable; see the [executed evidence](docs/american-pricing.md#measured-numerical-capability).
 
 ## Build and install from source
