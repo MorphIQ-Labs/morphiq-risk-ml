@@ -15,6 +15,7 @@
   (docs/error-function-replacement.md as docs/error-function-replacement.md)
   (docs/results-error-functions.md as docs/results-error-functions.md)
   THIRD_PARTY_NOTICES.md
+  (LICENSES/LAPACK-3.12.1.txt as LICENSES/LAPACK-3.12.1.txt)
   (LICENSES/AS241-StatLib.txt as LICENSES/AS241-StatLib.txt)
   (LICENSES/LetsBeRational.txt as LICENSES/LetsBeRational.txt)
   (LICENSES/QD-BSD-LBNL-License.doc as LICENSES/QD-BSD-LBNL-License.doc)
