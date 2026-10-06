@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **148
+seven core mutants. The catalog currently contains **150
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -325,7 +325,7 @@ boundaries after a rate change, and losing cached arithmetic indicators when
 starting a new solve. Cold public price requests and complete-result invariance
 across request order and uncached workspace budgets witness these dependencies.
 These are reuse consistency properties, not continuum accuracy proofs; the
-independent Greek/price campaigns remain separate. The catalog contains 148
+independent Greek/price campaigns remain separate. The catalog contains 150
 mechanisms. The default seven core mutants are unchanged.
 
 The optional `american-residual-fma` and `american-residual-screen` faults use
@@ -343,7 +343,7 @@ unchanged.
 
 ## American inverse (#117)
 
-Ten optional `american-iv-*` faults challenge quote validation, uncertainty in
+Twelve optional `american-iv-*` faults challenge quote validation, uncertainty in
 price signs, full interval width, bounded calls, cash-put applicability, the
 volatility coordinate, finite exercise rights, delayed opening, signed carry
 caps and cancellation. Their public `american_iv` witness combines independent
@@ -351,3 +351,8 @@ fixed-quote reference intervals with constructed uncertainty/semantic controls.
 The existing certified-accuracy locator is scoped to its named constructor now
 that another validated type has the same predicate. Default CI retains seven
 core faults; all new mechanisms require explicit local/manual selection.
+
+The inverse progress and spacing faults additionally require low-vega bracket
+contraction and useful endpoint progress within fixed evaluation budgets.
+These are progress regressions; independent reference containment remains a
+separate accuracy check. Neither fault changes the seven-mutant core selection.
