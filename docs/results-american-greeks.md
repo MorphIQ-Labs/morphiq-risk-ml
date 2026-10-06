@@ -137,6 +137,10 @@ cumulative allocation, not live workspace or process peak RSS.
 
 ## New Greek request cost
 
+These are the initial #115 measurements. The [subsequent boundary reuse
+qualification](results-american-greek-optimization.md) records the focused #119
+optimization against this baseline; the figures below remain historical.
+
 Five fresh-process rounds per model/request use one warmup and one measured
 call, alternating request order. The same admitted ATM put and 128/128 grid are
 used for price, spatial (delta/gamma/theta) and all-five requests. Whole-work

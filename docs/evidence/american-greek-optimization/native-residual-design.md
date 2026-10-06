@@ -20,8 +20,11 @@ explicit fma is the sole fused operation. No libm approximation is introduced.
 Borrow checked float-array pointers only during the foreign call. Validate all
 array tags/lengths, interval bounds and state shapes before reading/writing;
 retain OCaml roots, allocate nothing after validation, make no callback, retain
-no pointer, and do not release the runtime lock. State arrays are request-owned
-and their small fixed size fits the existing solver metadata reservation.
+no pointer, and do not release the runtime lock. State is request-owned: on the supported 64-bit runtimes the wrapper record,
+six-reference band array, two-double metrics and three-integer indices occupy
+144 bytes including headers. This fits the existing 64 KiB fixed solver
+metadata reservation. Band payloads are borrowed, not copied. No row-sized
+foreign buffer, retained pointer or global mutable state is introduced.
 
 A call processes only a contiguous block before the next original cancellation
 checkpoint or row-budget edge. The OCaml owner performs the first tick before

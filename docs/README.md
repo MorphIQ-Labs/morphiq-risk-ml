@@ -15,6 +15,7 @@ been retired; it remains in Git history.
 - [Piecewise allocation reuse](results-piecewise-allocation.md): bounded stencil/boundary snapshots, complete-outcome compatibility and paired cost evidence.
 - [Piecewise coefficients](piecewise-american.md): distinct immutable curves, event-aligned rollback and [executed evidence](results-american-piecewise.md).
 - [Estimated American Greeks](american-greeks.md): spot delta/gamma, parallel vega/rho, fixed-event theta and explicit per-quantity uncertainty.
+- [Greek boundary optimization](results-american-greek-optimization.md): request-owned reuse, complete perturbation replay and paired cost evidence.
 - [American Greek qualification](results-american-greeks.md): independent and canonical comparisons, boundary/failure controls and measured costs.
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 

@@ -122,6 +122,7 @@ not reassigned. Cancellation is checked during preparation, each underlying
 solve and before publication; caller callback exceptions propagate. A Greek
 request therefore has a different resource allocation from standalone pricing.
 
-See [qualification and measured costs](results-american-greeks.md). Tight-target
+See [qualification and initial costs](results-american-greeks.md) and the
+[subsequent boundary optimization](results-american-greek-optimization.md). Tight-target
 refusals, unresolved reference rows and shared-host performance limits are part
 of that evidence, not successful accuracy comparisons.
