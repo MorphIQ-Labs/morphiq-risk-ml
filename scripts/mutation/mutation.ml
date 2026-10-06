@@ -617,10 +617,11 @@ let catalog =
     {
       id = "enclosure-scratch-length";
       file = "lib/enclosure.ml";
-      snippet = "pack_array terms (na + 2) (a.error +^ 0.0)";
+      snippet = "pack_array terms (na + 2) (a.error +^ 0.0)\n\n  let sub a b";
       replacement =
         "pack_array terms (if a.hi > 2.0 then Float.Array.length terms else na \
-         + 2) (a.error +^ 0.0)";
+         + 2) (a.error +^ 0.0)\n\n\
+        \  let sub a b";
       killer = "enclosure_scalar";
       mechanism = "packing must not consume stale scalar-quotient scratch slots";
     };
@@ -1192,6 +1193,25 @@ let catalog =
       mechanism =
         "an inconclusive first certificate must retain full-evaluator \
          availability";
+    };
+    {
+      id = "enclosure-interpolation-prefix";
+      file = "lib/enclosure.ml";
+      snippet =
+        "pack_array terms (na + 2) (a.error +^ 0.0)\n\n  let sub_float a b";
+      replacement =
+        "pack_array terms (Float.Array.length terms) (a.error +^ 0.0)\n\n\
+        \  let sub_float a b";
+      killer = "enclosure_interpolation";
+      mechanism = "interpolation subtraction must exclude stale packing slots";
+    };
+    {
+      id = "enclosure-interpolation-complement";
+      file = "lib/enclosure.ml";
+      snippet = "(sub_using allocate (exact 1.) weight)";
+      replacement = "weight";
+      killer = "enclosure_interpolation";
+      mechanism = "linear interpolation retains the complementary left weight";
     };
     {
       id = "enclosure-exponential-prefix";
@@ -1816,6 +1836,7 @@ let guard_arguments = function
   | "american_greeks" | "american_greek_reuse" | "american_residual"
   | "american_policy" | "american_work_order" | "american_compiled" ->
       [ [] ]
+  | "enclosure_interpolation" -> [ [] ]
   | "terminal_cash" -> [ [ "terminal_cash" ] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
@@ -1849,7 +1870,16 @@ let guard ~cwd name =
          (executable :: List.concat actions))
   then Invalid ("missing executable/fixture for " ^ name)
   else
-    let results = List.map (run ~cwd executable) actions in
+    (* This guard excludes replay identity from its kill criterion. The option
+       is not a fixture and does not weaken executable/fixture preflight. *)
+    let options =
+      if name = "enclosure_interpolation" then [ "--numerical-only" ] else []
+    in
+    let results =
+      List.map
+        (fun fixtures -> run ~cwd executable (options @ fixtures))
+        actions
+    in
     if
       List.exists (fun (code, _) -> code <> 0 && code <> 1 && code <> 2) results
     then Invalid ("guard did not finish normally: " ^ name)
@@ -1911,6 +1941,10 @@ let guard_controls () =
         (match guard ~cwd:work "oracle_iv" with
         | Invalid _ -> true
         | _ -> false);
+      script "enclosure_interpolation"
+        "[ \"$#\" = 1 ] && [ \"$1\" = --numerical-only ]";
+      check "interpolation numerical-only argument was not passed"
+        (guard ~cwd:work "enclosure_interpolation" = Passed);
       print_endline "mutation guard controls pass")
 
 let score work m =

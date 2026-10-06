@@ -1623,27 +1623,20 @@ module Bsm = struct
               let mid = !low + ((!high - !low) / 2) in
               if nodes.(mid) <= vpoint then low := mid else high := mid
             done;
-            if E.compare_float point nodes.(!low) = E.Zero then values.(!low)
-            else if E.compare_float point nodes.(!high) = E.Zero then
-              values.(!high)
-            else
-              let width = E.sub (exact nodes.(!high)) (exact nodes.(!low)) in
-              let weight = E.div (E.sub point (exact nodes.(!low))) width in
-              (match (E.compare_float weight 0., E.compare_float weight 1.) with
-              | E.Positive, E.Negative -> ()
-              | _ -> fail "cash interpolation weight unresolved");
-              let value, error =
-                enclosed
-                  (E.add
-                     (E.mul (E.sub (exact 1.) weight) (exact values.(!low)))
-                     (E.mul weight (exact values.(!high))))
-              in
-              c.mapping_width <-
-                float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
-              c.mapping_error <- float_max c.mapping_error error;
-              if error > c.local then
-                fail "cash interpolation arithmetic resolution";
-              nonnegative "cash interpolated value" value
+            match
+              E.linear_interpolate point ~lower:nodes.(!low)
+                ~upper:nodes.(!high) ~left:values.(!low) ~right:values.(!high)
+            with
+            | E.Endpoint value -> value
+            | E.Unresolved_weight -> fail "cash interpolation weight unresolved"
+            | E.Interpolated ball ->
+                let value, error = enclosed ball in
+                c.mapping_width <-
+                  float_max c.mapping_width (nodes.(!high) -. nodes.(!low));
+                c.mapping_error <- float_max c.mapping_error error;
+                if error > c.local then
+                  fail "cash interpolation arithmetic resolution";
+                nonnegative "cash interpolated value" value
           in
           fun amount ->
             for i = 0 to Array.length mapping_grid - 1 do

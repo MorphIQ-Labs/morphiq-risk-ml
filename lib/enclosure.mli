@@ -41,6 +41,23 @@ module type S = sig
   val compare_float : t -> float -> sign
   val error_of_float : t -> float -> float
 
+  type interpolation =
+    | Endpoint of float
+    | Interpolated of t
+    | Unresolved_weight
+
+  val linear_interpolate :
+    t ->
+    lower:float ->
+    upper:float ->
+    left:float ->
+    right:float ->
+    interpolation
+  (** Original-input convex linear interpolation. Exact endpoints return the
+      supplied scalar unchanged. Interior weights must be strictly enclosed in
+      (0,1); otherwise [Unresolved_weight]. Arithmetic may raise [Unresolved].
+      Returned enclosures own immutable fields; no scratch escapes. *)
+
   val add_error : t -> float -> t
   (** Enlarge a radius by a proved nonnegative error allowance. *)
 end

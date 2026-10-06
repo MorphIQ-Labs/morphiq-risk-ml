@@ -12,7 +12,8 @@ JOBS=[(c,1) for c in CASES]+[(c,4) for c in ('cash','bermudan','piecewise-cash')
 def statistics_of(xs):
     return dict(median=statistics.median(xs),minimum=min(xs),maximum=max(xs),samples=xs)
 
-def summarize(runs):
+def summarize(runs, allocation_targets=None):
+    if allocation_targets is None: allocation_targets={c:.9 for c in ('bermudan','piecewise','piecewise-cash')}
     expected={(r,c,n,v) for r in range(5) for c,n in JOBS+[('european',0)] for v in ('baseline','candidate')}
     keys=[(x['round'],x['case'],x['size'],x['variant']) for x in runs]
     if len(keys)!=len(expected) or set(keys)!=expected:raise ValueError('incomplete/duplicate paired campaign')
@@ -31,7 +32,7 @@ def summarize(runs):
         if any(i!=identities[0] for i in identities):raise ValueError('changed American complete replay')
         for method in row['baseline']['time']:
             if method=='admission':continue
-            limit=.9 if size==1 and method=='scalar' and case in ('bermudan','piecewise','piecewise-cash') else 1.05
+            limit=allocation_targets.get(case,1.05) if size==1 and method=='scalar' else 1.05
             if row['candidate']['memory'][method]['median']>limit*row['baseline']['memory'][method]['median']:
                 failures.append(f'{case}/{size}/{method}: allocation criterion')
             if row['candidate']['time'][method]['wall_s']['median']>1.1*row['baseline']['time'][method]['wall_s']['median']:
@@ -46,11 +47,11 @@ def summarize(runs):
             if r['candidate']['allocation']['median']>1.05*r['baseline']['allocation']['median']:failures.append(r['key']+': European allocation criterion')
     return dict(american=summary,european=es,criteria_pass=not failures,failures=failures)
 
-def main():
-    p=argparse.ArgumentParser(description=__doc__)
+def main(*, description=__doc__, version='exponential-scratch-campaign 1', allocation_targets=None):
+    p=argparse.ArgumentParser(description=description)
     p.add_argument('--baseline',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--version',action='version',version='exponential-scratch-campaign 1')
+    p.add_argument('--version',action='version',version=version)
     a=p.parse_args();roots={'baseline':a.baseline.resolve(),'candidate':ROOT};out=a.output.resolve()
     if any(out.is_relative_to(r) for r in roots.values()):p.error('output must be outside source trees')
     out.mkdir(parents=True,exist_ok=False)
@@ -61,7 +62,7 @@ def main():
         if sources['baseline'][name]!=sources['candidate'][name]:raise ValueError('benchmark driver changed')
     def guard():
         if any(source_snapshot(r)!=sources[v] for v,r in roots.items()) or any(sha(Path(p))!=h for p,h in hashes.items()):raise ValueError('source/binary drift')
-    manifest=dict(sources=sources,binaries=hashes,commits={v:subprocess.check_output(['git','rev-parse','HEAD'],cwd=r,text=True).strip() for v,r in roots.items()},
+    manifest=dict(campaign=version,allocation_targets=allocation_targets,sources=sources,binaries=hashes,commits={v:subprocess.check_output(['git','rev-parse','HEAD'],cwd=r,text=True).strip() for v,r in roots.items()},
       platform=platform.platform(),logical_cpus=os.cpu_count(),
       hardware=subprocess.check_output(['sysctl','-n','machdep.cpu.brand_string'],text=True).strip() if platform.system()=='Darwin' else platform.machine(),
       started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -89,7 +90,7 @@ def main():
                 atomic_json(out/(name+'.json'),record)
                 atomic_json(out/'progress.json',dict(completed=len(runs),expected=140,last=name))
                 print(name,'complete',flush=True)
-    guard();summary=summarize(runs)
+    guard();summary=summarize(runs,allocation_targets)
     atomic_json(out/'summary.json',summary)
     atomic_json(out/'complete.json',dict(complete=True,processes=len(runs),criteria_pass=summary['criteria_pass'],source_unchanged=True))
     if not summary['criteria_pass']:raise ValueError('frozen engineering criteria failed: '+str(summary['failures']))

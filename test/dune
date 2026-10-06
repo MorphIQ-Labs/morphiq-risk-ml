@@ -1,4 +1,10 @@
 (test
+ (name enclosure_interpolation)
+ (modules enclosure_interpolation)
+ (modes byte_complete exe)
+ (libraries morphiq_risk zarith))
+
+(test
  (name test_morphiq_risk)
  (package morphiq_risk_ml)
  (modules test_morphiq_risk)
