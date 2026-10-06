@@ -68,8 +68,10 @@ central averages at stopping kinks. A change between analytical and numerical
 pricing routes is explicitly unavailable. The method is intentionally bounded;
 it does not retry at larger grids or invent a smaller bump without the caller.
 
-Every refinement change and final boundary/stencil/arithmetic indicator must
-fit one eighth of the requested Greek target; their final sum must fit half.
+Every refinement change, final boundary spread, and maximum stencil/arithmetic
+indicator across the observed refinement levels must fit one eighth of the
+requested Greek target; the assembled final indicators must fit half. This
+conservative maximum can reject a request whose finest-grid stencil is small.
 The [frozen protocol](evidence/american-greeks/protocol.md) and
 [derivation corrections](evidence/american-greeks/protocol-addendum.md) specify
 those screens. They establish empirical convergence observations, not a
