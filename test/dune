@@ -1093,3 +1093,14 @@
     %{exe:american_greeks.exe}
     --mode
     loose))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_benchmark_american_greeks.py
+  ../scripts/benchmark_american_greeks.py
+  ../scripts/benchmark_american_allocation.py
+  ../scripts/benchmark_bermudan_boundary.py
+  ../scripts/american_reference_data.py)
+ (action
+  (run python3 %{dep:../scripts/test_benchmark_american_greeks.py})))

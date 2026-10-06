@@ -58,7 +58,7 @@ def families(rows):
 
 
 def sources():
-    files=[BASE/'cases-v1.json',BASE/'protocol.md',BASE/'protocol-addendum.md',BASE/'frozen.json',Path(__file__),
+    files=[BASE/'cases-v1.json',BASE/'protocol.md',BASE/'protocol-addendum.md',BASE/'frozen.json',BASE/'canonical-addendum.md',Path(__file__),ROOT/'scripts/generate_american_greeks_canonical.py',
            *ROOT.glob('scripts/american_greeks*'),*ROOT.glob('scripts/american_piecewise*'),
            ROOT/'scripts/american_runner_io.hpp',ROOT/'scripts/american_cash_io.hpp',ROOT/'scripts/bermudan_io.hpp',ROOT/'scripts/american_reference_data.py']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files if p.is_file()}

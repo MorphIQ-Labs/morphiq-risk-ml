@@ -11,8 +11,8 @@
     "canonical-addendum.md": "f3f1b3c8dd8434c78a94a3c666fc0161748b095779201490b36fb915e1e935a7",
     "references-v1.json": "6caa762746d4d801ba148cb5eee858c1ff31df6b4dd2f12004ce47f057cfa5f1",
     "canonical-v1.json": "68e9abbaa02a16593897f417958816d971bb9e3fe78a553d926f8c1a73c2a26e",
-    "reference-raw.tar.gz": "b88a9cbe39d1470d8243bc229ef2e8902317132ba86d0bcc38c82e85124cce93",
-    "reference-reproduction.tar.gz": "37391804d0bf2807509ef6fdcea2b71b0f31cb9515ace31276695843a8fc1c72"
+    "reference-raw.tar.gz": "5e6515bb173a86be630ecd839eae89979e176f257dd42b74e27e55661eed86b9",
+    "reference-reproduction.tar.gz": "a4b409a42b6c187d321fef3620f9b837706330f149acbddc3a9c0c7e50eb4ffa"
   },
   "notes": [
     "Calendar-restricted and exact-Time canonical outcomes remain separate.",

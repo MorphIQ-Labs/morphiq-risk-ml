@@ -1,6 +1,6 @@
-(** Estimated American and Bermudan prices. These results are not [Production]
-    certificates. See [docs/american-pricing.md] for numerical capability and
-    limitations. *)
+(** Estimated American and Bermudan prices and Greeks. These results are not
+    [Production] certificates. See [docs/american-pricing.md] for numerical
+    capability and limitations. *)
 module Bsm : sig
   type inputs = {
     spot : float;

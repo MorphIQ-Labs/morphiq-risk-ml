@@ -332,9 +332,28 @@ let numerical_controls () =
         (match outcome with A.Greek_unavailable _ -> true | _ -> false))
     x.greeks
 
+let valuation_cash_control () =
+  let cash =
+    spec ~valuation:A.Before_cash ~opening:A.Before_cash [ (0., 5.) ]
+  in
+  let p = piece_model (model ()) [| (0.5, -0.03) |] [||] [||] in
+  let admitted = unwrap (P.admit_cash p cash) in
+  let req =
+    unwrap
+      (A.configure_greeks [ unwrap (A.request_greek ~tolerance:0.02 A.Delta) ])
+  in
+  let x =
+    unwrap (P.greeks (config ~cells:128 ~steps:128 1.) req admitted Side.Put)
+  in
+  expect "pre-cash spatial capability guard"
+    (match List.assoc A.Delta x.greeks with
+    | A.Greek_unavailable _ -> true
+    | _ -> false)
+
 let controls () =
   analytic_controls ();
   numerical_controls ();
+  valuation_cash_control ();
   let req = requests true in
   expect "empty Greeks" (Result.is_error (A.configure_greeks []));
   let d = unwrap (A.request_greek ~tolerance:0.01 A.Delta) in
@@ -520,8 +539,12 @@ let corpus path refined loose =
 let () =
   match Array.to_list Sys.argv with
   | [ _ ] -> controls ()
-  | [ _; "--corpus"; path; mode ] -> corpus path false (mode = "loose")
-  | [ _; "--refined-corpus"; path; mode ] -> corpus path true (mode = "loose")
+  | ([ _; "--corpus"; path; mode ] | [ _; "--"; path; mode ])
+    when mode = "primary" || mode = "loose" ->
+      corpus path false (mode = "loose")
+  | [ _; "--refined-corpus"; path; mode ]
+    when mode = "primary" || mode = "loose" ->
+      corpus path true (mode = "loose")
   | [ _; "--help" ] ->
       print_endline
         "american-greeks [--corpus FILE primary|loose | --refined-corpus FILE \

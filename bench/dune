@@ -209,3 +209,10 @@
  (ocamlopt_flags
   (:standard -O3))
  (libraries morphiq_risk unix))
+
+(executable
+ (name american_greeks)
+ (modules american_greeks)
+ (libraries morphiq_risk unix)
+ (ocamlopt_flags
+  (:standard -O3)))
