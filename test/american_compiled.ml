@@ -425,6 +425,63 @@ let constant_dates () =
           ~cash_at_valuation:P.Before_payment ~portfolio ~market ~scenarios:huge
           ~limits:
             { limits with max_scenarios = max_int; max_calculations = max_int }));
+  let empty_outputs =
+    Array.init 5 (fun i -> position ~id:(string_of_int i) constant [])
+  in
+  expect "zero-output row count cannot overflow"
+    (Result.is_error
+       (P.compile ~snapshot_id:"row-overflow" ~base_day:0
+          ~day_count:Planner.Actual_365_fixed
+          ~cash_at_valuation:P.Before_payment ~portfolio:empty_outputs ~market
+          ~scenarios:huge
+          ~limits:
+            {
+              limits with
+              max_scenarios = max_int;
+              max_calculations = 0;
+              tile_rows = 5;
+            }));
+  let european =
+    Array.init 5 (fun i ->
+        Planner.
+          {
+            id = string_of_int i;
+            factor = "S";
+            rate_factor = "r";
+            currency = "USD";
+            quantity = 1.;
+            model = Bsm { dividend_yield = 0. };
+            strike = 90.;
+            expiry_day = 365;
+            rate = 0.05;
+            side = Side.Call;
+          })
+  in
+  expect "European zero-output row count cannot overflow"
+    (Result.is_error
+       (Planner.compile ~snapshot_id:"row-overflow" ~base_day:0
+          ~day_count:Planner.Actual_365_fixed ~portfolio:european
+          ~market:
+            Planner.
+              [|
+                {
+                  name = "S";
+                  market = Spot_market { spot = 100.; volatility = vol 0.2 };
+                };
+              |]
+          ~scenarios:huge ~lognormal_outputs:[] ~normal_outputs:[]
+          ~output_mode:Planner.Stream
+          ~limits:
+            Planner.
+              {
+                max_instruments = 5;
+                max_scenarios = max_int;
+                max_calculations = 0;
+                tile_rows = 5;
+                max_workers = 1;
+                max_buffered_results = 5;
+                max_groups = 0;
+              }));
   expect "manifest records exact identity" (String.length (P.manifest p) > 500)
 
 let cash_dates () =

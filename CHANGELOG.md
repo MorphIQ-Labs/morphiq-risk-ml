@@ -15,7 +15,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
   sink-accepted cancellation/failure prefixes. No aggregation or settlement.
 - Expose read-only private scalar configuration fields for canonical identity;
   validating constructors remain mandatory. Existing scalar numerical owners
-  and European behavior are unchanged. See the [contract](docs/american-compiled.md)
+  are unchanged. Both planners now reject unrepresentable total row counts even
+  when no outputs are requested; previously the calculation bound could miss this
+  overflow. See the [contract](docs/american-compiled.md)
   and [qualification](docs/results-american-compiled.md).
 
 

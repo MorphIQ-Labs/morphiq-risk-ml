@@ -118,7 +118,7 @@ set; matching contract IDs alone is insufficient. Cross-row caching and workload
 crossover optimization remain [#119](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/119).
 
 Checked arithmetic bounds positions, market factors, scenarios, output operations,
-tiles and in-flight result slots. `max_schedule_events` bounds the sum of cash,
+tiles, total row counts (including zero-output rows) and in-flight result slots. `max_schedule_events` bounds the sum of cash,
 exercise and coefficient records **per position**, before copying them. An
 American opening counts as one event. A Greek bundle counts as one output slot,
 containing its explicitly requested per-quantity results and scalar diagnostics.

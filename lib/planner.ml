@@ -287,6 +287,7 @@ let compile_common ~assurance ~snapshot_id ~base_day ~day_count ~portfolio
           fi)
         portfolio
     in
+    ignore (product scenario_count instruments);
     let calculations = product scenario_count !calculations_per_scenario in
     require
       (calculations <= limits.max_calculations)
@@ -1621,6 +1622,7 @@ module American = struct
             index)
           portfolio
       in
+      ignore (product scenario_count instruments);
       let calculations = product scenario_count !per_scenario in
       require
         (calculations <= limits.max_calculations)
