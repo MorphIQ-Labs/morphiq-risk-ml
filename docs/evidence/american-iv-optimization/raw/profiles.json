@@ -1,0 +1,19 @@
+{
+  "source": "5009a981c9e4e4c24eb9e079624db5089663d477",
+  "binary": "929f720e9b0080dda3a30f126289e9744a91a92a28884c8b7ebbb87a26e63f41",
+  "driver": "0c0e1c32a124ecd98c69a41b8114b397b0118437d19f8a92f208204d0f10497d",
+  "runs": [
+    {
+      "case": "american-put",
+      "allocation_exit": 0,
+      "cpu_exit": 0,
+      "sample_exit": 0
+    },
+    {
+      "case": "cash-terminal-american",
+      "allocation_exit": 0,
+      "cpu_exit": 0,
+      "sample_exit": 0
+    }
+  ]
+}

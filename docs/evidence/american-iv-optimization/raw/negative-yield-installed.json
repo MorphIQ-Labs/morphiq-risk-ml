@@ -1,0 +1,78 @@
+[
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib",
+      "CAML_LD_LIBRARY_PATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib/stublibs:/Users/stephen/.opam/morphiq-risk-ml/lib/stublibs",
+      "ocamlfind",
+      "ocamlopt",
+      "-package",
+      "morphiq_risk_ml,zarith",
+      "-linkpkg",
+      "-o",
+      "/private/tmp/morphiq-american-iv-opt-evidence/consumer/negative-yield-native",
+      "negative_yield.ml"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib",
+      "CAML_LD_LIBRARY_PATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib/stublibs:/Users/stephen/.opam/morphiq-risk-ml/lib/stublibs",
+      "/private/tmp/morphiq-american-iv-opt-evidence/consumer/negative-yield-native",
+      "/tmp/morphiq-american-iv-opt/docs/evidence/american-iv/negative-yield/references.tsv"
+    ],
+    "exit": 0,
+    "stdout": "negative-yield false -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.94e7d9a9f2e88p-3 0x1.99a4759a243a2p-3\nnegative-yield true -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.94e7d9a9f2e88p-3 0x1.99a4759a243a2p-3\nnegative-yield false 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.9878f49770b4fp-3 0x1.9b0850c066778p-3\nnegative-yield true 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.9878f49770b4fp-3 0x1.9b0850c066778p-3\n2 independent negative-yield quotes, 4 exercise-contract checks passed\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib",
+      "CAML_LD_LIBRARY_PATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib/stublibs:/Users/stephen/.opam/morphiq-risk-ml/lib/stublibs",
+      "ocamlfind",
+      "ocamlc",
+      "-package",
+      "morphiq_risk_ml,zarith",
+      "-linkpkg",
+      "-o",
+      "/private/tmp/morphiq-american-iv-opt-evidence/consumer/negative-yield-bytecode",
+      "negative_yield.ml"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "opam",
+      "exec",
+      "--switch=morphiq-risk-ml",
+      "--",
+      "env",
+      "OCAMLPATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib",
+      "CAML_LD_LIBRARY_PATH=/private/tmp/morphiq-american-iv-opt-evidence/install/lib/stublibs:/Users/stephen/.opam/morphiq-risk-ml/lib/stublibs",
+      "/private/tmp/morphiq-american-iv-opt-evidence/consumer/negative-yield-bytecode",
+      "/tmp/morphiq-american-iv-opt/docs/evidence/american-iv/negative-yield/references.tsv"
+    ],
+    "exit": 0,
+    "stdout": "negative-yield false -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.94e7d9a9f2e88p-3 0x1.99a4759a243a2p-3\nnegative-yield true -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.94e7d9a9f2e88p-3 0x1.99a4759a243a2p-3\nnegative-yield false 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.9878f49770b4fp-3 0x1.9b0850c066778p-3\nnegative-yield true 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.9878f49770b4fp-3 0x1.9b0850c066778p-3\n2 independent negative-yield quotes, 4 exercise-contract checks passed\n",
+    "stderr": ""
+  }
+]

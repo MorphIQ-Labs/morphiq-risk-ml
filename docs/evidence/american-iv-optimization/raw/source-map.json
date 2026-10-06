@@ -1,0 +1,10 @@
+{
+  "baseline_head": "8b3a25f9fdabfbc29da6861f4d9f6599ac365878",
+  "integration_merge": "ba429ce2cdfe5545479d5fe75b55ed9822f06d1f",
+  "equal_trees": true,
+  "profile_source": "5009a981c9e4e4c24eb9e079624db5089663d477",
+  "profile_source_runtime_equal_baseline": true,
+  "rejected_candidate": "5764c82",
+  "runtime_candidate": "0964a65",
+  "qualification_source": "738e23f78443fa58ab8670daf6de629567019be9"
+}

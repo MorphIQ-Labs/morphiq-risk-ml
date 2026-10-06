@@ -1,0 +1,2982 @@
+{
+  "identities": {
+    "baseline": {
+      "source": "ba429ce2cdfe5545479d5fe75b55ed9822f06d1f",
+      "tree": "06599820a522655040864d4edcf637684c2dbdf5",
+      "binary_sha256": "ff2da773d88dd159c486e405b0fb0e378fcee3ba2209e907851988baeac82be2",
+      "driver_sha256": "23d396481226dd05f14ec3c89432c52a8478d00507924cd9d38dfd485f3a8461"
+    },
+    "candidate": {
+      "source": "738e23f78443fa58ab8670daf6de629567019be9",
+      "tree": "ded4f3927c976448a765b0e8cea58636c900fb85",
+      "binary_sha256": "2635c95bca9cced59afb0cb8dde09e28e527d10b57846d2509ac74db082373fa",
+      "driver_sha256": "23d396481226dd05f14ec3c89432c52a8478d00507924cd9d38dfd485f3a8461"
+    }
+  },
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "hardware": "Apple M1 Pro",
+  "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035",
+  "collector_sha256": "52fd1e9a960b7c209f5a74a8c427e48f27fb79cfe417ffe0228c5c6bb43b8aac",
+  "controls_sha256": "272c7cb381fa1de112ba3f53e9a164e99747a56ad550606293ac7006133a939c",
+  "profile": "release; library and benchmark -O3",
+  "warmup_per_path": 1,
+  "rounds_per_process": 3,
+  "environment": {
+    "OCAMLRUNPARAM": "v=0x400"
+  },
+  "rss_unit": "bytes on Darwin",
+  "processes": [
+    {
+      "pair": 0,
+      "mode": "baseline",
+      "load_before": [
+        7.01513671875,
+        33.55224609375,
+        26.20166015625
+      ],
+      "start_utc": "2026-10-06T12:54:33Z",
+      "exit": 0,
+      "load_after": [
+        5.03076171875,
+        30.53515625,
+        25.361328125
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 91400.003,
+          "cpu_ns": 91550.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88800.001,
+          "cpu_ns": 88750.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88449.998,
+          "cpu_ns": 88500.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 835800.002,
+          "cpu_ns": 835250.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 833899.999,
+          "cpu_ns": 833900.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 836400.001,
+          "cpu_ns": 836400.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 832650.001,
+          "cpu_ns": 832700.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 832600.001,
+          "cpu_ns": 832600.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 837350.002,
+          "cpu_ns": 835500.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 188567999.983,
+          "cpu_ns": 188542000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 188390999.916,
+          "cpu_ns": 188350000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 189527999.959,
+          "cpu_ns": 189331000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1699987999.978,
+          "cpu_ns": 1698563000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1691376000.061,
+          "cpu_ns": 1690848000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1700735000.079,
+          "cpu_ns": 1699386000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1692203999.963,
+          "cpu_ns": 1690411000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1692424999.899,
+          "cpu_ns": 1691194000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1696233999.915,
+          "cpu_ns": 1694798000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124137999.956,
+          "cpu_ns": 124057000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 125009999.96,
+          "cpu_ns": 124890000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124325999.99,
+          "cpu_ns": 124235000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1134511999.902,
+          "cpu_ns": 1134096000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1135147000.081,
+          "cpu_ns": 1134154000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1136393000.023,
+          "cpu_ns": 1135256000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1138035999.96,
+          "cpu_ns": 1137569000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1137565999.99,
+          "cpu_ns": 1137156000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1138282999.978,
+          "cpu_ns": 1137785000.0,
+          "allocated_bytes": 121295904.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13500416,
+        "user_seconds": 29.600775,
+        "system_seconds": 0.104645
+      },
+      "gc": {
+        "allocated_words": 594113695,
+        "minor_words": 560061761,
+        "promoted_words": 1010272,
+        "major_words": 35062206,
+        "minor_collections": 2650,
+        "major_collections": 787,
+        "forced_major_collections": 27,
+        "heap_words": 224646,
+        "top_heap_words": 707101
+      }
+    },
+    {
+      "pair": 0,
+      "mode": "candidate",
+      "load_before": [
+        5.03076171875,
+        30.53515625,
+        25.361328125
+      ],
+      "start_utc": "2026-10-06T12:55:03Z",
+      "exit": 0,
+      "load_after": [
+        4.43212890625,
+        29.15283203125,
+        24.9580078125
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 128850.003,
+          "cpu_ns": 129050.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 140900.002,
+          "cpu_ns": 140950.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 129299.995,
+          "cpu_ns": 129350.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 655300.001,
+          "cpu_ns": 653750.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 610200.001,
+          "cpu_ns": 608500.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 565650.0,
+          "cpu_ns": 565250.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 565149.996,
+          "cpu_ns": 563250.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 565900.002,
+          "cpu_ns": 565200.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 556700.001,
+          "cpu_ns": 556800.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189810000.011,
+          "cpu_ns": 189710000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 190050999.983,
+          "cpu_ns": 189878000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 189879000.071,
+          "cpu_ns": 189746000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 751753999.968,
+          "cpu_ns": 751471000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 756928000.017,
+          "cpu_ns": 755862000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 756975000.026,
+          "cpu_ns": 755842000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 755472999.997,
+          "cpu_ns": 754261000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 756129999.994,
+          "cpu_ns": 755396000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 753133000.107,
+          "cpu_ns": 752668000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124696000.014,
+          "cpu_ns": 124610000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 124389000.004,
+          "cpu_ns": 124206000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124836000.032,
+          "cpu_ns": 124781000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 757176999.934,
+          "cpu_ns": 756542000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 756368000.06,
+          "cpu_ns": 755970000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 759346000.035,
+          "cpu_ns": 758711000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 758138000.034,
+          "cpu_ns": 757402000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 761914000.032,
+          "cpu_ns": 760669000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 757511000.033,
+          "cpu_ns": 757142000.0,
+          "allocated_bytes": 80923200.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13516800,
+        "user_seconds": 16.386318,
+        "system_seconds": 0.076276
+      },
+      "gc": {
+        "allocated_words": 315722028,
+        "minor_words": 297070534,
+        "promoted_words": 546131,
+        "major_words": 19197625,
+        "minor_collections": 1469,
+        "major_collections": 440,
+        "forced_major_collections": 27,
+        "heap_words": 221406,
+        "top_heap_words": 717110
+      }
+    },
+    {
+      "pair": 1,
+      "mode": "candidate",
+      "load_before": [
+        4.43212890625,
+        29.15283203125,
+        24.9580078125
+      ],
+      "start_utc": "2026-10-06T12:55:19Z",
+      "exit": 0,
+      "load_after": [
+        3.81298828125,
+        27.8056640625,
+        24.55029296875
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 92450.0,
+          "cpu_ns": 92700.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88799.995,
+          "cpu_ns": 88800.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 89199.998,
+          "cpu_ns": 89250.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 560949.999,
+          "cpu_ns": 560550.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 562849.996,
+          "cpu_ns": 561400.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 560400.001,
+          "cpu_ns": 559900.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 555000.0,
+          "cpu_ns": 555200.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 554200.0,
+          "cpu_ns": 554250.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 553799.997,
+          "cpu_ns": 553950.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189142000.047,
+          "cpu_ns": 189060000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 188903000.089,
+          "cpu_ns": 188842000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 190877999.994,
+          "cpu_ns": 190775000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 752176999.929,
+          "cpu_ns": 751891000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754882999.929,
+          "cpu_ns": 754409000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 755546999.979,
+          "cpu_ns": 755127000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 751876999.973,
+          "cpu_ns": 751604000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 753265999.956,
+          "cpu_ns": 752985000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 752127000.014,
+          "cpu_ns": 751833000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124101999.914,
+          "cpu_ns": 124023000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 123753000.051,
+          "cpu_ns": 123720000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 123747000.005,
+          "cpu_ns": 123663000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 754533000.058,
+          "cpu_ns": 754296000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754568999.982,
+          "cpu_ns": 754291000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 755362000.084,
+          "cpu_ns": 755156000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 754980999.976,
+          "cpu_ns": 754722000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754920999.985,
+          "cpu_ns": 754613000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 756157999.975,
+          "cpu_ns": 755848000.0,
+          "allocated_bytes": 80923200.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13189120,
+        "user_seconds": 16.350355,
+        "system_seconds": 0.061480999999999994
+      },
+      "gc": {
+        "allocated_words": 315722028,
+        "minor_words": 297070534,
+        "promoted_words": 546131,
+        "major_words": 19197625,
+        "minor_collections": 1469,
+        "major_collections": 440,
+        "forced_major_collections": 27,
+        "heap_words": 221406,
+        "top_heap_words": 717110
+      }
+    },
+    {
+      "pair": 1,
+      "mode": "baseline",
+      "load_before": [
+        3.81298828125,
+        27.8056640625,
+        24.55029296875
+      ],
+      "start_utc": "2026-10-06T12:55:36Z",
+      "exit": 0,
+      "load_after": [
+        3.2880859375,
+        25.38623046875,
+        23.78466796875
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 91649.999,
+          "cpu_ns": 91900.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88599.999,
+          "cpu_ns": 88700.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88800.001,
+          "cpu_ns": 88800.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 836149.999,
+          "cpu_ns": 836150.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 833049.999,
+          "cpu_ns": 833100.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 837950.001,
+          "cpu_ns": 837200.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 845299.999,
+          "cpu_ns": 844900.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 834300.002,
+          "cpu_ns": 834350.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 832199.998,
+          "cpu_ns": 832150.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 188691999.996,
+          "cpu_ns": 188648000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 188824000.07,
+          "cpu_ns": 188750000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 188359000.022,
+          "cpu_ns": 188329000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1695542000.001,
+          "cpu_ns": 1694958000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1695519000.059,
+          "cpu_ns": 1694729000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1705334999.948,
+          "cpu_ns": 1703835000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1690021999.995,
+          "cpu_ns": 1689061000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1698248000.001,
+          "cpu_ns": 1696117000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1700125999.982,
+          "cpu_ns": 1698033000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 123626000.015,
+          "cpu_ns": 123587000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 124194000.033,
+          "cpu_ns": 124163000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124081999.995,
+          "cpu_ns": 124049000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1137409000.075,
+          "cpu_ns": 1136472000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1133199000.033,
+          "cpu_ns": 1132542000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1138418000.075,
+          "cpu_ns": 1136736000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1142527000.047,
+          "cpu_ns": 1140991000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1138437999.994,
+          "cpu_ns": 1137883000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1142476000.008,
+          "cpu_ns": 1141114000.0,
+          "allocated_bytes": 121295904.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13516800,
+        "user_seconds": 29.599855,
+        "system_seconds": 0.109577
+      },
+      "gc": {
+        "allocated_words": 594113695,
+        "minor_words": 560061761,
+        "promoted_words": 1010272,
+        "major_words": 35062206,
+        "minor_collections": 2650,
+        "major_collections": 787,
+        "forced_major_collections": 27,
+        "heap_words": 224646,
+        "top_heap_words": 707101
+      }
+    },
+    {
+      "pair": 2,
+      "mode": "baseline",
+      "load_before": [
+        3.2880859375,
+        25.38623046875,
+        23.78466796875
+      ],
+      "start_utc": "2026-10-06T12:56:06Z",
+      "exit": 0,
+      "load_after": [
+        4.1787109375,
+        23.5361328125,
+        23.171875
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 91549.999,
+          "cpu_ns": 91750.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88849.996,
+          "cpu_ns": 88850.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88499.999,
+          "cpu_ns": 88600.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 833149.999,
+          "cpu_ns": 833250.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 832700.002,
+          "cpu_ns": 832800.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 836899.999,
+          "cpu_ns": 836550.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 832450.0,
+          "cpu_ns": 832500.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 836749.998,
+          "cpu_ns": 836450.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 840250.001,
+          "cpu_ns": 839950.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 188966999.995,
+          "cpu_ns": 188865000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 188760999.939,
+          "cpu_ns": 188722000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 189078000.025,
+          "cpu_ns": 188994000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1697092999.937,
+          "cpu_ns": 1696297000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1696044999.99,
+          "cpu_ns": 1695021000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1702845000.08,
+          "cpu_ns": 1701218000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1688820999.931,
+          "cpu_ns": 1688078000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1690223999.904,
+          "cpu_ns": 1689277000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1693838000.065,
+          "cpu_ns": 1692967000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 123559999.978,
+          "cpu_ns": 123529000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 123789000.092,
+          "cpu_ns": 123733000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124040000.024,
+          "cpu_ns": 124000000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1137410999.974,
+          "cpu_ns": 1136796000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1133256000.001,
+          "cpu_ns": 1132912000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1133908000.076,
+          "cpu_ns": 1133445000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1137865000.055,
+          "cpu_ns": 1137408000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1139323000.098,
+          "cpu_ns": 1138769000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1139453000.04,
+          "cpu_ns": 1138746000.0,
+          "allocated_bytes": 121295904.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13336576,
+        "user_seconds": 29.594716,
+        "system_seconds": 0.094798
+      },
+      "gc": {
+        "allocated_words": 594113695,
+        "minor_words": 560061761,
+        "promoted_words": 1010272,
+        "major_words": 35062206,
+        "minor_collections": 2650,
+        "major_collections": 787,
+        "forced_major_collections": 27,
+        "heap_words": 224646,
+        "top_heap_words": 707101
+      }
+    },
+    {
+      "pair": 2,
+      "mode": "candidate",
+      "load_before": [
+        4.1787109375,
+        23.5361328125,
+        23.171875
+      ],
+      "start_utc": "2026-10-06T12:56:36Z",
+      "exit": 0,
+      "load_after": [
+        3.41796875,
+        22.107421875,
+        22.6669921875
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 92299.999,
+          "cpu_ns": 92600.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88449.998,
+          "cpu_ns": 88450.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88449.998,
+          "cpu_ns": 88500.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 559700.001,
+          "cpu_ns": 559900.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 553000.002,
+          "cpu_ns": 553050.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 555299.997,
+          "cpu_ns": 554350.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 557400.001,
+          "cpu_ns": 557400.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 562800.001,
+          "cpu_ns": 562400.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 554950.0,
+          "cpu_ns": 555050.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189809000.003,
+          "cpu_ns": 189661000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 190793999.936,
+          "cpu_ns": 190485000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 190609000.041,
+          "cpu_ns": 190437000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 753612999.921,
+          "cpu_ns": 753227000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 758358999.97,
+          "cpu_ns": 757887000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 752591999.946,
+          "cpu_ns": 752334000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 752007000.032,
+          "cpu_ns": 751776000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 753314000.089,
+          "cpu_ns": 753047000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 752031999.989,
+          "cpu_ns": 751723000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 123707000.05,
+          "cpu_ns": 123691000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 123878999.962,
+          "cpu_ns": 123835000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 123788999.976,
+          "cpu_ns": 123763000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 754321999.964,
+          "cpu_ns": 754094000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754291999.969,
+          "cpu_ns": 754000000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 756373999.99,
+          "cpu_ns": 756182000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 755008000.066,
+          "cpu_ns": 754773000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754370999.988,
+          "cpu_ns": 754129000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 756265999.982,
+          "cpu_ns": 755946000.0,
+          "allocated_bytes": 80923200.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13352960,
+        "user_seconds": 16.348933,
+        "system_seconds": 0.07285699999999999
+      },
+      "gc": {
+        "allocated_words": 315722028,
+        "minor_words": 297070534,
+        "promoted_words": 546131,
+        "major_words": 19197625,
+        "minor_collections": 1469,
+        "major_collections": 440,
+        "forced_major_collections": 27,
+        "heap_words": 221406,
+        "top_heap_words": 717110
+      }
+    },
+    {
+      "pair": 3,
+      "mode": "candidate",
+      "load_before": [
+        3.41796875,
+        22.107421875,
+        22.6669921875
+      ],
+      "start_utc": "2026-10-06T12:56:52Z",
+      "exit": 0,
+      "load_after": [
+        3.87890625,
+        21.2998046875,
+        22.36865234375
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 93450.001,
+          "cpu_ns": 93600.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 89349.999,
+          "cpu_ns": 89350.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 89500.0,
+          "cpu_ns": 89550.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 555549.999,
+          "cpu_ns": 555600.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 558599.998,
+          "cpu_ns": 557950.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 555700.0,
+          "cpu_ns": 555650.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 564549.997,
+          "cpu_ns": 564650.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 558449.997,
+          "cpu_ns": 558450.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 559600.0,
+          "cpu_ns": 559600.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189261000.021,
+          "cpu_ns": 189162000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 189519000.007,
+          "cpu_ns": 189364000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 190759000.019,
+          "cpu_ns": 190461000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 759810999.967,
+          "cpu_ns": 754555000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 755213000.113,
+          "cpu_ns": 754555000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 753233999.945,
+          "cpu_ns": 752715000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 751215000.055,
+          "cpu_ns": 750822000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 753689999.925,
+          "cpu_ns": 753307000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 751372999.977,
+          "cpu_ns": 750970000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124261999.968,
+          "cpu_ns": 124084000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 123970999.965,
+          "cpu_ns": 123824000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 123848999.967,
+          "cpu_ns": 123743000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 759288000.059,
+          "cpu_ns": 757004000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754883999.936,
+          "cpu_ns": 754372000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 756438999.902,
+          "cpu_ns": 755990000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 753784000.059,
+          "cpu_ns": 753499000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 753910999.978,
+          "cpu_ns": 753645000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 755437999.964,
+          "cpu_ns": 755078000.0,
+          "allocated_bytes": 80923200.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13910016,
+        "user_seconds": 16.381242,
+        "system_seconds": 0.037798
+      },
+      "gc": {
+        "allocated_words": 315722028,
+        "minor_words": 297070534,
+        "promoted_words": 546131,
+        "major_words": 19197625,
+        "minor_collections": 1469,
+        "major_collections": 440,
+        "forced_major_collections": 27,
+        "heap_words": 221406,
+        "top_heap_words": 717110
+      }
+    },
+    {
+      "pair": 3,
+      "mode": "baseline",
+      "load_before": [
+        3.87890625,
+        21.2998046875,
+        22.36865234375
+      ],
+      "start_utc": "2026-10-06T12:57:09Z",
+      "exit": 0,
+      "load_after": [
+        3.23876953125,
+        19.4716796875,
+        21.66748046875
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 92249.998,
+          "cpu_ns": 92500.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 90150.0,
+          "cpu_ns": 90150.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88899.996,
+          "cpu_ns": 88900.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 832200.004,
+          "cpu_ns": 832250.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 834700.0,
+          "cpu_ns": 834100.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 832550.001,
+          "cpu_ns": 832600.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 833250.0,
+          "cpu_ns": 833350.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 831700.0,
+          "cpu_ns": 831700.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 835150.003,
+          "cpu_ns": 834150.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189050000.045,
+          "cpu_ns": 188926000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 189450000.064,
+          "cpu_ns": 189366000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 188450000.016,
+          "cpu_ns": 188401000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1693441000.069,
+          "cpu_ns": 1692772000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1691056999.96,
+          "cpu_ns": 1690409000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1700537999.975,
+          "cpu_ns": 1699178000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1693261999.986,
+          "cpu_ns": 1691093000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1694157000.049,
+          "cpu_ns": 1692231000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1698178999.941,
+          "cpu_ns": 1696147000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124586999.998,
+          "cpu_ns": 124413000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 124576000.031,
+          "cpu_ns": 124374000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124462999.986,
+          "cpu_ns": 124348000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1139388000.011,
+          "cpu_ns": 1137988000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1136500000.022,
+          "cpu_ns": 1135180000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1137434000.033,
+          "cpu_ns": 1136049000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1140495000.058,
+          "cpu_ns": 1139320000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1141209000.023,
+          "cpu_ns": 1139842000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1142243999.988,
+          "cpu_ns": 1140828000.0,
+          "allocated_bytes": 121295904.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13598720,
+        "user_seconds": 29.66568,
+        "system_seconds": 0.062593
+      },
+      "gc": {
+        "allocated_words": 594113695,
+        "minor_words": 560061761,
+        "promoted_words": 1010272,
+        "major_words": 35062206,
+        "minor_collections": 2650,
+        "major_collections": 787,
+        "forced_major_collections": 27,
+        "heap_words": 224646,
+        "top_heap_words": 707101
+      }
+    },
+    {
+      "pair": 4,
+      "mode": "baseline",
+      "load_before": [
+        3.23876953125,
+        19.4716796875,
+        21.66748046875
+      ],
+      "start_utc": "2026-10-06T12:57:39Z",
+      "exit": 0,
+      "load_after": [
+        3.94775390625,
+        18.1005859375,
+        21.09423828125
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 92050.002,
+          "cpu_ns": 92250.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 95399.999,
+          "cpu_ns": 94800.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 90000.004,
+          "cpu_ns": 90100.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 841950.002,
+          "cpu_ns": 841350.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 839799.998,
+          "cpu_ns": 838900.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 852550.002,
+          "cpu_ns": 850200.0,
+          "allocated_bytes": 1064685.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 840950.001,
+          "cpu_ns": 839600.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 848000.002,
+          "cpu_ns": 846050.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 835600.001,
+          "cpu_ns": 835050.0,
+          "allocated_bytes": 1065157.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189344999.962,
+          "cpu_ns": 189153000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 189248000.039,
+          "cpu_ns": 189097000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 189359000.069,
+          "cpu_ns": 189147000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1705220000.003,
+          "cpu_ns": 1702166000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1705591000.034,
+          "cpu_ns": 1699367000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1705296000.0,
+          "cpu_ns": 1702083000.0,
+          "allocated_bytes": 320391264.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1700689999.969,
+          "cpu_ns": 1696620000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1693871999.974,
+          "cpu_ns": 1692256000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1696991999.983,
+          "cpu_ns": 1695355000.0,
+          "allocated_bytes": 320392192.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124858999.974,
+          "cpu_ns": 124612000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 124461999.978,
+          "cpu_ns": 124262000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 124042000.039,
+          "cpu_ns": 123952000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1138848999.981,
+          "cpu_ns": 1137437000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1135986999.958,
+          "cpu_ns": 1135033000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1137632999.918,
+          "cpu_ns": 1136195000.0,
+          "allocated_bytes": 121295432.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 1139752999.996,
+          "cpu_ns": 1138735000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 1139755000.011,
+          "cpu_ns": 1138622000.0,
+          "allocated_bytes": 121295904.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 1139655999.956,
+          "cpu_ns": 1138681000.0,
+          "allocated_bytes": 121295904.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13271040,
+        "user_seconds": 29.684319,
+        "system_seconds": 0.076252
+      },
+      "gc": {
+        "allocated_words": 594113695,
+        "minor_words": 560061761,
+        "promoted_words": 1010272,
+        "major_words": 35062206,
+        "minor_collections": 2650,
+        "major_collections": 787,
+        "forced_major_collections": 27,
+        "heap_words": 224646,
+        "top_heap_words": 707101
+      }
+    },
+    {
+      "pair": 4,
+      "mode": "candidate",
+      "load_before": [
+        3.94775390625,
+        18.1005859375,
+        21.09423828125
+      ],
+      "start_utc": "2026-10-06T12:58:09Z",
+      "exit": 0,
+      "load_after": [
+        3.595703125,
+        17.32763671875,
+        20.765625
+      ],
+      "samples": [
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 95500.0,
+          "cpu_ns": 95200.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 88749.995,
+          "cpu_ns": 88750.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/price",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 88899.996,
+          "cpu_ns": 88900.0,
+          "allocated_bytes": 116661.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 559850.002,
+          "cpu_ns": 558800.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 560000.003,
+          "cpu_ns": 559500.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/solve",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 560150.004,
+          "cpu_ns": 558400.0,
+          "allocated_bytes": 709709.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 1,
+          "n": 20,
+          "wall_ns": 554250.0,
+          "cpu_ns": 553500.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 2,
+          "n": 20,
+          "wall_ns": 553999.998,
+          "cpu_ns": 554100.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "call-100-0.05-american/end-to-end",
+          "round": 3,
+          "n": 20,
+          "wall_ns": 554100.005,
+          "cpu_ns": 553800.0,
+          "allocated_bytes": 710181.6
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 189318999.997,
+          "cpu_ns": 189116000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 189245000.016,
+          "cpu_ns": 189106000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 189497000.072,
+          "cpu_ns": 189367000.0,
+          "allocated_bytes": 35601424.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 752866999.945,
+          "cpu_ns": 752331000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754780999.967,
+          "cpu_ns": 754191000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 754379999.94,
+          "cpu_ns": 753670000.0,
+          "allocated_bytes": 142452344.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 753336000.023,
+          "cpu_ns": 752591000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 754409999.936,
+          "cpu_ns": 753867000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "cash-terminal-american/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 753340999.945,
+          "cpu_ns": 752709000.0,
+          "allocated_bytes": 142453272.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 124226000.044,
+          "cpu_ns": 124086000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 123779000.016,
+          "cpu_ns": 123724000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/price",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 123969999.957,
+          "cpu_ns": 123848000.0,
+          "allocated_bytes": 13475224.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 756706000.073,
+          "cpu_ns": 756021000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 756500000.018,
+          "cpu_ns": 755737000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/solve",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 757663000.026,
+          "cpu_ns": 757086000.0,
+          "allocated_bytes": 80922728.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 1,
+          "n": 1,
+          "wall_ns": 757782000.001,
+          "cpu_ns": 756931000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 2,
+          "n": 1,
+          "wall_ns": 760213999.893,
+          "cpu_ns": 758492000.0,
+          "allocated_bytes": 80923200.0
+        },
+        {
+          "name": "american-put/end-to-end",
+          "round": 3,
+          "n": 1,
+          "wall_ns": 761102000.019,
+          "cpu_ns": 759149000.0,
+          "allocated_bytes": 80923200.0
+        }
+      ],
+      "resources": {
+        "peak_rss": 13287424,
+        "user_seconds": 16.402232,
+        "system_seconds": 0.04181
+      },
+      "gc": {
+        "allocated_words": 315722028,
+        "minor_words": 297070534,
+        "promoted_words": 546131,
+        "major_words": 19197625,
+        "minor_collections": 1469,
+        "major_collections": 440,
+        "forced_major_collections": 27,
+        "heap_words": 221406,
+        "top_heap_words": 717110
+      }
+    }
+  ],
+  "checks": {
+    "baseline": [
+      "CHECK call-100-0.05-american 0x1.919999999999ap-3 0x1.9a66666666666p-3 9",
+      "CHECK cash-terminal-american 0x1.919999999999ap-3 0x1.9a66666666666p-3 9",
+      "CHECK american-put 0x1.919999999999ap-3 0x1.9a66666666666p-3 9"
+    ],
+    "candidate": [
+      "CHECK call-100-0.05-american 0x1.997e8e9146f65p-3 0x1.9c0deaba3cb8ep-3 6",
+      "CHECK cash-terminal-american 0x1.97adcdf124adfp-3 0x1.9a3d2a1a1a708p-3 4",
+      "CHECK american-put 0x1.974f30b2eef74p-3 0x1.9c6de904da7c6p-3 6"
+    ]
+  },
+  "summary": {
+    "baseline": {
+      "american-put/end-to-end": {
+        "wall_ns": {
+          "median": 1139655999.956,
+          "minimum": 1137565999.99,
+          "maximum": 1142527000.047
+        },
+        "cpu_ns": {
+          "median": 1138735000.0,
+          "minimum": 1137156000.0,
+          "maximum": 1141114000.0
+        },
+        "allocated_bytes": {
+          "median": 121295904.0,
+          "minimum": 121295904.0,
+          "maximum": 121295904.0
+        }
+      },
+      "american-put/price": {
+        "wall_ns": {
+          "median": 124194000.033,
+          "minimum": 123559999.978,
+          "maximum": 125009999.96
+        },
+        "cpu_ns": {
+          "median": 124163000.0,
+          "minimum": 123529000.0,
+          "maximum": 124890000.0
+        },
+        "allocated_bytes": {
+          "median": 13475224.0,
+          "minimum": 13475224.0,
+          "maximum": 13475224.0
+        }
+      },
+      "american-put/solve": {
+        "wall_ns": {
+          "median": 1136500000.022,
+          "minimum": 1133199000.033,
+          "maximum": 1139388000.011
+        },
+        "cpu_ns": {
+          "median": 1135256000.0,
+          "minimum": 1132542000.0,
+          "maximum": 1137988000.0
+        },
+        "allocated_bytes": {
+          "median": 121295432.0,
+          "minimum": 121295432.0,
+          "maximum": 121295432.0
+        }
+      },
+      "call-100-0.05-american/end-to-end": {
+        "wall_ns": {
+          "median": 835150.003,
+          "minimum": 831700.0,
+          "maximum": 848000.002
+        },
+        "cpu_ns": {
+          "median": 834350.0,
+          "minimum": 831700.0,
+          "maximum": 846050.0
+        },
+        "allocated_bytes": {
+          "median": 1065157.6,
+          "minimum": 1065157.6,
+          "maximum": 1065157.6
+        }
+      },
+      "call-100-0.05-american/price": {
+        "wall_ns": {
+          "median": 90000.004,
+          "minimum": 88449.998,
+          "maximum": 95399.999
+        },
+        "cpu_ns": {
+          "median": 90100.0,
+          "minimum": 88500.0,
+          "maximum": 94800.0
+        },
+        "allocated_bytes": {
+          "median": 116661.6,
+          "minimum": 116661.6,
+          "maximum": 116661.6
+        }
+      },
+      "call-100-0.05-american/solve": {
+        "wall_ns": {
+          "median": 835800.002,
+          "minimum": 832200.004,
+          "maximum": 852550.002
+        },
+        "cpu_ns": {
+          "median": 835250.0,
+          "minimum": 832250.0,
+          "maximum": 850200.0
+        },
+        "allocated_bytes": {
+          "median": 1064685.6,
+          "minimum": 1064685.6,
+          "maximum": 1064685.6
+        }
+      },
+      "cash-terminal-american/end-to-end": {
+        "wall_ns": {
+          "median": 1693871999.974,
+          "minimum": 1688820999.931,
+          "maximum": 1700689999.969
+        },
+        "cpu_ns": {
+          "median": 1692256000.0,
+          "minimum": 1688078000.0,
+          "maximum": 1698033000.0
+        },
+        "allocated_bytes": {
+          "median": 320392192.0,
+          "minimum": 320392192.0,
+          "maximum": 320392192.0
+        }
+      },
+      "cash-terminal-american/price": {
+        "wall_ns": {
+          "median": 188966999.995,
+          "minimum": 188359000.022,
+          "maximum": 189527999.959
+        },
+        "cpu_ns": {
+          "median": 188865000.0,
+          "minimum": 188329000.0,
+          "maximum": 189366000.0
+        },
+        "allocated_bytes": {
+          "median": 35601424.0,
+          "minimum": 35601424.0,
+          "maximum": 35601424.0
+        }
+      },
+      "cash-terminal-american/solve": {
+        "wall_ns": {
+          "median": 1699987999.978,
+          "minimum": 1691056999.96,
+          "maximum": 1705591000.034
+        },
+        "cpu_ns": {
+          "median": 1698563000.0,
+          "minimum": 1690409000.0,
+          "maximum": 1703835000.0
+        },
+        "allocated_bytes": {
+          "median": 320391264.0,
+          "minimum": 320391264.0,
+          "maximum": 320391264.0
+        }
+      }
+    },
+    "candidate": {
+      "american-put/end-to-end": {
+        "wall_ns": {
+          "median": 756157999.975,
+          "minimum": 753784000.059,
+          "maximum": 761914000.032
+        },
+        "cpu_ns": {
+          "median": 755848000.0,
+          "minimum": 753499000.0,
+          "maximum": 760669000.0
+        },
+        "allocated_bytes": {
+          "median": 80923200.0,
+          "minimum": 80923200.0,
+          "maximum": 80923200.0
+        }
+      },
+      "american-put/price": {
+        "wall_ns": {
+          "median": 123969999.957,
+          "minimum": 123707000.05,
+          "maximum": 124836000.032
+        },
+        "cpu_ns": {
+          "median": 123835000.0,
+          "minimum": 123663000.0,
+          "maximum": 124781000.0
+        },
+        "allocated_bytes": {
+          "median": 13475224.0,
+          "minimum": 13475224.0,
+          "maximum": 13475224.0
+        }
+      },
+      "american-put/solve": {
+        "wall_ns": {
+          "median": 756373999.99,
+          "minimum": 754291999.969,
+          "maximum": 759346000.035
+        },
+        "cpu_ns": {
+          "median": 755970000.0,
+          "minimum": 754000000.0,
+          "maximum": 758711000.0
+        },
+        "allocated_bytes": {
+          "median": 80922728.0,
+          "minimum": 80922728.0,
+          "maximum": 80922728.0
+        }
+      },
+      "call-100-0.05-american/end-to-end": {
+        "wall_ns": {
+          "median": 556700.001,
+          "minimum": 553799.997,
+          "maximum": 565900.002
+        },
+        "cpu_ns": {
+          "median": 556800.0,
+          "minimum": 553500.0,
+          "maximum": 565200.0
+        },
+        "allocated_bytes": {
+          "median": 710181.6,
+          "minimum": 710181.6,
+          "maximum": 710181.6
+        }
+      },
+      "call-100-0.05-american/price": {
+        "wall_ns": {
+          "median": 89500.0,
+          "minimum": 88449.998,
+          "maximum": 140900.002
+        },
+        "cpu_ns": {
+          "median": 89550.0,
+          "minimum": 88450.0,
+          "maximum": 140950.0
+        },
+        "allocated_bytes": {
+          "median": 116661.6,
+          "minimum": 116661.6,
+          "maximum": 116661.6
+        }
+      },
+      "call-100-0.05-american/solve": {
+        "wall_ns": {
+          "median": 560000.003,
+          "minimum": 553000.002,
+          "maximum": 655300.001
+        },
+        "cpu_ns": {
+          "median": 559500.0,
+          "minimum": 553050.0,
+          "maximum": 653750.0
+        },
+        "allocated_bytes": {
+          "median": 709709.6,
+          "minimum": 709709.6,
+          "maximum": 709709.6
+        }
+      },
+      "cash-terminal-american/end-to-end": {
+        "wall_ns": {
+          "median": 753265999.956,
+          "minimum": 751215000.055,
+          "maximum": 756129999.994
+        },
+        "cpu_ns": {
+          "median": 752668000.0,
+          "minimum": 750822000.0,
+          "maximum": 755396000.0
+        },
+        "allocated_bytes": {
+          "median": 142453272.0,
+          "minimum": 142453272.0,
+          "maximum": 142453272.0
+        }
+      },
+      "cash-terminal-american/price": {
+        "wall_ns": {
+          "median": 189809000.003,
+          "minimum": 188903000.089,
+          "maximum": 190877999.994
+        },
+        "cpu_ns": {
+          "median": 189661000.0,
+          "minimum": 188842000.0,
+          "maximum": 190775000.0
+        },
+        "allocated_bytes": {
+          "median": 35601424.0,
+          "minimum": 35601424.0,
+          "maximum": 35601424.0
+        }
+      },
+      "cash-terminal-american/solve": {
+        "wall_ns": {
+          "median": 754780999.967,
+          "minimum": 751753999.968,
+          "maximum": 759810999.967
+        },
+        "cpu_ns": {
+          "median": 754191000.0,
+          "minimum": 751471000.0,
+          "maximum": 757887000.0
+        },
+        "allocated_bytes": {
+          "median": 142452344.0,
+          "minimum": 142452344.0,
+          "maximum": 142452344.0
+        }
+      }
+    }
+  },
+  "criteria": [
+    {
+      "path": "american-put/end-to-end",
+      "metric": "wall_ns",
+      "ratio": 0.6634967042723364,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "american-put/end-to-end",
+      "metric": "allocated_bytes",
+      "ratio": 0.6671552569491547,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "american-put/price",
+      "metric": "wall_ns",
+      "ratio": 0.9981963695835508,
+      "maximum": 1.1,
+      "passed": true
+    },
+    {
+      "path": "american-put/price",
+      "metric": "allocated_bytes",
+      "ratio": 1.0,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "path": "american-put/solve",
+      "metric": "wall_ns",
+      "ratio": 0.6655292564675392,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "american-put/solve",
+      "metric": "allocated_bytes",
+      "ratio": 0.6671539617419393,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/end-to-end",
+      "metric": "wall_ns",
+      "ratio": 0.6665868394901988,
+      "maximum": 1.1,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/end-to-end",
+      "metric": "allocated_bytes",
+      "ratio": 0.6667385183187914,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/price",
+      "metric": "wall_ns",
+      "ratio": 0.9944444002469155,
+      "maximum": 1.1,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/price",
+      "metric": "allocated_bytes",
+      "ratio": 1.0,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/solve",
+      "metric": "wall_ns",
+      "ratio": 0.6700167524048415,
+      "maximum": 1.1,
+      "passed": true
+    },
+    {
+      "path": "call-100-0.05-american/solve",
+      "metric": "allocated_bytes",
+      "ratio": 0.6665907757182026,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/end-to-end",
+      "metric": "wall_ns",
+      "ratio": 0.44470066213241743,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/end-to-end",
+      "metric": "allocated_bytes",
+      "ratio": 0.44462154683220245,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/price",
+      "metric": "wall_ns",
+      "ratio": 1.0044558044950826,
+      "maximum": 1.1,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/price",
+      "metric": "allocated_bytes",
+      "ratio": 1.0,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/solve",
+      "metric": "wall_ns",
+      "ratio": 0.4439919575766228,
+      "maximum": 0.75,
+      "passed": true
+    },
+    {
+      "path": "cash-terminal-american/solve",
+      "metric": "allocated_bytes",
+      "ratio": 0.4446199382015609,
+      "maximum": 0.75,
+      "passed": true
+    }
+  ]
+}

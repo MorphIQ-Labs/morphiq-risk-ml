@@ -177,6 +177,10 @@ and source-artifact/cross-platform capability qualification is #120. General
 cash-put inversion, one-parameter curve inversion and rigorous general stopping
 inverse enclosures remain outside this API. No main release is implied.
 
+The subsequent [focused inverse optimization](results-american-iv-optimization.md)
+requalifies changed estimated endpoints and records matched before/after costs.
+The measurements below retain the original #117 implementation as history.
+
 ## Executed validation and measured cost
 
 Runtime source is `566e19096227dc920822660eb68c68cf89f1eef2`; final failure

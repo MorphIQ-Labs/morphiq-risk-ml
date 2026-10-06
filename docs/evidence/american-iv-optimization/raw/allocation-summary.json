@@ -1,0 +1,38 @@
+{
+  "american-put": {
+    "samples": 4680,
+    "categories": {
+      "grid construction": 170,
+      "stencil preparation": 2354,
+      "time-slab assembly": 1685,
+      "remaining inverse/price": 350,
+      "boundary arithmetic": 121
+    },
+    "percent": {
+      "grid construction": 3.6324786324786325,
+      "stencil preparation": 50.2991452991453,
+      "time-slab assembly": 36.004273504273506,
+      "remaining inverse/price": 7.478632478632479,
+      "boundary arithmetic": 2.5854700854700856
+    }
+  },
+  "cash-terminal-american": {
+    "samples": 12122,
+    "categories": {
+      "cash interpolation": 6639,
+      "grid construction": 324,
+      "stencil preparation": 2388,
+      "time-slab assembly": 1669,
+      "remaining inverse/price": 966,
+      "boundary arithmetic": 136
+    },
+    "percent": {
+      "cash interpolation": 54.768190067645605,
+      "grid construction": 2.672826266292691,
+      "stencil preparation": 19.699719518231316,
+      "time-slab assembly": 13.7683550569213,
+      "remaining inverse/price": 7.968982016168949,
+      "boundary arithmetic": 1.121927074740142
+    }
+  }
+}
