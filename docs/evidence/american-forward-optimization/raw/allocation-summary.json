@@ -1,0 +1,15 @@
+{
+  "samples": 519,
+  "categories": {
+    "stencil preparation": 253,
+    "time-slab": 194,
+    "grid": 20,
+    "other": 52
+  },
+  "percent": {
+    "stencil preparation": 48.747591522158,
+    "time-slab": 37.37957610789981,
+    "grid": 3.8535645472061657,
+    "other": 10.019267822736031
+  }
+}
