@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Frozen paired American/European campaign for call-owned exponential scratch."""
-import argparse,json,os,platform,statistics,subprocess
+import argparse,datetime,json,os,platform,statistics,subprocess
 from pathlib import Path
 import check_american_backends as american
 import benchmark_enclosure_consumers as european
@@ -62,7 +62,10 @@ def main():
     def guard():
         if any(source_snapshot(r)!=sources[v] for v,r in roots.items()) or any(sha(Path(p))!=h for p,h in hashes.items()):raise ValueError('source/binary drift')
     manifest=dict(sources=sources,binaries=hashes,commits={v:subprocess.check_output(['git','rev-parse','HEAD'],cwd=r,text=True).strip() for v,r in roots.items()},
-      platform=platform.platform(),logical_cpus=os.cpu_count(),compiler=subprocess.check_output(['opam','exec','--switch=morphiq-risk-ml','--','ocamlopt','-config'],text=True))
+      platform=platform.platform(),logical_cpus=os.cpu_count(),
+      hardware=subprocess.check_output(['sysctl','-n','machdep.cpu.brand_string'],text=True).strip() if platform.system()=='Darwin' else platform.machine(),
+      started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+      compiler=subprocess.check_output(['opam','exec','--switch=morphiq-risk-ml','--','ocamlopt','-config'],text=True))
     atomic_json(out/'manifest.json',manifest);runs=[];identities={}
     for i in range(5):
         jobs=JOBS+[('european',0)]
