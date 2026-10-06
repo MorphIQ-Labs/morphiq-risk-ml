@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **167
+seven core mutants. The catalog currently contains **176
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -366,3 +366,12 @@ not change the seven-mutant default CI selection.
 Ten optional `american-policy-*` faults challenge the native row operation graph,
 identity-row bands, pivots, finite failures, actual visits, aliases and callback/
 resource ordering. They do not change the seven core CI mechanisms.
+
+### Compiled American requests
+
+The nine optional `american-compiled-*` mutants exercise current-day cash and
+exercise retention, right-continuous knots, immutable cash ownership, complete
+operation identity, workspace/buffer admission, scalar cancellation and
+sink-accepted prefix accounting. `american_compiled` owns the payoff and
+precondition witnesses; replay equality is supplementary compatibility evidence.
+The catalog now contains 176 mechanisms; the default seven remain unchanged.

@@ -1,0 +1,21 @@
+File "american_batch_piecewise_iv.ml", line 9, characters 25-52:
+9 |       outputs = [ Output (Implied (settings, quote)) ];
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: This constructor has type
+         "(Morphiq_risk.Batch.American.constant,
+          Morphiq_risk__.Early_exercise.Bsm.Implied_volatility.estimated_interval)
+         Morphiq_risk.Batch.American.operation" =
+           "(Morphiq_risk.Batch.American.constant,
+            Morphiq_risk__.Early_exercise.Bsm.Implied_volatility.estimated_interval)
+           Morphiq_risk__American_batch.operation"
+       but an expression was expected of type
+         "(Morphiq_risk.Batch.American.piecewise, 'a)
+         Morphiq_risk.Batch.American.operation" =
+           "(Morphiq_risk.Batch.American.piecewise, 'a)
+           Morphiq_risk__American_batch.operation"
+       Type
+         "Morphiq_risk.Batch.American.constant" =
+           "Morphiq_risk__American_batch.constant"
+       is not compatible with type
+         "Morphiq_risk.Batch.American.piecewise" =
+           "Morphiq_risk__American_batch.piecewise"

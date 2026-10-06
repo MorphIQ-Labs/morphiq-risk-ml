@@ -1066,3 +1066,79 @@
  (alias runtest)
  (action
   (diff american_piecewise_inverse.expected american_piecewise_inverse.out)))
+
+(rule
+ (deps american_batch_piecewise_iv.ml ../../lib/morphiq_risk.cma)
+ (targets american_batch_piecewise_iv.out)
+ (action
+  (with-stderr-to
+   american_batch_piecewise_iv.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_batch_piecewise_iv.cmo
+     american_batch_piecewise_iv.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff american_batch_piecewise_iv.expected american_batch_piecewise_iv.out)))
+
+(rule
+ (deps american_plan_estimate_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets american_plan_estimate_certificate.out)
+ (action
+  (with-stderr-to
+   american_plan_estimate_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_plan_estimate_certificate.cmo
+     american_plan_estimate_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_plan_estimate_certificate.expected
+   american_plan_estimate_certificate.out)))
+
+(rule
+ (deps american_configuration_private.ml ../../lib/morphiq_risk.cma)
+ (targets american_configuration_private.out)
+ (action
+  (with-stderr-to
+   american_configuration_private.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_configuration_private.cmo
+     american_configuration_private.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_configuration_private.expected
+   american_configuration_private.out)))

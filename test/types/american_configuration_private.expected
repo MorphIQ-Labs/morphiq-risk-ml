@@ -1,0 +1,4 @@
+File "american_configuration_private.ml", line 4, characters 2-30:
+4 |   { cfg with tolerance = nan }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "Morphiq_risk.Early_exercise.Bsm.configuration"

@@ -5,6 +5,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Compiled American and Bermudan requests (#118)
+
+- Add immutable `Batch.American` requests and `Planner.American` dated scenario
+  plans for existing estimated prices/Greeks, constant-sigma IV and guarded
+  certified reductions. Preserve typed failures and distinct assurance paths.
+- Freeze schedules and exact-word identities, roll fixed dates with explicit
+  cash sides, and stream bounded ordered outcomes with worker-owned scratch and
+  sink-accepted cancellation/failure prefixes. No aggregation or settlement.
+- Expose read-only private scalar configuration fields for canonical identity;
+  validating constructors remain mandatory. Existing scalar numerical owners
+  are unchanged. Both planners now reject unrepresentable total row counts even
+  when no outputs are requested; previously the calculation bound could miss this
+  overflow. See the [contract](docs/american-compiled.md)
+  and [qualification](docs/results-american-compiled.md).
+
+
 ### Bounded American policy loops (#119)
 
 - Execute policy selection and tridiagonal solve/copy phases in bounded native

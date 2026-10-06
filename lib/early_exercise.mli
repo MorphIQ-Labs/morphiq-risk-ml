@@ -116,7 +116,14 @@ module Bsm : sig
     policy_iterations : int;
   }
 
-  type configuration
+  type configuration = private {
+    tolerance : float;
+    space_cells : int;
+    time_steps : int;
+    domain_expansions : int;
+    limits : limits;
+  }
+  (** Read-only parameters retain the complete numerical/resource identity. *)
 
   val configure :
     tolerance:float ->
@@ -214,7 +221,12 @@ module Bsm : sig
       requested resolution is achievable. *)
 
   type greek = Delta | Gamma | Vega | Rho | Theta
-  type greek_request
+
+  type greek_request = private {
+    quantity : greek;
+    tolerance : float;
+    bump : float option;
+  }
 
   val request_greek :
     ?bump:float -> tolerance:float -> greek -> (greek_request, string) result
@@ -224,7 +236,7 @@ module Bsm : sig
       volatility/continuous rate; rho holds yield fixed. Theta is per day,
       valuation time moving forward with absolute future events fixed. *)
 
-  type greek_configuration
+  type greek_configuration = private greek_request list
 
   val configure_greeks :
     greek_request list -> (greek_configuration, string) result
@@ -316,7 +328,13 @@ module Bsm : sig
     (** Finite nonnegative exact binary64 quote in the price's currency units.
     *)
 
-    type settings
+    type settings = private {
+      pricing : configuration;
+      lower : Vol.lognormal Vol.t;
+      upper : Vol.lognormal Vol.t;
+      width : float;
+      max_evaluations : int;
+    }
 
     val configure :
       pricing:configuration ->

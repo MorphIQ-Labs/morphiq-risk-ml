@@ -14,7 +14,7 @@ source = Path(sys.argv[1]).read_text()
 
 def replace_once(text, old, new):
     if text.count(old) != 1:
-        raise ValueError('planner instrumentation site missing/ambiguous: ' + old)
+        raise ValueError('planner instrumentation site missing/ambiguous: ' + old.lstrip())
     return text.replace(old, new)
 
 source = replace_once(source, 'Bachelier.Fast_middle.may_prepare',
@@ -28,7 +28,8 @@ if len(sys.argv) == 3 and sys.argv[2] == '--force-native-routing':
     print('open Morphiq_risk\nopen Morphiq_risk.Internal')
     print(source)
     raise SystemExit(0)
-source = replace_once(source, 'let execute t ~workers ~cancellation ~sink =', '''let evaluate_tile_original = evaluate_tile
+source = replace_once(source, '\nlet execute t ~workers ~cancellation ~sink =', '''
+let evaluate_tile_original = evaluate_tile
 let evaluate_tile t work =
   Planner_probe.evaluate work.id (fun () ->
     let result = evaluate_tile_original t work in

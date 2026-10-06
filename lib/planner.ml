@@ -287,6 +287,7 @@ let compile_common ~assurance ~snapshot_id ~base_day ~day_count ~portfolio
           fi)
         portfolio
     in
+    ignore (product scenario_count instruments);
     let calculations = product scenario_count !calculations_per_scenario in
     require
       (calculations <= limits.max_calculations)
@@ -1128,4 +1129,710 @@ module Fast = struct
           emit (Finished completion);
           completion
         with Stop stop -> result stop)
+end
+
+module American = struct
+  module A = Early_exercise.Bsm
+  module B = Batch.American
+  module C = Plan_encoding
+
+  type 'a curve = { initial : 'a; changes : (int * 'a) array }
+
+  type _ model =
+    | Constant : {
+        rate : float;
+        dividend_yield : float;
+        volatility : Vol.lognormal Vol.t;
+      }
+        -> B.constant model
+    | Piecewise : {
+        rate : float curve;
+        dividend_yield : float curve;
+        volatility : Vol.lognormal Vol.t curve;
+      }
+        -> B.piecewise model
+
+  type instant = { day : int; side : A.event_side }
+
+  type exercise =
+    | American of { opening : instant; expiry_side : A.event_side }
+    | Bermudan of instant array
+
+  type dividend = { day : int; amount : float }
+
+  type 'k specification = {
+    id : string;
+    factor : string;
+    currency : string;
+    quantity : float;
+    strike : float;
+    expiry_day : int;
+    side : Side.t;
+    model : 'k model;
+    exercise : exercise;
+    cash : dividend array option;
+    outputs : 'k B.output list;
+  }
+
+  type position = Position : 'k specification -> position
+  type factor = { name : string; spot : float }
+  type cash_at_valuation = Before_payment | After_payment
+
+  type limits = {
+    max_instruments : int;
+    max_market_factors : int;
+    max_scenarios : int;
+    max_calculations : int;
+    tile_rows : int;
+    max_workers : int;
+    max_buffered_results : int;
+    max_solver_workspace_bytes : int;
+    max_schedule_events : int;
+  }
+
+  type explanation = {
+    snapshot_id : string;
+    plan_id : string;
+    convention : string;
+    limits : limits;
+    instruments : int;
+    scenarios : int;
+    calculations : int;
+    tiles : int;
+    buffered_results : int;
+    dependency_reuse : string;
+  }
+
+  type t = {
+    portfolio : position array;
+    market : factor array;
+    factor_indices : int array;
+    scenarios : Scenario.t;
+    base_day : int;
+    day_count : day_count;
+    cash_at_valuation : cash_at_valuation;
+    explanation : explanation;
+    tiles_per_scenario : int;
+    encoding : string;
+  }
+
+  type tile = {
+    id : int;
+    scenario : int;
+    first : int;
+    length : int;
+    plan_id : string;
+  }
+
+  type error =
+    | Post_expiry
+    | Admission of A.input_error
+    | Volatility of Refusal.t
+    | Scalar of B.error
+
+  type outcome =
+    | Outcome : ('k, 'a) B.operation * ('a, error) result -> outcome
+
+  type row = {
+    scenario_id : int;
+    instrument_index : int;
+    instrument_id : string;
+    factor_id : string;
+    currency : string;
+    quantity : float;
+    outcomes : outcome list;
+  }
+
+  type event = Row of row | Finished of completion
+
+  let convention =
+    "american-planner-v1;frozen-spot;roll-fixed-events;parallel-level-volatility;typed-unweighted-stream"
+
+  let valid_day d = d >= -1000000000 && d <= 1000000000
+  let rank = function A.Regular | Before_cash -> 0 | After_cash -> 1
+
+  let compare_instant (a : instant) (b : instant) =
+    let k = Int.compare a.day b.day in
+    if k <> 0 then k else Int.compare (rank a.side) (rank b.side)
+
+  let expiry (p : 'k specification) =
+    match p.exercise with
+    | American x -> { day = p.expiry_day; side = x.expiry_side }
+    | Bermudan a -> a.(Array.length a - 1)
+
+  let event_side b = function
+    | A.Regular -> C.token b "regular"
+    | Before_cash -> C.token b "before"
+    | After_cash -> C.token b "after"
+
+  let encode_instant b (x : instant) =
+    C.integer b x.day;
+    event_side b x.side
+
+  let encode_model : type k. C.t -> k model -> unit =
+   fun b -> function
+    | Constant m ->
+        C.token b "constant";
+        List.iter (C.float b)
+          [ m.rate; m.dividend_yield; Vol.to_float m.volatility ]
+    | Piecewise m ->
+        C.token b "piecewise";
+        let curve f c =
+          f b c.initial;
+          C.array
+            (fun b (d, v) ->
+              C.integer b d;
+              f b v)
+            b c.changes
+        in
+        curve C.float m.rate;
+        curve C.float m.dividend_yield;
+        curve (fun b x -> C.float b (Vol.to_float x)) m.volatility
+
+  let copy_model : type k. k model -> k model = function
+    | Constant _ as m -> m
+    | Piecewise m ->
+        let copy c = { c with changes = Array.copy c.changes } in
+        Piecewise
+          {
+            rate = copy m.rate;
+            dividend_yield = copy m.dividend_yield;
+            volatility = copy m.volatility;
+          }
+
+  let copy_position (Position p) =
+    Position
+      {
+        p with
+        model = copy_model p.model;
+        cash = Option.map Array.copy p.cash;
+        exercise =
+          (match p.exercise with
+          | American _ as e -> e
+          | Bermudan a -> Bermudan (Array.copy a));
+      }
+
+  let schedule_count (type k) (p : k specification) =
+    let n = Option.fold ~none:0 ~some:Array.length p.cash in
+    let n =
+      sum n
+        (match p.exercise with American _ -> 1 | Bermudan a -> Array.length a)
+    in
+    match p.model with
+    | Constant _ -> n
+    | Piecewise m ->
+        List.fold_left sum n
+          [
+            Array.length m.rate.changes;
+            Array.length m.dividend_yield.changes;
+            Array.length m.volatility.changes;
+          ]
+
+  let check_schedule base (type k) (p : k specification) =
+    require
+      (valid_day p.expiry_day && p.expiry_day >= base)
+      "expiry before base or invalid date";
+    let cash = Option.value ~default:[||] p.cash in
+    Array.iteri
+      (fun i (d : dividend) ->
+        require
+          (d.day >= base && d.day <= p.expiry_day
+          && (i = 0 || cash.(i - 1).day <= d.day))
+          "cash dates out of order/range")
+      cash;
+    let at_cash day = Array.exists (fun (d : dividend) -> d.day = day) cash in
+    let side (x : instant) =
+      require
+        (if at_cash x.day then x.side <> A.Regular else x.side = A.Regular)
+        "event side does not match cash date"
+    in
+    (match p.exercise with
+    | American e ->
+        require
+          (valid_day e.opening.day && e.opening.day <= p.expiry_day)
+          "invalid opening date";
+        side e.opening;
+        side { day = p.expiry_day; side = e.expiry_side };
+        require
+          (compare_instant e.opening
+             { day = p.expiry_day; side = e.expiry_side }
+          <= 0)
+          "opening after expiry instant"
+    | Bermudan a ->
+        require (Array.length a > 0) "empty exercise schedule";
+        Array.iteri
+          (fun i (x : instant) ->
+            require
+              (x.day >= base && x.day <= p.expiry_day
+              && (i = 0 || compare_instant a.(i - 1) x < 0))
+              "exercise dates out of order/range";
+            side x)
+          a;
+        require
+          (a.(Array.length a - 1).day = p.expiry_day)
+          "missing expiry exercise");
+    let curve c =
+      Array.iteri
+        (fun i (d, _) ->
+          require
+            (d > base && d < p.expiry_day
+            && (i = 0 || fst c.changes.(i - 1) < d))
+            "coefficient dates out of order/range")
+        c.changes
+    in
+    match p.model with
+    | Constant _ -> ()
+    | Piecewise m ->
+        curve m.rate;
+        curve m.dividend_yield;
+        curve m.volatility
+
+  let prepare (type k) ~check ~base_day ~day_count ~cash_at_valuation ~spot
+      (point : Scenario.point) (p : k specification) : (k B.model, error) result
+      =
+    let exception Invalid of error in
+    let get f = function Ok x -> x | Error e -> raise (Invalid (f e)) in
+    try
+      check ();
+      let day = base_day + point.offset_days in
+      let cash = Option.value ~default:[||] p.cash in
+      let on_cash = ref false in
+      Array.iteri
+        (fun i (d : dividend) ->
+          if i land 255 = 0 then check ();
+          if d.day = day then on_cash := true)
+        cash;
+      let side =
+        if not !on_cash then A.Regular
+        else
+          match cash_at_valuation with
+          | Before_payment -> A.Before_cash
+          | After_payment -> A.After_cash
+      in
+      let now = { day; side } in
+      if compare_instant now (expiry p) > 0 then raise (Invalid Post_expiry);
+      let years d =
+        float (d - day)
+        /. match day_count with Actual_365_fixed -> 365. | Actual_360 -> 360.
+      in
+      let convert (x : instant) = A.{ time = years x.day; side = x.side } in
+      let opening, dates =
+        match p.exercise with
+        | American e ->
+            ( (if compare_instant e.opening now < 0 then now else e.opening),
+              None )
+        | Bermudan a ->
+            let future =
+              Array.to_list
+                (Array.mapi
+                   (fun i x ->
+                     if i land 255 = 0 then check ();
+                     x)
+                   a)
+              |> List.filter (fun x -> compare_instant x now >= 0)
+              |> Array.of_list
+            in
+            if Array.length future = 0 then raise (Invalid Post_expiry);
+            (future.(0), Some (Array.map convert future))
+      in
+      let cash =
+        Option.map
+          (fun a ->
+            let ds =
+              Array.to_list
+                (Array.mapi
+                   (fun i x ->
+                     if i land 255 = 0 then check ();
+                     x)
+                   a)
+              |> List.filter (fun (x : dividend) -> x.day >= day)
+              |> List.map (fun (x : dividend) ->
+                     A.{ time = years x.day; amount = x.amount })
+              |> Array.of_list
+            in
+            A.
+              {
+                valuation_side = side;
+                opening_side = opening.side;
+                expiry_side = (expiry p).side;
+                dividends = ds;
+              })
+          p.cash
+      in
+      let spot, vol_adjustment =
+        List.fold_left
+          (fun (s, v) (shock : Scenario.shock) ->
+            if shock.factor <> p.factor then (s, v)
+            else
+              match shock.field with
+              | Spot -> (Scenario.apply shock.adjustment s, v)
+              | Lognormal_volatility -> (s, Some shock.adjustment)
+              | Forward | Normal_volatility -> (s, v))
+          (spot, None) point.shocks
+      in
+      let volatility x =
+        match vol_adjustment with
+        | None -> x
+        | Some a ->
+            get
+              (fun e -> Volatility e)
+              (Vol.lognormal (Scenario.apply a (Vol.to_float x)))
+      in
+      let t = years p.expiry_day and opens = years opening.day in
+      let admit inputs =
+        match (dates, cash) with
+        | Some ds, _ -> A.admit_bermudan ?cash inputs ds
+        | None, Some c -> A.admit_cash inputs c
+        | None, None -> A.admit inputs
+      in
+      match p.model with
+      | Constant m ->
+          let inputs =
+            A.
+              {
+                spot;
+                strike = p.strike;
+                rate = m.rate;
+                dividend_yield = m.dividend_yield;
+                time_to_expiry = t;
+                opens_at = opens;
+                volatility = volatility m.volatility;
+              }
+          in
+          Ok (B.Constant (get (fun e -> Admission e) (admit inputs)))
+      | Piecewise m ->
+          let curve map c =
+            let initial = ref c.initial and future = ref [] in
+            Array.iteri
+              (fun i (d, x) ->
+                if i land 255 = 0 then check ();
+                if d <= day then initial := x
+                else future := (years d, map x) :: !future)
+              c.changes;
+            (map !initial, Array.of_list (List.rev !future))
+          in
+          let r, rs = curve Fun.id m.rate
+          and q, qs = curve Fun.id m.dividend_yield
+          and v, vs = curve volatility m.volatility in
+          let get x = get (fun e -> Admission e) x in
+          let inputs =
+            A.Piecewise.
+              {
+                spot;
+                strike = p.strike;
+                rate = get (Rate.create ~horizon:t ~initial:r ~changes:rs);
+                dividend_yield =
+                  get (Yield.create ~horizon:t ~initial:q ~changes:qs);
+                volatility =
+                  get (Volatility.create ~horizon:t ~initial:v ~changes:vs);
+                time_to_expiry = t;
+                opens_at = opens;
+              }
+          in
+          let a =
+            match (dates, cash) with
+            | Some ds, _ -> A.Piecewise.admit_bermudan ?cash inputs ds
+            | None, Some c -> A.Piecewise.admit_cash inputs c
+            | None, None -> A.Piecewise.admit inputs
+          in
+          Ok (B.Piecewise (get a))
+    with Invalid e -> Error e
+
+  let compile ~snapshot_id ~base_day ~day_count ~cash_at_valuation ~portfolio
+      ~market ~scenarios ~(limits : limits) =
+    try
+      require
+        (Sys.word_size = 64 && snapshot_id <> "" && valid_day base_day)
+        "invalid snapshot/date";
+      require
+        (limits.max_market_factors >= 0
+        && limits.max_instruments >= 0
+        && limits.max_scenarios >= 0
+        && limits.max_calculations >= 0
+        && limits.tile_rows > 0 && limits.max_workers > 0
+        && limits.max_buffered_results >= 0
+        && limits.max_solver_workspace_bytes >= 0
+        && limits.max_schedule_events >= 0)
+        "invalid planner limits";
+      let instruments = Array.length portfolio
+      and scenario_count = Scenario.count scenarios in
+      require
+        (Array.length market <= limits.max_market_factors
+        && instruments <= limits.max_instruments
+        && scenario_count <= limits.max_scenarios)
+        "dimension limit exceeded";
+      Array.iter
+        (fun (Position p) ->
+          require
+            (schedule_count p <= limits.max_schedule_events)
+            "schedule event limit exceeded")
+        portfolio;
+      let portfolio = Array.map copy_position portfolio
+      and market = Array.copy market in
+      let factors = Hashtbl.create 16 and ids = Hashtbl.create 16 in
+      Array.iteri
+        (fun i f ->
+          require
+            (f.name <> "" && not (Hashtbl.mem factors f.name))
+            "duplicate/empty factor";
+          Hashtbl.add factors f.name i)
+        market;
+      List.iter
+        (fun (factor, field) ->
+          require (Hashtbl.mem factors factor) "unknown scenario factor";
+          require
+            (field = Scenario.Spot || field = Scenario.Lognormal_volatility)
+            "unsupported American shock coordinate")
+        (Scenario.bindings scenarios);
+      let per_scenario = ref 0 and maximum_outputs = ref 0 in
+      let factor_indices =
+        Array.map
+          (fun (Position p) ->
+            require
+              (p.id <> ""
+              && (not (Hashtbl.mem ids p.id))
+              && p.currency <> "" && Float.is_finite p.quantity)
+              "invalid/duplicate position metadata";
+            Hashtbl.add ids p.id ();
+            let index =
+              match Hashtbl.find_opt factors p.factor with
+              | Some i -> i
+              | None -> raise (Plan_error "unknown position factor")
+            in
+            check_schedule base_day p;
+            (match
+               prepare
+                 ~check:(fun () -> ())
+                 ~base_day ~day_count ~cash_at_valuation:Before_payment
+                 ~spot:market.(index).spot
+                 Scenario.{ offset_days = 0; shocks = [] }
+                 p
+             with
+            | Ok _ -> ()
+            | Error _ -> raise (Plan_error ("invalid original model: " ^ p.id)));
+            let n = List.length p.outputs in
+            per_scenario := sum !per_scenario n;
+            maximum_outputs := max !maximum_outputs n;
+            List.iter
+              (fun o ->
+                require
+                  (B.output_workspace o <= limits.max_solver_workspace_bytes)
+                  "solver workspace limit exceeded")
+              p.outputs;
+            index)
+          portfolio
+      in
+      ignore (product scenario_count instruments);
+      let calculations = product scenario_count !per_scenario in
+      require
+        (calculations <= limits.max_calculations)
+        "calculation limit exceeded";
+      let tiles_per_scenario =
+        (instruments / limits.tile_rows)
+        + if instruments mod limits.tile_rows = 0 then 0 else 1
+      in
+      let tiles = product scenario_count tiles_per_scenario in
+      let buffered_results =
+        product
+          (product
+             (min instruments limits.tile_rows)
+             (min limits.max_workers tiles))
+          (max 1 !maximum_outputs)
+      in
+      require
+        (buffered_results <= limits.max_buffered_results)
+        "in-flight output limit exceeded";
+      let b = C.create () in
+      C.token b convention;
+      C.token b snapshot_id;
+      C.integer b base_day;
+      C.token b
+        (match day_count with
+        | Actual_365_fixed -> "act365f"
+        | Actual_360 -> "act360");
+      C.token b
+        (match cash_at_valuation with
+        | Before_payment -> "before"
+        | After_payment -> "after");
+      C.token b (Scenario.encoding scenarios);
+      List.iter (C.integer b)
+        [
+          limits.max_instruments;
+          limits.max_market_factors;
+          limits.max_scenarios;
+          limits.max_calculations;
+          limits.tile_rows;
+          limits.max_workers;
+          limits.max_buffered_results;
+          limits.max_solver_workspace_bytes;
+          limits.max_schedule_events;
+        ];
+      C.array
+        (fun b f ->
+          C.token b f.name;
+          C.float b f.spot)
+        b market;
+      C.array
+        (fun b (Position p) ->
+          List.iter (C.token b) [ p.id; p.factor; p.currency ];
+          C.float b p.quantity;
+          C.float b p.strike;
+          C.integer b p.expiry_day;
+          C.token b (match p.side with Side.Call -> "call" | Put -> "put");
+          encode_model b p.model;
+          (match p.exercise with
+          | American e ->
+              C.token b "american";
+              encode_instant b e.opening;
+              event_side b e.expiry_side
+          | Bermudan a ->
+              C.token b "bermudan";
+              C.array encode_instant b a);
+          C.option
+            (C.array (fun b (d : dividend) ->
+                 C.integer b d.day;
+                 C.float b d.amount))
+            b p.cash;
+          C.integer b (List.length p.outputs);
+          List.iter (fun o -> C.token b (B.output_encoding o)) p.outputs)
+        b portfolio;
+      let explanation =
+        {
+          snapshot_id;
+          plan_id = C.digest b;
+          convention;
+          limits;
+          instruments;
+          scenarios = scenario_count;
+          calculations;
+          tiles;
+          buffered_results;
+          dependency_reuse =
+            "frozen calendars/bindings; one admission per row; scalar-owned \
+             grid/operator reuse; no cross-row values/factors";
+        }
+      in
+      Ok
+        {
+          portfolio;
+          market;
+          factor_indices;
+          scenarios;
+          base_day;
+          day_count;
+          cash_at_valuation;
+          explanation;
+          tiles_per_scenario;
+          encoding = C.contents b;
+        }
+    with Plan_error s -> Error s
+
+  let explain t = t.explanation
+
+  let manifest t =
+    "american-plan-manifest-v1\nocaml=" ^ Sys.ocaml_version ^ "\nword-size="
+    ^ string_of_int Sys.word_size
+    ^ "\nplan=" ^ t.explanation.plan_id ^ "\n" ^ t.encoding
+
+  let tile t id =
+    if id < 0 || id >= t.explanation.tiles then
+      invalid_arg "American tile index";
+    let scenario = id / t.tiles_per_scenario
+    and first = id mod t.tiles_per_scenario * t.explanation.limits.tile_rows in
+    {
+      id;
+      scenario;
+      first;
+      length =
+        min t.explanation.limits.tile_rows (t.explanation.instruments - first);
+      plan_id = t.explanation.plan_id;
+    }
+
+  let evaluate_position t ~check scenario point index =
+    check ();
+    let (Position p) = t.portfolio.(index) in
+    let outcomes =
+      match
+        prepare ~check ~base_day:t.base_day ~day_count:t.day_count
+          ~cash_at_valuation:t.cash_at_valuation
+          ~spot:t.market.(t.factor_indices.(index)).spot point p
+      with
+      | Error e ->
+          List.map (fun (B.Output op) -> Outcome (op, Error e)) p.outputs
+      | Ok model ->
+          let r =
+            B.evaluate
+              ~cancel:(fun () ->
+                check ();
+                false)
+              (B.Request
+                 { id = p.id; model; side = p.side; outputs = p.outputs })
+          in
+          List.map
+            (fun (B.Outcome (op, r)) ->
+              Outcome (op, Result.map_error (fun e -> Scalar e) r))
+            r.outcomes
+    in
+    check ();
+    {
+      scenario_id = scenario;
+      instrument_index = index;
+      instrument_id = p.id;
+      factor_id = p.factor;
+      currency = p.currency;
+      quantity = p.quantity;
+      outcomes;
+    }
+
+  let evaluate_tile_with t ~check work =
+    if work.id < 0 || work.id >= t.explanation.tiles || work <> tile t work.id
+    then Error "tile does not belong to American plan"
+    else
+      let point = Scenario.point t.scenarios work.scenario in
+      Ok
+        (Array.init work.length (fun i ->
+             evaluate_position t ~check work.scenario point (work.first + i)))
+
+  let evaluate_tile t work = evaluate_tile_with t ~check:(fun () -> ()) work
+
+  let execute t ~workers ~cancellation ~sink =
+    let committed = ref 0 and calculations = ref 0 in
+    let result stop =
+      {
+        stop;
+        rows_committed = !committed;
+        calculations_committed = !calculations;
+      }
+    in
+    let check_cancel () =
+      if Atomic.get cancellation then raise (Stop Cancelled)
+    in
+    let accept (row : row) =
+      check_cancel ();
+      emit_to sink (Row row);
+      incr committed;
+      calculations := !calculations + List.length row.outcomes
+    in
+    let run_tile id =
+      try evaluate_tile_with t ~check:check_cancel (tile t id) with
+      | Stop Cancelled -> Ok [||]
+      | e -> Error (Printexc.to_string e)
+    in
+    let stop =
+      run_waves ~max_workers:t.explanation.limits.max_workers
+        ~tiles:t.explanation.tiles ~workers ~check_cancel ~run_tile ~accept
+    in
+    let stop =
+      match stop with
+      | Complete when Atomic.get cancellation -> Cancelled
+      | _ -> stop
+    in
+    let completion = result stop in
+    match stop with
+    | Sink_failure _ -> completion
+    | _ -> (
+        try
+          emit_to sink (Finished completion);
+          completion
+        with Stop s -> result s)
 end

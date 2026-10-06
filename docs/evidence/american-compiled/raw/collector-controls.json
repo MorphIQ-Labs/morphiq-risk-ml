@@ -1,0 +1,9 @@
+{
+  "rejections": [
+    "incomplete evidence",
+    "unknown output",
+    "duplicate sample",
+    "sample numeric"
+  ],
+  "valid_samples": 30
+}

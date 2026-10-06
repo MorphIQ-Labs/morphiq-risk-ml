@@ -21,7 +21,7 @@ function in the same module. [Piecewise coefficients](piecewise-american.md)
 use the distinct `Bsm.Piecewise` surface. [Estimated Greeks](american-greeks.md)
 have separate per-quantity acceptance and failure outcomes. The separate
 [estimated inverse](american-implied-volatility.md) supports guarded constant-sigma
-families; batch/planner support remains #118. There is no implicit date adapter or settlement convention.
+families. [American batch/planner APIs](american-compiled.md) add explicit dated rolls and bounded streaming; settlement remains outside their contract.
 
 ## Use and outcomes
 

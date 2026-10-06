@@ -1,0 +1,8 @@
+File "american_plan_estimate_certificate.ml", line 5, characters 71-76:
+5 |   | [ Planner.American.Outcome (Batch.American.Price _, Ok value) ] -> value
+                                                                           ^^^^^
+Error: The value "value" has type
+         "$a" = "Morphiq_risk.Early_exercise.Bsm.estimated_price"
+       but an expression was expected of type
+         "Morphiq_risk.Early_exercise.Bsm.Certified.price"
+       Hint: "$a" is an existential type bound by the constructor "Outcome".

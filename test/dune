@@ -1290,3 +1290,19 @@
    (progn
     (run %{test})
     (run %{exe:american_policy.bc})))))
+
+(test
+ (name american_compiled)
+ (modules american_compiled)
+ (libraries morphiq_risk)
+ (modes byte exe)
+ (deps
+  ../lib/dllmorphiq_risk_stubs%{ext_dll}
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (progn
+    (run %{test})
+    (run %{exe:american_compiled.bc})))))

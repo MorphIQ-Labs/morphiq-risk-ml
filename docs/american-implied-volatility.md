@@ -178,7 +178,7 @@ outcomes, exercise identity, cancellation and callback exceptions. Six expensive
 rows are explicitly marked manual; no skipped row is an accuracy pass.
 Default CI remains five jobs and seven core mutants.
 
-Portfolio integration remains #118; further allocation/latency work is #119,
+[Compiled portfolio integration](american-compiled.md) preserves these inverse outcomes; further allocation/latency work is #119,
 and source-artifact/cross-platform capability qualification is #120. General
 cash-put inversion, one-parameter curve inversion and rigorous general stopping
 inverse enclosures remain outside this API. No main release is implied.
