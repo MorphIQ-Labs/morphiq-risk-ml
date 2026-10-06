@@ -284,6 +284,88 @@ module Bsm : sig
       must preserve the exact original real shift at every level. No higher
       Greeks or certified results are produced. *)
 
+  module Implied_volatility : sig
+    (** One constant annual volatility; explicit estimated intervals, never an
+        [Iv.Root] or a certified volatility enclosure. *)
+
+    type no_solution =
+      | Below_immediate_payoff
+      | Above_global_cap
+      | Incompatible_constant_price
+
+    type independent = Expiry | Absorbing_stock | Zero_strike
+    type range_side = Below | Above
+
+    type error =
+      | Invalid_quote
+      | Invalid_configuration of string
+      | Unsupported_cash_put
+      | No_solution of no_solution
+      | Non_identifiable of independent
+      | Estimated_outside_search_range of range_side
+      | Price_uncertainty_or_plateau
+      | Inconsistent_prices
+      | Pricing_failed of failure
+      | Evaluation_limit
+      | Unrepresentable_progress
+      | Cancelled
+
+    type quote = private float
+
+    val quote : float -> (quote, error) result
+    (** Finite nonnegative exact binary64 quote in the price's currency units.
+    *)
+
+    type settings
+
+    val configure :
+      pricing:configuration ->
+      lower:Vol.lognormal Vol.t ->
+      upper:Vol.lognormal Vol.t ->
+      width:float ->
+      max_evaluations:int ->
+      (settings, error) result
+    (** Explicit finite increasing search range, positive absolute volatility
+        interval width and at least two price calls. Pricing work limits cover
+        the whole inverse: divided across the maximum calls; 64 KiB workspace is
+        reserved for bounded inverse metadata. Exhaustion is explicit. *)
+
+    type observation = private {
+      volatility : Vol.lognormal Vol.t;
+      price : estimated_price;
+      uncertainty_indicator : float;
+    }
+
+    type estimated_interval = private {
+      lower : observation;
+      upper : observation;
+      requested_width : float;
+      evaluations : int;
+      assurance : assurance;
+    }
+    (** Endpoint price indicators lie strictly on opposite sides of the original
+        quote; the full volatility width meets the requested target. Indicators
+        combine empirical price refinement and arithmetic screens, so neither
+        exact-model containment nor uniqueness is certified. *)
+
+    val solve :
+      ?cancel:(unit -> bool) ->
+      settings ->
+      admitted ->
+      Side.t ->
+      quote ->
+      (estimated_interval, error) result
+    (** No-cash calls/puts and liquidator cash calls, American or Bermudan. Cash
+        puts, including zero/empty specifications, are explicitly refused:
+        volatility monotonicity is not generally valid. Piecewise inputs have a
+        distinct type and no inverse family here. Each evaluated volatility
+        replaces the admitted constant value while preserving all other original
+        inputs, cash sides and exercise rights. Search-range failures are
+        estimated, not global nonexistence. Uncertainty/possible plateaus never
+        return a point root. Cancellation and caller exceptions are preserved.
+    *)
+  end
+
   module Piecewise : sig
     (** Complete right-continuous partitions of [0,horizon]. The initial level
         starts at zero; changes are strictly increasing interior knots. Expiry

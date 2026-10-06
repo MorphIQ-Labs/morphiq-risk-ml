@@ -224,3 +224,11 @@
  (libraries morphiq_risk unix)
  (ocamlopt_flags
   (:standard -O3)))
+
+(executable
+ (name american_iv)
+ (modules american_iv)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix)
+ (ocamlopt_flags
+  (:standard -O3)))

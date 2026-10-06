@@ -43,6 +43,7 @@ Compiler, arithmetic or backend work additionally follows the
   and [Greeks](docs/american-greeks.md). Its separate `Certified` module owns
   [guarded exact reductions](docs/american-certification.md), with explicit
   currency limits and private certificates; general stopping remains estimated-only.
+  Its separate `Implied_volatility` module owns [estimated constant-sigma inverses](docs/american-implied-volatility.md): preserve price uncertainty, whole-request work limits and explicit plateau outcomes. Cash-put monotonicity must not be assumed; an estimated interval is not a European `Iv.Root`.
   A passing price does not qualify a derivative: preserve
   per-quantity refinements, fixed-event theta, parallel curve coordinates and
   explicit nonsmooth/unresolved outcomes.
@@ -222,7 +223,7 @@ failure controls before pushing them.
    Portability evidence covers the tested platforms, not all architectures.
 
 The IV contract work is tracked in
-[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). Public positive roots now require the [exact-model rounding certificate](docs/certified-iv.md),
+[Bug #14](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/14). European public positive roots now require the [exact-model rounding certificate](docs/certified-iv.md),
 with explicit uncertainty failures and bounded work. Do not claim that a rounded-evaluator bracket is an
 exact-model enclosure or that an iteration cap proves convergence. Distinguish invalid input,
 mathematical non-existence, insufficient representability and numerical

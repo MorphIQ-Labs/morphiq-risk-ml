@@ -1,0 +1,5 @@
+File "forge_american_quote.ml", line 3, characters 56-59:
+3 | let (_ : Early_exercise.Bsm.Implied_volatility.quote) = -1.
+                                                            ^^^
+Error: The constant "-1." has type "float" but an expression was expected of type
+         "Morphiq_risk.Early_exercise.Bsm.Implied_volatility.quote"

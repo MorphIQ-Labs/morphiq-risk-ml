@@ -1,0 +1,4 @@
+File "forge_american_inverse.ml", line 4, characters 2-33:
+4 |   { x with requested_width = 0. }
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "Morphiq_risk.Early_exercise.Bsm.Implied_volatility.estimated_interval"

@@ -1,0 +1,7 @@
+File "american_inverse_is_not_root.ml", line 5, characters 2-3:
+5 |   x
+      ^
+Error: The value "x" has type
+         "Morphiq_risk.Early_exercise.Bsm.Implied_volatility.estimated_interval"
+       but an expression was expected of type
+         "Morphiq_risk.Vol.lognormal Morphiq_risk.Iv.t"

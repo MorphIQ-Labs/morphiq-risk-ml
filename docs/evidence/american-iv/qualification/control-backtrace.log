@@ -1,0 +1,3 @@
+Fatal error: exception Failure("constructor")
+Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
+Called from Dune__exe__American_iv.controls in file "test/american_iv.ml", lines 163-166, characters 4-18

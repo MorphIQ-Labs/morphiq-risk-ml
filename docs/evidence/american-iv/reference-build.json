@@ -1,0 +1,24 @@
+{
+  "quantlib_revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "quantlib_status": "clean",
+  "verified_existing_library_and_sources": true,
+  "build_sha256": {
+    "CMakeCache.txt": "05b68832ac5c51192a0a50659081d90c5a678966da4eba87e37121ded8ffa1a6",
+    "ql/config.hpp": "578dea77fa21c11b0eb9dc9d7174e3942757b10ca9d26813f3a48ca071c1b932",
+    "ql/libQuantLib.1.44.0.dylib": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161"
+  },
+  "source_sha256": {
+    "LICENSE.TXT": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+    "ql/pricingengines/vanilla/fdblackscholesvanillaengine.cpp": "4d049de6c97e299575ab78eae8c56598e53d0233edd561e0797d36253a40a877",
+    "ql/pricingengines/vanilla/fdblackscholesvanillaengine.hpp": "c4758ecc3af00fa932425a35e4fc6dcd5a375ac64a54a8d80d10fa190e5a15c0",
+    "ql/methods/finitedifferences/solvers/fdmbackwardsolver.cpp": "4663c02b1fd89424c266559b17cf23837acbeee7c10a86ed04c6a95b22abd503",
+    "ql/methods/finitedifferences/stepconditions/fdmstepconditioncomposite.cpp": "6f720f38d6afc17343a3b4d5555266b453663eb6b859e7b00204f8857c25c959"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "command_flags": "-std=c++17 -O3 -ffp-contract=off -Wall -Wextra -Werror; canonical adds -Wno-unused-function -DMORPHIQ_QUANTLIB and recorded include/library paths from #110 build",
+  "scope": "Reused verified existing QuantLib build; newly compiled project inverse adapters. No new third-party source or research PDF copied.",
+  "preliminary_failures": [
+    "Renaming the historical lattice main triggered missing-return warning; localized suppression surrounds only that unused included entry point.",
+    "First generator attempt had a syntax error in input serialization before any reference was produced; corrected before execution."
+  ]
+}

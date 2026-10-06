@@ -1,0 +1,1352 @@
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.709s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.172s
+
+OK
+exchange fixture provenance: OK
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.067s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.282s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.082s
+
+OK
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 3 tests in 1.015s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.019s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.012s
+
+OK
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.389s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.302s
+
+OK
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.263s
+
+OK
+steps 6
+central_error_over_t_u 128.0000000000006
+tail_absolute_error_u 4096.002808859
+central_operation_allowance_u 55.36267727187672
+tail_operation_allowance_u 2861.7944460152044
+Exchange price 13.3213275111; absolute error <= 3.48831e-16 currency units
+......................
+----------------------------------------------------------------------
+Ran 22 tests in 1.163s
+
+OK
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.494s
+
+OK
+1 instruments x 9 scenarios; 9 calculations; at most 4 buffered results
+plan 6acf42096d7bd8e6aab84cc028cecc2d3caeab4e57fa14ba96a29846c4245583
+scenario 0: 729.235984997 USD, numerical error <= 4.911e-14
+scenario 1: 4069.80587951 USD, numerical error <= 1.615e-13
+scenario 2: 11110.7350735 USD, numerical error <= 6.879e-13
+scenario 3: 642.012449235 USD, numerical error <= 4.5e-14
+scenario 4: 3904.8053328 USD, numerical error <= 6.477e-14
+scenario 5: 10997.8419659 USD, numerical error <= 1.411e-12
+scenario 6: 365.014482814 USD, numerical error <= 4.126e-14
+scenario 7: 3308.76482264 USD, numerical error <= 1.625e-13
+scenario 8: 10627.4992909 USD, numerical error <= 1.075e-12
+committed 9 rows; complete=true
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.017s
+
+OK
+Estimated American put: 6.65747803196 (backward-Euler-policy-v1); 11776 accepted time steps
+Estimated early-exercise premium: 0.327397404406
+Estimated American put with cash: 9.14925919024 (backward-Euler-policy-v1); 31744 accepted time steps
+Premium unavailable: matching cash-European comparison not implemented
+Estimated Bermudan put with cash: 9.00003498208 (backward-Euler-Bermudan-v1); 31744 accepted time steps
+Premium unavailable: matching cash-European comparison not implemented
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 1.636s
+
+OK
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 12.978s
+
+OK
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 14.688s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+shared Greeks: deferred partial failures retain independent ATM price, delta and vega
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+American public controls passed
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.011s
+
+OK
+fast batch: mixed outcomes, finite guard, ownership and concurrent replay pass
+American cash controls passed
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.109s
+
+OK
+IEEE arithmetic contract passed (5.3.0, 64-bit runtime)
+exact expansion sums: 30774 served, 10 overflow refusals
+exact expansion sums: 30774 served, 10 overflow refusals
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.080s
+
+OK
+shared Greeks: deferred partial failures retain independent ATM price, delta and vega
+full scalar checks=5200 rational=19306 refused=745 replay=f30666f99b132e8031ee9267f8d058a3
+fast scalar checks=5200 rational=19310 refused=743 replay=a7810e024cea5c4b8d43ff5c96eb3e04
+American residual operation graph, chunks and safety controls passed
+fast planner: original-input prices, both date conventions, ownership, worker replay, failures and limits pass
+fast planner: carry-cancellation cells, payoff overflow and post-expiry remain explicit
+Native Bachelier backend 2: shape, scalar/SIMD, odd tails, ownership and batch replay pass
+fast batch: mixed outcomes, finite guard, ownership and concurrent replay pass
+exact expansion sums: 30774 served, 10 overflow refusals
+exact expansion sums: 30774 served, 10 overflow refusals
+1	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+255	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+256	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+257	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+511	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+512	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+513	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1023	0	5	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1024	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1025	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4095	0	33	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4096	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4097	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16383	0	144	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16384	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16385	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+10000000	0	3087	"\132\149\166\190\000\000\000\191\000\000\000\000\000\000\000]\000\000\000L\144\b\000\0003\000\012\016\159\016l\255\235%@@8backward-Euler-policy-v1\012\000\000\000\000\000\000$@\144\224\160\012\128\2362\142\158\129\242?\012\192%/|eM\206?\160\012\000f\204L\210\148\167?\012\000pJo\250\167\151?\160\012\000\000\000\193\147\230\165>\012\000\000\000\000\000\000\000\000@\012\000\000\000\000\000\000\000\000\012\2249\012e2\161\208?@\012\000\000\000\000\000\195\146=\012\028O\193\142\247\188\234=\012\000\000\000\000\000\000\000\000\b\000\000'\000\001\002\224\001\003X\002\000\005\192\216\000i\000i\012\000\000\000\000\000\000\153@\000@B@@@"
+10000000	1	1	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	2	2	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	3	3	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	4	4	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	7	7	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	12	12	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	31	31	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	64	64	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	127	127	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	256	256	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+1	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+255	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+256	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+257	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+511	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+512	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+513	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1023	0	5	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1024	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1025	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4095	0	33	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4096	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4097	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16383	0	144	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16384	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16385	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+10000000	0	2857	"\132\149\166\190\000\000\000\191\000\000\000\000\000\000\000]\000\000\000L\144\b\000\0003\000\012\191\203\151O{\180 @@8backward-Euler-policy-v1\012\000\000\000\000\000\000$@\144\224\160\012\192\249\247\207q\127\241?\012\000\191\230a\171\218\206?\160\012\000\229Q\194\143\224\168?\012\0000+\173\242~\153?\160\012\000\000\240\193\014+\224>\012\000\000\000\000\000\190\148=@\012\000\000\000\000\000\000\000\000\012`^\199\219D\005\209?@\012\000\000\000\000\128\019S=\012|\028\235\219>\"\169=\012\000\000\000\000\000\000\000\000\b\000\000'\000\001\002\224\001\003\000\002\000\0052\208\000i\000i\012\000\000\000\000\000\000\153@\000@B@@@"
+10000000	1	1	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	2	2	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	3	3	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	4	4	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	7	7	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	12	12	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	31	31	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	64	64	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	127	127	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	256	256	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+American public controls passed
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 1.270s
+
+OK
+full scalar checks=5200 rational=19306 refused=745 replay=f30666f99b132e8031ee9267f8d058a3
+fast scalar checks=5200 rational=19310 refused=743 replay=a7810e024cea5c4b8d43ff5c96eb3e04
+American cash controls passed
+Native Bachelier backend 2: shape, scalar/SIMD, odd tails, ownership and batch replay pass
+piecewise controls passed
+shared preparation: four models, mixed failures, exact words, boundaries and concurrent calls pass
+American residual operation graph, chunks and safety controls passed
+fast planner: original-input prices, both date conventions, ownership, worker replay, failures and limits pass
+fast planner: carry-cancellation cells, payoff overflow and post-expiry remain explicit
+1	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+255	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+256	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+257	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+511	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+512	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+513	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1023	0	5	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1024	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1025	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4095	0	33	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4096	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4097	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16383	0	144	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16384	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16385	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+10000000	0	3087	"\132\149\166\190\000\000\000\191\000\000\000\000\000\000\000]\000\000\000L\144\b\000\0003\000\012\016\159\016l\255\235%@@8backward-Euler-policy-v1\012\000\000\000\000\000\000$@\144\224\160\012\128\2362\142\158\129\242?\012\192%/|eM\206?\160\012\000f\204L\210\148\167?\012\000pJo\250\167\151?\160\012\000\000\000\193\147\230\165>\012\000\000\000\000\000\000\000\000@\012\000\000\000\000\000\000\000\000\012\2249\012e2\161\208?@\012\000\000\000\000\000\195\146=\012\028O\193\142\247\188\234=\012\000\000\000\000\000\000\000\000\b\000\000'\000\001\002\224\001\003X\002\000\005\192\216\000i\000i\012\000\000\000\000\000\000\153@\000@B@@@"
+10000000	1	1	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	2	2	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	3	3	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	4	4	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	7	7	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	12	12	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	31	31	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	64	64	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	127	127	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	256	256	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+1	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+255	0	2	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+256	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+257	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+511	0	3	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+512	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+513	0	4	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1023	0	5	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1024	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+1025	0	6	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4095	0	33	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4096	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+4097	0	34	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16383	0	144	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16384	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+16385	0	145	"\132\149\166\190\000\000\000\r\000\000\000\000\000\000\000\b\000\000\000\007\145\144*row visits"
+10000000	0	2857	"\132\149\166\190\000\000\000\191\000\000\000\000\000\000\000]\000\000\000L\144\b\000\0003\000\012\191\203\151O{\180 @@8backward-Euler-policy-v1\012\000\000\000\000\000\000$@\144\224\160\012\192\249\247\207q\127\241?\012\000\191\230a\171\218\206?\160\012\000\229Q\194\143\224\168?\012\0000+\173\242~\153?\160\012\000\000\240\193\014+\224>\012\000\000\000\000\000\190\148=@\012\000\000\000\000\000\000\000\000\012`^\199\219D\005\209?@\012\000\000\000\000\128\019S=\012|\028\235\219>\"\169=\012\000\000\000\000\000\000\000\000\b\000\000'\000\001\002\224\001\003\000\002\000\0052\208\000i\000i\012\000\000\000\000\000\000\153@\000@B@@@"
+10000000	1	1	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	2	2	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	3	3	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	4	4	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	7	7	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	12	12	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	31	31	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	64	64	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	127	127	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+10000000	256	256	"\132\149\166\190\000\000\000\002\000\000\000\000\000\000\000\002\000\000\000\002\145@"
+IV termination, failed proposals, exponent range and arithmetic failures passed
+cases 121, worst 1.00 x attainable at x=-0.01 s=0.5, over 8x: 0
+case-0000 certified 0x0p+0 0x0p+0
+case-0001 certified 0x0p+0 0x0p+0
+case-0002 certified 0x0p+0 0x0p+0
+case-0003 certified 0x0p+0 0x0p+0
+case-0004 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0005 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0006 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0007 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0008 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0009 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0010 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0011 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0012 certified 0x0p+0 0x0p+0
+case-0013 certified 0x0p+0 0x0p+0
+case-0014 certified 0x0p+0 0x0p+0
+case-0015 certified 0x0p+0 0x0p+0
+case-0016 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0017 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0018 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0019 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0020 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0021 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0022 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0023 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0024 certified 0x0p+0 0x0p+0
+case-0025 certified 0x0p+0 0x0p+0
+case-0026 certified 0x0p+0 0x0p+0
+case-0027 certified 0x0p+0 0x0p+0
+case-0028 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0029 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0030 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0031 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0032 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0033 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0034 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0035 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0036 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0037 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0038 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0039 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0040 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0041 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0042 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0043 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0044 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0045 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0046 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0047 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0048 certified 0x1.4p+4 0x0p+0
+case-0049 certified 0x1.4p+4 0x0p+0
+case-0050 certified 0x1.4p+4 0x0p+0
+case-0051 certified 0x1.4p+4 0x0p+0
+case-0052 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0053 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0054 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0055 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0056 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0057 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0058 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0059 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0060 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0061 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0062 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0063 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0064 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0065 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0066 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0067 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0068 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0069 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0070 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0071 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0072 certified 0x0p+0 0x0p+0
+case-0073 certified 0x0p+0 0x0p+0
+case-0074 certified 0x1.6b0d4ca4ce2fap+4 0x1.d3f5381366ae6p-50
+case-0075 certified 0x1.6b0d4ca4ce2fap+4 0x1.d3f5381366ae6p-50
+case-0076 certified 0x1.0205eee25822cp+0 0x1.bcec65e6fd81dp-54
+case-0077 certified 0x1.0205eee25822cp+0 0x1.bcec65e6fd81dp-54
+case-0078 certified 0x1.7b2dab92f3b1cp+4 0x1.47d98e4b092a1p-50
+case-0079 certified 0x1.7b2dab92f3b1cp+4 0x1.47d98e4b092a1p-50
+case-0080 certified 0x1.310909859b04ap+4 0x1.0a6b0388531ccp-51
+case-0081 certified 0x1.310909859b04ap+4 0x1.0a6b0388531ccp-51
+case-0082 certified 0x1.4e0b2b15349a2p+5 0x1.4ebfb64f3d201p-50
+case-0083 certified 0x1.4e0b2b15349a2p+5 0x1.4ebfb64f3d201p-50
+case-0084 certified 0x0p+0 0x0p+0
+case-0085 certified 0x0p+0 0x0p+0
+case-0086 certified 0x1.ab6123ca5b358p+4 0x1.cca535b7a4fadp-53
+case-0087 certified 0x1.ab6123ca5b358p+4 0x1.cca535b7a4fadp-53
+case-0088 certified 0x1.256f1deb848b3p-1 0x1.a880a695c8b67p-57
+case-0089 certified 0x1.256f1deb848b3p-1 0x1.a880a695c8b67p-57
+case-0090 certified 0x1.b48c9cb9b759ep+4 0x1.631a57fbdfcf6p-50
+case-0091 certified 0x1.b48c9cb9b759ep+4 0x1.631a57fbdfcf6p-50
+case-0092 certified 0x1.0f33eca22941dp+4 0x1.4ff7b5b9e26a4p-51
+case-0093 certified 0x1.0f33eca22941dp+4 0x1.4ff7b5b9e26a4p-51
+case-0094 certified 0x1.5d4a8836423bbp+5 0x1.8f37bf360d15fp-49
+case-0095 certified 0x1.5d4a8836423bbp+5 0x1.8f37bf360d15fp-49
+case-0096 certified 0x0p+0 0x0p+0
+case-0097 certified 0x0p+0 0x0p+0
+case-0098 certified 0x1.1904a887460bdp+4 0x1.ee4271ac3bd6fp-52
+case-0099 certified 0x1.1904a887460bdp+4 0x1.ee4271ac3bd6fp-52
+case-0100 certified 0x1.9bf7217afa4d2p+0 0x1.bd7b523b863c9p-55
+case-0101 certified 0x1.9bf7217afa4d2p+0 0x1.bd7b523b863c9p-55
+case-0102 certified 0x1.32c41a9ef5b0ap+4 0x1.25b3e26cd3c32p-54
+case-0103 certified 0x1.32c41a9ef5b0ap+4 0x1.25b3e26cd3c32p-54
+case-0104 certified 0x1.45964713090a5p+4 0x1.840be49d8b4fbp-51
+case-0105 certified 0x1.45964713090a5p+4 0x1.840be49d8b4fbp-51
+case-0106 certified 0x1.2f4d77cd278b1p+5 0x1.19d5578edac88p-52
+case-0107 certified 0x1.2f4d77cd278b1p+5 0x1.19d5578edac88p-52
+case-0108 certified 0x0p+0 0x0p+0
+case-0109 certified 0x0p+0 0x0p+0
+case-0110 certified 0x1.59587facd311bp+4 0x1.91f9425f4c57fp-50
+case-0111 certified 0x1.59587facd311bp+4 0x1.91f9425f4c57fp-50
+case-0112 certified 0x1.eae0e3bdde1cbp-1 0x1.1de60c39f45b1p-55
+case-0113 certified 0x1.eae0e3bdde1cbp-1 0x1.1de60c39f45b1p-55
+case-0114 certified 0x1.68af86cac202ap+4 0x1.16f5ee02834b2p-50
+case-0115 certified 0x1.68af86cac202ap+4 0x1.16f5ee02834b2p-50
+case-0116 certified 0x1.2228970463b3ep+4 0x1.0a1fd1485dfe7p-52
+case-0117 certified 0x1.2228970463b3ep+4 0x1.0a1fd1485dfe7p-52
+case-0118 certified 0x1.3dc08b589b62dp+5 0x1.584758f965941p-49
+case-0119 certified 0x1.3dc08b589b62dp+5 0x1.584758f965941p-49
+case-0120 certified 0x0p+0 0x0p+0
+case-0121 certified 0x0p+0 0x0p+0
+case-0122 certified 0x1.95f8760fd7307p+3 0x1.168656e5cae38p-51
+case-0123 certified 0x1.95f8760fd7307p+3 0x1.168656e5cae38p-51
+case-0124 certified 0x1.3a7859be6deafp+1 0x1.bff04974879bfp-57
+case-0125 certified 0x1.3a7859be6deafp+1 0x1.bff04974879bfp-57
+case-0126 certified 0x1.e4968c7f72ab2p+3 0x1.f0796a40073b4p-51
+case-0127 certified 0x1.e4968c7f72ab2p+3 0x1.f0796a40073b4p-51
+case-0128 certified 0x1.5ab841a273dd3p+4 0x1.bb7a824c91f65p-50
+case-0129 certified 0x1.5ab841a273dd3p+4 0x1.bb7a824c91f65p-50
+case-0130 certified 0x1.12da3e552fbabp+5 0x1.981bab6cd6427p-49
+case-0131 certified 0x1.12da3e552fbabp+5 0x1.981bab6cd6427p-49
+case-0132 certified 0x0p+0 0x0p+0
+case-0133 certified 0x0p+0 0x0p+0
+case-0134 certified 0x1.0b50122d789e2p+4 0x1.f6e532a22890dp-52
+case-0135 certified 0x1.0b50122d789e2p+4 0x1.f6e532a22890dp-52
+case-0136 certified 0x1.87dfa2196dbcfp+0 0x1.8dd3f787d28a3p-54
+case-0137 certified 0x1.87dfa2196dbcfp+0 0x1.8dd3f787d28a3p-54
+case-0138 certified 0x1.23ce0c4f0f79fp+4 0x1.49b81a6019f74p-51
+case-0139 certified 0x1.23ce0c4f0f79fp+4 0x1.49b81a6019f74p-51
+case-0140 certified 0x1.35b53c9384d92p+4 0x1.4fa79ecf48495p-50
+case-0141 certified 0x1.35b53c9384d92p+4 0x1.4fa79ecf48495p-50
+case-0142 certified 0x1.2082a7607ebbap+5 0x1.cd60eb77d26d8p-50
+case-0143 certified 0x1.2082a7607ebbap+5 0x1.cd60eb77d26d8p-50
+case-0144 certified 0x0p+0 0x0p+0
+case-0145 certified 0x0p+0 0x0p+0
+case-0146 certified 0x1.0a73b634fd946p+1 0x1.a4d41a3ab28bcp-55
+case-0147 certified 0x1.0a73b634fd946p+1 0x1.a4d41a3ab28bcp-55
+case-0148 certified 0x1.d2a832e7a7793p+2 0x1.2cfe03023f69dp-52
+case-0149 certified 0x1.d2a832e7a7793p+2 0x1.2cfe03023f69dp-52
+case-0150 certified 0x1.2bf107011321bp+3 0x1.6198864995bb5p-52
+case-0151 certified 0x1.2bf107011321bp+3 0x1.6198864995bb5p-52
+case-0152 certified 0x1.f52c38b049907p+4 0x1.388d9b93c79a3p-50
+case-0153 certified 0x1.f52c38b049907p+4 0x1.388d9b93c79a3p-50
+case-0154 certified 0x1.0b3d57bb74a18p+5 0x1.16d0f19674b9ep-52
+case-0155 certified 0x1.0b3d57bb74a18p+5 0x1.16d0f19674b9ep-52
+case-0156 certified 0x0p+0 0x0p+0
+case-0157 certified 0x0p+0 0x0p+0
+case-0158 certified 0x1.c6dd0ed63fe7cp+2 0x1.87b422c4e12b1p-52
+case-0159 certified 0x1.c6dd0ed63fe7cp+2 0x1.87b422c4e12b1p-52
+case-0160 certified 0x1.41a9852d370e5p+2 0x1.66b57f1954668p-52
+case-0161 certified 0x1.41a9852d370e5p+2 0x1.66b57f1954668p-52
+case-0162 certified 0x1.84434a01bb7bp+3 0x1.11965e21ca6efp-52
+case-0163 certified 0x1.84434a01bb7bp+3 0x1.11965e21ca6efp-52
+case-0164 certified 0x1.c225efa047014p+4 0x1.1ce3d76ffe61ap-50
+case-0165 certified 0x1.c225efa047014p+4 0x1.1ce3d76ffe61ap-50
+case-0166 certified 0x1.19ee99aaeb7dap+5 0x1.a28498a09cf4dp-49
+case-0167 certified 0x1.19ee99aaeb7dap+5 0x1.a28498a09cf4dp-49
+case-0168 certified 0x1.85d16ab74389fp+1 0x1.a74c385d2b323p-54
+case-0169 certified 0x1.85d16ab74389fp+1 0x1.a74c385d2b323p-54
+case-0170 certified 0x0p+0 0x0p+0
+case-0171 certified 0x0p+0 0x0p+0
+case-0172 certified 0x1.366716f939ep+3 0x1.8293341d30aa8p-54
+case-0173 certified 0x1.366716f939ep+3 0x1.8293341d30aa8p-54
+case-0174 certified 0x1.a9e57896d1fbp+2 0x1.f6d1bef0015e4p-52
+case-0175 certified 0x1.a9e57896d1fbp+2 0x1.f6d1bef0015e4p-52
+case-0176 certified 0x1.08cfbaff1afaap+5 0x1.849fffd093857p-50
+case-0177 certified 0x1.08cfbaff1afaap+5 0x1.849fffd093857p-50
+case-0178 certified 0x1.e0e548a74d84p+4 0x1.1f14c35666388p-50
+case-0179 certified 0x1.e0e548a74d84p+4 0x1.1f14c35666388p-50
+case-0180 certified 0x0p+0 0x0p+0
+case-0181 certified 0x0p+0 0x0p+0
+case-0182 certified 0x1.fae9f9807d624p+0 0x1.310da11c1246dp-55
+case-0183 certified 0x1.fae9f9807d624p+0 0x1.310da11c1246dp-55
+case-0184 certified 0x1.bbe5dc723959ep+2 0x1.f0a60c75fa231p-57
+case-0185 certified 0x1.bbe5dc723959ep+2 0x1.f0a60c75fa231p-57
+case-0186 certified 0x1.1d502d692c593p+3 0x1.e52c8dbc66f34p-51
+case-0187 certified 0x1.1d502d692c593p+3 0x1.e52c8dbc66f34p-51
+case-0188 certified 0x1.dcbaf2202fa1ep+4 0x1.e1b7a7da09b5dp-50
+case-0189 certified 0x1.dcbaf2202fa1ep+4 0x1.e1b7a7da09b5dp-50
+case-0190 certified 0x1.fc6991b83778p+4 0x1.d68029c5d48fep-51
+case-0191 certified 0x1.fc6991b83778p+4 0x1.d68029c5d48fep-51
+case-0192 certified 0x1.fb0a6b590b936p+2 0x1.5762b5c95b43ap-52
+case-0193 certified 0x1.fb0a6b590b936p+2 0x1.5762b5c95b43ap-52
+case-0194 certified 0x0p+0 0x0p+0
+case-0195 certified 0x0p+0 0x0p+0
+case-0196 certified 0x1.8f2f2ff6cb748p+3 0x1.15d835b4224aep-51
+case-0197 certified 0x1.8f2f2ff6cb748p+3 0x1.15d835b4224aep-51
+case-0198 certified 0x1.2353f4948b55bp+2 0x1.f3b37b39809c2p-54
+case-0199 certified 0x1.2353f4948b55bp+2 0x1.f3b37b39809c2p-54
+case-0200 certified 0x1.1740ddca1c91bp+5 0x1.43573813d6bb1p-52
+case-0201 certified 0x1.1740ddca1c91bp+5 0x1.43573813d6bb1p-52
+case-0202 certified 0x1.afbf20bdf63e9p+4 0x1.fafd20929eddfp-50
+case-0203 certified 0x1.afbf20bdf63e9p+4 0x1.fafd20929eddfp-50
+case-0204 certified 0x1.72ce6f3a94ebap+1 0x1.93afc10b70e37p-54
+case-0205 certified 0x1.72ce6f3a94ebap+1 0x1.93afc10b70e37p-54
+case-0206 certified 0x0p+0 0x0p+0
+case-0207 certified 0x0p+0 0x0p+0
+case-0208 certified 0x1.2743a10e31127p+3 0x1.7e1e8ad74c205p-51
+case-0209 certified 0x1.2743a10e31127p+3 0x1.7e1e8ad74c205p-51
+case-0210 certified 0x1.95200a7f17afp+2 0x1.3dadf41d170dep-53
+case-0211 certified 0x1.95200a7f17afp+2 0x1.3dadf41d170dep-53
+case-0212 certified 0x1.f7cafa3d024cep+4 0x1.ae68ee8c5d9aep-50
+case-0213 certified 0x1.f7cafa3d024cep+4 0x1.ae68ee8c5d9aep-50
+case-0214 certified 0x1.c9712c55afaf6p+4 0x1.385c1562eb574p-50
+case-0215 certified 0x1.c9712c55afaf6p+4 0x1.385c1562eb574p-50
+case-0216 certified 0x1.28705f178eca8p+4 0x1.1bd8648ee2912p-54
+case-0217 certified 0x1.28705f178eca8p+4 0x1.1bd8648ee2912p-54
+case-0218 certified 0x0p+0 0x0p+0
+case-0219 certified 0x0p+0 0x0p+0
+case-0220 certified 0x1.534773c6698c7p+4 0x1.b8f412f808d22p-50
+case-0221 certified 0x1.534773c6698c7p+4 0x1.b8f412f808d22p-50
+case-0222 certified 0x1.56b8a576d60fbp+1 0x1.39b46578d547dp-53
+case-0223 certified 0x1.56b8a576d60fbp+1 0x1.39b46578d547dp-53
+case-0224 certified 0x1.6c162ce1efbfcp+5 0x1.a4ef28427a92bp-49
+case-0225 certified 0x1.6c162ce1efbfcp+5 0x1.a4ef28427a92bp-49
+case-0226 certified 0x1.afbbfaac50b51p+4 0x1.8fbe6b87f208p-51
+case-0227 certified 0x1.afbbfaac50b51p+4 0x1.8fbe6b87f208p-51
+case-0228 certified 0x1.8fe538be76834p+3 0x1.fadd7032ca69bp-51
+case-0229 certified 0x1.8fe538be76834p+3 0x1.fadd7032ca69bp-51
+case-0230 certified 0x0p+0 0x0p+0
+case-0231 certified 0x0p+0 0x0p+0
+case-0232 certified 0x1.07a27f9c2254ep+4 0x1.e156bf14adda2p-50
+case-0233 certified 0x1.07a27f9c2254ep+4 0x1.e156bf14adda2p-50
+case-0234 certified 0x1.fd7f19e7389a2p+1 0x1.c17f904b75acbp-54
+case-0235 certified 0x1.fd7f19e7389a2p+1 0x1.c17f904b75acbp-54
+case-0236 certified 0x1.49878390c9a32p+5 0x1.01791b946077dp-49
+case-0237 certified 0x1.49878390c9a32p+5 0x1.01791b946077dp-49
+case-0238 certified 0x1.cb1c6ac258049p+4 0x1.ff3e217bb3b81p-51
+case-0239 certified 0x1.cb1c6ac258049p+4 0x1.ff3e217bb3b81p-51
+case-0240 certified 0x1.7a79033516ee5p+4 0x1.46a7155f698f9p-50
+case-0241 certified 0x1.7a79033516ee5p+4 0x1.46a7155f698f9p-50
+case-0242 certified 0x0p+0 0x0p+0
+case-0243 certified 0x0p+0 0x0p+0
+case-0244 certified 0x1.94b77052b78aep+4 0x1.24387d1e69de9p-50
+case-0245 certified 0x1.94b77052b78aep+4 0x1.24387d1e69de9p-50
+case-0246 certified 0x1.a3e6d1da09c9ap+0 0x1.5206d822c922ap-54
+case-0247 certified 0x1.a3e6d1da09c9ap+0 0x1.5206d822c922ap-54
+case-0248 certified 0x1.7de3cd4b89545p+5 0x1.0858f62b98bcfp-49
+case-0249 certified 0x1.7de3cd4b89545p+5 0x1.0858f62b98bcfp-49
+case-0250 certified 0x1.814e9761fbba5p+4 0x1.9415adef8fd48p-51
+case-0251 certified 0x1.814e9761fbba5p+4 0x1.9415adef8fd48p-51
+case-0252 certified 0x1.19fb407cc3657p+4 0x1.6bd78e3bca0f2p-52
+case-0253 certified 0x1.19fb407cc3657p+4 0x1.6bd78e3bca0f2p-52
+case-0254 certified 0x0p+0 0x0p+0
+case-0255 certified 0x0p+0 0x0p+0
+case-0256 certified 0x1.42bb763c20c09p+4 0x1.e9b8ba7bf890bp-51
+case-0257 certified 0x1.42bb763c20c09p+4 0x1.e9b8ba7bf890bp-51
+case-0258 certified 0x1.4601adfaead93p+1 0x1.816df99889ap-53
+case-0259 certified 0x1.4601adfaead93p+1 0x1.816df99889ap-53
+case-0260 certified 0x1.5a5474ddf79c8p+5 0x1.f8cd7445b007ep-50
+case-0261 certified 0x1.5a5474ddf79c8p+5 0x1.f8cd7445b007ep-50
+case-0262 certified 0x1.9aada93f2bd39p+4 0x1.9dd790b6bd842p-50
+case-0263 certified 0x1.9aada93f2bd39p+4 0x1.9dd790b6bd842p-50
+case-0264 certified 0x1.c88170b47161ep+4 0x1.9216f350d9d94p-51
+case-0265 certified 0x1.c88170b47161ep+4 0x1.9216f350d9d94p-51
+case-0266 certified 0x0p+0 0x0p+0
+case-0267 certified 0x0p+0 0x0p+0
+case-0268 certified 0x1.d7ddf37d861e8p+4 0x1.f56f7638c90f4p-50
+case-0269 certified 0x1.d7ddf37d861e8p+4 0x1.f56f7638c90f4p-50
+case-0270 certified 0x1.eb9059229792ap-1 0x1.85101eca045d3p-58
+case-0271 certified 0x1.eb9059229792ap-1 0x1.85101eca045d3p-58
+case-0272 certified 0x1.8fc9dcbe76be9p+5 0x1.f0d45167da99p-49
+case-0273 certified 0x1.8fc9dcbe76be9p+5 0x1.f0d45167da99p-49
+case-0274 certified 0x1.571248c87c1b5p+4 0x1.cec5adb16f75cp-51
+case-0275 certified 0x1.571248c87c1b5p+4 0x1.cec5adb16f75cp-51
+case-0276 certified 0x1.6803adfc1dd9p+4 0x1.b4bcab78e3f86p-50
+case-0277 certified 0x1.6803adfc1dd9p+4 0x1.b4bcab78e3f86p-50
+case-0278 certified 0x0p+0 0x0p+0
+case-0279 certified 0x0p+0 0x0p+0
+case-0280 certified 0x1.80fa71c0c5babp+4 0x1.d454289c68748p-51
+case-0281 certified 0x1.80fa71c0c5babp+4 0x1.d454289c68748p-51
+case-0282 certified 0x1.8f6c3c4a7e1adp+0 0x1.5252e555f7c32p-55
+case-0283 certified 0x1.8f6c3c4a7e1adp+0 0x1.5252e555f7c32p-55
+case-0284 certified 0x1.6b43ce17caae2p+5 0x1.9cde56e807e29p-50
+case-0285 certified 0x1.6b43ce17caae2p+5 0x1.9cde56e807e29p-50
+case-0286 certified 0x1.6e83ee3377834p+4 0x1.7de5490dc15eap-54
+case-0287 certified 0x1.6e83ee3377834p+4 0x1.7de5490dc15eap-54
+case-0288 certified 0x0p+0 0x0p+0
+case-0289 certified 0x0p+0 0x0p+0
+case-0290 certified 0x0p+0 0x0p+0
+case-0291 certified 0x0p+0 0x0p+0
+case-0292 certified 0x0p+0 0x0p+0
+case-0293 certified 0x0p+0 0x0p+0
+case-0294 certified 0x1.9p+6 0x0p+0
+case-0295 certified 0x1.9p+6 0x0p+0
+case-0296 certified 0x1.9p+6 0x0p+0
+case-0297 certified 0x1.9p+6 0x0p+0
+case-0298 certified 0x0p+0 0x0p+0
+case-0299 certified 0x0p+0 0x0p+0
+case-0300 certified 0x1p+0 0x1p-54
+case-0301 certified 0x1p+0 0x1p-54
+case-0302 certified 0x0p+0 0x0p+0
+case-0303 certified 0x0p+0 0x0p+0
+case-0304 certified 0x1p+0 0x0.0000000000001p-1022
+case-0305 certified 0x1p+0 0x0.0000000000001p-1022
+case-0306 certified 0x0p+0 0x0p+0
+case-0307 certified 0x0p+0 0x0p+0
+case-0308 certified 0x0.0000000000001p-1022 0x0p+0
+case-0309 certified 0x0.0000000000001p-1022 0x0p+0
+case-0310 certified 0x0p+0 0x0p+0
+case-0311 certified 0x0p+0 0x0p+0
+case-0312 certified 0x0.0000000000001p-1022 0x0p+0
+case-0313 certified 0x0.0000000000001p-1022 0x0p+0
+case-0314 certified 0x0p+0 0x0p+0
+case-0315 certified 0x0p+0 0x0p+0
+case-0316 certified 0x1.fffffffffffffp+1023 0x1p+0
+case-0317 certified 0x1.fffffffffffffp+1023 0x1p+0
+case-0318 certified 0x0p+0 0x0p+0
+case-0319 certified 0x0p+0 0x0p+0
+case-0320 certified 0x1.79f02a4f9af8ep-504 0x1.9731558e75ebfp-558
+case-0321 certified 0x1.79f02a4f9af8ep-504 0x1.9731558e75ebfp-558
+case-0322 certified 0x1.0347b4cc381e1p-504 0x1.8460a0094f0ecp-558
+case-0323 certified 0x1.0347b4cc381e1p-504 0x1.8460a0094f0ecp-558
+case-0324 certified 0x1.79f02a4f9af8ep+496 0x1.9731558e75ebfp+442
+case-0325 certified 0x1.79f02a4f9af8ep+496 0x1.9731558e75ebfp+442
+case-0326 certified 0x1.0347b4cc381e1p+496 0x1.8460a0094f0ecp+442
+case-0327 certified 0x1.0347b4cc381e1p+496 0x1.8460a0094f0ecp+442
+case-0328 certified 0x0p+0 0x0p+0
+case-0329 certified 0x1.88145819fe0a7p+6 0x1.c2621b423824bp-48
+case-0330 certified 0x0p+0 0x0p+0
+case-0331 certified 0x1.fea5680c943e5p-48 0x1.7fe8c07448f16p-103
+case-0332 certified 0x1.a48229076208fp+6 0x1.53cdb22bd423fp-49
+case-0333 certified 0x0p+0 0x0p+0
+case-0334 certified 0x0p+0 0x0p+0
+case-0335 certified 0x1.fea5680c943e5p-48 0x1.7fe8c07448f16p-103
+negative-zero certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+negative-rate-neighbor unsupported
+positive-yield-neighbor unsupported
+negative-yield-outside-scope unsupported
+general-call unsupported
+case-0341 cash_unsupported
+case-0342 cash_unsupported
+case-0343 cash_unsupported
+case-0344 cash_unsupported
+general-put unsupported
+case-0346 cash_unsupported
+case-0347 cash_unsupported
+case-0348 cash_unsupported
+case-0349 cash_unsupported
+immediate-put-counterexample unsupported
+negative-rate-call-counterexample unsupported
+yield-call-counterexample unsupported
+finite-arithmetic-exhaustion arithmetic
+American reductions: 337 certificates, 16 unsupported, 1 unresolved arithmetic
+12 fixtures checked, 0 problems
+Volatility admission and mixed Greek unit boundaries passed
+carry cancellation: exact-input values and unresolved-cell control passed
+planner adversarial: subnormal multiplication, cancellation, overflow and output transactions passed
+qcheck random seed: 669256687
+Testing `morphiq_risk'.
+This run has ID `ZO61M9MT'.
+
+  [OK]          normal: exact points          0   values.
+  [OK]          normal: exact points          1   error-function finite limits.
+  [OK]          dd: scaled rounding           0   single rounding into the su...
+  [OK]          normal: properties            0   phi(x) = phi(-x) bit for bit.
+  [OK]          normal: properties            1   Phi is nondecreasing.
+  [OK]          normal: properties            2   Phi(-x) ~ 1 - Phi(x).
+  [OK]          normal: properties            3   Phi^-1(Phi(x)) ~ x on [-8, 8].
+
+Full test results in `/private/tmp/morphiq-american-iv/_build/default/test/_build/_tests/morphiq_risk'.
+Test Successful in 0.509s. 7 tests run.
+rho midpoint: independently strict call/put rounding cells
+Bermudan contract controls passed
+ordinary served 0x1.aa4850a1f07b6p+3 0x1.922ccfd52b572p-52
+reverse served 0x1.dbda9d04e3bc9p+2 0x1.1f0b74d50794p-52
+equal-assets served 0x1.67e19eece4401p+3 0x1.4aa54bf03d033p-51
+correlation-3 served 0x1.fb431ba249062p+3 0x1.dd69f58a8f0aap-51
+correlation-4 served 0x1.fb431ba249062p+3 0x1.288241b16fbd7p-52
+correlation-5 served 0x1.fb431ba249063p+3 0x1.3c542fb757cebp-53
+correlation-6 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-7 served 0x1.3bdc38d4f4be4p+4 0x1.2e17099cd2538p-50
+correlation-8 served 0x1.fb431ba249062p+3 0x1.c64b0c5f4bc0fp-52
+correlation-9 served 0x1.fb431ba249062p+3 0x1.8e859033a108ep-51
+correlation-10 served 0x1.fb431ba249063p+3 0x1.565ec6da266d1p-52
+correlation-11 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-12 served 0x1.3bdc38d4f4be4p+4 0x1.333807ad6bb54p-51
+correlation-13 served 0x1.67e19eece4401p+3 0x1.4aa54bf03d033p-51
+correlation-14 served 0x1.67e19eece44p+3 0x1.ecfcc1f60c1bfp-52
+correlation-15 served 0x1.67e19eece4401p+3 0x1.d0dc1c91ffb1p-53
+correlation-16 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-17 served 0x1.c9cf1e9626435p+3 0x1.f023b33fb7791p-52
+correlation-18 served 0x1.fea5680c943e5p-24 0x1.7919bf1121722p-79
+correlation-19 served 0x1.fea5680c943e5p-24 0x1.968549eaa6572p-81
+correlation-20 served 0x1.fea5680c943e6p-24 0x1.9399b5c43bafp-79
+correlation-21 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-22 served 0x1.fe6ef53bb5da5p+1 0x1.9cc39c87650eap-54
+correlation-23 served 0x0p+0 0x0p+0
+correlation-24 served 0x1.3f276107dca6fp-50 0x1.54346b7ea940ap-98
+correlation-25 served 0x1.3f276107dca6fp-50 0x1.54346b7ea940ap-98
+correlation-26 served 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+correlation-27 served 0x1.fe6ef53bb5d9fp+1 0x1.6cf60dceaa036p-54
+expiry-28 served 0x1.4p+2 0x0p+0
+expiry-29 served 0x0p+0 0x0p+0
+expiry-30 served 0x0p+0 0x0p+0
+expiry-31 served 0x0p+0 0x0p+0
+expiry-32 served 0x1.9p+6 0x0p+0
+expiry-33 served 0x0p+0 0x0p+0
+zero-receive served 0x0p+0 0x0p+0
+zero-deliver served 0x1.8c051a5ca12a6p+6 0x1.fee0afddbc912p-51
+zero-variance served 0x1.78b6043efd3a3p+2 0x1.cc856c008f0c6p-54
+zero-variance-atm served 0x0p+0 0x0p+0
+currency--1000 served 0x1.10d21f1ff6119p-1003 0x0.00000000255dfp-1022
+currency--500 served 0x1.10d21f1ff6119p-503 0x1.2aebbf5044f1cp-557
+currency-500 accuracy_exceeded
+currency-1000 accuracy_exceeded
+time-42 numerical_failure
+time-43 numerical_failure
+time-44 served 0x1.dcf853712b907p+2 0x1.e5175b5f507e2p-52
+time-45 served 0x1.dae4d5fcf2999p+3 0x1.8e53331c17244p-52
+volatility-46 numerical_failure
+volatility-47 numerical_failure
+volatility-48 numerical_failure
+volatility-49 unadjudicated 0x1.9p+6 0x0.0000000000281p-1022
+negative-yield served 0x1.2ba2666d7f317p+3 0x1.bb10df9387985p-51
+discount-overflow numerical_failure
+carry-cancellation served 0x1.8c051a5ca12a6p-53 0x1.cd600c922d6dp-110
+deep-otm served 0x1.fc3e969f1dfedp-499 0x1.5cf477fb91505p-553
+deep-itm served 0x1.ee88e9cd5abd4p+9 0x1.f461b467aefe7p-45
+exact-only accuracy_exceeded
+demanding-limit accuracy_exceeded
+invalid-57 invalid_input
+invalid-58 invalid_input
+invalid-59 invalid_input
+invalid-60 invalid_input
+invalid-61 invalid_input
+invalid-62 invalid_input
+invalid-63 invalid_input
+invalid-64 invalid_accuracy
+invalid-65 invalid_accuracy
+exchange: 66 rows, 47 certificates, 10 explicit numerical/accuracy failures, 1 served but reference unresolved
+planner groups: limits, duplicates, signed zeros, ordered totals; replay=add1883b68d8d6d69536da521294fc00f87a8bd0e2d02617101e7128848f447f
+2376 interior quantity requests; admission, accuracy, expiry, zero-variance, tail and joint capability controls pass
+0.3.0
+{"complete": true, "configuration": "initial", "counts": {"pass": 18, "runtime_unavailable": 22, "unresolved_reference": 1}, "mode": "primary", "schema": "american-runtime-campaign-v1"}
+planner: exact scalar/batch, rational aggregate enclosures, scenario coverage, isolation, failures and 1/2/3/4-worker replay passed
+American Greek boundary reuse controls passed
+{"schema": 1, "complete": true, "mode": "primary", "configuration": "initial", "counts": {"runtime_unavailable": 21, "pass": 9}}
+{"schema": 1, "complete": true, "mode": "primary", "configuration": "initial", "counts": {"runtime_unavailable": 26, "pass": 14}}
+{"schema": 1, "complete": true, "mode": "primary", "configuration": "initial", "counts": {"pass": 14, "runtime_unavailable": 18}}
+Greek cancellation: original-input values or explicit failure
+{"injected_failure":false,"scenarios":8,"workers":1,"rows":64,"peak_slots":4,"bound":16,"live_before":5890,"peak_live_sample":5988,"all_domain_bytes":884088,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+{"injected_failure":false,"scenarios":8,"workers":4,"rows":64,"peak_slots":16,"bound":16,"live_before":5890,"peak_live_sample":6181,"all_domain_bytes":892640,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+{"injected_failure":false,"scenarios":80,"workers":1,"rows":640,"peak_slots":4,"bound":16,"live_before":5897,"peak_live_sample":5995,"all_domain_bytes":9286264,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+{"injected_failure":false,"scenarios":80,"workers":4,"rows":640,"peak_slots":16,"bound":16,"live_before":5897,"peak_live_sample":6181,"all_domain_bytes":9371064,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+{"injected_failure":true,"scenarios":8,"workers":1,"rows":4,"peak_slots":4,"bound":16,"live_before":5893,"peak_live_sample":5991,"all_domain_bytes":34024,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+{"injected_failure":true,"scenarios":8,"workers":4,"rows":4,"peak_slots":12,"bound":16,"live_before":5893,"peak_live_sample":6126,"all_domain_bytes":152744,"source_sha256":"0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3"}
+....
+----------------------------------------------------------------------
+Ran 4 tests in 1.237s
+
+OK
+european-control	delta	estimated	-0x1.92c9b1b4aa298p-2	stencil=0x0p+0;arithmetic=0x1.7fe812cafa19dp-56;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+european-control	gamma	estimated	0x1.367c7cff8de1fp-6	stencil=0x0p+0;arithmetic=0x1.30629585369bap-60;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+european-control	vega	estimated	0x1.2f3591afd9cp+5	stencil=0x1.2f35c6cp-11;arithmetic=0x1.f16711895bbcdp-38;price=0x1.5290177acdeecp-39;refinement=none;bump=0x1.252633p-17,0x1.2524cp-19	0x1.95200a7f17afp+2
+european-control	rho	estimated	-0x1.6d51969a6f4p+5	stencil=0x1.d657590ap-5;arithmetic=0x1.78ade3c5b3e62p-38;price=0x1.b3add36e4c301p-40;refinement=none;bump=0x1.d80d344p-15,0x1.d80d74p-17	0x1.95200a7f17afp+2
+european-control	theta	estimated	-0x1.9bcfd95028d65p-8	stencil=0x0p+0;arithmetic=0x1.0b2fae3db7ba1p-62;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+exercise-control	delta	estimated	-0x1p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x1.a3b5b989efe05p-35;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+exercise-control	gamma	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x1.4fc4946e59804p-34;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+exercise-control	vega	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x1.0651a03172fap-22;price=0x1.0651ac6cb007ep-24;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=0x0p+0,0x0p+0	0x1.ep+5
+exercise-control	rho	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x1.065193c6ce276p-22;price=0x1.0651939766629p-24;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=0x0p+0,0x0p+0	0x1.ep+5
+exercise-control	theta	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x0p+0;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+bermudan-event	theta	unavailable	-	theta at a valuation event or expiry is unavailable	0x1.948598bf281c6p+2
+American Greek controls passed
+{"schema": 1, "complete": true, "mode": "loose", "refined": false, "counts": {"runtime_unavailable": 184, "unresolved_reference": 2, "pass": 44}, "binary_sha256": "82d5311ad8f011cb9ca0834c926845e1e334becd022acd234d156b1a098d3583", "cases_sha256": "72d1bde5c5a5ee67e6575de5be2f5036cd4eff511d26ca01e6ba649eefaf8041", "references_sha256": "6caa762746d4d801ba148cb5eee858c1ff31df6b4dd2f12004ce47f057cfa5f1", "collector_sources": {"/private/tmp/morphiq-american-iv/_build/default/test/../scripts/check_american_greeks.py": "9697ad6df0a673e7ea3ca531cb1e427d3db8559787071e056de92653c11f13f6", "/private/tmp/morphiq-american-iv/_build/default/test/../scripts/collect_american_greeks.py": "e8523200849bc8bc2a67275fd14a6e0fc8791fcda2643266dc9aefd287ed69b2", "/private/tmp/morphiq-american-iv/_build/default/test/../scripts/check_american_piecewise.py": "faaf01d907d4b49d4e090655d4f829216b5aa58111a28a38be3df4b57c0fc9a8", "/private/tmp/morphiq-american-iv/_build/default/test/../scripts/american_piecewise_reference.py": "5f089de435853e886ca1d9072f3198866421a01eb415bb087103ce42df24c891", "/private/tmp/morphiq-american-iv/_build/default/test/../scripts/american_reference_data.py": "d0a954257b325e2f6cd6e4b95573feec9d23dc6e31f5e88b951c8ce133427331"}}
+native Fast planner: original-input scalar replay, metadata, expiry/refusal priority, tile/worker order, cancellation, sink failures and concurrent reuse pass
+native Fast planner: original-input scalar replay, metadata, expiry/refusal priority, tile/worker order, cancellation, sink failures and concurrent reuse pass
+native Fast planner: original-input scalar replay, metadata, expiry/refusal priority, tile/worker order, cancellation, sink failures and concurrent reuse pass
+native Fast planner: original-input scalar replay, metadata, expiry/refusal priority, tile/worker order, cancellation, sink failures and concurrent reuse pass
+shared preparation: four models, mixed failures, exact words, boundaries and concurrent calls pass
+Full model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+First model configuration
+1670 original-input model enclosures; explicit domain/overflow failures checked
+532 nearest-even boundary veta references; exact-zero, kink, adjacent and numerical-failure controls pass
+Full inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 23
+black76 unresolved: 1
+bsm certified: 27
+displaced certified: 15
+displaced unresolved: 3
+74/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+First inverse configuration
+bachelier certified: 9
+bachelier unresolved: 5
+black76 certified: 22
+black76 unresolved: 2
+bsm certified: 25
+bsm unresolved: 2
+displaced certified: 12
+displaced unresolved: 6
+68/83 exact-quote reference roots certified; unresolved rows are not accuracy passes
+2506 enclosed extra-bit Greek references, 0 explicit capability failures
+880 outcomes: 581 independently checked finite values, 201 explicit failures, 98 kinks
+oracle assurance: exact finite scoring, classifications and fixture failure controls passed
+{
+  "schema": 1,
+  "command": "check",
+  "complete": true,
+  "source_commit": "566e19096227dc920822660eb68c68cf89f1eef2",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.8",
+  "runner_sha256": "f5f206d8c8cd6b4a3b1d4d433fcbeadb397beb1ee363dd24f78b2dfa781423a1",
+  "results": [
+    {
+      "checks": 44,
+      "peak_observed_slots": 153,
+      "planner_source_sha256": "0f233ffe8670c286f26a7a64e8a9e5e1d4f5935026fa188cb5838a59cbcbe1c3",
+      "ocaml": "5.3.0"
+    }
+  ]
+}
+99088 fast batch price outcomes equal scalar words/classes; independent scalar oracle runs separately
+Full enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+First enclosure configuration
+1126 deterministic primitive cases, 2000 random compositions, 40354 elementary/normal references; 30574 outside exponential guard; 15217 other-function rows
+fast planner fixture bsm: 24256
+fast planner fixture black76: 6696
+fast planner fixture displaced: 41768
+fast planner fixture bachelier: 5024
+fast planner: 77744 exact-maturity scalar outcomes; 21344 nonrepresentable maturities excluded; 99088 total fixture rows
+Bachelier preparation: 466 fixture selections, boundaries and concurrent replay pass
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 2.635s
+
+OK
+quantity                rows  worst ulp    worst rel                       at  fails
+cdf body               14278          3    4.366e-16               -0x1.aap+2      0
+  0 nonfinite class checks (excluded from ULP statistics)
+cdf tail (x <= -8)      6177          5    6.055e-16    -0x1.a7563d16a682ep+4      0
+  0 nonfinite class checks (excluded from ULP statistics)
+erf                    20455          1    2.220e-16               -0x1.6cp+0      0
+  0 nonfinite class checks (excluded from ULP statistics)
+erfc                   20455          4    5.067e-16      0x1.8ace5f53462fp+3      0
+  0 nonfinite class checks (excluded from ULP statistics)
+erfcx                  16740          2    4.441e-16    -0x1.53249a1a6af7fp-2      0
+  45 nonfinite class checks (excluded from ULP statistics)
+inv central             6030          0    0.000e+00                   0x0p+0      0
+  0 nonfinite class checks (excluded from ULP statistics)
+inv tail                5349          2    3.015e-16                 0x1p-742      0
+  0 nonfinite class checks (excluded from ULP statistics)
+logcdf                 20455          4    5.790e-16     0x1.4b73f8356cf3cp+4      0
+  1023 nonfinite class checks (excluded from ULP statistics)
+pdf                    20455          3    4.225e-16    -0x1.e37fd73d2b1a8p+4      0
+  0 nonfinite class checks (excluded from ULP statistics)
+inverse replay 91bedc0a4352538aa60ae7c831f27bcaf16be0058a45daa3d6c33f2501344c19 over 193443 bytes
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.898s
+
+OK
+{"counts": {"value_checked": 2626, "unavailable": 122}, "failures": 0}
+{"counts": {"value_checked": 9458, "availability_failure": 1206, "class_checked": 96}, "failures": 0}
+normal_dd: all cases within budget
+translation cases 32, self-consistency cases 96, failures 0
+log1p    27651 rows, worst 1 ulp at -0x1.f410eaa8a61f6p-1, worst 0.9334 ulp from exact
+  0 nonfinite class checks (excluded from ULP statistics)
+log      21515 rows, worst 1 ulp at 0x1.ce283c2d11eaep-908, worst 0.9563 ulp from exact
+  0 nonfinite class checks (excluded from ULP statistics)
+exp      31152 rows, worst 1 ulp at -0x1.63422c73c63f2p+9, worst 1.0321 ulp from exact
+  172 nonfinite class checks (excluded from ULP statistics)
+expm1    31152 rows, worst 1 ulp at -0x1.2b708872320e1p+5, worst 1.3553 ulp from exact
+  172 nonfinite class checks (excluded from ULP statistics)
+log1p reduced path: worst 0.5205 ulp from exact (bound 0.5 + 0.14)
+{"rows": 2511, "totals": {"value_checked": 1880, "class_checked": 436, "reference_unresolved": 54, "availability_failure": 127, "nonfinite_fast_price": 14}, "contract_violations": 0}
+{"counts": {"value_checked": 10114, "class_checked": 1260, "availability_failure": 204, "reference_unresolved": 52}, "failures": 0}
+case-0000 certified 0x0p+0 0x0p+0
+case-0001 certified 0x0p+0 0x0p+0
+case-0002 certified 0x0p+0 0x0p+0
+case-0003 certified 0x0p+0 0x0p+0
+case-0004 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0005 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0006 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0007 certified 0x1.2f99139a99983p+0 0x1.c866a497e48cap-54
+case-0008 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0009 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0010 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0011 certified 0x1.2fed6d4af4099p+4 0x1.fb85719bb7e25p-51
+case-0012 certified 0x0p+0 0x0p+0
+case-0013 certified 0x0p+0 0x0p+0
+case-0014 certified 0x0p+0 0x0p+0
+case-0015 certified 0x0p+0 0x0p+0
+case-0016 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0017 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0018 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0019 certified 0x1.dc02ebcec5475p+0 0x1.02bb9682d8585p-54
+case-0020 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0021 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0022 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0023 certified 0x1.441a40bc4fa3dp+4 0x1.3cbdf69004d99p-52
+case-0024 certified 0x0p+0 0x0p+0
+case-0025 certified 0x0p+0 0x0p+0
+case-0026 certified 0x0p+0 0x0p+0
+case-0027 certified 0x0p+0 0x0p+0
+case-0028 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0029 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0030 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0031 certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+case-0032 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0033 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0034 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0035 certified 0x1.f1597da04bdaep+4 0x1.5a85720783acfp-50
+case-0036 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0037 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0038 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0039 certified 0x1.3821b5fd69ce6p+2 0x1.f651e0facf801p-55
+case-0040 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0041 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0042 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0043 certified 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51
+case-0044 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0045 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0046 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0047 certified 0x1.06915f41727e7p+5 0x1.09287e7f5a324p-49
+case-0048 certified 0x1.4p+4 0x0p+0
+case-0049 certified 0x1.4p+4 0x0p+0
+case-0050 certified 0x1.4p+4 0x0p+0
+case-0051 certified 0x1.4p+4 0x0p+0
+case-0052 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0053 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0054 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0055 certified 0x1.625b55ff62c3fp+4 0x1.d9687ce7ce712p-51
+case-0056 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0057 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0058 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0059 certified 0x1.68391cfa502d1p+5 0x1.c7ec5d501a6f3p-49
+case-0060 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0061 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0062 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0063 certified 0x1.8e086d7f5a73ap+4 0x1.f04d70f829842p-50
+case-0064 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0065 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0066 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0067 certified 0x1.a2b4676cf4bc4p+4 0x1.6580f5bbf6ca2p-50
+case-0068 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0069 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0070 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0071 certified 0x1.798ae4ab9924cp+5 0x1.5e4de1a01808bp-49
+case-0072 certified 0x0p+0 0x0p+0
+case-0073 certified 0x0p+0 0x0p+0
+case-0074 certified 0x1.6b0d4ca4ce2fap+4 0x1.d3f5381366ae6p-50
+case-0075 certified 0x1.6b0d4ca4ce2fap+4 0x1.d3f5381366ae6p-50
+case-0076 certified 0x1.0205eee25822cp+0 0x1.bcec65e6fd81dp-54
+case-0077 certified 0x1.0205eee25822cp+0 0x1.bcec65e6fd81dp-54
+case-0078 certified 0x1.7b2dab92f3b1cp+4 0x1.47d98e4b092a1p-50
+case-0079 certified 0x1.7b2dab92f3b1cp+4 0x1.47d98e4b092a1p-50
+case-0080 certified 0x1.310909859b04ap+4 0x1.0a6b0388531ccp-51
+case-0081 certified 0x1.310909859b04ap+4 0x1.0a6b0388531ccp-51
+case-0082 certified 0x1.4e0b2b15349a2p+5 0x1.4ebfb64f3d201p-50
+case-0083 certified 0x1.4e0b2b15349a2p+5 0x1.4ebfb64f3d201p-50
+case-0084 certified 0x0p+0 0x0p+0
+case-0085 certified 0x0p+0 0x0p+0
+case-0086 certified 0x1.ab6123ca5b358p+4 0x1.cca535b7a4fadp-53
+case-0087 certified 0x1.ab6123ca5b358p+4 0x1.cca535b7a4fadp-53
+case-0088 certified 0x1.256f1deb848b3p-1 0x1.a880a695c8b67p-57
+case-0089 certified 0x1.256f1deb848b3p-1 0x1.a880a695c8b67p-57
+case-0090 certified 0x1.b48c9cb9b759ep+4 0x1.631a57fbdfcf6p-50
+case-0091 certified 0x1.b48c9cb9b759ep+4 0x1.631a57fbdfcf6p-50
+case-0092 certified 0x1.0f33eca22941dp+4 0x1.4ff7b5b9e26a4p-51
+case-0093 certified 0x1.0f33eca22941dp+4 0x1.4ff7b5b9e26a4p-51
+case-0094 certified 0x1.5d4a8836423bbp+5 0x1.8f37bf360d15fp-49
+case-0095 certified 0x1.5d4a8836423bbp+5 0x1.8f37bf360d15fp-49
+case-0096 certified 0x0p+0 0x0p+0
+case-0097 certified 0x0p+0 0x0p+0
+case-0098 certified 0x1.1904a887460bdp+4 0x1.ee4271ac3bd6fp-52
+case-0099 certified 0x1.1904a887460bdp+4 0x1.ee4271ac3bd6fp-52
+case-0100 certified 0x1.9bf7217afa4d2p+0 0x1.bd7b523b863c9p-55
+case-0101 certified 0x1.9bf7217afa4d2p+0 0x1.bd7b523b863c9p-55
+case-0102 certified 0x1.32c41a9ef5b0ap+4 0x1.25b3e26cd3c32p-54
+case-0103 certified 0x1.32c41a9ef5b0ap+4 0x1.25b3e26cd3c32p-54
+case-0104 certified 0x1.45964713090a5p+4 0x1.840be49d8b4fbp-51
+case-0105 certified 0x1.45964713090a5p+4 0x1.840be49d8b4fbp-51
+case-0106 certified 0x1.2f4d77cd278b1p+5 0x1.19d5578edac88p-52
+case-0107 certified 0x1.2f4d77cd278b1p+5 0x1.19d5578edac88p-52
+case-0108 certified 0x0p+0 0x0p+0
+case-0109 certified 0x0p+0 0x0p+0
+case-0110 certified 0x1.59587facd311bp+4 0x1.91f9425f4c57fp-50
+case-0111 certified 0x1.59587facd311bp+4 0x1.91f9425f4c57fp-50
+case-0112 certified 0x1.eae0e3bdde1cbp-1 0x1.1de60c39f45b1p-55
+case-0113 certified 0x1.eae0e3bdde1cbp-1 0x1.1de60c39f45b1p-55
+case-0114 certified 0x1.68af86cac202ap+4 0x1.16f5ee02834b2p-50
+case-0115 certified 0x1.68af86cac202ap+4 0x1.16f5ee02834b2p-50
+case-0116 certified 0x1.2228970463b3ep+4 0x1.0a1fd1485dfe7p-52
+case-0117 certified 0x1.2228970463b3ep+4 0x1.0a1fd1485dfe7p-52
+case-0118 certified 0x1.3dc08b589b62dp+5 0x1.584758f965941p-49
+case-0119 certified 0x1.3dc08b589b62dp+5 0x1.584758f965941p-49
+case-0120 certified 0x0p+0 0x0p+0
+case-0121 certified 0x0p+0 0x0p+0
+case-0122 certified 0x1.95f8760fd7307p+3 0x1.168656e5cae38p-51
+case-0123 certified 0x1.95f8760fd7307p+3 0x1.168656e5cae38p-51
+case-0124 certified 0x1.3a7859be6deafp+1 0x1.bff04974879bfp-57
+case-0125 certified 0x1.3a7859be6deafp+1 0x1.bff04974879bfp-57
+case-0126 certified 0x1.e4968c7f72ab2p+3 0x1.f0796a40073b4p-51
+case-0127 certified 0x1.e4968c7f72ab2p+3 0x1.f0796a40073b4p-51
+case-0128 certified 0x1.5ab841a273dd3p+4 0x1.bb7a824c91f65p-50
+case-0129 certified 0x1.5ab841a273dd3p+4 0x1.bb7a824c91f65p-50
+case-0130 certified 0x1.12da3e552fbabp+5 0x1.981bab6cd6427p-49
+case-0131 certified 0x1.12da3e552fbabp+5 0x1.981bab6cd6427p-49
+case-0132 certified 0x0p+0 0x0p+0
+case-0133 certified 0x0p+0 0x0p+0
+case-0134 certified 0x1.0b50122d789e2p+4 0x1.f6e532a22890dp-52
+case-0135 certified 0x1.0b50122d789e2p+4 0x1.f6e532a22890dp-52
+case-0136 certified 0x1.87dfa2196dbcfp+0 0x1.8dd3f787d28a3p-54
+case-0137 certified 0x1.87dfa2196dbcfp+0 0x1.8dd3f787d28a3p-54
+case-0138 certified 0x1.23ce0c4f0f79fp+4 0x1.49b81a6019f74p-51
+case-0139 certified 0x1.23ce0c4f0f79fp+4 0x1.49b81a6019f74p-51
+case-0140 certified 0x1.35b53c9384d92p+4 0x1.4fa79ecf48495p-50
+case-0141 certified 0x1.35b53c9384d92p+4 0x1.4fa79ecf48495p-50
+case-0142 certified 0x1.2082a7607ebbap+5 0x1.cd60eb77d26d8p-50
+case-0143 certified 0x1.2082a7607ebbap+5 0x1.cd60eb77d26d8p-50
+case-0144 certified 0x0p+0 0x0p+0
+case-0145 certified 0x0p+0 0x0p+0
+case-0146 certified 0x1.0a73b634fd946p+1 0x1.a4d41a3ab28bcp-55
+case-0147 certified 0x1.0a73b634fd946p+1 0x1.a4d41a3ab28bcp-55
+case-0148 certified 0x1.d2a832e7a7793p+2 0x1.2cfe03023f69dp-52
+case-0149 certified 0x1.d2a832e7a7793p+2 0x1.2cfe03023f69dp-52
+case-0150 certified 0x1.2bf107011321bp+3 0x1.6198864995bb5p-52
+case-0151 certified 0x1.2bf107011321bp+3 0x1.6198864995bb5p-52
+case-0152 certified 0x1.f52c38b049907p+4 0x1.388d9b93c79a3p-50
+case-0153 certified 0x1.f52c38b049907p+4 0x1.388d9b93c79a3p-50
+case-0154 certified 0x1.0b3d57bb74a18p+5 0x1.16d0f19674b9ep-52
+case-0155 certified 0x1.0b3d57bb74a18p+5 0x1.16d0f19674b9ep-52
+case-0156 certified 0x0p+0 0x0p+0
+case-0157 certified 0x0p+0 0x0p+0
+case-0158 certified 0x1.c6dd0ed63fe7cp+2 0x1.87b422c4e12b1p-52
+case-0159 certified 0x1.c6dd0ed63fe7cp+2 0x1.87b422c4e12b1p-52
+case-0160 certified 0x1.41a9852d370e5p+2 0x1.66b57f1954668p-52
+case-0161 certified 0x1.41a9852d370e5p+2 0x1.66b57f1954668p-52
+case-0162 certified 0x1.84434a01bb7bp+3 0x1.11965e21ca6efp-52
+case-0163 certified 0x1.84434a01bb7bp+3 0x1.11965e21ca6efp-52
+case-0164 certified 0x1.c225efa047014p+4 0x1.1ce3d76ffe61ap-50
+case-0165 certified 0x1.c225efa047014p+4 0x1.1ce3d76ffe61ap-50
+case-0166 certified 0x1.19ee99aaeb7dap+5 0x1.a28498a09cf4dp-49
+case-0167 certified 0x1.19ee99aaeb7dap+5 0x1.a28498a09cf4dp-49
+case-0168 certified 0x1.85d16ab74389fp+1 0x1.a74c385d2b323p-54
+case-0169 certified 0x1.85d16ab74389fp+1 0x1.a74c385d2b323p-54
+case-0170 certified 0x0p+0 0x0p+0
+case-0171 certified 0x0p+0 0x0p+0
+case-0172 certified 0x1.366716f939ep+3 0x1.8293341d30aa8p-54
+case-0173 certified 0x1.366716f939ep+3 0x1.8293341d30aa8p-54
+case-0174 certified 0x1.a9e57896d1fbp+2 0x1.f6d1bef0015e4p-52
+case-0175 certified 0x1.a9e57896d1fbp+2 0x1.f6d1bef0015e4p-52
+case-0176 certified 0x1.08cfbaff1afaap+5 0x1.849fffd093857p-50
+case-0177 certified 0x1.08cfbaff1afaap+5 0x1.849fffd093857p-50
+case-0178 certified 0x1.e0e548a74d84p+4 0x1.1f14c35666388p-50
+case-0179 certified 0x1.e0e548a74d84p+4 0x1.1f14c35666388p-50
+case-0180 certified 0x0p+0 0x0p+0
+case-0181 certified 0x0p+0 0x0p+0
+case-0182 certified 0x1.fae9f9807d624p+0 0x1.310da11c1246dp-55
+case-0183 certified 0x1.fae9f9807d624p+0 0x1.310da11c1246dp-55
+case-0184 certified 0x1.bbe5dc723959ep+2 0x1.f0a60c75fa231p-57
+case-0185 certified 0x1.bbe5dc723959ep+2 0x1.f0a60c75fa231p-57
+case-0186 certified 0x1.1d502d692c593p+3 0x1.e52c8dbc66f34p-51
+case-0187 certified 0x1.1d502d692c593p+3 0x1.e52c8dbc66f34p-51
+case-0188 certified 0x1.dcbaf2202fa1ep+4 0x1.e1b7a7da09b5dp-50
+case-0189 certified 0x1.dcbaf2202fa1ep+4 0x1.e1b7a7da09b5dp-50
+case-0190 certified 0x1.fc6991b83778p+4 0x1.d68029c5d48fep-51
+case-0191 certified 0x1.fc6991b83778p+4 0x1.d68029c5d48fep-51
+case-0192 certified 0x1.fb0a6b590b936p+2 0x1.5762b5c95b43ap-52
+case-0193 certified 0x1.fb0a6b590b936p+2 0x1.5762b5c95b43ap-52
+case-0194 certified 0x0p+0 0x0p+0
+case-0195 certified 0x0p+0 0x0p+0
+case-0196 certified 0x1.8f2f2ff6cb748p+3 0x1.15d835b4224aep-51
+case-0197 certified 0x1.8f2f2ff6cb748p+3 0x1.15d835b4224aep-51
+case-0198 certified 0x1.2353f4948b55bp+2 0x1.f3b37b39809c2p-54
+case-0199 certified 0x1.2353f4948b55bp+2 0x1.f3b37b39809c2p-54
+case-0200 certified 0x1.1740ddca1c91bp+5 0x1.43573813d6bb1p-52
+case-0201 certified 0x1.1740ddca1c91bp+5 0x1.43573813d6bb1p-52
+case-0202 certified 0x1.afbf20bdf63e9p+4 0x1.fafd20929eddfp-50
+case-0203 certified 0x1.afbf20bdf63e9p+4 0x1.fafd20929eddfp-50
+case-0204 certified 0x1.72ce6f3a94ebap+1 0x1.93afc10b70e37p-54
+case-0205 certified 0x1.72ce6f3a94ebap+1 0x1.93afc10b70e37p-54
+case-0206 certified 0x0p+0 0x0p+0
+case-0207 certified 0x0p+0 0x0p+0
+case-0208 certified 0x1.2743a10e31127p+3 0x1.7e1e8ad74c205p-51
+case-0209 certified 0x1.2743a10e31127p+3 0x1.7e1e8ad74c205p-51
+case-0210 certified 0x1.95200a7f17afp+2 0x1.3dadf41d170dep-53
+case-0211 certified 0x1.95200a7f17afp+2 0x1.3dadf41d170dep-53
+case-0212 certified 0x1.f7cafa3d024cep+4 0x1.ae68ee8c5d9aep-50
+case-0213 certified 0x1.f7cafa3d024cep+4 0x1.ae68ee8c5d9aep-50
+case-0214 certified 0x1.c9712c55afaf6p+4 0x1.385c1562eb574p-50
+case-0215 certified 0x1.c9712c55afaf6p+4 0x1.385c1562eb574p-50
+case-0216 certified 0x1.28705f178eca8p+4 0x1.1bd8648ee2912p-54
+case-0217 certified 0x1.28705f178eca8p+4 0x1.1bd8648ee2912p-54
+case-0218 certified 0x0p+0 0x0p+0
+case-0219 certified 0x0p+0 0x0p+0
+case-0220 certified 0x1.534773c6698c7p+4 0x1.b8f412f808d22p-50
+case-0221 certified 0x1.534773c6698c7p+4 0x1.b8f412f808d22p-50
+case-0222 certified 0x1.56b8a576d60fbp+1 0x1.39b46578d547dp-53
+case-0223 certified 0x1.56b8a576d60fbp+1 0x1.39b46578d547dp-53
+case-0224 certified 0x1.6c162ce1efbfcp+5 0x1.a4ef28427a92bp-49
+case-0225 certified 0x1.6c162ce1efbfcp+5 0x1.a4ef28427a92bp-49
+case-0226 certified 0x1.afbbfaac50b51p+4 0x1.8fbe6b87f208p-51
+case-0227 certified 0x1.afbbfaac50b51p+4 0x1.8fbe6b87f208p-51
+case-0228 certified 0x1.8fe538be76834p+3 0x1.fadd7032ca69bp-51
+case-0229 certified 0x1.8fe538be76834p+3 0x1.fadd7032ca69bp-51
+case-0230 certified 0x0p+0 0x0p+0
+case-0231 certified 0x0p+0 0x0p+0
+case-0232 certified 0x1.07a27f9c2254ep+4 0x1.e156bf14adda2p-50
+case-0233 certified 0x1.07a27f9c2254ep+4 0x1.e156bf14adda2p-50
+case-0234 certified 0x1.fd7f19e7389a2p+1 0x1.c17f904b75acbp-54
+case-0235 certified 0x1.fd7f19e7389a2p+1 0x1.c17f904b75acbp-54
+case-0236 certified 0x1.49878390c9a32p+5 0x1.01791b946077dp-49
+case-0237 certified 0x1.49878390c9a32p+5 0x1.01791b946077dp-49
+case-0238 certified 0x1.cb1c6ac258049p+4 0x1.ff3e217bb3b81p-51
+case-0239 certified 0x1.cb1c6ac258049p+4 0x1.ff3e217bb3b81p-51
+case-0240 certified 0x1.7a79033516ee5p+4 0x1.46a7155f698f9p-50
+case-0241 certified 0x1.7a79033516ee5p+4 0x1.46a7155f698f9p-50
+case-0242 certified 0x0p+0 0x0p+0
+case-0243 certified 0x0p+0 0x0p+0
+case-0244 certified 0x1.94b77052b78aep+4 0x1.24387d1e69de9p-50
+case-0245 certified 0x1.94b77052b78aep+4 0x1.24387d1e69de9p-50
+case-0246 certified 0x1.a3e6d1da09c9ap+0 0x1.5206d822c922ap-54
+case-0247 certified 0x1.a3e6d1da09c9ap+0 0x1.5206d822c922ap-54
+case-0248 certified 0x1.7de3cd4b89545p+5 0x1.0858f62b98bcfp-49
+case-0249 certified 0x1.7de3cd4b89545p+5 0x1.0858f62b98bcfp-49
+case-0250 certified 0x1.814e9761fbba5p+4 0x1.9415adef8fd48p-51
+case-0251 certified 0x1.814e9761fbba5p+4 0x1.9415adef8fd48p-51
+case-0252 certified 0x1.19fb407cc3657p+4 0x1.6bd78e3bca0f2p-52
+case-0253 certified 0x1.19fb407cc3657p+4 0x1.6bd78e3bca0f2p-52
+case-0254 certified 0x0p+0 0x0p+0
+case-0255 certified 0x0p+0 0x0p+0
+case-0256 certified 0x1.42bb763c20c09p+4 0x1.e9b8ba7bf890bp-51
+case-0257 certified 0x1.42bb763c20c09p+4 0x1.e9b8ba7bf890bp-51
+case-0258 certified 0x1.4601adfaead93p+1 0x1.816df99889ap-53
+case-0259 certified 0x1.4601adfaead93p+1 0x1.816df99889ap-53
+case-0260 certified 0x1.5a5474ddf79c8p+5 0x1.f8cd7445b007ep-50
+case-0261 certified 0x1.5a5474ddf79c8p+5 0x1.f8cd7445b007ep-50
+case-0262 certified 0x1.9aada93f2bd39p+4 0x1.9dd790b6bd842p-50
+case-0263 certified 0x1.9aada93f2bd39p+4 0x1.9dd790b6bd842p-50
+case-0264 certified 0x1.c88170b47161ep+4 0x1.9216f350d9d94p-51
+case-0265 certified 0x1.c88170b47161ep+4 0x1.9216f350d9d94p-51
+case-0266 certified 0x0p+0 0x0p+0
+case-0267 certified 0x0p+0 0x0p+0
+case-0268 certified 0x1.d7ddf37d861e8p+4 0x1.f56f7638c90f4p-50
+case-0269 certified 0x1.d7ddf37d861e8p+4 0x1.f56f7638c90f4p-50
+case-0270 certified 0x1.eb9059229792ap-1 0x1.85101eca045d3p-58
+case-0271 certified 0x1.eb9059229792ap-1 0x1.85101eca045d3p-58
+case-0272 certified 0x1.8fc9dcbe76be9p+5 0x1.f0d45167da99p-49
+case-0273 certified 0x1.8fc9dcbe76be9p+5 0x1.f0d45167da99p-49
+case-0274 certified 0x1.571248c87c1b5p+4 0x1.cec5adb16f75cp-51
+case-0275 certified 0x1.571248c87c1b5p+4 0x1.cec5adb16f75cp-51
+case-0276 certified 0x1.6803adfc1dd9p+4 0x1.b4bcab78e3f86p-50
+case-0277 certified 0x1.6803adfc1dd9p+4 0x1.b4bcab78e3f86p-50
+case-0278 certified 0x0p+0 0x0p+0
+case-0279 certified 0x0p+0 0x0p+0
+case-0280 certified 0x1.80fa71c0c5babp+4 0x1.d454289c68748p-51
+case-0281 certified 0x1.80fa71c0c5babp+4 0x1.d454289c68748p-51
+case-0282 certified 0x1.8f6c3c4a7e1adp+0 0x1.5252e555f7c32p-55
+case-0283 certified 0x1.8f6c3c4a7e1adp+0 0x1.5252e555f7c32p-55
+case-0284 certified 0x1.6b43ce17caae2p+5 0x1.9cde56e807e29p-50
+case-0285 certified 0x1.6b43ce17caae2p+5 0x1.9cde56e807e29p-50
+case-0286 certified 0x1.6e83ee3377834p+4 0x1.7de5490dc15eap-54
+case-0287 certified 0x1.6e83ee3377834p+4 0x1.7de5490dc15eap-54
+case-0288 certified 0x0p+0 0x0p+0
+case-0289 certified 0x0p+0 0x0p+0
+case-0290 certified 0x0p+0 0x0p+0
+case-0291 certified 0x0p+0 0x0p+0
+case-0292 certified 0x0p+0 0x0p+0
+case-0293 certified 0x0p+0 0x0p+0
+case-0294 certified 0x1.9p+6 0x0p+0
+case-0295 certified 0x1.9p+6 0x0p+0
+case-0296 certified 0x1.9p+6 0x0p+0
+case-0297 certified 0x1.9p+6 0x0p+0
+case-0298 certified 0x0p+0 0x0p+0
+case-0299 certified 0x0p+0 0x0p+0
+case-0300 certified 0x1p+0 0x1p-54
+case-0301 certified 0x1p+0 0x1p-54
+case-0302 certified 0x0p+0 0x0p+0
+case-0303 certified 0x0p+0 0x0p+0
+case-0304 certified 0x1p+0 0x0.0000000000001p-1022
+case-0305 certified 0x1p+0 0x0.0000000000001p-1022
+case-0306 certified 0x0p+0 0x0p+0
+case-0307 certified 0x0p+0 0x0p+0
+case-0308 certified 0x0.0000000000001p-1022 0x0p+0
+case-0309 certified 0x0.0000000000001p-1022 0x0p+0
+case-0310 certified 0x0p+0 0x0p+0
+case-0311 certified 0x0p+0 0x0p+0
+case-0312 certified 0x0.0000000000001p-1022 0x0p+0
+case-0313 certified 0x0.0000000000001p-1022 0x0p+0
+case-0314 certified 0x0p+0 0x0p+0
+case-0315 certified 0x0p+0 0x0p+0
+case-0316 certified 0x1.fffffffffffffp+1023 0x1p+0
+case-0317 certified 0x1.fffffffffffffp+1023 0x1p+0
+case-0318 certified 0x0p+0 0x0p+0
+case-0319 certified 0x0p+0 0x0p+0
+case-0320 certified 0x1.79f02a4f9af8ep-504 0x1.9731558e75ebfp-558
+case-0321 certified 0x1.79f02a4f9af8ep-504 0x1.9731558e75ebfp-558
+case-0322 certified 0x1.0347b4cc381e1p-504 0x1.8460a0094f0ecp-558
+case-0323 certified 0x1.0347b4cc381e1p-504 0x1.8460a0094f0ecp-558
+case-0324 certified 0x1.79f02a4f9af8ep+496 0x1.9731558e75ebfp+442
+case-0325 certified 0x1.79f02a4f9af8ep+496 0x1.9731558e75ebfp+442
+case-0326 certified 0x1.0347b4cc381e1p+496 0x1.8460a0094f0ecp+442
+case-0327 certified 0x1.0347b4cc381e1p+496 0x1.8460a0094f0ecp+442
+case-0328 certified 0x0p+0 0x0p+0
+case-0329 certified 0x1.88145819fe0a7p+6 0x1.c2621b423824bp-48
+case-0330 certified 0x0p+0 0x0p+0
+case-0331 certified 0x1.fea5680c943e5p-48 0x1.7fe8c07448f16p-103
+case-0332 certified 0x1.a48229076208fp+6 0x1.53cdb22bd423fp-49
+case-0333 certified 0x0p+0 0x0p+0
+case-0334 certified 0x0p+0 0x0p+0
+case-0335 certified 0x1.fea5680c943e5p-48 0x1.7fe8c07448f16p-103
+negative-zero certified 0x1.fdcbdb70c3308p+2 0x1.7895068b7f401p-55
+negative-rate-neighbor unsupported
+positive-yield-neighbor unsupported
+negative-yield-outside-scope unsupported
+general-call unsupported
+case-0341 cash_unsupported
+case-0342 cash_unsupported
+case-0343 cash_unsupported
+case-0344 cash_unsupported
+general-put unsupported
+case-0346 cash_unsupported
+case-0347 cash_unsupported
+case-0348 cash_unsupported
+case-0349 cash_unsupported
+immediate-put-counterexample unsupported
+negative-rate-call-counterexample unsupported
+yield-call-counterexample unsupported
+finite-arithmetic-exhaustion arithmetic
+American reductions: 337 certificates, 16 unsupported, 1 unresolved arithmetic
+4176 public price/Greek certificates; 3932 exact acceptance-limit controls
+european-control	delta	estimated	-0x1.92c9b1b4aa298p-2	stencil=0x0p+0;arithmetic=0x1.7fe812cafa19dp-56;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+european-control	gamma	estimated	0x1.367c7cff8de1fp-6	stencil=0x0p+0;arithmetic=0x1.30629585369bap-60;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+european-control	vega	estimated	0x1.2f3591afd9cp+5	stencil=0x1.2f35c6cp-11;arithmetic=0x1.f16711895bbcdp-38;price=0x1.5290177acdeecp-39;refinement=none;bump=0x1.252633p-17,0x1.2524cp-19	0x1.95200a7f17afp+2
+european-control	rho	estimated	-0x1.6d51969a6f4p+5	stencil=0x1.d657590ap-5;arithmetic=0x1.78ade3c5b3e62p-38;price=0x1.b3add36e4c301p-40;refinement=none;bump=0x1.d80d344p-15,0x1.d80d74p-17	0x1.95200a7f17afp+2
+european-control	theta	estimated	-0x1.9bcfd95028d65p-8	stencil=0x0p+0;arithmetic=0x1.0b2fae3db7ba1p-62;price=0x0p+0;refinement=none;bump=none	0x1.95200a7f17afp+2
+exercise-control	delta	estimated	-0x1p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x1.a3b5b989efe05p-35;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+exercise-control	gamma	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x1.4fc4946e59804p-34;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+exercise-control	vega	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x1.0651a03172fap-22;price=0x1.0651ac6cb007ep-24;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=0x0p+0,0x0p+0	0x1.ep+5
+exercise-control	rho	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x1.065193c6ce276p-22;price=0x1.0651939766629p-24;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=0x0p+0,0x0p+0	0x1.ep+5
+exercise-control	theta	estimated	0x0p+0	stencil=0x0p+0;arithmetic=0x0p+0;price=0x0p+0;refinement=0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0,0x0p+0;bump=none	0x1.ep+5
+bermudan-event	theta	unavailable	-	theta at a valuation event or expiry is unavailable	0x1.948598bf281c6p+2
+American Greek controls passed
+4468 prepared quotients: canonical words and independent rational allowances agree
+2506 extended Greek references, 0 failures, worst 0.95761 of bound
+Native Bachelier: 466 selected of 99088 input rows; independent 8-ULP/4.3-epsilon gates and exact replay pass
+generated error fail pass / total     time test name
+[ ]    0    0    0    0 / 3000     0.0s max(intrinsic, 0) <= price <= maximum[✓] 3000    0    0 3000 / 3000     0.0s max(intrinsic, 0) <= price <= maximum
+[ ]    0    0    0    0 / 3000     0.0s call - put = A - C[✓] 3000    0    0 3000 / 3000     0.0s call - put = A - C
+[ ]    0    0    0    0 / 3000     0.0s price is nondecreasing in σ[✓] 3000    0    0 3000 / 3000     0.1s price is nondecreasing in σ
+[ ]    0    0    0    0 / 3000     0.0s delta within its bounds; gamma, vega >= 0[ ]  591    0    0  591 / 3000     0.1s delta within its bounds; gamma, vega >= 0[ ] 1663    0    0 1663 / 3000     0.2s delta within its bounds; gamma, vega >= 0[ ] 2854    0    0 2854 / 3000     0.4s delta within its bounds; gamma, vega >= 0[✓] 3000    0    0 3000 / 3000     0.4s delta within its bounds; gamma, vega >= 0
+[ ]    0    0    0    0 / 3000     0.0s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit[ ] 2774    0    0 2774 / 3000     0.1s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit[✓] 3000    0    0 3000 / 3000     0.1s price(2^j S, 2^j K) = 2^j price(S, K), bit for bit
+[ ]    0    0    0    0 / 3000     0.0s displaced = Black-76 on representable sums, bit for bit[ ]  920    0    0  886 / 3000     0.1s displaced = Black-76 on representable sums, bit for bit[ ] 2338    0    0 2249 / 3000     0.2s displaced = Black-76 on representable sums, bit for bit[✓] 3117    0    0 3000 / 3000     0.3s displaced = Black-76 on representable sums, bit for bit
+[ ]    0    0    0    0 / 3000     0.0s IV round trip composes forward and inverse error[ ]    6    0    0    5 / 3000     0.1s IV round trip composes forward and inverse error[ ]   11    0    0   10 / 3000     0.2s IV round trip composes forward and inverse error[ ]   15    0    0   14 / 3000     0.3s IV round trip composes forward and inverse error[ ]   25    0    0   23 / 3000     0.4s IV round trip composes forward and inverse error[ ]   28    0    0   26 / 3000     0.5s IV round trip composes forward and inverse error[ ]   35    0    0   31 / 3000     0.7s IV round trip composes forward and inverse error[ ]   44    0    0   40 / 3000     0.8s IV round trip composes forward and inverse error[ ]   49    0    0   45 / 3000     0.9s IV round trip composes forward and inverse error[ ]   56    0    0   51 / 3000     1.0s IV round trip composes forward and inverse error[ ]   64    0    0   57 / 3000     1.1s IV round trip composes forward and inverse error[ ]   69    0    0   62 / 3000     1.2s IV round trip composes forward and inverse error[ ]   74    0    0   67 / 3000     1.3s IV round trip composes forward and inverse error[ ]   80    0    0   71 / 3000     1.5s IV round trip composes forward and inverse error[ ]   85    0    0   76 / 3000     1.6s IV round trip composes forward and inverse error[ ]   91    0    0   81 / 3000     1.7s IV round trip composes forward and inverse error[ ]   97    0    0   87 / 3000     1.8s IV round trip composes forward and inverse error[ ]  101    0    0   91 / 3000     1.9s IV round trip composes forward and inverse error[ ]  114    0    0  101 / 3000     2.1s IV round trip composes forward and inverse error[ ]  123    0    0  109 / 3000     2.2s IV round trip composes forward and inverse error[ ]  129    0    0  114 / 3000     2.3s IV round trip composes forward and inverse error[ ]  137    0    0  121 / 3000     2.5s IV round trip composes forward and inverse error[ ]  143    0    0  127 / 3000     2.6s IV round trip composes forward and inverse error[ ]  151    0    0  134 / 3000     2.8s IV round trip composes forward and inverse error[ ]  161    0    0  143 / 3000     2.9s IV round trip composes forward and inverse error[ ]  169    0    0  150 / 3000     3.0s IV round trip composes forward and inverse error[ ]  175    0    0  155 / 3000     3.1s IV round trip composes forward and inverse error[ ]  183    0    0  162 / 3000     3.3s IV round trip composes forward and inverse error[ ]  188    0    0  167 / 3000     3.4s IV round trip composes forward and inverse error[ ]  199    0    0  178 / 3000     3.5s IV round trip composes forward and inverse error[ ]  208    0    0  185 / 3000     3.7s IV round trip composes forward and inverse error[ ]  222    0    0  197 / 3000     3.8s IV round trip composes forward and inverse error[ ]  228    0    0  203 / 3000     3.9s IV round trip composes forward and inverse error[ ]  235    0    0  210 / 3000     4.0s IV round trip composes forward and inverse error[ ]  238    0    0  213 / 3000     4.1s IV round trip composes forward and inverse error[ ]  246    0    0  221 / 3000     4.3s IV round trip composes forward and inverse error[ ]  251    0    0  225 / 3000     4.4s IV round trip composes forward and inverse error[ ]  258    0    0  232 / 3000     4.5s IV round trip composes forward and inverse error[ ]  263    0    0  237 / 3000     4.6s IV round trip composes forward and inverse error[ ]  269    0    0  243 / 3000     4.7s IV round trip composes forward and inverse error[ ]  275    0    0  249 / 3000     4.8s IV round trip composes forward and inverse error[ ]  283    0    0  256 / 3000     4.9s IV round trip composes forward and inverse error[ ]  289    0    0  262 / 3000     5.0s IV round trip composes forward and inverse error[ ]  294    0    0  267 / 3000     5.1s IV round trip composes forward and inverse error[ ]  302    0    0  274 / 3000     5.3s IV round trip composes forward and inverse error[ ]  309    0    0  280 / 3000     5.4s IV round trip composes forward and inverse error[ ]  320    0    0  290 / 3000     5.5s IV round trip composes forward and inverse error[ ]  324    0    0  293 / 3000     5.6s IV round trip composes forward and inverse error[ ]  333    0    0  302 / 3000     5.7s IV round trip composes forward and inverse error[ ]  340    0    0  309 / 3000     5.9s IV round trip composes forward and inverse error[ ]  345    0    0  314 / 3000     6.0s IV round trip composes forward and inverse error[ ]  355    0    0  322 / 3000     6.1s IV round trip composes forward and inverse error[ ]  363    0    0  329 / 3000     6.2s IV round trip composes forward and inverse error[ ]  369    0    0  335 / 3000     6.3s IV round trip composes forward and inverse error[ ]  376    0    0  342 / 3000     6.4s IV round trip composes forward and inverse error[ ]  386    0    0  350 / 3000     6.6s IV round trip composes forward and inverse error[ ]  394    0    0  358 / 3000     6.7s IV round trip composes forward and inverse error[ ]  405    0    0  368 / 3000     6.9s IV round trip composes forward and inverse error[ ]  409    0    0  372 / 3000     7.0s IV round trip composes forward and inverse error[ ]  416    0    0  379 / 3000     7.1s IV round trip composes forward and inverse error[ ]  422    0    0  385 / 3000     7.2s IV round trip composes forward and inverse error[ ]  432    0    0  393 / 3000     7.3s IV round trip composes forward and inverse error[ ]  440    0    0  399 / 3000     7.4s IV round trip composes forward and inverse error[ ]  447    0    0  405 / 3000     7.5s IV round trip composes forward and inverse error[ ]  454    0    0  411 / 3000     7.7s IV round trip composes forward and inverse error[ ]  465    0    0  419 / 3000     7.8s IV round trip composes forward and inverse error[ ]  472    0    0  425 / 3000     7.9s IV round trip composes forward and inverse error[ ]  478    0    0  431 / 3000     8.0s IV round trip composes forward and inverse error[ ]  483    0    0  436 / 3000     8.1s IV round trip composes forward and inverse error[ ]  492    0    0  443 / 3000     8.2s IV round trip composes forward and inverse error[ ]  499    0    0  450 / 3000     8.3s IV round trip composes forward and inverse error[ ]  507    0    0  458 / 3000     8.4s IV round trip composes forward and inverse error[ ]  511    0    0  462 / 3000     8.5s IV round trip composes forward and inverse error[ ]  518    0    0  467 / 3000     8.6s IV round trip composes forward and inverse error[ ]  525    0    0  474 / 3000     8.7s IV round trip composes forward and inverse error[ ]  531    0    0  480 / 3000     8.8s IV round trip composes forward and inverse error[ ]  535    0    0  484 / 3000     9.0s IV round trip composes forward and inverse error[ ]  544    0    0  493 / 3000     9.1s IV round trip composes forward and inverse error[ ]  549    0    0  498 / 3000     9.2s IV round trip composes forward and inverse error[ ]  554    0    0  503 / 3000     9.3s IV round trip composes forward and inverse error[ ]  560    0    0  509 / 3000     9.4s IV round trip composes forward and inverse error[ ]  566    0    0  513 / 3000     9.5s IV round trip composes forward and inverse error[ ]  573    0    0  519 / 3000     9.6s IV round trip composes forward and inverse error[ ]  579    0    0  525 / 3000     9.8s IV round trip composes forward and inverse error[ ]  587    0    0  531 / 3000     9.9s IV round trip composes forward and inverse error[ ]  594    0    0  538 / 3000    10.0s IV round trip composes forward and inverse error[ ]  601    0    0  545 / 3000    10.2s IV round trip composes forward and inverse error[ ]  603    0    0  547 / 3000    10.4s IV round trip composes forward and inverse error[ ]  613    0    0  557 / 3000    10.5s IV round trip composes forward and inverse error[ ]  622    0    0  566 / 3000    10.6s IV round trip composes forward and inverse error[ ]  627    0    0  570 / 3000    10.7s IV round trip composes forward and inverse error[ ]  634    0    0  577 / 3000    10.9s IV round trip composes forward and inverse error[ ]  637    0    0  580 / 3000    11.1s IV round trip composes forward and inverse error[ ]  644    0    0  587 / 3000    11.3s IV round trip composes forward and inverse error[ ]  651    0    0  594 / 3000    11.4s IV round trip composes forward and inverse error[ ]  659    0    0  601 / 3000    11.5s IV round trip composes forward and inverse error[ ]  664    0    0  605 / 3000    11.6s IV round trip composes forward and inverse error[ ]  672    0    0  612 / 3000    11.7s IV round trip composes forward and inverse error[ ]  680    0    0  619 / 3000    11.9s IV round trip composes forward and inverse error[ ]  686    0    0  625 / 3000    12.0s IV round trip composes forward and inverse error[ ]  692    0    0  631 / 3000    12.1s IV round trip composes forward and inverse error[ ]  697    0    0  636 / 3000    12.2s IV round trip composes forward and inverse error[ ]  704    0    0  643 / 3000    12.3s IV round trip composes forward and inverse error[ ]  711    0    0  650 / 3000    12.5s IV round trip composes forward and inverse error[ ]  718    0    0  657 / 3000    12.6s IV round trip composes forward and inverse error[ ]  726    0    0  664 / 3000    12.7s IV round trip composes forward and inverse error[ ]  732    0    0  670 / 3000    12.8s IV round trip composes forward and inverse error[ ]  736    0    0  674 / 3000    12.9s IV round trip composes forward and inverse error[ ]  744    0    0  682 / 3000    13.0s IV round trip composes forward and inverse error[ ]  749    0    0  687 / 3000    13.2s IV round trip composes forward and inverse error[ ]  756    0    0  694 / 3000    13.3s IV round trip composes forward and inverse error[ ]  761    0    0  699 / 3000    13.4s IV round trip composes forward and inverse error[ ]  770    0    0  708 / 3000    13.5s IV round trip composes forward and inverse error[ ]  776    0    0  714 / 3000    13.6s IV round trip composes forward and inverse error[ ]  783    0    0  721 / 3000    13.7s IV round trip composes forward and inverse error[ ]  793    0    0  730 / 3000    13.8s IV round trip composes forward and inverse error[ ]  799    0    0  736 / 3000    13.9s IV round trip composes forward and inverse error[ ]  803    0    0  740 / 3000    14.0s IV round trip composes forward and inverse error[ ]  810    0    0  746 / 3000    14.1s IV round trip composes forward and inverse error[ ]  815    0    0  751 / 3000    14.2s IV round trip composes forward and inverse error[ ]  821    0    0  757 / 3000    14.4s IV round trip composes forward and inverse error[ ]  826    0    0  762 / 3000    14.5s IV round trip composes forward and inverse error[ ]  833    0    0  769 / 3000    14.6s IV round trip composes forward and inverse error[ ]  841    0    0  777 / 3000    14.7s IV round trip composes forward and inverse error[ ]  848    0    0  784 / 3000    14.8s IV round trip composes forward and inverse error[ ]  852    0    0  788 / 3000    14.9s IV round trip composes forward and inverse error[ ]  857    0    0  793 / 3000    15.0s IV round trip composes forward and inverse error[ ]  866    0    0  800 / 3000    15.1s IV round trip composes forward and inverse error[ ]  871    0    0  805 / 3000    15.2s IV round trip composes forward and inverse error[ ]  878    0    0  812 / 3000    15.3s IV round trip composes forward and inverse error[ ]  883    0    0  817 / 3000    15.5s IV round trip composes forward and inverse error[ ]  892    0    0  826 / 3000    15.6s IV round trip composes forward and inverse error[ ]  899    0    0  833 / 3000    15.7s IV round trip composes forward and inverse error[ ]  907    0    0  841 / 3000    15.8s IV round trip composes forward and inverse error[ ]  913    0    0  847 / 3000    15.9s IV round trip composes forward and inverse error[ ]  918    0    0  852 / 3000    16.0s IV round trip composes forward and inverse error[ ]  928    0    0  860 / 3000    16.2s IV round trip composes forward and inverse error[ ]  934    0    0  866 / 3000    16.3s IV round trip composes forward and inverse error[ ]  941    0    0  873 / 3000    16.4s IV round trip composes forward and inverse error[ ]  951    0    0  881 / 3000    16.5s IV round trip composes forward and inverse error[ ]  956    0    0  886 / 3000    16.6s IV round trip composes forward and inverse error[ ]  966    0    0  895 / 3000    16.7s IV round trip composes forward and inverse error[ ]  972    0    0  901 / 3000    16.8s IV round trip composes forward and inverse error[ ]  978    0    0  906 / 3000    16.9s IV round trip composes forward and inverse error[ ]  984    0    0  912 / 3000    17.0s IV round trip composes forward and inverse error[ ]  992    0    0  920 / 3000    17.2s IV round trip composes forward and inverse error[ ] 1002    0    0  928 / 3000    17.3s IV round trip composes forward and inverse error[ ] 1009    0    0  935 / 3000    17.4s IV round trip composes forward and inverse error[ ] 1017    0    0  943 / 3000    17.6s IV round trip composes forward and inverse error[ ] 1023    0    0  949 / 3000    17.7s IV round trip composes forward and inverse error[ ] 1030    0    0  955 / 3000    17.8s IV round trip composes forward and inverse error[ ] 1038    0    0  962 / 3000    17.9s IV round trip composes forward and inverse error[ ] 1044    0    0  968 / 3000    18.0s IV round trip composes forward and inverse error[ ] 1053    0    0  976 / 3000    18.1s IV round trip composes forward and inverse error[ ] 1059    0    0  981 / 3000    18.2s IV round trip composes forward and inverse error[ ] 1071    0    0  992 / 3000    18.3s IV round trip composes forward and inverse error[ ] 1076    0    0  997 / 3000    18.5s IV round trip composes forward and inverse error[ ] 1081    0    0 1002 / 3000    18.6s IV round trip composes forward and inverse error[ ] 1091    0    0 1012 / 3000    18.8s IV round trip composes forward and inverse error[ ] 1099    0    0 1019 / 3000    18.9s IV round trip composes forward and inverse error[ ] 1105    0    0 1025 / 3000    19.0s IV round trip composes forward and inverse error[ ] 1112    0    0 1030 / 3000    19.1s IV round trip composes forward and inverse error[ ] 1118    0    0 1036 / 3000    19.2s IV round trip composes forward and inverse error[ ] 1124    0    0 1042 / 3000    19.3s IV round trip composes forward and inverse error[ ] 1130    0    0 1048 / 3000    19.4s IV round trip composes forward and inverse error[ ] 1138    0    0 1055 / 3000    19.6s IV round trip composes forward and inverse error[ ] 1147    0    0 1062 / 3000    19.7s IV round trip composes forward and inverse error[ ] 1155    0    0 1070 / 3000    19.8s IV round trip composes forward and inverse error[ ] 1161    0    0 1075 / 3000    20.0s IV round trip composes forward and inverse error[ ] 1169    0    0 1083 / 3000    20.1s IV round trip composes forward and inverse error[ ] 1176    0    0 1090 / 3000    20.2s IV round trip composes forward and inverse error[ ] 1182    0    0 1096 / 3000    20.3s IV round trip composes forward and inverse error[ ] 1188    0    0 1102 / 3000    20.4s IV round trip composes forward and inverse error[ ] 1196    0    0 1108 / 3000    20.5s IV round trip composes forward and inverse error[ ] 1205    0    0 1116 / 3000    20.6s IV round trip composes forward and inverse error[ ] 1208    0    0 1119 / 3000    20.7s IV round trip composes forward and inverse error[ ] 1217    0    0 1128 / 3000    20.9s IV round trip composes forward and inverse error[ ] 1221    0    0 1132 / 3000    21.0s IV round trip composes forward and inverse error[ ] 1229    0    0 1140 / 3000    21.1s IV round trip composes forward and inverse error[ ] 1234    0    0 1145 / 3000    21.2s IV round trip composes forward and inverse error[ ] 1240    0    0 1151 / 3000    21.3s IV round trip composes forward and inverse error[ ] 1247    0    0 1158 / 3000    21.5s IV round trip composes forward and inverse error[ ] 1258    0    0 1168 / 3000    21.6s IV round trip composes forward and inverse error[ ] 1265    0    0 1173 / 3000    21.7s IV round trip composes forward and inverse error[ ] 1274    0    0 1181 / 3000    21.8s IV round trip composes forward and inverse error[ ] 1281    0    0 1188 / 3000    21.9s IV round trip composes forward and inverse error[ ] 1288    0    0 1195 / 3000    22.0s IV round trip composes forward and inverse error[ ] 1294    0    0 1201 / 3000    22.1s IV round trip composes forward and inverse error[ ] 1301    0    0 1208 / 3000    22.2s IV round trip composes forward and inverse error[ ] 1305    0    0 1212 / 3000    22.4s IV round trip composes forward and inverse error[ ] 1315    0    0 1220 / 3000    22.5s IV round trip composes forward and inverse error[ ] 1319    0    0 1224 / 3000    22.6s IV round trip composes forward and inverse error[ ] 1325    0    0 1230 / 3000    22.7s IV round trip composes forward and inverse error[ ] 1332    0    0 1236 / 3000    22.8s IV round trip composes forward and inverse error[ ] 1341    0    0 1245 / 3000    22.9s IV round trip composes forward and inverse error[ ] 1347    0    0 1251 / 3000    23.0s IV round trip composes forward and inverse error[ ] 1356    0    0 1259 / 3000    23.2s IV round trip composes forward and inverse error[ ] 1364    0    0 1267 / 3000    23.3s IV round trip composes forward and inverse error[ ] 1372    0    0 1274 / 3000    23.4s IV round trip composes forward and inverse error[ ] 1380    0    0 1281 / 3000    23.5s IV round trip composes forward and inverse error[ ] 1385    0    0 1286 / 3000    23.7s IV round trip composes forward and inverse error[ ] 1390    0    0 1291 / 3000    23.8s IV round trip composes forward and inverse error[ ] 1398    0    0 1299 / 3000    23.9s IV round trip composes forward and inverse error[ ] 1407    0    0 1308 / 3000    24.0s IV round trip composes forward and inverse error[ ] 1411    0    0 1312 / 3000    24.1s IV round trip composes forward and inverse error[ ] 1418    0    0 1317 / 3000    24.2s IV round trip composes forward and inverse error[ ] 1422    0    0 1321 / 3000    24.3s IV round trip composes forward and inverse error[ ] 1429    0    0 1328 / 3000    24.4s IV round trip composes forward and inverse error[ ] 1437    0    0 1336 / 3000    24.6s IV round trip composes forward and inverse error[ ] 1441    0    0 1340 / 3000    24.7s IV round trip composes forward and inverse error[ ] 1450    0    0 1349 / 3000    24.8s IV round trip composes forward and inverse error[ ] 1453    0    0 1352 / 3000    24.9s IV round trip composes forward and inverse error[ ] 1464    0    0 1361 / 3000    25.0s IV round trip composes forward and inverse error[ ] 1472    0    0 1369 / 3000    25.1s IV round trip composes forward and inverse error[ ] 1476    0    0 1373 / 3000    25.2s IV round trip composes forward and inverse error[ ] 1484    0    0 1381 / 3000    25.3s IV round trip composes forward and inverse error[ ] 1490    0    0 1387 / 3000    25.5s IV round trip composes forward and inverse error[ ] 1497    0    0 1394 / 3000    25.6s IV round trip composes forward and inverse error[ ] 1502    0    0 1399 / 3000    25.7s IV round trip composes forward and inverse error[ ] 1511    0    0 1407 / 3000    25.8s IV round trip composes forward and inverse error[ ] 1519    0    0 1414 / 3000    25.9s IV round trip composes forward and inverse error[ ] 1525    0    0 1420 / 3000    26.0s IV round trip composes forward and inverse error[ ] 1531    0    0 1426 / 3000    26.1s IV round trip composes forward and inverse error[ ] 1538    0    0 1432 / 3000    26.2s IV round trip composes forward and inverse error[ ] 1547    0    0 1441 / 3000    26.3s IV round trip composes forward and inverse error[ ] 1551    0    0 1445 / 3000    26.5s IV round trip composes forward and inverse error[ ] 1559    0    0 1451 / 3000    26.6s IV round trip composes forward and inverse error[ ] 1568    0    0 1459 / 3000    26.7s IV round trip composes forward and inverse error[ ] 1573    0    0 1464 / 3000    26.8s IV round trip composes forward and inverse error[ ] 1581    0    0 1472 / 3000    26.9s IV round trip composes forward and inverse error[ ] 1588    0    0 1479 / 3000    27.0s IV round trip composes forward and inverse error[ ] 1592    0    0 1483 / 3000    27.1s IV round trip composes forward and inverse error[ ] 1600    0    0 1491 / 3000    27.2s IV round trip composes forward and inverse error[ ] 1608    0    0 1499 / 3000    27.3s IV round trip composes forward and inverse error[ ] 1614    0    0 1505 / 3000    27.5s IV round trip composes forward and inverse error[ ] 1623    0    0 1513 / 3000    27.6s IV round trip composes forward and inverse error[ ] 1632    0    0 1520 / 3000    27.7s IV round trip composes forward and inverse error[ ] 1638    0    0 1526 / 3000    27.9s IV round trip composes forward and inverse error[ ] 1645    0    0 1533 / 3000    28.0s IV round trip composes forward and inverse error[ ] 1650    0    0 1538 / 3000    28.1s IV round trip composes forward and inverse error[ ] 1658    0    0 1546 / 3000    28.3s IV round trip composes forward and inverse error[ ] 1666    0    0 1554 / 3000    28.4s IV round trip composes forward and inverse error[ ] 1673    0    0 1560 / 3000    28.5s IV round trip composes forward and inverse error[ ] 1679    0    0 1566 / 3000    28.6s IV round trip composes forward and inverse error[ ] 1687    0    0 1574 / 3000    28.7s IV round trip composes forward and inverse error[ ] 1697    0    0 1582 / 3000    28.8s IV round trip composes forward and inverse error[ ] 1701    0    0 1586 / 3000    28.9s IV round trip composes forward and inverse error[ ] 1709    0    0 1593 / 3000    29.0s IV round trip composes forward and inverse error[ ] 1716    0    0 1599 / 3000    29.1s IV round trip composes forward and inverse error[ ] 1725    0    0 1608 / 3000    29.2s IV round trip composes forward and inverse error[ ] 1731    0    0 1613 / 3000    29.4s IV round trip composes forward and inverse error[ ] 1738    0    0 1620 / 3000    29.5s IV round trip composes forward and inverse error[ ] 1743    0    0 1625 / 3000    29.6s IV round trip composes forward and inverse error[ ] 1752    0    0 1633 / 3000    29.7s IV round trip composes forward and inverse error[ ] 1758    0    0 1639 / 3000    29.9s IV round trip composes forward and inverse error[ ] 1763    0    0 1644 / 3000    30.0s IV round trip composes forward and inverse error[ ] 1770    0    0 1650 / 3000    30.1s IV round trip composes forward and inverse error[ ] 1778    0    0 1657 / 3000    30.2s IV round trip composes forward and inverse error[ ] 1788    0    0 1666 / 3000    30.3s IV round trip composes forward and inverse error[ ] 1793    0    0 1670 / 3000    30.4s IV round trip composes forward and inverse error[ ] 1801    0    0 1678 / 3000    30.6s IV round trip composes forward and inverse error[ ] 1810    0    0 1687 / 3000    30.7s IV round trip composes forward and inverse error[ ] 1814    0    0 1691 / 3000    30.8s IV round trip composes forward and inverse error[ ] 1824    0    0 1700 / 3000    30.9s IV round trip composes forward and inverse error[ ] 1832    0    0 1708 / 3000    31.1s IV round trip composes forward and inverse error[ ] 1835    0    0 1711 / 3000    31.2s IV round trip composes forward and inverse error[ ] 1842    0    0 1718 / 3000    31.3s IV round trip composes forward and inverse error[ ] 1850    0    0 1725 / 3000    31.4s IV round trip composes forward and inverse error[ ] 1855    0    0 1730 / 3000    31.5s IV round trip composes forward and inverse error[ ] 1862    0    0 1737 / 3000    31.6s IV round trip composes forward and inverse error[ ] 1872    0    0 1747 / 3000    31.8s IV round trip composes forward and inverse error[ ] 1882    0    0 1755 / 3000    31.9s IV round trip composes forward and inverse error[ ] 1886    0    0 1759 / 3000    32.0s IV round trip composes forward and inverse error[ ] 1892    0    0 1765 / 3000    32.1s IV round trip composes forward and inverse error[ ] 1903    0    0 1775 / 3000    32.2s IV round trip composes forward and inverse error[ ] 1909    0    0 1780 / 3000    32.4s IV round trip composes forward and inverse error[ ] 1917    0    0 1788 / 3000    32.5s IV round trip composes forward and inverse error[ ] 1923    0    0 1794 / 3000    32.6s IV round trip composes forward and inverse error[ ] 1931    0    0 1802 / 3000    32.7s IV round trip composes forward and inverse error[ ] 1937    0    0 1808 / 3000    32.8s IV round trip composes forward and inverse error[ ] 1942    0    0 1813 / 3000    32.9s IV round trip composes forward and inverse error[ ] 1947    0    0 1818 / 3000    33.0s IV round trip composes forward and inverse error[ ] 1955    0    0 1824 / 3000    33.1s IV round trip composes forward and inverse error[ ] 1959    0    0 1828 / 3000    33.2s IV round trip composes forward and inverse error[ ] 1964    0    0 1833 / 3000    33.4s IV round trip composes forward and inverse error[ ] 1970    0    0 1839 / 3000    33.5s IV round trip composes forward and inverse error[ ] 1976    0    0 1845 / 3000    33.6s IV round trip composes forward and inverse error[ ] 1983    0    0 1852 / 3000    33.7s IV round trip composes forward and inverse error[ ] 1991    0    0 1859 / 3000    33.8s IV round trip composes forward and inverse error[ ] 2000    0    0 1868 / 3000    33.9s IV round trip composes forward and inverse error[ ] 2006    0    0 1874 / 3000    34.1s IV round trip composes forward and inverse error[ ] 2011    0    0 1879 / 3000    34.2s IV round trip composes forward and inverse error[ ] 2020    0    0 1887 / 3000    34.3s IV round trip composes forward and inverse error[ ] 2027    0    0 1894 / 3000    34.4s IV round trip composes forward and inverse error[ ] 2033    0    0 1899 / 3000    34.5s IV round trip composes forward and inverse error[ ] 2038    0    0 1904 / 3000    34.6s IV round trip composes forward and inverse error[ ] 2046    0    0 1912 / 3000    34.7s IV round trip composes forward and inverse error[ ] 2053    0    0 1919 / 3000    34.9s IV round trip composes forward and inverse error[ ] 2060    0    0 1926 / 3000    35.0s IV round trip composes forward and inverse error[ ] 2066    0    0 1931 / 3000    35.1s IV round trip composes forward and inverse error[ ] 2072    0    0 1937 / 3000    35.2s IV round trip composes forward and inverse error[ ] 2077    0    0 1942 / 3000    35.3s IV round trip composes forward and inverse error[ ] 2084    0    0 1949 / 3000    35.4s IV round trip composes forward and inverse error[ ] 2091    0    0 1956 / 3000    35.6s IV round trip composes forward and inverse error[ ] 2097    0    0 1962 / 3000    35.7s IV round trip composes forward and inverse error[ ] 2104    0    0 1968 / 3000    35.8s IV round trip composes forward and inverse error[ ] 2108    0    0 1972 / 3000    35.9s IV round trip composes forward and inverse error[ ] 2116    0    0 1980 / 3000    36.0s IV round trip composes forward and inverse error[ ] 2133    0    0 1995 / 3000    36.1s IV round trip composes forward and inverse error[ ] 2136    0    0 1998 / 3000    36.3s IV round trip composes forward and inverse error[ ] 2142    0    0 2004 / 3000    36.4s IV round trip composes forward and inverse error[ ] 2151    0    0 2013 / 3000    36.6s IV round trip composes forward and inverse error[ ] 2155    0    0 2017 / 3000    36.7s IV round trip composes forward and inverse error[ ] 2162    0    0 2024 / 3000    36.8s IV round trip composes forward and inverse error[ ] 2169    0    0 2031 / 3000    36.9s IV round trip composes forward and inverse error[ ] 2179    0    0 2040 / 3000    37.0s IV round trip composes forward and inverse error[ ] 2183    0    0 2044 / 3000    37.1s IV round trip composes forward and inverse error[ ] 2190    0    0 2051 / 3000    37.3s IV round trip composes forward and inverse error[ ] 2201    0    0 2060 / 3000    37.4s IV round trip composes forward and inverse error[ ] 2205    0    0 2064 / 3000    37.5s IV round trip composes forward and inverse error[ ] 2215    0    0 2073 / 3000    37.6s IV round trip composes forward and inverse error[ ] 2222    0    0 2080 / 3000    37.7s IV round trip composes forward and inverse error[ ] 2228    0    0 2085 / 3000    37.9s IV round trip composes forward and inverse error[ ] 2237    0    0 2094 / 3000    38.0s IV round trip composes forward and inverse error[ ] 2245    0    0 2101 / 3000    38.1s IV round trip composes forward and inverse error[ ] 2251    0    0 2107 / 3000    38.2s IV round trip composes forward and inverse error[ ] 2257    0    0 2113 / 3000    38.3s IV round trip composes forward and inverse error[ ] 2264    0    0 2120 / 3000    38.4s IV round trip composes forward and inverse error[ ] 2269    0    0 2125 / 3000    38.5s IV round trip composes forward and inverse error[ ] 2278    0    0 2134 / 3000    38.7s IV round trip composes forward and inverse error[ ] 2286    0    0 2141 / 3000    38.8s IV round trip composes forward and inverse error[ ] 2292    0    0 2147 / 3000    38.9s IV round trip composes forward and inverse error[ ] 2298    0    0 2153 / 3000    39.0s IV round trip composes forward and inverse error[ ] 2306    0    0 2161 / 3000    39.1s IV round trip composes forward and inverse error[ ] 2312    0    0 2167 / 3000    39.3s IV round trip composes forward and inverse error[ ] 2320    0    0 2174 / 3000    39.4s IV round trip composes forward and inverse error[ ] 2329    0    0 2182 / 3000    39.5s IV round trip composes forward and inverse error[ ] 2334    0    0 2187 / 3000    39.6s IV round trip composes forward and inverse error[ ] 2340    0    0 2193 / 3000    39.7s IV round trip composes forward and inverse error[ ] 2349    0    0 2201 / 3000    39.8s IV round trip composes forward and inverse error[ ] 2354    0    0 2206 / 3000    39.9s IV round trip composes forward and inverse error[ ] 2359    0    0 2211 / 3000    40.0s IV round trip composes forward and inverse error[ ] 2370    0    0 2220 / 3000    40.1s IV round trip composes forward and inverse error[ ] 2375    0    0 2225 / 3000    40.3s IV round trip composes forward and inverse error[ ] 2383    0    0 2233 / 3000    40.4s IV round trip composes forward and inverse error[ ] 2392    0    0 2239 / 3000    40.5s IV round trip composes forward and inverse error[ ] 2401    0    0 2247 / 3000    40.6s IV round trip composes forward and inverse error[ ] 2407    0    0 2253 / 3000    40.8s IV round trip composes forward and inverse error[ ] 2413    0    0 2259 / 3000    40.9s IV round trip composes forward and inverse error[ ] 2420    0    0 2266 / 3000    41.0s IV round trip composes forward and inverse error[ ] 2427    0    0 2273 / 3000    41.1s IV round trip composes forward and inverse error[ ] 2430    0    0 2276 / 3000    41.2s IV round trip composes forward and inverse error[ ] 2437    0    0 2283 / 3000    41.3s IV round trip composes forward and inverse error[ ] 2443    0    0 2288 / 3000    41.5s IV round trip composes forward and inverse error[ ] 2451    0    0 2295 / 3000    41.6s IV round trip composes forward and inverse error[ ] 2455    0    0 2299 / 3000    41.7s IV round trip composes forward and inverse error[ ] 2459    0    0 2303 / 3000    41.8s IV round trip composes forward and inverse error[ ] 2467    0    0 2311 / 3000    41.9s IV round trip composes forward and inverse error[ ] 2474    0    0 2318 / 3000    42.0s IV round trip composes forward and inverse error[ ] 2478    0    0 2321 / 3000    42.1s IV round trip composes forward and inverse error[ ] 2483    0    0 2326 / 3000    42.3s IV round trip composes forward and inverse error[ ] 2487    0    0 2330 / 3000    42.4s IV round trip composes forward and inverse error[ ] 2496    0    0 2338 / 3000    42.5s IV round trip composes forward and inverse error[ ] 2500    0    0 2342 / 3000    42.6s IV round trip composes forward and inverse error[ ] 2506    0    0 2347 / 3000    42.7s IV round trip composes forward and inverse error[ ] 2512    0    0 2353 / 3000    42.8s IV round trip composes forward and inverse error[ ] 2518    0    0 2358 / 3000    43.0s IV round trip composes forward and inverse error[ ] 2526    0    0 2366 / 3000    43.1s IV round trip composes forward and inverse error[ ] 2534    0    0 2372 / 3000    43.2s IV round trip composes forward and inverse error[ ] 2540    0    0 2378 / 3000    43.3s IV round trip composes forward and inverse error[ ] 2544    0    0 2381 / 3000    43.4s IV round trip composes forward and inverse error[ ] 2550    0    0 2387 / 3000    43.6s IV round trip composes forward and inverse error[ ] 2558    0    0 2395 / 3000    43.7s IV round trip composes forward and inverse error[ ] 2565    0    0 2402 / 3000    43.8s IV round trip composes forward and inverse error[ ] 2567    0    0 2404 / 3000    43.9s IV round trip composes forward and inverse error[ ] 2571    0    0 2408 / 3000    44.0s IV round trip composes forward and inverse error[ ] 2576    0    0 2413 / 3000    44.1s IV round trip composes forward and inverse error[ ] 2584    0    0 2421 / 3000    44.3s IV round trip composes forward and inverse error[ ] 2588    0    0 2425 / 3000    44.4s IV round trip composes forward and inverse error[ ] 2593    0    0 2430 / 3000    44.5s IV round trip composes forward and inverse error (generating)[ ] 2596    0    0 2433 / 3000    44.6s IV round trip composes forward and inverse error[ ] 2603    0    0 2440 / 3000    44.8s IV round trip composes forward and inverse error[ ] 2609    0    0 2446 / 3000    44.9s IV round trip composes forward and inverse error[ ] 2613    0    0 2450 / 3000    45.0s IV round trip composes forward and inverse error[ ] 2617    0    0 2454 / 3000    45.1s IV round trip composes forward and inverse error[ ] 2623    0    0 2460 / 3000    45.3s IV round trip composes forward and inverse error[ ] 2629    0    0 2466 / 3000    45.4s IV round trip composes forward and inverse error[ ] 2634    0    0 2471 / 3000    45.5s IV round trip composes forward and inverse error[ ] 2638    0    0 2475 / 3000    45.6s IV round trip composes forward and inverse error[ ] 2641    0    0 2478 / 3000    45.7s IV round trip composes forward and inverse error[ ] 2646    0    0 2483 / 3000    45.8s IV round trip composes forward and inverse error[ ] 2648    0    0 2485 / 3000    46.0s IV round trip composes forward and inverse error[ ] 2654    0    0 2490 / 3000    46.2s IV round trip composes forward and inverse error[ ] 2660    0    0 2496 / 3000    46.3s IV round trip composes forward and inverse error[ ] 2667    0    0 2503 / 3000    46.4s IV round trip composes forward and inverse error[ ] 2671    0    0 2507 / 3000    46.5s IV round trip composes forward and inverse error[ ] 2676    0    0 2512 / 3000    46.6s IV round trip composes forward and inverse error[ ] 2682    0    0 2516 / 3000    46.7s IV round trip composes forward and inverse error[ ] 2688    0    0 2522 / 3000    46.9s IV round trip composes forward and inverse error[ ] 2694    0    0 2528 / 3000    47.0s IV round trip composes forward and inverse error[ ] 2700    0    0 2533 / 3000    47.1s IV round trip composes forward and inverse error[ ] 2708    0    0 2539 / 3000    47.2s IV round trip composes forward and inverse error[ ] 2713    0    0 2544 / 3000    47.4s IV round trip composes forward and inverse error[ ] 2721    0    0 2551 / 3000    47.5s IV round trip composes forward and inverse error[ ] 2726    0    0 2556 / 3000    47.6s IV round trip composes forward and inverse error[ ] 2733    0    0 2562 / 3000    47.7s IV round trip composes forward and inverse error[ ] 2738    0    0 2567 / 3000    47.8s IV round trip composes forward and inverse error[ ] 2744    0    0 2572 / 3000    48.0s IV round trip composes forward and inverse error[ ] 2745    0    0 2573 / 3000    48.1s IV round trip composes forward and inverse error[ ] 2753    0    0 2580 / 3000    48.2s IV round trip composes forward and inverse error[ ] 2760    0    0 2587 / 3000    48.4s IV round trip composes forward and inverse error[ ] 2764    0    0 2591 / 3000    48.5s IV round trip composes forward and inverse error[ ] 2769    0    0 2596 / 3000    48.6s IV round trip composes forward and inverse error[ ] 2776    0    0 2603 / 3000    48.8s IV round trip composes forward and inverse error[ ] 2785    0    0 2610 / 3000    48.9s IV round trip composes forward and inverse error[ ] 2794    0    0 2618 / 3000    49.0s IV round trip composes forward and inverse error[ ] 2798    0    0 2622 / 3000    49.2s IV round trip composes forward and inverse error[ ] 2803    0    0 2627 / 3000    49.3s IV round trip composes forward and inverse error[ ] 2809    0    0 2632 / 3000    49.4s IV round trip composes forward and inverse error[ ] 2814    0    0 2637 / 3000    49.5s IV round trip composes forward and inverse error[ ] 2819    0    0 2642 / 3000    49.6s IV round trip composes forward and inverse error[ ] 2824    0    0 2647 / 3000    49.8s IV round trip composes forward and inverse error[ ] 2829    0    0 2652 / 3000    49.9s IV round trip composes forward and inverse error[ ] 2834    0    0 2657 / 3000    50.0s IV round trip composes forward and inverse error[ ] 2840    0    0 2662 / 3000    50.1s IV round trip composes forward and inverse error (generating)[ ] 2845    0    0 2667 / 3000    50.2s IV round trip composes forward and inverse error[ ] 2849    0    0 2671 / 3000    50.3s IV round trip composes forward and inverse error[ ] 2857    0    0 2678 / 3000    50.4s IV round trip composes forward and inverse error[ ] 2862    0    0 2683 / 3000    50.5s IV round trip composes forward and inverse error[ ] 2867    0    0 2688 / 3000    50.7s IV round trip composes forward and inverse error[ ] 2878    0    0 2697 / 3000    50.8s IV round trip composes forward and inverse error[ ] 2885    0    0 2704 / 3000    50.9s IV round trip composes forward and inverse error[ ] 2891    0    0 2710 / 3000    51.0s IV round trip composes forward and inverse error[ ] 2895    0    0 2714 / 3000    51.2s IV round trip composes forward and inverse error[ ] 2903    0    0 2722 / 3000    51.3s IV round trip composes forward and inverse error[ ] 2909    0    0 2727 / 3000    51.4s IV round trip composes forward and inverse error[ ] 2914    0    0 2732 / 3000    51.5s IV round trip composes forward and inverse error[ ] 2921    0    0 2738 / 3000    51.6s IV round trip composes forward and inverse error[ ] 2926    0    0 2743 / 3000    51.7s IV round trip composes forward and inverse error[ ] 2936    0    0 2753 / 3000    51.9s IV round trip composes forward and inverse error[ ] 2942    0    0 2758 / 3000    52.0s IV round trip composes forward and inverse error[ ] 2948    0    0 2764 / 3000    52.1s IV round trip composes forward and inverse error[ ] 2953    0    0 2769 / 3000    52.2s IV round trip composes forward and inverse error[ ] 2961    0    0 2777 / 3000    52.4s IV round trip composes forward and inverse error[ ] 2968    0    0 2784 / 3000    52.5s IV round trip composes forward and inverse error[ ] 2974    0    0 2790 / 3000    52.6s IV round trip composes forward and inverse error[ ] 2980    0    0 2796 / 3000    52.7s IV round trip composes forward and inverse error[ ] 2988    0    0 2803 / 3000    52.8s IV round trip composes forward and inverse error[ ] 2996    0    0 2809 / 3000    52.9s IV round trip composes forward and inverse error[ ] 3004    0    0 2817 / 3000    53.0s IV round trip composes forward and inverse error[ ] 3005    0    0 2818 / 3000    53.2s IV round trip composes forward and inverse error[ ] 3010    0    0 2822 / 3000    53.3s IV round trip composes forward and inverse error[ ] 3018    0    0 2830 / 3000    53.4s IV round trip composes forward and inverse error[ ] 3026    0    0 2838 / 3000    53.6s IV round trip composes forward and inverse error[ ] 3035    0    0 2847 / 3000    53.7s IV round trip composes forward and inverse error[ ] 3042    0    0 2852 / 3000    53.8s IV round trip composes forward and inverse error[ ] 3050    0    0 2858 / 3000    53.9s IV round trip composes forward and inverse error[ ] 3061    0    0 2868 / 3000    54.1s IV round trip composes forward and inverse error[ ] 3071    0    0 2876 / 3000    54.2s IV round trip composes forward and inverse error[ ] 3075    0    0 2880 / 3000    54.3s IV round trip composes forward and inverse error[ ] 3082    0    0 2886 / 3000    54.4s IV round trip composes forward and inverse error[ ] 3089    0    0 2893 / 3000    54.5s IV round trip composes forward and inverse error[ ] 3096    0    0 2899 / 3000    54.7s IV round trip composes forward and inverse error[ ] 3104    0    0 2907 / 3000    54.8s IV round trip composes forward and inverse error[ ] 3110    0    0 2913 / 3000    54.9s IV round trip composes forward and inverse error[ ] 3118    0    0 2920 / 3000    55.1s IV round trip composes forward and inverse error[ ] 3124    0    0 2925 / 3000    55.2s IV round trip composes forward and inverse error[ ] 3130    0    0 2931 / 3000    55.3s IV round trip composes forward and inverse error[ ] 3135    0    0 2936 / 3000    55.4s IV round trip composes forward and inverse error[ ] 3144    0    0 2943 / 3000    55.6s IV round trip composes forward and inverse error[ ] 3149    0    0 2948 / 3000    55.7s IV round trip composes forward and inverse error[ ] 3154    0    0 2953 / 3000    55.8s IV round trip composes forward and inverse error[ ] 3163    0    0 2959 / 3000    55.9s IV round trip composes forward and inverse error[ ] 3173    0    0 2967 / 3000    56.0s IV round trip composes forward and inverse error[ ] 3187    0    0 2978 / 3000    56.1s IV round trip composes forward and inverse error[ ] 3194    0    0 2984 / 3000    56.2s IV round trip composes forward and inverse error[✓] 3200    0    0 2989 / 3000    56.3s IV round trip composes forward and inverse error
+[ ]    0    0    0    0 / 1000     0.0s delta, vega, theta match differences of the price[ ]  471    0    0  313 / 1000     0.1s delta, vega, theta match differences of the price[✓] 1200    0    0  796 / 1000     0.2s delta, vega, theta match differences of the price
+================================================================================
+success (ran 8 tests)
+2007 generated regressions and boundary controls passed
+8330 batch IV fixture outcomes equal scalar; served roots equal independent reference
+black_kernel: worst 0.329328 of bound
+normal_pdf: worst 0.201691 of bound
+erfcx: worst 0.0534342 of bound
+log: worst 0.0571602 of bound
+sqrt: worst 0.680983 of bound
+normal_cdf: worst 0.0139337 of bound
+y_prime: worst 0.0451552 of bound
+split_quotient: worst 0.497579 of bound
+exp: worst 0.718825 of bound
+split_sqrt: worst 0.295301 of bound
+div: worst 0.497579 of bound
+expm1: worst 0.282185 of bound
+86145 DD rows (47719 nonzero low words), 0 failures
+model status                                  rows  pass  in cell <=4ulp  <=ferro  worst ulp
+bachelier expiry_not_identifiable               70    70                                    
+bachelier invalid_input                         15    15                                    
+bachelier root                                 859   859      859    859        0          0
+bachelier rounded_zero_volatility_bound        420   420                                    
+bachelier zero_volatility_limit                645   645                                    
+black76 expiry_not_identifiable                 84    84                                    
+black76 invalid_input                           15    15                                    
+black76 no_finite_inverse                        4     4                                    
+black76 root                                  1802  1802     1802   1802        0          0
+black76 rounded_zero_volatility_bound           56    56                                    
+black76 zero_volatility_limit                  146   146                                    
+bsm expiry_not_identifiable                     84    84                                    
+bsm invalid_input                               15    15                                    
+bsm no_finite_inverse                            4     4                                    
+bsm root                                      1754  1754     1754   1754        0          0
+bsm rounded_zero_volatility_bound               90    90                                    
+bsm zero_volatility_limit                      160   160                                    
+displaced expiry_not_identifiable               84    84                                    
+displaced invalid_input                         15    15                                    
+displaced no_finite_inverse                      2     2                                    
+displaced root                                1164  1164     1164   1164        0          0
+displaced rounded_zero_volatility_bound        345   345                                    
+displaced zero_volatility_limit                497   497                                    
+unresolved reference rows (no expectation):
+bsm runtime certification: 1754 roots, 0 numerical failures
+black76 runtime certification: 1802 roots, 0 numerical failures
+displaced runtime certification: 1164 roots, 0 numerical failures
+bachelier runtime certification: 859 roots, 0 numerical failures
+determinism digest 5ee6731f4b8a5674b949840d89e87346e18c300d99d9e863cad32185bedd8199 over 6069960 bytes
+Derived price certificates: 57320 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+bachelier deep_itm                   3918          2       8        0          1 |        329      4.3 |     0
+bachelier itm                         800          3       8        0      0.935 |        329      4.3 |     0
+bachelier near_atm_tiny_variance      565          2       8        0   1.57e-05 |        329      4.3 |     0
+bachelier otm                        4976          5       8        0       0.91 |        329      4.3 |     0
+bachelier zero_variance               765          0       8        0          0 |        329      4.3 |     0
+black deep_itm                      10303          2       8        0          1 |        175     28.4 |     0
+black extreme_scale                 12384          7      32        0       1.79 |    7.3e+06      613 |     0
+black itm                            2802          7      16        1       1.98 |         37     17.3 |     0
+black near_atm_tiny_variance         3307          5       8        0    4.5e-05 |        552      0.1 |     0
+black otm                           13562         10      32        0       1.98 |    3.5e+03     17.9 |     0
+black zero_variance                  3938          2       4        0   2.46e-08 |    4.3e+15      567 |     0
+family cancel   rows    840 fails 0
+family halfway  rows     24 fails 0
+family grid     rows  38456 fails 0
+family random   rows  18000 fails 0
+zero variance: worst excess over rounding 0.000912 of the analytical error budget E
+Derived Greek certificates: 65980 rows
+family greek         rows    worst ulp   median   budget  fails
+bachelier charm      1344            2        0        8      0
+bachelier color      1055            4        0        8      0
+bachelier delta      1344            3        0        8      0
+bachelier gamma      1055            3        0        4      0
+bachelier rho        1359            4        0        8      0
+bachelier theta      1344            3        0        8      0
+bachelier vanna      1055            3        0        4      0
+bachelier vega       1075            3        0        4      0
+bachelier veta       1055            3        0        4      0
+bachelier volga      1075            5        0        8      0
+black charm          4384            4        0        8      0
+black color          3825            6        1       16      0
+black delta          4383            6        1       16      0
+black gamma          3825            4        1        8      0
+black rho            4415            8        0       16      0
+black theta          4383            8        0        8      0
+black vanna          3825            4        1        8      0
+black vega           3864            5        1        8      0
+black veta           3825            5        1        8      0
+black volga          3865            5        1        8      0
+other statuses:
+  below_binary64 -> ~0                 13625
+  kink -> refused                      420
+American Greek boundary reuse controls passed
+piecewise controls passed
+Derived price certificates: 41768 rows
+region                               rows  worst ulp  budget   median  eps*scale |  ferro ulp ferro sc | fails
+black deep_itm                      11140          2       8        0       1.13 |        175     28.4 |     0
+black itm                            4852          6      16        1       2.16 |         37     17.3 |     0
+black near_atm_tiny_variance         2436          6       8        0   5.91e-05 |        552      0.1 |     0
+black otm                           18120          8      32        0       2.81 |    3.5e+03     17.9 |     0
+black zero_variance                  5220          1       4        0   7.98e-17 |    4.3e+15      567 |     0
+family halfway  rows      8 fails 0
+family grid     rows  41760 fails 0
+zero variance: worst excess over rounding 0 of the analytical error budget E
+Bermudan contract controls passed

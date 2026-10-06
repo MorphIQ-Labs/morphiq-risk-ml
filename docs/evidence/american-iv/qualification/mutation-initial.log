@@ -1,0 +1,13 @@
+baseline passes (537 s)
+killed    american-iv-quote by american_iv
+killed    american-iv-uncertainty by american_iv
+killed    american-iv-width by american_iv
+killed    american-iv-budget by american_iv
+killed    american-iv-cash-put by american_iv
+killed    american-iv-volatility by american_iv
+SURVIVED  american-iv-exercise: finite exercise rights must survive volatility replacement
+killed    american-iv-opening-floor by american_iv
+killed    american-iv-global-cap by american_iv
+SURVIVED  american-iv-cancel: cancellation before evaluation is observable
+killed    american-certified-accuracy by american_certification
+9 of 11 mutants killed as catalogued

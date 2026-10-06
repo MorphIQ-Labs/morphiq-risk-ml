@@ -1,0 +1,7 @@
+File "american_piecewise_inverse.ml", line 4, characters 50-51:
+4 |   Early_exercise.Bsm.Implied_volatility.solve cfg x Side.Call quote
+                                                      ^
+Error: The value "x" has type
+         "Morphiq_risk.Early_exercise.Bsm.Piecewise.admitted"
+       but an expression was expected of type
+         "Morphiq_risk.Early_exercise.Bsm.admitted"

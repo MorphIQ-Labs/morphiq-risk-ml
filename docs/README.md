@@ -19,6 +19,7 @@ been retired; it remains in Git history.
 - [American Greek qualification](results-american-greeks.md): independent and canonical comparisons, boundary/failure controls and measured costs.
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 
+- [American/Bermudan implied volatility](american-implied-volatility.md): estimated constant-volatility intervals, monotonicity guards, quote boundaries and independent fixed-quote references.
 - [Certified American/Bermudan reductions](american-certification.md): proved applicability, private price certificates, independent containment checks and remaining general-stopping obligations.
 - [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.
 

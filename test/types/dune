@@ -968,3 +968,101 @@
   (diff
    american_piecewise_certificate.expected
    american_piecewise_certificate.out)))
+
+(rule
+ (deps forge_american_quote.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_quote.out)
+ (action
+  (with-stderr-to
+   forge_american_quote.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_quote.cmo
+     forge_american_quote.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_quote.expected forge_american_quote.out)))
+
+(rule
+ (deps forge_american_inverse.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_inverse.out)
+ (action
+  (with-stderr-to
+   forge_american_inverse.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_inverse.cmo
+     forge_american_inverse.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_inverse.expected forge_american_inverse.out)))
+
+(rule
+ (deps american_inverse_is_not_root.ml ../../lib/morphiq_risk.cma)
+ (targets american_inverse_is_not_root.out)
+ (action
+  (with-stderr-to
+   american_inverse_is_not_root.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_inverse_is_not_root.cmo
+     american_inverse_is_not_root.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_inverse_is_not_root.expected
+   american_inverse_is_not_root.out)))
+
+(rule
+ (deps american_piecewise_inverse.ml ../../lib/morphiq_risk.cma)
+ (targets american_piecewise_inverse.out)
+ (action
+  (with-stderr-to
+   american_piecewise_inverse.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_piecewise_inverse.cmo
+     american_piecewise_inverse.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff american_piecewise_inverse.expected american_piecewise_inverse.out)))

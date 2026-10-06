@@ -1,0 +1,22 @@
+[
+  {
+    "log": "/tmp/morphiq-american-iv-evidence/tight-native.log",
+    "accepted": 30,
+    "refused": 0
+  },
+  {
+    "log": "/tmp/morphiq-american-iv-evidence/tight-bytecode.log",
+    "accepted": 30,
+    "refused": 0
+  },
+  {
+    "log": "/tmp/morphiq-american-iv-evidence/installed-native.log",
+    "accepted": 30,
+    "refused": 0
+  },
+  {
+    "log": "/tmp/morphiq-american-iv-evidence/installed-bytecode.log",
+    "accepted": 30,
+    "refused": 0
+  }
+]

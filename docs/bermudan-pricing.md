@@ -1,5 +1,9 @@
 # Explicit Bermudan exercise schedules
 
+The separate [constant-volatility inverse](american-implied-volatility.md) returns
+estimated intervals for supported monotone families, with explicit uncertainty
+and nonidentifiability outcomes. It does not extend European root certification.
+
 `Bsm.Piecewise.admit_bermudan` extends these same finite-rights and cash-side
 conventions to [piecewise coefficients](piecewise-american.md).
 

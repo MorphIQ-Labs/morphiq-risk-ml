@@ -38,6 +38,102 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-iv-quote";
+      file = "lib/early_exercise.ml";
+      snippet = "let quote x =\n      if Float.is_finite x && x >= 0. then Ok x";
+      replacement = "let quote x =\n      if Float.is_finite x then Ok x";
+      killer = "american_iv";
+      mechanism = "negative quotes cannot enter the private validated type";
+    };
+    {
+      id = "american-iv-uncertainty";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "raise (B.Unresolved \"inverse price indicator\");\n      result";
+      replacement =
+        "raise (B.Unresolved \"inverse price indicator\");\n      0.";
+      killer = "american_iv";
+      mechanism = "price indicators must participate in every sign decision";
+    };
+    {
+      id = "american-iv-width";
+      file = "lib/early_exercise.ml";
+      snippet = "B.compare_float distance cfg.width";
+      replacement = "B.Zero";
+      killer = "american_iv";
+      mechanism = "entire accepted volatility width must meet the target";
+    };
+    {
+      id = "american-iv-budget";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "if !evaluations >= cfg.max_evaluations then stop Evaluation_limit;";
+      replacement =
+        "if false && !evaluations >= cfg.max_evaluations then stop \
+         Evaluation_limit;";
+      killer = "american_iv";
+      mechanism = "maximum price calls includes attempted evaluations";
+    };
+    {
+      id = "american-iv-cash-put";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "if side = Side.Put && Option.is_some cash then stop \
+         Unsupported_cash_put;";
+      replacement =
+        "if false && side = Side.Put && Option.is_some cash then stop \
+         Unsupported_cash_put;";
+      killer = "american_iv";
+      mechanism = "cash put monotonicity cannot be assumed";
+    };
+    {
+      id = "american-iv-volatility";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "let replace_volatility admitted volatility =\n\
+        \      match admitted with\n\
+        \      | Admitted p -> Admitted { p with volatility }";
+      replacement =
+        "let replace_volatility admitted volatility =\n\
+        \      match admitted with\n\
+        \      | Admitted p -> Admitted p";
+      killer = "american_iv";
+      mechanism = "inverse varies the candidate rather than the admitted seed";
+    };
+    {
+      id = "american-iv-exercise";
+      file = "lib/early_exercise.ml";
+      snippet = "Bermudan ({ p with volatility }, cash, dates)\n\n    let solve";
+      replacement = "Admitted { p with volatility }\n\n    let solve";
+      killer = "american_iv";
+      mechanism = "finite exercise rights must survive volatility replacement";
+    };
+    {
+      id = "american-iv-opening-floor";
+      file = "lib/early_exercise.ml";
+      snippet = "if cash = None && p.opens_at = 0. then";
+      replacement = "if cash = None then";
+      killer = "american_iv";
+      mechanism = "delayed exercise does not have an immediate-payoff floor";
+    };
+    {
+      id = "american-iv-global-cap";
+      file = "lib/early_exercise.ml";
+      snippet = "B.mul (exact (max 0. (-.rate))) (exact p.time_to_expiry)";
+      replacement = "B.mul (exact (max 0. rate)) (exact p.time_to_expiry)";
+      killer = "american_iv";
+      mechanism = "negative rates and yields enlarge the true financial cap";
+    };
+    {
+      id = "american-iv-cancel";
+      file = "lib/early_exercise.ml";
+      snippet = "let checkpoint () = if cancel () then stop Cancelled in";
+      replacement =
+        "let checkpoint () = if false && cancel () then stop Cancelled in";
+      killer = "american_iv";
+      mechanism = "cancellation before evaluation is observable";
+    };
+    {
       id = "american-certified-cash";
       file = "lib/early_exercise.ml";
       snippet = "Error (Unsupported_capability Cash_specification)";
@@ -111,8 +207,11 @@ let catalog =
     {
       id = "american-certified-accuracy";
       file = "lib/early_exercise.ml";
-      snippet = "Float.is_finite x && x >= 0. then Ok x";
-      replacement = "Float.is_finite x then Ok x";
+      snippet =
+        "let absolute_error_limit x =\n\
+        \      if Float.is_finite x && x >= 0. then Ok x";
+      replacement =
+        "let absolute_error_limit x =\n      if Float.is_finite x then Ok x";
       killer = "american_certification";
       mechanism = "validated accuracy type rejects negative limits";
     };
@@ -1440,6 +1539,7 @@ let replace needle by hay =
    Missing mappings or fixtures fail before any mutant is scored. Native
    executables avoid an ambient bytecode DLL search-path dependency. *)
 let guard_arguments = function
+  | "american_iv" -> [ [ "american_iv" ] ]
   | "american_certification" -> [ [ "american_certification" ] ]
   | "exchange_reference" -> [ [ "exchange_reference" ] ]
   | "oracle_price" -> [ [ "european" ]; [ "displaced" ] ]
@@ -1474,7 +1574,9 @@ let guard ~cwd name =
   let actions =
     List.map
       (List.map (fun fixture ->
-           if fixture = "american_certification" then
+           if fixture = "american_iv" then
+             "_build/default/docs/evidence/american-iv/references.tsv"
+           else if fixture = "american_certification" then
              "_build/default/docs/evidence/american-certification/reference-v2/references.tsv"
            else if fixture = "exchange_reference" then
              "_build/default/test/exchange_reference.tsv"

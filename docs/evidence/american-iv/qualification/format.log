@@ -1,0 +1,273 @@
+File "bench/dune", line 1, characters 0-0:
+diff --git a/_build/default/bench/dune b/_build/.sandbox/65871eae540b146470a2b28b2ba946e2/default/bench/dune.corrected
+index a8b9259..82b5cc5 100644
+--- a/_build/default/bench/dune
++++ b/_build/.sandbox/65871eae540b146470a2b28b2ba946e2/default/bench/dune.corrected
+@@ -230,4 +230,5 @@
+  (modules american_iv)
+  (foreign_archives assurance_clock)
+  (libraries morphiq_risk unix)
+- (ocamlopt_flags (:standard -O3)))
++ (ocamlopt_flags
++  (:standard -O3)))
+File "test/dune", line 1, characters 0-0:
+diff --git a/_build/default/test/dune b/_build/.sandbox/a3f4cbfa0ee067243c7dc97d571c60f3/default/test/dune.corrected
+index e582938..c1aca6d 100644
+--- a/_build/default/test/dune
++++ b/_build/.sandbox/a3f4cbfa0ee067243c7dc97d571c60f3/default/test/dune.corrected
+@@ -1219,5 +1219,9 @@
+ 
+ (rule
+  (alias runtest)
+- (deps ../scripts/american_iv_campaign.py ../scripts/check_american_iv.py ../scripts/test_american_iv_campaign.py)
+- (action (run python3 %{dep:../scripts/test_american_iv_campaign.py})))
++ (deps
++  ../scripts/american_iv_campaign.py
++  ../scripts/check_american_iv.py
++  ../scripts/test_american_iv_campaign.py)
++ (action
++  (run python3 %{dep:../scripts/test_american_iv_campaign.py})))
+File "test/types/american_inverse_is_not_root.ml", line 1, characters 0-0:
+diff --git a/_build/default/test/types/american_inverse_is_not_root.ml b/_build/.sandbox/9a1e6d26395771df28639ed1227c7bff/default/test/types/american_inverse_is_not_root.ml.corrected
+index 811e2c9..f97cf29 100644
+--- a/_build/default/test/types/american_inverse_is_not_root.ml
++++ b/_build/.sandbox/9a1e6d26395771df28639ed1227c7bff/default/test/types/american_inverse_is_not_root.ml.corrected
+@@ -1,4 +1,5 @@
+ open Morphiq_risk
+ 
+-let cast (x : Early_exercise.Bsm.Implied_volatility.estimated_interval) : Vol.lognormal Iv.t =
++let cast (x : Early_exercise.Bsm.Implied_volatility.estimated_interval) :
++    Vol.lognormal Iv.t =
+   x
+File "bench/american_iv.ml", line 1, characters 0-0:
+diff --git a/_build/default/bench/american_iv.ml b/_build/.sandbox/dc0cb48e7a11efd9ce04b8636a4e2512/default/bench/american_iv.ml.corrected
+index 6f18ea0..a6277e3 100644
+--- a/_build/default/bench/american_iv.ml
++++ b/_build/.sandbox/dc0cb48e7a11efd9ce04b8636a4e2512/default/bench/american_iv.ml.corrected
+@@ -1,63 +1,127 @@
+ open Morphiq_risk
+ module A = Early_exercise.Bsm
+ module I = A.Implied_volatility
++
+ external monotonic : unit -> float = "morphiq_bench_monotonic"
++
+ let get = function Ok x -> x | Error _ -> failwith "benchmark refusal"
+ let vol x = get (Vol.lognormal x)
+-let pricing parts = get (A.configure ~tolerance:1. ~space_cells:128 ~time_steps:128
+-  ~domain_expansions:3 ~limits:A.{max_nodes=8192;max_steps=parts*131072;
+-  max_policy_solves=parts*1048576;max_row_visits=parts*1000000000;
+-  max_workspace_bytes=8388608;policy_iterations=64})
+-let words () = let a,b,c=Gc.counters () in a+.c-.b
++
++let pricing parts =
++  get
++    (A.configure ~tolerance:1. ~space_cells:128 ~time_steps:128
++       ~domain_expansions:3
++       ~limits:
++         A.
++           {
++             max_nodes = 8192;
++             max_steps = parts * 131072;
++             max_policy_solves = parts * 1048576;
++             max_row_visits = parts * 1000000000;
++             max_workspace_bytes = 8388608;
++             policy_iterations = 64;
++           })
++
++let words () =
++  let a, b, c = Gc.counters () in
++  a +. c -. b
++
+ let sample name n f =
+   ignore (Sys.opaque_identity (f ()));
+-  for round=1 to 3 do
++  for round = 1 to 3 do
+     Gc.full_major ();
+-    let before=words () and cpu=Sys.time () and start=monotonic () in
+-    for _=1 to n do ignore (Sys.opaque_identity (f ())) done;
+-    let elapsed=monotonic ()-.start in
+-    let cpu=Sys.time ()-.cpu and allocation=8.*.(words ()-.before) in
++    let before = words () and cpu = Sys.time () and start = monotonic () in
++    for _ = 1 to n do
++      ignore (Sys.opaque_identity (f ()))
++    done;
++    let elapsed = monotonic () -. start in
++    let cpu = Sys.time () -. cpu and allocation = 8. *. (words () -. before) in
+     Printf.printf "TIME %s %d %d %.3f %.3f %.3f\n%!" name round n
+-      (elapsed*.1e9/.float n) (cpu*.1e9/.float n) (allocation/.float n)
++      (elapsed *. 1e9 /. float n)
++      (cpu *. 1e9 /. float n)
++      (allocation /. float n)
+   done
+-let run fields = match fields with
+-| [id;_;side;s;k;r;q;t;opens;cash;quote;_;_;_] ->
+-  let f=float_of_string in
+-  let p=A.{spot=f s;strike=f k;rate=f r;dividend_yield=f q;
+-    time_to_expiry=f t;opens_at=f opens;volatility=vol 0.2} in
+-  let admit () = get (if f cash=0. then A.admit p else A.admit_cash p
+-    A.{valuation_side=Regular;opening_side=After_cash;expiry_side=After_cash;
+-    dividends=[|{time=p.time_to_expiry;amount=f cash}|]}) in
+-  let side=if side="call" then Side.Call else Side.Put in
+-  let settings=get (I.configure ~pricing:(pricing 64) ~lower:(vol 0.05)
+-    ~upper:(vol 0.6) ~width:0.005 ~max_evaluations:64) in
+-  let admitted=admit () and quote_value=f quote in
+-  let quote=get (I.quote quote_value) in
+-  let solve ()=get (I.solve settings admitted side quote) in
+-  let full ()=get (I.solve settings (admit ()) side (get (I.quote quote_value))) in
+-  let pc=pricing 1 in
+-  let price ()=get (A.price pc admitted side) in
+-  let result=solve () in
+-  if full ()<>result then failwith "full solve mismatch";
+-  Printf.printf "CHECK %s %h %h %d\n%!" id (Vol.to_float result.lower.volatility)
+-    (Vol.to_float result.upper.volatility) result.evaluations;
+-  let n=if id="call-100-0.05-american" then 20 else 1 in
+-  sample (id^"/price") n price;
+-  sample (id^"/solve") n solve;
+-  sample (id^"/end-to-end") n full
+-| _ -> failwith "fixture shape"
++
++let run fields =
++  match fields with
++  | [ id; _; side; s; k; r; q; t; opens; cash; quote; _; _; _ ] ->
++      let f = float_of_string in
++      let p =
++        A.
++          {
++            spot = f s;
++            strike = f k;
++            rate = f r;
++            dividend_yield = f q;
++            time_to_expiry = f t;
++            opens_at = f opens;
++            volatility = vol 0.2;
++          }
++      in
++      let admit () =
++        get
++          (if f cash = 0. then A.admit p
++           else
++             A.admit_cash p
++               A.
++                 {
++                   valuation_side = Regular;
++                   opening_side = After_cash;
++                   expiry_side = After_cash;
++                   dividends =
++                     [| { time = p.time_to_expiry; amount = f cash } |];
++                 })
++      in
++      let side = if side = "call" then Side.Call else Side.Put in
++      let settings =
++        get
++          (I.configure ~pricing:(pricing 64) ~lower:(vol 0.05) ~upper:(vol 0.6)
++             ~width:0.005 ~max_evaluations:64)
++      in
++      let admitted = admit () and quote_value = f quote in
++      let quote = get (I.quote quote_value) in
++      let solve () = get (I.solve settings admitted side quote) in
++      let full () =
++        get (I.solve settings (admit ()) side (get (I.quote quote_value)))
++      in
++      let pc = pricing 1 in
++      let price () = get (A.price pc admitted side) in
++      let result = solve () in
++      if full () <> result then failwith "full solve mismatch";
++      Printf.printf "CHECK %s %h %h %d\n%!" id
++        (Vol.to_float result.lower.volatility)
++        (Vol.to_float result.upper.volatility)
++        result.evaluations;
++      let n = if id = "call-100-0.05-american" then 20 else 1 in
++      sample (id ^ "/price") n price;
++      sample (id ^ "/solve") n solve;
++      sample (id ^ "/end-to-end") n full
++  | _ -> failwith "fixture shape"
++
+ let () =
+-  let usage="Usage: american_iv REFERENCE.tsv (fixed #117 cost corpus)" in
++  let usage = "Usage: american_iv REFERENCE.tsv (fixed #117 cost corpus)" in
+   match Array.to_list Sys.argv with
+-  | [_;"--help"] -> print_endline usage
+-  | [_;"--version"] -> print_endline "american-iv-bench 1"
+-  | [_;file] | [_;"--";file] ->
+-    let channel=open_in file in
+-    let count=ref 0 in
+-    (try while true do
+-      let fields=String.split_on_char ' ' (input_line channel) in
+-      if List.mem (List.hd fields) ["call-100-0.05-american";"american-put";"cash-terminal-american"]
+-      then (run fields; incr count)
+-    done with End_of_file -> close_in channel);
+-    if !count<>3 then failwith "incomplete benchmark corpus"
+-  | _ -> prerr_endline usage; exit 2
++  | [ _; "--help" ] -> print_endline usage
++  | [ _; "--version" ] -> print_endline "american-iv-bench 1"
++  | [ _; file ] | [ _; "--"; file ] ->
++      let channel = open_in file in
++      let count = ref 0 in
++      (try
++         while true do
++           let fields = String.split_on_char ' ' (input_line channel) in
++           if
++             List.mem (List.hd fields)
++               [
++                 "call-100-0.05-american";
++                 "american-put";
++                 "cash-terminal-american";
++               ]
++           then (
++             run fields;
++             incr count)
++         done
++       with End_of_file -> close_in channel);
++      if !count <> 3 then failwith "incomplete benchmark corpus"
++  | _ ->
++      prerr_endline usage;
++      exit 2
+File "test/american_iv.ml", line 1, characters 0-0:
+diff --git a/_build/default/test/american_iv.ml b/_build/.sandbox/b6bcf4956707f8bc86a8e7a6639d3c32/default/test/american_iv.ml.corrected
+index db147f3..07830cb 100644
+--- a/_build/default/test/american_iv.ml
++++ b/_build/.sandbox/b6bcf4956707f8bc86a8e7a6639d3c32/default/test/american_iv.ml.corrected
+@@ -209,16 +209,29 @@ let controls () =
+     && !calls = 10);
+   let strict = settings (configuration ~cells:32 ~tolerance:1e-12 ()) in
+   check "strict price failure is not a sign"
+-    (match I.solve strict (get (A.admit uncertain_model)) Side.Put (quote 10.) with
+-    | Error (I.Pricing_failed _) -> true | _ -> false);
++    (match
++       I.solve strict (get (A.admit uncertain_model)) Side.Put (quote 10.)
++     with
++    | Error (I.Pricing_failed _) -> true
++    | _ -> false);
+   let p0 = model ~s:120. ~t:0. () in
+   let at_event opening_side =
+-    get (A.admit_cash p0 A.{valuation_side=Before_cash; opening_side;
+-      expiry_side=After_cash; dividends=[|{time=0.;amount=10.}|]}) in
++    get
++      (A.admit_cash p0
++         A.
++           {
++             valuation_side = Before_cash;
++             opening_side;
++             expiry_side = After_cash;
++             dividends = [| { time = 0.; amount = 10. } |];
++           })
++  in
+   check "expiry after cash preserves jump"
+-    (solve ~a:(at_event A.After_cash) Side.Call 10. = Error (I.Non_identifiable I.Expiry));
++    (solve ~a:(at_event A.After_cash) Side.Call 10.
++    = Error (I.Non_identifiable I.Expiry));
+   check "expiry before cash retains immediate exercise"
+-    (solve ~a:(at_event A.Before_cash) Side.Call 20. = Error (I.Non_identifiable I.Expiry));
++    (solve ~a:(at_event A.Before_cash) Side.Call 20.
++    = Error (I.Non_identifiable I.Expiry));
+   print_endline "American inverse controls passed"
+ 
+ let hex x =
+Promoting _build/default/bench/american_iv.ml.corrected to
+  bench/american_iv.ml.
+Promoting _build/default/bench/dune.corrected to bench/dune.
+Promoting _build/default/test/american_iv.ml.corrected to
+  test/american_iv.ml.
+Promoting _build/default/test/dune.corrected to test/dune.
+Promoting _build/default/test/types/american_inverse_is_not_root.ml.corrected
+  to test/types/american_inverse_is_not_root.ml.
