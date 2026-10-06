@@ -63,6 +63,20 @@ checks segment endpoints, both eligible event sides and interior `q*S(t)=r*K`.
 A supremum approached immediately before an event remains an admissible stopping
 value when the exercise window is already open.
 
+For a call whose cash payments and every exercise right are at positive expiry,
+scalar pricing uses an exact terminal reduction before constructing a grid.
+After-only exercise has payoff `(X-(K+D))+`, with the original joint cash sum D;
+if before-cash exercise is permitted it dominates and the strike remains K.
+The constant route preserves the effective strike's two-word centre and adds an
+outward discounted allowance for any remaining strike uncertainty. The piecewise
+route carries the complete enclosure through the integrated European formula.
+Admission, full schedule traversal, cancellation and resource limits still apply.
+The method is `terminal-cash-European-reduction`; refinement/mapping diagnostics
+are absent and the result remains estimated-only. Earlier cash or exercise and
+puts use their existing methods. Greek requests retain their separately qualified
+evaluation route; this price reduction does not qualify new derivatives. See the
+[derivation, independent references and measurements](results-american-forward-optimization.md).
+
 Cash interpolation is positive piecewise linear interpolation, with explicitly
 checked convex weights and a real zero node. A separate pre-jump sampling grid
 evaluates the incoming PDE interpolant at the mapped stock; that sampled jump

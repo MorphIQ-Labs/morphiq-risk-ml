@@ -6,6 +6,12 @@ side and exercise right fixed. It replaces the admitted seed sigma. The result
 is an estimated volatility interval, not a point root, a uniqueness claim, a
 rigorous enclosure or the European nearest-even `Iv.Root` contract.
 
+Terminal-only cash calls now use the guarded exact effective-strike reduction
+in candidate prices. Inverse endpoints and evaluation counts can change as the
+PDE indicators disappear; strict uncertainty-band signs, whole-request budgets
+and the estimated-only result contract remain authoritative. See the
+[forward optimization evidence](results-american-forward-optimization.md).
+
 ## Supported families and use
 
 | Contract | Capability |
