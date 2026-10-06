@@ -4,7 +4,10 @@
  (libraries morphiq_fp)
  (foreign_stubs
   (language c)
-  (names bachelier_kernel_stubs american_residual_stubs)
+  (names
+   bachelier_kernel_stubs
+   american_residual_stubs
+   american_policy_stubs)
   (flags
    (:standard
     -O3

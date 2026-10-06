@@ -20,6 +20,7 @@ module Internal = struct
   module Bachelier_fast = Bachelier.Fast_middle
   module Bachelier_native = Bachelier_native
   module American_residual = American_residual
+  module American_policy = American_policy
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split
