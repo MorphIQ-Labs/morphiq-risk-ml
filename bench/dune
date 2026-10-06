@@ -262,8 +262,12 @@
    %{exe:american_workloads.exe})))
 
 (executables
- (names backend_requests backend_contracts)
- (modules backend_requests backend_contracts backend_inputs)
+ (names backend_requests backend_contracts american_remaining_allocation)
+ (modules
+  backend_requests
+  backend_contracts
+  american_remaining_allocation
+  backend_inputs)
  (modes byte_complete exe)
  (foreign_archives assurance_clock)
  (libraries morphiq_risk unix)
