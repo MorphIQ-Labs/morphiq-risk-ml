@@ -283,7 +283,31 @@ let numerical_controls () =
     }
   in
   let cfg = config ~lim ~cells:128 ~steps:128 1. in
-  let x = unwrap (P.greeks cfg (requests true) (unwrap (P.admit p)) Side.Put) in
+  (* Keep nonlinear spatial coverage in bytecode. The full numerical parallel
+     campaign is native; both backends also exercise all analytical parallel
+     coordinates and the non-differentiable stopping controls above. *)
+  let selected =
+    if Sys.backend_type = Native then quantities
+    else [ A.Delta; A.Gamma; A.Theta ]
+  in
+  let targets = List.combine quantities [ 0.02; 0.002; 1.; 1.; 0.005 ] in
+  let requested =
+    unwrap
+      (A.configure_greeks
+         (List.filter_map
+            (fun (q, tolerance) ->
+              if List.mem q selected then
+                Some
+                  (unwrap
+                     (A.request_greek
+                        ?bump:
+                          (if q = A.Vega || q = A.Rho then Some 0x1p-10
+                           else None)
+                        ~tolerance q))
+              else None)
+            targets))
+  in
+  let x = unwrap (P.greeks cfg requested (unwrap (P.admit p)) Side.Put) in
   (* Pinned independent QuantLib exact-Time comparison, 128/256/512 refinement;
      retain its empirical uncertainty, including parallel-bump/time-roll error. *)
   let values =
@@ -305,12 +329,13 @@ let numerical_controls () =
   in
   List.iter2
     (fun ((q, reference), radius) target ->
-      match List.assoc q x.greeks with
-      | A.Greek_estimate g ->
-          expect
-            ("stochastic continuation " ^ greek_name q)
-            (abs_float (g.value -. reference) +. radius <= target)
-      | _ -> failwith ("stochastic Greek unavailable: " ^ greek_name q))
+      if List.mem q selected then
+        match List.assoc q x.greeks with
+        | A.Greek_estimate g ->
+            expect
+              ("stochastic continuation " ^ greek_name q)
+              (abs_float (g.value -. reference) +. radius <= target)
+        | _ -> failwith ("stochastic Greek unavailable: " ^ greek_name q))
     (List.combine (List.combine quantities values) radii)
     [ 0.02; 0.002; 1.; 1.; 0.005 ];
   let cash =
