@@ -38,6 +38,25 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-residual-fma";
+      file = "lib/american_residual_stubs.c";
+      snippet =
+        "fma(Double_field(hi, i), Double_field(v, i + 1), -Double_field(rhs, \
+         i))";
+      replacement =
+        "(Double_field(hi, i) * Double_field(v, i + 1) - Double_field(rhs, i))";
+      killer = "american_residual";
+      mechanism = "residual retains explicit fused multiplication and addition";
+    };
+    {
+      id = "american-residual-screen";
+      file = "lib/american_residual_stubs.c";
+      snippet = "0x1p-48 * magnitude";
+      replacement = "0x1p-49 * magnitude";
+      killer = "american_residual";
+      mechanism = "residual retains the derived roundoff screen";
+    };
+    {
       id = "american-greek-boundary-inputs";
       file = "lib/early_exercise.ml";
       snippet = "if same_boundary_inputs then boundary_reuse";
@@ -1359,7 +1378,7 @@ let guard_arguments = function
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
   | "bermudan" | "american_piecewise" | "american_greeks"
-  | "american_greek_reuse" ->
+  | "american_greek_reuse" | "american_residual" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

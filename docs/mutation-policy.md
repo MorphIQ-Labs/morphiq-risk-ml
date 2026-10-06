@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **128
+seven core mutants. The catalog currently contains **130
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -325,5 +325,11 @@ boundaries after a rate change, and losing cached arithmetic indicators when
 starting a new solve. Cold public price requests and complete-result invariance
 across request order and uncached workspace budgets witness these dependencies.
 These are reuse consistency properties, not continuum accuracy proofs; the
-independent Greek/price campaigns remain separate. The catalog contains 128
+independent Greek/price campaigns remain separate. The catalog contains 130
 mechanisms. The default seven core mutants are unchanged.
+
+The optional `american-residual-fma` and `american-residual-screen` faults use
+`american_residual` to reject removal of an explicit FMA and halving of the
+roundoff screen. The independently executed OCaml operation graph also checks
+partial failures, chunking and input preservation; native and bytecode safety
+controls exercise the foreign boundary. The seven core selections are unchanged.

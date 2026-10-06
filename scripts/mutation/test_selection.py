@@ -28,7 +28,7 @@ class SelectionTests(unittest.TestCase):
     def test_core_is_a_strict_reviewed_subset(self):
         full = self.listing()
         core = self.listing("--core")
-        self.assertEqual(len(full), 128)
+        self.assertEqual(len(full), 130)
         self.assertEqual(core, {
             "split-root-nonoverlap", "dd-scale-nonoverlap",
             "reference-expansion", "scaled-exp-prefactor", "certified-rounding-cell",

@@ -285,8 +285,6 @@ module Bsm = struct
   let[@inline always] float_min (a : float) (b : float) =
     if a <= b then a else b
 
-  let eta = Float.next_after 0. infinity
-
   module E = Enclosure.Fast
 
   let centre (x : E.t) = x.hi +. x.lo +. (x.third +. x.fourth)
@@ -1175,46 +1173,37 @@ module Bsm = struct
     in
     prepare p reused switched;
     let current_key = ref (key p) in
+    let residual_state =
+      American_residual.create ~lo ~diag ~hi ~rhs ~values:v ~payoff:g
+    in
     let residual obstacle =
-      let worst = ref 0. and worst_row = ref 0 and indicator = ref 0. in
-      for i = 1 to n - 2 do
+      American_residual.reset residual_state ~obstacle;
+      let i = ref 1 in
+      while !i <= n - 2 do
+        (* Preserve the exact pre-row budget/callback order. After this tick,
+           following rows stop before the next callback or budget edge. *)
         tick c;
-        (* Original unfactored bands; explicit FMA differs from elimination's
-           accumulation. No product complementarity test. *)
-        let pvalue =
-          Float.fma lo.(i)
-            v.(i - 1)
-            (Float.fma diag.(i) v.(i) (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
+        let following =
+          min
+            (n - 2 - !i)
+            (min
+               (255 - (c.visits land 255))
+               (c.cfg.limits.max_row_visits - c.visits))
         in
-        let e = v.(i) -. g.(i) in
-        let r =
-          if obstacle then
-            float_max
-              (abs_float (float_min pvalue e))
-              (float_max (-.pvalue) (-.e))
-          else abs_float pvalue
+        let status =
+          American_residual.run residual_state ~first:!i ~last:(!i + following)
         in
-        ignore (finite "original residual" r);
-        if r > !worst then (
-          worst := r;
-          worst_row := i);
-        let magnitude =
-          abs_float (lo.(i) *. v.(i - 1))
-          +. abs_float (diag.(i) *. v.(i))
-          +. abs_float (hi.(i) *. v.(i + 1))
-          +. abs_float rhs.(i)
-          +. abs_float v.(i)
-          +. abs_float g.(i)
-        in
-        let screen =
-          finite "residual roundoff screen"
-            ((0x1p-48 *. magnitude) +. (32. *. eta))
-        in
-        indicator := float_max !indicator screen
+        let visited = American_residual.visited residual_state in
+        c.visits <- c.visits + visited - 1;
+        if status = 1 then fail "original residual";
+        if status = 2 then fail "residual roundoff screen";
+        i := !i + visited
       done;
-      c.roundoff <- float_max c.roundoff !indicator;
-      if !indicator > c.local /. 4. then fail "residual roundoff resolution";
-      (!worst, !worst_row)
+      let indicator = American_residual.indicator residual_state in
+      c.roundoff <- float_max c.roundoff indicator;
+      if indicator > c.local /. 4. then fail "residual roundoff resolution";
+      ( American_residual.worst residual_state,
+        American_residual.worst_row residual_state )
     in
     let slab_constant ?next_exercise p earlier later obstacle =
       if earlier < later then (
