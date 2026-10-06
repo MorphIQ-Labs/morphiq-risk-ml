@@ -34,7 +34,8 @@ valuation; Bermudan rolls remove past rights and never add new ones. Expiry
 before the selected valuation instant gives a per-row Post_expiry result.
 Curve levels are right-continuous at valuation, retain future knots and use
 the final left level at expiry. Schedule errors are rejected before filtering,
-so a roll cannot hide malformed or duplicate original events.
+so a roll cannot hide malformed events or invalid duplicate exercise/curve records.
+Scalar-permitted coincident cash records retain their original order and amounts.
 
 ## Identity, reuse and bounds
 
