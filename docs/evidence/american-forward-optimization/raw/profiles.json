@@ -1,0 +1,13 @@
+{
+  "source": "07916c6d706eb3c2193deba3dc475c8f3ab218bb",
+  "binary": "0f976e4d6e10babf9b1e20d47e8162884e10f587b9adbc79286808c9354f6fe2",
+  "driver": "343ebf7b97d1a47a40baff577dae47463550f55ecac3ec0a8727251ac87807b9",
+  "runs": [
+    {
+      "case": "american-put",
+      "allocation_exit": 0,
+      "cpu_exit": 0,
+      "sample_exit": 0
+    }
+  ]
+}

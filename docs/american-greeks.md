@@ -61,7 +61,11 @@ In continuation, theta uses the local backward equation with the initial
 coefficient levels, not averaged future coefficients. Future knots, cash dates
 and exercise rights remain fixed. Analytical no-cash terminal reductions use
 enclosed original-word rate/yield/variance integrals and European derivatives.
-The no-early-exercise call reduction is also available for spatial quantities.
+The no-early-exercise call reduction is also available for spatial quantities. Scalar terminal-cash call prices now have an exact European reduction, but
+Greek base and perturbed prices retain their independently qualified routes.
+Consequently their reported price estimates and method/diagnostic fields can
+differ from a separate scalar price request for the same model. Extending the
+reduction to spatial or fixed-event theta requires separate qualification.
 
 Vega/rho use central bumps `h`, `h/2`, `h/4` on unchanged stock grids and event
 schedules. They compare the derivatives across every underlying refinement and

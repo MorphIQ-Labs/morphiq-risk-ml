@@ -1,0 +1,9 @@
+{
+  "baseline": "07916c6d706eb3c2193deba3dc475c8f3ab218bb",
+  "runtime": "c222191f5974e48d865701bcfc355347af675f3d",
+  "measured": "a0c89b7905fd946215e05fd25b56c6c7bd32d830",
+  "final_changes": "documentation and evidence only",
+  "installed_iv_after_timing": true,
+  "failed_setup": "First standalone piecewise client build used a nonexistent bench/clock_stubs.c path; corrected to bench/assurance_clock.c and rebuilt both clients before timing. No failed build counted as evidence.",
+  "canonical_recheck": "Final adapter adds explicit side/input validation; original terminal comparison repeated with that binary after timing; all price bits unchanged. Initial exploratory timings are not acceptance evidence."
+}

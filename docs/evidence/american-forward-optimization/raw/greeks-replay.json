@@ -1,0 +1,22 @@
+[
+  {
+    "name": "primary-initial",
+    "rows": 230,
+    "full_payload_identical": true
+  },
+  {
+    "name": "primary-refined",
+    "rows": 230,
+    "full_payload_identical": true
+  },
+  {
+    "name": "loose-initial",
+    "rows": 230,
+    "full_payload_identical": true
+  },
+  {
+    "name": "loose-refined",
+    "rows": 230,
+    "full_payload_identical": true
+  }
+]

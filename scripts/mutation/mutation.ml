@@ -38,6 +38,62 @@ type mutant = {
 let catalog =
   [
     {
+      id = "terminal-cash-window";
+      file = "lib/early_exercise.ml";
+      snippet = "&& p.opens_at = p.time_to_expiry ->";
+      replacement = "&& true ->";
+      killer = "terminal_cash";
+      mechanism = "earlier exercise cannot become terminal-only";
+    };
+    {
+      id = "terminal-cash-date";
+      file = "lib/early_exercise.ml";
+      snippet = "when p.time_to_expiry > 0. && time = p.time_to_expiry";
+      replacement = "when p.time_to_expiry > 0. && true";
+      killer = "terminal_cash";
+      mechanism = "earlier cash cannot be collapsed into terminal strike";
+    };
+    {
+      id = "terminal-cash-side";
+      file = "lib/early_exercise.ml";
+      snippet = "| Side.Call, Some spec, [ (time, amount) ]";
+      replacement = "| _, Some spec, [ (time, amount) ]";
+      killer = "terminal_cash";
+      mechanism = "cash puts have a different payoff";
+    };
+    {
+      id = "terminal-cash-phase";
+      file = "lib/early_exercise.ml";
+      snippet = "if spec.opening_side = Before_cash then exact p.strike";
+      replacement = "if spec.opening_side = After_cash then exact p.strike";
+      killer = "terminal_cash";
+      mechanism = "pre-cash exercise dominates the post-cash call";
+    };
+    {
+      id = "terminal-cash-lowword";
+      file = "lib/early_exercise.ml";
+      snippet = "~strike:strike.hi ~strike_low:strike.lo";
+      replacement = "~strike:strike.hi ~strike_low:0.";
+      killer = "terminal_cash";
+      mechanism = "retain the effective strike low word";
+    };
+    {
+      id = "terminal-cash-greek";
+      file = "lib/early_exercise.ml";
+      snippet = "~terminal_reductions:false";
+      replacement = "~terminal_reductions:true";
+      killer = "terminal_cash";
+      mechanism = "price reduction does not qualify spatial Greeks";
+    };
+    {
+      id = "terminal-cash-amount";
+      file = "lib/early_exercise.ml";
+      snippet = "else E.add (exact p.strike) amount)";
+      replacement = "else exact p.strike)";
+      killer = "terminal_cash";
+      mechanism = "after-cash payoff includes the joint payment";
+    };
+    {
       id = "american-iv-progress";
       file = "lib/early_exercise.ml";
       snippet = "if phase = 2 then midpoint a b";
@@ -1580,6 +1636,7 @@ let guard_arguments = function
   | "bermudan" | "american_piecewise" | "american_greeks"
   | "american_greek_reuse" | "american_residual" ->
       [ [] ]
+  | "terminal_cash" -> [ [ "terminal_cash" ] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
   | "oracle_assurance" | "iv_termination" | "normal_dd_reference" | "properties"
@@ -1598,6 +1655,8 @@ let guard ~cwd name =
              "_build/default/docs/evidence/american-iv/references.tsv"
            else if fixture = "american_certification" then
              "_build/default/docs/evidence/american-certification/reference-v2/references.tsv"
+           else if fixture = "terminal_cash" then
+             "_build/default/docs/evidence/american-forward-optimization/reference-v1/references.tsv"
            else if fixture = "exchange_reference" then
              "_build/default/test/exchange_reference.tsv"
            else "_build/default/oracle/fixtures/" ^ fixture ^ ".txt"))

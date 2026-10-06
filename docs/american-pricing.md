@@ -119,7 +119,8 @@ include both window endpoints and interior q*S(t)=r*K; the 250/9 interior maximu
 has a direct regression. Equal/nonzero volatility is never inferred from a
 rounded sigma-squared. European reduction applies to a degenerate exercise
 window or a no-yield call with nonnegative rate on the no-cash route. Cash
-requests use event-aware deterministic stopping; see the extension for its
+requests additionally reduce terminal-only cash calls using the exact original
+effective strike, and use event-aware deterministic stopping; see the extension for its
 additional diagnostics, restrictions and costs. Analytical results retain the
 same estimated-only public type, even where their internal arithmetic is enclosed.
 

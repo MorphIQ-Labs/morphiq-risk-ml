@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Terminal cash-call reduction (#119)
+
+- Reduce positive-expiry calls with all cash and exercise at expiry to the
+  original-input European payoff. Preserve event sides, the exact joint K+D,
+  uncertainty, admission, cancellation and resource limits.
+- Scalar price values, method/diagnostics, availability and cash-call inverse
+  endpoints intentionally change. Greek requests retain their qualified routes;
+  no certificate or cash-put inverse is added.
+- All 80 new strict independent terminal cases succeed (previously refused).
+  Eight existing price outcomes change at unchanged targets; the other 564
+  complete outcomes and all 920 Greek rows remain identical. See the
+  [numerical and performance report](docs/results-american-forward-optimization.md).
+
 ### American inverse search optimization (#119)
 
 - Reduce full price calls with safeguarded interpolation, bounded overlap probes

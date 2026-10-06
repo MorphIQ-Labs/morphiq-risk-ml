@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **150
+seven core mutants. The catalog currently contains **157
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -325,7 +325,7 @@ boundaries after a rate change, and losing cached arithmetic indicators when
 starting a new solve. Cold public price requests and complete-result invariance
 across request order and uncached workspace budgets witness these dependencies.
 These are reuse consistency properties, not continuum accuracy proofs; the
-independent Greek/price campaigns remain separate. The catalog contains 150
+independent Greek/price campaigns remain separate. The catalog contains 157
 mechanisms. The default seven core mutants are unchanged.
 
 The optional `american-residual-fma` and `american-residual-screen` faults use
@@ -356,3 +356,9 @@ The inverse progress and spacing faults additionally require low-vega bracket
 contraction and useful endpoint progress within fixed evaluation budgets.
 These are progress regressions; independent reference containment remains a
 separate accuracy check. Neither fault changes the seven-mutant core selection.
+
+Seven optional `terminal-cash-*` faults exercise terminal-only exercise and cash dates,
+call/put separation, before/after cash rights, exact effective-strike low words,
+payment inclusion and the separate Greek evaluation route. Their designated
+witness is the independent terminal-cash reference and control suite. They do
+not change the seven-mutant default CI selection.

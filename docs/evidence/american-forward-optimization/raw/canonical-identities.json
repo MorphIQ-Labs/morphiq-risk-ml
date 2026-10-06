@@ -1,0 +1,13 @@
+{
+  "revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "dirty": "",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "files": {
+    "/tmp/morphiq-american-forward-opt/scripts/american_acceleration_reference.cpp": "e8e529e20c8bd6ad04dc74399368db108a5b405ba4bf6c11e988cabcd49ca00f",
+    "/Users/stephen/Development/MorphIQ-Labs/QuantLib/ql/pricingengines/vanilla/qdfpamericanengine.cpp": "7a13ddfd9311b264f0a86e2b89922097c0ecc1065c9313ff77766a058cd37e33",
+    "/Users/stephen/Development/MorphIQ-Labs/QuantLib/ql/pricingengines/vanilla/qdplusamericanengine.cpp": "7f14b3d7eb330cea46c6941d699a9beb7b0f99f02c01524e5e645d07f7b85b2a",
+    "/Users/stephen/Development/MorphIQ-Labs/QuantLib/LICENSE.TXT": "a4cc06a3c4a0db9b946b6acc90171f307c4229fd09c1247f815139f30046379c",
+    "/tmp/morphiq-exchange-ql-build/ql/libQuantLib.1.dylib": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161",
+    "/tmp/morphiq-american-forward-evidence/canonical": "a9e79424b5c9fabbb72ef3c83f772fa15a3bd46036e9eb7bed59c9775e5454cb"
+  }
+}

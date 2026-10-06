@@ -1,0 +1,422 @@
+{
+  "rows": [
+    {
+      "id": "call-80",
+      "scheme": "fast",
+      "value": "0x1.87dfa219ab39dp+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-80",
+      "scheme": "accurate",
+      "value": "0x1.87dfa219ab3a8p+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-80",
+      "scheme": "high",
+      "value": "0x1.87dfa219ab3a9p+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-100",
+      "scheme": "fast",
+      "value": "0x1.2743a12102a25p+3",
+      "reference_status": "resolved",
+      "error_upper": "2282437315/562949953421312",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-100",
+      "scheme": "accurate",
+      "value": "0x1.2743a12102c5ep+3",
+      "reference_status": "resolved",
+      "error_upper": "1141218373/281474976710656",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-100",
+      "scheme": "high",
+      "value": "0x1.2743a12102cacp+3",
+      "reference_status": "resolved",
+      "error_upper": "570609167/140737488355328",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-120",
+      "scheme": "fast",
+      "value": "0x1.80fa74e44e819p+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-120",
+      "scheme": "accurate",
+      "value": "0x1.80fa74e4531a9p+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-120",
+      "scheme": "high",
+      "value": "0x1.80fa74e453eb4p+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "scheme": "fast",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "9/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "scheme": "accurate",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "9/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-zero-rate-yield",
+      "scheme": "high",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "9/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-low-vol",
+      "scheme": "fast",
+      "value": "0x1.72ce6f3abe6ccp+1",
+      "reference_status": "resolved",
+      "error_upper": "106013015/4503599627370496",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-low-vol",
+      "scheme": "accurate",
+      "value": "0x1.72ce6f3abe6ccp+1",
+      "reference_status": "resolved",
+      "error_upper": "106013015/4503599627370496",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-low-vol",
+      "scheme": "high",
+      "value": "0x1.72ce6f3abe6ccp+1",
+      "reference_status": "resolved",
+      "error_upper": "106013015/4503599627370496",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-80",
+      "scheme": "fast",
+      "value": "0x1.410c28caa0abbp+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-80",
+      "scheme": "accurate",
+      "value": "0x1.410c288ea68e4p+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-80",
+      "scheme": "high",
+      "value": "0x1.410c3749b8bd7p+4",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-100",
+      "scheme": "fast",
+      "value": "0x1.aa48c98fc90d6p+2",
+      "reference_status": "resolved",
+      "error_upper": "75344411977/2251799813685248",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-100",
+      "scheme": "accurate",
+      "value": "0x1.aa48a5c287c6p+2",
+      "reference_status": "resolved",
+      "error_upper": "71822768827/2251799813685248",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-100",
+      "scheme": "high",
+      "value": "0x1.aa48aee677d67p+2",
+      "reference_status": "resolved",
+      "error_upper": "66915563693/2251799813685248",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-120",
+      "scheme": "fast",
+      "value": "0x1.9c72b3c116d43p+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-120",
+      "scheme": "accurate",
+      "value": "0x1.9c738bf747b59p+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-120",
+      "scheme": "high",
+      "value": "0x1.9c73904b1b4bfp+0",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "scheme": "fast",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "4888292671/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "scheme": "accurate",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "4888292671/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-zero-rate-yield",
+      "scheme": "high",
+      "value": "0x1.fdcbdb70c331p+2",
+      "reference_status": "resolved",
+      "error_upper": "4888292671/1125899906842624",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-low-vol",
+      "scheme": "fast",
+      "value": "0x1.06c56e4d85d8bp-6",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-low-vol",
+      "scheme": "accurate",
+      "value": "0x1.f6879e6bd9d9p-7",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "put-low-vol",
+      "scheme": "high",
+      "value": "0x1.f608b1a1945ccp-7",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "empirical reference width exceeds frozen goal"
+    },
+    {
+      "id": "call-no-early",
+      "scheme": "fast",
+      "value": "0x1.4e6b2e3d54dc4p+3",
+      "reference_status": "resolved",
+      "error_upper": "3/562949953421312",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-no-early",
+      "scheme": "accurate",
+      "value": "0x1.4e6b2e3d54dc4p+3",
+      "reference_status": "resolved",
+      "error_upper": "3/562949953421312",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-no-early",
+      "scheme": "high",
+      "value": "0x1.4e6b2e3d54dc4p+3",
+      "reference_status": "resolved",
+      "error_upper": "3/562949953421312",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "call-dividend-yield",
+      "scheme": "fast",
+      "value": "0x1.3ff982a650b76p+4",
+      "reference_status": "resolved",
+      "error_upper": "222986598981/140737488355328",
+      "epsilon": "15/8192",
+      "status": "pass"
+    },
+    {
+      "id": "call-dividend-yield",
+      "scheme": "accurate",
+      "value": "0x1.4000382154771p+4",
+      "reference_status": "resolved",
+      "error_upper": "15075198833/281474976710656",
+      "epsilon": "15/8192",
+      "status": "pass"
+    },
+    {
+      "id": "call-dividend-yield",
+      "scheme": "high",
+      "value": "0x1.400001691d458p+4",
+      "reference_status": "resolved",
+      "error_upper": "48315019/35184372088832",
+      "epsilon": "15/8192",
+      "status": "pass"
+    },
+    {
+      "id": "put-deep-exercise",
+      "scheme": "fast",
+      "value": "0x1.9000005ce8ff5p+5",
+      "reference_status": "resolved",
+      "error_upper": "100700149/140737488355328",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-deep-exercise",
+      "scheme": "accurate",
+      "value": "0x1.8ffffffcf7fe7p+5",
+      "reference_status": "resolved",
+      "error_upper": "6455321/140737488355328",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "put-deep-exercise",
+      "scheme": "high",
+      "value": "0x1.900000000035ap+5",
+      "reference_status": "resolved",
+      "error_upper": "1638829/70368744177664",
+      "epsilon": "25/16384",
+      "status": "pass"
+    },
+    {
+      "id": "probability-stress",
+      "scheme": "fast",
+      "value": "0x1.bb23fdfdb66aep-309",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "lattice unavailable at a frozen level"
+    },
+    {
+      "id": "probability-stress",
+      "scheme": "accurate",
+      "value": "0x1.990b621c229ap-25",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "lattice unavailable at a frozen level"
+    },
+    {
+      "id": "probability-stress",
+      "scheme": "high",
+      "value": "0x1.2cf53eb9ddd24p-26",
+      "reference_status": "unresolved",
+      "status": "reference_unresolved",
+      "reason": "lattice unavailable at a frozen level"
+    },
+    {
+      "id": "put-scaled--20",
+      "scheme": "fast",
+      "value": "0x1.aa48c98fc9113p-18",
+      "reference_status": "resolved",
+      "error_upper": "75344412099/2361183241434822606848",
+      "epsilon": "25/17179869184",
+      "status": "pass"
+    },
+    {
+      "id": "put-scaled--20",
+      "scheme": "accurate",
+      "value": "0x1.aa48a5c28782fp-18",
+      "reference_status": "resolved",
+      "error_upper": "71822770973/2361183241434822606848",
+      "epsilon": "25/17179869184",
+      "status": "pass"
+    },
+    {
+      "id": "put-scaled--20",
+      "scheme": "high",
+      "value": "0x1.aa48aee677d4fp-18",
+      "reference_status": "resolved",
+      "error_upper": "66915563741/2361183241434822606848",
+      "epsilon": "25/17179869184",
+      "status": "pass"
+    },
+    {
+      "id": "put-scaled-20",
+      "scheme": "fast",
+      "value": "0x1.aa48c98fc90d7p+22",
+      "reference_status": "resolved",
+      "error_upper": "75344411979/2147483648",
+      "epsilon": "1600",
+      "status": "pass"
+    },
+    {
+      "id": "put-scaled-20",
+      "scheme": "accurate",
+      "value": "0x1.aa48a5c287c5fp+22",
+      "reference_status": "resolved",
+      "error_upper": "71822768829/2147483648",
+      "epsilon": "1600",
+      "status": "pass"
+    },
+    {
+      "id": "put-scaled-20",
+      "scheme": "high",
+      "value": "0x1.aa48aee677d67p+22",
+      "reference_status": "resolved",
+      "error_upper": "66915563693/2147483648",
+      "epsilon": "1600",
+      "status": "pass"
+    }
+  ],
+  "counts": {
+    "reference_unresolved": 18,
+    "pass": 30
+  }
+}
