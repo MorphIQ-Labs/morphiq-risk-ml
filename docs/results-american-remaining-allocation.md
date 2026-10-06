@@ -3,8 +3,12 @@
 After retaining bounded native solving in the [backend comparison](results-american-backends.md),
 the next #119 optimization target is enclosed time-step/boundary arithmetic,
 followed by cash interpolation. These owners dominate the current Bermudan,
-piecewise and cash workloads. This pass changes only a profiling harness and
+piecewise and cash workloads. This attribution pass changes only a profiling harness and
 documentation; production arithmetic, work bounds and served values are unchanged.
+
+The subsequent [exponential scratch qualification](results-enclosure-exponential-scratch.md)
+records the implementation, matched savings and remaining cash-interpolation cost.
+The measurements below remain the pre-optimization attribution.
 
 ## Scope and evidence
 

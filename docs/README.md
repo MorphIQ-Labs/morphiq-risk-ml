@@ -24,7 +24,8 @@ been retired; it remains in Git history.
 - [American/Bermudan implied volatility](american-implied-volatility.md): estimated constant-volatility intervals, monotonicity guards, quote boundaries and independent fixed-quote references.
 - [American native policy optimization](results-american-native-policy.md): bounded policy kernels, complete compatibility, paired latency and RSS diagnosis.
 - [American policy backend comparison](results-american-backends.md): actual matrices and complete requests, exact residual checks, and the decision to retain bounded native solving over OCaml/reference LAPACK alternatives.
-- [Remaining American allocation](results-american-remaining-allocation.md): current sampled owners and the next time/boundary and cash-interpolation optimization targets.
+- [Remaining American allocation](results-american-remaining-allocation.md): sampled owners before exponential scratch reuse.
+- [Enclosed exponential scratch](results-enclosure-exponential-scratch.md): bounded private storage, matched American/European allocation savings and unchanged numerical outcomes.
 - [American forward optimization](results-american-forward-optimization.md): exact terminal cash-call reduction, numerical compatibility, and specialized-method evaluation.
 - [American inverse optimization](results-american-iv-optimization.md): safeguarded proposals, independent interval compatibility and paired latency/allocation evidence.
 - [Certified American/Bermudan reductions](american-certification.md): proved applicability, private price certificates, independent containment checks and remaining general-stopping obligations.
