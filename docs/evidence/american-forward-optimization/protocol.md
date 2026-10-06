@@ -55,3 +55,13 @@ samples, GC, per-child RSS, failures and host load. Do not change accuracy,
 resolution, requests or targets to meet an improvement threshold. Default CI
 remains five jobs and seven core mutants. Publish remaining general cost and an
 explicit adopt/defer disposition for specialized-method evaluation.
+
+Greek requests intentionally retain their independently qualified PDE/analytic
+route. A new price identity does not qualify spatial extraction or fixed-event
+theta. The private price owner receives an explicit route switch from the Greek
+owner; its base and perturbed prices use that same route. Public scalar prices
+and IV use the reduction. This can give distinct estimates of the same model in
+scalar-price and Greek reports; their separate method/diagnostic fields remain
+visible. A derivative reduction needs its own derivation and independent
+qualification, and is tracked separately rather than returning new unavailable
+Greeks merely because the price route no longer emits a grid.
