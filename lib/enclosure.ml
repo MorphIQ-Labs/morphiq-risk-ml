@@ -193,19 +193,21 @@ struct
     require (Float.is_finite error) "nonfinite enclosure radius";
     { a with error }
 
-  let add a b =
+  let add_using allocate a b =
     if is_zero a then b
     else if is_zero b then a
     else
       let na = word_count a and nb = word_count b in
-      let terms = Float.Array.create (na + nb) in
+      let terms = allocate (na + nb) in
       for i = 0 to na - 1 do
         Float.Array.set terms i (word a i)
       done;
       for i = 0 to nb - 1 do
         Float.Array.set terms (na + i) (word b i)
       done;
-      pack_array terms (Float.Array.length terms) (a.error +^ b.error)
+      pack_array terms (na + nb) (a.error +^ b.error)
+
+  let[@inline always] add a b = add_using Float.Array.create a b
 
   let sub_using allocate a b =
     if is_zero a then neg b
@@ -270,7 +272,7 @@ struct
       let error = if ea + eb >= -968 then 0.0 else quantum in
       error
 
-  let mul a b =
+  let mul_using allocate a b =
     if is_zero a || is_zero b then exact 0.0
     else if is_float a 1.0 then b
     else if is_float b 1.0 then a
@@ -279,7 +281,7 @@ struct
     else
       let na = word_count a and nb = word_count b in
       let count = 2 * na * nb in
-      let terms = Float.Array.create count in
+      let terms = allocate count in
       let error = ref 0.0 in
       for i = 0 to na - 1 do
         let x = word a i in
@@ -301,7 +303,9 @@ struct
         done
       done;
       let input = (centre_magnitude a *^ b.error) +^ (magnitude b *^ a.error) in
-      pack_array terms (Float.Array.length terms) (!error +^ input)
+      pack_array terms count (!error +^ input)
+
+  let[@inline always] mul a b = mul_using Float.Array.create a b
 
   let[@inline always] mul_float_using allocate a b =
     finite b;
@@ -339,6 +343,21 @@ struct
 
   let[@inline always] mul_float a b = mul_float_using Float.Array.create a b
 
+  let div_float_using allocate a b =
+    require (Float.is_finite b && b <> 0.0) "invalid scalar denominator";
+    if b = 1.0 then a
+    else if b = -1.0 then neg a
+    else if is_zero a then exact 0.0
+    else
+      let remainder = ref a and quotient = ref (exact 0.0) in
+      for _ = 1 to Config.words do
+        let q = !remainder.hi /. b in
+        quotient := add_float_using allocate !quotient q;
+        remainder :=
+          sub_using allocate !remainder (mul_float_using allocate (exact q) b)
+      done;
+      add_error !quotient (magnitude !remainder /^ abs b)
+
   let div_float a b =
     require (Float.is_finite b && b <> 0.0) "invalid scalar denominator";
     if b = 1.0 then a
@@ -353,14 +372,7 @@ struct
         require (count <= 8) "scalar quotient scratch bound";
         scratch
       in
-      let remainder = ref a and quotient = ref (exact 0.0) in
-      for _ = 1 to Config.words do
-        let q = !remainder.hi /. b in
-        quotient := add_float_using allocate !quotient q;
-        remainder :=
-          sub_using allocate !remainder (mul_float_using allocate (exact q) b)
-      done;
-      add_error !quotient (magnitude !remainder /^ abs b)
+      div_float_using allocate a b
 
   let div a b =
     require (b.hi <> 0.0) "unresolved denominator";
@@ -439,6 +451,20 @@ struct
     if is_zero a then exact (if minus_one then 0.0 else 1.0)
     else (
       require (magnitude a <= 256.0) "exponential enclosure domain";
+      (* Every operation fully overwrites its used prefix before packing copies
+         retained fields into an immutable result. Product pairs need <=2*w*w,
+         scalar products <=4*w, sums <=2*w, and quotient suboperations <=8.
+         No result borrows this call-owned array, including nested arguments. *)
+      let capacity = max 8 (2 * Config.words * Config.words) in
+      let scratch = Float.Array.create capacity in
+      let allocate count =
+        require (count <= capacity) "exponential scratch bound";
+        scratch
+      in
+      let add a b = add_using allocate a b
+      and mul a b = mul_using allocate a b
+      and mul_float a b = mul_float_using allocate a b
+      and div_float a b = div_float_using allocate a b in
       let r = scale a (-10) in
       let term = ref (exact 1.0) in
       let sum = ref (exact (if minus_one then 0.0 else 1.0)) in

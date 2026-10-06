@@ -274,6 +274,18 @@
  (ocamlopt_flags
   (:standard -O3)))
 
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_exponential_scratch_campaign.py
+  ../scripts/measure_exponential_scratch.py
+  ../scripts/check_american_backends.py
+  ../scripts/benchmark_enclosure_consumers.py
+  ../scripts/measure_american_workloads.py
+  ../scripts/benchmark_american_allocation.py)
+ (action
+  (run python3 %{dep:../scripts/test_exponential_scratch_campaign.py})))
+
 (executable
  (name backend_micro)
  (modules backend_micro)

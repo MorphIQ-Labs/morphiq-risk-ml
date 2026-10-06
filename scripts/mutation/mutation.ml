@@ -1194,6 +1194,20 @@ let catalog =
          availability";
     };
     {
+      id = "enclosure-exponential-prefix";
+      file = "lib/enclosure.ml";
+      snippet =
+        "pack_array terms (na + nb) (a.error +^ b.error)\n\n\
+        \  let[@inline always] add";
+      replacement =
+        "pack_array terms (Float.Array.length terms) (a.error +^ b.error)\n\n\
+        \  let[@inline always] add";
+      killer = "enclosure_exponential";
+      mechanism =
+        "exponential scratch packing must exclude stale terms beyond the used \
+         prefix";
+    };
+    {
       id = "enclosure-series-tail";
       file = "lib/enclosure.ml";
       snippet = "let result = ref (add_error !sum tail) in";
@@ -1795,12 +1809,12 @@ let guard_arguments = function
   | "production_reference" -> [ [ "greek_bits"; "model_enclosures" ] ]
   | "production_greek_reference" -> [ [ "greek_bits" ] ]
   | "fast_planner" | "fast_batch" | "enclosure_sum" | "enclosure_scalar"
-  | "shared_greeks" | "production_boundary" | "production_multi"
-  | "planner_contract" | "prepared_division" | "carry_cancellation"
-  | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
-  | "bermudan" | "american_piecewise" | "american_greeks"
-  | "american_greek_reuse" | "american_residual" | "american_policy"
-  | "american_work_order" | "american_compiled" ->
+  | "enclosure_exponential" | "shared_greeks" | "production_boundary"
+  | "production_multi" | "planner_contract" | "prepared_division"
+  | "carry_cancellation" | "greek_cancellation" | "rho_midpoint"
+  | "american_pricing" | "american_cash" | "bermudan" | "american_piecewise"
+  | "american_greeks" | "american_greek_reuse" | "american_residual"
+  | "american_policy" | "american_work_order" | "american_compiled" ->
       [ [] ]
   | "terminal_cash" -> [ [ "terminal_cash" ] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]

@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Enclosed exponential scratch (#119)
+
+- Reuse bounded call-owned packing storage within both enclosure precisions'
+  exponential/expm1 evaluations. Arithmetic order, error bounds, public results
+  and work/cancellation contracts are preserved; no new boundary cache or FFI.
+- Retain [current allocation attribution](docs/results-american-remaining-allocation.md)
+  and the [frozen qualification/performance protocol](docs/evidence/american-remaining-allocation/exponential-protocol.md).
+
 ### Compiled American and Bermudan requests (#118)
 
 - Add immutable `Batch.American` requests and `Planner.American` dated scenario
