@@ -1,0 +1,13 @@
+{
+  "python": "3.14.8",
+  "python_flint": "0.9.0",
+  "flint": "3.6.0",
+  "sources": {
+    "scripts/generate_american_iv.py": "9f741d3d50e36bbaf87f545ca98cce27b02356066e819e67c803b2610ad7ef01",
+    "scripts/generate_american_iv_negative_yield.py": "d0f593fb63f0c19ac76dded1811e7dada2ad82ae2814078b2e8ac6ed376b9a14"
+  },
+  "files": {
+    "references.json": "ad705ff875c51acb4fd281a7df13bc0fe0a2099a20697971d41ed9e1037c83d3",
+    "references.tsv": "127ebcd1b4cbec5669f57cd7fe545c18f769a536320466a1db1b0a945293216d"
+  }
+}

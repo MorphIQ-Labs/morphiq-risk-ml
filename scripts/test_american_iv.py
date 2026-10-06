@@ -1,5 +1,5 @@
 import copy,json,unittest
-from check_american_iv import BASE,load,validate
+from check_american_iv import BASE,load,validate,validate_negative
 class Controls(unittest.TestCase):
  def setUp(self):self.d=json.loads((BASE/'references.json').read_text())
  def test_complete(self):self.assertEqual(len(load()),30)
@@ -21,4 +21,18 @@ class Controls(unittest.TestCase):
  def test_counterexample(self):
   self.d['cash_put_counterexample'][1]['upper']='11'
   with self.assertRaisesRegex(ValueError,'counterexample lost'):validate(self.d)
+class NegativeYieldControls(unittest.TestCase):
+ def setUp(self):self.d=json.loads((BASE.parent/'negative-yield/references.json').read_text())
+ def test_missing(self):
+  self.d.pop()
+  with self.assertRaisesRegex(ValueError,'corpus incomplete'):validate_negative(self.d)
+ def test_wrong_sign(self):
+  self.d[0]['q']=.02
+  with self.assertRaisesRegex(ValueError,'identity'):validate_negative(self.d)
+ def test_reversed(self):
+  self.d[0]['lower']='1'
+  with self.assertRaisesRegex(ValueError,'reversed'):validate_negative(self.d)
+ def test_precision(self):
+  self.d[0]['attempts'].pop()
+  with self.assertRaisesRegex(ValueError,'precision identity'):validate_negative(self.d)
 if __name__=='__main__':unittest.main()
