@@ -30,6 +30,6 @@ for config,width in [('initial',.05),('refined',.05),('tight',.005)]:
   records.append(row)
  summary.append(counts)
 with (out/'compatibility.csv').open('w') as f:
- fields=list(dict.fromkeys(key for r in records for key in r));w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(records)
+ fields=list(dict.fromkeys(key for r in records for key in r));w=csv.DictWriter(f,fieldnames=fields,lineterminator="\n");w.writeheader();w.writerows(records)
 (out/'compatibility.json').write_text(json.dumps(summary,indent=2)+'\n')
 print(json.dumps(summary,indent=2))
