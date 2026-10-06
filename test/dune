@@ -1187,3 +1187,41 @@
   ../docs/evidence/american-certification/reference-v2/references.tsv)
  (action
   (run python3 %{dep:../scripts/test_american_certification.py})))
+
+(test
+ (name american_iv)
+ (modules american_iv)
+ (modes byte exe)
+ (libraries morphiq_risk zarith)
+ (deps
+  ../docs/evidence/american-iv/references.tsv
+  ../lib/dllmorphiq_risk_stubs%{ext_dll}
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test} %{dep:../docs/evidence/american-iv/references.tsv}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_american_iv.py
+  ../docs/evidence/american-iv/references.tsv
+  ../scripts/test_american_iv.py
+  ../scripts/generate_american_iv.py
+  ../scripts/american_iv_reference.cpp
+  ../scripts/american_lattice.cpp
+  ../scripts/american_runner_io.hpp
+  (source_tree ../docs/evidence/american-iv/reference-v1))
+ (action
+  (run python3 %{dep:../scripts/test_american_iv.py})))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/american_iv_campaign.py
+  ../scripts/check_american_iv.py
+  ../scripts/test_american_iv_campaign.py)
+ (action
+  (run python3 %{dep:../scripts/test_american_iv_campaign.py})))

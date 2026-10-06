@@ -1,5 +1,9 @@
 # Estimated scalar American pricing
 
+The separate [constant-volatility inverse](american-implied-volatility.md) returns
+estimated intervals for supported monotone families, with explicit uncertainty
+and nonidentifiability outcomes. It does not extend European root certification.
+
 `Early_exercise.Bsm` implements constant-coefficient American call/put pricing,
 including #112's [scheduled cash-dividend extension](american-cash-dividends.md). It supports continuous yield, finite signed rates/yields,
 expiry, zero stock/strike, deterministic stopping and delayed exercise opening.

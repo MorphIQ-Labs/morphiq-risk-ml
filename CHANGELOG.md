@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Estimated American/Bermudan implied volatility (#117)
+
+- Add `Early_exercise.Bsm.Implied_volatility`: private quotes and estimated
+  intervals for constant-volatility no-cash calls/puts and cash-dividend calls.
+  Preserve original exercise rights and event sides while replacing only sigma.
+- Include price refinement/arithmetic indicators in sign classification; require
+  the full volatility width and strict opposite endpoint signs. Plateaus,
+  unresolved prices, bounded exhaustion and estimated search-range exclusions
+  remain explicit. Cash puts and piecewise curve inversion are unsupported.
+- Existing prices, Greeks and European certified IV outcomes are unchanged.
+  See [contract, derivations and qualification](docs/american-implied-volatility.md).
+
 ### Certified American/Bermudan reductions (#116)
 
 - Add `Early_exercise.Bsm.Certified` for no-cash expiry, terminal-only rights,

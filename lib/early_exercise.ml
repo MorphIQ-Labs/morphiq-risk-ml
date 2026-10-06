@@ -3004,6 +3004,306 @@ module Bsm = struct
   let greeks ?cancel cfg requests admitted side =
     greeks_with_curves ?cancel cfg requests admitted side
 
+  module Implied_volatility = struct
+    module B = Enclosure
+
+    type no_solution =
+      | Below_immediate_payoff
+      | Above_global_cap
+      | Incompatible_constant_price
+
+    type independent = Expiry | Absorbing_stock | Zero_strike
+    type range_side = Below | Above
+
+    type error =
+      | Invalid_quote
+      | Invalid_configuration of string
+      | Unsupported_cash_put
+      | No_solution of no_solution
+      | Non_identifiable of independent
+      | Estimated_outside_search_range of range_side
+      | Price_uncertainty_or_plateau
+      | Inconsistent_prices
+      | Pricing_failed of failure
+      | Evaluation_limit
+      | Unrepresentable_progress
+      | Cancelled
+
+    type quote = float
+
+    let quote x =
+      if Float.is_finite x && x >= 0. then Ok x else Error Invalid_quote
+
+    type settings = {
+      pricing : configuration;
+      lower : Vol.lognormal Vol.t;
+      upper : Vol.lognormal Vol.t;
+      width : float;
+      max_evaluations : int;
+    }
+
+    let configure ~pricing ~lower ~upper ~width ~max_evaluations =
+      if Vol.to_float lower >= Vol.to_float upper then
+        Error
+          (Invalid_configuration "strictly increasing volatility range required")
+      else if (not (Float.is_finite width)) || width <= 0. then
+        Error
+          (Invalid_configuration "positive finite volatility width required")
+      else if max_evaluations < 2 then
+        Error (Invalid_configuration "at least two price evaluations required")
+      else Ok { pricing; lower; upper; width; max_evaluations }
+
+    type observation = {
+      volatility : Vol.lognormal Vol.t;
+      price : estimated_price;
+      uncertainty_indicator : float;
+    }
+
+    type estimated_interval = {
+      lower : observation;
+      upper : observation;
+      requested_width : float;
+      evaluations : int;
+      assurance : assurance;
+    }
+
+    exception Abort of error
+    exception Callback_error of exn
+
+    let stop e = raise (Abort e)
+    let exact = B.exact
+
+    let positive_part x =
+      match B.sign x with
+      | B.Positive -> x
+      | B.Zero | B.Negative -> exact 0.
+      | B.Indeterminate -> raise (B.Unresolved "inverse payoff sign")
+
+    let indicator (p : estimated_price) =
+      let refinement =
+        Option.fold ~none:0. ~some:(fun r -> r.observed_sum) p.refinement
+      in
+      let x =
+        B.add (exact refinement)
+          (B.add
+             (exact p.maximum_roundoff_indicator)
+             (exact p.boundary_arithmetic_indicator))
+      in
+      let error = B.error_of_float x x.hi in
+      let result =
+        if error = 0. then x.hi else Float.next_after (x.hi +. error) infinity
+      in
+      if (not (Float.is_finite result)) || result < 0. then
+        raise (B.Unresolved "inverse price indicator");
+      result
+
+    let edge (o : observation) sign =
+      B.add (exact o.price.value) (exact (sign *. o.uncertainty_indicator))
+
+    let classify quote o =
+      if B.compare_float (edge o 1.) quote = B.Negative then -1
+      else if B.compare_float (edge o (-1.)) quote = B.Positive then 1
+      else 0
+
+    let ordered a b =
+      if B.sign (B.sub (edge a (-1.)) (edge b 1.)) = B.Positive then
+        stop Inconsistent_prices
+
+    let replace_volatility admitted volatility =
+      match admitted with
+      | Admitted p -> Admitted { p with volatility }
+      | With_cash (p, cash) -> With_cash ({ p with volatility }, cash)
+      | Bermudan (p, cash, dates) ->
+          Bermudan ({ p with volatility }, cash, dates)
+
+    let solve ?(cancel = fun () -> false) cfg admitted side quote =
+      let cancel () = try cancel () with e -> raise (Callback_error e) in
+      let checkpoint () = if cancel () then stop Cancelled in
+      try
+        checkpoint ();
+        let p = inputs admitted in
+        let cash =
+          match admitted with
+          | Admitted _ -> None
+          | With_cash (_, c) -> Some c
+          | Bermudan (_, c, _) -> c
+        in
+        if side = Side.Put && Option.is_some cash then stop Unsupported_cash_put;
+        let limits = cfg.pricing.limits in
+        if limits.max_workspace_bytes < 65536 then
+          stop (Pricing_failed (Resource_limit "inverse metadata workspace"));
+        (* A mathematical cap is optional evidence, never a rounded substitute.
+           Failure to enclose it cannot establish absence of a root. *)
+        (try
+           let amount, rate =
+             if side = Side.Call then (p.spot, p.dividend_yield)
+             else (p.strike, p.rate)
+           in
+           let exponent =
+             B.mul (exact (max 0. (-.rate))) (exact p.time_to_expiry)
+           in
+           let cap = B.mul (exact amount) (B.exp exponent) in
+           if B.compare_float cap quote = B.Negative then
+             stop (No_solution Above_global_cap)
+         with B.Unresolved _ -> ());
+        (if cash = None && p.opens_at = 0. then
+           let difference = B.sub (exact p.spot) (exact p.strike) in
+           let payoff =
+             if side = Side.Call then difference else B.neg difference
+           in
+           if B.compare_float payoff quote = B.Positive then
+             stop (No_solution Below_immediate_payoff));
+        let constant =
+          if p.time_to_expiry = 0. then (
+            let stock = ref (exact p.spot) in
+            (match cash with
+            | Some c
+              when c.valuation_side = Before_cash && c.opening_side = After_cash
+              ->
+                let total = ref (exact 0.) in
+                Array.iteri
+                  (fun i (d : dividend) ->
+                    checkpoint ();
+                    if i >= limits.max_row_visits then
+                      stop
+                        (Pricing_failed
+                           (Resource_limit "inverse expiry cash rows"));
+                    total := B.add !total (exact d.amount))
+                  c.dividends;
+                stock := positive_part (B.sub !stock !total)
+            | _ -> ());
+            let difference = B.sub !stock (exact p.strike) in
+            Some
+              ( Expiry,
+                positive_part
+                  (if side = Side.Call then difference else B.neg difference) ))
+          else if p.spot = 0. then
+            if side = Side.Call then Some (Absorbing_stock, exact 0.)
+            else
+              let t = if p.rate >= 0. then p.opens_at else p.time_to_expiry in
+              Some
+                ( Absorbing_stock,
+                  B.mul (exact p.strike)
+                    (B.exp (B.mul (exact (-.p.rate)) (exact t))) )
+          else if p.strike = 0. && cash = None then
+            if side = Side.Put then Some (Zero_strike, exact 0.)
+            else
+              let t =
+                if p.dividend_yield >= 0. then p.opens_at else p.time_to_expiry
+              in
+              Some
+                ( Zero_strike,
+                  B.mul (exact p.spot)
+                    (B.exp (B.mul (exact (-.p.dividend_yield)) (exact t))) )
+          else None
+        in
+        (match constant with
+        | Some (reason, value) -> (
+            checkpoint ();
+            match B.compare_float value quote with
+            | B.Zero -> stop (Non_identifiable reason)
+            | B.Positive | B.Negative ->
+                stop (No_solution Incompatible_constant_price)
+            | B.Indeterminate -> stop Price_uncertainty_or_plateau)
+        | None -> ());
+        let limits =
+          {
+            limits with
+            max_steps = limits.max_steps / cfg.max_evaluations;
+            max_policy_solves = limits.max_policy_solves / cfg.max_evaluations;
+            max_row_visits = limits.max_row_visits / cfg.max_evaluations;
+            max_workspace_bytes = limits.max_workspace_bytes - 65536;
+          }
+        in
+        if
+          limits.max_steps = 0
+          || limits.max_policy_solves = 0
+          || limits.max_row_visits = 0
+        then stop (Pricing_failed (Resource_limit "inverse work partition"));
+        let pricing = { cfg.pricing with limits } and evaluations = ref 0 in
+        let evaluate volatility =
+          checkpoint ();
+          if !evaluations >= cfg.max_evaluations then stop Evaluation_limit;
+          incr evaluations;
+          match
+            price ~cancel pricing (replace_volatility admitted volatility) side
+          with
+          | Error Cancelled -> stop Cancelled
+          | Error e -> stop (Pricing_failed e)
+          | Ok price ->
+              { volatility; price; uncertainty_indicator = indicator price }
+        in
+        let midpoint a b =
+          let lo = Vol.to_float a.volatility
+          and hi = Vol.to_float b.volatility in
+          let mid = lo +. ((hi -. lo) *. 0.5) in
+          if not (lo < mid && mid < hi) then stop Unrepresentable_progress;
+          match Vol.lognormal mid with
+          | Ok v -> v
+          | Error _ -> stop Unrepresentable_progress
+        in
+        let sample a b =
+          let m = evaluate (midpoint a b) in
+          ordered a m;
+          ordered m b;
+          m
+        in
+        let rec search lower upper =
+          checkpoint ();
+          let distance =
+            B.sub
+              (exact (Vol.to_float upper.volatility))
+              (exact (Vol.to_float lower.volatility))
+          in
+          match B.compare_float distance cfg.width with
+          | B.Zero | B.Negative ->
+              if classify quote lower <> -1 || classify quote upper <> 1 then
+                stop Price_uncertainty_or_plateau;
+              {
+                lower;
+                upper;
+                requested_width = cfg.width;
+                evaluations = !evaluations;
+                assurance = Estimated_only;
+              }
+          | B.Positive | B.Indeterminate -> (
+              let mid = sample lower upper in
+              match classify quote mid with
+              | -1 -> search mid upper
+              | 1 -> search lower mid
+              | _ ->
+                  let left = sample lower mid in
+                  if classify quote left = 1 then search lower left
+                  else
+                    let right = sample mid upper in
+                    if classify quote right = -1 then search right upper
+                    else
+                      let lo =
+                        if classify quote left = -1 then left else lower
+                      in
+                      let hi =
+                        if classify quote right = 1 then right else upper
+                      in
+                      if lo == lower && hi == upper then
+                        stop Price_uncertainty_or_plateau;
+                      search lo hi)
+        in
+        let lower = evaluate cfg.lower in
+        let upper = evaluate cfg.upper in
+        ordered lower upper;
+        let a = classify quote lower and b = classify quote upper in
+        if a = 1 then stop (Estimated_outside_search_range Below);
+        if b = -1 then stop (Estimated_outside_search_range Above);
+        if a <> -1 || b <> 1 then stop Price_uncertainty_or_plateau;
+        let result = search lower upper in
+        checkpoint ();
+        Ok result
+      with
+      | Callback_error e -> raise e
+      | Abort e -> Error e
+      | B.Unresolved s -> Error (Pricing_failed (Arithmetic_unresolved s))
+  end
+
   module Piecewise = struct
     module Rate = struct
       type t = curve

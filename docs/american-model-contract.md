@@ -1,5 +1,9 @@
 # American and Bermudan financial contract
 
+The separate [constant-volatility inverse](american-implied-volatility.md) returns
+estimated intervals for supported monotone families, with explicit uncertainty
+and nonidentifiability outcomes. It does not extend European root certification.
+
 **Design for #108 under [Epic #107](https://github.com/MorphIQ-Labs/morphiq-risk-ml/issues/107).
 No American runtime API is implemented by this document.** It fixes the real
 quantity, event semantics and ownership that #109–#120 must implement and qualify.
