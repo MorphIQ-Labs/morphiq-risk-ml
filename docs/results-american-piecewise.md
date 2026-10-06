@@ -160,3 +160,7 @@ python3 scripts/benchmark_american_piecewise.py \
   --candidate /path/to/candidate-build.json \
   --output /new/performance-directory
 ```
+
+The subsequent [piecewise allocation pass](results-piecewise-allocation.md)
+qualifies bounded stencil/boundary and slab-matrix reuse against these frozen
+workloads. The measurements above remain the original #114 characterization.
