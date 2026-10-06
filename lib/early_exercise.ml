@@ -802,12 +802,13 @@ module Bsm = struct
     | Some x -> x
     | None -> fail "missing future exercise instant"
 
-  let piecewise_european tick curves p side =
+  let piecewise_european ?strike tick curves p side =
+    let strike = Option.value ~default:(exact p.strike) strike in
     let integral curve f = curve_integral tick curve 0. p.time_to_expiry f in
     let x = E.mul (exact p.spot) (E.exp (E.neg (integral curves.yields exact)))
-    and y = E.mul (exact p.strike) (E.exp (E.neg (integral curves.rates exact)))
+    and y = E.mul strike (E.exp (E.neg (integral curves.rates exact)))
     and variance = integral curves.vols (fun v -> E.mul (exact v) (exact v)) in
-    if p.spot = 0. || p.strike = 0. || E.sign variance = E.Zero then
+    if p.spot = 0. || E.sign strike = E.Zero || E.sign variance = E.Zero then
       enclosed (payoff_e side x y)
     else
       let root = E.sqrt variance in
@@ -947,6 +948,47 @@ module Bsm = struct
       Some
         ("piecewise-European-reduction", piecewise_european tick curves p side)
     else None
+
+  (* With only terminal cash and terminal call rights, pre-cash exercise
+     dominates post-cash exercise. After-only rights shift the strike by the
+     exact joint payment. No statement about earlier exercise follows. *)
+  let terminal_cash_strike p cash events side =
+    match (side, cash, events) with
+    | Side.Call, Some spec, [ (time, amount) ]
+      when p.time_to_expiry > 0. && time = p.time_to_expiry
+           && p.opens_at = p.time_to_expiry ->
+        Some
+          (if spec.opening_side = Before_cash then exact p.strike
+           else E.add (exact p.strike) amount)
+    | _ -> None
+
+  let terminal_cash_european ?curves tick p strike =
+    match curves with
+    | Some cs -> piecewise_european ~strike tick cs p Side.Call
+    | None ->
+        if E.sign strike = E.Zero then
+          enclosed
+            (E.mul (exact p.spot)
+               (exp_product (-.p.dividend_yield) (exact p.time_to_expiry)))
+        else
+          let retained = E.of_words strike.hi strike.lo in
+          let remainder = E.magnitude (E.sub strike retained) in
+          let m =
+            Model_enclosure.Fast.black ~spot:p.spot ~spot_low:0.
+              ~strike:strike.hi ~strike_low:strike.lo ~time:p.time_to_expiry
+              ~rate:p.rate ~yield:p.dividend_yield
+          in
+          let price =
+            Model_enclosure.Fast.price m Side.Call (Vol.to_float p.volatility)
+          in
+          let error =
+            if remainder = 0. then 0.
+            else
+              E.magnitude
+                (E.mul (exact remainder)
+                   (exp_product (-.p.rate) (exact p.time_to_expiry)))
+          in
+          enclosed (E.add_error price error)
 
   type context = {
     cfg : configuration;
@@ -1668,8 +1710,8 @@ module Bsm = struct
     (value, if capture then Some v else None)
 
   let price_with_curves ?curves ?observe ?boundary_reuse
-      ?(cancel = fun () -> false) ?(exercise_regions = false) ?(premium = false)
-      cfg admitted side =
+      ?(terminal_reductions = true) ?(cancel = fun () -> false)
+      ?(exercise_regions = false) ?(premium = false) cfg admitted side =
     let p = inputs admitted in
     let cash =
       match admitted with
@@ -1810,6 +1852,17 @@ module Bsm = struct
             | None, None -> analytic p side
             | None, Some spec ->
                 cash_analytic cfg cancel cash_visits p spec events side)
+      in
+      let analytical =
+        match analytical with
+        | Some _ -> analytical
+        | None when terminal_reductions ->
+            Option.map
+              (fun strike ->
+                ( "terminal-cash-European-reduction",
+                  terminal_cash_european ?curves model_tick p strike ))
+              (terminal_cash_strike p cash events side)
+        | None -> None
       in
       match analytical with
       | Some (method_name, (value, error)) ->
@@ -2788,8 +2841,8 @@ module Bsm = struct
             None)
         in
         match
-          price_with_curves ?curves ~observe ?boundary_reuse:reuse ~cancel cfg a
-            side
+          price_with_curves ?curves ~observe ?boundary_reuse:reuse
+            ~terminal_reductions:false ~cancel cfg a side
         with
         | Error (Cancelled as f) | Error (Resource_limit _ as f) ->
             raise (Stop f)

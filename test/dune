@@ -1244,3 +1244,33 @@
    (run
     %{test}
     %{dep:../docs/evidence/american-iv/negative-yield/references.tsv}))))
+
+(test
+ (name terminal_cash)
+ (modules terminal_cash)
+ (libraries morphiq_risk zarith)
+ (modes byte exe)
+ (deps
+  ../docs/evidence/american-forward-optimization/reference-v1/references.tsv
+  ../lib/dllmorphiq_risk_stubs%{ext_dll}
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (progn
+    (run
+     %{test}
+     %{dep:../docs/evidence/american-forward-optimization/reference-v1/references.tsv})
+    (run
+     %{exe:terminal_cash.bc}
+     %{dep:../docs/evidence/american-forward-optimization/reference-v1/references.tsv})))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_terminal_cash.py
+  ../scripts/generate_terminal_cash.py
+  (source_tree ../docs/evidence/american-forward-optimization/reference-v1))
+ (action
+  (run python3 %{dep:../scripts/check_terminal_cash.py})))
