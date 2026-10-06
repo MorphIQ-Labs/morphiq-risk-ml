@@ -86,10 +86,14 @@ strictly below/above. These empirical indicators do not certify the real PDE
 price. Carrying them into inversion avoids discarding known uncertainty; it
 does not turn them into rigorous bounds.
 
-Bisection preserves opposite endpoint signs. An overlapping midpoint triggers
-quarter probes; only strict signs may move an endpoint. If neither quarter
-improves the bracket, return `Price_uncertainty_or_plateau`. Do not divide by
-vega or choose a point within an overlap. A success requires outward full-width
+Safeguarded point-price interpolation proposes interior probes, with endpoint
+spacing and a midpoint every third step to prevent stagnation. The first
+overlapping probe permits one bounded pair of nearby probes; quarter probes
+remain the fallback. Only strict full-band signs may move an endpoint. If the
+fallback cannot improve the bracket, return `Price_uncertainty_or_plateau`.
+The [proposal derivation](evidence/american-iv-optimization/proposal-design.md)
+explains the placement rules. A proposed location cannot establish a root or
+an endpoint sign; no vega lower bound is assumed. A success requires outward full-width
 comparison with `width` and rechecks both strict signs. Increasing-sigma prices
 with disjoint reversed bands return `Inconsistent_prices`. Overlapping bands
 cannot establish a violation. No sample history or mutable cross-request cache

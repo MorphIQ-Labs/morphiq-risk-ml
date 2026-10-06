@@ -3263,6 +3263,14 @@ module Bsm = struct
             and hi = Vol.to_float b.volatility in
             let weight = l /. scale /. ((l /. scale) +. (r /. scale)) in
             let x = lo +. ((hi -. lo) *. weight) in
+            (* Spend a price call on bracket progress, not on oversolving one
+               endpoint. This placement margin cannot establish a sign. *)
+            let margin = Float.min (cfg.width *. 0.25) ((hi -. lo) *. 0.25) in
+            let x =
+              if Float.is_finite x then
+                Float.max (lo +. margin) (Float.min (hi -. margin) x)
+              else x
+            in
             if not (Float.is_finite l && Float.is_finite r && l > 0. && r > 0.)
             then midpoint a b
             else
