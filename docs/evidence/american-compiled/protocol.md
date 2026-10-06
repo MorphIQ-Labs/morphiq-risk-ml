@@ -89,3 +89,34 @@ binary/source/configuration, warmups, all samples, process allocation/GC/RSS,
 host load and first-output/cancellation observations. Report amortized throughput
 as such. No deployment SLA, universal parallel speedup or new numerical accuracy
 threshold is inferred; broad workload/crossover acceptance remains #119/#120.
+
+## Fixed measurement matrix (before measurement)
+
+Use native release/O3 OCaml 5.3.0 Flambda. Each workload has four identical
+positions (distinct IDs) and two paired scenarios: base spot 100 and spot 101,
+both at day zero. K=100, r=.05, q=0, sigma=.2, expiry day365, opening day0,
+ACT/365F, no cash. Workloads: call price, general put price, put delta+gamma
+bundle, call estimated IV, call certified reduction. Price configuration:
+64 space cells, 64 time steps, two domain expansions, tolerance1; work limits
+8192 nodes, 131072 steps, 1048576 policy solves, 100000000 row visits, 8MiB
+workspace, 64 policy iterations. Greek tolerances are10, default bumps.
+IV search [.05,.6], width .01, 32 evaluations and independent fixed quote
+`0x1.4e6b2e3d54dc2p+3` (the existing call-100-0.05-american reference).
+Certificate absolute limit1e-9. Quotes stay fixed under the spot shock.
+
+Compare explicit scalar calls on eight pre-admitted inputs with the matching
+compiled fixed batch. Separately measure dated-plan execution with one and two
+workers, tile_rows=1, no-op streaming sink with first-row clock observation.
+Use two warm-up executions and five measured executions per mode per process;
+five fresh processes alternate forward/reverse mode order. Compilation alone
+uses 100 repetitions after two warmups, separately for fixed and dated plans.
+Compare complete scalar/batch/plan outcomes outside timing. Per-mode cumulative
+allocation is coordinator-domain only; separate per-child RSS includes workers.
+Process-wide GC counters are reported as diagnostics, never mislabeled as
+whole-process allocation. No missing/refused Greek quantity counts as a success.
+
+A separate cancellation probe requests cancellation after a controller delay
+of5ms during a general put solve. Record actual issuance and elapsed return,
+controller scheduling delay, committed prefix and stop reason. This observation
+has no latency threshold. Compilation bounds include market factors and schedule
+events; the date adapter supports the qualified 64-bit runtimes only.
