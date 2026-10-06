@@ -167,6 +167,68 @@ let controls () =
   let vv = (price varying_vol Side.Put).value in
   expect "varying stencil independent reference"
     (abs_float (vv -. 10.673905247541096) +. 0.055185215741111904 <= 1.);
+  (* Workspace size affects reuse, never the represented option or outcome.
+     Compare both boundary choices through complete public results, including
+     diagnostic/work counters and cancellation cadence. *)
+  List.iter
+    (fun (p, cash) ->
+      let admitted =
+        unwrap
+          (match cash with None -> P.admit p | Some c -> P.admit_cash p c)
+      in
+      let count =
+        3
+        + Array.length (P.Rate.changes p.rate)
+        + Array.length (P.Yield.changes p.dividend_yield)
+        + Array.length (P.Volatility.changes p.volatility)
+      in
+      let reserved =
+        (512 * limits.max_nodes)
+        + (32 * limits.policy_iterations)
+        + 65536 + (1024 * count)
+        +
+        match cash with
+        | None -> 0
+        | Some c -> (48 * limits.max_nodes) + (1024 * Array.length c.A.dividends)
+      in
+      List.iter
+        (fun side ->
+          let run surplus cancel_after =
+            let calls = ref 0 in
+            let result =
+              P.price
+                ~cancel:(fun () ->
+                  incr calls;
+                  !calls > cancel_after)
+                (config ~cells:32 ~steps:32
+                   ~lim:{ limits with max_workspace_bytes = reserved + surplus }
+                   1.)
+                admitted side
+            in
+            (result, !calls)
+          in
+          let expected = run 0 max_int in
+          List.iter
+            (fun surplus ->
+              expect "bounded cache complete outcome and visits"
+                (run surplus max_int = expected);
+              expect "bounded cache cancellation cadence"
+                (run surplus 400 = run 0 400))
+            [ 512; 16384; 1048576 ])
+        [ Side.Put; Side.Call ])
+    [
+      (varying_vol, None);
+      ( piece_model (model ~q:(-0.05) ())
+          [| (0.5, -0.03) |]
+          [| (0.25, 0.08); (0.75, -0.02) |]
+          [| (0.375, 0.3) |],
+        None );
+      ( piece_model (model ())
+          [| (0.5, -0.03) |]
+          [| (0.5, 0.08) |]
+          [| (0.5, 0.35) |],
+        Some (spec [ (0.5, 5.) ]) );
+    ];
   let near =
     piece_model
       (model ~s:0x1p-20 ~r:(-0.1) ~vol:0.5 ())

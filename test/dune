@@ -1045,3 +1045,14 @@
     %{dep:../scripts/check_american_piecewise.py}
     --executable
     %{exe:american_piecewise.exe}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_piecewise_allocation.py
+  ../scripts/test_benchmark_american_allocation.py
+  ../scripts/benchmark_piecewise_allocation.py
+  ../scripts/benchmark_bermudan_boundary.py
+  ../scripts/benchmark_american_allocation.py)
+ (action
+  (run python3 %{dep:../scripts/test_piecewise_allocation.py})))

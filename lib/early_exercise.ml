@@ -858,7 +858,7 @@ module Bsm = struct
 
   let check c = if c.cancel () then raise (Stop Cancelled)
 
-  let tick c =
+  let[@inline always] tick c =
     if c.visits >= c.cfg.limits.max_row_visits then
       raise (Stop (Resource_limit "row visits"));
     c.visits <- c.visits + 1;
@@ -985,7 +985,8 @@ module Bsm = struct
      original words; rounded time coordinates are not dependency identities.
      A 256-byte entry charge covers the list/tuple/key/array headers and boxed
      words on the supported 64-bit runtime; payload is 8 bytes per step. *)
-  let boundary_values ~max_steps cache earlier later next_exercise time_steps =
+  let boundary_values ?top ~max_steps cache earlier later next_exercise
+      time_steps =
     let remaining, entries = !cache in
     if
       (remaining = 0 && entries = [])
@@ -997,7 +998,8 @@ module Bsm = struct
         ( Int64.bits_of_float earlier,
           Int64.bits_of_float later,
           Option.map Int64.bits_of_float next_exercise,
-          time_steps )
+          time_steps,
+          Option.map Int64.bits_of_float top )
       in
       match List.assoc_opt key entries with
       | Some values -> Some values
@@ -1010,14 +1012,18 @@ module Bsm = struct
             Some values
 
   (* The price request owns preparation for one stock-grid key. Payoff and
-     spatial bands depend only on that grid, the fixed model and option side;
+     spatial bands depend on that grid and the complete coefficient tuple;
      time steps, boundary choice and cash interpolation do not alter them. *)
-  let solver_pair ?curves ?dates ?cash ?bermudan ~prepared ~boundary_cache c p
-      side x time_steps capture =
+  let solver_pair ?curves ?dates ?cash ?bermudan ~prepared ~stencils
+      ~boundary_cache c p side x time_steps capture =
    fun upper_boundary ->
     check c;
     let n = Array.length x in
-    let key p = (p.rate, p.dividend_yield, Vol.to_float p.volatility) in
+    let key p =
+      ( Int64.bits_of_float p.rate,
+        Int64.bits_of_float p.dividend_yield,
+        Int64.bits_of_float (Vol.to_float p.volatility) )
+    in
     let arr () = Array.make n 0. in
     let left, right, g, reused, switched =
       match !prepared with
@@ -1042,6 +1048,18 @@ module Bsm = struct
       v.(i) <- g.(i)
     done;
     let prepare p reused switched =
+      let reused, switched =
+        if reused || curves = None then (reused, switched)
+        else
+          match List.assoc_opt (key p) (snd !stencils) with
+          | None -> (false, 0)
+          | Some (saved_left, saved_right, switched) ->
+              if Array.length saved_left <> n || Array.length saved_right <> n
+              then fail "cached spatial grid mismatch";
+              Array.blit saved_left 0 left 0 n;
+              Array.blit saved_right 0 right 0 n;
+              (true, switched)
+      in
       let sigma = Vol.to_float p.volatility in
       if reused then (
         (* A logical stencil-row visit remains a visit when loading a prepared
@@ -1049,7 +1067,8 @@ module Bsm = struct
         for _ = 1 to n - 2 do
           tick c
         done;
-        c.switched <- c.switched + switched)
+        c.switched <- c.switched + switched;
+        prepared := Some (key p, left, right, g, switched))
       else
         let switched_before = c.switched in
         let drift = E.sub (exact p.rate) (exact p.dividend_yield) in
@@ -1092,7 +1111,21 @@ module Bsm = struct
           left.(i) <- coefficient "left spatial coefficient resolution" lm;
           right.(i) <- coefficient "right spatial coefficient resolution" lp
         done;
-        prepared := Some (key p, left, right, g, c.switched - switched_before)
+        let switched = c.switched - switched_before in
+        prepared := Some (key p, left, right, g, switched);
+        (* The arrays above remain mutable working bands. Retain separate,
+           immutable snapshots, charged to the same surplus as boundary values.
+           A 256-byte entry allowance covers keys, boxes and headers. *)
+        let remaining, boundaries = !boundary_cache in
+        if curves <> None && remaining >= 256 && n <= (remaining - 256) / 16
+        then (
+          let charge = 256 + (16 * n) in
+          let used, entries = !stencils in
+          stencils :=
+            ( used + charge,
+              (key p, (Array.copy left, Array.copy right, switched)) :: entries
+            );
+          boundary_cache := (remaining - charge, boundaries))
     in
     prepare p reused switched;
     let current_key = ref (key p) in
@@ -1169,6 +1202,14 @@ module Bsm = struct
           boundary_values ~max_steps:c.cfg.limits.max_steps boundary_cache
             earlier later next_exercise time_steps
         in
+        let top_values =
+          if upper_boundary && curves <> None then
+            boundary_values
+              ~top:(if side = Side.Call then x.(n - 1) else p.strike)
+              ~max_steps:c.cfg.limits.max_steps boundary_cache earlier later
+              next_exercise time_steps
+          else None
+        in
         let previous = ref later in
         for j = 1 to time_steps do
           step c;
@@ -1220,47 +1261,66 @@ module Bsm = struct
                 value
           in
           let top =
-            if upper_boundary then
-              let factor =
-                match piecewise_bounds with
-                | Some (_, future_cap) ->
-                    E.exp
-                      (E.add future_cap
-                         (E.mul
-                            (exact
-                               (float_max
-                                  (if side = Side.Call then -.p.dividend_yield
-                                   else -.p.rate)
-                                  0.))
-                            (E.sub (exact later) t_e)))
-                | None ->
-                    exp_product
-                      (float_max
-                         (if side = Side.Call then -.p.dividend_yield
-                          else -.p.rate)
-                         0.)
-                      remaining
+            if upper_boundary then (
+              let cached =
+                match top_values with None -> nan | Some vs -> vs.(j - 1)
               in
-              boundary c
-                (E.mul
-                   (exact (if side = Side.Call then x.(n - 1) else p.strike))
-                   factor)
+              if not (Float.is_nan cached) then cached
+              else
+                let factor =
+                  match piecewise_bounds with
+                  | Some (_, future_cap) ->
+                      E.exp
+                        (E.add future_cap
+                           (E.mul
+                              (exact
+                                 (float_max
+                                    (if side = Side.Call then -.p.dividend_yield
+                                     else -.p.rate)
+                                    0.))
+                              (E.sub (exact later) t_e)))
+                  | None ->
+                      exp_product
+                        (float_max
+                           (if side = Side.Call then -.p.dividend_yield
+                            else -.p.rate)
+                           0.)
+                        remaining
+                in
+                let value =
+                  boundary c
+                    (E.mul
+                       (exact
+                          (if side = Side.Call then x.(n - 1) else p.strike))
+                       factor)
+                in
+                (match top_values with
+                | None -> ()
+                | Some vs -> vs.(j - 1) <- value);
+                value)
             else if obstacle then g.(n - 1)
             else 0.
           in
           v.(0) <- zero;
           v.(n - 1) <- top;
+          (* h, coefficients and original bands are fixed within this slab;
+             policy elimination writes only d/z/candidate. Check the first
+             assembly in its original row/step order, then retain the bands.
+             Every logical row visit and RHS update still occurs each step. *)
+          let assemble = j = 1 in
           for i = 1 to n - 2 do
             tick c;
-            lo.(i) <- -.h *. left.(i);
-            hi.(i) <- -.h *. right.(i);
-            diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
-            rhs.(i) <- v.(i);
-            let margin =
-              finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
-            in
-            if margin < 0.25 || diag.(i) <= 0. then
-              fail "lost binary64 matrix dominance"
+            if assemble then (
+              lo.(i) <- -.h *. left.(i);
+              hi.(i) <- -.h *. right.(i);
+              diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
+              rhs.(i) <- v.(i);
+              let margin =
+                finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
+              in
+              if margin < 0.25 || diag.(i) <= 0. then
+                fail "lost binary64 matrix dominance")
+            else rhs.(i) <- v.(i)
           done;
           let accepted = ref false and iteration = ref 0 in
           while not !accepted do
@@ -1748,11 +1808,14 @@ module Bsm = struct
           in
           let cache_bytes =
             if
-              side = Side.Call
-              || curves = None && dates = None && p.rate >= 0.
-                 && p.opens_at = 0.
+              curves = None
+              && (side = Side.Call
+                 || (dates = None && p.rate >= 0. && p.opens_at = 0.))
             then 0
-            else max 0 (cfg.limits.max_workspace_bytes - reserved - 128)
+            else
+              max 0
+                (cfg.limits.max_workspace_bytes - reserved
+                - if curves = None then 128 else 256)
           in
           let boundary_cache = ref (cache_bytes, []) in
           let fine_time = 4 * cfg.time_steps in
@@ -1760,11 +1823,16 @@ module Bsm = struct
              fixed inputs/configuration plus (level, domain). Drop the previous
              preparation before constructing a different grid. *)
           let spatial = ref None in
+          let stencils = ref (0, []) in
           let run ?(mapping_level = 2) level domain time capture =
             let prepared =
               match !spatial with
               | Some (l, d, prepared) when l = level && d = domain -> prepared
               | _ ->
+                  let used, _ = !stencils in
+                  stencils := (0, []);
+                  let remaining, boundaries = !boundary_cache in
+                  boundary_cache := (remaining + used, boundaries);
                   let prepared = ref None in
                   spatial := Some (level, domain, prepared);
                   prepared
@@ -1780,7 +1848,7 @@ module Bsm = struct
                 cash
             in
             let solve =
-              solver_pair ?curves ?dates ?cash ?bermudan ~prepared
+              solver_pair ?curves ?dates ?cash ?bermudan ~prepared ~stencils
                 ~boundary_cache c p side x time capture
             in
             let low, vl = solve false in

@@ -1,0 +1,13 @@
+{
+  "none": {
+    "upper_boundary": 7506,
+    "other": 1601,
+    "stencil": 3711
+  },
+  "cash": {
+    "upper_boundary": 3973,
+    "other": 1315,
+    "stencil": 2248,
+    "cash_mapping": 696
+  }
+}

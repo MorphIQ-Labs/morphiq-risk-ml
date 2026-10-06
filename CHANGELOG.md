@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Piecewise allocation reuse (#119)
+
+- Reuse immutable coefficient stencils and successful upper boundary scalars
+  within one price request, sharing a bounded surplus workspace allowance.
+- Prepare original matrix bands once per constant slab and inline row-budget
+  checks, retaining first-step arithmetic/failure order and per-step visits.
+- Retain original arithmetic on misses, grid/endpoint dependencies, logical
+  visits, cancellation, numerical diagnostics and constrained-workspace fallback.
+
 ### Piecewise American and Bermudan coefficients (#114)
 
 - Add distinct immutable rate, yield and lognormal-volatility schedules through

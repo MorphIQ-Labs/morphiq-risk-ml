@@ -12,6 +12,7 @@ been retired; it remains in Git history.
 
 - [Bermudan boundary reuse](results-bermudan-boundary.md): bounded request-owned discounts, unchanged outcomes and paired allocation/latency evidence.
 
+- [Piecewise allocation reuse](results-piecewise-allocation.md): bounded stencil/boundary snapshots, complete-outcome compatibility and paired cost evidence.
 - [Piecewise coefficients](piecewise-american.md): distinct immutable curves, event-aligned rollback and [executed evidence](results-american-piecewise.md).
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 

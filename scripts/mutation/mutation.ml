@@ -67,6 +67,39 @@ let catalog =
       mechanism = "interior rate knots can maximize the future discount factor";
     };
     {
+      id = "piecewise-slab-matrix";
+      file = "lib/early_exercise.ml";
+      snippet = "let assemble = j = 1 in";
+      replacement = "let assemble = j = 1 && diag.(1) = 0. in";
+      killer = "american_piecewise";
+      mechanism =
+        "original matrix bands must be rebuilt for every constant slab";
+    };
+    {
+      id = "piecewise-cache-key";
+      file = "lib/early_exercise.ml";
+      snippet = "List.assoc_opt (key p) (snd !stencils)";
+      replacement = "Option.map snd (List.nth_opt (snd !stencils) 0)";
+      killer = "american_piecewise";
+      mechanism = "reused stencils retain every coefficient dependency";
+    };
+    {
+      id = "piecewise-cache-ownership";
+      file = "lib/early_exercise.ml";
+      snippet = "Array.copy left, Array.copy right, switched";
+      replacement = "left, right, switched";
+      killer = "american_piecewise";
+      mechanism = "stored stencils cannot alias mutable working bands";
+    };
+    {
+      id = "piecewise-upper-boundary-key";
+      file = "lib/early_exercise.ml";
+      snippet = "Option.map Int64.bits_of_float top";
+      replacement = "Option.map (fun _ -> Int64.zero) top";
+      killer = "american_piecewise";
+      mechanism = "call upper boundaries depend on the stock-grid endpoint";
+    };
+    {
       id = "piecewise-stencil-key";
       file = "lib/early_exercise.ml";
       snippet = "if key p <> !current_key then (";
