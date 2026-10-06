@@ -29,6 +29,12 @@
   (run %{test} %{dep:../oracle/fixtures/dd.txt})))
 
 (test
+ (name enclosure_exponential)
+ (modules enclosure_exponential)
+ (modes byte_complete exe)
+ (libraries morphiq_risk zarith))
+
+(test
  (name enclosure_scalar)
  (modules enclosure_scalar)
  (modes byte exe)
