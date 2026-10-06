@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Reference-LAPACK/lapack",
+  "revision": "6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca",
+  "version": "3.12.1",
+  "sha256": {
+    "dgtsv.f": "7fa899040fa5b02bb4906856c2488d31011ce1607c51efbd1375bfc20709aa38",
+    "LICENSE": "978539245c405775bf347b1256c36df4daf8b69a64b099e94b1d53742201621e"
+  }
+}

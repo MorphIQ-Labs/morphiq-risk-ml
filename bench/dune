@@ -260,3 +260,34 @@
    python3
    %{dep:../scripts/test_american_workloads.py}
    %{exe:american_workloads.exe})))
+
+(executables
+ (names backend_requests backend_contracts)
+ (modules backend_requests backend_contracts backend_inputs)
+ (modes byte_complete exe)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk unix)
+ (ocamlopt_flags
+  (:standard -O3)))
+
+(executable
+ (name backend_micro)
+ (modules backend_micro)
+ (modes byte_complete exe)
+ (foreign_archives assurance_clock)
+ (libraries morphiq_risk)
+ (ocamlopt_flags
+  (:standard -O3)))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/check_american_backends.py
+  ../scripts/build_american_backends.py
+  ../scripts/test_american_backends.py
+  ../scripts/measure_american_workloads.py)
+ (action
+  (run
+   python3
+   %{dep:../scripts/test_american_backends.py}
+   %{exe:backend_micro.exe})))
