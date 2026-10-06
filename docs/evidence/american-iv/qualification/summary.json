@@ -1,0 +1,39 @@
+{
+  "implementation_commit": "566e190",
+  "final_test_commit": "624eb79da0c516887bc2c188db67ef0102140651",
+  "runtime_changed_after_implementation": false,
+  "negative_yield_supplement": {
+    "quotes": 2,
+    "exercise_contract_checks": 4,
+    "source": "624eb79da0c516887bc2c188db67ef0102140651",
+    "added_after_timing_without_runtime_changes": true
+  },
+  "initial_native": {
+    "width": 0.05,
+    "domain_expansions": 2,
+    "accepted": 24,
+    "price_accuracy_refusals": 6
+  },
+  "refined_native": {
+    "width": 0.05,
+    "domain_expansions": 3,
+    "accepted": 30,
+    "refused": 0
+  },
+  "tight_native_bytecode_and_installed": {
+    "width": 0.005,
+    "domain_expansions": 3,
+    "accepted_each": 30,
+    "refused_each": 0
+  },
+  "source_artifact_cross_platform_campaign": "pending #120",
+  "general_inverse_certification": "not offered",
+  "main_merge": "not authorized by this work",
+  "notes": [
+    "Initial wide/tight native and bytecode runs preceded the final extra finite-rights/expiry controls; runtime bytes are identical to implementation commit. Final installed clients include the complete controls.",
+    "Development suite started at implementation commit; test-only finite-rights/collector additions were committed during validation. Subsequent release and focused checks cover these additions; runtime source did not change.",
+    "First bytecode launch failed before startup because opam replaced DLL search environment; corrected by setting it after opam exec.",
+    "The initial node increase caused six workspace refusals; original node/workspace caps were restored without numerical tolerance changes.",
+    "Prototype constructor/syntax/formatting and control-witness errors were corrected before qualification. Available raw logs are retained; not every transient compiler message was captured."
+  ]
+}

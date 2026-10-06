@@ -166,10 +166,78 @@ Ordinary CI exercises the 24 analytical rows, public type rejection, invalid
 requests, budgets, uncertainty, plateau, finite-range and mathematical boundary
 outcomes, exercise identity, cancellation and callback exceptions. Six expensive
 rows are explicitly marked manual; no skipped row is an accuracy pass.
-Full qualification, installed replay and measured costs are recorded below when
-complete. Default CI remains five jobs and seven core mutants.
+Default CI remains five jobs and seven core mutants.
 
 Portfolio integration remains #118; further allocation/latency work is #119,
 and source-artifact/cross-platform capability qualification is #120. General
 cash-put inversion, one-parameter curve inversion and rigorous general stopping
 inverse enclosures remain outside this API. No main release is implied.
+
+## Executed validation and measured cost
+
+Runtime source is `566e19096227dc920822660eb68c68cf89f1eef2`; final failure
+controls are `c3f5f5e5a3b7801466fa8ddfefe1fc843ca04a9b`. The [qualification summary](evidence/american-iv/qualification/summary.json)
+and [hashed raw records](evidence/american-iv/qualification/manifest.json) retain
+commands, complete outcomes, failed attempts, source/compiler identity and timing.
+No runtime changes followed the implementation commit; subsequent changes are
+controls, documentation and evidence. Development/release ordinary suites,
+format/install, and the final focused native/bytecode/type controls passed.
+
+All 30 width-0.005 intervals contain their entire independent references in
+native, bytecode and external installed-package native/bytecode clients. Complete
+serialized outcomes agree across all four runs. This is local platform evidence;
+CI's ordinary three-platform checks do not execute these six manual PDE rows.
+The standalone source-artifact campaign remains #120.
+
+Eleven affected mutation mechanisms are rejected after successful builds and
+clean baselines. The first exercise-schedule and cancellation probes survived: terminal-only
+rights cannot distinguish the two models, and pricing cancellation does not
+exercise volatility-independent boundary dispatch. New three-date Bermudan
+and pre-boundary cancellation controls reject both faults. The initial survivors
+and successful targeted follow-up are retained. These probes establish
+sensitivity of their witnesses, not universal numerical correctness.
+
+Five fresh processes, each with one warmup per measured path and three rounds,
+measure the fixed exact quotes at sigma range [0.05,0.6], full width 0.005,
+128 space/time cells, three domain expansions and price refinement target 1.
+Analytical rounds contain 20 requests; PDE rounds contain one. End-to-end includes
+model admission and quote validation, with an already built configuration. Single
+price cost is at sigma 0.2 under the corresponding per-evaluation work limits.
+Primary numerical validation and mutation workers completed before timing. Hardware/load and raw variation
+are retained; this shared-host measurement is not a deployment or tail-latency SLO.
+
+| Case/path | Median wall time | Allocated bytes/request |
+| --- | ---: | ---: |
+| American put / end-to-end | 1125.654 ms | 121,295,904 |
+| American put / price | 124.460 ms | 13,475,224 |
+| American put / solve | 1123.202 ms | 121,295,432 |
+| No-early call / end-to-end | 0.803 ms | 1,065,158 |
+| No-early call / price | 0.088 ms | 116,662 |
+| No-early call / solve | 0.813 ms | 1,064,686 |
+| Cash terminal call / end-to-end | 1720.264 ms | 320,392,192 |
+| Cash terminal call / price | 189.435 ms | 35,601,424 |
+| Cash terminal call / solve | 1683.622 ms | 320,391,264 |
+
+Allocation is cumulative OCaml allocation, including inverse price evaluations;
+it is not retained workspace or peak RSS. General inverses intentionally reuse
+no value surfaces across candidate sigma. Their cost makes dependency-safe
+preparation reuse and pricing allocation a concrete #119 follow-up. Batch and
+scenario integration (#118) must preserve whole-inverse budgets and per-row
+estimated intervals/refusals, without promoting them to certified roots.
+
+The final protocol audit found that the primary corpus exercised negative rates
+but only nonnegative yields. A separate [two-quote Arb supplement](evidence/american-iv/negative-yield/manifest.json)
+adds terminal call/put inverses with q=-0.02 and opposite-sign rates, each under
+American and Bermudan admission. Its 256/512-bit, 120-step exact-quote inverses
+were generated before adding the four checks. Native/bytecode development/release
+checks and installed clients passed. This supplement was added after timing,
+with no runtime or benchmark changes; its source is `624eb79da0c516887bc2c188db67ef0102140651`.
+The original 30-row campaign and all its failures remain unchanged. Offline
+manifest/export controls cover both corpora.
+
+To reproduce the primary local campaign after building, run
+`_build/default/test/american_iv.exe docs/evidence/american-iv/references.tsv all 0.005 3`.
+Use `scripts/american_iv_campaign.py --minimum 30 --same LOGS...` to check complete
+ordered outcomes and replay identity. `scripts/check_american_iv.py` checks both
+reference manifests offline. Reference generators require the recorded optional
+Arb/QuantLib environment; ordinary builds and CI do not.

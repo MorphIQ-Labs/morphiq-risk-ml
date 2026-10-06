@@ -1,0 +1,110 @@
+{
+  "american-put/end-to-end": {
+    "wall_ns": {
+      "median": 1125654000.09,
+      "minimum": 1110079000.005,
+      "maximum": 1165890999.953
+    },
+    "allocated_bytes": {
+      "median": 121295904.0,
+      "minimum": 121295904.0,
+      "maximum": 121295904.0
+    }
+  },
+  "american-put/price": {
+    "wall_ns": {
+      "median": 124459999.963,
+      "minimum": 121322000.05,
+      "maximum": 162652999.978
+    },
+    "allocated_bytes": {
+      "median": 13475224.0,
+      "minimum": 13475224.0,
+      "maximum": 13475224.0
+    }
+  },
+  "american-put/solve": {
+    "wall_ns": {
+      "median": 1123202000.046,
+      "minimum": 1111229000.031,
+      "maximum": 1186875000.014
+    },
+    "allocated_bytes": {
+      "median": 121295432.0,
+      "minimum": 121295432.0,
+      "maximum": 121295432.0
+    }
+  },
+  "call-100-0.05-american/end-to-end": {
+    "wall_ns": {
+      "median": 802700.0,
+      "minimum": 767349.999,
+      "maximum": 833650.003
+    },
+    "allocated_bytes": {
+      "median": 1065157.6,
+      "minimum": 1065157.6,
+      "maximum": 1065157.6
+    }
+  },
+  "call-100-0.05-american/price": {
+    "wall_ns": {
+      "median": 87649.998,
+      "minimum": 81699.999,
+      "maximum": 124650.0
+    },
+    "allocated_bytes": {
+      "median": 116661.6,
+      "minimum": 116661.6,
+      "maximum": 116661.6
+    }
+  },
+  "call-100-0.05-american/solve": {
+    "wall_ns": {
+      "median": 812849.996,
+      "minimum": 742149.999,
+      "maximum": 952100.003
+    },
+    "allocated_bytes": {
+      "median": 1064685.6,
+      "minimum": 1064685.6,
+      "maximum": 1064685.6
+    }
+  },
+  "cash-terminal-american/end-to-end": {
+    "wall_ns": {
+      "median": 1720264000.003,
+      "minimum": 1645591999.986,
+      "maximum": 1936398999.998
+    },
+    "allocated_bytes": {
+      "median": 320392192.0,
+      "minimum": 320392192.0,
+      "maximum": 320392192.0
+    }
+  },
+  "cash-terminal-american/price": {
+    "wall_ns": {
+      "median": 189435000.066,
+      "minimum": 184902999.899,
+      "maximum": 199451999.972
+    },
+    "allocated_bytes": {
+      "median": 35601424.0,
+      "minimum": 35601424.0,
+      "maximum": 35601424.0
+    }
+  },
+  "cash-terminal-american/solve": {
+    "wall_ns": {
+      "median": 1683621999.924,
+      "minimum": 1661924000.015,
+      "maximum": 1898553000.065
+    },
+    "allocated_bytes": {
+      "median": 320391264.0,
+      "minimum": 320391264.0,
+      "maximum": 320391264.0
+    }
+  }
+}

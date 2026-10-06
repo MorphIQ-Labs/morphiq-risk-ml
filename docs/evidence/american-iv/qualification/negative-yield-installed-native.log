@@ -1,0 +1,5 @@
+negative-yield false -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.919999999999ap-3 0x1.9a66666666666p-3
+negative-yield true -0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.919999999999ap-3 0x1.9a66666666666p-3
+negative-yield false 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.919999999999ap-3 0x1.9a66666666666p-3
+negative-yield true 0x1.999999999999ap-5 -0x1.47ae147ae147bp-6 0x1.919999999999ap-3 0x1.9a66666666666p-3
+2 independent negative-yield quotes, 4 exercise-contract checks passed
