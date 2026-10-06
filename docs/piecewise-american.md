@@ -61,7 +61,11 @@ changing that grid releases its snapshots. Cache misses rebuild the original
 enclosed bands. Loading a snapshot preserves logical row visits and upwind counts.
 At a cash date the backward order remains After exercise, liquidator mapping,
 Before exercise. A coefficient change adds neither a stock jump nor a Bermudan
-exercise right. The traversed interval uses its own coefficients.
+exercise right. The traversed interval uses its own coefficients. Original matrix bands and
+their dominance check are prepared at the first time step of each constant slab,
+in the original row/step order; later steps update the right-hand side. Policy
+elimination writes separate scratch, so these bands stay immutable within the
+slab. Logical row visits and cancellation polling remain at every time step.
 
 The zero-stock put boundary is
 `K max_u exp(-integral_t^u r)`, where `u` ranges over permitted exercise times.

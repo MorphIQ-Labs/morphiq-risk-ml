@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **120
+seven core mutants. The catalog currently contains **121
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -300,9 +300,10 @@ use distinct equal-integral exercise profiles, original-input analytical
 stationary/discount extrema and the independently refined volatility-profile
 reference. The #114 catalog contained 117 mechanisms; the core remains seven.
 
-The #119 allocation follow-up adds three optional faults: omitting stencil
+The #119 allocation follow-up adds four optional faults: omitting stencil
 coefficient identity, aliasing cached snapshots to mutable working bands, and
-omitting the call upper-boundary grid endpoint. Independent varying-volatility
+omitting the call upper-boundary grid endpoint, and retaining matrix bands
+across changed constant slabs. Independent varying-volatility
 references and complete public outcomes across cache-disabled/partial/full
-workspace budgets witness these dependencies. The catalog now has 120 entries;
+workspace budgets witness these dependencies. The catalog now has 121 entries;
 default CI still runs seven.

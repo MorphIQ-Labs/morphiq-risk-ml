@@ -858,7 +858,7 @@ module Bsm = struct
 
   let check c = if c.cancel () then raise (Stop Cancelled)
 
-  let tick c =
+  let[@inline always] tick c =
     if c.visits >= c.cfg.limits.max_row_visits then
       raise (Stop (Resource_limit "row visits"));
     c.visits <- c.visits + 1;
@@ -1303,17 +1303,24 @@ module Bsm = struct
           in
           v.(0) <- zero;
           v.(n - 1) <- top;
+          (* h, coefficients and original bands are fixed within this slab;
+             policy elimination writes only d/z/candidate. Check the first
+             assembly in its original row/step order, then retain the bands.
+             Every logical row visit and RHS update still occurs each step. *)
+          let assemble = j = 1 in
           for i = 1 to n - 2 do
             tick c;
-            lo.(i) <- -.h *. left.(i);
-            hi.(i) <- -.h *. right.(i);
-            diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
-            rhs.(i) <- v.(i);
-            let margin =
-              finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
-            in
-            if margin < 0.25 || diag.(i) <= 0. then
-              fail "lost binary64 matrix dominance"
+            if assemble then (
+              lo.(i) <- -.h *. left.(i);
+              hi.(i) <- -.h *. right.(i);
+              diag.(i) <- 1. +. (h *. (left.(i) +. right.(i) +. p.rate));
+              rhs.(i) <- v.(i);
+              let margin =
+                finite "assembled matrix margin" (diag.(i) +. lo.(i) +. hi.(i))
+              in
+              if margin < 0.25 || diag.(i) <= 0. then
+                fail "lost binary64 matrix dominance")
+            else rhs.(i) <- v.(i)
           done;
           let accepted = ref false and iteration = ref 0 in
           while not !accepted do

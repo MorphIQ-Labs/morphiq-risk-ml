@@ -67,6 +67,15 @@ let catalog =
       mechanism = "interior rate knots can maximize the future discount factor";
     };
     {
+      id = "piecewise-slab-matrix";
+      file = "lib/early_exercise.ml";
+      snippet = "let assemble = j = 1 in";
+      replacement = "let assemble = j = 1 && diag.(1) = 0. in";
+      killer = "american_piecewise";
+      mechanism =
+        "original matrix bands must be rebuilt for every constant slab";
+    };
+    {
       id = "piecewise-cache-key";
       file = "lib/early_exercise.ml";
       snippet = "List.assoc_opt (key p) (snd !stencils)";
