@@ -129,7 +129,11 @@ let diagnostics (d : A.greek_diagnostics) =
     | None -> "none"
     | Some (a, b) -> Printf.sprintf "%h,%h" a b)
 
-let print_result id = function
+let print_result id outcome =
+  if Sys.getenv_opt "MORPHIQ_GREEK_SNAPSHOT" = Some "1" then
+    Printf.eprintf "snapshot\t%s\t%S\n%!" id
+      (Marshal.to_string outcome [ Marshal.No_sharing ]);
+  match outcome with
   | Error f ->
       List.iter
         (fun q ->
