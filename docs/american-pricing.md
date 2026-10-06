@@ -19,8 +19,9 @@ proved exact reductions, with its own private price and explicit error limit.
 [Explicit Bermudan schedules](bermudan-pricing.md) use a separate admission
 function in the same module. [Piecewise coefficients](piecewise-american.md)
 use the distinct `Bsm.Piecewise` surface. [Estimated Greeks](american-greeks.md)
-have separate per-quantity acceptance and failure outcomes. IV and batch/planner
-support remain #117–#118. There is no implicit date adapter or settlement convention.
+have separate per-quantity acceptance and failure outcomes. The separate
+[estimated inverse](american-implied-volatility.md) supports guarded constant-sigma
+families; batch/planner support remains #118. There is no implicit date adapter or settlement convention.
 
 ## Use and outcomes
 

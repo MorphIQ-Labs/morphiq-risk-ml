@@ -27,6 +27,10 @@ class Controls(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'failed startup'): execute([str(Path(d)/'missing')],out,err,1)
             with self.assertRaisesRegex(ValueError, 'timeout'): execute([sys.executable,'-c','import time;time.sleep(2)'],out,err,.05)
             with self.assertRaisesRegex(ValueError, 'process failed'): execute([sys.executable,'-c','raise SystemExit(1)'],out,err,1)
+    def test_order(self):
+        second=GOOD.replace(" a "," b ").replace("TOTAL 1 1 0 0\n", "")
+        text=second+GOOD.replace("TOTAL 1 1 0 0", "TOTAL 2 2 0 0")
+        with self.assertRaisesRegex(ValueError, "identity/order"): parse(text,["a","b"])
     def test_replay_change(self):
         changed=GOOD.replace(REPLAY, REPLAY[:-2]+'41')
         self.assertNotEqual(parse(GOOD,['a']),parse(changed,['a']))

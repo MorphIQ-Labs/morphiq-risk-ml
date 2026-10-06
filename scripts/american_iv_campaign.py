@@ -41,7 +41,7 @@ def parse(text, ids, minimum=0):
             total = list(map(int, parts[1:]))
         else:
             raise ValueError('unexpected output')
-    require(set(rows) == set(ids), 'incomplete or changed case identity')
+    require(list(rows) == list(ids), 'incomplete or changed case identity/order')
     accepted = {k for k, v in rows.items() if v[0] == 'interval'}
     require(roots == accepted, 'root/outcome mismatch')
     require(total == [len(ids), len(accepted), len(ids)-len(accepted), 0], 'incomplete total')

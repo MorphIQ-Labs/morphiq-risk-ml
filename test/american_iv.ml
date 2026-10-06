@@ -188,6 +188,20 @@ let controls () =
   check "Bermudan rights preserved at both endpoints"
     (interval.lower.price.method_name = "European-reduction"
     && interval.upper.price.method_name = "European-reduction");
+  let finite_dates =
+    Array.map (fun time -> A.{ time; side = Regular }) [| 0.; 0.5; 1. |]
+  in
+  let finite = get (A.admit_bermudan (model ~q:0.02 ()) finite_dates) in
+  let finite_interval =
+    get
+      (I.solve
+         (settings ~evaluations:2 ~width:1.
+            (configuration ~parts:2 ~cells:32 ~tolerance:100. ~expansions:3 ()))
+         finite Side.Put (quote 10.))
+  in
+  check "finite rights must not become continuous exercise"
+    (finite_interval.lower.price.method_name = "backward-Euler-Bermudan-v1"
+    && finite_interval.upper.price.method_name = "backward-Euler-Bermudan-v1");
   let delayed =
     get (A.admit (model ~s:120. ~k:100. ~r:0. ~q:0.2 ~opens:1. ()))
   in
