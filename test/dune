@@ -1274,3 +1274,19 @@
   (source_tree ../docs/evidence/american-forward-optimization/reference-v1))
  (action
   (run python3 %{dep:../scripts/check_terminal_cash.py})))
+
+(test
+ (name american_policy)
+ (modules american_policy american_policy_reference)
+ (libraries morphiq_risk morphiq_fp zarith)
+ (modes byte exe)
+ (deps
+  ../lib/dllmorphiq_risk_stubs%{ext_dll}
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (progn
+    (run %{test})
+    (run %{exe:american_policy.bc})))))

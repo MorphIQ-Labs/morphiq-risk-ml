@@ -1,0 +1,152 @@
+{
+  "complete": true,
+  "source_sha256": "d0d652fc13b469bf281ebab8e6383caddda458992da316dad22b395f1d6e5d27",
+  "runs": [
+    {
+      "variant": "baseline",
+      "backend": "native",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "env",
+        "OCAMLPATH=/tmp/morphiq-american-forward-opt/_build/install/default/lib",
+        "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-forward-opt/_build/install/default/lib/stublibs",
+        "ocamlfind",
+        "ocamlopt",
+        "-O3",
+        "-package",
+        "morphiq_risk_ml",
+        "-linkpkg",
+        "-o",
+        "/tmp/morphiq-american-native-evidence/work-order-baseline-native",
+        "/tmp/morphiq-american-native-evidence/work_order.ml"
+      ],
+      "static_libraries": {
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.a": "0a2447ae7530797f1c466c2d1b3c3305d3fbc83ce18ac5063a0ebd46aba2da48",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/libmorphiq_risk_stubs.a": "142c518571774d56715b636d38b4028c180d48f70ad15f1763166db2acffef08",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/dllmorphiq_risk_stubs.so": "6584ba8040b5836e9ecc5de873414fddf5a6d67e9cf786d1fe2ce0e47cbd2276",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.cma": "89baaa2273465f233a878c64a6731e7d3da7d39d1f43571ee18e40ecb99e5fc9",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.cmxa": "3030b1ab683a665716bb6c7d94b3eda62a2266af670adb61ae8f7b702c841f65",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.cma": "f80cc4ad7b9376062ab885eababd2da354f005515ea0106cf871772c5137ba5b",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/dllmorphiq_fp_stubs.so": "b1ea9f954b788219f5ec19cf9a94bd820c9059bf2cdadca4cf20e742559b639d",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/libmorphiq_fp_stubs.a": "ae1ee06cbad8856f5b2258ab43f3b72e824e71f298d84c6c7cef39b344537ca9",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.a": "aec4243519bd30c6c0493c81df711522d80d0b8f6bca30c0633c5d28c959ea79",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.cmxa": "5f2fc0cbf1e443c7c5330459480d8dab93af390c55cb01cec18be5f2f2db6eb8"
+      },
+      "binary_sha256": "93a706c9442955c94a77f4594343072edf6de4fda27f5d2e212470915e24e692",
+      "output_sha256": "5198b0568d669e7179ac16d0b94e8c22deb239cbb131698fff0d01dc6fa2fc1f",
+      "rows": 54
+    },
+    {
+      "variant": "baseline",
+      "backend": "byte",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "env",
+        "OCAMLPATH=/tmp/morphiq-american-forward-opt/_build/install/default/lib",
+        "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-forward-opt/_build/install/default/lib/stublibs",
+        "ocamlfind",
+        "ocamlc",
+        "-package",
+        "morphiq_risk_ml",
+        "-linkpkg",
+        "-o",
+        "/tmp/morphiq-american-native-evidence/work-order-baseline-byte",
+        "/tmp/morphiq-american-native-evidence/work_order.ml"
+      ],
+      "static_libraries": {
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.a": "0a2447ae7530797f1c466c2d1b3c3305d3fbc83ce18ac5063a0ebd46aba2da48",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/libmorphiq_risk_stubs.a": "142c518571774d56715b636d38b4028c180d48f70ad15f1763166db2acffef08",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/dllmorphiq_risk_stubs.so": "6584ba8040b5836e9ecc5de873414fddf5a6d67e9cf786d1fe2ce0e47cbd2276",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.cma": "89baaa2273465f233a878c64a6731e7d3da7d39d1f43571ee18e40ecb99e5fc9",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/morphiq_risk.cmxa": "3030b1ab683a665716bb6c7d94b3eda62a2266af670adb61ae8f7b702c841f65",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.cma": "f80cc4ad7b9376062ab885eababd2da354f005515ea0106cf871772c5137ba5b",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/dllmorphiq_fp_stubs.so": "b1ea9f954b788219f5ec19cf9a94bd820c9059bf2cdadca4cf20e742559b639d",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/libmorphiq_fp_stubs.a": "ae1ee06cbad8856f5b2258ab43f3b72e824e71f298d84c6c7cef39b344537ca9",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.a": "aec4243519bd30c6c0493c81df711522d80d0b8f6bca30c0633c5d28c959ea79",
+        "/tmp/morphiq-american-forward-opt/_build/default/lib/fp/morphiq_fp.cmxa": "5f2fc0cbf1e443c7c5330459480d8dab93af390c55cb01cec18be5f2f2db6eb8"
+      },
+      "binary_sha256": "2f8f3493f483a116bad34ccddfb2fae426ccf641392d80da7a1721ec28bce1c7",
+      "output_sha256": "5198b0568d669e7179ac16d0b94e8c22deb239cbb131698fff0d01dc6fa2fc1f",
+      "rows": 54
+    },
+    {
+      "variant": "candidate",
+      "backend": "native",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "env",
+        "OCAMLPATH=/tmp/morphiq-american-native-policy/_build/install/default/lib",
+        "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-native-policy/_build/install/default/lib/stublibs",
+        "ocamlfind",
+        "ocamlopt",
+        "-O3",
+        "-package",
+        "morphiq_risk_ml",
+        "-linkpkg",
+        "-o",
+        "/tmp/morphiq-american-native-evidence/work-order-candidate-native",
+        "/tmp/morphiq-american-native-evidence/work_order.ml"
+      ],
+      "static_libraries": {
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.a": "9c6c6526c9caf2127cf3e47dbf7f258c2c826d2edcaa9c7e78fe73b355bb0d20",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/libmorphiq_risk_stubs.a": "15248ed8e4fbc13cd23e2f5000fed6c894150c412f5c690b72c8958e66b1b7e7",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/dllmorphiq_risk_stubs.so": "b4fc0dc209c27a649674ce3004478646083a197463c8d6750891b56863b12f62",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.cma": "974a69191ea66b4bdccfe75de82796328e20bfcc824cbb7adfedb197402ad40e",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.cmxa": "78864c362670a2ed4fe63b4c21a653e122bc9109d0c0bae53328405f6b8c92cc",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.cma": "f80cc4ad7b9376062ab885eababd2da354f005515ea0106cf871772c5137ba5b",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/dllmorphiq_fp_stubs.so": "91b0bb7de78617da4087d640970ad4377765c6ef90fbeb29b1907ffe23707564",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/libmorphiq_fp_stubs.a": "899f757b22c1931f86b06d3f4371fa13943c19a78f2f92af6363f953a551751d",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.a": "48448916f5018ab01c37a08d192299948d0d8c8dfa2f9ddd47eb47f81b59cdd5",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.cmxa": "5f2fc0cbf1e443c7c5330459480d8dab93af390c55cb01cec18be5f2f2db6eb8"
+      },
+      "binary_sha256": "00ad26dacff6c4214dd22eae3731bca3c0c5f955c180f54c7b2418808fed8718",
+      "output_sha256": "5198b0568d669e7179ac16d0b94e8c22deb239cbb131698fff0d01dc6fa2fc1f",
+      "rows": 54
+    },
+    {
+      "variant": "candidate",
+      "backend": "byte",
+      "command": [
+        "opam",
+        "exec",
+        "--switch=morphiq-risk-ml",
+        "--",
+        "env",
+        "OCAMLPATH=/tmp/morphiq-american-native-policy/_build/install/default/lib",
+        "CAML_LD_LIBRARY_PATH=/tmp/morphiq-american-native-policy/_build/install/default/lib/stublibs",
+        "ocamlfind",
+        "ocamlc",
+        "-package",
+        "morphiq_risk_ml",
+        "-linkpkg",
+        "-o",
+        "/tmp/morphiq-american-native-evidence/work-order-candidate-byte",
+        "/tmp/morphiq-american-native-evidence/work_order.ml"
+      ],
+      "static_libraries": {
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.a": "9c6c6526c9caf2127cf3e47dbf7f258c2c826d2edcaa9c7e78fe73b355bb0d20",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/libmorphiq_risk_stubs.a": "15248ed8e4fbc13cd23e2f5000fed6c894150c412f5c690b72c8958e66b1b7e7",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/dllmorphiq_risk_stubs.so": "b4fc0dc209c27a649674ce3004478646083a197463c8d6750891b56863b12f62",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.cma": "974a69191ea66b4bdccfe75de82796328e20bfcc824cbb7adfedb197402ad40e",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/morphiq_risk.cmxa": "78864c362670a2ed4fe63b4c21a653e122bc9109d0c0bae53328405f6b8c92cc",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.cma": "f80cc4ad7b9376062ab885eababd2da354f005515ea0106cf871772c5137ba5b",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/dllmorphiq_fp_stubs.so": "91b0bb7de78617da4087d640970ad4377765c6ef90fbeb29b1907ffe23707564",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/libmorphiq_fp_stubs.a": "899f757b22c1931f86b06d3f4371fa13943c19a78f2f92af6363f953a551751d",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.a": "48448916f5018ab01c37a08d192299948d0d8c8dfa2f9ddd47eb47f81b59cdd5",
+        "/tmp/morphiq-american-native-policy/_build/default/lib/fp/morphiq_fp.cmxa": "5f2fc0cbf1e443c7c5330459480d8dab93af390c55cb01cec18be5f2f2db6eb8"
+      },
+      "binary_sha256": "fbb7ef55a30a0c4b00bffa7c8e38ce6dd959570c414c1ddaccd429c4043b8060",
+      "output_sha256": "5198b0568d669e7179ac16d0b94e8c22deb239cbb131698fff0d01dc6fa2fc1f",
+      "rows": 54
+    }
+  ]
+}

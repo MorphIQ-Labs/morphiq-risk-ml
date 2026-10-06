@@ -38,6 +38,95 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-policy-fma";
+      file = "lib/american_policy_stubs.c";
+      snippet =
+        "fma(Double_field(hi, i), Double_field(v, i + 1), -Double_field(rhs, \
+         i))";
+      replacement =
+        "(Double_field(hi, i) * Double_field(v, i + 1) - Double_field(rhs, i))";
+      killer = "american_policy";
+      mechanism = "preserve the explicit fused policy residual";
+    };
+    {
+      id = "american-policy-product";
+      file = "lib/american_policy_stubs.c";
+      snippet = "Double_field(d, i) - mult * prev_hi";
+      replacement = "fma(-mult, prev_hi, Double_field(d, i))";
+      killer = "american_policy";
+      mechanism = "preserve separately rounded elimination product";
+    };
+    {
+      id = "american-policy-mask";
+      file = "lib/american_policy_stubs.c";
+      snippet =
+        "Bool_val(Field(mask, i)) ? 0. : Double_field(lo, i) / Double_field(d, \
+         i - 1)";
+      replacement = "Double_field(lo, i) / Double_field(d, i - 1)";
+      killer = "american_policy";
+      mechanism = "identity rows have zero lower coefficient";
+    };
+    {
+      id = "american-policy-upper";
+      file = "lib/american_policy_stubs.c";
+      snippet = "Bool_val(Field(mask, i - 1)) ? 0. : Double_field(hi, i - 1)";
+      replacement = "Double_field(hi, i - 1)";
+      killer = "american_policy";
+      mechanism = "previous identity row has zero upper coefficient";
+    };
+    {
+      id = "american-policy-pivot";
+      file = "lib/american_policy_stubs.c";
+      snippet = "if (Double_field(d, i - 1) <= 0.)";
+      replacement = "if (0)";
+      killer = "american_policy";
+      mechanism = "reject nonpositive forward pivot before division";
+    };
+    {
+      id = "american-policy-back-pivot";
+      file = "lib/american_policy_stubs.c";
+      snippet = "if (Double_field(d, i) <= 0.)";
+      replacement = "if (0)";
+      killer = "american_policy";
+      mechanism = "reject nonpositive backward pivot before division";
+    };
+    {
+      id = "american-policy-finite";
+      file = "lib/american_policy_stubs.c";
+      snippet = "if (!isfinite(solved_rhs))";
+      replacement = "if (0)";
+      killer = "american_policy";
+      mechanism = "retain first nonfinite RHS failure";
+    };
+    {
+      id = "american-policy-visit";
+      file = "lib/american_policy_stubs.c";
+      snippet = "Field(state, 4) = Val_long(visited);";
+      replacement = "Field(state, 4) = Val_long(visited - (status != 0));";
+      killer = "american_policy";
+      mechanism = "include the failing row in logical work";
+    };
+    {
+      id = "american-policy-alias";
+      file = "lib/american_policy_stubs.c";
+      snippet = "if (Field(bands, k) == Field(bands, j)) invalid();";
+      replacement = "if (0) invalid();";
+      killer = "american_policy";
+      mechanism = "reject writable band aliases";
+    };
+    {
+      id = "american-policy-budget";
+      file = "lib/early_exercise.ml";
+      snippet =
+        "let visited = American_policy.visited policy_state in\n\
+        \        c.visits <- c.visits + visited - 1;";
+      replacement =
+        "let visited = American_policy.visited policy_state in\n\
+        \        c.visits <- c.cfg.limits.max_row_visits + visited;";
+      killer = "american_pricing";
+      mechanism = "preserve logical visits and cancellation ordering";
+    };
+    {
       id = "terminal-cash-window";
       file = "lib/early_exercise.ml";
       snippet = "&& p.opens_at = p.time_to_expiry ->";
@@ -1634,7 +1723,8 @@ let guard_arguments = function
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
   | "bermudan" | "american_piecewise" | "american_greeks"
-  | "american_greek_reuse" | "american_residual" ->
+  | "american_greek_reuse" | "american_residual" | "american_policy"
+  | "american_work_order" ->
       [ [] ]
   | "terminal_cash" -> [ [ "terminal_cash" ] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]

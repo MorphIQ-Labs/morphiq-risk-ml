@@ -99,6 +99,7 @@ module Internal : sig
   end
 
   module American_residual = American_residual
+  module American_policy = American_policy
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split

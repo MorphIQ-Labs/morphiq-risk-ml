@@ -1,0 +1,16 @@
+{
+  "source": "eaa5e189015219dc489542c86fc654ee2f8bc904",
+  "tree": "ceec0b4eeb5b1dbb2278e27d36e7caa4f6bf6d56",
+  "integration": "d690ce76051807a3c129fc8ab1d1587edf006096",
+  "binaries": {
+    "bench/american_iv.exe": "8a40f3458bd48309ee0bac7ff80d9d97709a5d6b709551f460592b1931c5addc",
+    "bench/american_allocation.exe": "7a9081ae456d980ab0f0a5fe7db877c98dbdd00ff9d7e6377f8a406cfce677ee",
+    "test/american_pricing.exe": "6d5ba9ba2ad7ca85126248e763c53273825d7c6d820878a3c6e8e58ac5d762f8",
+    "test/american_cash.exe": "f635759e058ef037800df9a6d6d2dd0c8b2a52e7e0439886a90790048ef4ea23",
+    "test/american_piecewise.exe": "1841287a70428c801f65279f3eb314debea97376e8feaf4dd4a5923411ce5575",
+    "test/bermudan.exe": "08eab85abb1912ad518aa6436f00234c4e0d859c8162aa0a7a546103872298d9",
+    "test/american_greeks.exe": "fab962e5f69372aa65b6e7986c4f64d8c8c578b72336b2790275c2f03bfe29b9",
+    "test/american_iv.exe": "d2485fa719526f170d0be0fc76f26ed356c9d568d67feecd05becf97235c7d41",
+    "test/terminal_cash.exe": "4a72c3e277311be2fbd354e86992ee1dadaf6a7255107af585a85a596ec38b42"
+  }
+}

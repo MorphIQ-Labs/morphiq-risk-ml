@@ -1326,6 +1326,40 @@ module Bsm = struct
     in
     prepare p reused switched;
     let current_key = ref (key p) in
+    let policy_state =
+      American_policy.create ~lo ~diag ~hi ~rhs ~values:v ~payoff:g ~pivots:d
+        ~solution_rhs:z ~candidate ~mask ~oldmask
+    in
+    let policy_rows phase first last =
+      let descending = phase = American_policy.Substitute in
+      let i = ref first in
+      while if descending then !i >= last else !i <= last do
+        tick c;
+        let remaining = if descending then !i - last else last - !i in
+        let following =
+          min remaining
+            (min
+               (255 - (c.visits land 255))
+               (c.cfg.limits.max_row_visits - c.visits))
+        in
+        let edge = if descending then !i - following else !i + following in
+        let status =
+          American_policy.run policy_state phase ~first:!i ~last:edge
+        in
+        let visited = American_policy.visited policy_state in
+        c.visits <- c.visits + visited - 1;
+        (match status with
+        | 0 -> ()
+        | 1 -> fail "policy decision"
+        | 2 -> fail "nonpositive elimination pivot"
+        | 3 -> fail "elimination pivot"
+        | 4 -> fail "elimination right hand side"
+        | 5 -> fail "nonpositive back substitution pivot"
+        | 6 -> fail "back substitution"
+        | _ -> fail "native policy status invariant");
+        i := if descending then !i - visited else !i + visited
+      done
+    in
     let residual_state =
       American_residual.create ~lo ~diag ~hi ~rhs ~values:v ~payoff:g
     in
@@ -1509,67 +1543,32 @@ module Bsm = struct
                  (Stop (Nonconvergence { step = c.steps; row; residual = r })));
             policy c;
             incr iteration;
-            let changed = ref false and fingerprint = ref 17 in
-            for i = 1 to n - 2 do
-              tick c;
-              oldmask.(i) <- mask.(i);
-              let pvalue =
-                Float.fma lo.(i)
-                  v.(i - 1)
-                  (Float.fma diag.(i) v.(i)
-                     (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
-              in
-              ignore (finite "policy decision" pvalue);
-              mask.(i) <- obstacle && pvalue > v.(i) -. g.(i);
-              fingerprint :=
-                !fingerprint * 65599 lxor if mask.(i) then i else -i;
-              if mask.(i) <> oldmask.(i) then changed := true;
-              d.(i) <- (if mask.(i) then 1. else diag.(i));
-              z.(i) <- (if mask.(i) then g.(i) else rhs.(i))
-            done;
+            American_policy.reset policy_state ~obstacle;
+            policy_rows American_policy.Select 1 (n - 2);
+            let changed = American_policy.changed policy_state
+            and fingerprint = American_policy.fingerprint policy_state in
             (* Eliminate known boundaries once, retaining full original bands
                for the independent residual. Identity rows have zero bands. *)
             if not mask.(1) then z.(1) <- z.(1) -. (lo.(1) *. zero);
             if not mask.(n - 2) then
               z.(n - 2) <- z.(n - 2) -. (hi.(n - 2) *. top);
-            for i = 2 to n - 2 do
-              tick c;
-              if d.(i - 1) <= 0. then fail "nonpositive elimination pivot";
-              let mult = if mask.(i) then 0. else lo.(i) /. d.(i - 1) in
-              let prev_hi = if mask.(i - 1) then 0. else hi.(i - 1) in
-              d.(i) <- finite "elimination pivot" (d.(i) -. (mult *. prev_hi));
-              z.(i) <-
-                finite "elimination right hand side"
-                  (z.(i) -. (mult *. z.(i - 1)))
-            done;
-            for i = n - 2 downto 1 do
-              tick c;
-              if d.(i) <= 0. then fail "nonpositive back substitution pivot";
-              let next =
-                if i = n - 2 || mask.(i) then 0.
-                else hi.(i) *. candidate.(i + 1)
-              in
-              candidate.(i) <-
-                finite "back substitution" ((z.(i) -. next) /. d.(i))
-            done;
-            for i = 1 to n - 2 do
-              tick c;
-              v.(i) <- candidate.(i)
-            done;
+            policy_rows American_policy.Eliminate 2 (n - 2);
+            policy_rows American_policy.Substitute (n - 2) 1;
+            policy_rows American_policy.Copy 1 (n - 2);
             let r, row = residual obstacle in
             (if r <= c.local then (
                accepted := true;
                c.residual <- float_max c.residual r)
              else
-               let repeated = ref ((not !changed) && !iteration > 1) in
+               let repeated = ref ((not changed) && !iteration > 1) in
                for k = 0 to !iteration - 2 do
                  tick c;
-                 if history.(k) = !fingerprint then repeated := true
+                 if history.(k) = fingerprint then repeated := true
                done;
                if !repeated then
                  raise
                    (Stop (Nonconvergence { step = c.steps; row; residual = r })));
-            history.(!iteration - 1) <- !fingerprint
+            history.(!iteration - 1) <- fingerprint
           done
         done)
     in

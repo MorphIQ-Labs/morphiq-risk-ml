@@ -268,21 +268,29 @@ single-threaded inside a solve; outer portfolio workers own parallelism. A nativ
 backend, if justified, uses one native thread per call with no global thread-count
 mutation during concurrent requests. Oversubscription must be measured explicitly.
 
-Any future FFI uses stable C-layout float64 Bigarrays or copies to owned native
-storage; it must not retain a pointer into a movable OCaml float array across
-allocation or runtime-lock release. Root the Bigarrays for the whole call, check
-lengths/strides and LP64 versus ILP64 integers, prohibit writable aliasing, and
-return no borrowed scratch views. Include packing and residual costs in timing.
-A blocking LAPACK call is cancellable only before/after that bounded call; if
-that fails the latency budget, restrict N or keep the OCaml path.
+Bounded internal C kernels may borrow rooted OCaml float arrays while holding
+the runtime lock, provided they never allocate, call back, retain pointers or
+change the floating-point environment. The policy and residual owners validate
+shapes and writable aliases before arithmetic. Calls visit at most 256 rows and
+end before the next cancellation or work-budget boundary. OCaml owns outer
+iteration, failures and accounting; each mutable workspace has one owner.
+
+A vendor or blocking FFI instead uses stable C-layout float64 Bigarrays or copies
+to owned native storage. Never retain a movable-array pointer across allocation
+or runtime-lock release. Root storage for the whole call, check lengths/strides
+and LP64 versus ILP64 integers, prohibit writable aliasing, and return no borrowed
+scratch views. Include packing and residual costs in timing. A blocking LAPACK
+call is cancellable only before/after that bounded call; if that fails the
+latency budget, restrict N or keep the existing path.
 
 The [arithmetic contract](numerical-backend-contract.md) still applies: nearest
 even, gradual underflow, no implicit contraction/reassociation or fast math.
-Inspect/restore the thread's floating-point environment on every native exit;
-reject an unsupported environment. Existing explicit multiplication/FMA owners
-remain authoritative. Native/bytecode execution, concurrent calls, malformed
-buffers and environment restoration require executable witnesses before an
-optional backend ships. A vendor library cannot silently weaken these rules.
+Internal policy kernels preserve the explicit FMA and separate product boundaries;
+ordinary OCaml arithmetic continues using its existing multiplication owner.
+A vendor backend must inspect/restore the thread's floating-point environment
+on every exit and reject unsupported environments. Native/bytecode execution,
+concurrent calls, malformed buffers and environment preservation require
+executable witnesses. A vendor library cannot silently weaken these rules.
 
 ## 5. Error ledger and event interpolation
 
