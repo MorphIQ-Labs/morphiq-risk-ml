@@ -98,6 +98,14 @@ array. No recursive call, callback or user-visible borrowed buffer shares it.
 Exceptions abandon only that call's scratch, and separate calls/domains own
 separate arrays. All array accesses remain checked.
 
+`test/enclosure_scalar.ml` checks full fields (including padding-zero signs),
+refusal classifications and exact-rational containment over boundary and seeded
+inputs in both precisions. It also checks that retained results survive later
+divisions/failures and concurrent independent calls. The optional scalar-radius
+and scratch-length mutants require numerical containment failures, not changed
+replay fingerprints. The complete model/certificate/reference suites remain
+separate obligations.
+
 ### Exponential-owned scratch
 
 Each nonzero `exp`/`expm1` call additionally owns one private array, reused by
@@ -163,13 +171,7 @@ mutation guard checks containment and availability; ordinary compatibility also
 covers unresolved weights, arithmetic failures, signed endpoints, extreme nodes,
 retained results and independent domains. No result or callback borrows scratch.
 
-`test/enclosure_scalar.ml` checks full fields (including padding-zero signs),
-refusal classifications and exact-rational containment over boundary and seeded
-inputs in both precisions. It also checks that retained results survive later
-divisions/failures and concurrent independent calls. The optional scalar-radius
-and scratch-length mutants require numerical containment failures, not changed
-replay fingerprints. The complete model/certificate/reference suites remain
-separate obligations.
+### Shared packing invariants
 
 Addition emits all logical words of its first operand, then its second, including
 the same explicit zero slots as before. Multiplication visits operand pairs in

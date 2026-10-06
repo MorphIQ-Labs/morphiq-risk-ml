@@ -5,13 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
-### Cash interpolation storage (#119)
+### Cash interpolation storage candidate (#119)
 
 - Reuse bounded private packing storage and the immutable point-to-lower-node
   difference inside enclosed linear interpolation. Preserve endpoints, convex
   checks, arithmetic order, errors, diagnostics, event semantics and work limits.
 - The internal primitive is shared by both enclosure precisions; public pricing
   signatures and complete numerical outcomes are unchanged.
+- Adoption is deferred: batch latency has not cleared the frozen criteria.
+  See the [paired allocation and correctness qualification](docs/results-american-cash-interpolation.md)
+  for unchanged controls, remaining costs and reproducible evidence.
 
 ### Enclosed exponential scratch (#119)
 

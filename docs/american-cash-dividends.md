@@ -91,7 +91,8 @@ storage and the immutable original `point-lower` numerator. It preserves exact
 endpoint shortcuts, strict convex-weight checks, the weighted-sum order and
 all fields/radii. Grid search, tick counts, diagnostics and rejection limits
 remain in the cash solver; this introduces no cross-point cache or borrowed
-result. See the [storage argument](runtime-enclosures.md#interpolation-owned-scratch).
+result. See the [storage argument](runtime-enclosures.md#interpolation-owned-scratch)
+and [matched allocation qualification](results-american-cash-interpolation.md).
 
 Both event differences must meet the same epsilon/8 criterion as the space/time/
 domain differences. The latest event difference also enters the epsilon/2 sum.

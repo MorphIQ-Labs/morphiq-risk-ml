@@ -26,6 +26,7 @@ been retired; it remains in Git history.
 - [American policy backend comparison](results-american-backends.md): actual matrices and complete requests, exact residual checks, and the decision to retain bounded native solving over OCaml/reference LAPACK alternatives.
 - [Remaining American allocation](results-american-remaining-allocation.md): sampled owners before exponential scratch reuse.
 - [Enclosed exponential scratch](results-enclosure-exponential-scratch.md): bounded private storage, matched American/European allocation savings and unchanged numerical outcomes.
+- [Cash interpolation storage](results-american-cash-interpolation.md): bounded scratch and numerator reuse with unchanged outcomes and measured allocation savings.
 - [American forward optimization](results-american-forward-optimization.md): exact terminal cash-call reduction, numerical compatibility, and specialized-method evaluation.
 - [American inverse optimization](results-american-iv-optimization.md): safeguarded proposals, independent interval compatibility and paired latency/allocation evidence.
 - [Certified American/Bermudan reductions](american-certification.md): proved applicability, private price certificates, independent containment checks and remaining general-stopping obligations.
