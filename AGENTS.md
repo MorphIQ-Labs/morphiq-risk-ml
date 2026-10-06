@@ -40,7 +40,10 @@ Compiler, arithmetic or backend work additionally follows the
   `Bachelier` owns the normal model. Model-specific abstract admission types
   and volatility coordinates enforce structural separation.
 - `Early_exercise.Bsm` owns bounded, estimated-only scalar American and Bermudan prices
-  and [Greeks](docs/american-greeks.md). A passing price does not qualify a derivative: preserve
+  and [Greeks](docs/american-greeks.md). Its separate `Certified` module owns
+  [guarded exact reductions](docs/american-certification.md), with explicit
+  currency limits and private certificates; general stopping remains estimated-only.
+  A passing price does not qualify a derivative: preserve
   per-quantity refinements, fixed-event theta, parallel curve coordinates and
   explicit nonsmooth/unresolved outcomes.
   Read [American capability](docs/american-pricing.md) and the

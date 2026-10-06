@@ -1158,3 +1158,32 @@
    CAML_LD_LIBRARY_PATH
    ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
    (run %{test}))))
+
+(test
+ (name american_certification)
+ (modules american_certification)
+ (modes byte exe)
+ (libraries morphiq_risk zarith)
+ (deps
+  ../docs/evidence/american-certification/reference-v2/references.tsv
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run
+    %{test}
+    %{dep:../docs/evidence/american-certification/reference-v2/references.tsv}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_american_certification.py
+  ../scripts/check_american_certification.py
+  ../scripts/generate_american_certification.py
+  ../docs/evidence/american-certification/reference-v2/manifest.json
+  ../docs/evidence/american-certification/reference-v2/cases.json
+  ../docs/evidence/american-certification/reference-v2/references.tsv)
+ (action
+  (run python3 %{dep:../scripts/test_american_certification.py})))

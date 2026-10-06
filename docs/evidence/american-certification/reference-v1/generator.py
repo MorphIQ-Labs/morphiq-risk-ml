@@ -46,7 +46,7 @@ def cases():
     add('american','put',s=80.,r=.05,sigma=0.,expected='unsupported',name='immediate-put-counterexample')
     add('american','call',s=120.,r=-.05,sigma=0.,expected='unsupported',name='negative-rate-call-counterexample')
     add('american','call',s=120.,q=.03,sigma=0.,expected='unsupported',name='yield-call-counterexample')
-    add('american','call',r=2048.,name='finite-arithmetic-exhaustion',expected='arithmetic')
+    add('american','call',r=512.,name='finite-arithmetic-exhaustion',expected='arithmetic')
     return rows
 
 def reference(row):

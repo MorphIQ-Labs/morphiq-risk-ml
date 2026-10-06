@@ -6,6 +6,11 @@ admission and checked-input evidence. That admission does not certify every
 served result. The production boundary must make the numerical obligation
 explicit and enforce it on the actual request.
 
+The separate [`Early_exercise.Bsm.Certified`](american-certification.md) API
+reuses this European enclosure for proved original-input stopping reductions,
+with direct enclosed zero-boundary payoffs. It does not add a general American
+dispatcher to `Production` or qualify PDE estimates.
+
 ## Intended use and exclusions
 
 The candidate covers scalar, cash-settled European calls and puts under BSM,

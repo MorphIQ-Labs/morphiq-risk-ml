@@ -5,8 +5,10 @@ conventions to [piecewise coefficients](piecewise-american.md).
 
 `Early_exercise.Bsm.admit_bermudan` prices a call or put with a finite set of
 exercise instants under constant BSM coefficients, continuous yield and optional
-scheduled liquidator cash dividends. Every successful output is **Estimated_only**.
-It is not a `Production` certificate. [Estimated Greeks](american-greeks.md)
+scheduled liquidator cash dividends. Every successful `Bsm.price` output is **Estimated_only**.
+It is not a `Production` certificate. The separate
+[`Bsm.Certified` API](american-certification.md) accepts guarded no-cash exact
+reductions of the same admitted exercise schedules. [Estimated Greeks](american-greeks.md)
 retain these exercise schedules and decline theta at a valuation exercise right.
 Implied volatility and portfolio adapters remain separate work under Epic #107.
 

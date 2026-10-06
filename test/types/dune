@@ -868,3 +868,103 @@
   (diff
    american_greek_into_certificate.expected
    american_greek_into_certificate.out)))
+
+(rule
+ (deps forge_american_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_certificate.out)
+ (action
+  (with-stderr-to
+   forge_american_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_certificate.cmo
+     forge_american_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_certificate.expected forge_american_certificate.out)))
+
+(rule
+ (deps forge_american_accuracy.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_accuracy.out)
+ (action
+  (with-stderr-to
+   forge_american_accuracy.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_accuracy.cmo
+     forge_american_accuracy.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_accuracy.expected forge_american_accuracy.out)))
+
+(rule
+ (deps american_estimate_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets american_estimate_certificate.out)
+ (action
+  (with-stderr-to
+   american_estimate_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_estimate_certificate.cmo
+     american_estimate_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_estimate_certificate.expected
+   american_estimate_certificate.out)))
+
+(rule
+ (deps american_piecewise_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets american_piecewise_certificate.out)
+ (action
+  (with-stderr-to
+   american_piecewise_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_piecewise_certificate.cmo
+     american_piecewise_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_piecewise_certificate.expected
+   american_piecewise_certificate.out)))

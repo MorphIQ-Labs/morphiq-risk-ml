@@ -1,0 +1,42 @@
+{
+  "sources": {
+    "scripts/check_american_certification.py": "d3c2ec26bb618ae9ec421cfde4f81c5991f6d720ad3332ce05d59ce9bce24c36",
+    "docs/evidence/american-certification/reference-v2/manifest.json": "8caa05393b1fcb17423916a502c50aedb8882c184cf9216671142e33552ddf37"
+  },
+  "scope": "Original mathematical experiments, not a runtime price failure or impossibility proof.",
+  "continuum_reference": {
+    "case": "case-0032",
+    "lower": "14059850135907622332480351094781617362125677924377051609829483154753403750225/452312848583266388373324160190187140051835877600158453279131187530910662656",
+    "upper": "28119700271815244664960702189563234724251355848754103219658966309506807500457/904625697166532776746648320380374280103671755200316906558262375061821325312"
+  },
+  "discrete": {
+    "nodes": [
+      0,
+      100,
+      200
+    ],
+    "time_step": "1",
+    "upper_boundary": "100",
+    "diagonal": "33263151749988740936425372867625/20282409603651670423947251286016",
+    "rhs": "324518553658426762811953039540225/10141204801825835211973625643008",
+    "value": "25961484292674141024956243163218/1330526069999549637457014914705",
+    "residual": "0",
+    "continuum_gap_lower": "6964284232242635152067690502452548153039066780082478606871311145199120477540573025341909377588167554171617/601814036835794790720739900008690241201681198024018825646195054678536653765620325627178751916706868756480",
+    "note": "Exact one-step discrete LCP; boundary, space and time errors deliberately remain unqualified."
+  },
+  "supersolution": {
+    "candidate": "positive_part(s-100)",
+    "off_kink_pde_defect": "0",
+    "derivative_jump": "1",
+    "candidate_at_strike": "0",
+    "contradicted_by_positive_continuum_lower_bound": true
+  },
+  "coarse_bound": {
+    "lower": "0",
+    "upper": "100",
+    "midpoint_radius": "50",
+    "engineering_refinement_target": "25/16384",
+    "explicit_test_error_limit": "25/17179869184"
+  },
+  "disposition": "Exact reductions may use the existing original-input enclosure; general stopping remains estimated-only."
+}

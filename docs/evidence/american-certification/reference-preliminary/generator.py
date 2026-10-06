@@ -46,7 +46,7 @@ def cases():
     add('american','put',s=80.,r=.05,sigma=0.,expected='unsupported',name='immediate-put-counterexample')
     add('american','call',s=120.,r=-.05,sigma=0.,expected='unsupported',name='negative-rate-call-counterexample')
     add('american','call',s=120.,q=.03,sigma=0.,expected='unsupported',name='yield-call-counterexample')
-    add('american','call',r=2048.,name='finite-arithmetic-exhaustion',expected='arithmetic')
+    add('american','call',r=512.,name='finite-arithmetic-exhaustion',expected='arithmetic')
     return rows
 
 def reference(row):
@@ -71,13 +71,7 @@ def main():
     records=[];lines=[]
     for row in corpus:
         bounds=['-','-'];attempts=[]
-        fs=list(map(float.fromhex,row['words']))
-        exact_payoff=fs[5]==0 or (fs[4]==0 and fs[2]==0 and fs[3]==0)
-        if row['expected']=='ok' and exact_payoff:
-            x=(1 if row['side']=='call' else -1)*(Fraction(fs[0])-Fraction(fs[1]))
-            x=max(x,Fraction(0));bounds=[str(x),str(x)]
-            attempts.append(dict(precision='exact-rational payoff',lower=str(x),upper=str(x),resolved=True))
-        elif row['expected']=='ok':
+        if row['expected']=='ok':
             for precision in (256,512,1024,2048):
                 with ctx.workprec(precision):
                     value=reference(row);assert value.is_finite(),row['id']

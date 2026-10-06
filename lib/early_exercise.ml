@@ -151,6 +151,117 @@ module Bsm = struct
     | Bermudan (_, _, dates) -> Some (Array.copy dates)
     | Admitted _ | With_cash _ -> None
 
+  module Certified = struct
+    type unsupported = Cash_specification | General_stopping
+
+    type error =
+      | Invalid_accuracy
+      | Unsupported_capability of unsupported
+      | Arithmetic_unresolved
+      | Accuracy_exceeded
+      | Cancelled
+
+    type absolute_error_limit = float
+
+    let absolute_error_limit x =
+      if Float.is_finite x && x >= 0. then Ok x else Error Invalid_accuracy
+
+    type reduction = Expiry | Terminal_only | No_early_exercise_call
+
+    type price = {
+      value : float;
+      absolute_error : float;
+      reduction : reduction;
+    }
+
+    let reduction admitted side =
+      match admitted with
+      | With_cash _ | Bermudan (_, Some _, _) ->
+          Error (Unsupported_capability Cash_specification)
+      | Admitted p | Bermudan (p, None, _) ->
+          if p.time_to_expiry = 0. then Ok Expiry
+          else if p.opens_at = p.time_to_expiry then Ok Terminal_only
+          else if side = Side.Call && p.dividend_yield = 0. && p.rate >= 0. then
+            Ok No_early_exercise_call
+          else Error (Unsupported_capability General_stopping)
+
+    let accept reduction ~max_error value absolute_error =
+      if
+        not
+          (Float.is_finite value
+          && Float.is_finite absolute_error
+          && absolute_error >= 0.)
+      then Error Arithmetic_unresolved
+      else if absolute_error > max_error then Error Accuracy_exceeded
+      else Ok { value; absolute_error; reduction }
+
+    let boundary p side =
+      let module E = Enclosure in
+      if p.time_to_expiry = 0. then
+        let x =
+          if side = Side.Call then E.sub (E.exact p.spot) (E.exact p.strike)
+          else E.sub (E.exact p.strike) (E.exact p.spot)
+        in
+        match E.sign x with
+        | E.Positive -> x
+        | E.Zero | E.Negative -> E.exact 0.
+        | E.Indeterminate -> raise (E.Unresolved "reduction payoff sign")
+      else if
+        (p.spot = 0. && side = Side.Call) || (p.strike = 0. && side = Side.Put)
+      then E.exact 0.
+      else
+        let amount, rate =
+          if p.spot = 0. then (p.strike, p.rate) else (p.spot, p.dividend_yield)
+        in
+        E.mul (E.exact amount)
+          (E.exp (E.mul (E.exact (-.rate)) (E.exact p.time_to_expiry)))
+
+    let price ?(cancel = fun () -> false) admitted side ~max_error =
+      if cancel () then Error Cancelled
+      else
+        match reduction admitted side with
+        | Error e -> Error e
+        | Ok reduction ->
+            let p = inputs admitted in
+            let result =
+              if p.time_to_expiry = 0. || p.spot = 0. || p.strike = 0. then
+                try
+                  let x = boundary p side in
+                  accept reduction ~max_error x.hi
+                    (Enclosure.error_of_float x x.hi)
+                with Enclosure.Unresolved _ -> Error Arithmetic_unresolved
+              else
+                let original : Black.Bsm.inputs =
+                  {
+                    spot = p.spot;
+                    strike = p.strike;
+                    rate = p.rate;
+                    dividend_yield = p.dividend_yield;
+                    time_to_expiry = p.time_to_expiry;
+                  }
+                in
+                match Production.Bsm.admit original with
+                | Error _ -> Error Arithmetic_unresolved
+                | Ok european -> (
+                    match
+                      Production.Bsm.evaluate european side p.volatility
+                        Production.Price ~max_error
+                    with
+                    | Ok certificate ->
+                        accept reduction ~max_error certificate.value
+                          certificate.absolute_error
+                    | Error Production.Accuracy_exceeded ->
+                        Error Accuracy_exceeded
+                    | Error Production.Invalid_accuracy ->
+                        Error Invalid_accuracy
+                    | Error
+                        ( Production.Invalid_input _ | Production.Unsupported _
+                        | Production.Numerical_failure ) ->
+                        Error Arithmetic_unresolved)
+            in
+            if cancel () then Error Cancelled else result
+  end
+
   let eligible p cash t side =
     (t > p.opens_at || (t = p.opens_at && rank side >= rank cash.opening_side))
     && (t < p.time_to_expiry
