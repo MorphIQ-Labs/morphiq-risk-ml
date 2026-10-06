@@ -234,9 +234,12 @@ let () =
   expect "independent concurrent owner"
     (exact_system () = expected && Domain.join d = expected);
   (* No rounding-mode/subnormal/signed-zero change across foreign execution. *)
-  expect "round to nearest remains" (1. +. 0x1p-53 = 1.);
-  expect "gradual underflow remains" (Float.min_float /. 2. > 0.);
-  expect "signed zero remains" (Int64.bits_of_float (-0.) = Int64.min_int);
+  expect "round to nearest remains"
+    (Sys.opaque_identity 1. +. Sys.opaque_identity 0x1p-53 = 1.);
+  expect "gradual underflow remains"
+    (Sys.opaque_identity Float.min_float /. Sys.opaque_identity 2. > 0.);
+  expect "signed zero remains"
+    (Int64.bits_of_float (-.Sys.opaque_identity 0.) = Int64.min_int);
   print_endline
     "native policy: operation graphs, partial failures, exact systems, \
      shape/alias controls and independent owners pass"

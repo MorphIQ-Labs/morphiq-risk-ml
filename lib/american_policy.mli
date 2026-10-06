@@ -3,7 +3,8 @@ type phase = Select | Eliminate | Substitute | Copy
 type t
 (** Internal operation-preserving blocks over exclusively owned solver arrays.
     Borrowed arrays must remain disjoint and must not be mutated concurrently.
-    Calls do not allocate, release the runtime lock or retain pointers. *)
+    Valid foreign blocks do not allocate, release the runtime lock or retain
+    pointers; invalid calls can allocate when raising [Invalid_argument]. *)
 
 val create :
   lo:float array ->
