@@ -39,7 +39,10 @@ Compiler, arithmetic or backend work additionally follows the
 - `Black.Make` shares the lognormal kernel across carry/shift choices;
   `Bachelier` owns the normal model. Model-specific abstract admission types
   and volatility coordinates enforce structural separation.
-- `Early_exercise.Bsm` owns bounded, estimated-only scalar American and Bermudan prices.
+- `Early_exercise.Bsm` owns bounded, estimated-only scalar American and Bermudan prices
+  and [Greeks](docs/american-greeks.md). A passing price does not qualify a derivative: preserve
+  per-quantity refinements, fixed-event theta, parallel curve coordinates and
+  explicit nonsmooth/unresolved outcomes.
   Read [American capability](docs/american-pricing.md) and the
   [finite exercise contract](docs/bermudan-pricing.md). Refining a numerical time
   grid must never add Bermudan exercise rights. Refined grids and

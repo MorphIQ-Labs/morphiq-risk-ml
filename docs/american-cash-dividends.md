@@ -87,7 +87,9 @@ in #120. Exercise regions
 at valuation are unavailable if the opening instant has not arrived, including
 valuation-before/opening-after at the same physical date.
 
-Varying coefficients, cash Greeks/IV and planner adapters remain separate work. The API exposes no alternative dividend convention;
+[Piecewise coefficients](piecewise-american.md) and [estimated Greeks](american-greeks.md)
+retain this cash model, with explicit valuation-event Greek exclusions. Cash IV
+and planner adapters remain separate work. The API exposes no alternative dividend convention;
 escrowed dividends and spot adjustment are not substitutes for this model.
 
 ## Work and memory

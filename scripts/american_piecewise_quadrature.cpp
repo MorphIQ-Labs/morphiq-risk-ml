@@ -1,6 +1,10 @@
 // Original independent discounted Gaussian quadrature; no PDE or policy solver.
 #include "american_piecewise_io.hpp"
-static double solve(const PiecewiseRow& spec, bool upper) {
+static double solve(const PiecewiseRow& spec, bool upper
+#ifdef MORPHIQ_GREEK_REFERENCE
+    , std::array<double,4>* derivatives=nullptr
+#endif
+) {
     const auto& row=spec.option.model; const auto& p=row.p;
     if(p.t==0 || p.s==0 || p.k==0 || zero_volatility(spec)) throw std::runtime_error("analytical reference row");
     const auto cash=joint_cash(row);
@@ -56,10 +60,21 @@ static double solve(const PiecewiseRow& spec, bool upper) {
         if(phase!=99 && right_at(spec,t,phase)) for(size_t i=0;i<x.size();++i) v[i]=std::max(v[i],payoff(x[i]));
         later=t;
     }
-    return v[std::lower_bound(x.begin(),x.end(),p.s)-x.begin()];
+    const double value=v[std::lower_bound(x.begin(),x.end(),p.s)-x.begin()];
+#ifdef MORPHIQ_GREEK_REFERENCE
+    if(derivatives) {
+        const double h=std::min(p.s/4,scale/std::pow(p.n,.75));
+        const auto stencil=[&](double d) {const double l=interpolate(p.s-d,0),r=interpolate(p.s+d,0);return std::array<double,2>{(r-l)/(2*d),(r-2*value+l)/(d*d)};};
+        const auto a=stencil(h),b=stencil(2*h);
+        *derivatives={a[0],a[1],std::abs(a[0]-b[0]),std::abs(a[1]-b[1])};
+    }
+#endif
+    return value;
 }
+#ifndef MORPHIQ_GREEK_REFERENCE
 int main(int argc,char** argv) {
     if(int r=piecewise_cli(argc,argv,"piecewise-quadrature 1");r!=-1)return r;
     try {unsigned count=0; for(std::string line;std::getline(std::cin,line);) {if(++count>512) throw std::runtime_error("row budget"); auto x=piecewise_row(line); std::cout<<x.option.model.p.id<<'\t'<<x.option.model.p.n<<'\t'; try {auto lo=solve(x,false),hi=solve(x,true); if(!std::isfinite(lo)||!std::isfinite(hi)||hi<lo)throw std::runtime_error("invalid boundary pair"); std::cout<<"finite\t"<<std::hexfloat<<lo<<'\t'<<hi<<'\n';}catch(const std::exception& e){std::cout<<"unavailable\t-\t"<<clean(e.what())<<'\n';}} }
     catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 2;}
 }
+#endif

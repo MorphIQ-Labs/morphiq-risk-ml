@@ -1,0 +1,7 @@
+File "american_greek_into_certificate.ml", line 5, characters 2-3:
+5 |   p
+      ^
+Error: The value "p" has type "Morphiq_risk.Early_exercise.Bsm.estimated_greek"
+       but an expression was expected of type
+         "float Morphiq_risk.Production.certified" =
+           "float Morphiq_risk__Production.certified"

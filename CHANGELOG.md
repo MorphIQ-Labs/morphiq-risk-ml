@@ -5,6 +5,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Estimated American and Bermudan Greeks (#115)
+
+- Add per-request delta, gamma, parallel vega/rho and fixed-event daily theta to
+  constant and piecewise American/Bermudan contracts. Results retain price and
+  derivative diagnostics, identified perturbed prices and per-quantity failures.
+- Use spot-anchored spatial stencils, independent derivative refinements and
+  parallel bump/one-sided slope checks. Expiry, liquidation and exercise kinks
+  cannot become placeholder Greeks; work, ownership and cancellation are bounded.
+- These are estimates, not certificates. See [capability](docs/american-greeks.md)
+  and [qualification](docs/results-american-greeks.md) for unresolved references,
+  tight-target refusals, compatibility and measured costs.
+
 ### Piecewise allocation reuse (#119)
 
 - Reuse immutable coefficient stencils and successful upper boundary scalars

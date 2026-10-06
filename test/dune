@@ -1056,3 +1056,40 @@
   ../scripts/benchmark_american_allocation.py)
  (action
   (run python3 %{dep:../scripts/test_piecewise_allocation.py})))
+
+(test
+ (name american_greeks)
+ (modules american_greeks)
+ (modes byte exe)
+ (libraries morphiq_risk unix)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_american_greeks.py
+  ../scripts/check_american_greeks.py
+  ../scripts/collect_american_greeks.py
+  ../scripts/collect_american_greeks_canonical.py
+  ../scripts/generate_american_greeks.py
+  ../scripts/american_piecewise_reference.py
+  ../scripts/check_american_piecewise.py
+  ../scripts/american_reference_data.py
+  (source_tree ../docs/evidence/american-greeks))
+ (action
+  (progn
+   (run python3 %{dep:../scripts/test_american_greeks.py})
+   (run
+    python3
+    %{dep:../scripts/check_american_greeks.py}
+    --executable
+    %{exe:american_greeks.exe}
+    --mode
+    loose))))

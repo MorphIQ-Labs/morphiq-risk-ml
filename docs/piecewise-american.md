@@ -45,11 +45,11 @@ execution coalesces adjacent equal levels only after validation. Fully constant
 curves, including redundant splits, delegate to the existing constant path and
 retain its complete outcomes.
 
-A future parallel rate/yield Greek will shift every original level by one
-annual continuous-rate displacement. A segment Greek will perturb one original
-level. Volatility perturbations use annual lognormal units and must remain
-nonnegative. Those coordinates are defined here; this change adds no Greeks,
-IV, batch/planner adapter, nonconstant interpolation or stochastic volatility.
+[Estimated delta, gamma, vega, rho and theta](american-greeks.md) use these same
+admitted curves. Vega/rho shift every original volatility/rate level by one
+parallel displacement, preserving exact shifts and fixed event times. Rho holds
+yield fixed. Bucketed/yield risks, IV, batch/planner adapters, nonconstant
+interpolation and stochastic volatility remain outside this surface.
 
 ## Event ordering and numerical method
 

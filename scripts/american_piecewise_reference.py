@@ -24,19 +24,28 @@ def protocol(row, n):
     return ' | '.join(sections)
 
 
-def evaluate(row, dps):
+def evaluate(row, dps, *, spot_shift=0, rate_shift=0, volatility_shift=0, valuation_roll=0):
     import mpmath as mp
     mp.mp.dps = dps
     def exact(w):
         n, d = number(w).as_integer_ratio()
         return mp.mpf(n) / d
     p = {k: exact(v) for k, v in row['inputs'].items()}
+    p['spot'] += spot_shift
     curves = {k: [(mp.mpf(0), p[k])] + [(exact(e['time']), exact(e['level'])) for e in row['curves'][k]] for k in ('rate', 'yield', 'volatility')}
+    for key, shift in [('rate', rate_shift), ('volatility', volatility_shift)]:
+        curves[key] = [(t, a + shift) for t, a in curves[key]]
     cash = {}
     for e in row['cash']:
         t = exact(e['time']); cash[t] = cash.get(t, mp.mpf(0)) + exact(e['amount'])
     rights = None if row['exercise'] is None else [(exact(e['time']), e['side']) for e in row['exercise']]
     T, opening = p['time'], p['opens']
+    if valuation_roll:
+        if cash or opening != T:
+            raise ValueError('analytic valuation roll currently requires no-cash terminal reduction')
+        T -= valuation_roll
+        opening = T
+        curves = {k: [(mp.mpf(0), xs[0][1])] + [(t-valuation_roll, a) for t,a in xs[1:]] for k,xs in curves.items()}
     def level(k, t):
         return next(a for u, a in reversed(curves[k]) if u <= t)
     def integral(k, lo, hi, power=1):

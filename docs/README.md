@@ -2,7 +2,7 @@
 
 Start with the [project README](../README.md) for installation and a certified
 pricing example. The current implementation includes the European scalar family,
-typed batches, bounded scenario planning, and estimated scalar American and Bermudan prices. The original slice proposal has
+typed batches, bounded scenario planning, and estimated scalar American and Bermudan prices and Greeks. The original slice proposal has
 been retired; it remains in Git history.
 
 - [Experimental baseline](experimental-baseline.md): claim owners, exact-candidate evidence and limitations.
@@ -14,6 +14,8 @@ been retired; it remains in Git history.
 
 - [Piecewise allocation reuse](results-piecewise-allocation.md): bounded stencil/boundary snapshots, complete-outcome compatibility and paired cost evidence.
 - [Piecewise coefficients](piecewise-american.md): distinct immutable curves, event-aligned rollback and [executed evidence](results-american-piecewise.md).
+- [Estimated American Greeks](american-greeks.md): spot delta/gamma, parallel vega/rho, fixed-event theta and explicit per-quantity uncertainty.
+- [American Greek qualification](results-american-greeks.md): independent and canonical comparisons, boundary/failure controls and measured costs.
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 
 - [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.

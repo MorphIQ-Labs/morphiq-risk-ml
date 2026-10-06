@@ -1,0 +1,23 @@
+{
+  "quantlib_revision": "79f08f66bc7f42ab228f37d15ee0cb4f2d920e0c",
+  "quantlib_library_sha256": "f5a54c0b233ca464eff08f5671a17a1ef52b68cbc884351bb4630c4cb707d161",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "flags": "-std=c++17 -O3 -ffp-contract=off",
+  "mpmath": "1.3.0",
+  "artifacts": {
+    "cases-v1.json": "72d1bde5c5a5ee67e6575de5be2f5036cd4eff511d26ca01e6ba649eefaf8041",
+    "protocol.md": "18487dcd288603ff63a73c0f30a4f55403b1213012ebc3c6e46825e1b2190e60",
+    "protocol-addendum.md": "f1a6c7c6366aa379153e1f15d8b8fc885abb03e8b20b5d402f8394267f146d68",
+    "canonical-addendum.md": "f3f1b3c8dd8434c78a94a3c666fc0161748b095779201490b36fb915e1e935a7",
+    "references-v1.json": "6caa762746d4d801ba148cb5eee858c1ff31df6b4dd2f12004ce47f057cfa5f1",
+    "canonical-v1.json": "68e9abbaa02a16593897f417958816d971bb9e3fe78a553d926f8c1a73c2a26e",
+    "reference-raw.tar.gz": "b88a9cbe39d1470d8243bc229ef2e8902317132ba86d0bcc38c82e85124cce93",
+    "reference-reproduction.tar.gz": "37391804d0bf2807509ef6fdcea2b71b0f31cb9515ace31276695843a8fc1c72"
+  },
+  "notes": [
+    "Calendar-restricted and exact-Time canonical outcomes remain separate.",
+    "Initial snapshot theta sentinel was rejected and retained; no accuracy claim uses it.",
+    "Raw evidence includes failed/unavailable rows and all perturbation families.",
+    "Independent quadrature resolution flags are never replaced by canonical comparison flags."
+  ]
+}

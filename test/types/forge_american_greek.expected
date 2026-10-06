@@ -1,0 +1,4 @@
+File "forge_american_greek.ml", line 3, characters 53-74:
+3 | let forge (p : Early_exercise.Bsm.estimated_greek) = { p with value = 1. }
+                                                         ^^^^^^^^^^^^^^^^^^^^^
+Error: Cannot create values of the private type "Morphiq_risk.Early_exercise.Bsm.estimated_greek"

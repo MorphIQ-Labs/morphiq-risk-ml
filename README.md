@@ -1,7 +1,7 @@
 # morphiq-risk-ml
 
 An OCaml library for European option pricing, implied volatility, analytic
-Greeks, estimated scalar American/Bermudan prices, and deterministic portfolio scenarios.
+Greeks, estimated scalar American/Bermudan prices and Greeks, and deterministic portfolio scenarios.
 
 The library implements Black–Scholes–Merton, Black-76, displaced Black, and
 Bachelier from their mathematical definitions. Model admission, volatility
@@ -21,6 +21,7 @@ institutional deployment approval.
 | American prices | Estimated scalar BSM calls/puts with continuous yield, bounded work and explicit numerical failures; [capability and limits](docs/american-pricing.md). No full-price certificate |
 | Implied volatility | Positive roots require a runtime certificate of correct binary64 rounding; unresolved cases fail explicitly |
 | Analytic Greeks | Delta, gamma, theta, vega, rho, vanna, volga, charm, veta, and color, with model-specific volatility and time units |
+| American/Bermudan Greeks | Estimated delta, gamma, parallel vega/rho and fixed-event theta with per-quantity failures; [coordinates and limits](docs/american-greeks.md) |
 | Numerical acceptance | `Production` requires caller-selected absolute error limits and returns private value/error certificates or explicit failures |
 | Exchange prices | Certified scalar two-asset European prices with typed correlation and an explicit currency error limit; [scope and limits](docs/exchange-prices.md) |
 | Fast price batches | One-shot or frozen compiled requests with admission reuse and explicit failures; [contract](docs/fast-batch.md). No runtime error certificate |
