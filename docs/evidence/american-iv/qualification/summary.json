@@ -34,6 +34,7 @@
     "Development suite started at implementation commit; test-only finite-rights/collector additions were committed during validation. Subsequent release and focused checks cover these additions; runtime source did not change.",
     "First bytecode launch failed before startup because opam replaced DLL search environment; corrected by setting it after opam exec.",
     "The initial node increase caused six workspace refusals; original node/workspace caps were restored without numerical tolerance changes.",
-    "Prototype constructor/syntax/formatting and control-witness errors were corrected before qualification. Available raw logs are retained; not every transient compiler message was captured."
+    "Prototype constructor/syntax/formatting and control-witness errors were corrected before qualification. Available raw logs are retained; not every transient compiler message was captured.",
+    "The first PR formatting check rejected an unformatted scratch prototype copied into the evidence bundle. Removed that duplicate in favor of the maintained finite-rights test; its formatting failure log is retained. Runtime/tests/reference data are unchanged by this packaging correction."
   ]
 }
