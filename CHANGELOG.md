@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Enclosed exponential scratch (#119)
+
+- Reuse bounded call-owned packing storage within both enclosure precisions'
+  exponential/expm1 evaluations. Arithmetic order, error bounds, public results
+  and work/cancellation contracts are preserved; no new boundary cache or FFI.
+- Matched singleton allocation falls 13.3% for Bermudan, 20.5% for piecewise
+  and 15.0% for piecewise-cash, with broadly unchanged latency. Shared European
+  certified consumers also allocate less; ordinary cash remains unchanged.
+  See the [qualification and retained evidence](docs/results-enclosure-exponential-scratch.md).
+
 ### Compiled American and Bermudan requests (#118)
 
 - Add immutable `Batch.American` requests and `Planner.American` dated scenario

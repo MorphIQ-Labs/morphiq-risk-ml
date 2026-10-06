@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **176
+seven core mutants. The catalog currently contains **177
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -83,6 +83,12 @@ controls cover the first attempt's exponential remainder, the exact product
 quantum shortcut and the fallback needed to preserve full-evaluator availability.
 The default core remains the same seven. Both arithmetic configurations run
 the independent ordinary primitive and model reference checks.
+
+The later exponential scratch optimization adds optional
+`enclosure-exponential-prefix`: packing the whole reusable array instead of its
+used prefix must fail the independent rational exponential containment or
+availability witness in `enclosure_exponential`. A changed replay digest is not
+its kill criterion. The total catalog is 177; the default core remains seven.
 
 ## Zero-volatility boundary regressions
 
@@ -374,4 +380,4 @@ exercise retention, right-continuous knots, immutable cash ownership, complete
 operation identity, workspace/buffer admission, scalar cancellation and
 sink-accepted prefix accounting. `american_compiled` owns the payoff and
 precondition witnesses; replay equality is supplementary compatibility evidence.
-The catalog now contains 176 mechanisms; the default seven remain unchanged.
+The catalog now contains 177 mechanisms; the default seven remain unchanged.

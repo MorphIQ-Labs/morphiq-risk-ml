@@ -98,6 +98,35 @@ array. No recursive call, callback or user-visible borrowed buffer shares it.
 Exceptions abandon only that call's scratch, and separate calls/domains own
 separate arrays. All array accesses remain checked.
 
+### Exponential-owned scratch
+
+Each nonzero `exp`/`expm1` call additionally owns one private array, reused by
+the original sequential series and reconstruction operations. With `w` retained
+words, general products need at most `2*w*w` terms, sums `2*w`, scalar products
+`4*w`, and scalar quotient suboperations eight. Capacity `max 8 (2*w*w)` is
+therefore eight floats in Fast and 32 in Full. Each checked allocator verifies
+the requested prefix against this bound; packing receives the actual used
+length and must not read stale tail slots.
+
+Generic addition/multiplication and scalar quotient bodies accept a private
+allocator internally. Ordinary public operations still allocate their own
+scratch. Exponential-local operations share only storage: term insertion,
+product/FMA and radius order, scalar validation, quotient iterations, series
+degrees, tail bounds and reconstruction counts remain unchanged. Every nested
+argument finishes by copying retained fields into an immutable record before
+the next operation overwrites scratch. The array never escapes, survives a
+failed call for reuse, or crosses independent calls/domains. Zero/domain checks
+precede the new exponential allocation.
+
+`test/enclosure_exponential.ml` checks retained results, intervening failures,
+independent domains and native/bytecode full-field replay in both precisions.
+Its independent rational check uses degree-96 Taylor bounds on `|x| <= 1`,
+with remainder `3*|x|^97/97!` from `exp(|x|) < 3`. Monotonicity checks both
+endpoints of uncertain inputs, for exp and expm1. Existing range-reduced
+elementary/model reference checks cover additional inputs. The optional
+stale-prefix mutant must fail a numerical containment/availability witness;
+changed replay alone is insufficient.
+
 `test/enclosure_scalar.ml` checks full fields (including padding-zero signs),
 refusal classifications and exact-rational containment over boundary and seeded
 inputs in both precisions. It also checks that retained results survive later
