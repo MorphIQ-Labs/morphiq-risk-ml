@@ -1,6 +1,6 @@
 # American compiled workload and worker campaign (#119)
 
-Freeze against integration403ea7cdeddc7b263bd88bc62cc1c7558cbe884b before
+Freeze against integration `403ea7cdeddc7b263bd88bc62cc1c7558cbe884b` before
 implementation or performance collection. This pass extends the #118 engineering
 baseline; it does not modify production pricing or select a new solver/backend.
 Actual policy-matrix/backend crossover and residual scalar optimization remain
@@ -37,11 +37,14 @@ and digests across processes. Replay equality is compatibility, not accuracy.
 ## Measurement and accounting
 
 Five fresh processes per case/shape/phase, alternating configuration and method
-order. Time phase:one warmup and one measured full execution per configuration,
-plus50 repetitions for compilation after one warmup. Include explicit scalar,
+order. Time phase:one warmup and one measured full execution per configuration.
+An untimed full major collection follows each warmup. Record admission and
+end-to-end scalar calls separately from reused scalar/fixed execution. Use50 repetitions for compilation after one warmup. Include explicit scalar,
 fixed compiled batch and dated planner costs. Singleton timing is separate from
-amortized portfolio cost. First-row clocks and a minimal classification sink are
+amortized portfolio cost. First-row clocks and a minimal row-counting sink are
 included in planner timing; no transport/retained-result sink is implied.
+A nonnegative zero-duration observation is retained as below clock resolution,
+not converted into a positive duration or an infinite throughput claim.
 
 Allocation phase runs separately from timing. Use `Gc.stat` before/after each
 complete execution to collect program-wide managed allocation including joined

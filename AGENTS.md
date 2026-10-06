@@ -341,6 +341,10 @@ Read [the scenario contract](docs/scenario-planner.md). Its architecture lives i
   coordinates, currencies and factors. Partial totals are not complete totals.
   Check complete ordered outcomes across worker counts outside timing; replay
   equality establishes compatibility, not independent numerical accuracy.
+- Qualify allocation-counter scope before comparing workers. Coordinator
+  counters omit worker bodies; program-wide `Gc.stat` includes joined domains
+  but forces major collections. Keep that allocation experiment separate from
+  ordinary latency and label cumulative managed bytes separately from peak RSS.
 - Tune workers and tile size together against a one-worker reference. Domain
   startup can outweigh small Fast workloads. Include first-output latency,
   cancellation and buffer costs before recommending more workers or larger

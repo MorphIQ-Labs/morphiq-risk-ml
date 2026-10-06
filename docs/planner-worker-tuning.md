@@ -39,7 +39,8 @@ The tradeoffs are explicit:
 - **First output and cancellation:** every tile in a wave finishes before the
   first row is delivered. Bigger tiles can delay the first callback and observing
   cancellation. Cancellation remains checked between waves and before each
-  committed row; running scalar work is not interrupted. Time to first row is
+  committed row. European running scalar work is not interrupted;
+  `Planner.American` also forwards cancellation into its bounded scalar solvers. Time to first row is
   diagnostic evidence, not a cancellation-latency guarantee.
 - **Memory:** the compiled limit must accommodate the larger wave. Fast row
   slots are bounded by `min(N, tile_rows) * min(max_workers, T)`. Certified
