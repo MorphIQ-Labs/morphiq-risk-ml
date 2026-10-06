@@ -1,6 +1,6 @@
-(** Estimated American and Bermudan prices. These results are not [Production]
-    certificates. See [docs/american-pricing.md] for numerical capability and
-    limitations. *)
+(** Estimated American and Bermudan prices and Greeks. These results are not
+    [Production] certificates. See [docs/american-pricing.md] for numerical
+    capability and limitations. *)
 module Bsm : sig
   type inputs = {
     spot : float;
@@ -166,6 +166,77 @@ module Bsm : sig
       their own availability. Finite-input admission does not imply that the
       requested resolution is achievable. *)
 
+  type greek = Delta | Gamma | Vega | Rho | Theta
+  type greek_request
+
+  val request_greek :
+    ?bump:float -> tolerance:float -> greek -> (greek_request, string) result
+  (** Positive finite absolute refinement target, in the Greek's units. Vega/rho
+      require a positive initial parallel bump; other quantities reject bumps.
+      Delta/gamma vary spot. Vega/rho are per unit annual lognormal
+      volatility/continuous rate; rho holds yield fixed. Theta is per day,
+      valuation time moving forward with absolute future events fixed. *)
+
+  type greek_configuration
+
+  val configure_greeks :
+    greek_request list -> (greek_configuration, string) result
+  (** One to five distinct quantities, in caller order. *)
+
+  type greek_diagnostics = {
+    derivative_refinement : refinement option;
+    bump_changes : (float * float) option;
+    stencil_change : float;
+    arithmetic_indicator : float;
+    amplified_price_indicator : float;
+  }
+  (** Empirical diagnostics, not continuum error bounds. Underlying price
+      uncertainty remains visible separately from derivative refinement. *)
+
+  type estimated_greek = private {
+    value : float;
+    assurance : assurance;
+    requested_tolerance : float;
+    method_name : string;
+    diagnostics : greek_diagnostics;
+  }
+
+  type greek_outcome =
+    | Greek_estimate of estimated_greek
+    | Greek_unavailable of string
+    | Greek_failure of failure
+    | Greek_accuracy_not_demonstrated of greek_diagnostics
+
+  type perturbation_price = private {
+    quantity : greek;
+    shift : float;
+    price : estimated_price;
+  }
+  (** Coordinate and exact parallel displacement identify each accepted price.
+  *)
+
+  type estimated_greeks = private {
+    price : estimated_price;
+    greeks : (greek * greek_outcome) list;
+    perturbation_prices : perturbation_price list;
+  }
+
+  val greeks :
+    ?cancel:(unit -> bool) ->
+    configuration ->
+    greek_configuration ->
+    admitted ->
+    Side.t ->
+    (estimated_greeks, failure) result
+  (** Estimated-only outcomes, with the accepted base and perturbed prices. The
+      request's work limits are partitioned across its maximum number of solves
+      and derivative preparation; workspace includes call-owned Greek scratch.
+      Cancellation/resource exhaustion fails the whole request. Unresolved
+      exercise neighborhoods, non-smooth events and unqualified analytical
+      stopping regimes explicitly decline individual quantities. Parallel bumps
+      must preserve the exact original real shift at every level. No higher
+      Greeks or certified results are produced. *)
+
   module Piecewise : sig
     (** Complete right-continuous partitions of [0,horizon]. The initial level
         starts at zero; changes are strictly increasing interior knots. Expiry
@@ -255,6 +326,18 @@ module Bsm : sig
         split constant curves delegate to constant pricing. A parallel rate or
         yield perturbation shifts every annual continuous level; a segment
         perturbation changes one original level. Volatility perturbations use
-        annual lognormal units. This API does not yet implement those Greeks. *)
+        annual lognormal units. *)
+
+    val greeks :
+      ?cancel:(unit -> bool) ->
+      configuration ->
+      greek_configuration ->
+      admitted ->
+      Side.t ->
+      (estimated_greeks, failure) result
+    (** Same units, outcomes and whole-request limits as constant [greeks].
+        Vega/rho shift every level of the corresponding curve; knots, cash
+        amounts and exercise instants stay fixed. Bucketed risks are deferred.
+    *)
   end
 end

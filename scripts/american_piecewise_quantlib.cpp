@@ -86,7 +86,13 @@ int main(int argc, char** argv) {
                     const double days = std::round(t*360.);
                     if (days < 0 || days > 36000) throw std::runtime_error("date range excluded");
                     const Date d = today + static_cast<Integer>(days);
+#ifndef MORPHIQ_GREEK_REFERENCE
                     if (dc.yearFraction(today, d) != t) throw std::runtime_error("time mapping excluded");
+#endif
+                    // The Greek adapter's solver/curves/conditions consume the
+                    // original Time values directly. Dates here belong only to
+                    // the separate unmodified engine, which that adapter does
+                    // not publish as a model-matched comparison.
                     return d;
                 };
                 std::vector<Date> rights; for(auto e:spec.option.exercise) rights.push_back(date(e.first));
@@ -122,11 +128,19 @@ int main(int argc, char** argv) {
                 FdmBlackScholesSolver solver(Handle<GeneralizedBlackScholesProcess>(process),x.k,desc,FdmSchemeDesc::CrankNicolson());
                 const double value = solver.valueAt(x.s);
                 if (!std::isfinite(value)) throw std::runtime_error("nonfinite canonical price");
+#ifdef MORPHIQ_GREEK_REFERENCE
+                const double delta=solver.deltaAt(x.s),gamma=solver.gammaAt(x.s);
+                std::cout << "finite\t" << std::hexfloat << value << '\t' << delta << '\t' << gamma << '\t';
+                try {const double theta=solver.thetaAt(x.s);if(theta==Null<Real>())std::cout << "-";else std::cout << theta/365.;}
+                catch(const std::exception&) {std::cout << "-";}
+                std::cout << '\n';
+#else
                 std::cout << "finite\t" << std::hexfloat << value << "\t";
                 if(baseline_ok) std::cout << baseline; else std::cout << "-";
                 std::cout << "\t-\tpiecewise-coefficient exercise/liquidator adapter; unmodified cash Spot baseline has different floor/coincident/side conventions";
                 if(!baseline_ok) std::cout << "; Spot unavailable: " << baseline_reason;
                 std::cout << '\n';
+#endif
             } catch (const std::exception& error) {
                 std::cout << "exception\t-\t-\t-\t" << clean(error.what()) << '\n';
             }

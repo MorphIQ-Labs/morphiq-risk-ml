@@ -7,9 +7,11 @@ The general schedule names in the API sketch remain proposed; #111/#112 supply
 the [constant-coefficient scalar API](american-pricing.md), including
 [scheduled cash dividends](american-cash-dividends.md). #113 adds
 [explicit finite Bermudan schedules](bermudan-pricing.md) through
-`Bsm.admit_bermudan`; the broader coefficient-schedule sketch remains proposed.
-Existing European
-definitions, certificates and served values are unchanged.
+`Bsm.admit_bermudan`. #114 supplies the [piecewise coefficient API](piecewise-american.md),
+and #115 adds [estimated scalar Greeks](american-greeks.md). The abstract names
+in the original sketch below remain design notation; the linked capability
+documents define the delivered APIs. Existing European definitions, certificates
+and served values are unchanged.
 
 Work is staged on `feature/american-integration`, created from main at
 `bab3ffda321f8df2cd83a5bc982aa3b76a7fdf51`. Focused PRs target that temporary

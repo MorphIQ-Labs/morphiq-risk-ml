@@ -38,6 +38,49 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-greek-gamma";
+      file = "lib/early_exercise.ml";
+      snippet = "E.div (E.mul_float (E.sub r l) 2.) span";
+      replacement = "E.div (E.mul_float (E.sub r l) 1.) span";
+      killer = "american_greeks";
+      mechanism = "nonuniform second derivative has its factor two";
+    };
+    {
+      id = "american-greek-theta";
+      file = "lib/early_exercise.ml";
+      snippet = "                365.\n          in\n          let a = x.(i)";
+      replacement =
+        "                (-.365.)\n          in\n          let a = x.(i)";
+      killer = "american_greeks";
+      mechanism = "theta is forward calendar passage with fixed future events";
+    };
+    {
+      id = "american-greek-parallel";
+      file = "lib/early_exercise.ml";
+      snippet = "segments = Array.map (fun (t, v) -> (t, shift v)) c.segments;";
+      replacement = "segments = c.segments;";
+      killer = "american_greeks";
+      mechanism = "parallel risk shifts every coefficient level";
+    };
+    {
+      id = "american-greek-cash-kink";
+      file = "lib/early_exercise.ml";
+      snippet = "| Some cash -> cash.valuation_side = Before_cash";
+      replacement = "| Some _ -> false";
+      killer = "american_greeks";
+      mechanism =
+        "valuation liquidation kinks cannot be ordinary spot derivatives";
+    };
+    {
+      id = "american-greek-one-sided";
+      file = "lib/early_exercise.ml";
+      snippet = "sample_stencil = abs_float slope_difference;";
+      replacement = "sample_stencil = 0.;";
+      killer = "american_greeks";
+      mechanism =
+        "central convergence alone does not establish a derivative at a kink";
+    };
+    {
       id = "piecewise-average-profile";
       file = "lib/early_exercise.ml";
       snippet =
@@ -1298,7 +1341,7 @@ let guard_arguments = function
   | "shared_greeks" | "production_boundary" | "production_multi"
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
-  | "bermudan" | "american_piecewise" ->
+  | "bermudan" | "american_piecewise" | "american_greeks" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]

@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **121
+seven core mutants. The catalog currently contains **126
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -306,3 +306,13 @@ omitting the call upper-boundary grid endpoint, and retaining matrix bands
 across changed constant slabs. Independent varying-volatility references and complete public outcomes across cache-disabled/partial/full
 workspace budgets witness these dependencies. The catalog now has 121 entries;
 default CI still runs seven.
+
+## Estimated American Greeks (#115)
+
+Five optional mechanisms cover the nonuniform gamma factor, calendar-theta sign,
+parallel shifting of every curve segment, valuation cash kinks and unequal
+one-sided slopes at deterministic stopping kinks. Their `american_greeks` guard
+compares integrated models with precision-refined independent price derivatives,
+a stochastic piecewise case with the pinned canonical campaign, and explicit
+non-differentiability contracts. They do not enter the seven-mutant CI core.
+The catalog now contains 126 mechanisms.

@@ -818,3 +818,53 @@
  (alias runtest)
  (action
   (diff piecewise_as_constant.expected piecewise_as_constant.out)))
+
+(rule
+ (deps forge_american_greek.ml ../../lib/morphiq_risk.cma)
+ (targets forge_american_greek.out)
+ (action
+  (with-stderr-to
+   forge_american_greek.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     forge_american_greek.cmo
+     forge_american_greek.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff forge_american_greek.expected forge_american_greek.out)))
+
+(rule
+ (deps american_greek_into_certificate.ml ../../lib/morphiq_risk.cma)
+ (targets american_greek_into_certificate.out)
+ (action
+  (with-stderr-to
+   american_greek_into_certificate.out
+   (with-accepted-exit-codes
+    2
+    (run
+     %{ocamlc}
+     -color
+     never
+     -I
+     ../../lib/.morphiq_risk.objs/byte
+     -c
+     -o
+     american_greek_into_certificate.cmo
+     american_greek_into_certificate.ml)))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff
+   american_greek_into_certificate.expected
+   american_greek_into_certificate.out)))

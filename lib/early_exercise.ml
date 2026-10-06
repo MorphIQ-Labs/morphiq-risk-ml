@@ -1530,7 +1530,7 @@ module Bsm = struct
     let value = nonnegative "spot price" v.(!spot_index) in
     (value, if capture then Some v else None)
 
-  let price_with_curves ?curves ?(cancel = fun () -> false)
+  let price_with_curves ?curves ?observe ?(cancel = fun () -> false)
       ?(exercise_regions = false) ?(premium = false) cfg admitted side =
     let p = inputs admitted in
     let cash =
@@ -1849,11 +1849,15 @@ module Bsm = struct
             in
             let solve =
               solver_pair ?curves ?dates ?cash ?bermudan ~prepared ~stencils
-                ~boundary_cache c p side x time capture
+                ~boundary_cache c p side x time
+                (capture || Option.is_some observe)
             in
             let low, vl = solve false in
             let high, vh = solve true in
             if high < low then fail "reversed boundary pair";
+            (match (observe, vl, vh) with
+            | Some f, Some vl, Some vh -> f c x vl vh
+            | _ -> ());
             let midpoint = low +. (0.5 *. (high -. low)) in
             (midpoint, 0.5 *. (high -. low), x, vl, vh)
           in
@@ -2043,6 +2047,768 @@ module Bsm = struct
   let price ?cancel ?exercise_regions ?premium cfg admitted side =
     price_with_curves ?cancel ?exercise_regions ?premium cfg admitted side
 
+  type greek = Delta | Gamma | Vega | Rho | Theta
+
+  type greek_request = {
+    quantity : greek;
+    tolerance : float;
+    bump : float option;
+  }
+
+  type greek_configuration = greek_request list
+
+  let request_greek ?bump ~tolerance quantity =
+    if (not (Float.is_finite tolerance)) || tolerance <= 0. then
+      Error "positive finite Greek tolerance required"
+    else
+      match (quantity, bump) with
+      | (Vega | Rho), Some h when Float.is_finite h && h > 0. && h /. 4. > 0. ->
+          Ok { quantity; tolerance; bump }
+      | (Delta | Gamma | Theta), None -> Ok { quantity; tolerance; bump }
+      | (Vega | Rho), _ ->
+          Error "vega/rho require a positive finite resolvable bump"
+      | _ -> Error "only vega/rho take a bump"
+
+  let configure_greeks requests =
+    let rec valid seen = function
+      | [] -> true
+      | r :: tail ->
+          (not (List.mem r.quantity seen)) && valid (r.quantity :: seen) tail
+    in
+    if requests = [] || not (valid [] requests) then
+      Error "request one to five distinct Greeks"
+    else Ok requests
+
+  type greek_diagnostics = {
+    derivative_refinement : refinement option;
+    bump_changes : (float * float) option;
+    stencil_change : float;
+    arithmetic_indicator : float;
+    amplified_price_indicator : float;
+  }
+
+  type estimated_greek = {
+    value : float;
+    assurance : assurance;
+    requested_tolerance : float;
+    method_name : string;
+    diagnostics : greek_diagnostics;
+  }
+
+  type greek_outcome =
+    | Greek_estimate of estimated_greek
+    | Greek_unavailable of string
+    | Greek_failure of failure
+    | Greek_accuracy_not_demonstrated of greek_diagnostics
+
+  type perturbation_price = {
+    quantity : greek;
+    shift : float;
+    price : estimated_price;
+  }
+
+  type estimated_greeks = {
+    price : estimated_price;
+    greeks : (greek * greek_outcome) list;
+    perturbation_prices : perturbation_price list;
+  }
+
+  type derivative_sample = {
+    sample_value : float;
+    sample_spread : float;
+    sample_stencil : float;
+    sample_arithmetic : float;
+    sample_condition : float;
+  }
+
+  type greek_observation = {
+    stock_delta : (derivative_sample, string) result;
+    stock_gamma : (derivative_sample, string) result;
+    calendar_theta : (derivative_sample, string) result;
+    point_price : derivative_sample;
+  }
+
+  let greek_cash = function
+    | Admitted _ | Bermudan (_, None, _) -> None
+    | With_cash (_, c) | Bermudan (_, Some c, _) -> Some c
+
+  let greek_immediate admitted =
+    let p = inputs admitted in
+    let phase =
+      match greek_cash admitted with
+      | None -> Regular
+      | Some c -> c.valuation_side
+    in
+    match admitted with
+    | Bermudan (_, _, ds) -> ds.(0).time = 0. && ds.(0).side = phase
+    | _ -> (
+        p.opens_at = 0.
+        &&
+        match greek_cash admitted with
+        | None -> true
+        | Some c -> rank phase >= rank c.opening_side)
+
+  let theta_event admitted =
+    let p = inputs admitted in
+    p.time_to_expiry = 0.
+    || (match admitted with
+       | Bermudan (_, _, ds) -> ds.(0).time = 0.
+       | _ -> false)
+    ||
+    match greek_cash admitted with
+    | None -> false
+    | Some c -> Array.length c.dividends > 0 && c.dividends.(0).time = 0.
+
+  let observe_greeks admitted side c x low high =
+    let p = inputs admitted in
+    let i = ref 0 in
+    while !i < Array.length x && x.(!i) <> p.spot do
+      tick c;
+      incr i
+    done;
+    if !i = Array.length x then fail "missing Greek spot anchor";
+    let i = !i in
+    let point_price =
+      {
+        sample_value = low.(i) +. (0.5 *. (high.(i) -. low.(i)));
+        sample_spread = 0.5 *. (high.(i) -. low.(i));
+        sample_stencil = 0.;
+        sample_arithmetic = c.roundoff +. c.boundary_error;
+        sample_condition = 1.;
+      }
+    in
+    let unavailable reason =
+      {
+        stock_delta = Error reason;
+        stock_gamma = Error reason;
+        calendar_theta = Error reason;
+        point_price;
+      }
+    in
+    if
+      match greek_cash admitted with
+      | Some cash -> cash.valuation_side = Before_cash
+      | None -> false
+    then
+      unavailable "spot Greeks before a valuation cash jump are not qualified"
+    else if i < 2 || i + 2 >= Array.length x then
+      unavailable "spot has no two-sided derivative stencil"
+    else
+      try
+        let immediate = greek_immediate admitted in
+        let classify j =
+          tick c;
+          if not immediate then Estimated_continuation
+          else
+            let g = centre (payoff_e side (exact x.(j)) (exact p.strike)) in
+            if
+              g > 0.
+              && abs_float (low.(j) -. g) <= c.local
+              && abs_float (high.(j) -. g) <= c.local
+            then Estimated_exercise
+            else if low.(j) > g +. c.local && high.(j) > g +. c.local then
+              Estimated_continuation
+            else Unresolved
+        in
+        let kind = classify i in
+        let smooth = ref (kind <> Unresolved) in
+        for j = i - 2 to i + 2 do
+          if classify j <> kind then smooth := false
+        done;
+        if not !smooth then
+          unavailable
+            "exercise transition or unresolved derivative neighborhood"
+        else
+          let stencil values width =
+            tick c;
+            let a = E.sub (exact x.(i)) (exact x.(i - width))
+            and b = E.sub (exact x.(i + width)) (exact x.(i)) in
+            let l =
+              E.div (E.sub (exact values.(i)) (exact values.(i - width))) a
+            and r =
+              E.div (E.sub (exact values.(i + width)) (exact values.(i))) b
+            in
+            let span = E.add a b in
+            ( E.div (E.add (E.mul b l) (E.mul a r)) span,
+              E.div (E.mul_float (E.sub r l) 2.) span )
+          in
+          let ld, lg = stencil low 1
+          and hd, hg = stencil high 1
+          and wd, wg = stencil low 2
+          and zd, zg = stencil high 2 in
+          let sample condition l h w z =
+            let v, e = enclosed (E.mul_float (E.add l h) 0.5) in
+            let lv, le = enclosed l
+            and hv, he = enclosed h
+            and wv, we = enclosed w
+            and zv, ze = enclosed z in
+            {
+              sample_value = v;
+              sample_spread = 0.5 *. abs_float (hv -. lv);
+              sample_stencil =
+                float_max (abs_float (lv -. wv)) (abs_float (hv -. zv));
+              sample_arithmetic = e +. le +. he +. we +. ze;
+              sample_condition = condition;
+            }
+          in
+          let theta values d g =
+            if kind = Estimated_exercise then exact 0.
+            else
+              E.div_float
+                (E.sub
+                   (E.sub
+                      (E.mul_float (exact values.(i)) p.rate)
+                      (E.mul
+                         (E.sub (exact p.rate) (exact p.dividend_yield))
+                         (E.mul (exact p.spot) d)))
+                   (E.mul_float
+                      (E.mul
+                         (E.mul
+                            (exact (Vol.to_float p.volatility))
+                            (exact (Vol.to_float p.volatility)))
+                         (E.mul (E.mul (exact p.spot) (exact p.spot)) g))
+                      0.5))
+                365.
+          in
+          let a = x.(i) -. x.(i - 1) and b = x.(i + 1) -. x.(i) in
+          let delta_condition = 2. /. float_min a b
+          and gamma_condition = 4. /. (a *. b) in
+          let theta_condition =
+            if kind = Estimated_exercise then 0.
+            else
+              (abs_float p.rate
+              +. abs_float (p.rate -. p.dividend_yield)
+                 *. p.spot *. delta_condition
+              +. 0.5 *. Vol.to_float p.volatility *. Vol.to_float p.volatility
+                 *. p.spot *. p.spot *. gamma_condition)
+              /. 365.
+          in
+          {
+            stock_delta = Ok (sample delta_condition ld hd wd zd);
+            stock_gamma = Ok (sample gamma_condition lg hg wg zg);
+            calendar_theta =
+              (if theta_event admitted then
+                 Error "theta at a valuation event or expiry is unavailable"
+               else
+                 Ok
+                   (sample theta_condition (theta low ld lg) (theta high hd hg)
+                      (theta low wd wg) (theta high zd zg)));
+            point_price;
+          }
+      with
+      | E.Unresolved reason -> unavailable ("derivative arithmetic: " ^ reason)
+      | Stop (Arithmetic_unresolved reason) ->
+          unavailable ("derivative arithmetic: " ^ reason)
+
+  let derivative_refinement samples =
+    match samples with
+    | [ d0; d1; s0; s1; t0; t1; v ] | [ d0; d1; s0; s1; t0; t1; _; _; v ] ->
+        let difference a b = abs_float (a.sample_value -. b.sample_value) in
+        let sc = (difference s1 s0, difference v s1)
+        and tc = (difference t1 t0, difference v t1)
+        and dc = (difference d1 d0, difference v d1) in
+        let ec =
+          match samples with
+          | [ _; _; _; _; _; _; e0; e1; _ ] ->
+              Some (difference e1 e0, difference v e1)
+          | _ -> None
+        in
+        Some
+          {
+            space_changes = sc;
+            time_changes = tc;
+            domain_changes = dc;
+            event_changes = ec;
+            boundary_half_spread = v.sample_spread;
+            observed_sum =
+              snd sc +. snd tc +. snd dc +. v.sample_spread
+              +. Option.fold ~none:0. ~some:snd ec;
+          }
+    | [ _ ] -> None
+    | _ -> fail "incomplete derivative observations"
+
+  let qualify_greek request samples bump_changes price_indicator method_name =
+    let refinement = derivative_refinement samples in
+    let final = List.hd (List.rev samples) in
+    let arithmetic =
+      List.fold_left (fun a s -> float_max a s.sample_arithmetic) 0. samples
+    in
+    let stencil =
+      List.fold_left (fun a s -> float_max a s.sample_stencil) 0. samples
+    in
+    let small x =
+      Float.is_finite x && x >= 0. && x <= request.tolerance /. 8.
+    in
+    let pair (a, b) = small a && small b in
+    let mesh_ok =
+      match refinement with
+      | None -> true
+      | Some r ->
+          pair r.space_changes && pair r.time_changes && pair r.domain_changes
+          && Option.fold ~none:true ~some:pair r.event_changes
+          && small r.boundary_half_spread
+    in
+    let sum =
+      Option.fold ~none:0. ~some:(fun r -> r.observed_sum) refinement
+      +. stencil +. arithmetic
+      +. Option.fold ~none:0. ~some:snd bump_changes
+    in
+    if
+      not
+        (Float.is_finite final.sample_value
+        && Float.is_finite price_indicator
+        && mesh_ok && small stencil && small arithmetic
+        && Option.fold ~none:true ~some:pair bump_changes
+        && Float.is_finite sum
+        && sum <= request.tolerance /. 2.)
+    then
+      Greek_accuracy_not_demonstrated
+        {
+          derivative_refinement = refinement;
+          bump_changes;
+          stencil_change = stencil;
+          arithmetic_indicator = arithmetic;
+          amplified_price_indicator = price_indicator;
+        }
+    else
+      Greek_estimate
+        {
+          value = final.sample_value;
+          assurance = Estimated_only;
+          requested_tolerance = request.tolerance;
+          method_name;
+          diagnostics =
+            {
+              derivative_refinement = refinement;
+              bump_changes;
+              stencil_change = stencil;
+              arithmetic_indicator = arithmetic;
+              amplified_price_indicator = price_indicator;
+            };
+        }
+
+  let analytic_spatial ?curves tick admitted side quantity =
+    let p = inputs admitted in
+    let cash = greek_cash admitted in
+    let no_cash =
+      Option.fold ~none:true ~some:(fun c -> Array.length c.dividends = 0) cash
+    in
+    let all curve predicate =
+      Array.for_all
+        (fun (_, v) ->
+          tick ();
+          predicate v)
+        curve.segments
+    in
+    let terminal = p.opens_at = p.time_to_expiry in
+    let european_reduction =
+      no_cash
+      && (terminal
+         || side = Side.Call
+            &&
+            match curves with
+            | None -> p.dividend_yield = 0. && p.rate >= 0.
+            | Some cs ->
+                all cs.yields (( = ) 0.) && all cs.rates (fun r -> r >= 0.))
+    in
+    if p.spot <= 0. || p.strike <= 0. then
+      Error "absorbing-stock/zero-strike Greeks are not qualified"
+    else if
+      p.time_to_expiry = 0. && no_cash && p.spot <> p.strike
+      && quantity <> Theta
+    then
+      Ok
+        (exact
+           (match (quantity, side) with
+           | Delta, Side.Call when p.spot > p.strike -> 1.
+           | Delta, Side.Put when p.spot < p.strike -> -1.
+           | _ -> 0.))
+    else if (not european_reduction) || p.time_to_expiry = 0. then
+      Error "non-smooth or unqualified analytical stopping regime"
+    else
+      let r, q, a =
+        match curves with
+        | None ->
+            ( E.mul_float (exact p.rate) p.time_to_expiry,
+              E.mul_float (exact p.dividend_yield) p.time_to_expiry,
+              E.mul_float
+                (E.mul
+                   (exact (Vol.to_float p.volatility))
+                   (exact (Vol.to_float p.volatility)))
+                p.time_to_expiry )
+        | Some cs ->
+            let integrate c f = curve_integral tick c 0. p.time_to_expiry f in
+            ( integrate cs.rates exact,
+              integrate cs.yields exact,
+              integrate cs.vols (fun v -> E.mul (exact v) (exact v)) )
+      in
+      if E.sign a <> E.Positive then
+        Error "zero-variance analytical Greeks are not qualified"
+      else
+        let discount = E.exp (E.neg q) in
+        let x = E.mul (exact p.spot) discount
+        and y = E.mul (exact p.strike) (E.exp (E.neg r))
+        and root = E.sqrt a in
+        let d1 =
+          E.div (E.add (E.sub (E.log x) (E.log y)) (E.mul_float a 0.5)) root
+        in
+        let delta =
+          E.mul discount
+            (if side = Side.Call then Model_enclosure.Fast.cdf d1
+             else E.neg (Model_enclosure.Fast.cdf (E.neg d1)))
+        in
+        let gamma =
+          E.div
+            (E.mul discount (Model_enclosure.Fast.pdf d1))
+            (E.mul (exact p.spot) root)
+        in
+        match quantity with
+        | Delta -> Ok delta
+        | Gamma -> Ok gamma
+        | Theta ->
+            if theta_event admitted then
+              Error "theta at a valuation event or expiry is unavailable"
+            else
+              let value =
+                match curves with
+                | None -> european p side
+                | Some cs -> piecewise_european tick cs p side
+              in
+              let v, e = value in
+              Ok
+                (E.div_float
+                   (E.sub
+                      (E.sub
+                         (E.mul_float (E.add_error (exact v) e) p.rate)
+                         (E.mul
+                            (E.sub (exact p.rate) (exact p.dividend_yield))
+                            (E.mul (exact p.spot) delta)))
+                      (E.mul_float
+                         (E.mul
+                            (E.mul
+                               (exact (Vol.to_float p.volatility))
+                               (exact (Vol.to_float p.volatility)))
+                            (E.mul (E.mul (exact p.spot) (exact p.spot)) gamma))
+                         0.5))
+                   365.)
+        | Vega | Rho -> Error "use explicit parallel perturbations"
+
+  let shift_greek ?curves ~tick admitted quantity h =
+    let shift x =
+      tick ();
+      let s = E.add (exact x) (exact h) in
+      let v = centre s in
+      if (not (Float.is_finite v)) || E.sign (E.sub s (exact v)) <> E.Zero then
+        raise (E.Unresolved "parallel shift is not exactly representable");
+      if quantity = Vega && v < 0. then
+        raise (E.Unresolved "volatility shift outside nonnegative domain");
+      v
+    in
+    let p = inputs admitted in
+    let p =
+      match quantity with
+      | Rho -> { p with rate = shift p.rate }
+      | Vega -> (
+          match Vol.lognormal (shift (Vol.to_float p.volatility)) with
+          | Ok v -> { p with volatility = v }
+          | Error _ -> raise (E.Unresolved "volatility shift"))
+      | _ -> p
+    in
+    let admitted =
+      match admitted with
+      | Admitted _ -> Admitted p
+      | With_cash (_, c) -> With_cash (p, c)
+      | Bermudan (_, c, ds) -> Bermudan (p, c, ds)
+    in
+    let curves =
+      Option.map
+        (fun cs ->
+          let shifted c =
+            {
+              c with
+              initial = shift c.initial;
+              changes = Array.map (fun (t, v) -> (t, shift v)) c.changes;
+              segments = Array.map (fun (t, v) -> (t, shift v)) c.segments;
+            }
+          in
+          match quantity with
+          | Rho -> { cs with rates = shifted cs.rates }
+          | Vega -> { cs with vols = shifted cs.vols }
+          | _ -> cs)
+        curves
+    in
+    (admitted, curves)
+
+  let greeks_with_curves ?curves ?(cancel = fun () -> false) cfg requests
+      admitted side =
+    try
+      if cancel () then raise (Stop Cancelled);
+      let solves =
+        1
+        + 6
+          * List.length
+              (List.filter
+                 (fun (r : greek_request) ->
+                   r.quantity = Vega || r.quantity = Rho)
+                 requests)
+      in
+      let metadata =
+        match curves with
+        | None -> 0
+        | Some cs ->
+            Array.length cs.rates.changes
+            + Array.length cs.yields.changes
+            + Array.length cs.vols.changes
+            + 3
+      in
+      if
+        cfg.limits.max_workspace_bytes < 131072
+        || metadata > (cfg.limits.max_workspace_bytes - 131072) / 1024
+      then
+        raise (Stop (Resource_limit "Greek observation/perturbation workspace"));
+      let partitions = solves + 1 in
+      let limits =
+        {
+          cfg.limits with
+          max_steps = cfg.limits.max_steps / partitions;
+          max_policy_solves = cfg.limits.max_policy_solves / partitions;
+          max_row_visits = cfg.limits.max_row_visits / partitions;
+          max_workspace_bytes =
+            cfg.limits.max_workspace_bytes - 65536 - (1024 * metadata);
+        }
+      in
+      if
+        limits.max_steps = 0
+        || limits.max_policy_solves = 0
+        || limits.max_row_visits = 0
+      then raise (Stop (Resource_limit "Greek request work partition"));
+      let cfg = { cfg with limits } in
+      let extra_visits = ref 0 in
+      let tick () =
+        if cancel () then raise (Stop Cancelled);
+        incr extra_visits;
+        if !extra_visits > limits.max_row_visits then
+          raise (Stop (Resource_limit "Greek analytic visits"))
+      in
+      let run ?curves a =
+        let observations = ref [] in
+        let observe c x low high =
+          observations := observe_greeks a side c x low high :: !observations
+        in
+        match price_with_curves ?curves ~observe ~cancel cfg a side with
+        | Error (Cancelled as f) | Error (Resource_limit _ as f) ->
+            raise (Stop f)
+        | Error f -> Error f
+        | Ok price -> Ok (price, List.rev !observations)
+      in
+      match run ?curves admitted with
+      | Error f -> Error f
+      | Ok (price, observations) ->
+          let perturbations = ref [] in
+          let price_indicator (p : estimated_price) =
+            Option.fold ~none:0. ~some:(fun r -> r.observed_sum) p.refinement
+            +. p.maximum_roundoff_indicator +. p.boundary_arithmetic_indicator
+          in
+          let sample_price ((p : estimated_price), observations) =
+            match observations with
+            | [] ->
+                [
+                  {
+                    sample_value = p.value;
+                    sample_spread = 0.;
+                    sample_stencil = 0.;
+                    sample_arithmetic =
+                      p.maximum_roundoff_indicator
+                      +. p.boundary_arithmetic_indicator;
+                    sample_condition = 1.;
+                  };
+                ]
+            | _ -> List.map (fun o -> o.point_price) observations
+          in
+          let outcome (request : greek_request) =
+            try
+              match request.quantity with
+              | Delta | Gamma | Theta -> (
+                  let samples =
+                    match observations with
+                    | [] -> (
+                        match
+                          analytic_spatial ?curves tick admitted side
+                            request.quantity
+                        with
+                        | Error e -> Error e
+                        | Ok x ->
+                            let v, e = enclosed x in
+                            Ok
+                              [
+                                {
+                                  sample_value = v;
+                                  sample_spread = 0.;
+                                  sample_stencil = 0.;
+                                  sample_arithmetic = e;
+                                  sample_condition = 0.;
+                                };
+                              ])
+                    | _ ->
+                        let selected =
+                          List.map
+                            (fun o ->
+                              match request.quantity with
+                              | Delta -> o.stock_delta
+                              | Gamma -> o.stock_gamma
+                              | _ -> o.calendar_theta)
+                            observations
+                        in
+                        List.fold_right
+                          (fun s acc ->
+                            match (s, acc) with
+                            | Ok s, Ok xs -> Ok (s :: xs)
+                            | Error e, _ | _, Error e -> Error e)
+                          selected (Ok [])
+                  in
+                  match samples with
+                  | Error e -> Greek_unavailable e
+                  | Ok samples ->
+                      let amplification =
+                        List.fold_left
+                          (fun m s -> float_max m s.sample_condition)
+                          0. samples
+                      in
+                      qualify_greek request samples None
+                        (amplification *. price_indicator price)
+                        "refined-spatial-or-analytic-v1")
+              | Vega | Rho -> (
+                  let p = inputs admitted in
+                  let zero_vol =
+                    match curves with
+                    | None -> Vol.to_float p.volatility = 0.
+                    | Some cs ->
+                        Array.exists (fun (_, v) -> v = 0.) cs.vols.segments
+                  in
+                  if request.quantity = Vega && zero_vol then
+                    Greek_unavailable
+                      "ordinary parallel vega unavailable at a zero volatility \
+                       level"
+                  else if p.time_to_expiry = 0. then
+                    Greek_unavailable
+                      "expiry parameter derivatives are not qualified"
+                  else
+                    let h = Option.get request.bump in
+                    let estimates = ref [] and amplified = ref 0. in
+                    for scale = 0 to 2 do
+                      tick ();
+                      let h = Float.ldexp h (-scale) in
+                      let shifted amount =
+                        let a, cs =
+                          shift_greek ?curves ~tick admitted request.quantity
+                            amount
+                        in
+                        match run ?curves:cs a with
+                        | Error f -> raise (Stop f)
+                        | Ok (p, os) ->
+                            perturbations :=
+                              {
+                                quantity = request.quantity;
+                                shift = amount;
+                                price = p;
+                              }
+                              :: !perturbations;
+                            (p, os)
+                      in
+                      let minus = shifted (-.h) in
+                      let plus = shifted h in
+                      amplified :=
+                        float_max !amplified
+                          ((price_indicator (fst minus)
+                           +. price_indicator (fst plus))
+                          /. (2. *. h));
+                      let a = sample_price minus and b = sample_price plus in
+                      let original = sample_price (price, observations) in
+                      if
+                        List.length a <> List.length b
+                        || List.length a <> List.length original
+                      then
+                        raise
+                          (E.Unresolved
+                             "perturbation changes analytical/numerical route");
+                      let samples =
+                        List.map2
+                          (fun (a, original) b ->
+                            let v, e =
+                              enclosed
+                                (E.div_float
+                                   (E.sub (exact b.sample_value)
+                                      (exact a.sample_value))
+                                   (2. *. h))
+                            in
+                            let slope_difference, slope_arithmetic =
+                              enclosed
+                                (E.div_float
+                                   (E.add
+                                      (E.sub (exact b.sample_value)
+                                         (exact original.sample_value))
+                                      (E.sub (exact a.sample_value)
+                                         (exact original.sample_value)))
+                                   h)
+                            in
+                            {
+                              sample_value = v;
+                              sample_spread =
+                                (a.sample_spread +. b.sample_spread) /. (2. *. h);
+                              sample_stencil = abs_float slope_difference;
+                              sample_arithmetic =
+                                e +. slope_arithmetic
+                                +. (a.sample_arithmetic +. b.sample_arithmetic
+                                   +. (2. *. original.sample_arithmetic))
+                                   /. h;
+                              sample_condition = 0.;
+                            })
+                          (List.combine a original) b
+                      in
+                      estimates := samples :: !estimates
+                    done;
+                    match !estimates with
+                    | [ fine; middle; coarse ] ->
+                        if
+                          List.length fine <> List.length middle
+                          || List.length middle <> List.length coarse
+                        then
+                          raise
+                            (E.Unresolved
+                               "bump refinement changes analytical/numerical \
+                                route");
+                        let max_change a b =
+                          List.fold_left2
+                            (fun m a b ->
+                              float_max m
+                                (abs_float (a.sample_value -. b.sample_value)))
+                            0. a b
+                        in
+                        qualify_greek request fine
+                          (Some
+                             (max_change middle coarse, max_change fine middle))
+                          !amplified "parallel-central-refinement-v1"
+                    | _ -> assert false)
+            with
+            | E.Unresolved e -> Greek_unavailable e
+            | Stop (Cancelled as f) | Stop (Resource_limit _ as f) ->
+                raise (Stop f)
+            | Stop f -> Greek_failure f
+          in
+          let greeks =
+            List.map
+              (fun (r : greek_request) -> (r.quantity, outcome r))
+              requests
+          in
+          if cancel () then raise (Stop Cancelled);
+          Ok { price; greeks; perturbation_prices = List.rev !perturbations }
+    with
+    | Stop f -> Error f
+    | E.Unresolved e -> Error (Arithmetic_unresolved e)
+
+  let greeks ?cancel cfg requests admitted side =
+    greeks_with_curves ?cancel cfg requests admitted side
+
   module Piecewise = struct
     module Rate = struct
       type t = curve
@@ -2157,5 +2923,8 @@ module Bsm = struct
     let price ?cancel ?exercise_regions ?premium cfg p side =
       price_with_curves ?curves:p.curves ?cancel ?exercise_regions ?premium cfg
         p.base side
+
+    let greeks ?cancel cfg requests p side =
+      greeks_with_curves ?curves:p.curves ?cancel cfg requests p.base side
   end
 end
