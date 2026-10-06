@@ -49,3 +49,14 @@
  (alias runtest)
  (action
   (run %{exe:bermudan_price.exe})))
+
+(executable
+ (name american_batch)
+ (modules american_batch)
+ (modes byte exe)
+ (libraries morphiq_risk))
+
+(rule
+ (alias runtest)
+ (action
+  (run %{exe:american_batch.exe})))

@@ -52,6 +52,7 @@ Compiler, arithmetic or backend work additionally follows the
   grid must never add Bermudan exercise rights. Refined grids and
   small residuals are diagnostics, not continuum certificates; failures and
   unresolved references cannot count as accuracy passes.
+- `Batch.American` and `Planner.American` own [typed early-exercise compilation](docs/american-compiled.md), fixed-date rolls and bounded unweighted streaming. Preserve event-side ordering, original schedule validation, typed assurance and sink-accepted prefixes. A rolled model is admitted once per row; solver reuse remains inside the scalar dependency contract.
 - `Exchange` owns certified scalar two-asset European exchange prices, with
   typed correlation, original-input covariance and private currency certificates.
   Read [its contract and limits](docs/exchange-prices.md); Greeks, inverse

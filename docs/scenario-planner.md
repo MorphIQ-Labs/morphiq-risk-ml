@@ -1,5 +1,7 @@
 # Scenario planning contract (version 1)
 
+For American/Bermudan operations, use the separate [typed compiled API](american-compiled.md), with explicit exercise/cash date rolls and unweighted streaming.
+
 Epic #23 supplies the scenario planner. This feature extends orchestration of
 the existing European scalar contract; it does not change prices, Greeks, IV
 acceptance, or institutional deployment approval.

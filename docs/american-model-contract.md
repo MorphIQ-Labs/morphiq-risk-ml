@@ -128,7 +128,7 @@ convention, rather than subtracting previously rounded offsets repeatedly.
 Its resulting binary64 words become exact scalar inputs. Distinct date events
 that collapse to one binary64 time require an explicit conversion failure,
 not an invented ordering. The existing European `Scenario.Time` convention is
-unchanged; American scenario integration and roll policies belong to #118.
+unchanged; [American scenario integration and roll policies](american-compiled.md) have a separate additive API.
 
 ## 3. Cash dividends and coincident events
 
