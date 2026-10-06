@@ -10,7 +10,7 @@ been retired; it remains in Git history.
 
 ## Current contracts
 
-- [Compiled American/Bermudan requests](american-compiled.md): typed fixed batches, dated scenario rolls, bounded streaming and separate assurance paths; [qualification and costs](results-american-compiled.md).
+- [Compiled American/Bermudan requests](american-compiled.md): typed fixed batches, dated scenario rolls, bounded streaming and separate assurance paths; [qualification and costs](results-american-compiled.md), plus the broader [workload/worker/allocation campaign](results-american-workloads.md).
 
 - [Bermudan boundary reuse](results-bermudan-boundary.md): bounded request-owned discounts, unchanged outcomes and paired allocation/latency evidence.
 

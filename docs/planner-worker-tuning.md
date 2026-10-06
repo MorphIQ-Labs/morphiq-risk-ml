@@ -61,6 +61,16 @@ granularity. The logical tile's output array still uses the caller-selected row
 limit. Private packing/SoA scratch is additional to the explained value bytes;
 neither the chunk cap nor the output-slot bound is a heap/RSS guarantee.
 
+For `Planner.American`, use the separate [American workload campaign](results-american-workloads.md).
+It covers cash, Bermudan, piecewise, Greek, inverse, certified and hard workloads
+with tiles/workers 1/2/4. Its program-wide `Gc.stat` allocation includes joined
+workers, qualified against known allocations and independent domain counters.
+Those forced-collection measurements run separately from latency; the earlier
+European coordinator-only counters below retain their original scope. Parallel
+execution changes elapsed cost, while total managed allocation remains roughly
+unchanged for these inputs. Shared-host timing ranges are wide; retain the full
+matrix and first-output/cancellation evidence when selecting a configuration.
+
 ## Reproduce the sweep
 
 Build before starting timing, then keep task-owned builds, tests and profilers
