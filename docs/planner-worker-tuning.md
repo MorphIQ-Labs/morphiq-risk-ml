@@ -39,7 +39,8 @@ The tradeoffs are explicit:
 - **First output and cancellation:** every tile in a wave finishes before the
   first row is delivered. Bigger tiles can delay the first callback and observing
   cancellation. Cancellation remains checked between waves and before each
-  committed row; running scalar work is not interrupted. Time to first row is
+  committed row. European running scalar work is not interrupted;
+  `Planner.American` also forwards cancellation into its bounded scalar solvers. Time to first row is
   diagnostic evidence, not a cancellation-latency guarantee.
 - **Memory:** the compiled limit must accommodate the larger wave. Fast row
   slots are bounded by `min(N, tile_rows) * min(max_workers, T)`. Certified
@@ -59,6 +60,16 @@ not change the caller's logical tiles, wave count, callback timing or cancellati
 granularity. The logical tile's output array still uses the caller-selected row
 limit. Private packing/SoA scratch is additional to the explained value bytes;
 neither the chunk cap nor the output-slot bound is a heap/RSS guarantee.
+
+For `Planner.American`, use the separate [American workload campaign](results-american-workloads.md).
+It covers cash, Bermudan, piecewise, Greek, inverse, certified and hard workloads
+with tiles/workers 1/2/4. Its program-wide `Gc.stat` allocation includes joined
+workers, qualified against known allocations and independent domain counters.
+Those forced-collection measurements run separately from latency; the earlier
+European coordinator-only counters below retain their original scope. Parallel
+execution changes elapsed cost, while total managed allocation remains roughly
+unchanged for these inputs. Shared-host timing ranges are wide; retain the full
+matrix and first-output/cancellation evidence when selecting a configuration.
 
 ## Reproduce the sweep
 
