@@ -214,8 +214,13 @@ Never repair a small pivot by adding an unrequested diagonal perturbation.
 
 | Candidate | Conditions and tradeoff | Selection |
 | --- | --- | --- |
-| Compact OCaml elimination/back substitution | O(N) work/storage; positive-diagonal, nonpositive off-diagonal, strictly row-dominant tridiagonal input. Positive exact elimination pivots follow from the M-matrix structure. Binary64 pivots and residuals still need checking. | Initial #111 implementation; no native dependency or call boundary. |
-| LAPACK `DGTSV` | General tridiagonal solve with partial pivoting, destructive coefficient/RHS buffers, and an INFO status. It can handle systems excluded by the specialized kernel but does not repair a nonmonotone pricing scheme. | Optional #119 comparison; not built, timed or adopted in #109. |
+| Compact OCaml elimination/back substitution | O(N) work/storage; positive-diagonal, nonpositive off-diagonal, strictly row-dominant tridiagonal input. Positive exact elimination pivots follow from the M-matrix structure. Binary64 pivots and residuals still need checking. | Initial #111 implementation; now retained as an operation reference. The #119 actual-matrix comparison favors the current bounded native loops. |
+| Bounded native specialized solver | Same qualified operation graph in bounded blocks; existing ownership, residual checks and work/cancellation boundaries. | Adopted in PR #144; retained after the #119 actual-matrix and full-request comparison. |
+| LAPACK `DGTSV` | General tridiagonal solve with partial pivoting, destructive coefficient/RHS buffers, and an INFO status. It can handle systems excluded by the specialized kernel but does not repair a nonmonotone pricing scheme. | Evaluated in the optional #119 experiment; production adoption deferred for measured cost and nonconformant physical work boundaries. |
+
+The [executed backend comparison](results-american-backends.md) retains actual
+matrix captures, exact residual/error checks, complete-request costs and the
+adopt/defer decisions. Its isolated DGTSV wrapper is not a production dependency.
 
 The [pinned LAPACK source](https://github.com/Reference-LAPACK/lapack/blob/6ec7f2bc4ecf4c4a93496aa2fa519575bc0e39ca/SRC/dgtsv.f)
 uses row interchanges when needed, with a second upper diagonal. INFO<0 is an
