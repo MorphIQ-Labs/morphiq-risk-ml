@@ -301,9 +301,8 @@ stationary/discount extrema and the independently refined volatility-profile
 reference. The #114 catalog contained 117 mechanisms; the core remains seven.
 
 The #119 allocation follow-up adds four optional faults: omitting stencil
-coefficient identity, aliasing cached snapshots to mutable working bands, and
+coefficient identity, aliasing cached snapshots to mutable working bands,
 omitting the call upper-boundary grid endpoint, and retaining matrix bands
-across changed constant slabs. Independent varying-volatility
-references and complete public outcomes across cache-disabled/partial/full
+across changed constant slabs. Independent varying-volatility references and complete public outcomes across cache-disabled/partial/full
 workspace budgets witness these dependencies. The catalog now has 121 entries;
 default CI still runs seven.

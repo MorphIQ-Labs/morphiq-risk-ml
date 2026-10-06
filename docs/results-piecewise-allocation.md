@@ -43,11 +43,11 @@ too wide; refined primary remains 14 passes and 26 runtime refusals. Equality is
 compatibility evidence, not a continuum accuracy proof.
 
 The new structural controls use 32/32 grids and compare absent, partial and ample
-cache capacity for varying
-volatility, staggered rates/yields/volatility and a coincident cash event, for
+cache capacity for varying volatility, staggered rates/yields/volatility and a coincident cash event, for
 puts and calls. They preserve complete results and cancellation cadence. The
-existing concurrent-request test checks ownership. Three optional faults target
-coefficient identity, mutable snapshot aliasing and the call-grid endpoint.
+existing concurrent-request test checks ownership. Four optional faults target
+coefficient identity, mutable snapshot aliasing, the call-grid endpoint and
+slab-matrix identity.
 An initial test-harness attempt used redundant 128/128 bytecode solves for these
 structural checks and was stopped for cost; its partial logs are retained. The
 independent refined witness, all frozen cases and tolerances were unchanged.
@@ -84,7 +84,6 @@ one warmup then three reused-admission prices, give these medians:
 
 | Workload | Baseline ms/price | Candidate ms/price | Baseline MB allocated/price | Candidate MB allocated/price |
 |---|---:|---:|---:|---:|
-
 | american none | 145.70 | 130.41 | 12.905 | 12.909 |
 | american cash | 425.85 | 380.31 | 42.164 | 42.171 |
 | bermudan none | 294.46 | 264.71 | 40.532 | 40.538 |
