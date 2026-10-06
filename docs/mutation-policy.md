@@ -2,7 +2,7 @@
 
 The ordinary `ci` workflow retains the full accuracy/certification test suite
 on Linux x86-64, Linux arm64 and macOS arm64. Its required `mutation` job runs
-seven core mutants. The catalog currently contains **177
+seven core mutants. The catalog currently contains **179
 mechanisms**; the smaller counts below describe its historical growth. Each
 selected mutant still requires a clean baseline, a successful mutated
 build and failure of the designated independent numerical guard; compiler
@@ -88,7 +88,17 @@ The later exponential scratch optimization adds optional
 `enclosure-exponential-prefix`: packing the whole reusable array instead of its
 used prefix must fail the independent rational exponential containment or
 availability witness in `enclosure_exponential`. A changed replay digest is not
-its kill criterion. The total catalog is 177; the default core remains seven.
+its kill criterion. That pass brought the catalog to 177; the default core remains seven.
+
+The cash interpolation storage pass adds `enclosure-interpolation-prefix` and
+`enclosure-interpolation-complement`. Their `enclosure_interpolation` guard uses
+`--numerical-only`: independent exact-rational containment/availability must
+reject the fault; full-field replay comparisons are excluded from this guard.
+Ordinary tests additionally compare the original composition, endpoints,
+refusals, retained results and independent domains. The scalar quotient prefix
+locator is scoped to its original addition helper now that scalar subtraction
+also accepts private scratch. The optional catalog is 179; the default core
+remains seven.
 
 ## Zero-volatility boundary regressions
 

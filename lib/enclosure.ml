@@ -258,19 +258,21 @@ struct
 
   let sub a b = sub_using Float.Array.create a b
 
-  let sub_float a b =
+  let sub_float_using allocate a b =
     finite b;
     if is_zero a then neg (exact b)
     else if b = 0.0 then a
     else
       let na = word_count a in
-      let terms = Float.Array.create (na + 2) in
+      let terms = allocate (na + 2) in
       for i = 0 to na - 1 do
         Float.Array.set terms i (word a i)
       done;
       Float.Array.set terms na (-.b);
       Float.Array.set terms (na + 1) (-0.0);
-      pack_array terms (Float.Array.length terms) (a.error +^ 0.0)
+      pack_array terms (na + 2) (a.error +^ 0.0)
+
+  let sub_float a b = sub_float_using Float.Array.create a b
 
   let[@inline always] frexp_exponent x =
     let field =
@@ -391,32 +393,36 @@ struct
       in
       div_float_using allocate a b
 
-  let div a b =
+  let div_using allocate divide_float a b =
     require (b.hi <> 0.0) "unresolved denominator";
     if b.lo = 0.0 && b.third = 0.0 && b.fourth = 0.0 && b.error = 0.0 then
-      div_float a b.hi
+      divide_float a b.hi
     else
-      let terms = Float.Array.create (word_count b - 1) in
+      let terms = allocate (word_count b - 1) in
       for i = 1 to word_count b - 1 do
         Float.Array.set terms (i - 1) (word b i)
       done;
       let rho =
-        div_float (pack_array terms (Float.Array.length terms) b.error) b.hi
+        divide_float (pack_array terms (word_count b - 1) b.error) b.hi
       in
       let r = magnitude rho in
       require (r < 0.5) "denominator uncertainty";
-      let quotient = div_float a b.hi in
+      let quotient = divide_float a b.hi in
       let power = ref (exact 1.0) and inverse = ref (exact 1.0) in
       for _ = 1 to Config.words - 1 do
-        power := mul !power (neg rho);
-        inverse := add !inverse !power
+        power := mul_using allocate !power (neg rho);
+        inverse := add_using allocate !inverse !power
       done;
       let tail = ref 1.0 in
       for _ = 1 to Config.words do
         tail := !tail *^ r
       done;
       let remainder = !tail /^ down (1.0 -. r) in
-      add_error (mul quotient !inverse) (magnitude quotient *^ remainder)
+      add_error
+        (mul_using allocate quotient !inverse)
+        (magnitude quotient *^ remainder)
+
+  let div a b = div_using Float.Array.create div_float a b
 
   let scale a k =
     let error =
@@ -450,18 +456,31 @@ struct
     | Interpolated of t
     | Unresolved_weight
 
-  let linear_interpolate point ~lower ~upper ~left ~right =
-    if compare_float point lower = Zero then Endpoint left
-    else if compare_float point upper = Zero then Endpoint right
+  let[@inline always] linear_interpolate point ~lower ~upper ~left ~right =
+    (* All arithmetic completes into immutable fields before another operation
+       overwrites this call's checked prefix. No result borrows this array. *)
+    let capacity = max 8 (2 * Config.words * Config.words) in
+    let scratch = Float.Array.create capacity in
+    let allocate count =
+      require (count <= capacity) "interpolation scratch bound";
+      scratch
+    in
+    let subtract a b = sub_float_using allocate a b in
+    let compare a b = sign (subtract a b) in
+    let offset = subtract point lower in
+    if sign offset = Zero then Endpoint left
+    else if compare point upper = Zero then Endpoint right
     else
-      let width = sub (exact upper) (exact lower) in
-      let weight = div (sub point (exact lower)) width in
-      match (compare_float weight 0., compare_float weight 1.) with
+      let width = subtract (exact upper) lower in
+      let weight = div_using allocate (div_float_using allocate) offset width in
+      match (compare weight 0., compare weight 1.) with
       | Positive, Negative ->
           Interpolated
-            (add
-               (mul (sub (exact 1.) weight) (exact left))
-               (mul weight (exact right)))
+            (add_using allocate
+               (mul_float_using allocate
+                  (sub_using allocate (exact 1.) weight)
+                  left)
+               (mul_float_using allocate weight right))
       | _ -> Unresolved_weight
 
   let sqrt a =

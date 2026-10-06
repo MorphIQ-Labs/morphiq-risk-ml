@@ -127,6 +127,42 @@ elementary/model reference checks cover additional inputs. The optional
 stale-prefix mutant must fail a numerical containment/availability witness;
 changed replay alone is insufficient.
 
+### Interpolation-owned scratch
+
+`linear_interpolate` is an internal, model-independent composition of enclosed
+endpoint comparisons, `(point-lower)/(upper-lower)`, strict convex-weight
+checks and `(1-weight)*left + weight*right`. Exact endpoints return the original
+scalar directly, including its zero sign. An unresolved weight is a distinct
+result; the cash owner retains its original failure message, diagnostics and
+local arithmetic limit. Binary grid search, event sides, mapping refinements,
+work accounting and cancellation checkpoints stay in that owner.
+
+The primitive owns one array of `max 8 (2*w*w)` floats. The exponential bounds
+above also cover this composition and general division: its denominator lower
+part needs `w-1` terms, quotient suboperations eight, and geometric correction
+products at most `2*w*w`. Each operation overwrites its used prefix and copies
+retained fields. General division's ordinary entry point still allocates fresh
+storage and retains its original scalar-quotient ownership; only this composition
+supplies the interpolation array. The geometric tail and validation are unchanged.
+
+Scalar subtraction/multiplication insert the same logical exact-scalar words
+and zero signs as their generic counterparts. The first endpoint comparison
+already constructs `point-lower`; this immutable enclosure is reused as the
+numerator after the upper endpoint check. Both inputs and all five stored fields
+are unchanged, so reevaluating that pure subtraction cannot supply new evidence
+or a different failure. This is within-call common-expression reuse, with no
+cross-point/cache dependency. Width is still enclosed from the original nodes;
+the expression is not rewritten into slope form or reassociated. Explicit
+inlining removes argument boxing without changing arithmetic.
+
+`test/enclosure_interpolation.ml` checks both precisions against the original
+composition and an independent exact-rational linear formula. For uncertain
+points inside ordered finite nodes, the affine image is bounded by the two
+rational endpoint values (including decreasing interpolants). The numerical-only
+mutation guard checks containment and availability; ordinary compatibility also
+covers unresolved weights, arithmetic failures, signed endpoints, extreme nodes,
+retained results and independent domains. No result or callback borrows scratch.
+
 `test/enclosure_scalar.ml` checks full fields (including padding-zero signs),
 refusal classifications and exact-rational containment over boundary and seeded
 inputs in both precisions. It also checks that retained results survive later

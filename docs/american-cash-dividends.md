@@ -86,6 +86,13 @@ space refinement holds mapping resolution fixed. On matching fine grids, the
 second projection is the identity. This extra projection intentionally exposes
 mapping sensitivity, including at kinks.
 
+The internal enclosed interpolation primitive reuses bounded call-owned packing
+storage and the immutable original `point-lower` numerator. It preserves exact
+endpoint shortcuts, strict convex-weight checks, the weighted-sum order and
+all fields/radii. Grid search, tick counts, diagnostics and rejection limits
+remain in the cash solver; this introduces no cross-point cache or borrowed
+result. See the [storage argument](runtime-enclosures.md#interpolation-owned-scratch).
+
 Both event differences must meet the same epsilon/8 criterion as the space/time/
 domain differences. The latest event difference also enters the epsilon/2 sum.
 No frozen #109 threshold is widened. `refinement.event_changes` is `None` for
