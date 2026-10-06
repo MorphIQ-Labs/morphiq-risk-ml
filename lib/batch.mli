@@ -80,3 +80,5 @@ module Fast : sig
       numerical failures are per-item; programming/runtime exceptions propagate.
   *)
 end
+
+module American = American_batch

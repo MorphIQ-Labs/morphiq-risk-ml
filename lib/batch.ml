@@ -182,3 +182,5 @@ module Fast = struct
             | Scalar entry -> price entry | Native i -> finish values.(i))
           p.slots
 end
+
+module American = American_batch

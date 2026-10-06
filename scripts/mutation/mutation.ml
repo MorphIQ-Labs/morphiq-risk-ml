@@ -38,6 +38,82 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-compiled-today-cash";
+      file = "lib/planner.ml";
+      snippet = "List.filter (fun (x : dividend) -> x.day >= day)";
+      replacement = "List.filter (fun (x : dividend) -> x.day > day)";
+      killer = "american_compiled";
+      mechanism = "retain current cash event and its valuation side";
+    };
+    {
+      id = "american-compiled-today-right";
+      file = "lib/planner.ml";
+      snippet = "List.filter (fun x -> compare_instant x now >= 0)";
+      replacement = "List.filter (fun x -> compare_instant x now > 0)";
+      killer = "american_compiled";
+      mechanism = "retain exercise at the current instant";
+    };
+    {
+      id = "american-compiled-knot";
+      file = "lib/planner.ml";
+      snippet = "if d <= day then initial := x";
+      replacement = "if d < day then initial := x";
+      killer = "american_compiled";
+      mechanism = "right-continuous coefficients activate at the knot";
+    };
+    {
+      id = "american-compiled-identity";
+      file = "lib/american_batch.ml";
+      snippet = "C.float b cfg.tolerance;";
+      replacement = "C.float b 0.;";
+      killer = "american_compiled";
+      mechanism = "numerical tolerance participates in identity";
+    };
+    {
+      id = "american-compiled-workspace";
+      file = "lib/planner.ml";
+      snippet = "B.output_workspace o <= limits.max_solver_workspace_bytes";
+      replacement = "B.output_workspace o <= max_int";
+      killer = "american_compiled";
+      mechanism = "enforce caller PDE workspace policy";
+    };
+    {
+      id = "american-compiled-buffer";
+      file = "lib/planner.ml";
+      snippet =
+        "(buffered_results <= limits.max_buffered_results)\n\
+        \        \"in-flight output limit exceeded\"";
+      replacement =
+        "(buffered_results <= max_int)\n\
+        \        \"in-flight output limit exceeded\"";
+      killer = "american_compiled";
+      mechanism = "bound all in-flight result slots";
+    };
+    {
+      id = "american-compiled-cancel";
+      file = "lib/american_batch.ml";
+      snippet = "A.price ~cancel ~premium:p.premium";
+      replacement = "A.price ~cancel:(fun () -> false) ~premium:p.premium";
+      killer = "american_compiled";
+      mechanism = "forward cancellation into the scalar solve";
+    };
+    {
+      id = "american-compiled-prefix";
+      file = "lib/planner.ml";
+      snippet = "emit_to sink (Row row);\n      incr committed;";
+      replacement = "incr committed;\n      emit_to sink (Row row);";
+      killer = "american_compiled";
+      mechanism = "count only sink-accepted rows";
+    };
+    {
+      id = "american-compiled-cash-copy";
+      file = "lib/planner.ml";
+      snippet = "cash = Option.map Array.copy p.cash;";
+      replacement = "cash = p.cash;";
+      killer = "american_compiled";
+      mechanism = "snapshot caller-owned cash arrays";
+    };
+    {
       id = "american-policy-fma";
       file = "lib/american_policy_stubs.c";
       snippet =
@@ -1724,7 +1800,7 @@ let guard_arguments = function
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
   | "bermudan" | "american_piecewise" | "american_greeks"
   | "american_greek_reuse" | "american_residual" | "american_policy"
-  | "american_work_order" ->
+  | "american_work_order" | "american_compiled" ->
       [ [] ]
   | "terminal_cash" -> [ [ "terminal_cash" ] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]

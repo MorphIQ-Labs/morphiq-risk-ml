@@ -273,3 +273,152 @@ module Fast : sig
       requires a fresh output destination; no durable resume/retry is implied.
   *)
 end
+
+module American : sig
+  module B = Batch.American
+  (** Typed estimated/certified early-exercise scenario streaming. No aggregate
+      total or implicit promotion of estimates to certificates. *)
+
+  type 'a curve = { initial : 'a; changes : (int * 'a) array }
+
+  type _ model =
+    | Constant : {
+        rate : float;
+        dividend_yield : float;
+        volatility : Vol.lognormal Vol.t;
+      }
+        -> B.constant model
+    | Piecewise : {
+        rate : float curve;
+        dividend_yield : float curve;
+        volatility : Vol.lognormal Vol.t curve;
+      }
+        -> B.piecewise model
+
+  type instant = { day : int; side : Early_exercise.Bsm.event_side }
+
+  type exercise =
+    | American of {
+        opening : instant;
+        expiry_side : Early_exercise.Bsm.event_side;
+      }
+    | Bermudan of instant array
+
+  type dividend = { day : int; amount : float }
+
+  type 'k specification = {
+    id : string;
+    factor : string;
+    currency : string;
+    quantity : float;
+    strike : float;
+    expiry_day : int;
+    side : Side.t;
+    model : 'k model;
+    exercise : exercise;
+    cash : dividend array option;
+    outputs : 'k B.output list;
+  }
+
+  type position = Position : 'k specification -> position
+  type factor = { name : string; spot : float }
+  type cash_at_valuation = Before_payment | After_payment
+
+  type limits = {
+    max_instruments : int;
+    max_market_factors : int;
+    max_scenarios : int;
+    max_calculations : int;
+    tile_rows : int;
+    max_workers : int;
+    max_buffered_results : int;
+    max_solver_workspace_bytes : int;
+    max_schedule_events : int;
+  }
+
+  type t
+
+  type explanation = {
+    snapshot_id : string;
+    plan_id : string;
+    convention : string;
+    limits : limits;
+    instruments : int;
+    scenarios : int;
+    calculations : int;
+    tiles : int;
+    buffered_results : int;
+    dependency_reuse : string;
+  }
+
+  val compile :
+    snapshot_id:string ->
+    base_day:int ->
+    day_count:day_count ->
+    cash_at_valuation:cash_at_valuation ->
+    portfolio:position array ->
+    market:factor array ->
+    scenarios:Scenario.t ->
+    limits:limits ->
+    (t, string) result
+  (** Supported on the qualified 64-bit runtimes. Freeze all arrays; validate
+      the complete original schedule and unshocked base model before scenario
+      filtering. Future shocked admission is per-row. Dates/knots lie in the
+      declared base-to-expiry interval (American opening may precede base).
+      Volatility shocks map each original coefficient level; spot shocks act on
+      frozen factor spot. Rates/yields/quotes stay fixed. Each remaining year
+      fraction is a single division of an integer day difference. No dividend
+      adjustment to the supplied valuation-side spot. Output slots count
+      operations, including one slot per Greek bundle. No full scenario cube,
+      aggregate mode, settlement or economic P&L. *)
+
+  val explain : t -> explanation
+  val manifest : t -> string
+
+  type tile = private {
+    id : int;
+    scenario : int;
+    first : int;
+    length : int;
+    plan_id : string;
+  }
+
+  val tile : t -> int -> tile
+
+  type error =
+    | Post_expiry
+    | Admission of Early_exercise.Bsm.input_error
+    | Volatility of Refusal.t
+    | Scalar of B.error
+
+  type outcome =
+    | Outcome : ('k, 'a) B.operation * ('a, error) result -> outcome
+
+  type row = {
+    scenario_id : int;
+    instrument_index : int;
+    instrument_id : string;
+    factor_id : string;
+    currency : string;
+    quantity : float;
+    outcomes : outcome list;
+  }
+
+  type event = Row of row | Finished of completion
+
+  val evaluate_tile : t -> tile -> (row array, string) result
+  (** Full unweighted ordered results for one owned tile; fresh arrays. *)
+
+  val execute :
+    t ->
+    workers:int ->
+    cancellation:cancellation ->
+    sink:(event -> (unit, string) result) ->
+    completion
+  (** Ordered bounded waves using worker-owned scalar scratch. Cancellation
+      reaches scalar kernels and date preparation; an interrupted row is not
+      committed. Workers join before return. The coordinator alone invokes the
+      sink. Counters describe only sink-accepted rows/operation slots; already
+      computed uncommitted work is discarded. Sink failure has no guaranteed
+      Finished marker. Each execution requires a fresh output destination. *)
+end
