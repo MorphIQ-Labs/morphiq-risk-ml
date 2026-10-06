@@ -1104,3 +1104,17 @@
   ../scripts/american_reference_data.py)
  (action
   (run python3 %{dep:../scripts/test_benchmark_american_greeks.py})))
+
+(test
+ (name american_greek_reuse)
+ (modules american_greek_reuse)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))

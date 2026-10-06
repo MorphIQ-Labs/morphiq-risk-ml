@@ -38,6 +38,23 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-greek-boundary-inputs";
+      file = "lib/early_exercise.ml";
+      snippet = "if same_boundary_inputs then boundary_reuse";
+      replacement = "if true then boundary_reuse";
+      killer = "american_greek_reuse";
+      mechanism = "rate shifts cannot reuse volatility-shift boundary values";
+    };
+    {
+      id = "american-greek-boundary-error";
+      file = "lib/early_exercise.ml";
+      snippet = "| Some errors -> accept_boundary c value errors.(i)";
+      replacement = "| Some _ -> value";
+      killer = "american_greek_reuse";
+      mechanism =
+        "each solve must retain cached boundary arithmetic uncertainty";
+    };
+    {
       id = "american-greek-gamma";
       file = "lib/early_exercise.ml";
       snippet = "E.div (E.mul_float (E.sub r l) 2.) span";
@@ -1341,7 +1358,8 @@ let guard_arguments = function
   | "shared_greeks" | "production_boundary" | "production_multi"
   | "planner_contract" | "prepared_division" | "carry_cancellation"
   | "greek_cancellation" | "rho_midpoint" | "american_pricing" | "american_cash"
-  | "bermudan" | "american_piecewise" | "american_greeks" ->
+  | "bermudan" | "american_piecewise" | "american_greeks"
+  | "american_greek_reuse" ->
       [ [] ]
   | "finite_greeks" -> [ [ "finite_greeks" ] ]
   | "numerical_regressions" -> [ [ "regressions" ] ]
