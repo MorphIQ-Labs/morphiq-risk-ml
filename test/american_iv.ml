@@ -102,6 +102,9 @@ let controls () =
   check "mathematical cap"
     (solve Side.Call 101. = Error (I.No_solution I.Above_global_cap));
   let expiry = get (A.admit (model ~t:0. ~s:101. ())) in
+  check "cancel before a volatility-independent boundary"
+    (I.solve ~cancel:(fun () -> true) (settings cfg) expiry Side.Call (quote 1.)
+    = Error I.Cancelled);
   check "expiry nonidentifiability"
     (solve ~a:expiry Side.Call 1. = Error (I.Non_identifiable I.Expiry));
   check "expiry incompatible quote"
