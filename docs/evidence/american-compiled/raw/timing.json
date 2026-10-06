@@ -1,0 +1,3083 @@
+{
+  "processes": [
+    {
+      "index": 0,
+      "command": [
+        "/tmp/morphiq-american-compiled/_build/default/bench/american_compiled.exe"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "pid": 69607,
+      "wall_s": 10.903801042004488,
+      "load_before": [
+        15.26123046875,
+        35.6494140625,
+        27.6669921875
+      ],
+      "load_after": [
+        13.52978515625,
+        34.6064453125,
+        27.3896484375
+      ],
+      "peak_rss_bytes": 16285696,
+      "user_cpu_s": 12.090143,
+      "system_cpu_s": 0.129573,
+      "samples": {
+        "call/scalar": {
+          "wall_s": 0.000710400008,
+          "cpu_s": 0.0007112,
+          "coordinator_bytes": 1037884.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/batch": {
+          "wall_s": 0.000705999997,
+          "cpu_s": 0.000707,
+          "coordinator_bytes": 1038340.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-1": {
+          "wall_s": 0.000707599986,
+          "cpu_s": 0.0007048,
+          "coordinator_bytes": 1047604.8,
+          "first_row_s": 8.03999836e-05,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-2": {
+          "wall_s": 0.000712800003,
+          "cpu_s": 0.0012128,
+          "coordinator_bytes": 526180.8,
+          "first_row_s": 0.000178800034,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/compile-batch": {
+          "wall_s": 3.49000003e-05,
+          "cpu_s": 3.426e-05,
+          "coordinator_bytes": 46219.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/compile-plan": {
+          "wall_s": 2.31700006e-05,
+          "cpu_s": 2.319e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "put/scalar": {
+          "wall_s": 0.188709,
+          "cpu_s": 0.1836842,
+          "coordinator_bytes": 57130972.8,
+          "first_row_s": 0.0,
+          "minor": 161,
+          "major": 79,
+          "iterations": 5
+        },
+        "put/batch": {
+          "wall_s": 0.1890436,
+          "cpu_s": 0.1850696,
+          "coordinator_bytes": 57131428.8,
+          "first_row_s": 0.0,
+          "minor": 161,
+          "major": 78,
+          "iterations": 5
+        },
+        "put/planner-1": {
+          "wall_s": 0.1854096,
+          "cpu_s": 0.1837062,
+          "coordinator_bytes": 57140692.8,
+          "first_row_s": 0.0214734,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/planner-2": {
+          "wall_s": 0.0970324,
+          "cpu_s": 0.1890174,
+          "coordinator_bytes": 28572724.8,
+          "first_row_s": 0.022609,
+          "minor": 94,
+          "major": 34,
+          "iterations": 5
+        },
+        "put/compile-batch": {
+          "wall_s": 3.42999992e-05,
+          "cpu_s": 3.433e-05,
+          "coordinator_bytes": 46211.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 3,
+          "iterations": 100
+        },
+        "put/compile-plan": {
+          "wall_s": 2.46699993e-05,
+          "cpu_s": 2.435e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/scalar": {
+          "wall_s": 0.1910962,
+          "cpu_s": 0.1859234,
+          "coordinator_bytes": 58533340.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/batch": {
+          "wall_s": 0.1833438,
+          "cpu_s": 0.1822826,
+          "coordinator_bytes": 58533796.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/planner-1": {
+          "wall_s": 0.185772,
+          "cpu_s": 0.1846158,
+          "coordinator_bytes": 58543060.8,
+          "first_row_s": 0.0221214,
+          "minor": 166,
+          "major": 82,
+          "iterations": 5
+        },
+        "greeks/planner-2": {
+          "wall_s": 0.0952606,
+          "cpu_s": 0.187179,
+          "coordinator_bytes": 29273908.8,
+          "first_row_s": 0.0223564,
+          "minor": 97,
+          "major": 36,
+          "iterations": 5
+        },
+        "greeks/compile-batch": {
+          "wall_s": 4.10500006e-05,
+          "cpu_s": 4.072e-05,
+          "coordinator_bytes": 53875.04,
+          "first_row_s": 0.0,
+          "minor": 4,
+          "major": 4,
+          "iterations": 100
+        },
+        "greeks/compile-plan": {
+          "wall_s": 2.58600002e-05,
+          "cpu_s": 2.586e-05,
+          "coordinator_bytes": 33203.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "iv/scalar": {
+          "wall_s": 0.00440400001,
+          "cpu_s": 0.004366,
+          "coordinator_bytes": 6299548.8,
+          "first_row_s": 0.0,
+          "minor": 19,
+          "major": 8,
+          "iterations": 5
+        },
+        "iv/batch": {
+          "wall_s": 0.004275,
+          "cpu_s": 0.004258,
+          "coordinator_bytes": 6300004.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-1": {
+          "wall_s": 0.0042956,
+          "cpu_s": 0.0042844,
+          "coordinator_bytes": 6309268.8,
+          "first_row_s": 0.000485400017,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-2": {
+          "wall_s": 0.00270760001,
+          "cpu_s": 0.0050078,
+          "coordinator_bytes": 3157012.8,
+          "first_row_s": 0.000620399974,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/compile-batch": {
+          "wall_s": 3.94299999e-05,
+          "cpu_s": 3.944e-05,
+          "coordinator_bytes": 59627.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/compile-plan": {
+          "wall_s": 2.59799999e-05,
+          "cpu_s": 2.601e-05,
+          "coordinator_bytes": 36195.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/scalar": {
+          "wall_s": 0.00439619999,
+          "cpu_s": 0.004376,
+          "coordinator_bytes": 3869276.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/batch": {
+          "wall_s": 0.0043912,
+          "cpu_s": 0.0043808,
+          "coordinator_bytes": 3869732.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-1": {
+          "wall_s": 0.0043854,
+          "cpu_s": 0.0043698,
+          "coordinator_bytes": 3878996.8,
+          "first_row_s": 0.0004006,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-2": {
+          "wall_s": 0.00271999999,
+          "cpu_s": 0.0050702,
+          "coordinator_bytes": 1941876.8,
+          "first_row_s": 0.000532999961,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/compile-batch": {
+          "wall_s": 2.03000009e-05,
+          "cpu_s": 2.03e-05,
+          "coordinator_bytes": 36907.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/compile-plan": {
+          "wall_s": 1.62200001e-05,
+          "cpu_s": 1.621e-05,
+          "coordinator_bytes": 26323.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        }
+      },
+      "cancel": {
+        "issued_s": 0.00644300005,
+        "controller_delay_s": 0.0014430000499999996,
+        "return_after_issue_s": 7.70000042e-05,
+        "rows": 0,
+        "slots": 0
+      }
+    },
+    {
+      "index": 1,
+      "command": [
+        "/tmp/morphiq-american-compiled/_build/default/bench/american_compiled.exe",
+        "--reverse"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "pid": 69615,
+      "wall_s": 10.822748250095174,
+      "load_before": [
+        13.52978515625,
+        34.6064453125,
+        27.3896484375
+      ],
+      "load_after": [
+        12.14453125,
+        33.61474609375,
+        27.12158203125
+      ],
+      "peak_rss_bytes": 18989056,
+      "user_cpu_s": 12.05958,
+      "system_cpu_s": 0.11871,
+      "samples": {
+        "certified/compile-plan": {
+          "wall_s": 1.67699996e-05,
+          "cpu_s": 1.672e-05,
+          "coordinator_bytes": 26323.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/compile-batch": {
+          "wall_s": 2.0049999e-05,
+          "cpu_s": 2.006e-05,
+          "coordinator_bytes": 36907.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/planner-2": {
+          "wall_s": 0.00282040001,
+          "cpu_s": 0.0052026,
+          "coordinator_bytes": 1941876.8,
+          "first_row_s": 0.000560399983,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-1": {
+          "wall_s": 0.00446580001,
+          "cpu_s": 0.0044274,
+          "coordinator_bytes": 3878996.8,
+          "first_row_s": 0.000397600001,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/batch": {
+          "wall_s": 0.0044276,
+          "cpu_s": 0.0043906,
+          "coordinator_bytes": 3869732.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/scalar": {
+          "wall_s": 0.00513680002,
+          "cpu_s": 0.0047084,
+          "coordinator_bytes": 3869276.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/compile-plan": {
+          "wall_s": 2.71899998e-05,
+          "cpu_s": 2.724e-05,
+          "coordinator_bytes": 36195.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/compile-batch": {
+          "wall_s": 4.09099995e-05,
+          "cpu_s": 4.08e-05,
+          "coordinator_bytes": 59627.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/planner-2": {
+          "wall_s": 0.00280240001,
+          "cpu_s": 0.0051526,
+          "coordinator_bytes": 3157012.8,
+          "first_row_s": 0.000636199955,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-1": {
+          "wall_s": 0.004363,
+          "cpu_s": 0.004313,
+          "coordinator_bytes": 6309268.8,
+          "first_row_s": 0.000478000008,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/batch": {
+          "wall_s": 0.0044214,
+          "cpu_s": 0.0043746,
+          "coordinator_bytes": 6300004.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/scalar": {
+          "wall_s": 0.0044332,
+          "cpu_s": 0.0043916,
+          "coordinator_bytes": 6299548.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "greeks/compile-plan": {
+          "wall_s": 2.71699997e-05,
+          "cpu_s": 2.703e-05,
+          "coordinator_bytes": 33203.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/compile-batch": {
+          "wall_s": 4.06100007e-05,
+          "cpu_s": 4.061e-05,
+          "coordinator_bytes": 53875.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/planner-2": {
+          "wall_s": 0.0969514,
+          "cpu_s": 0.1894386,
+          "coordinator_bytes": 29273908.8,
+          "first_row_s": 0.0227096,
+          "minor": 94,
+          "major": 34,
+          "iterations": 5
+        },
+        "greeks/planner-1": {
+          "wall_s": 0.1833344,
+          "cpu_s": 0.182418,
+          "coordinator_bytes": 58543060.8,
+          "first_row_s": 0.0213842,
+          "minor": 164,
+          "major": 79,
+          "iterations": 5
+        },
+        "greeks/batch": {
+          "wall_s": 0.1848174,
+          "cpu_s": 0.1836476,
+          "coordinator_bytes": 58533796.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/scalar": {
+          "wall_s": 0.19183,
+          "cpu_s": 0.183982,
+          "coordinator_bytes": 58533340.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/compile-plan": {
+          "wall_s": 2.278e-05,
+          "cpu_s": 2.282e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "put/compile-batch": {
+          "wall_s": 3.36899993e-05,
+          "cpu_s": 3.362e-05,
+          "coordinator_bytes": 46211.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 3,
+          "iterations": 100
+        },
+        "put/planner-2": {
+          "wall_s": 0.0945388,
+          "cpu_s": 0.1859276,
+          "coordinator_bytes": 28572724.8,
+          "first_row_s": 0.022168,
+          "minor": 95,
+          "major": 35,
+          "iterations": 5
+        },
+        "put/planner-1": {
+          "wall_s": 0.1871042,
+          "cpu_s": 0.1851482,
+          "coordinator_bytes": 57140692.8,
+          "first_row_s": 0.021781,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/batch": {
+          "wall_s": 0.1823884,
+          "cpu_s": 0.1814506,
+          "coordinator_bytes": 57131428.8,
+          "first_row_s": 0.0,
+          "minor": 161,
+          "major": 79,
+          "iterations": 5
+        },
+        "put/scalar": {
+          "wall_s": 0.1869058,
+          "cpu_s": 0.1824734,
+          "coordinator_bytes": 57130972.8,
+          "first_row_s": 0.0,
+          "minor": 162,
+          "major": 81,
+          "iterations": 5
+        },
+        "call/compile-plan": {
+          "wall_s": 2.24599999e-05,
+          "cpu_s": 2.252e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/compile-batch": {
+          "wall_s": 3.25300009e-05,
+          "cpu_s": 3.256e-05,
+          "coordinator_bytes": 46219.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/planner-2": {
+          "wall_s": 0.000625000009,
+          "cpu_s": 0.0010644,
+          "coordinator_bytes": 526180.8,
+          "first_row_s": 0.000142600015,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-1": {
+          "wall_s": 0.000699799997,
+          "cpu_s": 0.0007004,
+          "coordinator_bytes": 1047604.8,
+          "first_row_s": 8.11999664e-05,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/batch": {
+          "wall_s": 0.000715399999,
+          "cpu_s": 0.0007104,
+          "coordinator_bytes": 1038340.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/scalar": {
+          "wall_s": 0.000676999986,
+          "cpu_s": 0.0006776,
+          "coordinator_bytes": 1037884.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        }
+      },
+      "cancel": {
+        "issued_s": 0.00639800006,
+        "controller_delay_s": 0.0013980000599999997,
+        "return_after_issue_s": 0.000103999977,
+        "rows": 0,
+        "slots": 0
+      }
+    },
+    {
+      "index": 2,
+      "command": [
+        "/tmp/morphiq-american-compiled/_build/default/bench/american_compiled.exe"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "pid": 69646,
+      "wall_s": 10.989022791967727,
+      "load_before": [
+        12.14453125,
+        33.61474609375,
+        27.12158203125
+      ],
+      "load_after": [
+        10.8984375,
+        32.6396484375,
+        26.85107421875
+      ],
+      "peak_rss_bytes": 16007168,
+      "user_cpu_s": 12.27973,
+      "system_cpu_s": 0.136952,
+      "samples": {
+        "call/scalar": {
+          "wall_s": 0.000695599988,
+          "cpu_s": 0.0006926,
+          "coordinator_bytes": 1037884.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/batch": {
+          "wall_s": 0.000683800015,
+          "cpu_s": 0.0006844,
+          "coordinator_bytes": 1038340.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-1": {
+          "wall_s": 0.000712199998,
+          "cpu_s": 0.0007112,
+          "coordinator_bytes": 1047604.8,
+          "first_row_s": 8.23999988e-05,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-2": {
+          "wall_s": 0.000693199993,
+          "cpu_s": 0.0011368,
+          "coordinator_bytes": 526180.8,
+          "first_row_s": 0.000157399988,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/compile-batch": {
+          "wall_s": 3.37200006e-05,
+          "cpu_s": 3.376e-05,
+          "coordinator_bytes": 46219.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/compile-plan": {
+          "wall_s": 2.22999998e-05,
+          "cpu_s": 2.232e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "put/scalar": {
+          "wall_s": 0.1831404,
+          "cpu_s": 0.1822296,
+          "coordinator_bytes": 57130972.8,
+          "first_row_s": 0.0,
+          "minor": 161,
+          "major": 79,
+          "iterations": 5
+        },
+        "put/batch": {
+          "wall_s": 0.183931,
+          "cpu_s": 0.1824798,
+          "coordinator_bytes": 57131428.8,
+          "first_row_s": 0.0,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/planner-1": {
+          "wall_s": 0.1967732,
+          "cpu_s": 0.1895436,
+          "coordinator_bytes": 57140692.8,
+          "first_row_s": 0.0223006,
+          "minor": 161,
+          "major": 79,
+          "iterations": 5
+        },
+        "put/planner-2": {
+          "wall_s": 0.1032068,
+          "cpu_s": 0.1964154,
+          "coordinator_bytes": 28572724.8,
+          "first_row_s": 0.0241238,
+          "minor": 98,
+          "major": 37,
+          "iterations": 5
+        },
+        "put/compile-batch": {
+          "wall_s": 3.50200001e-05,
+          "cpu_s": 3.503e-05,
+          "coordinator_bytes": 46211.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 3,
+          "iterations": 100
+        },
+        "put/compile-plan": {
+          "wall_s": 2.39200005e-05,
+          "cpu_s": 2.393e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/scalar": {
+          "wall_s": 0.1903708,
+          "cpu_s": 0.1889128,
+          "coordinator_bytes": 58533340.8,
+          "first_row_s": 0.0,
+          "minor": 164,
+          "major": 78,
+          "iterations": 5
+        },
+        "greeks/batch": {
+          "wall_s": 0.188765,
+          "cpu_s": 0.1873572,
+          "coordinator_bytes": 58533796.8,
+          "first_row_s": 0.0,
+          "minor": 164,
+          "major": 78,
+          "iterations": 5
+        },
+        "greeks/planner-1": {
+          "wall_s": 0.189239,
+          "cpu_s": 0.1877948,
+          "coordinator_bytes": 58543060.8,
+          "first_row_s": 0.021985,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/planner-2": {
+          "wall_s": 0.0990046,
+          "cpu_s": 0.1926706,
+          "coordinator_bytes": 29273908.8,
+          "first_row_s": 0.0229188,
+          "minor": 95,
+          "major": 35,
+          "iterations": 5
+        },
+        "greeks/compile-batch": {
+          "wall_s": 4.158e-05,
+          "cpu_s": 4.094e-05,
+          "coordinator_bytes": 53875.04,
+          "first_row_s": 0.0,
+          "minor": 4,
+          "major": 4,
+          "iterations": 100
+        },
+        "greeks/compile-plan": {
+          "wall_s": 2.88000004e-05,
+          "cpu_s": 2.802e-05,
+          "coordinator_bytes": 33203.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "iv/scalar": {
+          "wall_s": 0.00455179999,
+          "cpu_s": 0.0044986,
+          "coordinator_bytes": 6299548.8,
+          "first_row_s": 0.0,
+          "minor": 20,
+          "major": 11,
+          "iterations": 5
+        },
+        "iv/batch": {
+          "wall_s": 0.00446820001,
+          "cpu_s": 0.004437,
+          "coordinator_bytes": 6300004.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-1": {
+          "wall_s": 0.00450840001,
+          "cpu_s": 0.0044454,
+          "coordinator_bytes": 6309268.8,
+          "first_row_s": 0.00055519999,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-2": {
+          "wall_s": 0.00323100002,
+          "cpu_s": 0.0055422,
+          "coordinator_bytes": 3157012.8,
+          "first_row_s": 0.000678000017,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/compile-batch": {
+          "wall_s": 4.05799993e-05,
+          "cpu_s": 4.056e-05,
+          "coordinator_bytes": 59627.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/compile-plan": {
+          "wall_s": 2.76599999e-05,
+          "cpu_s": 2.736e-05,
+          "coordinator_bytes": 36195.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/scalar": {
+          "wall_s": 0.0044736,
+          "cpu_s": 0.0044478,
+          "coordinator_bytes": 3869276.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/batch": {
+          "wall_s": 0.0044886,
+          "cpu_s": 0.0044688,
+          "coordinator_bytes": 3869732.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-1": {
+          "wall_s": 0.00458160001,
+          "cpu_s": 0.0045072,
+          "coordinator_bytes": 3878996.8,
+          "first_row_s": 0.000430200016,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-2": {
+          "wall_s": 0.0028496,
+          "cpu_s": 0.0052514,
+          "coordinator_bytes": 1941876.8,
+          "first_row_s": 0.000591799989,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/compile-batch": {
+          "wall_s": 2.10299995e-05,
+          "cpu_s": 2.105e-05,
+          "coordinator_bytes": 36907.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/compile-plan": {
+          "wall_s": 1.621e-05,
+          "cpu_s": 1.625e-05,
+          "coordinator_bytes": 26323.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        }
+      },
+      "cancel": {
+        "issued_s": 0.00593500002,
+        "controller_delay_s": 0.00093500002,
+        "return_after_issue_s": 0.000151999993,
+        "rows": 0,
+        "slots": 0
+      }
+    },
+    {
+      "index": 3,
+      "command": [
+        "/tmp/morphiq-american-compiled/_build/default/bench/american_compiled.exe",
+        "--reverse"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "pid": 69649,
+      "wall_s": 11.050952458987013,
+      "load_before": [
+        10.8984375,
+        32.6396484375,
+        26.85107421875
+      ],
+      "load_after": [
+        9.634765625,
+        31.30029296875,
+        26.47412109375
+      ],
+      "peak_rss_bytes": 18972672,
+      "user_cpu_s": 12.234218,
+      "system_cpu_s": 0.13189099999999998,
+      "samples": {
+        "certified/compile-plan": {
+          "wall_s": 1.82699994e-05,
+          "cpu_s": 1.831e-05,
+          "coordinator_bytes": 26323.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/compile-batch": {
+          "wall_s": 2.33399996e-05,
+          "cpu_s": 2.238e-05,
+          "coordinator_bytes": 36907.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/planner-2": {
+          "wall_s": 0.00282660001,
+          "cpu_s": 0.0052262,
+          "coordinator_bytes": 1941876.8,
+          "first_row_s": 0.000569800008,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-1": {
+          "wall_s": 0.0045404,
+          "cpu_s": 0.0044858,
+          "coordinator_bytes": 3878996.8,
+          "first_row_s": 0.000419400004,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/batch": {
+          "wall_s": 0.00452460002,
+          "cpu_s": 0.0044894,
+          "coordinator_bytes": 3869732.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/scalar": {
+          "wall_s": 0.0045068,
+          "cpu_s": 0.0044656,
+          "coordinator_bytes": 3869276.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/compile-plan": {
+          "wall_s": 2.87900004e-05,
+          "cpu_s": 2.861e-05,
+          "coordinator_bytes": 36195.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/compile-batch": {
+          "wall_s": 4.19299991e-05,
+          "cpu_s": 4.162e-05,
+          "coordinator_bytes": 59627.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/planner-2": {
+          "wall_s": 0.00305339999,
+          "cpu_s": 0.0054796,
+          "coordinator_bytes": 3157012.8,
+          "first_row_s": 0.000832800008,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-1": {
+          "wall_s": 0.0044954,
+          "cpu_s": 0.004448,
+          "coordinator_bytes": 6309268.8,
+          "first_row_s": 0.000532000023,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/batch": {
+          "wall_s": 0.00449699999,
+          "cpu_s": 0.0044684,
+          "coordinator_bytes": 6300004.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/scalar": {
+          "wall_s": 0.00458499999,
+          "cpu_s": 0.0045028,
+          "coordinator_bytes": 6299548.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "greeks/compile-plan": {
+          "wall_s": 2.67900003e-05,
+          "cpu_s": 2.683e-05,
+          "coordinator_bytes": 33203.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/compile-batch": {
+          "wall_s": 4.18600009e-05,
+          "cpu_s": 4.17e-05,
+          "coordinator_bytes": 53875.04,
+          "first_row_s": 0.0,
+          "minor": 4,
+          "major": 4,
+          "iterations": 100
+        },
+        "greeks/planner-2": {
+          "wall_s": 0.0982184,
+          "cpu_s": 0.1922594,
+          "coordinator_bytes": 29273908.8,
+          "first_row_s": 0.0230752,
+          "minor": 98,
+          "major": 37,
+          "iterations": 5
+        },
+        "greeks/planner-1": {
+          "wall_s": 0.1862014,
+          "cpu_s": 0.1850338,
+          "coordinator_bytes": 58543060.8,
+          "first_row_s": 0.0219268,
+          "minor": 164,
+          "major": 78,
+          "iterations": 5
+        },
+        "greeks/batch": {
+          "wall_s": 0.185465,
+          "cpu_s": 0.1843396,
+          "coordinator_bytes": 58533796.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/scalar": {
+          "wall_s": 0.1876426,
+          "cpu_s": 0.1860528,
+          "coordinator_bytes": 58533340.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 81,
+          "iterations": 5
+        },
+        "put/compile-plan": {
+          "wall_s": 2.43600004e-05,
+          "cpu_s": 2.431e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "put/compile-batch": {
+          "wall_s": 3.39899992e-05,
+          "cpu_s": 3.402e-05,
+          "coordinator_bytes": 46211.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 3,
+          "iterations": 100
+        },
+        "put/planner-2": {
+          "wall_s": 0.097545,
+          "cpu_s": 0.1898244,
+          "coordinator_bytes": 28572724.8,
+          "first_row_s": 0.0232196,
+          "minor": 96,
+          "major": 36,
+          "iterations": 5
+        },
+        "put/planner-1": {
+          "wall_s": 0.1875328,
+          "cpu_s": 0.1854514,
+          "coordinator_bytes": 57140692.8,
+          "first_row_s": 0.0216762,
+          "minor": 161,
+          "major": 79,
+          "iterations": 5
+        },
+        "put/batch": {
+          "wall_s": 0.1865466,
+          "cpu_s": 0.1849928,
+          "coordinator_bytes": 57131428.8,
+          "first_row_s": 0.0,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/scalar": {
+          "wall_s": 0.1870456,
+          "cpu_s": 0.1847452,
+          "coordinator_bytes": 57130972.8,
+          "first_row_s": 0.0,
+          "minor": 162,
+          "major": 81,
+          "iterations": 5
+        },
+        "call/compile-plan": {
+          "wall_s": 2.23699992e-05,
+          "cpu_s": 2.243e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/compile-batch": {
+          "wall_s": 3.38300003e-05,
+          "cpu_s": 3.377e-05,
+          "coordinator_bytes": 46219.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/planner-2": {
+          "wall_s": 0.000692800013,
+          "cpu_s": 0.0011442,
+          "coordinator_bytes": 526180.8,
+          "first_row_s": 0.000155999977,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-1": {
+          "wall_s": 0.000730000017,
+          "cpu_s": 0.0007228,
+          "coordinator_bytes": 1047604.8,
+          "first_row_s": 8.4400014e-05,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/batch": {
+          "wall_s": 0.000720200012,
+          "cpu_s": 0.0007166,
+          "coordinator_bytes": 1038340.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/scalar": {
+          "wall_s": 0.000751600019,
+          "cpu_s": 0.0007386,
+          "coordinator_bytes": 1037884.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        }
+      },
+      "cancel": {
+        "issued_s": 0.00646000006,
+        "controller_delay_s": 0.0014600000600000001,
+        "return_after_issue_s": 8.39999411e-05,
+        "rows": 0,
+        "slots": 0
+      }
+    },
+    {
+      "index": 4,
+      "command": [
+        "/tmp/morphiq-american-compiled/_build/default/bench/american_compiled.exe"
+      ],
+      "exit": 0,
+      "timed_out": false,
+      "pid": 69651,
+      "wall_s": 10.908414166071452,
+      "load_before": [
+        9.634765625,
+        31.30029296875,
+        26.47412109375
+      ],
+      "load_after": [
+        8.84765625,
+        30.41748046875,
+        26.216796875
+      ],
+      "peak_rss_bytes": 16089088,
+      "user_cpu_s": 12.210316,
+      "system_cpu_s": 0.126146,
+      "samples": {
+        "call/scalar": {
+          "wall_s": 0.000686000008,
+          "cpu_s": 0.0006868,
+          "coordinator_bytes": 1037884.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/batch": {
+          "wall_s": 0.000739199994,
+          "cpu_s": 0.0007244,
+          "coordinator_bytes": 1038340.8,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-1": {
+          "wall_s": 0.000820799987,
+          "cpu_s": 0.0007884,
+          "coordinator_bytes": 1047604.8,
+          "first_row_s": 9.91999637e-05,
+          "minor": 2,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/planner-2": {
+          "wall_s": 0.00081600002,
+          "cpu_s": 0.0014156,
+          "coordinator_bytes": 526180.8,
+          "first_row_s": 0.000189199997,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "call/compile-batch": {
+          "wall_s": 3.49999999e-05,
+          "cpu_s": 3.504e-05,
+          "coordinator_bytes": 46219.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "call/compile-plan": {
+          "wall_s": 2.31600006e-05,
+          "cpu_s": 2.321e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "put/scalar": {
+          "wall_s": 0.1852354,
+          "cpu_s": 0.1839958,
+          "coordinator_bytes": 57130972.8,
+          "first_row_s": 0.0,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/batch": {
+          "wall_s": 0.186508,
+          "cpu_s": 0.184665,
+          "coordinator_bytes": 57131428.8,
+          "first_row_s": 0.0,
+          "minor": 161,
+          "major": 78,
+          "iterations": 5
+        },
+        "put/planner-1": {
+          "wall_s": 0.1855366,
+          "cpu_s": 0.1845198,
+          "coordinator_bytes": 57140692.8,
+          "first_row_s": 0.0219302,
+          "minor": 162,
+          "major": 80,
+          "iterations": 5
+        },
+        "put/planner-2": {
+          "wall_s": 0.096481,
+          "cpu_s": 0.1887282,
+          "coordinator_bytes": 28572724.8,
+          "first_row_s": 0.0224402,
+          "minor": 95,
+          "major": 36,
+          "iterations": 5
+        },
+        "put/compile-batch": {
+          "wall_s": 3.59099999e-05,
+          "cpu_s": 3.539e-05,
+          "coordinator_bytes": 46211.04,
+          "first_row_s": 0.0,
+          "minor": 3,
+          "major": 3,
+          "iterations": 100
+        },
+        "put/compile-plan": {
+          "wall_s": 2.29400001e-05,
+          "cpu_s": 2.296e-05,
+          "coordinator_bytes": 29155.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "greeks/scalar": {
+          "wall_s": 0.1975996,
+          "cpu_s": 0.1895326,
+          "coordinator_bytes": 58533340.8,
+          "first_row_s": 0.0,
+          "minor": 164,
+          "major": 78,
+          "iterations": 5
+        },
+        "greeks/batch": {
+          "wall_s": 0.1882194,
+          "cpu_s": 0.1866424,
+          "coordinator_bytes": 58533796.8,
+          "first_row_s": 0.0,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/planner-1": {
+          "wall_s": 0.189016,
+          "cpu_s": 0.1870824,
+          "coordinator_bytes": 58543060.8,
+          "first_row_s": 0.021917,
+          "minor": 165,
+          "major": 80,
+          "iterations": 5
+        },
+        "greeks/planner-2": {
+          "wall_s": 0.0984374,
+          "cpu_s": 0.1918726,
+          "coordinator_bytes": 29273908.8,
+          "first_row_s": 0.0228708,
+          "minor": 99,
+          "major": 39,
+          "iterations": 5
+        },
+        "greeks/compile-batch": {
+          "wall_s": 4.10299993e-05,
+          "cpu_s": 4.106e-05,
+          "coordinator_bytes": 53875.04,
+          "first_row_s": 0.0,
+          "minor": 4,
+          "major": 4,
+          "iterations": 100
+        },
+        "greeks/compile-plan": {
+          "wall_s": 3.29199992e-05,
+          "cpu_s": 3.039e-05,
+          "coordinator_bytes": 33203.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 2,
+          "iterations": 100
+        },
+        "iv/scalar": {
+          "wall_s": 0.00443259999,
+          "cpu_s": 0.0043906,
+          "coordinator_bytes": 6299548.8,
+          "first_row_s": 0.0,
+          "minor": 16,
+          "major": 2,
+          "iterations": 5
+        },
+        "iv/batch": {
+          "wall_s": 0.00434580001,
+          "cpu_s": 0.004335,
+          "coordinator_bytes": 6300004.8,
+          "first_row_s": 0.0,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-1": {
+          "wall_s": 0.0044456,
+          "cpu_s": 0.0044184,
+          "coordinator_bytes": 6309268.8,
+          "first_row_s": 0.000529199978,
+          "minor": 15,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/planner-2": {
+          "wall_s": 0.0028192,
+          "cpu_s": 0.0052386,
+          "coordinator_bytes": 3157012.8,
+          "first_row_s": 0.000670999987,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "iv/compile-batch": {
+          "wall_s": 3.92699998e-05,
+          "cpu_s": 3.927e-05,
+          "coordinator_bytes": 59627.04,
+          "first_row_s": 0.0,
+          "minor": 2,
+          "major": 0,
+          "iterations": 100
+        },
+        "iv/compile-plan": {
+          "wall_s": 2.61300011e-05,
+          "cpu_s": 2.614e-05,
+          "coordinator_bytes": 36195.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/scalar": {
+          "wall_s": 0.00441719999,
+          "cpu_s": 0.004401,
+          "coordinator_bytes": 3869276.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/batch": {
+          "wall_s": 0.0044124,
+          "cpu_s": 0.0043952,
+          "coordinator_bytes": 3869732.8,
+          "first_row_s": 0.0,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-1": {
+          "wall_s": 0.00441659999,
+          "cpu_s": 0.0044112,
+          "coordinator_bytes": 3878996.8,
+          "first_row_s": 0.000402599992,
+          "minor": 9,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/planner-2": {
+          "wall_s": 0.0030606,
+          "cpu_s": 0.005337,
+          "coordinator_bytes": 1941876.8,
+          "first_row_s": 0.000554399984,
+          "minor": 20,
+          "major": 0,
+          "iterations": 5
+        },
+        "certified/compile-batch": {
+          "wall_s": 2.10799999e-05,
+          "cpu_s": 2.101e-05,
+          "coordinator_bytes": 36907.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        },
+        "certified/compile-plan": {
+          "wall_s": 1.70700008e-05,
+          "cpu_s": 1.696e-05,
+          "coordinator_bytes": 26323.04,
+          "first_row_s": 0.0,
+          "minor": 1,
+          "major": 0,
+          "iterations": 100
+        }
+      },
+      "cancel": {
+        "issued_s": 0.00636699994,
+        "controller_delay_s": 0.0013669999399999995,
+        "return_after_issue_s": 0.000103000086,
+        "rows": 0,
+        "slots": 0
+      }
+    }
+  ],
+  "summary": {
+    "call/scalar": {
+      "wall_s": {
+        "median": 0.000695599988,
+        "min": 0.000676999986,
+        "max": 0.000751600019,
+        "samples": [
+          0.000710400008,
+          0.000676999986,
+          0.000695599988,
+          0.000751600019,
+          0.000686000008
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0006926,
+        "min": 0.0006776,
+        "max": 0.0007386,
+        "samples": [
+          0.0007112,
+          0.0006776,
+          0.0006926,
+          0.0007386,
+          0.0006868
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1037884.8,
+        "min": 1037884.8,
+        "max": 1037884.8,
+        "samples": [
+          1037884.8,
+          1037884.8,
+          1037884.8,
+          1037884.8,
+          1037884.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "call/batch": {
+      "wall_s": {
+        "median": 0.000715399999,
+        "min": 0.000683800015,
+        "max": 0.000739199994,
+        "samples": [
+          0.000705999997,
+          0.000715399999,
+          0.000683800015,
+          0.000720200012,
+          0.000739199994
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0007104,
+        "min": 0.0006844,
+        "max": 0.0007244,
+        "samples": [
+          0.000707,
+          0.0007104,
+          0.0006844,
+          0.0007166,
+          0.0007244
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1038340.8,
+        "min": 1038340.8,
+        "max": 1038340.8,
+        "samples": [
+          1038340.8,
+          1038340.8,
+          1038340.8,
+          1038340.8,
+          1038340.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "call/planner-1": {
+      "wall_s": {
+        "median": 0.000712199998,
+        "min": 0.000699799997,
+        "max": 0.000820799987,
+        "samples": [
+          0.000707599986,
+          0.000699799997,
+          0.000712199998,
+          0.000730000017,
+          0.000820799987
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0007112,
+        "min": 0.0007004,
+        "max": 0.0007884,
+        "samples": [
+          0.0007048,
+          0.0007004,
+          0.0007112,
+          0.0007228,
+          0.0007884
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1047604.8,
+        "min": 1047604.8,
+        "max": 1047604.8,
+        "samples": [
+          1047604.8,
+          1047604.8,
+          1047604.8,
+          1047604.8,
+          1047604.8
+        ]
+      },
+      "first_row_s": {
+        "median": 8.23999988e-05,
+        "min": 8.03999836e-05,
+        "max": 9.91999637e-05,
+        "samples": [
+          8.03999836e-05,
+          8.11999664e-05,
+          8.23999988e-05,
+          8.4400014e-05,
+          9.91999637e-05
+        ]
+      }
+    },
+    "call/planner-2": {
+      "wall_s": {
+        "median": 0.000693199993,
+        "min": 0.000625000009,
+        "max": 0.00081600002,
+        "samples": [
+          0.000712800003,
+          0.000625000009,
+          0.000693199993,
+          0.000692800013,
+          0.00081600002
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0011442,
+        "min": 0.0010644,
+        "max": 0.0014156,
+        "samples": [
+          0.0012128,
+          0.0010644,
+          0.0011368,
+          0.0011442,
+          0.0014156
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 526180.8,
+        "min": 526180.8,
+        "max": 526180.8,
+        "samples": [
+          526180.8,
+          526180.8,
+          526180.8,
+          526180.8,
+          526180.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.000157399988,
+        "min": 0.000142600015,
+        "max": 0.000189199997,
+        "samples": [
+          0.000178800034,
+          0.000142600015,
+          0.000157399988,
+          0.000155999977,
+          0.000189199997
+        ]
+      }
+    },
+    "call/compile-batch": {
+      "wall_s": {
+        "median": 3.38300003e-05,
+        "min": 3.25300009e-05,
+        "max": 3.49999999e-05,
+        "samples": [
+          3.49000003e-05,
+          3.25300009e-05,
+          3.37200006e-05,
+          3.38300003e-05,
+          3.49999999e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 3.377e-05,
+        "min": 3.256e-05,
+        "max": 3.504e-05,
+        "samples": [
+          3.426e-05,
+          3.256e-05,
+          3.376e-05,
+          3.377e-05,
+          3.504e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 46219.04,
+        "min": 46219.04,
+        "max": 46219.04,
+        "samples": [
+          46219.04,
+          46219.04,
+          46219.04,
+          46219.04,
+          46219.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "call/compile-plan": {
+      "wall_s": {
+        "median": 2.24599999e-05,
+        "min": 2.22999998e-05,
+        "max": 2.31700006e-05,
+        "samples": [
+          2.31700006e-05,
+          2.24599999e-05,
+          2.22999998e-05,
+          2.23699992e-05,
+          2.31600006e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 2.252e-05,
+        "min": 2.232e-05,
+        "max": 2.321e-05,
+        "samples": [
+          2.319e-05,
+          2.252e-05,
+          2.232e-05,
+          2.243e-05,
+          2.321e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29155.04,
+        "min": 29155.04,
+        "max": 29155.04,
+        "samples": [
+          29155.04,
+          29155.04,
+          29155.04,
+          29155.04,
+          29155.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "put/scalar": {
+      "wall_s": {
+        "median": 0.1869058,
+        "min": 0.1831404,
+        "max": 0.188709,
+        "samples": [
+          0.188709,
+          0.1869058,
+          0.1831404,
+          0.1870456,
+          0.1852354
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1836842,
+        "min": 0.1822296,
+        "max": 0.1847452,
+        "samples": [
+          0.1836842,
+          0.1824734,
+          0.1822296,
+          0.1847452,
+          0.1839958
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 57130972.8,
+        "min": 57130972.8,
+        "max": 57130972.8,
+        "samples": [
+          57130972.8,
+          57130972.8,
+          57130972.8,
+          57130972.8,
+          57130972.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "put/batch": {
+      "wall_s": {
+        "median": 0.186508,
+        "min": 0.1823884,
+        "max": 0.1890436,
+        "samples": [
+          0.1890436,
+          0.1823884,
+          0.183931,
+          0.1865466,
+          0.186508
+        ]
+      },
+      "cpu_s": {
+        "median": 0.184665,
+        "min": 0.1814506,
+        "max": 0.1850696,
+        "samples": [
+          0.1850696,
+          0.1814506,
+          0.1824798,
+          0.1849928,
+          0.184665
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 57131428.8,
+        "min": 57131428.8,
+        "max": 57131428.8,
+        "samples": [
+          57131428.8,
+          57131428.8,
+          57131428.8,
+          57131428.8,
+          57131428.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "put/planner-1": {
+      "wall_s": {
+        "median": 0.1871042,
+        "min": 0.1854096,
+        "max": 0.1967732,
+        "samples": [
+          0.1854096,
+          0.1871042,
+          0.1967732,
+          0.1875328,
+          0.1855366
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1851482,
+        "min": 0.1837062,
+        "max": 0.1895436,
+        "samples": [
+          0.1837062,
+          0.1851482,
+          0.1895436,
+          0.1854514,
+          0.1845198
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 57140692.8,
+        "min": 57140692.8,
+        "max": 57140692.8,
+        "samples": [
+          57140692.8,
+          57140692.8,
+          57140692.8,
+          57140692.8,
+          57140692.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.021781,
+        "min": 0.0214734,
+        "max": 0.0223006,
+        "samples": [
+          0.0214734,
+          0.021781,
+          0.0223006,
+          0.0216762,
+          0.0219302
+        ]
+      }
+    },
+    "put/planner-2": {
+      "wall_s": {
+        "median": 0.0970324,
+        "min": 0.0945388,
+        "max": 0.1032068,
+        "samples": [
+          0.0970324,
+          0.0945388,
+          0.1032068,
+          0.097545,
+          0.096481
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1890174,
+        "min": 0.1859276,
+        "max": 0.1964154,
+        "samples": [
+          0.1890174,
+          0.1859276,
+          0.1964154,
+          0.1898244,
+          0.1887282
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 28572724.8,
+        "min": 28572724.8,
+        "max": 28572724.8,
+        "samples": [
+          28572724.8,
+          28572724.8,
+          28572724.8,
+          28572724.8,
+          28572724.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.022609,
+        "min": 0.022168,
+        "max": 0.0241238,
+        "samples": [
+          0.022609,
+          0.022168,
+          0.0241238,
+          0.0232196,
+          0.0224402
+        ]
+      }
+    },
+    "put/compile-batch": {
+      "wall_s": {
+        "median": 3.42999992e-05,
+        "min": 3.36899993e-05,
+        "max": 3.59099999e-05,
+        "samples": [
+          3.42999992e-05,
+          3.36899993e-05,
+          3.50200001e-05,
+          3.39899992e-05,
+          3.59099999e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 3.433e-05,
+        "min": 3.362e-05,
+        "max": 3.539e-05,
+        "samples": [
+          3.433e-05,
+          3.362e-05,
+          3.503e-05,
+          3.402e-05,
+          3.539e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 46211.04,
+        "min": 46211.04,
+        "max": 46211.04,
+        "samples": [
+          46211.04,
+          46211.04,
+          46211.04,
+          46211.04,
+          46211.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "put/compile-plan": {
+      "wall_s": {
+        "median": 2.39200005e-05,
+        "min": 2.278e-05,
+        "max": 2.46699993e-05,
+        "samples": [
+          2.46699993e-05,
+          2.278e-05,
+          2.39200005e-05,
+          2.43600004e-05,
+          2.29400001e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 2.393e-05,
+        "min": 2.282e-05,
+        "max": 2.435e-05,
+        "samples": [
+          2.435e-05,
+          2.282e-05,
+          2.393e-05,
+          2.431e-05,
+          2.296e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29155.04,
+        "min": 29155.04,
+        "max": 29155.04,
+        "samples": [
+          29155.04,
+          29155.04,
+          29155.04,
+          29155.04,
+          29155.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "greeks/scalar": {
+      "wall_s": {
+        "median": 0.1910962,
+        "min": 0.1876426,
+        "max": 0.1975996,
+        "samples": [
+          0.1910962,
+          0.19183,
+          0.1903708,
+          0.1876426,
+          0.1975996
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1860528,
+        "min": 0.183982,
+        "max": 0.1895326,
+        "samples": [
+          0.1859234,
+          0.183982,
+          0.1889128,
+          0.1860528,
+          0.1895326
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 58533340.8,
+        "min": 58533340.8,
+        "max": 58533340.8,
+        "samples": [
+          58533340.8,
+          58533340.8,
+          58533340.8,
+          58533340.8,
+          58533340.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "greeks/batch": {
+      "wall_s": {
+        "median": 0.185465,
+        "min": 0.1833438,
+        "max": 0.188765,
+        "samples": [
+          0.1833438,
+          0.1848174,
+          0.188765,
+          0.185465,
+          0.1882194
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1843396,
+        "min": 0.1822826,
+        "max": 0.1873572,
+        "samples": [
+          0.1822826,
+          0.1836476,
+          0.1873572,
+          0.1843396,
+          0.1866424
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 58533796.8,
+        "min": 58533796.8,
+        "max": 58533796.8,
+        "samples": [
+          58533796.8,
+          58533796.8,
+          58533796.8,
+          58533796.8,
+          58533796.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "greeks/planner-1": {
+      "wall_s": {
+        "median": 0.1862014,
+        "min": 0.1833344,
+        "max": 0.189239,
+        "samples": [
+          0.185772,
+          0.1833344,
+          0.189239,
+          0.1862014,
+          0.189016
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1850338,
+        "min": 0.182418,
+        "max": 0.1877948,
+        "samples": [
+          0.1846158,
+          0.182418,
+          0.1877948,
+          0.1850338,
+          0.1870824
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 58543060.8,
+        "min": 58543060.8,
+        "max": 58543060.8,
+        "samples": [
+          58543060.8,
+          58543060.8,
+          58543060.8,
+          58543060.8,
+          58543060.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0219268,
+        "min": 0.0213842,
+        "max": 0.0221214,
+        "samples": [
+          0.0221214,
+          0.0213842,
+          0.021985,
+          0.0219268,
+          0.021917
+        ]
+      }
+    },
+    "greeks/planner-2": {
+      "wall_s": {
+        "median": 0.0982184,
+        "min": 0.0952606,
+        "max": 0.0990046,
+        "samples": [
+          0.0952606,
+          0.0969514,
+          0.0990046,
+          0.0982184,
+          0.0984374
+        ]
+      },
+      "cpu_s": {
+        "median": 0.1918726,
+        "min": 0.187179,
+        "max": 0.1926706,
+        "samples": [
+          0.187179,
+          0.1894386,
+          0.1926706,
+          0.1922594,
+          0.1918726
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 29273908.8,
+        "min": 29273908.8,
+        "max": 29273908.8,
+        "samples": [
+          29273908.8,
+          29273908.8,
+          29273908.8,
+          29273908.8,
+          29273908.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0228708,
+        "min": 0.0223564,
+        "max": 0.0230752,
+        "samples": [
+          0.0223564,
+          0.0227096,
+          0.0229188,
+          0.0230752,
+          0.0228708
+        ]
+      }
+    },
+    "greeks/compile-batch": {
+      "wall_s": {
+        "median": 4.10500006e-05,
+        "min": 4.06100007e-05,
+        "max": 4.18600009e-05,
+        "samples": [
+          4.10500006e-05,
+          4.06100007e-05,
+          4.158e-05,
+          4.18600009e-05,
+          4.10299993e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 4.094e-05,
+        "min": 4.061e-05,
+        "max": 4.17e-05,
+        "samples": [
+          4.072e-05,
+          4.061e-05,
+          4.094e-05,
+          4.17e-05,
+          4.106e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 53875.04,
+        "min": 53875.04,
+        "max": 53875.04,
+        "samples": [
+          53875.04,
+          53875.04,
+          53875.04,
+          53875.04,
+          53875.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "greeks/compile-plan": {
+      "wall_s": {
+        "median": 2.71699997e-05,
+        "min": 2.58600002e-05,
+        "max": 3.29199992e-05,
+        "samples": [
+          2.58600002e-05,
+          2.71699997e-05,
+          2.88000004e-05,
+          2.67900003e-05,
+          3.29199992e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 2.703e-05,
+        "min": 2.586e-05,
+        "max": 3.039e-05,
+        "samples": [
+          2.586e-05,
+          2.703e-05,
+          2.802e-05,
+          2.683e-05,
+          3.039e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 33203.04,
+        "min": 33203.04,
+        "max": 33203.04,
+        "samples": [
+          33203.04,
+          33203.04,
+          33203.04,
+          33203.04,
+          33203.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "iv/scalar": {
+      "wall_s": {
+        "median": 0.0044332,
+        "min": 0.00440400001,
+        "max": 0.00458499999,
+        "samples": [
+          0.00440400001,
+          0.0044332,
+          0.00455179999,
+          0.00458499999,
+          0.00443259999
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0043916,
+        "min": 0.004366,
+        "max": 0.0045028,
+        "samples": [
+          0.004366,
+          0.0043916,
+          0.0044986,
+          0.0045028,
+          0.0043906
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 6299548.8,
+        "min": 6299548.8,
+        "max": 6299548.8,
+        "samples": [
+          6299548.8,
+          6299548.8,
+          6299548.8,
+          6299548.8,
+          6299548.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "iv/batch": {
+      "wall_s": {
+        "median": 0.0044214,
+        "min": 0.004275,
+        "max": 0.00449699999,
+        "samples": [
+          0.004275,
+          0.0044214,
+          0.00446820001,
+          0.00449699999,
+          0.00434580001
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0043746,
+        "min": 0.004258,
+        "max": 0.0044684,
+        "samples": [
+          0.004258,
+          0.0043746,
+          0.004437,
+          0.0044684,
+          0.004335
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 6300004.8,
+        "min": 6300004.8,
+        "max": 6300004.8,
+        "samples": [
+          6300004.8,
+          6300004.8,
+          6300004.8,
+          6300004.8,
+          6300004.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "iv/planner-1": {
+      "wall_s": {
+        "median": 0.0044456,
+        "min": 0.0042956,
+        "max": 0.00450840001,
+        "samples": [
+          0.0042956,
+          0.004363,
+          0.00450840001,
+          0.0044954,
+          0.0044456
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0044184,
+        "min": 0.0042844,
+        "max": 0.004448,
+        "samples": [
+          0.0042844,
+          0.004313,
+          0.0044454,
+          0.004448,
+          0.0044184
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 6309268.8,
+        "min": 6309268.8,
+        "max": 6309268.8,
+        "samples": [
+          6309268.8,
+          6309268.8,
+          6309268.8,
+          6309268.8,
+          6309268.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.000529199978,
+        "min": 0.000478000008,
+        "max": 0.00055519999,
+        "samples": [
+          0.000485400017,
+          0.000478000008,
+          0.00055519999,
+          0.000532000023,
+          0.000529199978
+        ]
+      }
+    },
+    "iv/planner-2": {
+      "wall_s": {
+        "median": 0.0028192,
+        "min": 0.00270760001,
+        "max": 0.00323100002,
+        "samples": [
+          0.00270760001,
+          0.00280240001,
+          0.00323100002,
+          0.00305339999,
+          0.0028192
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0052386,
+        "min": 0.0050078,
+        "max": 0.0055422,
+        "samples": [
+          0.0050078,
+          0.0051526,
+          0.0055422,
+          0.0054796,
+          0.0052386
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3157012.8,
+        "min": 3157012.8,
+        "max": 3157012.8,
+        "samples": [
+          3157012.8,
+          3157012.8,
+          3157012.8,
+          3157012.8,
+          3157012.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.000670999987,
+        "min": 0.000620399974,
+        "max": 0.000832800008,
+        "samples": [
+          0.000620399974,
+          0.000636199955,
+          0.000678000017,
+          0.000832800008,
+          0.000670999987
+        ]
+      }
+    },
+    "iv/compile-batch": {
+      "wall_s": {
+        "median": 4.05799993e-05,
+        "min": 3.92699998e-05,
+        "max": 4.19299991e-05,
+        "samples": [
+          3.94299999e-05,
+          4.09099995e-05,
+          4.05799993e-05,
+          4.19299991e-05,
+          3.92699998e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 4.056e-05,
+        "min": 3.927e-05,
+        "max": 4.162e-05,
+        "samples": [
+          3.944e-05,
+          4.08e-05,
+          4.056e-05,
+          4.162e-05,
+          3.927e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 59627.04,
+        "min": 59627.04,
+        "max": 59627.04,
+        "samples": [
+          59627.04,
+          59627.04,
+          59627.04,
+          59627.04,
+          59627.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "iv/compile-plan": {
+      "wall_s": {
+        "median": 2.71899998e-05,
+        "min": 2.59799999e-05,
+        "max": 2.87900004e-05,
+        "samples": [
+          2.59799999e-05,
+          2.71899998e-05,
+          2.76599999e-05,
+          2.87900004e-05,
+          2.61300011e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 2.724e-05,
+        "min": 2.601e-05,
+        "max": 2.861e-05,
+        "samples": [
+          2.601e-05,
+          2.724e-05,
+          2.736e-05,
+          2.861e-05,
+          2.614e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 36195.04,
+        "min": 36195.04,
+        "max": 36195.04,
+        "samples": [
+          36195.04,
+          36195.04,
+          36195.04,
+          36195.04,
+          36195.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "certified/scalar": {
+      "wall_s": {
+        "median": 0.0044736,
+        "min": 0.00439619999,
+        "max": 0.00513680002,
+        "samples": [
+          0.00439619999,
+          0.00513680002,
+          0.0044736,
+          0.0045068,
+          0.00441719999
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0044478,
+        "min": 0.004376,
+        "max": 0.0047084,
+        "samples": [
+          0.004376,
+          0.0047084,
+          0.0044478,
+          0.0044656,
+          0.004401
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3869276.8,
+        "min": 3869276.8,
+        "max": 3869276.8,
+        "samples": [
+          3869276.8,
+          3869276.8,
+          3869276.8,
+          3869276.8,
+          3869276.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "certified/batch": {
+      "wall_s": {
+        "median": 0.0044276,
+        "min": 0.0043912,
+        "max": 0.00452460002,
+        "samples": [
+          0.0043912,
+          0.0044276,
+          0.0044886,
+          0.00452460002,
+          0.0044124
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0043952,
+        "min": 0.0043808,
+        "max": 0.0044894,
+        "samples": [
+          0.0043808,
+          0.0043906,
+          0.0044688,
+          0.0044894,
+          0.0043952
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3869732.8,
+        "min": 3869732.8,
+        "max": 3869732.8,
+        "samples": [
+          3869732.8,
+          3869732.8,
+          3869732.8,
+          3869732.8,
+          3869732.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "certified/planner-1": {
+      "wall_s": {
+        "median": 0.00446580001,
+        "min": 0.0043854,
+        "max": 0.00458160001,
+        "samples": [
+          0.0043854,
+          0.00446580001,
+          0.00458160001,
+          0.0045404,
+          0.00441659999
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0044274,
+        "min": 0.0043698,
+        "max": 0.0045072,
+        "samples": [
+          0.0043698,
+          0.0044274,
+          0.0045072,
+          0.0044858,
+          0.0044112
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 3878996.8,
+        "min": 3878996.8,
+        "max": 3878996.8,
+        "samples": [
+          3878996.8,
+          3878996.8,
+          3878996.8,
+          3878996.8,
+          3878996.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.000402599992,
+        "min": 0.000397600001,
+        "max": 0.000430200016,
+        "samples": [
+          0.0004006,
+          0.000397600001,
+          0.000430200016,
+          0.000419400004,
+          0.000402599992
+        ]
+      }
+    },
+    "certified/planner-2": {
+      "wall_s": {
+        "median": 0.00282660001,
+        "min": 0.00271999999,
+        "max": 0.0030606,
+        "samples": [
+          0.00271999999,
+          0.00282040001,
+          0.0028496,
+          0.00282660001,
+          0.0030606
+        ]
+      },
+      "cpu_s": {
+        "median": 0.0052262,
+        "min": 0.0050702,
+        "max": 0.005337,
+        "samples": [
+          0.0050702,
+          0.0052026,
+          0.0052514,
+          0.0052262,
+          0.005337
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 1941876.8,
+        "min": 1941876.8,
+        "max": 1941876.8,
+        "samples": [
+          1941876.8,
+          1941876.8,
+          1941876.8,
+          1941876.8,
+          1941876.8
+        ]
+      },
+      "first_row_s": {
+        "median": 0.000560399983,
+        "min": 0.000532999961,
+        "max": 0.000591799989,
+        "samples": [
+          0.000532999961,
+          0.000560399983,
+          0.000591799989,
+          0.000569800008,
+          0.000554399984
+        ]
+      }
+    },
+    "certified/compile-batch": {
+      "wall_s": {
+        "median": 2.10299995e-05,
+        "min": 2.0049999e-05,
+        "max": 2.33399996e-05,
+        "samples": [
+          2.03000009e-05,
+          2.0049999e-05,
+          2.10299995e-05,
+          2.33399996e-05,
+          2.10799999e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 2.101e-05,
+        "min": 2.006e-05,
+        "max": 2.238e-05,
+        "samples": [
+          2.03e-05,
+          2.006e-05,
+          2.105e-05,
+          2.238e-05,
+          2.101e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 36907.04,
+        "min": 36907.04,
+        "max": 36907.04,
+        "samples": [
+          36907.04,
+          36907.04,
+          36907.04,
+          36907.04,
+          36907.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "certified/compile-plan": {
+      "wall_s": {
+        "median": 1.67699996e-05,
+        "min": 1.621e-05,
+        "max": 1.82699994e-05,
+        "samples": [
+          1.62200001e-05,
+          1.67699996e-05,
+          1.621e-05,
+          1.82699994e-05,
+          1.70700008e-05
+        ]
+      },
+      "cpu_s": {
+        "median": 1.672e-05,
+        "min": 1.621e-05,
+        "max": 1.831e-05,
+        "samples": [
+          1.621e-05,
+          1.672e-05,
+          1.625e-05,
+          1.831e-05,
+          1.696e-05
+        ]
+      },
+      "coordinator_bytes": {
+        "median": 26323.04,
+        "min": 26323.04,
+        "max": 26323.04,
+        "samples": [
+          26323.04,
+          26323.04,
+          26323.04,
+          26323.04,
+          26323.04
+        ]
+      },
+      "first_row_s": {
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "samples": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "child_controls": {
+    "checks": [
+      "failed startup rejected",
+      "nonzero exit recorded",
+      "timeout killed and reaped own child"
+    ],
+    "failure": {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-c",
+        "raise SystemExit(7)"
+      ],
+      "exit": 7,
+      "timed_out": false,
+      "pid": 69654,
+      "wall_s": 0.039624916040338576,
+      "load_before": [
+        8.84765625,
+        30.41748046875,
+        26.216796875
+      ],
+      "load_after": [
+        8.84765625,
+        30.41748046875,
+        26.216796875
+      ],
+      "peak_rss_bytes": 14696448,
+      "user_cpu_s": 0.018194,
+      "system_cpu_s": 0.01049
+    },
+    "timeout": {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import time;time.sleep(5)"
+      ],
+      "exit": -9,
+      "timed_out": true,
+      "pid": 69655,
+      "wall_s": 0.0515130830463022,
+      "load_before": [
+        8.84765625,
+        30.41748046875,
+        26.216796875
+      ],
+      "load_after": [
+        8.84765625,
+        30.41748046875,
+        26.216796875
+      ],
+      "peak_rss_bytes": 14647296,
+      "user_cpu_s": 0.014669,
+      "system_cpu_s": 0.006959
+    }
+  },
+  "controls": {
+    "rejections": [
+      "incomplete evidence",
+      "unknown output",
+      "duplicate sample",
+      "sample numeric"
+    ],
+    "valid_samples": 30
+  },
+  "source_unchanged": true
+}
