@@ -86,10 +86,14 @@ strictly below/above. These empirical indicators do not certify the real PDE
 price. Carrying them into inversion avoids discarding known uncertainty; it
 does not turn them into rigorous bounds.
 
-Bisection preserves opposite endpoint signs. An overlapping midpoint triggers
-quarter probes; only strict signs may move an endpoint. If neither quarter
-improves the bracket, return `Price_uncertainty_or_plateau`. Do not divide by
-vega or choose a point within an overlap. A success requires outward full-width
+Safeguarded point-price interpolation proposes interior probes, with endpoint
+spacing and a midpoint every third step to prevent stagnation. The first
+overlapping probe permits one bounded pair of nearby probes; quarter probes
+remain the fallback. Only strict full-band signs may move an endpoint. If the
+fallback cannot improve the bracket, return `Price_uncertainty_or_plateau`.
+The [proposal derivation](evidence/american-iv-optimization/proposal-design.md)
+explains the placement rules. A proposed location cannot establish a root or
+an endpoint sign; no vega lower bound is assumed. A success requires outward full-width
 comparison with `width` and rechecks both strict signs. Increasing-sigma prices
 with disjoint reversed bands return `Inconsistent_prices`. Overlapping bands
 cannot establish a violation. No sample history or mutable cross-request cache
@@ -172,6 +176,10 @@ Portfolio integration remains #118; further allocation/latency work is #119,
 and source-artifact/cross-platform capability qualification is #120. General
 cash-put inversion, one-parameter curve inversion and rigorous general stopping
 inverse enclosures remain outside this API. No main release is implied.
+
+The subsequent [focused inverse optimization](results-american-iv-optimization.md)
+requalifies changed estimated endpoints and records matched before/after costs.
+The measurements below retain the original #117 implementation as history.
 
 ## Executed validation and measured cost
 

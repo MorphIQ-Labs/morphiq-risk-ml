@@ -1,0 +1,26 @@
+[
+  {
+    "configuration": "initial",
+    "cases": 30,
+    "accepted": 24,
+    "refused": 6,
+    "changed_accepted_payloads": 24,
+    "changed_failure_payloads": 0
+  },
+  {
+    "configuration": "refined",
+    "cases": 30,
+    "accepted": 30,
+    "refused": 0,
+    "changed_accepted_payloads": 30,
+    "changed_failure_payloads": 0
+  },
+  {
+    "configuration": "tight",
+    "cases": 30,
+    "accepted": 30,
+    "refused": 0,
+    "changed_accepted_payloads": 30,
+    "changed_failure_payloads": 0
+  }
+]

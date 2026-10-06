@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### American inverse search optimization (#119)
+
+- Reduce full price calls with safeguarded interpolation, bounded overlap probes
+  and periodic midpoint fallback. Preserve full uncertainty-band signs, outward
+  interval-width acceptance, model/exercise identity and whole-request budgets.
+- Estimated interval endpoints and evaluation counts intentionally change;
+  availability under small budgets can change. All 30 original case outcomes
+  remain consistent at initial/refined/tight settings, with complete independent
+  reference containment and unchanged failure payloads. Existing price, Greek
+  and European implementations are unchanged.
+- See the [matched performance and numerical compatibility report](docs/results-american-iv-optimization.md)
+  for remaining costs, source-bound measurements and per-case reference gaps.
+
 ### Estimated American/Bermudan implied volatility (#117)
 
 - Add `Early_exercise.Bsm.Implied_volatility`: private quotes and estimated

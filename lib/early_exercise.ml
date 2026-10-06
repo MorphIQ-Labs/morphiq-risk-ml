@@ -3242,13 +3242,41 @@ module Bsm = struct
           | Ok v -> v
           | Error _ -> stop Unrepresentable_progress
         in
-        let sample a b =
-          let m = evaluate (midpoint a b) in
+        let sample_at a b volatility =
+          let m = evaluate volatility in
           ordered a m;
           ordered m b;
           m
         in
-        let rec search lower upper =
+        let sample a b = sample_at a b (midpoint a b) in
+        let interior lo hi x =
+          if Float.is_finite x && lo < x && x < hi then
+            match Vol.lognormal x with Ok v -> Some v | Error _ -> None
+          else None
+        in
+        let proposal phase a b =
+          if phase = 2 then midpoint a b
+          else
+            let l = quote -. a.price.value and r = b.price.value -. quote in
+            let scale = Float.max l r in
+            let lo = Vol.to_float a.volatility
+            and hi = Vol.to_float b.volatility in
+            let weight = l /. scale /. ((l /. scale) +. (r /. scale)) in
+            let x = lo +. ((hi -. lo) *. weight) in
+            (* Spend a price call on bracket progress, not on oversolving one
+               endpoint. This placement margin cannot establish a sign. *)
+            let margin = Float.min (cfg.width *. 0.25) ((hi -. lo) *. 0.25) in
+            let x =
+              if Float.is_finite x then
+                Float.max (lo +. margin) (Float.min (hi -. margin) x)
+              else x
+            in
+            if not (Float.is_finite l && Float.is_finite r && l > 0. && r > 0.)
+            then midpoint a b
+            else
+              match interior lo hi x with Some v -> v | None -> midpoint a b
+        in
+        let rec search phase local_attempted lower upper =
           checkpoint ();
           let distance =
             B.sub
@@ -3267,26 +3295,54 @@ module Bsm = struct
                 assurance = Estimated_only;
               }
           | B.Positive | B.Indeterminate -> (
-              let mid = sample lower upper in
+              let mid = sample_at lower upper (proposal phase lower upper) in
+              let next = (phase + 1) mod 3 in
               match classify quote mid with
-              | -1 -> search mid upper
-              | 1 -> search lower mid
-              | _ ->
-                  let left = sample lower mid in
-                  if classify quote left = 1 then search lower left
-                  else
-                    let right = sample mid upper in
-                    if classify quote right = -1 then search right upper
+              | -1 -> search next local_attempted mid upper
+              | 1 -> search next local_attempted lower mid
+              | _ -> (
+                  let tighten left right =
+                    let lo = if classify quote left = -1 then left else lower in
+                    let hi =
+                      if classify quote right = 1 then right else upper
+                    in
+                    if lo == lower && hi == upper then None else Some (lo, hi)
+                  in
+                  let quarters attempted =
+                    let left = sample lower mid in
+                    if classify quote left = 1 then
+                      search next attempted lower left
                     else
-                      let lo =
-                        if classify quote left = -1 then left else lower
-                      in
-                      let hi =
-                        if classify quote right = 1 then right else upper
-                      in
-                      if lo == lower && hi == upper then
-                        stop Price_uncertainty_or_plateau;
-                      search lo hi)
+                      let right = sample mid upper in
+                      if classify quote right = -1 then
+                        search next attempted right upper
+                      else
+                        match tighten left right with
+                        | Some (lo, hi) -> search next attempted lo hi
+                        | None -> stop Price_uncertainty_or_plateau
+                  in
+                  if local_attempted then quarters true
+                  else
+                    let m = Vol.to_float mid.volatility in
+                    let delta = cfg.width *. 0.25 in
+                    match
+                      ( interior (Vol.to_float lower.volatility) m (m -. delta),
+                        interior m (Vol.to_float upper.volatility) (m +. delta)
+                      )
+                    with
+                    | Some l, Some r -> (
+                        let left = sample_at lower mid l in
+                        if classify quote left = 1 then
+                          search next true lower left
+                        else
+                          let right = sample_at mid upper r in
+                          if classify quote right = -1 then
+                            search next true right upper
+                          else
+                            match tighten left right with
+                            | Some (lo, hi) -> search next true lo hi
+                            | None -> quarters true)
+                    | _ -> quarters true))
         in
         let lower = evaluate cfg.lower in
         let upper = evaluate cfg.upper in
@@ -3295,7 +3351,7 @@ module Bsm = struct
         if a = 1 then stop (Estimated_outside_search_range Below);
         if b = -1 then stop (Estimated_outside_search_range Above);
         if a <> -1 || b <> 1 then stop Price_uncertainty_or_plateau;
-        let result = search lower upper in
+        let result = search 0 false lower upper in
         checkpoint ();
         Ok result
       with

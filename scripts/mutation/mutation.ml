@@ -38,6 +38,26 @@ type mutant = {
 let catalog =
   [
     {
+      id = "american-iv-progress";
+      file = "lib/early_exercise.ml";
+      snippet = "if phase = 2 then midpoint a b";
+      replacement = "if false && phase = 2 then midpoint a b";
+      killer = "american_iv";
+      mechanism =
+        "low-vega proposals need periodic bracket contraction within the price \
+         budget";
+    };
+    {
+      id = "american-iv-spacing";
+      file = "lib/early_exercise.ml";
+      snippet = "Float.min (cfg.width *. 0.25) ((hi -. lo) *. 0.25)";
+      replacement = "0.";
+      killer = "american_iv";
+      mechanism =
+        "near-endpoint interpolation must not oversolve one endpoint while \
+         exhausting the price budget";
+    };
+    {
       id = "american-iv-quote";
       file = "lib/early_exercise.ml";
       snippet = "let quote x =\n      if Float.is_finite x && x >= 0. then Ok x";

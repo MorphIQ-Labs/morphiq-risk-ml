@@ -1,0 +1,35 @@
+[
+  {
+    "name": "initial",
+    "command": [
+      "/tmp/morphiq-american-iv-opt/_build/default/test/american_iv.exe",
+      "/tmp/morphiq-american-iv-opt/docs/evidence/american-iv/references.tsv",
+      "all",
+      ".05",
+      "2"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "refined",
+    "command": [
+      "/tmp/morphiq-american-iv-opt/_build/default/test/american_iv.exe",
+      "/tmp/morphiq-american-iv-opt/docs/evidence/american-iv/references.tsv",
+      "all",
+      ".05",
+      "3"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "tight",
+    "command": [
+      "/tmp/morphiq-american-iv-opt/_build/default/test/american_iv.exe",
+      "/tmp/morphiq-american-iv-opt/docs/evidence/american-iv/references.tsv",
+      "all",
+      ".005",
+      "3"
+    ],
+    "exit": 0
+  }
+]

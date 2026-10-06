@@ -249,6 +249,49 @@ let controls () =
   check "expiry before cash retains immediate exercise"
     (solve ~a:(at_event A.Before_cash) Side.Call 20.
     = Error (I.Non_identifiable I.Expiry));
+  let progress label a quote_value lower upper width evaluations =
+    let result =
+      get
+        (I.solve
+           (settings ~lower ~upper ~width ~evaluations cfg)
+           a Side.Call (quote quote_value))
+    in
+    let lo = Q.of_float (Vol.to_float result.lower.volatility)
+    and hi = Q.of_float (Vol.to_float result.upper.volatility) in
+    check (label ^ " bounded work") (result.evaluations <= evaluations);
+    check (label ^ " full width")
+      (Q.compare (Q.sub hi lo) (Q.of_float width) <= 0);
+    let q = Q.of_float quote_value in
+    check
+      (label ^ " strict lower band")
+      (Q.compare
+         (Q.add
+            (Q.of_float result.lower.price.value)
+            (Q.of_float result.lower.uncertainty_indicator))
+         q
+      < 0);
+    check
+      (label ^ " strict upper band")
+      (Q.compare
+         (Q.sub
+            (Q.of_float result.upper.price.value)
+            (Q.of_float result.upper.uncertainty_indicator))
+         q
+      > 0);
+    result
+  in
+  ignore (progress "endpoint progress" a 10. 0.05 0.6 0.005 8);
+  List.iter
+    (fun (s, k, q) ->
+      ignore
+        (progress "low-vega progress"
+           (get (A.admit (model ~s ~k ~r:0. ())))
+           q 0.001 6. 1e-6 64))
+    [ (50., 100., 1e-8); (100., 150., 1e-6) ];
+  let below = progress "lower quote" a 9.9 0.05 0.6 1e-4 64
+  and above = progress "higher quote" a 10.1 0.05 0.6 1e-4 64 in
+  check "quote perturbations retain ordering"
+    (Vol.to_float below.upper.volatility < Vol.to_float above.lower.volatility);
   print_endline "American inverse controls passed"
 
 let hex x =

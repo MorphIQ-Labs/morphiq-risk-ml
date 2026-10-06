@@ -20,6 +20,7 @@ been retired; it remains in Git history.
 - [Bermudan pricing](bermudan-pricing.md): immutable finite exercise schedules, cash-side semantics, explicit uncertainty and bounded work.
 
 - [American/Bermudan implied volatility](american-implied-volatility.md): estimated constant-volatility intervals, monotonicity guards, quote boundaries and independent fixed-quote references.
+- [American inverse optimization](results-american-iv-optimization.md): safeguarded proposals, independent interval compatibility and paired latency/allocation evidence.
 - [Certified American/Bermudan reductions](american-certification.md): proved applicability, private price certificates, independent containment checks and remaining general-stopping obligations.
 - [Estimated American pricing](american-pricing.md): scalar BSM API, bounded solver, explicit unavailable outcomes and executed numerical capability.
 

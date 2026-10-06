@@ -1,0 +1,111 @@
+open Morphiq_risk
+module A = Early_exercise.Bsm
+module I = A.Implied_volatility
+
+let monotonic = Unix.gettimeofday
+
+let get = function Ok x -> x | Error _ -> failwith "benchmark refusal"
+let vol x = get (Vol.lognormal x)
+
+let pricing parts =
+  get
+    (A.configure ~tolerance:1. ~space_cells:128 ~time_steps:128
+       ~domain_expansions:3
+       ~limits:
+         A.
+           {
+             max_nodes = 8192;
+             max_steps = parts * 131072;
+             max_policy_solves = parts * 1048576;
+             max_row_visits = parts * 1000000000;
+             max_workspace_bytes = 8388608;
+             policy_iterations = 64;
+           })
+
+let words () =
+  let a, b, c = Gc.counters () in
+  a +. c -. b
+
+let sample _ _ _ = ()
+let profile operation =
+  if Sys.argv.(3)="cpu" then (
+    print_endline "READY";
+    flush stdout;
+    for _=1 to 16 do ignore (Sys.opaque_identity(operation ())) done
+  ) else (
+    let sites=Hashtbl.create 128 in
+    let alloc (a:Gc.Memprof.allocation) =
+      let key=Printexc.raw_backtrace_to_string a.callstack in
+      let n=Option.value ~default:0 (Hashtbl.find_opt sites key) in
+      Hashtbl.replace sites key (n+a.n_samples); None in
+    let p=Gc.Memprof.start ~sampling_rate:0.0001 ~callstack_size:32
+      {Gc.Memprof.null_tracker with alloc_minor=alloc;alloc_major=alloc} in
+    for _=1 to 3 do ignore (Sys.opaque_identity(operation ())) done;
+    Gc.Memprof.stop (); Gc.Memprof.discard p;
+    Hashtbl.to_seq sites |> List.of_seq |> List.sort(fun (_,a) (_,b)->compare b a)
+    |> List.iter(fun (stack,n)->Printf.printf "SAMPLES %d\n%s\n" n stack)
+  )
+
+let run fields =
+  match fields with
+  | [ id; _; side; s; k; r; q; t; opens; cash; quote; _; _; _ ] ->
+      let f = float_of_string in
+      let p =
+        A.
+          {
+            spot = f s;
+            strike = f k;
+            rate = f r;
+            dividend_yield = f q;
+            time_to_expiry = f t;
+            opens_at = f opens;
+            volatility = vol 0.2;
+          }
+      in
+      let admit () =
+        get
+          (if f cash = 0. then A.admit p
+           else
+             A.admit_cash p
+               A.
+                 {
+                   valuation_side = Regular;
+                   opening_side = After_cash;
+                   expiry_side = After_cash;
+                   dividends =
+                     [| { time = p.time_to_expiry; amount = f cash } |];
+                 })
+      in
+      let side = if side = "call" then Side.Call else Side.Put in
+      let settings =
+        get
+          (I.configure ~pricing:(pricing 64) ~lower:(vol 0.05) ~upper:(vol 0.6)
+             ~width:0.005 ~max_evaluations:64)
+      in
+      let admitted = admit () and quote_value = f quote in
+      let quote = get (I.quote quote_value) in
+      let solve () = get (I.solve settings admitted side quote) in
+      let full () =
+        get (I.solve settings (admit ()) side (get (I.quote quote_value)))
+      in
+      let pc = pricing 1 in
+      let price () = get (A.price pc admitted side) in
+      let result = solve () in
+      profile solve;
+      if full () <> result then failwith "full solve mismatch";
+      Printf.printf "CHECK %s %h %h %d\n%!" id
+        (Vol.to_float result.lower.volatility)
+        (Vol.to_float result.upper.volatility)
+        result.evaluations;
+      let n = if id = "call-100-0.05-american" then 20 else 1 in
+      sample (id ^ "/price") n price;
+      sample (id ^ "/solve") n solve;
+      sample (id ^ "/end-to-end") n full
+  | _ -> failwith "fixture shape"
+
+let () =
+ let ch=open_in Sys.argv.(1) in
+ let rec find ()=let line=input_line ch in
+  let fields=String.split_on_char ' ' line in
+  if List.hd fields=Sys.argv.(2) then fields else find () in
+ let fields=find () in close_in ch;run fields
