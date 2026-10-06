@@ -98,6 +98,7 @@ module Internal : sig
     val execute : ?scalar:bool -> t -> float array
   end
 
+  module Plan_encoding = Plan_encoding
   module American_residual = American_residual
   module American_policy = American_policy
   module Elementary = Elementary

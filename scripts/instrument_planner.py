@@ -14,7 +14,7 @@ source = Path(sys.argv[1]).read_text()
 
 def replace_once(text, old, new):
     if text.count(old) != 1:
-        raise ValueError('planner instrumentation site missing/ambiguous: ' + old)
+        raise ValueError('planner instrumentation site missing/ambiguous: ' + old.lstrip())
     return text.replace(old, new)
 
 source = replace_once(source, 'Bachelier.Fast_middle.may_prepare',
