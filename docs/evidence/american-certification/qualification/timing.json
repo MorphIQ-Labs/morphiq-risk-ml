@@ -1,0 +1,2015 @@
+{
+  "source": "d0a01e7eea5e967685a880d5cd3c889939c2fa0d",
+  "tree": "06986dba4c96134673b829fc607b0f9df4b7a427",
+  "binary_sha256": "ace0ca218d164cdcd83781d4fc2881f29bf2090dc55ef21ad1c3abd935af6242",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "hardware": "Apple M1 Pro",
+  "compiler": "version: 5.3.0\nstandard_library_default: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nstandard_library: /Users/stephen/.opam/morphiq-risk-ml/lib/ocaml\nccomp_type: cc\nc_compiler: cc\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv  -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: cc -O2 -fno-strict-aliasing -fwrapv  -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -L/opt/homebrew/opt/zstd/lib -lzstd    -lpthread\nnative_c_libraries:    -lpthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: arm64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: cc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: aarch64-apple-darwin27.0.0\ntarget: aarch64-apple-darwin27.0.0\nflambda: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nexec_magic_number: Caml1999X035\ncmi_magic_number: Caml1999I035\ncmo_magic_number: Caml1999O035\ncma_magic_number: Caml1999A035\ncmx_magic_number: Caml1999y035\ncmxa_magic_number: Caml1999z035\nast_impl_magic_number: Caml1999M035\nast_intf_magic_number: Caml1999N035\ncmxs_magic_number: Caml1999D035\ncmt_magic_number: Caml1999T035\nlinear_magic_number: Caml1999L035",
+  "collector_sha256": "e8ffa360ef59aa0e908979cbae712814b25b133addaa3bf6710c123e41ec95af",
+  "controls_sha256": "d05939f594459f80c22d2d4ddced60c0685a74ff0eab7b541621bfee462b2d87",
+  "profile": "release, library -O3, bench -O3",
+  "warmup_per_sample": 20,
+  "rounds_per_process": 5,
+  "processes": [
+    {
+      "index": 0,
+      "load_before": [
+        8.92822265625,
+        72.3056640625,
+        71.09130859375
+      ],
+      "start_utc": "2026-10-06T10:29:55Z",
+      "exit": 0,
+      "load_after": [
+        8.92822265625,
+        72.3056640625,
+        71.09130859375
+      ],
+      "samples": [
+        {
+          "name": "call/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 20.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 22.4,
+          "cpu_ns": 22.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.7,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 926209.999,
+          "cpu_ns": 923510.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 917150.0,
+          "cpu_ns": 915490.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 912830.0,
+          "cpu_ns": 911070.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 917230.0,
+          "cpu_ns": 914480.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 920980.001,
+          "cpu_ns": 919080.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 917699.999,
+          "cpu_ns": 914950.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 920520.0,
+          "cpu_ns": 918590.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 912310.0,
+          "cpu_ns": 911170.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 912850.0,
+          "cpu_ns": 911590.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 922840.0,
+          "cpu_ns": 920710.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 20.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1372790.0,
+          "cpu_ns": 1369340.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1393720.0,
+          "cpu_ns": 1390380.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1374499.999,
+          "cpu_ns": 1370970.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1379000.0,
+          "cpu_ns": 1374460.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1368150.0,
+          "cpu_ns": 1365640.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1375030.0,
+          "cpu_ns": 1371970.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1371469.999,
+          "cpu_ns": 1368230.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1369769.999,
+          "cpu_ns": 1366210.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1371080.0,
+          "cpu_ns": 1368090.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1370079.999,
+          "cpu_ns": 1366750.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "expiry/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 21.1,
+          "cpu_ns": 21.2,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 22.3,
+          "cpu_ns": 22.7,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.6,
+          "cpu_ns": 19.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 226.9,
+          "cpu_ns": 227.0,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 226.7,
+          "cpu_ns": 226.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 227.3,
+          "cpu_ns": 227.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 226.6,
+          "cpu_ns": 226.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 225.5,
+          "cpu_ns": 225.7,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 244.3,
+          "cpu_ns": 244.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 243.5,
+          "cpu_ns": 243.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 247.2,
+          "cpu_ns": 247.4,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 229.3,
+          "cpu_ns": 229.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 213.6,
+          "cpu_ns": 211.1,
+          "allocated_bytes": 272.011
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "load_before": [
+        8.92822265625,
+        72.3056640625,
+        71.09130859375
+      ],
+      "start_utc": "2026-10-06T10:29:57Z",
+      "exit": 0,
+      "load_after": [
+        8.693359375,
+        71.20458984375,
+        70.70947265625
+      ],
+      "samples": [
+        {
+          "name": "call/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 20.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.4,
+          "cpu_ns": 19.7,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 932630.0,
+          "cpu_ns": 930300.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1136580.0,
+          "cpu_ns": 1132240.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1141510.0,
+          "cpu_ns": 1138280.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1144910.0,
+          "cpu_ns": 1140690.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1148559.999,
+          "cpu_ns": 1144790.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1160260.0,
+          "cpu_ns": 1149150.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1164380.0,
+          "cpu_ns": 1153210.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1179510.0,
+          "cpu_ns": 1157810.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1215710.0,
+          "cpu_ns": 1159720.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1157050.0,
+          "cpu_ns": 1138560.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 24.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 24.5,
+          "cpu_ns": 24.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 23.8,
+          "cpu_ns": 24.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 23.6,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1765810.0,
+          "cpu_ns": 1677220.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1806490.0,
+          "cpu_ns": 1688960.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1739570.0,
+          "cpu_ns": 1685900.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1792650.0,
+          "cpu_ns": 1688300.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1714120.0,
+          "cpu_ns": 1702020.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1702540.0,
+          "cpu_ns": 1696200.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1667090.0,
+          "cpu_ns": 1660410.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1557229.999,
+          "cpu_ns": 1548300.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1379829.999,
+          "cpu_ns": 1374640.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1374150.0,
+          "cpu_ns": 1369400.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "expiry/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 19.5,
+          "cpu_ns": 19.6,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.4,
+          "cpu_ns": 19.6,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 232.7,
+          "cpu_ns": 232.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 232.5,
+          "cpu_ns": 232.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 233.9,
+          "cpu_ns": 233.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 233.8,
+          "cpu_ns": 233.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 236.9,
+          "cpu_ns": 235.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 263.7,
+          "cpu_ns": 258.2,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 262.8,
+          "cpu_ns": 262.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 297.4,
+          "cpu_ns": 290.5,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 258.4,
+          "cpu_ns": 258.5,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 248.7,
+          "cpu_ns": 248.8,
+          "allocated_bytes": 272.011
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "load_before": [
+        8.693359375,
+        71.20458984375,
+        70.70947265625
+      ],
+      "start_utc": "2026-10-06T10:30:00Z",
+      "exit": 0,
+      "load_after": [
+        9.5185546875,
+        70.337890625,
+        70.40625
+      ],
+      "samples": [
+        {
+          "name": "call/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 25.9,
+          "cpu_ns": 26.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 24.9,
+          "cpu_ns": 25.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 25.8,
+          "cpu_ns": 26.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 24.6,
+          "cpu_ns": 24.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 29.0,
+          "cpu_ns": 28.7,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1143130.0,
+          "cpu_ns": 1140000.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1147740.0,
+          "cpu_ns": 1143990.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1155259.999,
+          "cpu_ns": 1149630.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1153340.001,
+          "cpu_ns": 1148510.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1146030.0,
+          "cpu_ns": 1141760.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1154620.0,
+          "cpu_ns": 1147390.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1141790.0,
+          "cpu_ns": 1137440.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1063780.0,
+          "cpu_ns": 1059110.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 917470.0,
+          "cpu_ns": 915430.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 921420.0,
+          "cpu_ns": 919330.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.3,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1383200.0,
+          "cpu_ns": 1378960.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1384720.0,
+          "cpu_ns": 1378540.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1386419.999,
+          "cpu_ns": 1380330.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1383840.0,
+          "cpu_ns": 1377350.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1386050.001,
+          "cpu_ns": 1379520.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1373480.0,
+          "cpu_ns": 1369450.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1348890.0,
+          "cpu_ns": 1337890.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1543919.999,
+          "cpu_ns": 1513980.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1889330.0,
+          "cpu_ns": 1720370.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1891180.0,
+          "cpu_ns": 1684830.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "expiry/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 23.9,
+          "cpu_ns": 24.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 23.8,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 29.3,
+          "cpu_ns": 26.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 24.0,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 288.0,
+          "cpu_ns": 279.4,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 276.6,
+          "cpu_ns": 276.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 280.2,
+          "cpu_ns": 280.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 268.2,
+          "cpu_ns": 259.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 281.6,
+          "cpu_ns": 281.7,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 308.0,
+          "cpu_ns": 305.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 312.6,
+          "cpu_ns": 306.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 304.5,
+          "cpu_ns": 304.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 331.7,
+          "cpu_ns": 313.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 319.5,
+          "cpu_ns": 314.0,
+          "allocated_bytes": 272.011
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "load_before": [
+        9.5185546875,
+        70.337890625,
+        70.40625
+      ],
+      "start_utc": "2026-10-06T10:30:03Z",
+      "exit": 0,
+      "load_after": [
+        9.5185546875,
+        70.337890625,
+        70.40625
+      ],
+      "samples": [
+        {
+          "name": "call/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 24.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1204890.0,
+          "cpu_ns": 1165790.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1233380.0,
+          "cpu_ns": 1185370.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1148300.0,
+          "cpu_ns": 1139170.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1149950.001,
+          "cpu_ns": 1140280.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1148350.0,
+          "cpu_ns": 1142520.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1134120.0,
+          "cpu_ns": 1128370.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 919480.0,
+          "cpu_ns": 916160.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 910960.0,
+          "cpu_ns": 909500.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 919940.0,
+          "cpu_ns": 918580.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 909750.001,
+          "cpu_ns": 907960.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 19.7,
+          "cpu_ns": 19.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 24.4,
+          "cpu_ns": 22.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.3,
+          "cpu_ns": 19.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1482000.001,
+          "cpu_ns": 1474900.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1696560.0,
+          "cpu_ns": 1687160.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1709690.0,
+          "cpu_ns": 1699250.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1699099.999,
+          "cpu_ns": 1691250.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1808529.999,
+          "cpu_ns": 1740700.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1757610.0,
+          "cpu_ns": 1709290.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1827470.0,
+          "cpu_ns": 1728490.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1753500.0,
+          "cpu_ns": 1715480.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1755219.999,
+          "cpu_ns": 1710710.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1744619.999,
+          "cpu_ns": 1695570.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "expiry/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 24.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 24.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 304.0,
+          "cpu_ns": 283.2,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 279.0,
+          "cpu_ns": 279.2,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 282.1,
+          "cpu_ns": 279.0,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 278.7,
+          "cpu_ns": 277.4,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 276.8,
+          "cpu_ns": 277.0,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 342.1,
+          "cpu_ns": 308.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 330.3,
+          "cpu_ns": 315.7,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 319.4,
+          "cpu_ns": 308.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 314.9,
+          "cpu_ns": 297.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 362.1,
+          "cpu_ns": 285.3,
+          "allocated_bytes": 272.011
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "load_before": [
+        9.5185546875,
+        70.337890625,
+        70.40625
+      ],
+      "start_utc": "2026-10-06T10:30:06Z",
+      "exit": 0,
+      "load_after": [
+        8.916015625,
+        69.203125,
+        70.00537109375
+      ],
+      "samples": [
+        {
+          "name": "call/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 23.8,
+          "cpu_ns": 24.6,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.9,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 23.7,
+          "cpu_ns": 23.8,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "call/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1135879.999,
+          "cpu_ns": 1131760.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1138650.0,
+          "cpu_ns": 1132850.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1139690.001,
+          "cpu_ns": 1134910.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1129320.0,
+          "cpu_ns": 1127190.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 948970.0,
+          "cpu_ns": 948230.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 909970.0,
+          "cpu_ns": 908640.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 911830.0,
+          "cpu_ns": 910480.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 821910.0,
+          "cpu_ns": 818550.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 776780.0,
+          "cpu_ns": 775780.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "call/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 771870.001,
+          "cpu_ns": 771010.0,
+          "allocated_bytes": 402385.12
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 18.0,
+          "cpu_ns": 18.2,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.6,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 19.0,
+          "cpu_ns": 19.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1153980.0,
+          "cpu_ns": 1152590.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1152390.001,
+          "cpu_ns": 1151680.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1201619.999,
+          "cpu_ns": 1200090.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1285829.999,
+          "cpu_ns": 1283920.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/price",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1192640.0,
+          "cpu_ns": 1191120.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 1,
+          "n": 100,
+          "wall_ns": 1255630.0,
+          "cpu_ns": 1254550.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 2,
+          "n": 100,
+          "wall_ns": 1237820.0,
+          "cpu_ns": 1236500.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 3,
+          "n": 100,
+          "wall_ns": 1215570.0,
+          "cpu_ns": 1214280.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 4,
+          "n": 100,
+          "wall_ns": 1201420.0,
+          "cpu_ns": 1200290.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "terminal-put/end-to-end",
+          "round": 5,
+          "n": 100,
+          "wall_ns": 1200750.0,
+          "cpu_ns": 1198830.0,
+          "allocated_bytes": 497201.12
+        },
+        {
+          "name": "expiry/admission",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.6,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 16.5,
+          "cpu_ns": 16.5,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 19.0,
+          "cpu_ns": 19.1,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/admission",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 16.4,
+          "cpu_ns": 16.4,
+          "allocated_bytes": 0.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 191.1,
+          "cpu_ns": 191.4,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 192.5,
+          "cpu_ns": 192.6,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 191.9,
+          "cpu_ns": 191.9,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 192.7,
+          "cpu_ns": 192.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/price",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 193.3,
+          "cpu_ns": 193.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 1,
+          "n": 10000,
+          "wall_ns": 207.3,
+          "cpu_ns": 207.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 2,
+          "n": 10000,
+          "wall_ns": 207.8,
+          "cpu_ns": 207.8,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 3,
+          "n": 10000,
+          "wall_ns": 206.4,
+          "cpu_ns": 206.5,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 4,
+          "n": 10000,
+          "wall_ns": 207.3,
+          "cpu_ns": 207.3,
+          "allocated_bytes": 272.011
+        },
+        {
+          "name": "expiry/end-to-end",
+          "round": 5,
+          "n": 10000,
+          "wall_ns": 208.6,
+          "cpu_ns": 208.6,
+          "allocated_bytes": 272.011
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "CHECK call 0x1.4e6b2e3d54dc2p+3 0x1.f511bbf93e094p-51",
+    "CHECK terminal-put 0x1.95200a7f17afp+2 0x1.3dadf41d170dep-53",
+    "CHECK expiry 0x1p+0 0x0p+0"
+  ],
+  "summary": {
+    "call/admission": {
+      "wall_ns": {
+        "median": 23.7,
+        "minimum": 19.3,
+        "maximum": 29.0
+      },
+      "allocated_bytes": {
+        "median": 0.011,
+        "minimum": 0.011,
+        "maximum": 0.011
+      }
+    },
+    "call/end-to-end": {
+      "wall_ns": {
+        "median": 919940.0,
+        "minimum": 771870.001,
+        "maximum": 1215710.0
+      },
+      "allocated_bytes": {
+        "median": 402385.12,
+        "minimum": 402385.12,
+        "maximum": 402385.12
+      }
+    },
+    "call/price": {
+      "wall_ns": {
+        "median": 1141510.0,
+        "minimum": 912830.0,
+        "maximum": 1233380.0
+      },
+      "allocated_bytes": {
+        "median": 402385.12,
+        "minimum": 402385.12,
+        "maximum": 402385.12
+      }
+    },
+    "expiry/admission": {
+      "wall_ns": {
+        "median": 19.6,
+        "minimum": 16.4,
+        "maximum": 29.3
+      },
+      "allocated_bytes": {
+        "median": 0.011,
+        "minimum": 0.011,
+        "maximum": 0.011
+      }
+    },
+    "expiry/end-to-end": {
+      "wall_ns": {
+        "median": 262.8,
+        "minimum": 206.4,
+        "maximum": 362.1
+      },
+      "allocated_bytes": {
+        "median": 272.011,
+        "minimum": 272.011,
+        "maximum": 272.011
+      }
+    },
+    "expiry/price": {
+      "wall_ns": {
+        "median": 233.8,
+        "minimum": 191.1,
+        "maximum": 304.0
+      },
+      "allocated_bytes": {
+        "median": 272.011,
+        "minimum": 272.011,
+        "maximum": 272.011
+      }
+    },
+    "terminal-put/admission": {
+      "wall_ns": {
+        "median": 19.3,
+        "minimum": 16.4,
+        "maximum": 24.5
+      },
+      "allocated_bytes": {
+        "median": 0.011,
+        "minimum": 0.011,
+        "maximum": 0.011
+      }
+    },
+    "terminal-put/end-to-end": {
+      "wall_ns": {
+        "median": 1375030.0,
+        "minimum": 1200750.0,
+        "maximum": 1891180.0
+      },
+      "allocated_bytes": {
+        "median": 497201.12,
+        "minimum": 497201.12,
+        "maximum": 497201.12
+      }
+    },
+    "terminal-put/price": {
+      "wall_ns": {
+        "median": 1386050.001,
+        "minimum": 1152390.001,
+        "maximum": 1808529.999
+      },
+      "allocated_bytes": {
+        "median": 497201.12,
+        "minimum": 497201.12,
+        "maximum": 497201.12
+      }
+    }
+  }
+}

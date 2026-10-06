@@ -190,5 +190,80 @@ corrects that witness to 2048. V1, the preliminary data, their original generato
 bytes and prototype failures remain retained. No accuracy criterion or valid
 certificate containment requirement was weakened.
 
-The outcome counts, compiled-fault results, installed-client checks and source
-identity of the completed candidate are recorded in the qualification evidence.
+The qualified implementation is `d0a01e7eea5e967685a880d5cd3c889939c2fa0d`,
+based on integration `03d8920ddffa7c5456b7fc2280348e5f04cda7f6`.
+The [qualification summary](evidence/american-certification/qualification/summary.json)
+and [hashed raw records](evidence/american-certification/qualification/manifest.json)
+retain source identity, complete native/bytecode outputs, failed prototypes,
+commands, installed-package hashes, collector scripts and timing samples.
+Subsequent documentation/evidence packaging does not change this implementation.
+
+Development and release ordinary suites, package and format checks pass.
+Native and bytecode each contain all 337 independent reference intervals and
+retain all 17 explicit refusals. An externally installed package produces
+identical complete 354-row outcomes in native and bytecode clients; Zarith is
+used only by that test client. Four compiler-rejection witnesses protect price,
+accuracy, estimated-result and piecewise boundaries. Six fixture controls and
+six timing-collector controls cover malformed/truncated data, duplicate identity,
+nonfinite timing, process failure, startup failure and timeout retention.
+
+All eight optional `american-certified-*` faults compile and are rejected after
+a clean full mutation-profile baseline: cash, opening window, side, rate, yield,
+retained radius, requested limit and accuracy validation. The optional catalog
+contains 138 mechanisms; default PR CI remains five jobs with seven core
+mutants. The existing implementation is unchanged apart from the new nested
+module; ordinary compatibility/determinism checks pass. Historical complete PDE
+price/Greek campaigns retain their original revisions and were not rerun here.
+
+One installed-client attempt omitted the test-only Zarith dynamic-library path
+for bytecode. Its failure is retained; the corrected harness gives the newly
+installed package precedence and includes the dependency DLL path. No runtime
+code or numerical criterion changed in response.
+
+### Measured cost of the new API
+
+Five fresh native processes on an Apple M1 Pro, macOS 27.0 arm64, OCaml 5.3.0
+Flambda, release profile with `-O3`, ran the fixed
+[benchmark](../bench/american_certified.ml). Each path has 20 warmup calls before
+five timed blocks: 100 calls per live-price block, 10,000 per admission/expiry
+block. Typed volatility, error limit and input records are prepared outside the
+timing. Admission and end-to-end include `Bsm.admit`; pricing reuses admission.
+All task-owned validation finished before timing. Shared-host one-minute load
+was 8.69–9.52; this is not an isolated machine or a tail-latency campaign.
+
+| Example, explicit limit 1e-10 | Warm price median (block range) | End-to-end median | Cumulative allocation / price |
+| --- | ---: | ---: | ---: |
+| S=K=100, r=.05, q=0, sigma=.2, T=1 call, open now | 1.142 ms (0.913–1.233) | 0.920 ms | 402,385 bytes |
+| Same, q=.02, terminal-only put | 1.386 ms (1.152–1.809) | 1.375 ms | 497,201 bytes |
+| S=101, K=100, expiry call | 0.234 microseconds (0.191–0.304) | 0.263 microseconds | 272 bytes |
+
+These are medians of 25 warm sequential per-call block averages, not cold
+single-request latency or percentiles. Price/end-to-end ordering differences
+are variation, not evidence that admission accelerates pricing. Admission costs
+about 19–24 ns in this fixed-input compiled harness; immutable constructor
+allocations can be eliminated. Allocation includes amortized measurement
+bookkeeping and is distinct from live memory/RSS. CHECK records are identical
+across all five processes. The non-expiry costs reflect the existing European
+runtime enclosure, not the Fast path; residual allocation remains a performance
+opportunity under #119. No new speed target was assigned or inferred.
+
+Reproduce ordinary checks in the project opam switch with `dune test` and
+`dune test --profile release`; build `@install`, `@fmt`, and
+`bench/american_certified.exe` in the appropriate profile. Run the affected faults:
+
+```sh
+opam exec --switch=morphiq-risk-ml -- dune exec scripts/mutation/mutation.exe -- \
+  american-certified-cash american-certified-window american-certified-side \
+  american-certified-rate american-certified-yield american-certified-bound \
+  american-certified-limit american-certified-accuracy
+```
+
+The retained installed/timing scripts record the exact executed local paths;
+adjust those paths for another clean checkout of the qualified revision.
+Oracle regeneration additionally needs pinned python-flint 0.9.0, while
+ordinary checks use committed references.
+
+Final immutable source-artifact installation, the full mutation catalog and
+cross-platform capability qualification remain #120. The separate PR platform
+checks are useful additional evidence, not institutional acceptance or a
+replacement for that final campaign.

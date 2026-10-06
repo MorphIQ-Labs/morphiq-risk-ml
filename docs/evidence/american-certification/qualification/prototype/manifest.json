@@ -1,0 +1,34 @@
+{
+  "morphiq-american-certification-build.log.gz": {
+    "sha256": "504f6df5562f7b80d337b74816b34e07ef08488a40caba353547764457f88373",
+    "uncompressed_sha256": "baa058e1ad9a7ff8536d4420687bd1930f52ac036cfde5af8b70c6d03d4cb42c"
+  },
+  "morphiq-american-certification-controls.log.gz": {
+    "sha256": "504f6df5562f7b80d337b74816b34e07ef08488a40caba353547764457f88373",
+    "uncompressed_sha256": "baa058e1ad9a7ff8536d4420687bd1930f52ac036cfde5af8b70c6d03d4cb42c"
+  },
+  "morphiq-american-certification-controls2.log.gz": {
+    "sha256": "8ccca4dff5a929ec0d94dc52ff44e376c15cd0496f6055741da6b4da06eb1d5e",
+    "uncompressed_sha256": "cf50374bb8e253300de88846fdf3562b835295453cd69e67f16957f927696068"
+  },
+  "morphiq-american-certification-controls3.log.gz": {
+    "sha256": "91600e2a023a855ea106f15548db932cf4eb763945997550bb04defa8bb7b71a",
+    "uncompressed_sha256": "cb320344057489e839961d92924804eaa4e232d749feb075428765fec992e551"
+  },
+  "morphiq-american-certification-controls4.log.gz": {
+    "sha256": "206a7ea800ef3e2c5d0698f1f87d0960016280cda7c09db557b68ff7b0c5ab08",
+    "uncompressed_sha256": "ed46381f36b37020737c5e321c15962d3c920f57f8fa039d4a8a3d3c6c4dc813"
+  },
+  "morphiq-cert-build.log.gz": {
+    "sha256": "206a7ea800ef3e2c5d0698f1f87d0960016280cda7c09db557b68ff7b0c5ab08",
+    "uncompressed_sha256": "ed46381f36b37020737c5e321c15962d3c920f57f8fa039d4a8a3d3c6c4dc813"
+  },
+  "morphiq-cert-fmt.log.gz": {
+    "sha256": "09aff3d7e946b9b1552da18191d574f0b00ce5f2ec7016f67a7f577bb9829cef",
+    "uncompressed_sha256": "234e6ec7216c16ff3dc8d7d056b5ca735ab764cffe276dc3f00af0f9a49cdbc7"
+  },
+  "morphiq-cert-fmt2.log.gz": {
+    "sha256": "77724f296f1d1801d04507446bba2cc96d9b491eac67b6930c0e51563398c4ef",
+    "uncompressed_sha256": "112ba8ecef5a57b2c80746129916804861edb386ad48991a1191c84dc839b9c0"
+  }
+}

@@ -4,7 +4,9 @@
 gamma, vega, rho and theta alongside the underlying price. All successful
 quantities are **Estimated_only**. A price can pass while one or more Greeks
 remain unavailable or fail their independent refinement screens. These values
-cannot be used as `Production` certificates.
+cannot be used as `Production` certificates. A price accepted by the separate
+[`Bsm.Certified` reduction API](american-certification.md) does not certify these
+finite-difference Greeks.
 
 ## Requesting quantities
 

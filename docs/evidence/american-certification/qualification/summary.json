@@ -1,0 +1,33 @@
+{
+  "source": "d0a01e7eea5e967685a880d5cd3c889939c2fa0d",
+  "scope": "Guarded exact-model stopping reductions; general PDE prices and Greeks remain estimated-only.",
+  "checks": {
+    "development": "passed",
+    "release": "passed",
+    "package": "passed",
+    "format": "passed",
+    "independent_native_bytecode": {
+      "certificates": 337,
+      "unsupported": 16,
+      "arithmetic_unresolved": 1
+    },
+    "installed_native_bytecode": "all 354 complete outputs identical; externally installed package with test-only Zarith",
+    "private_type_rejections": 4,
+    "fixture_failure_controls": 6,
+    "timing_collector_controls": 6,
+    "compiled_mutants": 8,
+    "default_core_mutants": 7
+  },
+  "limitations": [
+    "Finite corpus, not formal verification or independent human approval.",
+    "No general stopping, cash or piecewise certificates; no Greek/IV guarantee.",
+    "Local installed checks do not replace final source-artifact and cross-platform qualification in #120.",
+    "No performance target or deployment SLA; shared-host warm sequential per-call averages."
+  ],
+  "retained_failures": [
+    "Preliminary wide sparse-payoff reference before implementation; corrected with exact rational payoff in v1.",
+    "Prototype record type inference and zero-spot/strike European admission failures.",
+    "V1 exponent 512 was inside the model domain; v2 witness 2048 corrects classification without changing acceptance bounds.",
+    "Installed bytecode attempt 1 omitted test-only Zarith DLL search path; corrected harness preserves explicit installed package precedence."
+  ]
+}

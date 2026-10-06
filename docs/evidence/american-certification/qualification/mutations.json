@@ -1,0 +1,18 @@
+{
+  "source": "d0a01e7",
+  "clean_baseline_seconds": 354,
+  "compiled_kills": 8,
+  "selected": [
+    "american-certified-cash",
+    "american-certified-window",
+    "american-certified-side",
+    "american-certified-rate",
+    "american-certified-yield",
+    "american-certified-bound",
+    "american-certified-limit",
+    "american-certified-accuracy"
+  ],
+  "exit": 0,
+  "log_sha256": "80b98a1d4434d7bcc25d0bc9887363edc92c3fac4d06dc78d2b06ecdccd57e3b",
+  "default_core_unchanged": 7
+}
