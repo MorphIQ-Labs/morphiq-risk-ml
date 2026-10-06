@@ -5,6 +5,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Greek allocation and residual optimization (#119)
+
+- Reuse successful boundary values across volatility perturbations within one
+  Greek request, carrying each value's arithmetic indicator into the receiving
+  solve and checking original rate/yield/slab dependencies.
+- Discard shared storage on incompatible shifts; charge value/error arrays to
+  existing surplus workspace and preserve the uncached fallback, logical work,
+  request ownership, cancellation and per-quantity uncertainty.
+- Execute residual rows in bounded native blocks with the original explicit
+  FMAs, separately rounded magnitude products, finite-check order and exact
+  logical visits/cancellation checkpoints.
+- See [qualification](docs/results-american-greek-optimization.md) for complete
+  price/Greek compatibility and controlled allocation/latency evidence.
+
 ### Estimated American and Bermudan Greeks (#115)
 
 - Add per-request delta, gamma, parallel vega/rho and fixed-event daily theta to

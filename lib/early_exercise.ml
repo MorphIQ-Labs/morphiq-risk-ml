@@ -285,8 +285,6 @@ module Bsm = struct
   let[@inline always] float_min (a : float) (b : float) =
     if a <= b then a else b
 
-  let eta = Float.next_after 0. infinity
-
   module E = Enclosure.Fast
 
   let centre (x : E.t) = x.hi +. x.lo +. (x.third +. x.fourth)
@@ -876,11 +874,14 @@ module Bsm = struct
       raise (Stop (Resource_limit "policy solves"));
     c.policies <- c.policies + 1
 
-  let boundary c x =
-    let v, e = enclosed x in
+  let accept_boundary c v e =
     c.boundary_error <- float_max c.boundary_error e;
     if e > c.local then fail "boundary arithmetic resolution";
     nonnegative "boundary value" v
+
+  let boundary c x =
+    let v, e = enclosed x in
+    accept_boundary c v e
 
   let check_workspace c =
     (* Includes grids, 24 float bands/vectors, policy flags, retained fine pair,
@@ -979,17 +980,26 @@ module Bsm = struct
     c.largest <- max c.largest !n;
     Array.sub x 0 !n
 
-  (* Cache only successful scalar boundary values, not enclosures. Every hit
-     follows a previous boundary check in this same request, whose local
-     allowance is fixed and boundary_error only increases. Slab keys retain
-     original words; rounded time coordinates are not dependency identities.
-     A 256-byte entry charge covers the list/tuple/key/array headers and boxed
-     words on the supported 64-bit runtime; payload is 8 bytes per step. *)
+  type boundary_key = int64 * int64 * int64 option * int * int64 option
+  type boundary_slot = { values : float array; errors : float array option }
+
+  type boundary_cache = {
+    mutable remaining : int;
+    mutable boundary_bytes : int;
+    mutable entries : (boundary_key * boundary_slot) list;
+    keep_errors : bool;
+  }
+
+  (* Ordinary prices keep the original successful-scalar cache. A Greek request
+     can retain it across volatility shifts, whose boundary inputs are fixed.
+     Each reusable value retains its own arithmetic indicator: another solve's
+     context must recheck its local allowance and rebuild its own maximum.
+     Slab keys retain original words, not rounded intermediate time values.
+     The 256-byte entry charge covers keys, option/record/array headers. *)
   let boundary_values ?top ~max_steps cache earlier later next_exercise
       time_steps =
-    let remaining, entries = !cache in
     if
-      (remaining = 0 && entries = [])
+      (cache.remaining = 0 && cache.entries = [])
       || time_steps > max_steps
       || time_steps > Sys.max_floatarray_length
     then None
@@ -1001,15 +1011,49 @@ module Bsm = struct
           time_steps,
           Option.map Int64.bits_of_float top )
       in
-      match List.assoc_opt key entries with
+      match List.assoc_opt key cache.entries with
       | Some values -> Some values
       | None ->
-          if remaining < 256 || time_steps > (remaining - 256) / 8 then None
+          let per_step = if cache.keep_errors then 16 else 8 in
+          if
+            cache.remaining < 256
+            || time_steps > (cache.remaining - 256) / per_step
+          then None
           else
-            let values = Array.make time_steps nan in
-            cache :=
-              (remaining - 256 - (8 * time_steps), (key, values) :: entries);
+            let charge = 256 + (per_step * time_steps) in
+            let values =
+              {
+                values = Array.make time_steps nan;
+                errors =
+                  (if cache.keep_errors then Some (Array.make time_steps nan)
+                   else None);
+              }
+            in
+            cache.remaining <- cache.remaining - charge;
+            cache.boundary_bytes <- cache.boundary_bytes + charge;
+            cache.entries <- (key, values) :: cache.entries;
             Some values
+
+  let cached_boundary c slot i =
+    match slot with
+    | None -> nan
+    | Some slot -> (
+        let value = slot.values.(i) in
+        if Float.is_nan value then value
+        else
+          match slot.errors with
+          | None -> value
+          | Some errors -> accept_boundary c value errors.(i))
+
+  let store_boundary c slot i x =
+    let v, e = enclosed x in
+    let value = accept_boundary c v e in
+    (match slot with
+    | None -> ()
+    | Some slot ->
+        slot.values.(i) <- value;
+        Option.iter (fun errors -> errors.(i) <- e) slot.errors);
+    value
 
   (* The price request owns preparation for one stock-grid key. Payoff and
      spatial bands depend on that grid and the complete coefficient tuple;
@@ -1116,7 +1160,7 @@ module Bsm = struct
         (* The arrays above remain mutable working bands. Retain separate,
            immutable snapshots, charged to the same surplus as boundary values.
            A 256-byte entry allowance covers keys, boxes and headers. *)
-        let remaining, boundaries = !boundary_cache in
+        let remaining = boundary_cache.remaining in
         if curves <> None && remaining >= 256 && n <= (remaining - 256) / 16
         then (
           let charge = 256 + (16 * n) in
@@ -1125,50 +1169,41 @@ module Bsm = struct
             ( used + charge,
               (key p, (Array.copy left, Array.copy right, switched)) :: entries
             );
-          boundary_cache := (remaining - charge, boundaries))
+          boundary_cache.remaining <- remaining - charge)
     in
     prepare p reused switched;
     let current_key = ref (key p) in
+    let residual_state =
+      American_residual.create ~lo ~diag ~hi ~rhs ~values:v ~payoff:g
+    in
     let residual obstacle =
-      let worst = ref 0. and worst_row = ref 0 and indicator = ref 0. in
-      for i = 1 to n - 2 do
+      American_residual.reset residual_state ~obstacle;
+      let i = ref 1 in
+      while !i <= n - 2 do
+        (* Preserve the exact pre-row budget/callback order. After this tick,
+           following rows stop before the next callback or budget edge. *)
         tick c;
-        (* Original unfactored bands; explicit FMA differs from elimination's
-           accumulation. No product complementarity test. *)
-        let pvalue =
-          Float.fma lo.(i)
-            v.(i - 1)
-            (Float.fma diag.(i) v.(i) (Float.fma hi.(i) v.(i + 1) (-.rhs.(i))))
+        let following =
+          min
+            (n - 2 - !i)
+            (min
+               (255 - (c.visits land 255))
+               (c.cfg.limits.max_row_visits - c.visits))
         in
-        let e = v.(i) -. g.(i) in
-        let r =
-          if obstacle then
-            float_max
-              (abs_float (float_min pvalue e))
-              (float_max (-.pvalue) (-.e))
-          else abs_float pvalue
+        let status =
+          American_residual.run residual_state ~first:!i ~last:(!i + following)
         in
-        ignore (finite "original residual" r);
-        if r > !worst then (
-          worst := r;
-          worst_row := i);
-        let magnitude =
-          abs_float (lo.(i) *. v.(i - 1))
-          +. abs_float (diag.(i) *. v.(i))
-          +. abs_float (hi.(i) *. v.(i + 1))
-          +. abs_float rhs.(i)
-          +. abs_float v.(i)
-          +. abs_float g.(i)
-        in
-        let screen =
-          finite "residual roundoff screen"
-            ((0x1p-48 *. magnitude) +. (32. *. eta))
-        in
-        indicator := float_max !indicator screen
+        let visited = American_residual.visited residual_state in
+        c.visits <- c.visits + visited - 1;
+        if status = 1 then fail "original residual";
+        if status = 2 then fail "residual roundoff screen";
+        i := !i + visited
       done;
-      c.roundoff <- float_max c.roundoff !indicator;
-      if !indicator > c.local /. 4. then fail "residual roundoff resolution";
-      (!worst, !worst_row)
+      let indicator = American_residual.indicator residual_state in
+      c.roundoff <- float_max c.roundoff indicator;
+      if indicator > c.local /. 4. then fail "residual roundoff resolution";
+      ( American_residual.worst residual_state,
+        American_residual.worst_row residual_state )
     in
     let slab_constant ?next_exercise p earlier later obstacle =
       if earlier < later then (
@@ -1232,9 +1267,7 @@ module Bsm = struct
           let zero =
             if side = Side.Call then 0.
             else
-              let cached =
-                match zero_values with None -> nan | Some vs -> vs.(j - 1)
-              in
+              let cached = cached_boundary c zero_values (j - 1) in
               if not (Float.is_nan cached) then cached
               else
                 let value =
@@ -1248,23 +1281,19 @@ module Bsm = struct
                         if obstacle then maximum_enclosure (exact 0.) exponent
                         else exponent
                       in
-                      boundary c (E.mul (exact p.strike) (E.exp exponent))
+                      store_boundary c zero_values (j - 1)
+                        (E.mul (exact p.strike) (E.exp exponent))
                   | None ->
-                      boundary c
+                      store_boundary c zero_values (j - 1)
                         (E.mul (exact p.strike)
                            (exp_product (-.p.rate)
                               (if p.rate < 0. then remaining else wait)))
                 in
-                (match zero_values with
-                | None -> ()
-                | Some vs -> vs.(j - 1) <- value);
                 value
           in
           let top =
-            if upper_boundary then (
-              let cached =
-                match top_values with None -> nan | Some vs -> vs.(j - 1)
-              in
+            if upper_boundary then
+              let cached = cached_boundary c top_values (j - 1) in
               if not (Float.is_nan cached) then cached
               else
                 let factor =
@@ -1288,16 +1317,13 @@ module Bsm = struct
                         remaining
                 in
                 let value =
-                  boundary c
+                  store_boundary c top_values (j - 1)
                     (E.mul
                        (exact
                           (if side = Side.Call then x.(n - 1) else p.strike))
                        factor)
                 in
-                (match top_values with
-                | None -> ()
-                | Some vs -> vs.(j - 1) <- value);
-                value)
+                value
             else if obstacle then g.(n - 1)
             else 0.
           in
@@ -1530,8 +1556,9 @@ module Bsm = struct
     let value = nonnegative "spot price" v.(!spot_index) in
     (value, if capture then Some v else None)
 
-  let price_with_curves ?curves ?observe ?(cancel = fun () -> false)
-      ?(exercise_regions = false) ?(premium = false) cfg admitted side =
+  let price_with_curves ?curves ?observe ?boundary_reuse
+      ?(cancel = fun () -> false) ?(exercise_regions = false) ?(premium = false)
+      cfg admitted side =
     let p = inputs admitted in
     let cash =
       match admitted with
@@ -1817,7 +1844,30 @@ module Bsm = struct
                 (cfg.limits.max_workspace_bytes - reserved
                 - if curves = None then 128 else 256)
           in
-          let boundary_cache = ref (cache_bytes, []) in
+          let fresh () =
+            {
+              remaining = cache_bytes;
+              boundary_bytes = 0;
+              entries = [];
+              keep_errors = Option.is_some boundary_reuse;
+            }
+          in
+          let boundary_cache =
+            match boundary_reuse with
+            | None -> fresh ()
+            | Some reuse ->
+                let cache =
+                  match !reuse with
+                  | Some cache when cache.boundary_bytes <= cache_bytes ->
+                      (* The previous solve's stencil snapshots are no longer
+                         retained. Only the boundary entries cross this call. *)
+                      cache.remaining <- cache_bytes - cache.boundary_bytes;
+                      cache
+                  | _ -> fresh ()
+                in
+                reuse := Some cache;
+                cache
+          in
           let fine_time = 4 * cfg.time_steps in
           (* Single-entry, request-owned cache. grid is deterministic in the
              fixed inputs/configuration plus (level, domain). Drop the previous
@@ -1831,8 +1881,7 @@ module Bsm = struct
               | _ ->
                   let used, _ = !stencils in
                   stencils := (0, []);
-                  let remaining, boundaries = !boundary_cache in
-                  boundary_cache := (remaining + used, boundaries);
+                  boundary_cache.remaining <- boundary_cache.remaining + used;
                   let prepared = ref None in
                   spatial := Some (level, domain, prepared);
                   prepared
@@ -2590,12 +2639,47 @@ module Bsm = struct
         if !extra_visits > limits.max_row_visits then
           raise (Stop (Resource_limit "Greek analytic visits"))
       in
+      (* This pool belongs to this one admitted contract, side and fixed
+         configuration. shift_greek preserves stock/strike, event/exercise
+         objects and horizons. Rate/yield identities and the original slab
+         partition must also match: rho must never borrow vega's boundaries. *)
+      let boundary_reuse =
+        if List.exists (fun (r : greek_request) -> r.quantity = Vega) requests
+        then Some (ref None)
+        else None
+      in
+      let original = inputs admitted and original_curves = curves in
       let run ?curves a =
         let observations = ref [] in
         let observe c x low high =
           observations := observe_greeks a side c x low high :: !observations
         in
-        match price_with_curves ?curves ~observe ~cancel cfg a side with
+        let p = inputs a in
+        let same_boundary_inputs =
+          Int64.bits_of_float p.rate = Int64.bits_of_float original.rate
+          && Int64.bits_of_float p.dividend_yield
+             = Int64.bits_of_float original.dividend_yield
+          &&
+          match (curves, original_curves) with
+          | None, None -> true
+          | Some cs, Some original ->
+              cs.rates == original.rates
+              && cs.yields == original.yields
+              && cs.knots == original.knots
+          | _ -> false
+        in
+        let reuse =
+          if same_boundary_inputs then boundary_reuse
+          else (
+            (* Do not retain one solve's cache while an incompatible solve
+               spends that same surplus workspace on its own preparation. *)
+            Option.iter (fun reuse -> reuse := None) boundary_reuse;
+            None)
+        in
+        match
+          price_with_curves ?curves ~observe ?boundary_reuse:reuse ~cancel cfg a
+            side
+        with
         | Error (Cancelled as f) | Error (Resource_limit _ as f) ->
             raise (Stop f)
         | Error f -> Error f

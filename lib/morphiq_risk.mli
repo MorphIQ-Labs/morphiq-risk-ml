@@ -98,6 +98,7 @@ module Internal : sig
     val execute : ?scalar:bool -> t -> float array
   end
 
+  module American_residual = American_residual
   module Elementary = Elementary
   module Cody = Cody
   module Split = Split

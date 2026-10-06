@@ -1104,3 +1104,57 @@
   ../scripts/american_reference_data.py)
  (action
   (run python3 %{dep:../scripts/test_benchmark_american_greeks.py})))
+
+(test
+ (name american_greek_reuse)
+ (modules american_greek_reuse)
+ (modes byte exe)
+ (libraries morphiq_risk)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))
+
+(rule
+ (alias runtest)
+ (deps
+  ../scripts/test_american_greek_optimization.py
+  ../scripts/benchmark_american_greek_optimization.py
+  ../scripts/benchmark_american_greeks.py
+  ../scripts/benchmark_american_allocation.py
+  ../scripts/benchmark_bermudan_boundary.py
+  ../scripts/american_reference_data.py)
+ (action
+  (run python3 %{dep:../scripts/test_american_greek_optimization.py})))
+
+(test
+ (name american_residual)
+ (modules american_residual)
+ (modes byte exe)
+ (libraries morphiq_risk morphiq_fp)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))
+
+(test
+ (name american_work_order)
+ (modules american_work_order)
+ (modes byte exe)
+ (libraries morphiq_risk morphiq_fp)
+ (deps
+  ../lib/fp/dllmorphiq_fp_stubs%{ext_dll}
+  ../lib/dllmorphiq_risk_stubs%{ext_dll})
+ (action
+  (setenv
+   CAML_LD_LIBRARY_PATH
+   ../lib:../lib/fp:%{env:CAML_LD_LIBRARY_PATH=}
+   (run %{test}))))
