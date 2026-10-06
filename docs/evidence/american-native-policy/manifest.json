@@ -1,0 +1,12 @@
+{
+  "raw.tar.gz": "d7de9368e69bf1bdbf2deb53978f53538047c0a190da1375e870b511af1b5836",
+  "raw/baseline.json": "e7be5bb1ef2b44996685c372cb06b135978c3bacb72c645a60c39be73f9286d4",
+  "raw/cash-timing.json": "e1ef8c985e23264c444370af9f63cd2f457e886c9f03ba061875b4e909320988",
+  "raw/greeks-replay.json": "edcef6b7251023086836e3d0e04f3f4fdfd3ba39b9596fb2de1373549f055088",
+  "raw/price-replay.json": "4891896ec5d6e2c057fec28a9d741a2768425502c47a5c779f6c050f2cc6fb02",
+  "raw/rss-build.json": "a23d120480e346be2acde49546064276d581011923574dc9c7ec6285d1e8feb2",
+  "raw/rss-summary.json": "1e211da3ce19e2eaff764384c0642d02777d2fa76e02ed858f233ae561ccdeb1",
+  "raw/source-manifest.json": "b21f1f33d4e222c9e6ca2b13e84f10f78c854954966172fef0498cc69cb1d494",
+  "raw/timing.json": "85ac578f57e5a10ff6b0558bb404292c9dba7de67605eb17c606f62d5c471906",
+  "raw/work-order.json": "8b844bd2c225d34fd31006b739be2108f5d8c1d40f37cae742a553cfe98ada54"
+}

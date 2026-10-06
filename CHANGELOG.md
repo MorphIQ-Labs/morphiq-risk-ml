@@ -5,6 +5,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Numerical chan
 
 ## [Unreleased]
 
+### Bounded American policy loops (#119)
+
+- Execute policy selection and tridiagonal solve/copy phases in bounded native
+  blocks with the same arithmetic, finite checks, work limits and cancellation
+  checkpoints. Full scalar price, Greek and inverse replay remains identical.
+- Matched ordinary put pricing and IV improve about 26–28%; cumulative allocation
+  is essentially unchanged. Retain the request-order-sensitive RSS diagnosis and
+  broader performance obligations in the [qualification report](docs/results-american-native-policy.md).
+
 ### Terminal cash-call reduction (#119)
 
 - Reduce positive-expiry calls with all cash and exercise at expiry to the

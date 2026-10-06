@@ -1,0 +1,1165 @@
+{
+  "identities": {
+    "baseline": {
+      "source": "eaa5e189015219dc489542c86fc654ee2f8bc904",
+      "binary_sha256": "7a9081ae456d980ab0f0a5fe7db877c98dbdd00ff9d7e6377f8a406cfce677ee",
+      "driver_sha256": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f"
+    },
+    "candidate": {
+      "source": "a07ae172b0dca2cffb26693fdd3180a9c05df190",
+      "binary_sha256": "814223ceb440e9203a041c7e6d4662013a5b6eadfab47eaa9b556c4cf8c59924",
+      "driver_sha256": "c040ba9d394184e9f8e8b2c8e5df6bdc249b123f45a37f2130ce1c9badeb460f"
+    }
+  },
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "records": [
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.10072239240010579,
+      "allocated_bytes_per_call": 12910552,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5574,
+      "pair": 0,
+      "variant": "baseline",
+      "load_before": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "load_after": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "peak_rss_bytes": 8634368,
+      "user_seconds": 0.404316,
+      "system_seconds": 0.004699
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.07522296905517578,
+      "allocated_bytes_per_call": 12914360,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5576,
+      "pair": 0,
+      "variant": "candidate",
+      "load_before": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "load_after": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "peak_rss_bytes": 8568832,
+      "user_seconds": 0.30122899999999997,
+      "system_seconds": 0.004340999999999999
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2846030394236247,
+      "allocated_bytes_per_call": 29433464,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 0,
+      "variant": "baseline",
+      "load_before": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "load_after": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "peak_rss_bytes": 8519680,
+      "user_seconds": 1.132332,
+      "system_seconds": 0.005405
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.22083600362141928,
+      "allocated_bytes_per_call": 29438360,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 0,
+      "variant": "candidate",
+      "load_before": [
+        10.5419921875,
+        19.513671875,
+        16.85205078125
+      ],
+      "load_after": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "peak_rss_bytes": 8765440,
+      "user_seconds": 0.846117,
+      "system_seconds": 0.00532
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2944646676381429,
+      "allocated_bytes_per_call": 42173304,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 0,
+      "variant": "baseline",
+      "load_before": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "load_after": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "peak_rss_bytes": 8503296,
+      "user_seconds": 1.173841,
+      "system_seconds": 0.0056879999999999995
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2230370044708252,
+      "allocated_bytes_per_call": 42178200,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 0,
+      "variant": "candidate",
+      "load_before": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "load_after": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "peak_rss_bytes": 8536064,
+      "user_seconds": 0.8897889999999999,
+      "system_seconds": 0.004334
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.44480236371358234,
+      "allocated_bytes_per_call": 69210192,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 0,
+      "variant": "baseline",
+      "load_before": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "load_after": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "peak_rss_bytes": 8650752,
+      "user_seconds": 1.769982,
+      "system_seconds": 0.006977
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.3367326259613037,
+      "allocated_bytes_per_call": 69215088,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 0,
+      "variant": "candidate",
+      "load_before": [
+        10.17822265625,
+        19.2890625,
+        16.7880859375
+      ],
+      "load_after": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "peak_rss_bytes": 8454144,
+      "user_seconds": 1.339777,
+      "system_seconds": 0.00635
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.07520866394042969,
+      "allocated_bytes_per_call": 12914360,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5576,
+      "pair": 1,
+      "variant": "candidate",
+      "load_before": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "load_after": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 0.301645,
+      "system_seconds": 0.0033269999999999997
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.10187896092732747,
+      "allocated_bytes_per_call": 12910552,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5574,
+      "pair": 1,
+      "variant": "baseline",
+      "load_before": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "load_after": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "peak_rss_bytes": 8536064,
+      "user_seconds": 0.40591499999999997,
+      "system_seconds": 0.004255
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.21045772234598795,
+      "allocated_bytes_per_call": 29438360,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 1,
+      "variant": "candidate",
+      "load_before": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "load_after": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "peak_rss_bytes": 8519680,
+      "user_seconds": 0.8391419999999999,
+      "system_seconds": 0.004164999999999999
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.28393761316935223,
+      "allocated_bytes_per_call": 29433464,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 1,
+      "variant": "baseline",
+      "load_before": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "load_after": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.129877,
+      "system_seconds": 0.005173
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.22324260075887045,
+      "allocated_bytes_per_call": 42178200,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 1,
+      "variant": "candidate",
+      "load_before": [
+        9.68310546875,
+        19.03515625,
+        16.712890625
+      ],
+      "load_after": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "peak_rss_bytes": 8437760,
+      "user_seconds": 0.8891159999999999,
+      "system_seconds": 0.004195
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.29418261845906574,
+      "allocated_bytes_per_call": 42173304,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 1,
+      "variant": "baseline",
+      "load_before": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "load_after": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.172297,
+      "system_seconds": 0.005471
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.33942604064941406,
+      "allocated_bytes_per_call": 69215088,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 1,
+      "variant": "candidate",
+      "load_before": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "load_after": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "peak_rss_bytes": 8617984,
+      "user_seconds": 1.3489309999999999,
+      "system_seconds": 0.00579
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.445676326751709,
+      "allocated_bytes_per_call": 69210192,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 1,
+      "variant": "baseline",
+      "load_before": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "load_after": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.7889249999999999,
+      "system_seconds": 0.007930999999999999
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.10181999206542969,
+      "allocated_bytes_per_call": 12910552,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5574,
+      "pair": 2,
+      "variant": "baseline",
+      "load_before": [
+        9.3876953125,
+        18.818359375,
+        16.64990234375
+      ],
+      "load_after": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "peak_rss_bytes": 8617984,
+      "user_seconds": 0.406964,
+      "system_seconds": 0.003378
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.07521899541219075,
+      "allocated_bytes_per_call": 12914360,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5576,
+      "pair": 2,
+      "variant": "candidate",
+      "load_before": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "load_after": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "peak_rss_bytes": 8585216,
+      "user_seconds": 0.301525,
+      "system_seconds": 0.0027559999999999998
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.28516332308451336,
+      "allocated_bytes_per_call": 29433464,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 2,
+      "variant": "baseline",
+      "load_before": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "load_after": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.136134,
+      "system_seconds": 0.00568
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.21355295181274414,
+      "allocated_bytes_per_call": 29438360,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 2,
+      "variant": "candidate",
+      "load_before": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "load_after": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "peak_rss_bytes": 8781824,
+      "user_seconds": 0.8523419999999999,
+      "system_seconds": 0.005215
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.29465993245442706,
+      "allocated_bytes_per_call": 42173304,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 2,
+      "variant": "baseline",
+      "load_before": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "load_after": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "peak_rss_bytes": 8519680,
+      "user_seconds": 1.174169,
+      "system_seconds": 0.0055119999999999995
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2227916717529297,
+      "allocated_bytes_per_call": 42178200,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 2,
+      "variant": "candidate",
+      "load_before": [
+        8.9560546875,
+        18.572265625,
+        16.57568359375
+      ],
+      "load_after": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 0.887409,
+      "system_seconds": 0.004608999999999999
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.44291170438130695,
+      "allocated_bytes_per_call": 69210192,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 2,
+      "variant": "baseline",
+      "load_before": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "load_after": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.777125,
+      "system_seconds": 0.007835
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.3355456193288167,
+      "allocated_bytes_per_call": 69215088,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 2,
+      "variant": "candidate",
+      "load_before": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "load_after": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "peak_rss_bytes": 8601600,
+      "user_seconds": 1.338571,
+      "system_seconds": 0.00597
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.07539971669514973,
+      "allocated_bytes_per_call": 12914360,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5576,
+      "pair": 3,
+      "variant": "candidate",
+      "load_before": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "load_after": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "peak_rss_bytes": 8585216,
+      "user_seconds": 0.305317,
+      "system_seconds": 0.0025729999999999998
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.10107032457987468,
+      "allocated_bytes_per_call": 12910552,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5574,
+      "pair": 3,
+      "variant": "baseline",
+      "load_before": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "load_after": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "peak_rss_bytes": 8536064,
+      "user_seconds": 0.404616,
+      "system_seconds": 0.003018
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.20998636881510416,
+      "allocated_bytes_per_call": 29438360,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 3,
+      "variant": "candidate",
+      "load_before": [
+        8.79931640625,
+        18.3798828125,
+        16.51953125
+      ],
+      "load_after": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "peak_rss_bytes": 8617984,
+      "user_seconds": 0.83771,
+      "system_seconds": 0.004249
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.28296764691670734,
+      "allocated_bytes_per_call": 29433464,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 3,
+      "variant": "baseline",
+      "load_before": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "load_after": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "peak_rss_bytes": 8601600,
+      "user_seconds": 1.129378,
+      "system_seconds": 0.004901
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2234529654184977,
+      "allocated_bytes_per_call": 42178200,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 3,
+      "variant": "candidate",
+      "load_before": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "load_after": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "peak_rss_bytes": 8683520,
+      "user_seconds": 0.889716,
+      "system_seconds": 0.00456
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.31588395436604816,
+      "allocated_bytes_per_call": 42173304,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 3,
+      "variant": "baseline",
+      "load_before": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "load_after": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "peak_rss_bytes": 8585216,
+      "user_seconds": 1.197546,
+      "system_seconds": 0.012398
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.4319276809692383,
+      "allocated_bytes_per_call": 69215088,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 3,
+      "variant": "candidate",
+      "load_before": [
+        8.97509765625,
+        18.25732421875,
+        16.48681640625
+      ],
+      "load_after": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "peak_rss_bytes": 8421376,
+      "user_seconds": 1.391235,
+      "system_seconds": 0.029788
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.5276192824045817,
+      "allocated_bytes_per_call": 69210192,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 3,
+      "variant": "baseline",
+      "load_before": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "load_after": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "peak_rss_bytes": 7798784,
+      "user_seconds": 1.882453,
+      "system_seconds": 0.040241
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.10302964846293132,
+      "allocated_bytes_per_call": 12910552,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5574,
+      "pair": 4,
+      "variant": "baseline",
+      "load_before": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "load_after": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "peak_rss_bytes": 8536064,
+      "user_seconds": 0.41084299999999996,
+      "system_seconds": 0.00456
+    },
+    {
+      "mode": "none",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.07526302337646484,
+      "allocated_bytes_per_call": 12914360,
+      "minor_collections": 19,
+      "major_collections": 5,
+      "heap_words_after": 65939,
+      "live_words_after": 5576,
+      "pair": 4,
+      "variant": "candidate",
+      "load_before": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "load_after": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 0.302151,
+      "system_seconds": 0.003945
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.2966749668121338,
+      "allocated_bytes_per_call": 29433464,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 4,
+      "variant": "baseline",
+      "load_before": [
+        8.73681640625,
+        18.0537109375,
+        16.42529296875
+      ],
+      "load_after": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "peak_rss_bytes": 8601600,
+      "user_seconds": 1.145336,
+      "system_seconds": 0.006038
+    },
+    {
+      "mode": "zero",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.21061134338378906,
+      "allocated_bytes_per_call": 29438360,
+      "minor_collections": 45,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 4,
+      "variant": "candidate",
+      "load_before": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "load_after": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "peak_rss_bytes": 8536064,
+      "user_seconds": 0.841013,
+      "system_seconds": 0.0060019999999999995
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.29456599553426105,
+      "allocated_bytes_per_call": 42173304,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 4,
+      "variant": "baseline",
+      "load_before": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "load_after": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "peak_rss_bytes": 8667136,
+      "user_seconds": 1.173924,
+      "system_seconds": 0.005195
+    },
+    {
+      "mode": "cash",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.22358830769856772,
+      "allocated_bytes_per_call": 42178200,
+      "minor_collections": 63,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 4,
+      "variant": "candidate",
+      "load_before": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "load_after": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "peak_rss_bytes": 8454144,
+      "user_seconds": 0.89293,
+      "system_seconds": 0.006575999999999999
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.45436898867289227,
+      "allocated_bytes_per_call": 69210192,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5596,
+      "pair": 4,
+      "variant": "baseline",
+      "load_before": [
+        8.4375,
+        17.8369140625,
+        16.35791015625
+      ],
+      "load_after": [
+        8.162109375,
+        17.62353515625,
+        16.291015625
+      ],
+      "peak_rss_bytes": 8585216,
+      "user_seconds": 1.783815,
+      "system_seconds": 0.010102
+    },
+    {
+      "mode": "multiple",
+      "phase": "price",
+      "calls": 3,
+      "seconds_per_call": 0.33974234263102215,
+      "allocated_bytes_per_call": 69215088,
+      "minor_collections": 102,
+      "major_collections": 12,
+      "heap_words_after": 65939,
+      "live_words_after": 5598,
+      "pair": 4,
+      "variant": "candidate",
+      "load_before": [
+        8.162109375,
+        17.62353515625,
+        16.291015625
+      ],
+      "load_after": [
+        8.162109375,
+        17.62353515625,
+        16.291015625
+      ],
+      "peak_rss_bytes": 8519680,
+      "user_seconds": 1.350728,
+      "system_seconds": 0.0064399999999999995
+    }
+  ],
+  "summary": {
+    "none": {
+      "seconds_per_call": {
+        "baseline": 0.10181999206542969,
+        "candidate": 0.07522296905517578,
+        "ratio": 0.7387838825094131
+      },
+      "allocated_bytes_per_call": {
+        "baseline": 12910552,
+        "candidate": 12914360,
+        "ratio": 1.0002949525318514
+      }
+    },
+    "zero": {
+      "seconds_per_call": {
+        "baseline": 0.2846030394236247,
+        "candidate": 0.21061134338378906,
+        "ratio": 0.740017899353138
+      },
+      "allocated_bytes_per_call": {
+        "baseline": 29433464,
+        "candidate": 29438360,
+        "ratio": 1.0001663412773978
+      }
+    },
+    "cash": {
+      "seconds_per_call": {
+        "baseline": 0.29456599553426105,
+        "candidate": 0.22324260075887045,
+        "ratio": 0.7578695577334725
+      },
+      "allocated_bytes_per_call": {
+        "baseline": 42173304,
+        "candidate": 42178200,
+        "ratio": 1.0001160923981673
+      }
+    },
+    "multiple": {
+      "seconds_per_call": {
+        "baseline": 0.445676326751709,
+        "candidate": 0.33942604064941406,
+        "ratio": 0.7615976444683631
+      },
+      "allocated_bytes_per_call": {
+        "baseline": 69210192,
+        "candidate": 69215088,
+        "ratio": 1.0000707410261194
+      }
+    }
+  },
+  "criteria": [
+    {
+      "mode": "none",
+      "metric": "seconds_per_call",
+      "ratio": 0.7387838825094131,
+      "maximum": 0.8,
+      "passed": true
+    },
+    {
+      "mode": "none",
+      "metric": "allocated_bytes_per_call",
+      "ratio": 1.0002949525318514,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "mode": "zero",
+      "metric": "seconds_per_call",
+      "ratio": 0.740017899353138,
+      "maximum": 0.8,
+      "passed": true
+    },
+    {
+      "mode": "zero",
+      "metric": "allocated_bytes_per_call",
+      "ratio": 1.0001663412773978,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "mode": "cash",
+      "metric": "seconds_per_call",
+      "ratio": 0.7578695577334725,
+      "maximum": 0.8,
+      "passed": true
+    },
+    {
+      "mode": "cash",
+      "metric": "allocated_bytes_per_call",
+      "ratio": 1.0001160923981673,
+      "maximum": 1.05,
+      "passed": true
+    },
+    {
+      "mode": "multiple",
+      "metric": "seconds_per_call",
+      "ratio": 0.7615976444683631,
+      "maximum": 0.8,
+      "passed": true
+    },
+    {
+      "mode": "multiple",
+      "metric": "allocated_bytes_per_call",
+      "ratio": 1.0000707410261194,
+      "maximum": 1.05,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source": "a07ae172b0dca2cffb26693fdd3180a9c05df190",
+  "files": {
+    "lib/american_policy.ml": "11b7e529941c9d4c381b279bf017069423ca0e326e999997c1999b5cc96507c4",
+    "lib/american_policy.mli": "65dcc51c2ebca46813330a858a26a8412ad15f9fcde7e117b539ebbf5ef935e2",
+    "lib/american_policy_stubs.c": "fd02fdea0bf4d1ac9d864f22e526318d0cc34a5f4492aed7fa2219881412584e",
+    "lib/early_exercise.ml": "4b351bf9bffbfc402d391c22148ae54e3ee3fa0427887d27dd21de0b7a063d47",
+    "lib/dune": "2ec32bfbc2443f39e101dad999e0e50ac4f0032a914623c067202b1b512f96a7",
+    "test/american_policy.ml": "1ae1a8f9a75b9d17cbcc8888c962c79c7f64e009205c0e37f2018bc46bbc1124",
+    "test/american_policy_reference.ml": "82c60fa1d2c3d6f144882d04c0806dde07338314da9ab1af10e7911dcab7afa5",
+    "test/american_work_order.ml": "d0d652fc13b469bf281ebab8e6383caddda458992da316dad22b395f1d6e5d27"
+  },
+  "gc_interface": "/Users/stephen/.opam/morphiq-risk-ml/lib/ocaml/gc.mli",
+  "gc_interface_sha256": "b3c98af1306a8ffe7a39b2e18ccb5ed91476bcd6d306a7877c631c1621f2a9f6",
+  "gc_semantics": "OCaml 5.3.0 gc.mli lines 233-247: stat performs full major collection; quick_stat reports latest sampled counters without forcing collection. Lines 299-302: full_major collects currently unreachable blocks."
+}
