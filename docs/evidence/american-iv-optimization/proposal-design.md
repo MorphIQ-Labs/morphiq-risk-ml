@@ -54,3 +54,24 @@ Estimated endpoints and evaluation counts intentionally change. Requalify their
 independent containment and all success/failure guards. Price/Greek/European
 operations themselves remain unchanged; no historical exact inverse bits are a
 compatibility promise for this intentional estimated-search improvement.
+
+## Rejected first candidate and endpoint safeguard
+
+The first candidate preserves 24/6 initial and 30/0 refined/tight corpus outcomes,
+but the tight benchmark cases take 22/6/14 evaluations (analytical/put/cash),
+versus 9 each before. It is rejected before timing: the analytical and cash
+work counts would defeat the frozen adoption criteria. Near a strict endpoint,
+point interpolation can repeatedly improve its location without reducing the
+full interval; price uncertainty is not required to trigger this stagnation.
+
+Before a second runtime edit, add a placement safeguard: clip a finite secant
+proposal to stay at least min(width/4, bracket_span/4) from either endpoint,
+provided the clipped point remains strictly interior. A proposal closer than
+this margin spends a full price evaluation improving an already-sufficient
+endpoint precision while the opposite side still determines acceptance. The
+margin requests a useful opposite-side probe without assuming its sign.
+It is a placement heuristic, never a new accuracy threshold: unchanged outward
+width and full-band signs remain authoritative. Invalid/collapsed placements
+use the midpoint. Every third main proposal and bounded overlap fallback remain.
+The first candidate's runtime commit and complete corpus logs are retained;
+no quote, price tolerance, grid, requested width or adoption target changes.
